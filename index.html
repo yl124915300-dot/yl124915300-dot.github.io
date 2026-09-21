@@ -1,33 +1,138 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LA Tonight — 3 ideas under $100</title>
-<script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">(function(){var script=document.createElement("script");script.async=1;script.setAttribute("data-cmp-ab","2");script.src="https://emrld.ltd/NTc2Mjcx.js?t=576271";document.head.appendChild(script)})();</script>
-<style>
-:root{--ink:#15222f;--muted:#647383;--line:#dce5ea;--green:#0b7a61;--orange:#ef8a48}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:linear-gradient(140deg,#f7f4ec,#eef7f3 60%,#fff);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{width:min(960px,calc(100% - 32px));margin:auto;padding:42px 0 72px}.eyebrow{color:var(--green);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:12px}h1{font-size:clamp(38px,7vw,72px);line-height:.98;max-width:720px;margin:15px 0 20px;letter-spacing:-.055em}.lede{max-width:610px;color:#445564;font-size:18px;line-height:1.55}.panel{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;background:rgba(255,255,255,.84);border:1px solid var(--line);border-radius:24px;padding:22px;margin-top:28px}label{display:block;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}select,button{width:100%;margin-top:7px;border-radius:13px;border:1px solid var(--line);padding:13px 14px;background:#fff;color:var(--ink);font:inherit}button{cursor:pointer;font-weight:800;background:var(--green);border-color:var(--green);color:#fff}.results-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:38px 0 14px}h2{margin:0;font-size:28px}.status{color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;min-height:280px}.rank{color:var(--orange);font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.card h3{margin:8px 0;font-size:20px}.merchant,.meta{color:#546571;font-size:13px;line-height:1.45}.price{margin:16px 0 2px;font-size:28px;font-weight:900}.cta{margin-top:auto;display:block;background:#15222f;color:#fff;text-decoration:none;text-align:center;padding:12px;border-radius:12px}.tiny{margin-top:12px;color:#71808a;font-size:11px}.bridge{margin-top:24px;padding:18px;border:1px solid #b9ded2;border-radius:18px;background:#f1fbf7}.bridge h3{margin:0 0 7px;font-size:19px}.bridge p{margin:0;color:#49635d;font-size:13px;line-height:1.5}.affiliate-link{display:inline-block;margin-top:13px;padding:11px 14px;border-radius:11px;background:var(--green);color:#fff;text-decoration:none;font-weight:800}.notice{margin-top:24px;padding:14px 16px;border-left:4px solid var(--orange);background:#fff8f1;color:#5f493a;font-size:13px;line-height:1.5}footer{margin-top:32px;color:#7a8790;font-size:12px;line-height:1.55}@media(max-width:860px){.panel{grid-template-columns:1fr 1fr}}@media(max-width:620px){.panel,.cards{grid-template-columns:1fr}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LA Tonight — 3 bookable Klook activities</title>
+  <style>
+    :root { --ink:#15222f; --muted:#647383; --line:#dce5ea; --green:#0b7a61; --orange:#ef8a48; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(140deg,#f7f4ec 0%,#eef7f3 60%,#fff 100%); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { width:min(960px, calc(100% - 32px)); margin:0 auto; padding:42px 0 72px; }
+    .eyebrow { color:var(--green); font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:12px; }
+    h1 { font-size:clamp(38px,7vw,72px); line-height:.98; max-width:720px; margin:15px 0 20px; letter-spacing:-.055em; }
+    .lede { max-width:700px; color:#445564; font-size:18px; line-height:1.55; }
+    .panel { background:rgba(255,255,255,.84); border:1px solid rgba(220,229,234,.95); border-radius:24px; padding:22px; box-shadow:0 16px 45px rgba(40,63,71,.08); margin-top:28px; }
+    .choices { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0 20px; }
+    label { display:block; color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+    select, button { width:100%; margin-top:7px; border-radius:13px; border:1px solid var(--line); padding:13px 14px; background:#fff; color:var(--ink); font:inherit; }
+    button { cursor:pointer; font-weight:800; }
+    .primary { background:var(--green); border-color:var(--green); color:#fff; padding:15px 18px; }
+    .primary:hover { background:#09634f; }
+    .results-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin:38px 0 14px; }
+    h2 { margin:0; font-size:28px; letter-spacing:-.03em; }
+    .status { color:var(--muted); font-size:13px; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px; display:flex; flex-direction:column; min-height:360px; }
+    .rank { color:var(--orange); font-size:12px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .card h3 { margin:8px 0 8px; font-size:20px; line-height:1.12; }
+    .merchant { color:var(--muted); font-size:13px; }
+    .price { margin:16px 0 2px; font-size:28px; font-weight:900; }
+    .price small { font-size:12px; font-weight:700; color:#71808a; }
+    .meta { color:#546571; font-size:13px; line-height:1.45; }
+    .card .cta { margin-top:auto; background:#15222f; color:#fff; border-color:#15222f; }
+    .tiny { margin-top:12px; color:#71808a; font-size:11px; line-height:1.45; }
+    .disclosure { margin-top:24px; padding:18px; border:1px solid #b9ded2; border-radius:18px; background:#f1fbf7; color:#49635d; font-size:13px; line-height:1.5; }
+    .notice { margin-top:24px; padding:14px 16px; border-left:4px solid var(--orange); background:#fff8f1; color:#5f493a; font-size:13px; line-height:1.5; }
+    footer { margin-top:32px; color:#7a8790; font-size:12px; line-height:1.55; }
+    a { color:inherit; }
+    @media (max-width:720px) { .choices,.cards { grid-template-columns:1fr; } main { padding-top:28px; } .panel { padding:16px; } }
+  </style>
 </head>
 <body>
-<main>
-<div class="eyebrow">Los Angeles · two people · under $100</div>
-<h1>What should you do tonight?</h1>
-<p class="lede">Three quick local ideas, ranked for your mood and budget. We link you to the public activity deal page; the merchant handles checkout.</p>
-<section class="panel" aria-label="Your request"><label>When<select id="timeframe"><option value="tonight">Tonight</option><option value="weekend">This weekend</option></select></label><label>What sounds good?<select id="intent"><option value="fun">Something fun</option><option value="date">Date idea</option><option value="adventure">Adventure</option><option value="sightseeing">See LA</option></select></label><label>Party<select id="party"><option value="2">2 people</option></select></label><button id="find">Show my 3 best matches</button></section>
-<section aria-live="polite"><div class="results-head"><h2>Your short list</h2><div class="status" id="status">Loading public deal snapshots…</div></div><div class="cards" id="cards"></div></section>
-<section class="bridge" aria-label="Partner activity link"><h3>Browse more LA activities on Klook</h3><p>This is a general Klook activities landing page for broader discovery, not a claim that it is one of the three specific matches above. Klook handles checkout; availability and prices can change.</p><a class="affiliate-link" href="https://klook.tpo.lv/I4v7Ehrs" data-affiliate-program="klook" target="_blank" rel="sponsored nofollow" onclick="record('affiliate_outbound_click',{program:'Klook',link_type:'generic_landing_page'})">Browse Klook activities</a></section>
-<div class="notice"><strong>Pre-launch disclosure.</strong> The three cards remain ordinary Groupon public pages captured for validation on 2026-09-21. The Klook button above is a real generic affiliate tracking link generated in Travelpayouts; no test click has been made and no purchase has occurred, so revenue is currently $0.</div>
-<footer>Recommendation logic and user action events are recorded locally in this MVP. No payment, account creation or purchase is requested here.</footer>
-</main>
-<script>
-var deals=[];
-var $=function(id){return document.getElementById(id)};
-var record=function(event,extra){try{var rows=JSON.parse(localStorage.getItem("la-tonight-router-events")||"[]");rows.push(Object.assign({event:event,city:"Los Angeles",party_size:2,budget:100,source:"direct"},extra||{}));localStorage.setItem("la-tonight-router-events",JSON.stringify(rows.slice(-100)))}catch(e){}};
-var trackedUrl=function(url,dealId){var target=new URL(url);target.searchParams.set("utm_source","la-tonight-router");target.searchParams.set("utm_medium","referral");target.searchParams.set("utm_campaign","la_intent_mvp");target.searchParams.set("utm_content",dealId);return target.toString()};
-var rank=function(intent,timeframe){return deals.slice().sort(function(a,b){var ar=(b.tags.indexOf(intent)>=0?2:0)+(b.tags.indexOf(timeframe)>=0?1:0);var br=(a.tags.indexOf(intent)>=0?2:0)+(a.tags.indexOf(timeframe)>=0?1:0);return ar-br||a.price_usd-b.price_usd})};
-function render(){var timeframe=$("timeframe").value;var intent=$("intent").value;var picks=rank(intent,timeframe).slice(0,3);var cards=$("cards");cards.innerHTML="";picks.forEach(function(deal,i){var article=document.createElement("article");article.className="card";article.innerHTML='<div class="rank">'+(i===0?"Best fit":"Alternative "+i)+'</div><h3>'+deal.title+'</h3><div class="merchant">'+deal.merchant+' · '+deal.location+'</div><div class="price">$'+deal.price_usd.toFixed(2)+' <span style="font-size:13px;font-weight:700;color:#71808a">for 2</span></div><div class="meta">'+(deal.rating?deal.rating+' / 5 · ':'')+deal.fit_note+'<br>'+deal.availability_note+'</div>';var link=document.createElement("a");link.className="cta";link.href=trackedUrl(deal.public_url,deal.id);link.dataset.dealId=deal.id;link.textContent="View public deal";article.appendChild(link);var tiny=document.createElement("div");tiny.className="tiny";tiny.textContent="Snapshot "+deal.snapshot_date+" · "+deal.affiliate_status;article.appendChild(tiny);cards.appendChild(article)});$("status").textContent=(timeframe==="tonight"?"Tonight":"This weekend")+" · 2 people · $100 cap";record("recommendation_shown",{timeframe:timeframe,intent:intent})}
-$("find").addEventListener("click",function(){var timeframe=$("timeframe").value;var intent=$("intent").value;record("qualified_intent",{timeframe:timeframe,intent:intent});render()});$("cards").addEventListener("click",function(event){var link=event.target.closest("a[data-deal-id]");if(link){record("outbound_deal_click",{deal_id:link.dataset.dealId})}});fetch("/deals.json").then(function(response){return response.json()}).then(function(data){deals=data;record("page_view",{});$("status").textContent="Choose your timing and mood, then get 3 matches."}).catch(function(){$("status").textContent="Deal feed unavailable"});
-</script>
+  <main>
+    <div class="eyebrow">Los Angeles · two people · under US$100 per person</div>
+    <h1>What should you do tonight?</h1>
+    <p class="lede">Three real LA-area Klook activities with current public prices and bookable-date signals. Each card goes to the exact Klook product through a Travelpayouts tracking deep link; Klook handles checkout.</p>
+
+    <section class="panel" aria-label="Your request">
+      <div class="choices">
+        <label>When
+          <select id="timeframe"><option value="tonight">Tonight</option><option value="weekend">This weekend</option></select>
+        </label>
+        <label>What sounds good?
+          <select id="intent"><option value="fun">Something fun</option><option value="date">Date idea</option><option value="adventure">Adventure</option><option value="sightseeing">See LA</option></select>
+        </label>
+        <label>Party
+          <select id="party"><option value="2">2 people</option></select>
+        </label>
+      </div>
+      <button class="primary" id="find">Show my 3 best matches</button>
+    </section>
+
+    <section aria-live="polite">
+      <div class="results-head"><h2>Your short list</h2><div class="status" id="status">Loading verified Klook offers…</div></div>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section class="disclosure" aria-label="Affiliate disclosure">
+      <strong>Tracking disclosure.</strong> The three buttons below are Travelpayouts/Klook deep links with Sub IDs <code>la_router_card1</code>, <code>la_router_card2</code>, and <code>la_router_card3</code>. Prices, taxes, time slots, and availability can change on Klook. Redirect verification was performed separately and is not counted as a Real Outbound Click. No purchase or commission has occurred.
+    </section>
+
+    <div class="notice"><strong>Price scope.</strong> Prices shown are the public Klook prices captured on 2026-09-21 for one person; the two-person estimate is arithmetic only. Confirm the selected date, final total, and cancellation terms on Klook before paying.</div>
+    <footer>Recommendation and click events are recorded by this MVP. This page does not request payment, account creation, or purchase information.</footer>
+  </main>
+  <form name="kpi-events" data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="kpi-events" />
+    <input type="hidden" name="event" />
+    <input type="hidden" name="session_id" />
+    <input type="hidden" name="deal_id" />
+    <input type="hidden" name="city" />
+    <input type="hidden" name="timeframe" />
+    <input type="hidden" name="party_size" />
+    <input type="hidden" name="budget" />
+    <input type="hidden" name="intent" />
+    <input type="hidden" name="amount_usd" />
+    <input type="hidden" name="source" />
+  </form>
+  <script>
+    const sessionId = crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+    const staticMode = !['localhost', '127.0.0.1'].includes(location.hostname);
+    const source = new URLSearchParams(location.search).get('source') || 'direct';
+    let deals = [];
+    const $ = (id) => document.getElementById(id);
+    const makeEvent = (event, extra = {}) => ({ event, session_id:sessionId, city:'Los Angeles', party_size:2, budget:100, source, ...extra });
+    const send = (event, extra = {}) => {
+      const payload = makeEvent(event, extra);
+      if (!staticMode) {
+        return fetch('/api/event', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(payload) }).catch(() => {});
+      }
+      const body = new URLSearchParams(Object.entries({ 'form-name':'kpi-events', ...payload }).map(([key, value]) => [key, value == null ? '' : String(value)]));
+      try {
+        const stored = JSON.parse(localStorage.getItem('la-tonight-router-events') || '[]');
+        stored.push(payload);
+        localStorage.setItem('la-tonight-router-events', JSON.stringify(stored.slice(-100)));
+      } catch {}
+      if (navigator.sendBeacon) {
+        const sent = navigator.sendBeacon('/', new Blob([body.toString()], { type:'application/x-www-form-urlencoded' }));
+        if (sent) return Promise.resolve();
+      }
+      return fetch('/', { method:'POST', headers:{'content-type':'application/x-www-form-urlencoded'}, body, keepalive:true }).catch(() => {});
+    };
+    function rank(intent, timeframe) {
+      return [...deals].sort((a,b) => (b.tags.includes(intent) ? 2 : 0) + (b.tags.includes(timeframe) ? 1 : 0) - ((a.tags.includes(intent) ? 2 : 0) + (a.tags.includes(timeframe) ? 1 : 0)) || a.price_usd - b.price_usd);
+    }
+    function render(track = true) {
+      const timeframe = $('timeframe').value, intent = $('intent').value;
+      if (!track) {
+        $('status').textContent = 'Choose your timing and mood, then get 3 matches.';
+        $('cards').innerHTML = '';
+        return;
+      }
+      const picks = rank(intent, timeframe).slice(0,3);
+      $('status').textContent = `${timeframe === 'tonight' ? 'Tonight' : 'This weekend'} · 2 people · US$100/person cap`;
+      $('cards').innerHTML = picks.map((deal, i) => {
+        const go = staticMode ? deal.tracking_url : `/go/${encodeURIComponent(deal.id)}?sid=${encodeURIComponent(sessionId)}&timeframe=${encodeURIComponent(timeframe)}&intent=${encodeURIComponent(intent)}&source=la-tonight-router`;
+        return `<article class="card"><div class="rank">${i === 0 ? 'Best fit' : 'Alternative ' + i}</div><h3>${deal.title}</h3><div class="merchant">${deal.merchant} · ${deal.location}</div><div class="price">US$${deal.price_usd.toFixed(2)} <small>per person</small></div><div class="meta">${deal.rating ? deal.rating + ' / 5 · ' : ''}${deal.fit_note}<br>${deal.availability_note}</div><a class="cta" style="text-decoration:none;text-align:center;padding:12px;border-radius:12px;margin-top:18px" href="${go}" data-deal-id="${deal.id}" data-sub-id="${deal.tracking_sub_id}" target="_blank" rel="sponsored nofollow">Open exact Klook product</a><div class="tiny">Two-person estimate: US$${deal.estimated_total_usd.toFixed(2)} · Snapshot ${deal.snapshot_date} · ${deal.affiliate_status}</div></article>`;
+      }).join('');
+      send('recommendation_shown', { timeframe, intent });
+    }
+    $('cards').addEventListener('click', (event) => {
+      const link = event.target.closest('a[data-deal-id]');
+      if (link) send('outbound_deal_click', { deal_id:link.dataset.dealId, tracking_sub_id:link.dataset.subId, timeframe:$('timeframe').value, intent:$('intent').value });
+    });
+    $('find').addEventListener('click', () => { const timeframe = $('timeframe').value, intent = $('intent').value; send('qualified_intent', { timeframe, intent }); render(); });
+    fetch('/api/deals').then((response) => response.ok ? response.json() : Promise.reject(new Error('api_unavailable'))).catch(() => fetch('/deals.json').then((response) => response.json())).then(data => { deals = data; send('page_view'); render(false); }).catch(() => { $('status').textContent = 'Klook offer feed unavailable'; });
+  </script>
 </body>
 </html>
