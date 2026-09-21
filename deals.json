@@ -1,0 +1,53 @@
+[
+  {
+    "id": "axe-ventures-2p",
+    "title": "75-minute axe-throwing session for two",
+    "merchant": "Axe Ventures LA",
+    "category": "Adventure",
+    "price_usd": 46,
+    "original_price_usd": 70,
+    "rating": 4.4,
+    "location": "Hollywood",
+    "availability_note": "Public deal page; confirm current option and booking availability before purchase.",
+    "fit_note": "Exact 2-person option and under $100 total.",
+    "tags": ["fun", "adventure", "tonight", "weekend"],
+    "public_url": "https://www.groupon.com/deals/axe-ventures-5?redemptionLocationId=b08b3e20-6050-b4f3-b550-017ba8442e73",
+    "snapshot_date": "2026-09-21",
+    "live_status": "PUBLIC_CANDIDATE_NOT_QUOTE",
+    "affiliate_status": "NOT_CONNECTED"
+  },
+  {
+    "id": "family-arcade-2p",
+    "title": "All-day unlimited arcade play for two",
+    "merchant": "Family Arcade — Los Angeles",
+    "category": "Fun",
+    "price_usd": 35.10,
+    "original_price_usd": 50,
+    "rating": null,
+    "location": "Los Angeles",
+    "availability_note": "Any-day option shown on the public page; verify the selected option at checkout.",
+    "fit_note": "Exact 2-person option and under $100 total.",
+    "tags": ["fun", "date", "tonight", "weekend"],
+    "public_url": "https://www.groupon.com/deals/family-arcade-2",
+    "snapshot_date": "2026-09-21",
+    "live_status": "PUBLIC_CANDIDATE_NOT_QUOTE",
+    "affiliate_status": "NOT_CONNECTED"
+  },
+  {
+    "id": "golden-ticket-la-2p",
+    "title": "Celebrity home tour for two",
+    "merchant": "Golden Ticket L.A.",
+    "category": "Sightseeing",
+    "price_usd": 61.78,
+    "original_price_usd": 88,
+    "rating": null,
+    "location": "Hollywood",
+    "availability_note": "Public page shows an available-anytime 2-person option; verify the final price and date.",
+    "fit_note": "Exact 2-person option and under $100 total.",
+    "tags": ["date", "fun", "weekend", "tonight"],
+    "public_url": "https://www.groupon.com/deals/golden-ticket-la-1-1",
+    "snapshot_date": "2026-09-21",
+    "live_status": "PUBLIC_CANDIDATE_NOT_QUOTE",
+    "affiliate_status": "NOT_CONNECTED"
+  }
+]
