@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yl124915300-dot.github.io/sitemap.xml
