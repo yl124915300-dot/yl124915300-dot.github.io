@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PayRescue — Read-only WooCommerce + PayPal payment audit</title>
+<meta name="description" content="Find WooCommerce orders where PayPal was paid, approved or captured but the store still shows Pending or Failed. Read-only 30-day audit. No card data. No automatic order changes.">
+<link rel="canonical" href="https://yl124915300-dot.github.io/payrescue/">
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:860px;margin:0 auto;padding:40px 20px;color:#151515;line-height:1.55}
+h1{font-size:2.35rem;line-height:1.1;margin:.2em 0}.k{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:#555}
+.card{border:1px solid #ddd;border-radius:14px;padding:22px;margin:24px 0;background:#fff}.btn{display:inline-block;background:#111;color:#fff;padding:13px 18px;border-radius:9px;text-decoration:none;font-weight:700}
+small,.muted{color:#666}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.pill{background:#f5f5f5;border-radius:10px;padding:15px}
+a{color:#065fd4}.status{font-weight:700}
+</style>
+</head>
+<body>
+<div class="k">PayRescue · WooCommerce + PayPal</div>
+<h1>Check whether paid PayPal orders are stuck in WooCommerce.</h1>
+<p>PayRescue runs a <strong>read-only 30-day audit</strong> for payment-state mismatches such as PayPal completed while WooCommerce still shows Pending or Failed.</p>
+<div class="card">
+  <h2>What the audit checks</h2>
+  <div class="grid">
+    <div class="pill"><strong>Paid but stuck</strong><br><span class="muted">PayPal says completed; WooCommerce does not.</span></div>
+    <div class="pill"><strong>Pending payment</strong><br><span class="muted">Orders that may need status verification.</span></div>
+    <div class="pill"><strong>Failed orders</strong><br><span class="muted">Orders that may still have a valid PayPal payment.</span></div>
+    <div class="pill"><strong>Recoverable GMV</strong><br><span class="muted">Only counted after PayPal status, amount and currency match.</span></div>
+  </div>
+</div>
+<div class="card">
+  <h2>Safety boundary</h2>
+  <p>No card numbers or CVV are stored. Recovery is off by default. The audit does not automatically change WooCommerce order status.</p>
+  <p id="service">Live audit status: <span class="status">checking…</span></p>
+  <a id="audit" class="btn" href="#" rel="nofollow">Start read-only audit</a>
+  <p><small>The live audit endpoint may rotate during testing. This page remains the stable entry point.</small></p>
+</div>
+<h2>Common payment-state problems</h2>
+<ul>
+<li><a href="paypal-paid-woocommerce-pending/">PayPal paid, WooCommerce order still Pending</a></li>
+<li><a href="paypal-paid-woocommerce-failed/">PayPal paid, WooCommerce order shows Failed</a></li>
+<li><a href="paypal-capture-completed-order-pending/">PayPal capture completed but WooCommerce did not update</a></li>
+<li><a href="instrument-declined-checkout-stuck/">INSTRUMENT_DECLINED and checkout stuck after PayPal retry</a></li>
+</ul>
+<p class="muted">Sandbox validation has passed end-to-end. Sandbox amounts are test data, not merchant revenue.</p>
+<script>
+fetch('endpoint.json',{cache:'no-store'}).then(r=>r.json()).then(x=>{
+  const a=document.getElementById('audit'), s=document.querySelector('#service .status');
+  if(x&&x.url){a.href=x.url;s.textContent=x.status||'available';} else {s.textContent='temporarily unavailable';a.removeAttribute('href');}
+}).catch(()=>{document.querySelector('#service .status').textContent='temporarily unavailable';document.getElementById('audit').removeAttribute('href');});
+</script>
+</body></html>
