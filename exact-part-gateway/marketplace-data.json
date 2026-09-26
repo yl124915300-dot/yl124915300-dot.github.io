@@ -5,7 +5,7 @@
   "campaign_id": null,
   "customid": null,
   "subid": null,
-  "generated_at": "2026-09-26T11:34:56.340763+00:00",
+  "generated_at": "2026-09-26T11:42:58.608635+00:00",
   "freshness_hours": 24,
   "catalog": [
     {
@@ -198,8 +198,2007 @@
       "page_path": "lenze/mdsksbs056-33/"
     }
   ],
-  "queries": [],
-  "listings": [],
+  "queries": [
+    {
+      "mpn": "MS4SA-AP-ADC",
+      "brand": "Fuji Electric",
+      "target_region": "US"
+    },
+    {
+      "mpn": "6ES7215-1AG40-0XB0",
+      "brand": "Siemens",
+      "target_region": "US"
+    },
+    {
+      "mpn": "6ES7223-1PL32-0XB0",
+      "brand": "Siemens",
+      "target_region": "US"
+    },
+    {
+      "mpn": "6ES7231-4HF32-0XB0",
+      "brand": "Siemens",
+      "target_region": "US"
+    },
+    {
+      "mpn": "6ES7231-4HD32-0XB0",
+      "brand": "Siemens",
+      "target_region": "US"
+    },
+    {
+      "mpn": "NG1HB-510-M",
+      "brand": "Euchner",
+      "target_region": "US"
+    },
+    {
+      "mpn": "SGMAH-04AAA61D-OY",
+      "brand": "Yaskawa",
+      "target_region": "US"
+    },
+    {
+      "mpn": "MDSKSBS056-33",
+      "brand": "Lenze",
+      "target_region": "US"
+    },
+    {
+      "mpn": "IF6028",
+      "brand": "ifm",
+      "target_region": "US"
+    },
+    {
+      "mpn": "6ES7214-1AG40-0XB0",
+      "brand": "Siemens",
+      "target_region": "US"
+    },
+    {
+      "mpn": "55043-60020-E0",
+      "brand": "Toyota",
+      "target_region": "AU"
+    },
+    {
+      "mpn": "31462495",
+      "brand": "Volvo",
+      "target_region": "AU"
+    },
+    {
+      "mpn": "80111071",
+      "brand": "Grove",
+      "target_region": "BD"
+    },
+    {
+      "mpn": "80096475",
+      "brand": "Grove",
+      "target_region": "BD"
+    },
+    {
+      "mpn": "9333102230",
+      "brand": "Grove",
+      "target_region": "BD"
+    },
+    {
+      "mpn": "R911320209",
+      "brand": "Bosch Rexroth",
+      "target_region": "US"
+    },
+    {
+      "mpn": "MDS-CH-CV-260",
+      "brand": "Mitsubishi",
+      "target_region": "US"
+    },
+    {
+      "mpn": "6ES7511-1CK01-0AB0",
+      "brand": "Siemens",
+      "target_region": "US"
+    },
+    {
+      "mpn": "6ES7512-1CK01-0AB0",
+      "brand": "Siemens",
+      "target_region": "US"
+    },
+    {
+      "mpn": "7MH4960-6AA01",
+      "brand": "Siemens",
+      "target_region": "US"
+    }
+  ],
+  "listings": [
+    {
+      "marketplace": "ebay",
+      "listing_id": "125525941113",
+      "listing_url": "https://www.ebay.com/itm/125525941113",
+      "title": "SIMATIC S7-1200 CPU 1215C, COMPACT CPU - 6ES7215-1AG40-0XB0 (USED)",
+      "mpn": "6ES7215-1AG40-0XB0",
+      "price": 450,
+      "currency": "EUR",
+      "condition": "Used",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "ALL4SPS AG",
+      "seller_rating_if_public": "100% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "AVAILABLE",
+      "shipping_cost": 15,
+      "return_policy": "14 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/125525941113",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "USED_CONDITION",
+        "IMPORT_FEES_ADDITIONAL",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "EUR",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "IMPORT_FEES_ADDITIONAL",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "IMPORT_FEES_ADDITIONAL",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "IMPORT_FEES_ADDITIONAL",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "IMPORT_FEES_ADDITIONAL",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "IMPORT_FEES_ADDITIONAL",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "IMPORT_FEES_ADDITIONAL",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "318906343730",
+      "listing_url": "https://www.ebay.com/itm/318906343730",
+      "title": "6ES7215-1AG40-0XB0 NEW SIEMENS 6ES7 215-1AG40-0XB0 1AG40-OXBO S7-1200 CPU 1215C",
+      "mpn": "6ES7215-1AG40-0XB0",
+      "price": 499.55,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "IndustroSupply",
+      "seller_rating_if_public": "95.8% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "30 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/318906343730",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "SELLER_RATING_BELOW_98",
+        "LOW_FEEDBACK_COUNT",
+        "MODEL_FIELD_ZERO_O_TYPO",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "SELLER_RATING_BELOW_98",
+            "LOW_FEEDBACK_COUNT",
+            "MODEL_FIELD_ZERO_O_TYPO",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_RATING_BELOW_98",
+            "LOW_FEEDBACK_COUNT",
+            "MODEL_FIELD_ZERO_O_TYPO",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_RATING_BELOW_98",
+            "LOW_FEEDBACK_COUNT",
+            "MODEL_FIELD_ZERO_O_TYPO",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_RATING_BELOW_98",
+            "LOW_FEEDBACK_COUNT",
+            "MODEL_FIELD_ZERO_O_TYPO",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_RATING_BELOW_98",
+            "LOW_FEEDBACK_COUNT",
+            "MODEL_FIELD_ZERO_O_TYPO",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_RATING_BELOW_98",
+            "LOW_FEEDBACK_COUNT",
+            "MODEL_FIELD_ZERO_O_TYPO",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "315713830984",
+      "listing_url": "https://www.ebay.com/itm/315713830984",
+      "title": "New Siemens S7-1200 6ES7223-1PL32-0XB0 Boxed Sealed 6ES7 223-1PL32-0XB0",
+      "mpn": "6ES7223-1PL32-0XB0",
+      "price": 199.99,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "YJLXMB",
+      "seller_rating_if_public": "99.1% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "AVAILABLE",
+      "shipping_cost": 5,
+      "return_policy": "30 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/315713830984",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "MPN_FIELD_EMPTY_MODEL_EXACT",
+        "IMPORT_DELIVERY_ESTIMATE",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_TITLE",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "306870137708",
+      "listing_url": "https://www.ebay.com/itm/306870137708",
+      "title": "NEW IN STOCK 6ES7231-4HF32-0XB0 Siemens US Seller",
+      "mpn": "6ES7231-4HF32-0XB0",
+      "price": 319.97,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "MT.parts",
+      "seller_rating_if_public": "100% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "30 days; seller pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/306870137708",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "SELLER_CATALOG_EXTRA_FIELDS_MALFORMED",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "SELLER_CATALOG_EXTRA_FIELDS_MALFORMED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_CATALOG_EXTRA_FIELDS_MALFORMED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_CATALOG_EXTRA_FIELDS_MALFORMED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_CATALOG_EXTRA_FIELDS_MALFORMED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_CATALOG_EXTRA_FIELDS_MALFORMED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_CATALOG_EXTRA_FIELDS_MALFORMED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "127425611289",
+      "listing_url": "https://www.ebay.com/itm/127425611289",
+      "title": "1PC New Siemens PLC 6ES7 231-4HF32-0XB0 6ES72314HF320XB0 6ES7231-4HF32-0XB0",
+      "mpn": "6ES7231-4HF32-0XB0",
+      "price": 294.22,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "jauntyworld",
+      "seller_rating_if_public": "100% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "60 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/127425611289",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "MPN_FIELD_EMPTY_MODEL_EXACT",
+        "IMPORT_DELIVERY_ESTIMATE",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_TITLE",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MPN_FIELD_EMPTY_MODEL_EXACT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "147236773754",
+      "listing_url": "https://www.ebay.com/itm/147236773754",
+      "title": "SIEMENS 6ES7231-4HD32-0XB0 SIMATIC S7-1200 SM 1231 AI ANALOG INPUT",
+      "mpn": "6ES7231-4HD32-0XB0",
+      "price": 130,
+      "currency": "USD",
+      "condition": "Used",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "ATASHI EXIM",
+      "seller_rating_if_public": "100% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "30 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/147236773754",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "USED_CONDITION",
+        "LOW_FEEDBACK_COUNT",
+        "IMPORT_DELIVERY_ESTIMATE",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "187778640422",
+      "listing_url": "https://www.ebay.com/itm/187778640422",
+      "title": "Siemens 6ES7231-4HD32-0XB0 S7-1200 SM1231 AI Module Tested Used",
+      "mpn": "6ES7231-4HD32-0XB0",
+      "price": 118.2,
+      "currency": "USD",
+      "condition": "Used",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "automation-industrial",
+      "seller_rating_if_public": "100% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "AVAILABLE",
+      "shipping_cost": 30.5,
+      "return_policy": "Seller does not accept returns",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/187778640422",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "USED_CONDITION",
+        "NO_RETURNS",
+        "LOW_FEEDBACK_COUNT",
+        "UNUSUAL_SHIPPING_SERVICE",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "NO_RETURNS",
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "UNUSUAL_SHIPPING_SERVICE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "NO_RETURNS",
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "UNUSUAL_SHIPPING_SERVICE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "NO_RETURNS",
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "UNUSUAL_SHIPPING_SERVICE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "NO_RETURNS",
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "UNUSUAL_SHIPPING_SERVICE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "NO_RETURNS",
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "UNUSUAL_SHIPPING_SERVICE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "NO_RETURNS",
+            "USED_OR_OTHER_CONDITION",
+            "USED_CONDITION",
+            "LOW_FEEDBACK_COUNT",
+            "UNUSUAL_SHIPPING_SERVICE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "820049608385",
+      "listing_url": "https://www.ebay.com/itm/820049608385",
+      "title": "1PC Real US Stock NEW Yaskawa SGMAH-04AAA61D-OY Fast shipping",
+      "mpn": "SGMAH-04AAA61D-OY",
+      "price": 189.99,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "wicontrol",
+      "seller_rating_if_public": "100% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "30 days; seller pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/820049608385",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "ELECTRICAL_CATALOG_VALUES_NEED_NAMEPLATE_CHECK",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "ELECTRICAL_CATALOG_VALUES_NEED_NAMEPLATE_CHECK",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "ELECTRICAL_CATALOG_VALUES_NEED_NAMEPLATE_CHECK",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "ELECTRICAL_CATALOG_VALUES_NEED_NAMEPLATE_CHECK",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "ELECTRICAL_CATALOG_VALUES_NEED_NAMEPLATE_CHECK",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "ELECTRICAL_CATALOG_VALUES_NEED_NAMEPLATE_CHECK",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "ELECTRICAL_CATALOG_VALUES_NEED_NAMEPLATE_CHECK",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "800670854877",
+      "listing_url": "https://www.ebay.com/itm/800670854877",
+      "title": "MDSKSBS056-33 New Sealed LENZE SERVO MOTOR Inverter MDSKSBS056-33",
+      "mpn": "MDSKSBS056-33",
+      "price": 2569.02,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "originatorr",
+      "seller_rating_if_public": "99.8% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "30 days; seller pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/800670854877",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "SELLER_AWAY_UNTIL_2026_10_10",
+        "EXTENDED_DISPATCH",
+        "ID_NR_15002468_NOT_VERIFIED",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "SELLER_AWAY_UNTIL_2026_10_10",
+            "EXTENDED_DISPATCH",
+            "ID_NR_15002468_NOT_VERIFIED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_AWAY_UNTIL_2026_10_10",
+            "EXTENDED_DISPATCH",
+            "ID_NR_15002468_NOT_VERIFIED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_AWAY_UNTIL_2026_10_10",
+            "EXTENDED_DISPATCH",
+            "ID_NR_15002468_NOT_VERIFIED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_AWAY_UNTIL_2026_10_10",
+            "EXTENDED_DISPATCH",
+            "ID_NR_15002468_NOT_VERIFIED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_AWAY_UNTIL_2026_10_10",
+            "EXTENDED_DISPATCH",
+            "ID_NR_15002468_NOT_VERIFIED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "SELLER_AWAY_UNTIL_2026_10_10",
+            "EXTENDED_DISPATCH",
+            "ID_NR_15002468_NOT_VERIFIED",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "318898824837",
+      "listing_url": "https://www.ebay.com/itm/318898824837",
+      "title": "1PCS New IFM Proximity switch IF6028",
+      "mpn": "IF6028",
+      "price": 30.86,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "sno3877",
+      "seller_rating_if_public": "100% positive",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "AVAILABLE",
+      "shipping_cost": 4.99,
+      "return_policy": "30 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN_APPLICATION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:37:09Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/318898824837",
+          "observed_at": "2026-09-26T11:37:09Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "LOW_ITEM_VALUE",
+        "IMPORT_DELIVERY_ESTIMATE",
+        "APPLICATION_FIT_NOT_VERIFIED",
+        "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+        "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "LOW_ITEM_VALUE",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "LOW_ITEM_VALUE",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "LOW_ITEM_VALUE",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "LOW_ITEM_VALUE",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "LOW_ITEM_VALUE",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "LOW_ITEM_VALUE",
+            "IMPORT_DELIVERY_ESTIMATE",
+            "APPLICATION_FIT_NOT_VERIFIED",
+            "SELLER_AUTHENTICITY_NOT_INDEPENDENTLY_VERIFIED",
+            "APPLICATION_COMPATIBILITY_NOT_VERIFIED"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "318784890681",
+      "listing_url": "https://www.ebay.com/itm/318784890681",
+      "title": "1PCS NEW Mitsubishi power supply Drive MDS-CH-CV-260 free ship",
+      "mpn": "MDS-CH-CV-260",
+      "price": 3492.46,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "topbay",
+      "seller_rating_if_public": "100% positive (300 feedback)",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "AVAILABLE",
+      "shipping_cost": 6,
+      "return_policy": "14 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN; SYSTEM_REVISION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:38:50Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/318784890681",
+          "observed_at": "2026-09-26T11:38:50Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+        "FIRMWARE_REVISION_UNVERIFIED",
+        "CROSS_BORDER_SHIPPING",
+        "TITLE_FREE_SHIP_CONFLICTS_WITH_USD6_SHIPPING",
+        "TAX_FINAL_AT_CHECKOUT"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TITLE_FREE_SHIP_CONFLICTS_WITH_USD6_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TITLE_FREE_SHIP_CONFLICTS_WITH_USD6_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TITLE_FREE_SHIP_CONFLICTS_WITH_USD6_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TITLE_FREE_SHIP_CONFLICTS_WITH_USD6_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TITLE_FREE_SHIP_CONFLICTS_WITH_USD6_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TITLE_FREE_SHIP_CONFLICTS_WITH_USD6_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "398416798804",
+      "listing_url": "https://www.ebay.com/itm/398416798804",
+      "title": "NewSiemens 6ES7512-1CK01-0AB0 S7-1500 Compact CPU 1512C-1 PN 6ES7 512-1CK01-0AB0",
+      "mpn": "6ES7512-1CK01-0AB0",
+      "price": 1574.44,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "MRO-AUTO",
+      "seller_rating_if_public": "100% positive (430 feedback)",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "30 days; seller pays return shipping",
+      "compatibility_status": "EXACT_MPN; SYSTEM_REVISION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:38:50Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/398416798804",
+          "observed_at": "2026-09-26T11:38:50Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+        "FIRMWARE_REVISION_UNVERIFIED",
+        "TAX_FINAL_AT_CHECKOUT"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "317567759560",
+      "listing_url": "https://www.ebay.com/itm/317567759560",
+      "title": "NEW Siemens Simatic S7-1500 CPU 1511C-PN 6ES7 511-1CK01-0AB0 6ES7511-1CK01-0AB0",
+      "mpn": "6ES7511-1CK01-0AB0",
+      "price": 1090.97,
+      "currency": "EUR",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "chipplc",
+      "seller_rating_if_public": "97.7% positive (83 feedback)",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "30 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN; SYSTEM_REVISION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:38:50Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/317567759560",
+          "observed_at": "2026-09-26T11:38:50Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+        "FIRMWARE_REVISION_UNVERIFIED",
+        "CROSS_BORDER_SHIPPING",
+        "SELLER_FEEDBACK_BELOW_99",
+        "TAX_FINAL_AT_CHECKOUT"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_TITLE",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "SELLER_FEEDBACK_BELOW_99",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "SELLER_FEEDBACK_BELOW_99",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "SELLER_FEEDBACK_BELOW_99",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "SELLER_FEEDBACK_BELOW_99",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "SELLER_FEEDBACK_BELOW_99",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "SELLER_FEEDBACK_BELOW_99",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "128084116320",
+      "listing_url": "https://www.ebay.com/itm/128084116320",
+      "title": "Siemens Module 7MH4960-6AA01#1pcs new in box",
+      "mpn": "7MH4960-6AA01",
+      "price": 1220,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "derime-plc",
+      "seller_rating_if_public": "100% positive (85 feedback)",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "AVAILABLE",
+      "shipping_cost": 10,
+      "return_policy": "30 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN; SYSTEM_REVISION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:38:50Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/128084116320",
+          "observed_at": "2026-09-26T11:38:50Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+        "FIRMWARE_REVISION_UNVERIFIED",
+        "CROSS_BORDER_SHIPPING",
+        "LOW_FEEDBACK_COUNT",
+        "ORIGIN_FIELD_DIFFERS_FROM_IMAGE_LABEL",
+        "TAX_FINAL_AT_CHECKOUT"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "LOW_FEEDBACK_COUNT",
+            "ORIGIN_FIELD_DIFFERS_FROM_IMAGE_LABEL",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "LOW_FEEDBACK_COUNT",
+            "ORIGIN_FIELD_DIFFERS_FROM_IMAGE_LABEL",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "LOW_FEEDBACK_COUNT",
+            "ORIGIN_FIELD_DIFFERS_FROM_IMAGE_LABEL",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "LOW_FEEDBACK_COUNT",
+            "ORIGIN_FIELD_DIFFERS_FROM_IMAGE_LABEL",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "LOW_FEEDBACK_COUNT",
+            "ORIGIN_FIELD_DIFFERS_FROM_IMAGE_LABEL",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "LOW_FEEDBACK_COUNT",
+            "ORIGIN_FIELD_DIFFERS_FROM_IMAGE_LABEL",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "316114661251",
+      "listing_url": "https://www.ebay.com/itm/316114661251",
+      "title": "SIEMENS 7MH4960-6AA01 Electronic Weighing Module# 1pcs New In Box",
+      "mpn": "7MH4960-6AA01",
+      "price": 1185.92,
+      "currency": "USD",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "Technology-5G-Store",
+      "seller_rating_if_public": "100% positive (378 feedback)",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "AVAILABLE",
+      "shipping_cost": 50,
+      "return_policy": "30 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN; SYSTEM_REVISION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:38:50Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/316114661251",
+          "observed_at": "2026-09-26T11:38:50Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+        "FIRMWARE_REVISION_UNVERIFIED",
+        "CROSS_BORDER_SHIPPING",
+        "CATALOG_CONTROLLER_PLATFORM_INCONSISTENT",
+        "TAX_FINAL_AT_CHECKOUT"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "CATALOG_CONTROLLER_PLATFORM_INCONSISTENT",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "CATALOG_CONTROLLER_PLATFORM_INCONSISTENT",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "CATALOG_CONTROLLER_PLATFORM_INCONSISTENT",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "CATALOG_CONTROLLER_PLATFORM_INCONSISTENT",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "CATALOG_CONTROLLER_PLATFORM_INCONSISTENT",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "CATALOG_CONTROLLER_PLATFORM_INCONSISTENT",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        }
+      }
+    },
+    {
+      "marketplace": "ebay",
+      "listing_id": "298064926638",
+      "listing_url": "https://www.ebay.com/itm/298064926638",
+      "title": "1 Stück NEU Siemens 6ES7512-1CK01-0AB0 Mit Garantie",
+      "mpn": "6ES7512-1CK01-0AB0",
+      "price": 1653.67,
+      "currency": "EUR",
+      "condition": "New",
+      "availability": "IN_STOCK",
+      "purchase_type": "BUY_IT_NOW",
+      "seller": "techbridge",
+      "seller_rating_if_public": "100% positive (193 feedback)",
+      "ship_to": [
+        "US"
+      ],
+      "shipping_status": "FREE",
+      "shipping_cost": 0,
+      "return_policy": "30 days; buyer pays return shipping",
+      "compatibility_status": "EXACT_MPN; SYSTEM_REVISION_NOT_VERIFIED",
+      "last_verified_at": "2026-09-26T11:38:50Z",
+      "exact_part_match_score": 100,
+      "source_evidence": [
+        {
+          "url": "https://www.ebay.com/itm/298064926638",
+          "observed_at": "2026-09-26T11:38:50Z",
+          "verification_type": "PUBLIC_LISTING_PAGE"
+        }
+      ],
+      "risk_flags": [
+        "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+        "FIRMWARE_REVISION_UNVERIFIED",
+        "CROSS_BORDER_SHIPPING",
+        "TAX_FINAL_AT_CHECKOUT"
+      ],
+      "match_notes": null,
+      "match_basis": "EXACT_MPN_ITEM_SPECIFICS",
+      "category": "BUSINESS_INDUSTRIAL",
+      "shipping_currency": "USD",
+      "shipping_destination_basis": "Public eBay page estimated delivery to US ZIP 94112; other ZIP/country not verified.",
+      "affiliate_ready": false,
+      "affiliate_url": null,
+      "evidence_verified": true,
+      "region_checks": {
+        "US": {
+          "blockers": [],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "AU": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "GB": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "DE": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "PL": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        },
+        "CZ": {
+          "blockers": [
+            "TARGET_SHIPPING_UNVERIFIED"
+          ],
+          "risk_flags": [
+            "MANUFACTURER_AUTHORIZATION_UNVERIFIED",
+            "FIRMWARE_REVISION_UNVERIFIED",
+            "CROSS_BORDER_SHIPPING",
+            "TAX_FINAL_AT_CHECKOUT"
+          ]
+        }
+      }
+    }
+  ],
   "measurement": {
     "outbound_clicks": null,
     "scope": "NOT_COLLECTED",
