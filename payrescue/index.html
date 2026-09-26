@@ -24,7 +24,7 @@ a{color:#065fd4}.status{font-weight:700}
     <div class="pill"><strong>Paid but stuck</strong><br><span class="muted">PayPal says completed; WooCommerce does not.</span></div>
     <div class="pill"><strong>Pending payment</strong><br><span class="muted">Orders that may need status verification.</span></div>
     <div class="pill"><strong>Failed orders</strong><br><span class="muted">Orders that may still have a valid PayPal payment.</span></div>
-    <div class="pill"><strong>Recoverable GMV</strong><br><span class="muted">Only counted after PayPal status, amount and currency match.</span></div>
+    <div class="pill"><strong>Recoverable GMV</strong><br><span class="muted">Only confirmed after a completed PayPal capture, amount and currency match.</span></div>
   </div>
 </div>
 <div class="card">
@@ -32,8 +32,9 @@ a{color:#065fd4}.status{font-weight:700}
   <p>No card numbers or CVV are stored. Recovery is off by default. The audit does not automatically change WooCommerce order status.</p>
   <p id="service">Live audit status: <span class="status">checking…</span></p>
   <a id="audit" class="btn" href="#" rel="nofollow">Start read-only audit</a>
-  <p><small>The live audit endpoint may rotate during testing. This page remains the stable entry point.</small></p>
+  <p><small>Credentials are used only during your audit and are never saved. Anonymous event counts contain no personal or order data.</small></p>
 </div>
+<div class="card"><h2>Free audit. Pay only for funds actually recovered.</h2><p><strong>Audit is free.</strong> Recovery is off by default and requires your separate explicit authorization. The success fee is <strong>10% of funds actually recovered</strong>. <strong>No recovery = no fee.</strong></p><p>Request Recovery records a request only; it does not change orders. Already-paid order status corrections alone do not earn a fee. No subscriptions or automatic charges.</p></div>
 <h2>Common payment-state problems</h2>
 <ul>
 <li><a href="paypal-paid-woocommerce-pending/">PayPal paid, WooCommerce order still Pending</a></li>
@@ -43,9 +44,19 @@ a{color:#065fd4}.status{font-weight:700}
 </ul>
 <p class="muted">Sandbox validation has passed end-to-end. Sandbox amounts are test data, not merchant revenue.</p>
 <script>
-fetch('endpoint.json',{cache:'no-store'}).then(r=>r.json()).then(x=>{
-  const a=document.getElementById('audit'), s=document.querySelector('#service .status');
-  if(x&&x.url){a.href=x.url;s.textContent=x.status||'available';} else {s.textContent='temporarily unavailable';a.removeAttribute('href');}
-}).catch(()=>{document.querySelector('#service .status').textContent='temporarily unavailable';document.getElementById('audit').removeAttribute('href');});
+(async()=>{
+ const a=document.getElementById('audit'),s=document.querySelector('#service .status'),test=new URLSearchParams(location.search).get('selftest')==='1';
+ a.removeAttribute('href');
+ try {
+  const response=await fetch('endpoint.json',{cache:'no-store'});if(!response.ok)throw new Error();const x=await response.json();
+  if(!x.url||x.status!=='available')throw new Error();const target=new URL(x.url);if(target.protocol!=='https:')throw new Error();
+  const health=await fetch(new URL('/health',target),{cache:'no-store',signal:AbortSignal.timeout(8000)});if(!health.ok||(await health.json()).read_only!==true)throw new Error();
+  const source=test?'selftest':'pages';
+  function event(type){return fetch(new URL('/api/events',target),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:type,source,time:new Date().toISOString()}),keepalive:true,signal:AbortSignal.timeout(1500)}).catch(()=>{});}
+  target.searchParams.set('source','pages');if(test)target.searchParams.set('selftest','1');a.href=target.href;s.textContent='available · read-only';
+  const key='payrescue-landing-'+source+'-'+new Date().toISOString().slice(0,10);try{if(!sessionStorage.getItem(key)){event('LANDING_VIEW');sessionStorage.setItem(key,'1');}}catch{event('LANDING_VIEW');}
+  a.addEventListener('click',async e=>{e.preventDefault();await event('AUDIT_CLICK');location.assign(target.href);});
+ }catch{s.textContent='temporarily unavailable';a.removeAttribute('href');}
+})();
 </script>
 </body></html>
