@@ -14,6 +14,7 @@ import math
 import random
 import re
 import sqlite3
+import ssl
 import sys
 import urllib.error
 import urllib.parse
@@ -28,6 +29,23 @@ METHODS = {"browser_rendered", "official_api", "web_source"}
 NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 ET.register_namespace("", NS)
 METRICS = ("SEARCH_IMPRESSIONS", "SEARCH_CLICKS", "EPN_CLICKS", "ATTRIBUTED_PURCHASES", "COMMISSION_PENDING", "COMMISSION_PAID")
+
+
+def verified_tls_context():
+    """Use the host CA bundle if this Python installation has no default bundle."""
+    defaults = ssl.get_default_verify_paths()
+    if defaults.cafile or defaults.capath:
+        return ssl.create_default_context()
+    system_bundle = Path('/etc/ssl/cert.pem')
+    return ssl.create_default_context(cafile=str(system_bundle)) if system_bundle.is_file() else ssl.create_default_context()
+
+
+def metric_display(value):
+    if value is None:
+        return 'UNKNOWN'
+    if isinstance(value, dict) and isinstance(value.get('amount'), (int, float)) and value.get('currency'):
+        return f"{value['currency']} {value['amount']:,.2f}"
+    return str(value)
 
 
 def utcnow():
@@ -347,7 +365,7 @@ def probe(db, now, timeout=15):
         req = urllib.request.Request(url, headers={"User-Agent": "PartIntelligenceFactory/1.0 (+read-only availability-link audit)"}, method="GET")
         status, outcome, final_url = None, "UNVERIFIED", url
         try:
-            with urllib.request.urlopen(req, timeout=timeout) as response:
+            with urllib.request.urlopen(req, timeout=timeout, context=verified_tls_context()) as response:
                 status, final_url = response.status, response.url
                 response.read(1024)
                 outcome = "REACHABLE_NOT_REVERIFIED"
@@ -512,7 +530,7 @@ def verify_deployed(db, now, timeout=20):
         status, observed_hash, outcome = None, None, 'UNVERIFIED'
         try:
             req = urllib.request.Request(pub['canonical_url'], headers={'User-Agent': 'PartIntelligenceFactory/1.0 public deployment verification'})
-            with urllib.request.urlopen(req, timeout=timeout) as response:
+            with urllib.request.urlopen(req, timeout=timeout, context=verified_tls_context()) as response:
                 status = response.status
                 observed_hash = hashlib.sha256(response.read()).hexdigest()
                 outcome = 'LIVE_MATCH' if status == 200 and observed_hash == pub['content_hash'] else 'CONTENT_MISMATCH'
@@ -620,7 +638,7 @@ def generate(db, site_root, base, now, report_dir, allow_new=True):
     index_body = '<h1>Verified part intelligence</h1><p>Only pages meeting the complete evidence gate appear in this index.</p><div class="grid">' + ''.join('<article class="card"><h2>' + a(base + c['page_path'], c['brand'] + ' ' + c['mpn']) + '</h2><p>' + h(c['category']) + '</p></article>' for c in qualified) + '</div>'
     if clusters:
         index_body += '<section class="section"><h2>Manufacturer series guides</h2><ul>' + ''.join('<li>' + a(base + 'series/' + slug(brand) + '-' + slug(series) + '/', brand + ' ' + series) + '</li>' for brand, series in sorted(clusters)) + '</ul></section>'
-    index_body += '<section class="section"><h2>Verification dashboard</h2><dl>' + ''.join('<dt>' + h(k) + '</dt><dd>' + h('UNKNOWN' if v is None else v) + '</dd>' for k, v in current_metrics.items() if k.isupper()) + '</dl><p>Search, purchase and commission metrics require authorized reporting evidence. Unknown is not zero. LIVE requires a matching public HTTP check; BUILT only counts local artifacts.</p></section>'
+    index_body += '<section class="section"><h2>Verification dashboard</h2><dl>' + ''.join('<dt>' + h(k) + '</dt><dd>' + h(metric_display(v)) + '</dd>' for k, v in current_metrics.items() if k.isupper()) + '</dl><p>Search, purchase and commission metrics require authorized reporting evidence. Unknown is not zero. LIVE requires a matching public HTTP check; BUILT only counts local artifacts.</p></section>'
     publish('factory/', shell('Verified parts and dashboard | Exact-Part Gateway', 'Evidence-gated exact-part pages and transparent page_measurements.', base + 'factory/', index_body, base), base + 'factory/', kind='dashboard')
     # Keep every original URL in both existing sitemaps. Only new/substantive
     # content-changed URLs enter the IndexNow delta; unchanged pages do not.

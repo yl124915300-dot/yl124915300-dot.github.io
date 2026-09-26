@@ -102,3 +102,5 @@ All timestamps retain timezones. All evidence versions remain in `page_evidence`
 - Existing site `factory/` index/dashboard, `factory-metrics.json`, qualified part pages, qualifying series hubs, and safely merged subtree/root sitemaps.
 
 The 22 unit checks use synthetic fixtures exclusively in temporary directories. They cover strict offer facts, code mismatch, duplicate URLs, editorial support, fresh-vs-cached evidence, stale fallbacks, repeated no-supply observations, immutable evidence, attribution ownership, public deployment checks, unchanged IndexNow deltas, root sitemap preservation and isolation from existing business tables.
+
+On hosts where Python has no default CA bundle, network checks use the existing system `/etc/ssl/cert.pem` bundle when available. Certificate and hostname verification stay enabled. A network failure never refreshes commercial evidence.
