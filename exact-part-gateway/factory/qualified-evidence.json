@@ -1,0 +1,1220 @@
+{
+  "candidates": [
+    {
+      "mpn": "MDSKSBS056-33",
+      "brand": "Lenze",
+      "category": "Synchronous servo motor. Some eBay titles say inverter; the independent product reference identifies a servo motor.",
+      "vertical": "Industrial Automation/MRO",
+      "page_path": "lenze/mdsksbs056-33/",
+      "series": "MDSKS / MDxKS",
+      "identity_summary": "Synchronous servo motor. Some eBay titles say inverter; the independent product reference identifies a servo motor.",
+      "ebay_market_exists": true,
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:08:52+00:00",
+        "reviewer": "Codex root source-by-source review",
+        "incremental_value": "Exact-code cross-source identity, current price/condition/return comparison and model-specific purchasing conflicts."
+      },
+      "listings": [
+        {
+          "listing_id": "820157283472",
+          "source_url": "https://www.ebay.com/itm/820157283472",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "exact_mpn": "MDSKSBS056-33",
+          "identity_verified": true,
+          "price": 2318.97,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "youshuollc",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free standard shipping to US ZIP 94112, Walnut origin. Seller away until 2026-10-08; other destinations unknown.",
+          "returns_note": "Seller does not accept returns.",
+          "evidence_note": "Model and MPN both exact; 5 available; Buy It Now. Seller-away delay.",
+          "verification_method": "web_source"
+        },
+        {
+          "listing_id": "800670854877",
+          "source_url": "https://www.ebay.com/itm/800670854877",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "exact_mpn": "MDSKSBS056-33",
+          "identity_verified": true,
+          "price": 2569.02,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "originatorr",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free standard shipping to US ZIP 94112, Perth Amboy origin. Seller away until 2026-10-10; other destinations unknown.",
+          "returns_note": "30 days, seller-paid return shipping.",
+          "evidence_note": "Exact designation in title and label illustration; 10 available; Buy It Now.",
+          "verification_method": "web_source",
+          "tracked_url": "https://www.ebay.com/itm/800670854877?mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339214603&customid=cpr_mdsksbs05633&toolid=10001&mkevt=1"
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://gesrepair.com/products/mdsksbs056-33-lenze-servo-motor/",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "source_identity": "Global Electronic Services",
+          "exact_mpn": "MDSKSBS056-33",
+          "identity_note": "Exact motor model; separate new/surplus $1,978, refurbished $1,385 and repair $899 prices. Quote form is not verified buy-now supply; repair excluded from unit comparison."
+        },
+        {
+          "source_url": "https://s3.amazonaws.com/www.motionusa.com/lenze/Lenze-L-ForceServoMotors.pdf",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "source_identity": "Lenze L-force Servo Motors catalogue (MotionUSA mirror)",
+          "exact_mpn": "MDSKSBS056-33",
+          "identity_note": "Manufacturer-authored family reference, edition 06/2011. MDSKS??056-33 row and accessory ordering checklist; not proof of a specific unit configuration."
+        }
+      ],
+      "model_checks": [
+        {
+          "text": "Match the full Lenze identification number, not only the MDSKSBS056-33 shorthand. The motor catalogue distinguishes brake, mounting, shaft and connector options that must match the installed unit.",
+          "source_urls": [
+            "https://s3.amazonaws.com/www.motionusa.com/lenze/Lenze-L-ForceServoMotors.pdf"
+          ]
+        },
+        {
+          "text": "Separate motor-rated voltage from the drive mains supply: the catalogue row sits within a 400V mains section but has a different motor-voltage field. Use the actual nameplate and drive documentation; do not connect the motor directly to mains.",
+          "source_urls": [
+            "https://s3.amazonaws.com/www.motionusa.com/lenze/Lenze-L-ForceServoMotors.pdf"
+          ]
+        },
+        {
+          "text": "Both new listings allow ordering but show away notices through October 8/10. The cheaper offer declines returns while the other has 30-day seller-funded returns; this changes the cost of an incorrect variant.",
+          "source_urls": [
+            "https://www.ebay.com/itm/820157283472",
+            "https://www.ebay.com/itm/800670854877"
+          ]
+        },
+        {
+          "text": "GES repair pricing covers work on your existing motor, not a replacement unit; keep it outside purchase price ranges and confirm whether a replacement quote is actually available.",
+          "source_urls": [
+            "https://gesrepair.com/products/mdsksbs056-33-lenze-servo-motor/"
+          ]
+        }
+      ],
+      "tracked_search_url": "https://www.ebay.com/sch/i.html?_nkw=MDSKSBS056-33&LH_BIN=1&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339214603&customid=cprmdsksbs05633search&toolid=10001&mkevt=1"
+    },
+    {
+      "mpn": "SGMAH-04AAA61D-OY",
+      "brand": "Yaskawa",
+      "category": "Sigma-II AC servo motor; verify the complete -OY suffix on the physical unit.",
+      "vertical": "Industrial Automation/MRO",
+      "page_path": "yaskawa/sgmah-04aaa61d-oy/",
+      "series": "Sigma-II / SGMAH",
+      "identity_summary": "Sigma-II AC servo motor; verify the complete -OY suffix on the physical unit.",
+      "ebay_market_exists": true,
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:08:52+00:00",
+        "reviewer": "Codex root source-by-source review",
+        "incremental_value": "Exact-code cross-source identity, current price/condition/return comparison and model-specific purchasing conflicts."
+      },
+      "listings": [
+        {
+          "listing_id": "820049608385",
+          "source_url": "https://www.ebay.com/itm/820049608385",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "exact_mpn": "SGMAH-04AAA61D-OY",
+          "identity_verified": true,
+          "price": 189.99,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "wicontrol",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free standard shipping displayed to US ZIP 94112; Houston origin; other regions unknown.",
+          "returns_note": "30 days, seller-paid return shipping.",
+          "evidence_note": "Title, Model and Manufacturer Part Number match; 2 available and Buy It Now. Voltage fields conflict: 110V and 230V.",
+          "verification_method": "web_source",
+          "tracked_url": "https://www.ebay.com/itm/820049608385?mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339214603&customid=cpr_sgmah04aaa61doy&toolid=10001&mkevt=1"
+        },
+        {
+          "listing_id": "158228557820",
+          "source_url": "https://www.ebay.com/itm/158228557820",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "exact_mpn": "SGMAH-04AAA61D-OY",
+          "identity_verified": true,
+          "price": 147.69,
+          "currency": "USD",
+          "condition": "Used",
+          "seller": "Complicit Components",
+          "availability": "BUY_NOW",
+          "shipping_note": "USD 30 expedited shipping from China to US ZIP 94112; other regions unknown.",
+          "returns_note": "60 days, buyer-paid return shipping.",
+          "evidence_note": "Exact Model field matches; MPN field Does Not Apply. Buy It Now, 2 available. Physical label still must be checked.",
+          "verification_method": "web_source"
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.mroelectric.com/product/SGMAH-04AAA61D-OY",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "source_identity": "MRO Electric",
+          "exact_mpn": "SGMAH-04AAA61D-OY",
+          "identity_note": "Exact part number shown. New USD 1,349, 3 in stock, cart, 2-year MRO warranty. Description says 230V but table says 200V; not a verified nameplate rating."
+        }
+      ],
+      "model_checks": [
+        {
+          "text": "Match SGMAH-04AAA61D-OY on the actual motor label, including -OY; the first offer shows a box, while the used offer leaves its MPN field blank. Request the motor label and connectors before treating either as a replacement.",
+          "source_urls": [
+            "https://www.ebay.com/itm/820049608385",
+            "https://www.ebay.com/itm/158228557820"
+          ]
+        },
+        {
+          "text": "Resolve the voltage conflict using the installed drive and motor nameplate: wicontrol mixes 110V/230V, while MRO mixes 230V description and 200V table. Do not select a drive from these seller fields.",
+          "source_urls": [
+            "https://www.mroelectric.com/product/SGMAH-04AAA61D-OY",
+            "https://www.ebay.com/itm/820049608385"
+          ]
+        },
+        {
+          "text": "Compare the used China unit plus USD 30 freight and buyer-funded return with the Houston new offer and seller-funded return. These shipping observations use ZIP 94112 and do not establish worldwide terms.",
+          "source_urls": [
+            "https://www.ebay.com/itm/158228557820",
+            "https://www.ebay.com/itm/820049608385"
+          ]
+        }
+      ],
+      "tracked_search_url": "https://www.ebay.com/sch/i.html?_nkw=SGMAH-04AAA61D-OY&LH_BIN=1&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339214603&customid=cprsgmah04aaa61doysearch&toolid=10001&mkevt=1"
+    },
+    {
+      "mpn": "MDS-CH-CV-260",
+      "brand": "Mitsubishi Electric",
+      "category": "Power supply unit for an MDS-CH drive system; seller use of the term servo drive does not establish interchangeability.",
+      "vertical": "Industrial Automation/MRO",
+      "page_path": "mitsubishi-electric/mds-ch-cv-260/",
+      "series": "MDS-CH / MDS-CH-CV",
+      "identity_summary": "Power supply unit for an MDS-CH drive system; seller use of the term servo drive does not establish interchangeability.",
+      "ebay_market_exists": true,
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:08:52+00:00",
+        "reviewer": "Codex root source-by-source review",
+        "incremental_value": "Exact-code cross-source identity, current price/condition/return comparison and model-specific purchasing conflicts."
+      },
+      "listings": [
+        {
+          "listing_id": "318784890681",
+          "source_url": "https://www.ebay.com/itm/318784890681",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "exact_mpn": "MDS-CH-CV-260",
+          "identity_verified": true,
+          "price": 3492.46,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "topbay",
+          "availability": "BUY_NOW",
+          "shipping_note": "USD 6 SpeedPAK Standard from Shenzhen to US ZIP 94112, despite free ship in title; other regions unknown.",
+          "returns_note": "14 days, buyer-paid return shipping.",
+          "evidence_note": "Exact MPN and Model fields match; Buy It Now visible.",
+          "verification_method": "web_source",
+          "tracked_url": "https://www.ebay.com/itm/318784890681?mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339214603&customid=cpr_mdschcv260&toolid=10001&mkevt=1"
+        },
+        {
+          "listing_id": "800559371700",
+          "source_url": "https://www.ebay.com/itm/800559371700",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "exact_mpn": "MDS-CH-CV-260",
+          "identity_verified": true,
+          "price": 4742.25,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "youshuoplc",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free standard shipping to US ZIP 94112; Walnut origin. Seller away until 2026-10-08, so dispatch delayed; other regions unknown.",
+          "returns_note": "Seller does not accept returns.",
+          "evidence_note": "Exact title/Model designation; Buy It Now and 2 available; seller-away notice retained.",
+          "verification_method": "web_source"
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://cnctoolsllc.com/products/mitsubishi-power-supply-mds-ch-cv-260-new-in-stock",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "source_identity": "CNC Tools LLC",
+          "exact_mpn": "MDS-CH-CV-260",
+          "identity_note": "Exact MPN, new power supply; displayed $4,500, currency not independently confirmed. Conditional $1,000 core credit is not deducted. 12-month warranty."
+        },
+        {
+          "source_url": "https://dl.mitsubishielectric.com/dl/fa/document/manual/cnc/bnp-c3016(eng)/bnp-c3016(eng)f.pdf",
+          "verified_at": "2026-09-26T16:08:52+00:00",
+          "source_identity": "Mitsubishi Electric MDS-CH specification manual BNP-C3016F",
+          "exact_mpn": "MDS-CH-CV-260",
+          "identity_note": "Family manual defines CV power-supply unit, nameplate software/input/output fields and drive-system connections. Model legend and detailed power table use different values; physical unit must resolve rating."
+        }
+      ],
+      "model_checks": [
+        {
+          "text": "Confirm the full MDS-CH-CV-260 nameplate, software version and input/output ratings. CV is the power-supply family, distinct from V1/V2 axis and SP spindle units. The family manual is not proof that a listed unit fits your machine.",
+          "source_urls": [
+            "https://dl.mitsubishielectric.com/dl/fa/document/manual/cnc/bnp-c3016(eng)/bnp-c3016(eng)f.pdf"
+          ]
+        },
+        {
+          "text": "Have the maintainer compare the installed MDS-CH system, CN4 connection and AC reactor requirements with the manufacturer manual; do not infer cross-series substitution from a similar enclosure.",
+          "source_urls": [
+            "https://dl.mitsubishielectric.com/dl/fa/document/manual/cnc/bnp-c3016(eng)/bnp-c3016(eng)f.pdf"
+          ]
+        },
+        {
+          "text": "Topbay advertises free ship in its title but shows USD 6 to the observed ZIP. The US-located alternative is away until October 8 and declines seller returns. Confirm dispatch before choosing a downtime replacement.",
+          "source_urls": [
+            "https://www.ebay.com/itm/318784890681",
+            "https://www.ebay.com/itm/800559371700"
+          ]
+        },
+        {
+          "text": "CNC Tools core-exchange credit depends on evaluation; it is not an automatic discount on a replacement purchase. Ask for the precise firmware/series and nameplate power rating.",
+          "source_urls": [
+            "https://cnctoolsllc.com/products/mitsubishi-power-supply-mds-ch-cv-260-new-in-stock"
+          ]
+        }
+      ],
+      "tracked_search_url": "https://www.ebay.com/sch/i.html?_nkw=MDS-CH-CV-260&LH_BIN=1&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339214603&customid=cprmdschcv260search&toolid=10001&mkevt=1"
+    },
+    {
+      "mpn": "6ES7231-4HD32-0XB0",
+      "brand": "Siemens",
+      "category": "SIMATIC S7-1200 analog input module",
+      "vertical": "Industrial Automation/MRO",
+      "series": "S7-1200",
+      "page_path": "siemens/6es7231-4hd32-0xb0/",
+      "identity_summary": "SM 1231 analog input expansion with 4 analog inputs and 12-bit resolution plus sign.",
+      "model_checks": [
+        {
+          "text": "Confirm the 4HD32 four-input model is sufficient; the visually related 4HF32 has eight analog inputs and should not be silently substituted.",
+          "source_urls": [
+            "https://www.s7automation.com/product/6es7231-4hd32-0xb0/"
+          ]
+        },
+        {
+          "text": "Verify each transmitter uses supported voltage/current mode (\u00b110/5/2.5 V or 0/4\u201320 mA) and request channel test results for the used unit before commissioning.",
+          "source_urls": [
+            "https://www.s7automation.com/product/6es7231-4hd32-0xb0/",
+            "https://www.ebay.com/itm/147236773754"
+          ]
+        },
+        {
+          "text": "Compare used-tested condition against factory-new stock. The USD 130 base price is used here; the coupon total is conditional and is not a market price.",
+          "source_urls": [
+            "https://www.ebay.com/itm/147236773754"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.s7automation.com/product/6es7231-4hd32-0xb0/",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "source_identity": "S7Automation",
+          "exact_mpn": "6ES7231-4HD32-0XB0",
+          "identity_note": "Exact code; 4 AI; \u00b110/5/2.5 V or 0/4\u201320 mA; factory-new listing."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "147236773754",
+          "source_url": "https://www.ebay.com/itm/147236773754",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "6ES7231-4HD32-0XB0",
+          "identity_verified": true,
+          "price": 130,
+          "currency": "USD",
+          "condition": "Used; seller says working tested",
+          "seller": "ATASHI EXIM",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free expedited shipping from India to US ZIP 94112; other destinations unknown.",
+          "evidence_note": "Buy It Now; exact normalized MPN item-specific; USD 130 base price, coupon not included.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; buyer pays return shipping."
+        },
+        {
+          "listing_id": "6es7231-4hd32-0xb0",
+          "source_url": "https://www.s7automation.com/product/6es7231-4hd32-0xb0/",
+          "marketplace": "supplier",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "6ES7231-4HD32-0XB0",
+          "identity_verified": true,
+          "price": 162,
+          "currency": "EUR",
+          "condition": "Factory new",
+          "seller": "S7Automation",
+          "availability": "IN_STOCK",
+          "shipping_note": "Worldwide international shipping stated; transit time/cost subject to sales terms.",
+          "evidence_note": "14 in stock, EUR 162 and Add to cart.",
+          "verification_method": "web_source",
+          "warranty_note": "24-month seller warranty."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:07:11+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Separates used tested and factory-new offers, conditional coupon from base price, and four-input replacement risk."
+      }
+    },
+    {
+      "mpn": "6ES7512-1CK01-0AB0",
+      "brand": "Siemens",
+      "category": "SIMATIC S7-1500 compact CPU",
+      "vertical": "Industrial Automation/MRO",
+      "series": "S7-1500",
+      "page_path": "siemens/6es7512-1ck01-0ab0/",
+      "identity_summary": "CPU 1512C-1 PN with 32 DI/32 DQ, 5 AI/2 AQ, 250 KB program memory and 1 MB data memory.",
+      "model_checks": [
+        {
+          "text": "Ask for the actual firmware and hardware functional status. Siemens specifies TIA Portal V17 for FW V2.9 and V15 for FW V2.5; plan project compatibility before replacing the CPU.",
+          "source_urls": [
+            "https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=6ES7512-1CK01-0AB0"
+          ]
+        },
+        {
+          "text": "Confirm a suitable SIMATIC memory card and the front push-in connectors are included or already available; the required memory card is not automatically included in a CPU-only offer.",
+          "source_urls": [
+            "https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=6ES7512-1CK01-0AB0"
+          ]
+        },
+        {
+          "text": "Confirm the application expects 32 digital inputs and 32 digital outputs; 1511C has a different onboard I/O count and is not an automatic replacement.",
+          "source_urls": [
+            "https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=6ES7512-1CK01-0AB0"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.cjsautomation.com/parts/siemens/part/6es7512-1ck01-0ab0/",
+          "verified_at": "2026-09-26T16:14:33+00:00",
+          "source_identity": "CJS Automation",
+          "exact_mpn": "6ES7512-1CK01-0AB0",
+          "identity_note": "Priced stock and exact CPU order code."
+        },
+        {
+          "source_url": "https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=6ES7512-1CK01-0AB0",
+          "verified_at": "2026-09-26T16:14:33+00:00",
+          "source_identity": "Siemens",
+          "exact_mpn": "6ES7512-1CK01-0AB0",
+          "identity_note": "CPU 1512C-1 PN data sheet; SIMATIC memory card required; firmware-dependent TIA versions."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "398416798804",
+          "source_url": "https://www.ebay.com/itm/398416798804",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:14:33+00:00",
+          "exact_mpn": "6ES7512-1CK01-0AB0",
+          "identity_verified": true,
+          "price": 1574.44,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "MRO-AUTO",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free standard shipping to US ZIP 94112; location Wilmington, New York; other destinations unknown. Seller MRO-AUTO is away until October 10, 2026; displayed delivery to US ZIP 94112 is October 14\u201324, subject to change.",
+          "evidence_note": "6 available; Buy It Now; full exact MPN in title and model listing. Manual reviewer confirmed seller-away banner; delay disclosed.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; seller pays return shipping."
+        },
+        {
+          "listing_id": "6es7512-1ck01-0ab0",
+          "source_url": "https://www.cjsautomation.com/parts/siemens/part/6es7512-1ck01-0ab0/",
+          "marketplace": "supplier",
+          "verified_at": "2026-09-26T16:14:33+00:00",
+          "exact_mpn": "6ES7512-1CK01-0AB0",
+          "identity_verified": true,
+          "price": 1823,
+          "currency": "GBP",
+          "condition": "New sealed",
+          "seller": "CJS Automation",
+          "availability": "IN_STOCK",
+          "shipping_note": "Worldwide delivery stated; selected row estimated shipping October 5, 2026.",
+          "evidence_note": "10+ in stock at GBP 1823; Add to Cart. Other request-only partner rows excluded.",
+          "verification_method": "web_source",
+          "warranty_note": "24-month seller warranty."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:14:33+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Contrasts new eBay and sealed supplier offers, explicit warranty coverage and memory-card/firmware prerequisites."
+      }
+    },
+    {
+      "mpn": "IF6028",
+      "brand": "ifm",
+      "category": "Inductive analogue sensor",
+      "vertical": "Industrial Automation/MRO",
+      "series": "ifm IF6 analogue sensors",
+      "page_path": "ifm/if6028/",
+      "identity_summary": "IF6028 is an ifm inductive analogue sensor. Confirm the full type label before relying on IO-Link: the current manufacturer sheet identifies IFK4002A1PKG/IO/US, while one surplus seller describes IFK3002A1PKG/US.",
+      "model_checks": [
+        {
+          "text": "Require a photo of the complete type label. Metal Logics lists IF6028 with IFK3002A1PKG/US, whereas the manufacturer sheet uses IFK4002A1PKG/IO/US. Confirm the actual revision and IO-Link support before ordering.",
+          "source_urls": [
+            "https://shop.metallogics.com/products/ifm-electronic-efector-100-inductive-sensor-if6028",
+            "https://docs.rs-online.com/448e/A700000012038432.pdf"
+          ]
+        },
+        {
+          "text": "Check the control input and sensing target: the manufacturer sheet gives 15\u201330 V DC, 4\u201320 mA output and a 0.2\u20132 mm measuring range. Match the M12 A-coded connector wiring and installed sensor settings.",
+          "source_urls": [
+            "https://docs.rs-online.com/448e/A700000012038432.pdf"
+          ]
+        },
+        {
+          "text": "The eBay item declares China as origin while the RS catalog lists DE. Ask for the actual unit markings and traceability; the page does not independently certify authenticity.",
+          "source_urls": [
+            "https://www.ebay.com/itm/318898824837",
+            "https://uk.rs-online.com/web/p/proximity-sensors/0187926"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://docs.rs-online.com/448e/A700000012038432.pdf",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "source_identity": "ifm manufacturer datasheet hosted by RS",
+          "exact_mpn": "IF6028",
+          "identity_note": "IF6028-01 (13 April 2023), full type IFK4002A1PKG/IO/US; current read confirms reference identity, not physical seller inventory."
+        },
+        {
+          "source_url": "https://shop.metallogics.com/products/ifm-electronic-efector-100-inductive-sensor-if6028",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "source_identity": "Metal Logics",
+          "exact_mpn": "IF6028",
+          "identity_note": "Exact IF6028 model and older IFK3002A1PKG/US descriptor."
+        },
+        {
+          "source_url": "https://shop.metallogics.com/pages/warranty-and-returns",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "source_identity": "Metal Logics returns/warranty policy",
+          "exact_mpn": "IF6028",
+          "identity_note": "30-day supplier warranty and domestic return policy reviewed."
+        },
+        {
+          "source_url": "https://shop.metallogics.com/pages/shipping",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "source_identity": "Metal Logics shipping policy",
+          "exact_mpn": "IF6028",
+          "identity_note": "Global shipping subject to restrictions; international arrangements must be checked."
+        },
+        {
+          "source_url": "https://uk.rs-online.com/web/p/proximity-sensors/0187926",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "source_identity": "RS UK catalog",
+          "exact_mpn": "IF6028",
+          "identity_note": "Exact IF6028 identity and DE origin catalog field; cached catalog used only for reference, not current price or inventory."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "318898824837",
+          "source_url": "https://www.ebay.com/itm/318898824837",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "exact_mpn": "IF6028",
+          "identity_verified": true,
+          "price": 30.86,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "sno3877",
+          "availability": "BUY_NOW",
+          "shipping_note": "USD 4.99 SpeedPAK to US 94112, shown estimate October 5\u201315; other destinations unverified.",
+          "returns_note": "30 days; buyer pays return freight.",
+          "evidence_note": "Same-day public eBay page: exact MPN/Model IF6028, Buy It Now, 10 advertised available. No physical inventory or authenticity certification.",
+          "verification_method": "web_source"
+        },
+        {
+          "listing_id": "metallogics-if6028",
+          "source_url": "https://shop.metallogics.com/products/ifm-electronic-efector-100-inductive-sensor-if6028",
+          "marketplace": "supplier",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "exact_mpn": "IF6028",
+          "identity_verified": true,
+          "price": 90,
+          "currency": "USD",
+          "condition": "New in box",
+          "seller": "Metal Logics",
+          "availability": "BUY_NOW",
+          "shipping_note": "UPS/USPS; worldwide shipping with restrictions. Freight and international destination eligibility must be checked.",
+          "returns_note": "Domestic defective or incorrect items may be returned within 30 days of purchase. Non-defect return freight is deducted from the refund or buyer supplied; international returns require confirmation.",
+          "evidence_note": "Exact IF6028 product, USD 90, New in box, In Stock and enabled Add to cart were observed. The full type descriptor differs from the current manufacturer sheet.",
+          "verification_method": "web_source",
+          "warranty_note": "30-day Metal Logics supplier warranty from purchase date for defects, subject to correct use and inspection; not a manufacturer warranty. Confirm international claim arrangements."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:11:38Z",
+        "reviewer": "asset_inventory source review",
+        "incremental_value": "Compares two current purchasing paths while surfacing the IFK3002 versus IFK4002 revision/IO-Link discrepancy and separating seller authenticity from exact-MPN matching."
+      }
+    },
+    {
+      "mpn": "6ES7215-1AG40-0XB0",
+      "brand": "Siemens",
+      "category": "SIMATIC S7-1200 CPU",
+      "vertical": "Industrial Automation/MRO",
+      "series": "S7-1200",
+      "page_path": "siemens/6es7215-1ag40-0xb0/",
+      "identity_summary": "CPU 1215C DC/DC/DC with 14 digital inputs, 10 digital outputs, 2 analog inputs and 2 analog outputs.",
+      "model_checks": [
+        {
+          "text": "Confirm DC/DC/DC on the nameplate: this 1AG40 unit uses 24 V DC supply and is not the AC-powered 1BG40 variant.",
+          "source_urls": [
+            "https://www.qfautomation.com/products/6es7215-1ag40-0xb0"
+          ]
+        },
+        {
+          "text": "Check that the application needs the 1215C I/O layout of 14 DI, 10 DO, 2 AI and 2 AO; obtain the actual firmware/revision before replacing a programmed CPU.",
+          "source_urls": [
+            "https://www.qfautomation.com/products/6es7215-1ag40-0xb0"
+          ]
+        },
+        {
+          "text": "The eBay Model field substitutes letter O for zeros while its MPN field is correct. Match a legible physical label to 6ES7215-1AG40-0XB0 before ordering.",
+          "source_urls": [
+            "https://www.ebay.com/itm/318906343730"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.qfautomation.com/products/6es7215-1ag40-0xb0",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "source_identity": "Quantum First Automation",
+          "exact_mpn": "6ES7215-1AG40-0XB0",
+          "identity_note": "Exact order code and CPU 1215C DC/DC/DC identity."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "318906343730",
+          "source_url": "https://www.ebay.com/itm/318906343730",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "6ES7215-1AG40-0XB0",
+          "identity_verified": true,
+          "price": 499.55,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "IndustroSupply",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free SpeedPAK to US ZIP 94112; other destinations unknown. Dispatch location Shanghai, China.",
+          "evidence_note": "MPN field exact; Buy It Now; seller condition New. Model field zero/O typo retained as risk.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; buyer pays return shipping."
+        },
+        {
+          "listing_id": "6es7215-1ag40-0xb0",
+          "source_url": "https://www.qfautomation.com/products/6es7215-1ag40-0xb0",
+          "marketplace": "supplier",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "6ES7215-1AG40-0XB0",
+          "identity_verified": true,
+          "price": 1269.04,
+          "currency": "USD",
+          "condition": "Factory sealed",
+          "seller": "Quantum First Automation",
+          "availability": "IN_STOCK",
+          "shipping_note": "Worldwide delivery advertised; freight and destination eligibility confirmed at checkout.",
+          "evidence_note": "Page shows 5 available, public USD price and Add To Cart / Buy Now.",
+          "verification_method": "web_source",
+          "returns_note": "30-day after-sales return."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:07:11+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Compares lower-priced cross-border new listing with factory-sealed supplier stock; identifies model-field typo and DC/AC order-code risk."
+      }
+    },
+    {
+      "mpn": "6ES7223-1PL32-0XB0",
+      "brand": "Siemens",
+      "category": "SIMATIC S7-1200 digital I/O module",
+      "vertical": "Industrial Automation/MRO",
+      "series": "S7-1200",
+      "page_path": "siemens/6es7223-1pl32-0xb0/",
+      "identity_summary": "SM 1223 expansion module with 16 DC inputs and 16 relay outputs.",
+      "model_checks": [
+        {
+          "text": "Verify the 1PL32 relay-output variant: its 16 outputs are relay contacts rated 2 A, not the transistor-output SM 1223 version.",
+          "source_urls": [
+            "https://mall.industry.siemens.com/mall/en/b1/Catalog/Product/6ES7223-1PL32-0XB0"
+          ]
+        },
+        {
+          "text": "Check 16-channel input wiring for 24 V DC sink/source operation and output load/protection against the machine wiring diagram.",
+          "source_urls": [
+            "https://mall.industry.siemens.com/mall/en/b1/Catalog/Product/6ES7223-1PL32-0XB0"
+          ]
+        },
+        {
+          "text": "CJS headline price is an enquiry/long-lead row. The comparison uses the separate 5+ in-stock new-sealed row at GBP 285.00; confirm this row when ordering.",
+          "source_urls": [
+            "https://www.cjsautomation.com/parts/siemens/part/6es7223-1pl32-0xb0/"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.cjsautomation.com/parts/siemens/part/6es7223-1pl32-0xb0/",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "source_identity": "CJS Automation",
+          "exact_mpn": "6ES7223-1PL32-0XB0",
+          "identity_note": "Exact part number and orderable condition-specific supply options."
+        },
+        {
+          "source_url": "https://mall.industry.siemens.com/mall/en/b1/Catalog/Product/6ES7223-1PL32-0XB0",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "source_identity": "Siemens",
+          "exact_mpn": "6ES7223-1PL32-0XB0",
+          "identity_note": "16 DI at 24 V DC sink/source; 16 relay outputs rated 2 A."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "315713830984",
+          "source_url": "https://www.ebay.com/itm/315713830984",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "6ES7223-1PL32-0XB0",
+          "identity_verified": true,
+          "price": 199.99,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "YJLXMB",
+          "availability": "BUY_NOW",
+          "shipping_note": "USD 5 SpeedPAK to US ZIP 94112; other destinations unknown. Located Guangdong, China.",
+          "evidence_note": "More than 10 available and Buy It Now. Model field gives exact code with spacing; MPN field Does Not Apply.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; buyer pays return shipping."
+        },
+        {
+          "listing_id": "6es7223-1pl32-0xb0",
+          "source_url": "https://www.cjsautomation.com/parts/siemens/part/6es7223-1pl32-0xb0/",
+          "marketplace": "supplier",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "6ES7223-1PL32-0XB0",
+          "identity_verified": true,
+          "price": 285,
+          "currency": "GBP",
+          "condition": "New sealed",
+          "seller": "CJS Automation",
+          "availability": "IN_STOCK",
+          "shipping_note": "Worldwide delivery advertised; selected stock row estimated shipping October 5, 2026.",
+          "evidence_note": "Selected option: 5+ in stock; GBP 285.00; Add to Cart. Headline GBP 259.50 is Enquire now and is excluded.",
+          "verification_method": "web_source",
+          "warranty_note": "24-month seller warranty."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:07:11+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Separates actual priced stock from cheaper enquiry-only rows; explains relay versus transistor substitution risk."
+      }
+    },
+    {
+      "mpn": "6ES7231-4HF32-0XB0",
+      "brand": "Siemens",
+      "category": "SIMATIC S7-1200 analog input module",
+      "vertical": "Industrial Automation/MRO",
+      "series": "S7-1200",
+      "page_path": "siemens/6es7231-4hf32-0xb0/",
+      "identity_summary": "SM 1231 analog input expansion with 8 analog channels for voltage/current signals.",
+      "model_checks": [
+        {
+          "text": "Count the required analog channels: 4HF32 has 8 inputs; do not substitute the 4-channel 4HD32 module solely because both are SM 1231.",
+          "source_urls": [
+            "https://www.automation24.com/siemens-sm-1231-ai-6es7231-4hf32-0xb0"
+          ]
+        },
+        {
+          "text": "Verify configured ranges per channel: \u00b110/5/2.5 V or 0/4\u201320 mA, and 24 V DC supply (20.4\u201328.8 V permitted); confirm terminal wiring and TIA hardware configuration.",
+          "source_urls": [
+            "https://www.automation24.com/siemens-sm-1231-ai-6es7231-4hf32-0xb0"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.automation24.com/siemens-sm-1231-ai-6es7231-4hf32-0xb0",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "source_identity": "Automation24",
+          "exact_mpn": "6ES7231-4HF32-0XB0",
+          "identity_note": "Exact code, 8 analog inputs, 24 V DC supply and supported voltage/current ranges."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "306870137708",
+          "source_url": "https://www.ebay.com/itm/306870137708",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "6ES7231-4HF32-0XB0",
+          "identity_verified": true,
+          "price": 319.97,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "MT.parts",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free standard shipping to US ZIP 94112 from Edison, New Jersey; other destinations unknown.",
+          "evidence_note": "7 available; Buy It Now; exact model on title/box label.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; seller pays return shipping."
+        },
+        {
+          "listing_id": "127425611289",
+          "source_url": "https://www.ebay.com/itm/127425611289",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "6ES7231-4HF32-0XB0",
+          "identity_verified": true,
+          "price": 294.22,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "jauntyworld",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free SpeedPAK to US ZIP 94112 from China; other destinations unknown.",
+          "evidence_note": "5 available; Buy It Now; exact model field with spacing. MPN field Does Not Apply.",
+          "verification_method": "web_source",
+          "returns_note": "60-day returns; buyer pays return shipping."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:07:11+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Compares US-held and China-dispatched offers and different return-cost exposure; documents 8-channel versus 4-channel confusion."
+      }
+    },
+    {
+      "mpn": "6ES7511-1CK01-0AB0",
+      "brand": "Siemens",
+      "category": "SIMATIC S7-1500 compact CPU",
+      "vertical": "Industrial Automation/MRO",
+      "series": "S7-1500",
+      "page_path": "siemens/6es7511-1ck01-0ab0/",
+      "identity_summary": "CPU 1511C-1 PN compact S7-1500 controller with 16 digital inputs, 16 digital outputs and onboard analog I/O.",
+      "model_checks": [
+        {
+          "text": "Confirm 1511C-1 PN and the full 1CK01 order code: this compact CPU has 16 DI and 16 DQ. Match terminal wiring and channel addresses to the existing project before replacement.",
+          "source_urls": [
+            "https://cache.industry.siemens.com/dl/files/843/109752843/att_936129/v1/s71500_cpu1511c_1_pn_dtc_manual_en-US_en-US.pdf"
+          ]
+        },
+        {
+          "text": "A SIMATIC memory card is required. Verify whether it is included, and retain an authorized backup of the machine program and parameters before exchanging the CPU.",
+          "source_urls": [
+            "https://cache.industry.siemens.com/dl/files/843/109752843/att_936129/v1/s71500_cpu1511c_1_pn_dtc_manual_en-US_en-US.pdf"
+          ]
+        },
+        {
+          "text": "Obtain the actual firmware and hardware revision and check it against the STEP 7/TIA Portal project; the Siemens manual documents firmware V2.9 features with TIA Portal V17.",
+          "source_urls": [
+            "https://cache.industry.siemens.com/dl/files/843/109752843/att_936129/v1/s71500_cpu1511c_1_pn_dtc_manual_en-US_en-US.pdf"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://cache.industry.siemens.com/dl/files/843/109752843/att_936129/v1/s71500_cpu1511c_1_pn_dtc_manual_en-US_en-US.pdf",
+          "verified_at": "2026-09-26T16:20:36+00:00",
+          "source_identity": "Siemens",
+          "exact_mpn": "6ES7511-1CK01-0AB0",
+          "identity_note": "Official model-specific equipment manual A5E40898565-AB, May 2021; used only for technical identity and checks, not supply freshness."
+        },
+        {
+          "source_url": "https://www.teknihaus.com/6es7511-1ck01-0ab0",
+          "verified_at": "2026-09-26T16:20:36+00:00",
+          "source_identity": "Teknihaus",
+          "exact_mpn": "6ES7511-1CK01-0AB0",
+          "identity_note": "Exact order code, compact CPU and condition/warranty stated."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "317567759560",
+          "source_url": "https://www.ebay.com/itm/317567759560",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:20:36+00:00",
+          "exact_mpn": "6ES7511-1CK01-0AB0",
+          "identity_verified": true,
+          "price": 1090.97,
+          "currency": "EUR",
+          "condition": "New",
+          "seller": "chipplc",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free express shipping from Shanghai, Greater China to worldwide advertised; displayed destination US ZIP 94112. Confirm destination eligibility at checkout.",
+          "evidence_note": "Current same-day web page: 3 available and Buy It Now; exact item/product code. Direct URL fetch intermittently errors, but referenced page resolves.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; buyer pays return shipping."
+        },
+        {
+          "listing_id": "teknihaus-6es7511-1ck01-0ab0",
+          "source_url": "https://www.teknihaus.com/6es7511-1ck01-0ab0",
+          "marketplace": "supplier",
+          "verified_at": "2026-09-26T16:20:36+00:00",
+          "exact_mpn": "6ES7511-1CK01-0AB0",
+          "identity_verified": true,
+          "price": 3120,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "Teknihaus",
+          "availability": "IN_STOCK",
+          "shipping_note": "Worldwide express shipping advertised; freight unknown. Seller says usually ships in 1\u201310 business days.",
+          "evidence_note": "Exact MPN 6ES7511-1CK01-0AB0, USD 3,120, New condition, In Stock and enabled Add to Cart were observed on the current supplier product page.",
+          "verification_method": "web_source",
+          "warranty_note": "1-year seller warranty."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:20:36+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Compares current new eBay supply and priced supplier stock, distinguishes shipping lead times, and identifies required memory card, 1511C I/O and firmware/TIA checks."
+      }
+    },
+    {
+      "mpn": "7MH4960-6AA01",
+      "brand": "Siemens",
+      "category": "SIWAREX weighing electronics module",
+      "vertical": "Industrial Automation/MRO",
+      "series": "SIWAREX WP251",
+      "page_path": "siemens/7mh4960-6aa01/",
+      "identity_summary": "Single-channel SIWAREX WP251 weighing electronics for S7-1200 or standalone operation with analog strain-gauge load cells.",
+      "model_checks": [
+        {
+          "text": "Verify the connected load cells are analog strain-gauge full bridges within the documented 1\u20134 mV/V interface range; confirm calibration data can be restored.",
+          "source_urls": [
+            "https://mall.industry.siemens.com/mall/NO/NO/Catalog/Product/?mlfb=7MH4960-6AA01"
+          ]
+        },
+        {
+          "text": "Match the installation mode (S7-1200 or standalone), RS485/Ethernet wiring and required 4 DI / 4 DQ / 1 AQ. Obtain the actual firmware revision before replacement.",
+          "source_urls": [
+            "https://mall.industry.siemens.com/mall/NO/NO/Catalog/Product/?mlfb=7MH4960-6AA01"
+          ]
+        },
+        {
+          "text": "For legal-for-trade weighing, confirm the required local approval and verification for this WP251 installation; an exact part number alone does not preserve certification.",
+          "source_urls": [
+            "https://mall.industry.siemens.com/mall/NO/NO/Catalog/Product/?mlfb=7MH4960-6AA01"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://mall.industry.siemens.com/mall/NO/NO/Catalog/Product/?mlfb=7MH4960-6AA01",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "source_identity": "Siemens",
+          "exact_mpn": "7MH4960-6AA01",
+          "identity_note": "WP251 order code, load-cell interface 1\u20134 mV/V, RS485 and Ethernet interfaces."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "128084116320",
+          "source_url": "https://www.ebay.com/itm/128084116320",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "7MH4960-6AA01",
+          "identity_verified": true,
+          "price": 1220,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "derime-plc",
+          "availability": "BUY_NOW",
+          "shipping_note": "USD 10 SpeedPAK to US ZIP 94112 from China; other destinations unknown.",
+          "evidence_note": "3 available; exact MPN field; Buy It Now. Manufacturer authorization not verified.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; buyer pays return shipping."
+        },
+        {
+          "listing_id": "316114661251",
+          "source_url": "https://www.ebay.com/itm/316114661251",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:07:11+00:00",
+          "exact_mpn": "7MH4960-6AA01",
+          "identity_verified": true,
+          "price": 1185.92,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "Technology-5G-Store",
+          "availability": "BUY_NOW",
+          "shipping_note": "USD 50 expedited SpeedPAK to US ZIP 94112 from China; other destinations unknown.",
+          "evidence_note": "2 available; exact MPN and Model fields; Buy It Now. Controller Platform field says PLC-2, inconsistent with manufacturer context.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; buyer pays return shipping."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:07:11+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Compares differing freight costs, flags a generic incorrect platform field and explains load-cell/calibration and legal-for-trade checks."
+      }
+    },
+    {
+      "mpn": "6ES7214-1AG40-0XB0",
+      "brand": "Siemens",
+      "category": "SIMATIC S7-1200 CPU",
+      "vertical": "Industrial Automation/MRO",
+      "series": "S7-1200",
+      "page_path": "siemens/6es7214-1ag40-0xb0/",
+      "identity_summary": "CPU 1214C DC/DC/DC compact controller with 14 digital inputs, 10 digital outputs and 2 analog voltage inputs.",
+      "model_checks": [
+        {
+          "text": "Verify the 1AG40 DC/DC/DC order code and 20.4\u201328.8 V DC supply; match transistor output wiring to the machine and do not assume a relay-output variant is equivalent.",
+          "source_urls": [
+            "https://www.cjsautomation.com/parts/siemens/part/6es7214-1ag40-0xb0/"
+          ]
+        },
+        {
+          "text": "The two onboard analog inputs are 0\u201310 V. Check whether current-loop signals need a separate analog module in the original installation.",
+          "source_urls": [
+            "https://www.cjsautomation.com/parts/siemens/part/6es7214-1ag40-0xb0/"
+          ]
+        },
+        {
+          "text": "The eBay title says sealed, but its condition field is New\u2013Open box. Obtain packaging and nameplate photos and confirm included connectors before accepting the condition.",
+          "source_urls": [
+            "https://www.ebay.com/itm/398377510906"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.cjsautomation.com/parts/siemens/part/6es7214-1ag40-0xb0/",
+          "verified_at": "2026-09-26T16:14:33+00:00",
+          "source_identity": "CJS Automation",
+          "exact_mpn": "6ES7214-1AG40-0XB0",
+          "identity_note": "Exact order code, DC/DC/DC power configuration and 14DI/10DO/2AI layout."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "398377510906",
+          "source_url": "https://www.ebay.com/itm/398377510906",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:14:33+00:00",
+          "exact_mpn": "6ES7214-1AG40-0XB0",
+          "identity_verified": true,
+          "price": 385,
+          "currency": "EUR",
+          "condition": "New \u2013 Open box",
+          "seller": "Automation DEU",
+          "availability": "BUY_NOW",
+          "shipping_note": "EUR 22 international shipping from Germany to US ZIP 94112; import fees due before delivery; other destinations unknown.",
+          "evidence_note": "4 available; Buy It Now; exact Herstellernummer. Relisted item replaces sold 397714046826.",
+          "verification_method": "web_source",
+          "returns_note": "Seller does not accept returns."
+        },
+        {
+          "listing_id": "6es7214-1ag40-0xb0",
+          "source_url": "https://www.cjsautomation.com/parts/siemens/part/6es7214-1ag40-0xb0/",
+          "marketplace": "supplier",
+          "verified_at": "2026-09-26T16:14:33+00:00",
+          "exact_mpn": "6ES7214-1AG40-0XB0",
+          "identity_verified": true,
+          "price": 373,
+          "currency": "GBP",
+          "condition": "New sealed",
+          "seller": "CJS Automation",
+          "availability": "IN_STOCK",
+          "shipping_note": "Worldwide delivery; selected priced stock row estimated shipping October 5, 2026.",
+          "evidence_note": "Selected new-sealed row: 145+ in stock GBP373 and Add to Cart. Headline GBP343 is Enquire now and excluded.",
+          "verification_method": "web_source",
+          "warranty_note": "24-month seller warranty."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:14:33+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Captures the live relisting, excluded sold predecessor and title/condition contradiction, plus a genuinely stocked supplier row."
+      }
+    },
+    {
+      "mpn": "MS4SA-AP-ADC",
+      "brand": "Fuji Electric",
+      "category": "On-delay relay timer",
+      "vertical": "Industrial Automation/MRO",
+      "series": "Fuji MS4S timers",
+      "page_path": "fuji-electric/ms4sa-ap-adc/",
+      "identity_summary": "MS4SA-AP-ADC is the Fuji/AutomationDirect 8-pin on-delay timer with DPDT timed contacts, 100\u2013240 V AC nominal operating supply and a selectable 0.05-second to 60-hour range.",
+      "model_checks": [
+        {
+          "text": "Match the AP-ADC suffix and the 100\u2013240 V AC supply. A title mentioning 250 VAC may describe the contact rating; it is not proof of the timer supply-voltage variant.",
+          "source_urls": [
+            "https://www.automationdirect.com/adc/shopping/catalog/relays_-z-_timers/timer_relays/ms4sa-ap-adc"
+          ]
+        },
+        {
+          "text": "Verify the eight-pin base and TP48X or TP48SB socket. Confirm whether the socket and panel-mount hardware are included; do not substitute the eleven-pin MS4SM timer solely because the timing range matches.",
+          "source_urls": [
+            "https://www.automationdirect.com/adc/shopping/catalog/relays_-z-_timers/timer_relays/ms4sa-ap-adc"
+          ]
+        },
+        {
+          "text": "Compare condition explicitly: one current offer is used and another is old stock/open box. Request evidence of timer function, dial operation and pin condition before fitting to a machine.",
+          "source_urls": [
+            "https://www.ebay.com/itm/168253598603",
+            "https://www.ebay.com/itm/334699565742"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.automationdirect.com/adc/shopping/catalog/relays_-z-_timers/timer_relays/ms4sa-ap-adc",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "source_identity": "AutomationDirect product reference",
+          "exact_mpn": "MS4SA-AP-ADC",
+          "identity_note": "Exact SKU, operating supply, timing range and required TP48X/TP48SB sockets. Reference specification used; older cached price excluded."
+        },
+        {
+          "source_url": "https://eu.raptorsupplies.com/pd/fuji-electric/ms4sa-ap-adc",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "source_identity": "Raptor Supplies Europe",
+          "exact_mpn": "MS4SA-AP-ADC",
+          "identity_note": "Current product reference identifies Fuji model and eight-pin DPDT configuration; its price is not used in selected comparison."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "168253598603",
+          "source_url": "https://www.ebay.com/itm/168253598603",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "exact_mpn": "MS4SA-AP-ADC",
+          "identity_verified": true,
+          "price": 33.99,
+          "currency": "USD",
+          "condition": "Used",
+          "seller": "section8cubby",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free USPS Ground Advantage to US 94112, estimate September 30\u2013October 3; other destinations unverified.",
+          "returns_note": "30 days; buyer pays return freight.",
+          "evidence_note": "Same-day eBay public page shows exact code in title, AutomationDirect brand, used condition and Buy It Now. Quantity not stated; listing photo captions reference full code.",
+          "verification_method": "web_source"
+        },
+        {
+          "listing_id": "334699565742",
+          "source_url": "https://www.ebay.com/itm/334699565742",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:11:38Z",
+          "exact_mpn": "MS4SA-AP-ADC",
+          "identity_verified": true,
+          "price": 89.95,
+          "currency": "USD",
+          "condition": "New \u2013 Open box; seller describes old stock",
+          "seller": "AZ PLC SURPLUS",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free USPS First Class to US 94112, estimate September 30\u2013October 3; other destinations unverified.",
+          "returns_note": "30 days; buyer pays return freight.",
+          "evidence_note": "Same-day eBay public page: exact MPN MS4SA-AP-ADC, AutomationDirect brand, open-box condition and Buy It Now. Working-condition language is seller claim only.",
+          "verification_method": "web_source"
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:11:38Z",
+        "reviewer": "asset_inventory source review",
+        "incremental_value": "Separates used from open-box/old-stock supply and explains supply voltage versus contact rating plus eight-pin socket requirements; an ended USD 24.99 search result is excluded."
+      }
+    },
+    {
+      "mpn": "6ES7215-1BG40-0XB0",
+      "brand": "Siemens",
+      "category": "SIMATIC S7-1200 CPU",
+      "vertical": "Industrial Automation/MRO",
+      "series": "S7-1200",
+      "page_path": "siemens/6es7215-1bg40-0xb0/",
+      "identity_summary": "CPU 1215C AC/DC/relay with two PROFINET ports, 14 digital inputs, 10 relay outputs, 2 analog inputs and 2 analog outputs.",
+      "model_checks": [
+        {
+          "text": "Check the 1BG40 suffix and AC/DC/relay label: this model takes 85\u2013264 V AC at 47\u201363 Hz and uses relay outputs. Do not substitute the DC/DC/DC 1AG40 variant without reviewing the power and output wiring.",
+          "source_urls": [
+            "https://www.cjsautomation.com/parts/siemens/part/6es7215-1bg40-0xb0/"
+          ]
+        },
+        {
+          "text": "Check the application against 14 DI at 24 V DC, 10 relay DO rated 2 A, 2 AI at 0\u201310 V and 2 AO at 0\u201320 mA; relay outputs and analog ranges must match the connected equipment.",
+          "source_urls": [
+            "https://www.cjsautomation.com/parts/siemens/part/6es7215-1bg40-0xb0/"
+          ]
+        },
+        {
+          "text": "The eBay seller is away until October 10, 2026 despite allowing Buy It Now. Compare its delayed dispatch with the supplier\u2019s October 5 estimated shipping before committing to a downtime replacement.",
+          "source_urls": [
+            "https://www.ebay.com/itm/237071075966",
+            "https://www.cjsautomation.com/parts/siemens/part/6es7215-1bg40-0xb0/"
+          ]
+        }
+      ],
+      "references": [
+        {
+          "source_url": "https://www.cjsautomation.com/parts/siemens/part/6es7215-1bg40-0xb0/",
+          "verified_at": "2026-09-26T16:20:36+00:00",
+          "source_identity": "CJS Automation",
+          "exact_mpn": "6ES7215-1BG40-0XB0",
+          "identity_note": "Exact order code with electrical/I/O specification; supplier states it is not an authorized Siemens distributor. Automatically generated overview not relied on for firmware claims."
+        }
+      ],
+      "listings": [
+        {
+          "listing_id": "237071075966",
+          "source_url": "https://www.ebay.com/itm/237071075966",
+          "marketplace": "ebay",
+          "verified_at": "2026-09-26T16:20:36+00:00",
+          "exact_mpn": "6ES7215-1BG40-0XB0",
+          "identity_verified": true,
+          "price": 474.28,
+          "currency": "USD",
+          "condition": "New",
+          "seller": "PLC-VeriCart",
+          "availability": "BUY_NOW",
+          "shipping_note": "Free standard shipping from Orlando, Florida to US ZIP 94112; other destinations unknown. Seller away until October 10, 2026; displayed delivery October 14\u201323, subject to change.",
+          "evidence_note": "Current same-day web source: 10 available, Buy It Now, exact MPN and Model. Seller-away delay explicitly recorded.",
+          "verification_method": "web_source",
+          "returns_note": "30-day returns; seller pays return shipping."
+        },
+        {
+          "listing_id": "cjs-6es7215-1bg40-0xb0-new-sealed",
+          "source_url": "https://www.cjsautomation.com/parts/siemens/part/6es7215-1bg40-0xb0/",
+          "marketplace": "supplier",
+          "verified_at": "2026-09-26T16:20:36+00:00",
+          "exact_mpn": "6ES7215-1BG40-0XB0",
+          "identity_verified": true,
+          "price": 458.5,
+          "currency": "GBP",
+          "condition": "New sealed",
+          "seller": "CJS Automation",
+          "availability": "IN_STOCK",
+          "shipping_note": "Worldwide delivery advertised; freight unknown. Estimated shipping October 5, 2026.",
+          "evidence_note": "Current same-day web source: low-stock New Sealed offer GBP458.50 with Add to Cart. Other Enquire now, repair or price-on-request options excluded.",
+          "verification_method": "web_source",
+          "warranty_note": "24-month CJS warranty."
+        }
+      ],
+      "review": {
+        "approved": true,
+        "reviewed_at": "2026-09-26T16:20:36+00:00",
+        "reviewer": "supply_verify",
+        "incremental_value": "Compares eBay seller-away delay with a buyable supplier stock option, preserves currency separation and explains the AC supply / relay versus DC transistor model distinction."
+      }
+    }
+  ]
+}

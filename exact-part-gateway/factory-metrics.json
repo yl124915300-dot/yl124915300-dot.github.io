@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-09-26T16:30:24+00:00",
+  "QUALIFIED_PAGES_BUILT": 14,
+  "QUALIFIED_PAGES_LIVE": 0,
+  "EPN_TRACKED_PAGES": 0,
+  "EPN_TRACKED_COVERAGE": null,
+  "STALE_PAGES": 0,
+  "NO_LIVE_SUPPLY_PAGES": 0,
+  "INDEXED": null,
+  "INDEXED_STATUS": "UNKNOWN",
+  "measurement_note": "Unknown measurements are null, never zero. LIVE requires a public HTTP 200 whose content hash matches the current built artifact; BUILT does not imply deployed.",
+  "SEARCH_IMPRESSIONS": null,
+  "SEARCH_CLICKS": null,
+  "EPN_CLICKS": 0,
+  "ATTRIBUTED_PURCHASES": 0,
+  "COMMISSION_PENDING": {
+    "amount": 0,
+    "currency": "AUD"
+  },
+  "COMMISSION_PAID": {
+    "amount": 0,
+    "currency": "AUD"
+  }
+}

@@ -187,5 +187,35 @@
     "mpn": "MDSKSBS056-33",
     "category": "Servo motor",
     "page_path": "lenze/mdsksbs056-33/"
+  },
+  {
+    "brand": "ifm",
+    "mpn": "IF6028",
+    "category": "Inductive analogue sensor",
+    "page_path": "ifm/if6028/"
+  },
+  {
+    "brand": "Siemens",
+    "mpn": "6ES7214-1AG40-0XB0",
+    "category": "SIMATIC S7-1200 CPU",
+    "page_path": "siemens/6es7214-1ag40-0xb0/"
+  },
+  {
+    "brand": "Siemens",
+    "mpn": "6ES7215-1BG40-0XB0",
+    "category": "SIMATIC S7-1200 CPU",
+    "page_path": "siemens/6es7215-1bg40-0xb0/"
+  },
+  {
+    "brand": "Siemens",
+    "mpn": "6ES7511-1CK01-0AB0",
+    "category": "SIMATIC S7-1500 compact CPU",
+    "page_path": "siemens/6es7511-1ck01-0ab0/"
+  },
+  {
+    "brand": "Siemens",
+    "mpn": "6ES7512-1CK01-0AB0",
+    "category": "SIMATIC S7-1500 compact CPU",
+    "page_path": "siemens/6es7512-1ck01-0ab0/"
   }
 ]
