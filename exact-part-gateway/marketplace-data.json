@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "mode": "LINK_MODE",
+  "affiliate_status": "AFFILIATE_NOT_ACTIVE",
+  "campaign_id": null,
+  "customid": null,
+  "subid": null,
+  "generated_at": "2026-09-26T11:34:56.340763+00:00",
+  "freshness_hours": 24,
+  "catalog": [
+    {
+      "brand": "ASM",
+      "mpn": "WS10ZG-500-420T-L10-M4-M12",
+      "category": "Cable-extension position sensor",
+      "page_path": "asm/ws10zg-500-420t-l10-m4-m12/"
+    },
+    {
+      "brand": "Wenglor",
+      "mpn": "P3EC401",
+      "category": "Laser distance sensor",
+      "page_path": "wenglor/p3ec401/"
+    },
+    {
+      "brand": "Fuji Electric",
+      "mpn": "MS4SA-AP-ADC",
+      "category": "Timer relay",
+      "page_path": "fuji-electric/ms4sa-ap-adc/"
+    },
+    {
+      "brand": "Siemens",
+      "mpn": "6ES7215-1AG40-0XB0",
+      "category": "SIMATIC S7-1200 CPU",
+      "page_path": "siemens/6es7215-1ag40-0xb0/"
+    },
+    {
+      "brand": "Siemens",
+      "mpn": "6ES7223-1PL32-0XB0",
+      "category": "SIMATIC S7-1200 digital I/O module",
+      "page_path": "siemens/6es7223-1pl32-0xb0/"
+    },
+    {
+      "brand": "Siemens",
+      "mpn": "6ES7231-4HF32-0XB0",
+      "category": "SIMATIC S7-1200 analog input module",
+      "page_path": "siemens/6es7231-4hf32-0xb0/"
+    },
+    {
+      "brand": "Siemens",
+      "mpn": "6ES7231-4HD32-0XB0",
+      "category": "SIMATIC S7-1200 analog input module",
+      "page_path": "siemens/6es7231-4hd32-0xb0/"
+    },
+    {
+      "brand": "Siemens",
+      "mpn": "6AV6381-2BP08-1AH0",
+      "category": "SIMATIC WinCC software / license item",
+      "page_path": "siemens/6av6381-2bp08-1ah0/"
+    },
+    {
+      "brand": "Balluff",
+      "mpn": "BMF 305K-PS-C-2-PU-05",
+      "category": "Cylinder position sensor",
+      "aliases": [
+        "BMF0057"
+      ],
+      "page_path": "balluff/bmf-305k-ps-c-2-pu-05/"
+    },
+    {
+      "brand": "Siemens",
+      "mpn": "7MH4960-6AA01",
+      "category": "SIWAREX weighing electronics module",
+      "page_path": "siemens/7mh4960-6aa01/"
+    },
+    {
+      "brand": "Mitsubishi Electric",
+      "mpn": "FR-D740-036SC-EC",
+      "category": "Variable frequency drive",
+      "page_path": "schneider-electric/fr-d740-036sc-ec/"
+    },
+    {
+      "brand": "INVT",
+      "mpn": "GD20-2R2G-4-EU",
+      "category": "Goodrive20 variable frequency drive",
+      "page_path": "invt/gd20-2r2g-4-eu/"
+    },
+    {
+      "brand": "Euchner",
+      "mpn": "NG1HB-510-M",
+      "category": "Safety switch",
+      "page_path": "euchner/ng1hb-510-m/"
+    },
+    {
+      "brand": "Bansbach",
+      "mpn": "KOL2P-3-120-416-002",
+      "category": "Lockable gas spring",
+      "page_path": "bansbach/kol2p-3-120-416-002/"
+    },
+    {
+      "brand": "Bansbach",
+      "mpn": "KOM2P03-110-400-001",
+      "category": "Lockable gas spring",
+      "page_path": "bansbach/kom2p03-110-400-001/"
+    },
+    {
+      "brand": "ATOS",
+      "mpn": "DHI-0713/13",
+      "category": "Hydraulic directional control valve",
+      "page_path": "atos/dhi-0713-13/"
+    },
+    {
+      "brand": "TOX PRESSOTECHNIK",
+      "mpn": "PFHL 056.002",
+      "category": "FinePress pneumatic press",
+      "page_path": "tox-pressotechnik/pfhl-056-002/"
+    },
+    {
+      "brand": "Mitsubishi Electric",
+      "mpn": "MDS-CH-CV-260",
+      "category": "Servo drive power supply unit",
+      "page_path": "mitsubishi-electric/mds-ch-cv-260/"
+    },
+    {
+      "brand": "Banner Engineering",
+      "mpn": "K30L2GRYPQ-803685",
+      "category": "Multicolor indicator light",
+      "page_path": "banner-engineering/k30l2grypq-803685/"
+    },
+    {
+      "brand": "MOTECK",
+      "mpn": "MD21-24W6-345.545",
+      "category": "Electric linear actuator",
+      "page_path": "moteck/md21-24w6-345-545/"
+    },
+    {
+      "brand": "Kraus & Naimer",
+      "mpn": "KG20BT203/NLB512E",
+      "category": "Cam switch",
+      "page_path": "kraus-naimer/kg20bt203-nlb512e/"
+    },
+    {
+      "brand": "Yaskawa",
+      "mpn": "SGMAH-04AAA61D-OY",
+      "category": "0.4 kW servo motor",
+      "page_path": "yaskawa/sgmah-04aaa61d-oy/"
+    },
+    {
+      "brand": "SPG",
+      "mpn": "S8KA200B-L33",
+      "category": "Gearhead",
+      "page_path": "spg/s8ka200b-l33/"
+    },
+    {
+      "brand": "LINAK",
+      "mpn": "361203200000BA-612G305700CS000",
+      "category": "Electric actuator",
+      "page_path": "linak/361203200000ba-612g305700cs000/"
+    },
+    {
+      "brand": "MAC Valves",
+      "mpn": "0071372-00",
+      "category": "Pneumatic solenoid valve",
+      "page_path": "mac-valves/0071372-00/"
+    },
+    {
+      "brand": "Dansensor",
+      "mpn": "CheckMate 4",
+      "category": "Package gas analyzer",
+      "page_path": "dansensor/checkmate-4/"
+    },
+    {
+      "brand": "ifm",
+      "mpn": "SM9100",
+      "category": "Magnetic-inductive flow meter",
+      "page_path": "ifm/sm9100/"
+    },
+    {
+      "brand": "Pneumax",
+      "mpn": "MHS.P-PVC",
+      "category": "Piston position sensor",
+      "page_path": "pneumax/mhs-p-pvc/"
+    },
+    {
+      "brand": "Endress+Hauser",
+      "mpn": "FMB70-3BB1F121GLAA",
+      "category": "Deltabar S pressure transmitter",
+      "page_path": "endress-hauser/fmb70-3bb1f121glaa/"
+    },
+    {
+      "brand": "Endress+Hauser",
+      "mpn": "FMB70-3BB1C121GLAA",
+      "category": "Deltabar S pressure transmitter",
+      "page_path": "endress-hauser/fmb70-3bb1c121glaa/"
+    },
+    {
+      "brand": "Lenze",
+      "mpn": "MDSKSBS056-33",
+      "category": "Servo motor",
+      "page_path": "lenze/mdsksbs056-33/"
+    }
+  ],
+  "queries": [],
+  "listings": [],
+  "measurement": {
+    "outbound_clicks": null,
+    "scope": "NOT_COLLECTED",
+    "attribution": "EPN_ACCOUNT_REQUIRED"
+  }
+}
