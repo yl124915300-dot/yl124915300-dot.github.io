@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Connector documentation — Intent Commerce</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #172b36; background: #f4f7f8; }
+    body { margin: 0; } main { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+    h1 { font-size: 2.3rem; letter-spacing: -0.03em; } h2 { font-size: 1.3rem; margin-top: 2.2rem; }
+    p, li, td, th { line-height: 1.6; } a { color: #0b716d; } .small { color: #526973; font-size: .9rem; }
+    table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }
+    th, td { text-align: left; vertical-align: top; border-bottom: 1px solid #cddce0; padding: 10px 12px 10px 0; }
+    code { background: #e5ecee; padding: .1em .25em; border-radius: 3px; }
+    .note { background: #e7f3f1; border-left: 4px solid #0b716d; padding: 14px 18px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="../">← Intent Commerce</a></p>
+    <h1>Connector documentation</h1>
+    <p class="small">Four-operation API contract · updated 29 September 2026</p>
+    <p class="note">The connector is a pre-review candidate. Its API currently runs locally and has no verified public API URL. This page documents the contract; it is not an API endpoint and does not establish Muse compatibility.</p>
+
+    <h2>How Muse would use it</h2>
+    <ol>
+      <li>Receive an existing buyer shopping request.</li>
+      <li>Call <code>search_offers</code> and then <code>get_top3_results</code> to show up to three ranked offers with limits.</li>
+      <li>Call <code>create_checkout_handoff</code> only after the buyer chooses one shown result and asks to proceed. The supplier handles payment.</li>
+    </ol>
+    <p><code>parse_intent</code> is an optional preview step. No post-purchase, order or refund tool is exposed.</p>
+
+    <h2>Operations</h2>
+    <table>
+      <thead><tr><th>Operation ID</th><th>Route</th><th>Request</th><th>Response</th></tr></thead>
+      <tbody>
+        <tr><td><code>parse_intent</code></td><td><code>POST /connector/parse-intent</code></td><td>Buyer <code>query</code>, optional <code>city</code>, <code>postal_code</code>, <code>radius_km</code>, <code>origin_latitude</code>, <code>origin_longitude</code>.</td><td>Structured intent; no supplier request or session is created.</td></tr>
+        <tr><td><code>search_offers</code></td><td><code>POST /connector/search-offers</code></td><td>Same request fields as <code>parse_intent</code>.</td><td><code>session_id</code>, signed <code>session_token</code>, result count, supplier index status and limitations. A cold or expired index returns a retryable 503.</td></tr>
+        <tr><td><code>get_top3_results</code></td><td><code>POST /connector/get-top3-results</code></td><td><code>session_id</code> and <code>session_token</code>.</td><td>At most three offers with source, title, USD price, fit reasons, availability limits and affiliate disclosure. No checkout URL is returned here.</td></tr>
+        <tr><td><code>create_checkout_handoff</code></td><td><code>POST /connector/create-checkout-handoff</code></td><td><code>session_id</code>, <code>session_token</code>, a displayed <code>candidate_id</code>, and <code>buyer_confirmed=true</code>.</td><td>A supplier-controlled HTTPS URL and disclosure. Groupon creates a non-payment cart; Shopify passes through its supplied link.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Access and limits</h2>
+    <p>Tool calls require a server-to-server Bearer API key. The key is not a buyer credential and must not appear in prompts, browser code or this documentation. Search sessions use a signed token and expire. Requests are JSON, limited in size and rate. The local API has not yet been tested with Muse's authentication configuration.</p>
+    <p>Groupon's catalog is indexed in the background; the current sample can be incomplete, and only Los Angeles is prewarmed. A first request for another city or an unwarmed Shopify query may require a retry. A listed voucher does not verify a same-night booking or redemption slot. Checkout price, availability, fulfillment and payment remain with the supplier. Some eligible links may earn a commission; commission does not affect ranking. Groupon tracking is not currently verified.</p>
+
+    <p>See <a href="../privacy/">Privacy</a>, <a href="../terms/">Terms</a> and <a href="../support/">Support</a>.</p>
+  </main>
+</body>
+</html>
