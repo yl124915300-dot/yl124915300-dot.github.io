@@ -21,7 +21,7 @@
     <p><a href="../">← Intent Commerce</a></p>
     <h1>Connector documentation</h1>
     <p class="small">Four-operation API contract · updated 29 September 2026</p>
-    <p class="note">The connector is a pre-review candidate. Its API currently runs locally and has no verified public API URL. This page documents the contract; it is not an API endpoint and does not establish Muse compatibility.</p>
+    <p class="note">The Connector is a pre-review candidate at the fixed Cloudflare Worker hostname <code>https://intent-commerce-muse.yl124915300.workers.dev/</code>. Its four routes were checked over public HTTPS on 29 September 2026; <code>GET /health</code> and <code>GET /openapi.json</code> return JSON. Supplier coverage can still be warming. This page documents the contract; it does not establish Muse compatibility or approval.</p>
 
     <h2>How Muse would use it</h2>
     <ol>
@@ -38,13 +38,13 @@
         <tr><td><code>parse_intent</code></td><td><code>POST /connector/parse-intent</code></td><td>Buyer <code>query</code>, optional <code>city</code>, <code>postal_code</code>, <code>radius_km</code>, <code>origin_latitude</code>, <code>origin_longitude</code>.</td><td>Structured intent; no supplier request or session is created.</td></tr>
         <tr><td><code>search_offers</code></td><td><code>POST /connector/search-offers</code></td><td>Same request fields as <code>parse_intent</code>.</td><td><code>session_id</code>, signed <code>session_token</code>, result count, supplier index status and limitations. A cold or expired index returns a retryable 503.</td></tr>
         <tr><td><code>get_top3_results</code></td><td><code>POST /connector/get-top3-results</code></td><td><code>session_id</code> and <code>session_token</code>.</td><td>At most three offers with source, title, USD price, fit reasons, availability limits and affiliate disclosure. No checkout URL is returned here.</td></tr>
-        <tr><td><code>create_checkout_handoff</code></td><td><code>POST /connector/create-checkout-handoff</code></td><td><code>session_id</code>, <code>session_token</code>, a displayed <code>candidate_id</code>, and <code>buyer_confirmed=true</code>.</td><td>A supplier-controlled HTTPS URL and disclosure. Groupon creates a non-payment cart; Shopify passes through its supplied link.</td></tr>
+        <tr><td><code>create_checkout_handoff</code></td><td><code>POST /connector/create-checkout-handoff</code></td><td><code>session_id</code>, <code>session_token</code>, a displayed <code>candidate_id</code>, and <code>buyer_confirmed=true</code>.</td><td>A supplier-controlled HTTPS URL and disclosure when available. Groupon refuses a cart while its publisher binding is absent; Shopify passes through its supplied link. The Connector does not complete payment.</td></tr>
       </tbody>
     </table>
 
     <h2>Access and limits</h2>
-    <p>Tool calls require a server-to-server Bearer API key. The key is not a buyer credential and must not appear in prompts, browser code or this documentation. Search sessions use a signed token and expire. Requests are JSON, limited in size and rate. The local API has not yet been tested with Muse's authentication configuration.</p>
-    <p>Groupon's catalog is indexed in the background; the current sample can be incomplete, and only Los Angeles is prewarmed. A first request for another city or an unwarmed Shopify query may require a retry. A listed voucher does not verify a same-night booking or redemption slot. Checkout price, availability, fulfillment and payment remain with the supplier. Some eligible links may earn a commission; commission does not affect ranking. Groupon tracking is not currently verified.</p>
+    <p>Tool calls require a server-to-server Bearer API key. The key is not a buyer credential and must not appear in prompts, browser code or this documentation. Search sessions use a signed token and expire after 24 hours. JSON requests are limited to 4,096 bytes. The Worker implementation limits authenticated calls to 30 and searches to three per minute. Muse authentication and end-to-end review remain separate checks.</p>
+    <p>The Worker implementation reads supplier snapshots from D1. Its configured scheduled refresh processes up to three Groupon catalog pages per invocation when it runs; the current sample can be incomplete, and Los Angeles is the default refresh location. A first request for another city or an unwarmed Shopify query may return a retryable <code>503 supplier_index_warming</code>. <code>GET /openapi.json</code> serves the API contract from the Worker. A listed voucher does not verify a same-night booking or redemption slot. Checkout price, availability, fulfillment and payment remain with the supplier. Some eligible links may earn a commission; commission does not affect ranking. Groupon tracking is not currently verified.</p>
 
     <p>See <a href="../privacy/">Privacy</a>, <a href="../terms/">Terms</a> and <a href="../support/">Support</a>.</p>
   </main>
