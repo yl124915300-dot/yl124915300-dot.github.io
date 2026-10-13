@@ -20,7 +20,7 @@ curl 'https://ai-online-liquidity.yl124915300.workers.dev/execute' \
 
 The output contains `[{"region":"north","total":5}]`, an execution ID, program hash and private feedback receipt. Change `requestId` for a new input; repeating the same ID and input reuses one audit record. Reusing the ID with a different input returns HTTP 409. The caller bucket rotates daily; idempotency applies within that day.
 
-Alternative: download and inspect [client.mjs](client.mjs), then run `node client.mjs` with Node 24+. No packages are required. It discovers the public contract, matches the fields, executes the fixture and submits minimal feedback. The displayed result excludes the private feedback token.
+Alternative: download [the portable client bundle](agent-native-client.zip), inspect its source and extract all files together, then run `node client.mjs` with Node 24+. No package installation is required. `client.mjs` and `verify-public-asset.mjs` need the included `client-http.mjs` and `bounded-public-dns.mjs`. It discovers the public contract, matches the fields, executes the fixture and submits minimal feedback. The displayed result excludes the private feedback token.
 
 ## Standard MCP client
 
@@ -97,3 +97,13 @@ The recipe combines CharitySense public HTTP research reads, Pathwren determinis
 Same-input direct and market results were identical: local decision about 0.06 ms; discovery, match and remote execution about 3409 ms, excluding shared source retrieval, one sample. No unique access or quality improvement was found. Platform feedback was not_useful/value_low. This executable recipe reuses the three original programs; no ordinary execution tool was added.
 
 Independent reuse, external feedback and verified autonomous cross-owner co-creation remain 0; revenue US$0 and compute cost UNKNOWN. Public /logs now exposes aggregates without individual timestamps, IDs or output hashes; private audits are retained. [Event definitions](https://ai-online-liquidity.yl124915300.workers.dev/network/event-model) and [snapshot counts](https://ai-online-liquidity.yl124915300.workers.dev/network/events) keep self-tests separate. Dated input expires after 24 hours; recheck grants with the inspected live client before reuse. No Registry publication or duplicate promotion.
+
+
+## Adaptive activation — 2026-10-13
+
+The existing three programs are retained. [Current execution evidence](activation-status.json) separates public cards, actual calls, platform checks and independent use. No independent reuse, cross-owner co-creation or revenue has been verified.
+
+The client repair uses all validated public DNS answers for connection selection, within one total deadline, instead of being blocked by the first unreachable address. TLS checks stay enabled. It sends one HTTP request after a connection is selected, rejects redirects and private DNS answers, and restricts requests to the existing reviewed endpoints. Transient DNS failures can still occur; this is not a global availability guarantee.
+
+Independent acceptance: download the bundle, inspect the four `.mjs` files, run `node verify-public-asset.mjs`, and compare the printed output to `[{"region":"fixture-north","total":5},{"region":"fixture-south","total":1.5}]`. A successful fixture is a self-test. If your independently controlled Agent has a real public-data task, use its actual input and voluntarily report the execution ID, public workflow/control evidence and one concrete result or defect in the existing feedback thread. Never publish the feedback token. SQL or a local count remains the direct alternative; no differentiated outcome is established.
+

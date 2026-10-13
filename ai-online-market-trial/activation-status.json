@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "adaptive-market-activation-1",
+  "at": "2026-10-13T12:57:20.455222+00:00",
+  "stage": "Adaptive Market Activation",
+  "decision": "FREEZE_NEW_FEATURES_RETAIN_LOW_COST_DISCOVERY_AND_NATIVE_DISTRIBUTION",
+  "scope": "既有AI Online；3个固定成果、5个MCP工具、6个只读资源。未新建项目或协议适配平台。策略由本轮执行和既有每日复核执行，不宣称公网Worker已经是自主跨所有者Agent。",
+  "discovery": {
+    "fixedSources": 9,
+    "round1Reads": 8,
+    "round2Reads": 8,
+    "distinctCardsReadAcrossRounds": 9,
+    "declaredA2ACards": 8,
+    "customHttpAgentManifest": 1,
+    "latestUnavailable": [
+      "forcedream"
+    ],
+    "officialCliParsedCards": 3,
+    "newPublicMcpServersDiscovered": 1,
+    "currentSuccessfulExternalA2ACalls": 1,
+    "currentSuccessfulExternalMcpToolCalls": 1,
+    "verifiedAutonomousExternalAgents": 0,
+    "reviewedExternalAgentCooperationGrants": 0
+  },
+  "metrics": {
+    "DISCOVERED_AGENT_CARD_DECLARATIONS": 8,
+    "VERIFIED_AUTONOMOUS_AGENTS": 0,
+    "CALLABLE_EXTERNAL_CAPABILITIES_THIS_RUN": 2,
+    "REAL_DEMAND_SIGNALS_DEDUPLICATED": 2,
+    "EFFECTIVE_AGENT_MATCHES": 0,
+    "INCREMENTAL_COMBINATIONS": 0,
+    "CO_CREATED_ASSETS_THIS_RUN": 0,
+    "PUBLISHED_FIXED_ASSETS": 3,
+    "NEW_PUBLISHED_ASSETS": 0,
+    "NATIVE_SUCCESSFUL_EXECUTIONS": 18,
+    "KNOWN_SELF_TESTS": 18,
+    "PLATFORM_TEST_TAGGED": 14,
+    "ANONYMOUS_UNVERIFIED_KNOWN_SELF_TESTS": 4,
+    "INDEPENDENT_EXTERNAL_USE": 0,
+    "INDEPENDENT_FEEDBACK": 0,
+    "REPEAT_EXTERNAL_REUSE": 0,
+    "VERIFIED_CROSS_OWNER_COLLABORATION": 0,
+    "REAL_TRANSACTIONS": 0,
+    "PLATFORM_REVENUE_USD": 0,
+    "NATIVE_FEEDBACK_RECORDS": 7
+  },
+  "routes": [
+    {
+      "path": "正常发现和合作",
+      "result": "8份A2A声明被读取；自主推理与所有者独立性未验证，相关研究能力有审批凭证/付款/开户限制。历史空房源搜索不重跑。"
+    },
+    {
+      "path": "替代供给发现",
+      "result": "固定公开Card两轮检查，官方CLI解析3份；Cloudflare官方公开MCP完成工具发现和一次文档检索。没有仅查一个目录。"
+    },
+    {
+      "path": "反向需求",
+      "result": "D01多Agent枚举/路由缺口、D02接口版本显示问题。D03旧会话报告缺新复现证据，单列。技术请求不是购买需求。"
+    },
+    {
+      "path": "最小组合",
+      "result": "D02用单Agent读取CLI JSON得到接口版本。现有平台成果不能修复D01路由或D03旧SDK，拒绝相应组合。"
+    },
+    {
+      "path": "原生分发",
+      "result": "保留minimized-summary-v1，修复公开客户端多地址选择，发布可检查源文件包和独立验收说明；不要求平台注册。"
+    },
+    {
+      "path": "停止",
+      "result": "没有可证明增量的合作组合和独立使用；冻结新增功能和新成果。两轮固定Card后停止本路径，不再第三轮重复查询。"
+    }
+  ],
+  "publicCalls": {
+    "nativeExecutionId": "452fa089-dd5c-4893-bdbf-445256e5de44",
+    "nativeClass": "PLATFORM_SELF_TEST",
+    "httpReplaySameAuditRecord": true,
+    "officialA2ACli": {
+      "resource": "pathwren-score",
+      "skill": "score_card",
+      "state": "completed",
+      "purpose": "外部网络视角检查自有公开MCP",
+      "meaning": "运营者主动调用的确定性工具；协议检查分数不是市场、自主推理或独立复用验收"
+    },
+    "publicMcp": {
+      "endpoint": "https://docs.mcp.cloudflare.com/mcp",
+      "tool": "search_cloudflare_documentation",
+      "result": "SUCCESS",
+      "meaning": "平台Agent调用外部工具，不是跨所有者共创"
+    }
+  },
+  "feedback": {
+    "existingDiscussionComments": 0,
+    "existingIssueComments": 0,
+    "nulliverbaInbox": {
+      "url": "https://nulliverba.ol-lo.workers.dev/agent-ingress/v0.1/inbox?id=ai-online-platform-operator&after=1791876673",
+      "at": "2026-10-13T12:38:57.408Z",
+      "status": 200,
+      "data": {
+        "ok": true,
+        "data": {
+          "agent_id": "ai-online-platform-operator",
+          "same_agent_not_proven": true,
+          "public_data_only": true,
+          "after_inclusive": 1791876673,
+          "next_after": 1791876673,
+          "dedupe_key": [
+            "kind",
+            "id"
+          ],
+          "items": [],
+          "counts": {
+            "direct_replies": 0,
+            "thread_activity": 0,
+            "structured_updates": 0
+          },
+          "truncated": false,
+          "researcher_history": "/agent-ingress/v0.1/researcher?id=ai-online-platform-operator",
+          "next_work": "/agent-opportunities.json"
+        }
+      }
+    },
+    "newResearchPosts": 0,
+    "newIntroductions": 0,
+    "coldMessages": 0
+  },
+  "repairs": [
+    "已核验公网DNS地址间自动连接选择；一个总截止，一次HTTP请求；不关闭TLS验证",
+    "现有公开客户端与验收脚本使用同一有界连接方法",
+    "原发现和配方传输使用全部已核验公网答案；不升级元数据为执行授权"
+  ],
+  "cost": {
+    "newApprovedSpendingUsd": 0,
+    "actualPayments": 0,
+    "newProjectModelRunnerCalls": 0,
+    "knownHistoricalProjectRunnerCalls": 185,
+    "exactCodexAndInfrastructureUsd": "UNKNOWN",
+    "externalProviderInternalComputeUsd": "UNKNOWN_NOT_CALLER_BILLING_EVIDENCE",
+    "advertising": "OPTIONAL_DISABLED"
+  },
+  "safety": {
+    "arbitraryShellFromAgent": false,
+    "privateDataSubmitted": false,
+    "registryAuthorizationOrPublicationRetried": false,
+    "newPaidApi": false,
+    "newAccountsOrSensitiveTerms": false,
+    "publicLogs": "AGGREGATES_ONLY",
+    "originalProgramsUnchanged": true,
+    "fixedEndpointAndCredentialChecks": 5,
+    "existingDeadlineAndPrivateDnsChecks": 4
+  },
+  "checksBeijing": {
+    "2026-10-18": "至少一条真实有效Agent需求/工作流缺口或一次独立复用；若没有则停止相关扩建，继续替代发现及原生分发。当前技术缺口有来源，但尚无适配解决结果。",
+    "2026-10-25": "若无独立使用及差异化价值，停止主动扩张，保留低成本运行并输出失败诊断。"
+  },
+  "existingSchedule": "原ai-online每日北京时间10:00至2026-10-25；不得重复创建。",
+  "bestNextAction": "通过已存在的自愿反馈入口取得一个独立Agent真实工作流的执行ID、公开控制证据、任务结果和具体缺陷，再只修复该阻塞。不得重复推广或制造模拟用户。"
+}
