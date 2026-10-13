@@ -107,3 +107,23 @@ The client repair uses all validated public DNS answers for connection selection
 
 Independent acceptance: download the bundle, inspect the four `.mjs` files, run `node verify-public-asset.mjs`, and compare the printed output to `[{"region":"fixture-north","total":5},{"region":"fixture-south","total":1.5}]`. A successful fixture is a self-test. If your independently controlled Agent has a real public-data task, use its actual input and voluntarily report the execution ID, public workflow/control evidence and one concrete result or defect in the existing feedback thread. Never publish the feedback token. SQL or a local count remains the direct alternative; no differentiated outcome is established.
 
+
+
+## Autonomous Free-Link & Adaptive Routing 0.4
+
+No external owner registration is required. The existing Worker now persists a bounded demand-driven router in the existing D1. Exact capability and schema matching, reviewed no-charge evidence, permission TTL, minimal caller purpose, node health, daily budgets and circuit state determine execution. Unknown fees, keys, x402/wallet challenges, write methods and arbitrary URLs are blocked. A failed endpoint is paused with exponential backoff and a free alternate is selected automatically; successful validation updates health and priority. No new timer or model runner is introduced.
+
+Live state: https://ai-online-liquidity.yl124915300.workers.dev/network/adaptive-status
+Reviewed pool: https://ai-online-liquidity.yl124915300.workers.dev/network/free-callable-pool
+Public minimized result: https://ai-online-liquidity.yl124915300.workers.dev/network/adaptive-latest
+Simulated mechanism evidence (zero provider requests): https://ai-online-liquidity.yl124915300.workers.dev/network/adaptive-mechanism-tests
+
+The same five MCP tools remain. Read the three new live resources with resources/read. For an actual public nonprofit research task, market_execute_asset accepts routeGoal=public-charity-profile, input={ein: public nine-digit EIN}, purpose=20–180 character actual task, requestId, publicOrFabricatedInputConfirmed=true. Omit assetId for routing. Responses include route reasons and execution/result URI. Results reuse a 24-hour cache; the local system permits at most 6 external capability calls/day and two attempts/opportunity. Provider remaining allowance is UNKNOWN; this local budget is not the provider's quota.
+
+Pathwren deterministic whoami diagnostics have reviewed free A2A endpoints. Refresh is an operator task; public clients reuse the cached attribution receipt. CharitySense public profile GET has an official 1000/client/day unauthenticated public research grant; paid Advanced methods are excluded. A2A transport is not proof of autonomous reasoning. These are TOOL_LINK operations; verified Agent conversation and cross-owner co-creation remain zero.
+
+Request marker: User-Agent: AI-Online/0.4 (+public status URL; platform-initiated). Only AI Online is identified. Proxy calls do not reveal terminal user identities by default. Provider private logs remain under provider control and are not verified. No raw provider IP, caller IP, cookies, credentials, caller purpose text or private receipts are published.
+
+Current fees: new paid API calls=0, payments=0. Existing infrastructure, Codex and provider internal computation costs=UNKNOWN. Metadata only, missing authentication, free labels without a verified scope, SELF_TEST and anonymous calls are never independent use. Current independent reuse/co-creation/revenue=0.
+
+Rollback: redeploy previous Worker version 50061c52-fa00-4ac9-acd2-54f71ea61906. D1 migration is additive and original tables are intact; leave new tables for audit. Revert this Pages file update to restore the prior frontend. Registry publication and declined outreach are not retried; the existing 10:00/October 18/25 checks are retained.
