@@ -1,9 +1,25 @@
-// Public test client. It invokes no paid model, remote candidate, private file, or financial action.
-import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
-const endpoint=process.argv[2];if(!endpoint)throw Error('Pass the current published HTTPS /mcp URL');const u=new URL(endpoint);if(u.protocol!=='https:'||u.username||u.password||u.search||u.hash)throw Error('Credential-free HTTPS required');
-const c=new Client({name:'AI Online trial client; Owner independence not inferred',version:'0.2.0'},{versionNegotiation:{mode:'auto'}});
-await c.connect(new StreamableHTTPClientTransport(u));
-const call=async(name,args)=>{const r=await c.callTool({name,arguments:args});const d=r.structuredContent||JSON.parse(r.content[0].text);if(r.isError)throw Error(JSON.stringify(d));return d;};
-const agents=await call('market_executable_agents',{});const matches=await call('market_match',{needs:['gate_rows','project_rows']});const assets=await call('market_assets',{});const found=assets.assets.find(a=>a.id==='notice-readiness-v2');if(!found)throw Error('No reviewed notice-readiness-v2 asset currently available');const asset=await call('market_get_asset',{id:found.id});
-const result=await call('market_execute_asset',{assetId:asset.id,input:{now:'2026-10-13T00:00:00Z',rows:[{id:'fabricated-client-example',source:'https://example.org/fabricated',version:1,approved:1,expiry:'2026-10-20T00:00:00Z',sourceAvailable:false,translationReviewed:true}]},publicOrFabricatedInputConfirmed:true});
-console.log(JSON.stringify({at:new Date().toISOString(),agentContracts:agents.agents.length,topMatch:matches.matches[0],assetId:asset.id,execution:result,evidenceCategory:'client-controlled self-check; not independently verified Owner use'},null,2));await c.close();
+// AI Online public client: fixed reviewed pure-data assets; no subscription, account or payment.
+// Inspect this file before running. Node 24+, no dependency installation.
+const configUrl='https://yl124915300-dot.github.io/ai-online-market-trial/client-config.json';
+const config=await (await fetch(configUrl,{signal:AbortSignal.timeout(10000)})).json();
+if(!config.baseUrl)throw Error('Hosted sandbox is not deployed; use the browser local demo or source package.');
+const base=new URL(config.baseUrl);if(base.protocol!=='https:'||base.username||base.password||base.search||base.hash)throw Error('Credential-free HTTPS endpoint required');
+async function post(path,data){const response=await fetch(new URL(path,base),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(15000)});const r=await response.json();if(!response.ok)throw Error(JSON.stringify(r));return r;}
+if(process.argv.includes('--stdio')){
+ const {createInterface}=await import('node:readline');let version='2025-11-25';
+ for await(const line of createInterface({input:process.stdin,crlfDelay:Infinity})){
+  if(!line.trim())continue;let message;
+  try{if(Buffer.byteLength(line)>65536)throw Error('Input limit');message=JSON.parse(line);const response=await fetch(new URL('/mcp',base),{method:'POST',headers:{'content-type':'application/json',accept:'application/json, text/event-stream','mcp-protocol-version':version},body:line,signal:AbortSignal.timeout(15000)});
+   if(response.status===202)continue;const data=await response.json();if(message.method==='initialize'&&data.result?.protocolVersion)version=data.result.protocolVersion;
+   process.stdout.write(JSON.stringify(data)+'\n');
+  }catch{if(message&&Object.hasOwn(message,'id'))process.stdout.write(JSON.stringify({jsonrpc:'2.0',id:message.id,error:{code:-32000,message:'Sandbox connection or request failed'}})+'\n');}
+ }
+}else{
+ const input={rows:[{region:'north',visits:'2',note:'PUBLIC_FIXTURE'},{region:'north',visits:3},{region:'south',visits:1}]};
+ const match=await post('/match',{inputFields:['region','visits'],outputFields:['region','total']});
+ if(match.selected!=='minimized-summary-v1')throw Error('Published contract no longer matches this fixture');
+ const result=await post('/execute',{assetId:match.selected,input,requestId:crypto.randomUUID(),publicOrFabricatedInputConfirmed:true});
+ if(!result.ok)throw Error(JSON.stringify(result));
+ const feedback=await post('/feedback',{executionId:result.executionId,feedbackToken:result.receipt.feedbackToken,outcome:'useful',reasonCode:'works'});
+ const {receipt,...safeResult}=result;console.log(JSON.stringify({match,result:safeResult,feedback,evidenceCategory:'caller self-check; independence must be separately verified'},null,2));
+}

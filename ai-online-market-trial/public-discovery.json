@@ -1,0 +1,378 @@
+{
+  "checkedAt": "2026-10-13T04:30:26.920Z",
+  "policy": "No official MCP Registry authorization or publication attempted; no private Agent, account, cookie, key or tool invocation. Only bounded public metadata.",
+  "reports": [
+    {
+      "kind": "a2a_directory",
+      "source": "https://api.a2a-registry.org/public/agents?q=analytics",
+      "checkedAt": "2026-10-13T04:30:11.100Z",
+      "status": "UNAVAILABLE_OR_REJECTED",
+      "reason": "RESPONSE_LIMIT",
+      "elapsedMs": 5169.965583,
+      "replacement": "next distinct public source checked; remote invocation never attempted"
+    },
+    {
+      "kind": "public_directory",
+      "source": "https://wellknown.network/api/v1/search?q=data+aggregation&limit=5",
+      "checkedAt": "2026-10-13T04:30:16.271Z",
+      "status": "PUBLIC_METADATA_READ",
+      "elapsedMs": 2145.638417
+    },
+    {
+      "kind": "a2a_agent_card",
+      "source": "https://www.agentcard.net/.well-known/agent-card.json",
+      "checkedAt": "2026-10-13T04:30:18.417Z",
+      "status": "PUBLIC_METADATA_READ",
+      "elapsedMs": 2869.16525
+    },
+    {
+      "kind": "a2a_agent_card",
+      "source": "https://prassanna-ravishankar--research-agent-research-agent-app.modal.run/.well-known/agent.json",
+      "checkedAt": "2026-10-13T04:30:21.286Z",
+      "status": "PUBLIC_METADATA_READ",
+      "elapsedMs": 2368.6854590000003
+    },
+    {
+      "kind": "a2a_agent_card",
+      "source": "https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json",
+      "checkedAt": "2026-10-13T04:30:23.655Z",
+      "status": "PUBLIC_METADATA_READ",
+      "elapsedMs": 3264.9655409999996
+    }
+  ],
+  "resources": [
+    {
+      "name": "Data Aggregator",
+      "kind": "mcp_resource_or_other",
+      "source": "https://wellknown.network/api/v1/search?q=data+aggregation&limit=5",
+      "checkedAt": "2026-10-13T04:30:16.271Z",
+      "declaredEndpoint": "pypi:data-aggregator-mcp",
+      "cardUrl": null,
+      "declaredSkills": [],
+      "securityRequirements": null,
+      "securitySchemes": null,
+      "inputModes": null,
+      "outputModes": null,
+      "price": "UNKNOWN",
+      "rateLimit": "UNKNOWN",
+      "trust": "publisher/directory declaration; independent owner control not verified",
+      "discoverable": true,
+      "callable": "UNKNOWN_NOT_INVOKED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
+      "untrustedMetadata": true,
+      "matchDecision": {
+        "eligibleForRemoteInvocation": false,
+        "reasons": [
+          "no owner-granted participation authorization",
+          "no observed input/output contract for region+visits -> region+total",
+          "execution cost and limits UNKNOWN"
+        ],
+        "action": "metadata-only candidate; no contact or invocation implied"
+      }
+    },
+    {
+      "name": "data-aggregator-mcp",
+      "kind": "mcp_resource_or_other",
+      "source": "https://wellknown.network/api/v1/search?q=data+aggregation&limit=5",
+      "checkedAt": "2026-10-13T04:30:16.271Z",
+      "declaredEndpoint": "npm:data-aggregator-mcp",
+      "cardUrl": null,
+      "declaredSkills": [],
+      "securityRequirements": null,
+      "securitySchemes": null,
+      "inputModes": null,
+      "outputModes": null,
+      "price": "UNKNOWN",
+      "rateLimit": "UNKNOWN",
+      "trust": "publisher/directory declaration; independent owner control not verified",
+      "discoverable": true,
+      "callable": "UNKNOWN_NOT_INVOKED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
+      "untrustedMetadata": true,
+      "matchDecision": {
+        "eligibleForRemoteInvocation": false,
+        "reasons": [
+          "no owner-granted participation authorization",
+          "no observed input/output contract for region+visits -> region+total",
+          "execution cost and limits UNKNOWN"
+        ],
+        "action": "metadata-only candidate; no contact or invocation implied"
+      }
+    },
+    {
+      "name": "Free Official Data Samples, Provenance, Aggregations & Insights",
+      "kind": "mcp_resource_or_other",
+      "source": "https://wellknown.network/api/v1/search?q=data+aggregation&limit=5",
+      "checkedAt": "2026-10-13T04:30:16.271Z",
+      "declaredEndpoint": "https://agentnative.cazimedia.com/mcp/free-official-data-insights",
+      "cardUrl": null,
+      "declaredSkills": [],
+      "securityRequirements": null,
+      "securitySchemes": null,
+      "inputModes": null,
+      "outputModes": null,
+      "price": "UNKNOWN",
+      "rateLimit": "UNKNOWN",
+      "trust": "publisher/directory declaration; independent owner control not verified",
+      "discoverable": true,
+      "callable": "UNKNOWN_NOT_INVOKED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
+      "untrustedMetadata": true,
+      "matchDecision": {
+        "eligibleForRemoteInvocation": false,
+        "reasons": [
+          "no owner-granted participation authorization",
+          "no observed input/output contract for region+visits -> region+total",
+          "execution cost and limits UNKNOWN"
+        ],
+        "action": "metadata-only candidate; no contact or invocation implied"
+      }
+    },
+    {
+      "name": "@nirholas/crypto-data-aggregator",
+      "kind": "mcp_resource_or_other",
+      "source": "https://wellknown.network/api/v1/search?q=data+aggregation&limit=5",
+      "checkedAt": "2026-10-13T04:30:16.271Z",
+      "declaredEndpoint": "npm:@nirholas/crypto-data-aggregator",
+      "cardUrl": null,
+      "declaredSkills": [],
+      "securityRequirements": null,
+      "securitySchemes": null,
+      "inputModes": null,
+      "outputModes": null,
+      "price": "UNKNOWN",
+      "rateLimit": "UNKNOWN",
+      "trust": "publisher/directory declaration; independent owner control not verified",
+      "discoverable": true,
+      "callable": "UNKNOWN_NOT_INVOKED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
+      "untrustedMetadata": true,
+      "matchDecision": {
+        "eligibleForRemoteInvocation": false,
+        "reasons": [
+          "no owner-granted participation authorization",
+          "no observed input/output contract for region+visits -> region+total",
+          "execution cost and limits UNKNOWN"
+        ],
+        "action": "metadata-only candidate; no contact or invocation implied"
+      }
+    },
+    {
+      "name": "AgentNative Data Exchange",
+      "kind": "a2a_agent",
+      "source": "https://wellknown.network/api/v1/search?q=data+aggregation&limit=5",
+      "checkedAt": "2026-10-13T04:30:16.271Z",
+      "declaredEndpoint": "https://agentnative.cazimedia.com/a2a",
+      "cardUrl": null,
+      "declaredSkills": [],
+      "securityRequirements": null,
+      "securitySchemes": null,
+      "inputModes": null,
+      "outputModes": null,
+      "price": "UNKNOWN",
+      "rateLimit": "UNKNOWN",
+      "trust": "publisher/directory declaration; independent owner control not verified",
+      "discoverable": true,
+      "callable": "UNKNOWN_NOT_INVOKED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
+      "untrustedMetadata": true,
+      "matchDecision": {
+        "eligibleForRemoteInvocation": false,
+        "reasons": [
+          "no owner-granted participation authorization",
+          "no observed input/output contract for region+visits -> region+total",
+          "execution cost and limits UNKNOWN"
+        ],
+        "action": "metadata-only candidate; no contact or invocation implied"
+      }
+    },
+    {
+      "name": "AgentCard.net Toolkit",
+      "kind": "a2a_agent",
+      "source": "https://www.agentcard.net/.well-known/agent-card.json",
+      "checkedAt": "2026-10-13T04:30:18.417Z",
+      "declaredEndpoint": null,
+      "cardUrl": "https://www.agentcard.net/.well-known/agent-card.json",
+      "declaredSkills": [
+        {
+          "id": "generate-agent-card",
+          "name": "Agent Card Generator",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "validate-agent-card",
+          "name": "Agent Card Validator",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "check-well-known-discovery",
+          "name": "Well-known Discovery Checker",
+          "inputModes": null,
+          "outputModes": null
+        }
+      ],
+      "securityRequirements": null,
+      "securitySchemes": null,
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ],
+      "price": "UNKNOWN",
+      "rateLimit": "UNKNOWN",
+      "trust": "publisher/directory declaration; independent owner control not verified",
+      "discoverable": true,
+      "callable": "UNKNOWN_NOT_INVOKED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
+      "untrustedMetadata": true,
+      "matchDecision": {
+        "eligibleForRemoteInvocation": false,
+        "reasons": [
+          "no owner-granted participation authorization",
+          "no observed input/output contract for region+visits -> region+total",
+          "execution cost and limits UNKNOWN"
+        ],
+        "action": "metadata-only candidate; no contact or invocation implied"
+      }
+    },
+    {
+      "name": "Research Agent",
+      "kind": "a2a_agent",
+      "source": "https://prassanna-ravishankar--research-agent-research-agent-app.modal.run/.well-known/agent.json",
+      "checkedAt": "2026-10-13T04:30:21.286Z",
+      "declaredEndpoint": "https://prassanna-ravishankar--research-agent-research-agent-app.modal.run",
+      "cardUrl": "https://prassanna-ravishankar--research-agent-research-agent-app.modal.run/.well-known/agent.json",
+      "declaredSkills": [],
+      "securityRequirements": null,
+      "securitySchemes": null,
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ],
+      "price": "UNKNOWN",
+      "rateLimit": "UNKNOWN",
+      "trust": "publisher/directory declaration; independent owner control not verified",
+      "discoverable": true,
+      "callable": "UNKNOWN_NOT_INVOKED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
+      "untrustedMetadata": true,
+      "matchDecision": {
+        "eligibleForRemoteInvocation": false,
+        "reasons": [
+          "no owner-granted participation authorization",
+          "no observed input/output contract for region+visits -> region+total",
+          "execution cost and limits UNKNOWN"
+        ],
+        "action": "metadata-only candidate; no contact or invocation implied"
+      }
+    },
+    {
+      "name": "Nulliverba Research Discovery Agent",
+      "kind": "a2a_agent",
+      "source": "https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json",
+      "checkedAt": "2026-10-13T04:30:23.655Z",
+      "declaredEndpoint": null,
+      "cardUrl": "https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json",
+      "declaredSkills": [
+        {
+          "id": "take-one-life-research-task",
+          "name": "Take one bounded task and finish",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "discover-research-work",
+          "name": "Discover research work",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "inspect-public-research",
+          "name": "Inspect public research",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "structure-research-contribution",
+          "name": "Structure a research contribution",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "relay-research-question",
+          "name": "Relay one research question",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "continue-research-loop",
+          "name": "Continue a research loop",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "resume-research-lineage",
+          "name": "Resume public research lineage",
+          "inputModes": null,
+          "outputModes": null
+        },
+        {
+          "id": "research-inbox",
+          "name": "Check research inbox",
+          "inputModes": null,
+          "outputModes": null
+        }
+      ],
+      "securityRequirements": null,
+      "securitySchemes": null,
+      "inputModes": [
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "price": "UNKNOWN",
+      "rateLimit": "UNKNOWN",
+      "trust": "publisher/directory declaration; independent owner control not verified",
+      "discoverable": true,
+      "callable": "UNKNOWN_NOT_INVOKED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
+      "untrustedMetadata": true,
+      "matchDecision": {
+        "eligibleForRemoteInvocation": false,
+        "reasons": [
+          "no owner-granted participation authorization",
+          "no observed input/output contract for region+visits -> region+total",
+          "execution cost and limits UNKNOWN"
+        ],
+        "action": "metadata-only candidate; no contact or invocation implied"
+      }
+    }
+  ],
+  "actualCallableExternalResources": 0,
+  "authorizedExternalParticipants": 0,
+  "independentReuses": 0
+}

@@ -1,7 +1,6 @@
 {
-  "mcpServers": {
-    "ai-online-network": {
-      "url": "https://yours-designed-thumbs-curriculum.trycloudflare.com/mcp"
-    }
-  }
+  "baseUrl": "https://ai-online-liquidity.yl124915300.workers.dev",
+  "mcpUrl": "https://ai-online-liquidity.yl124915300.workers.dev/mcp",
+  "verificationStatus": "HTTP_AND_STANDARD_MCP_CLIENT_PASSED_2026_10_13",
+  "requiresRegistration": false
 }

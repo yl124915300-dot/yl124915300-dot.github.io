@@ -1,0 +1,389 @@
+{
+  "schemaVersion": "liquidity-1",
+  "updatedAt": "2026-10-13",
+  "primaryAsset": "minimized-summary-v1",
+  "assets": [
+    {
+      "id": "notice-readiness-v1",
+      "runId": "R10-matched",
+      "title": "Notice readiness gate v1",
+      "inputContract": "JSON {rows:[{id,source,version,approved,expiry}],now:explicit RFC3339}. Pure-data checklist only; no notice publication or authority verification. Missing source/version approval or expired notice prevents READY.",
+      "kind": "executable_asset",
+      "owner": "platform-controlled",
+      "independentOwner": false,
+      "program": {
+        "steps": [
+          {
+            "id": "s1",
+            "tool": "gate_rows",
+            "args": {
+              "rows": {
+                "$ref": "input.rows"
+              },
+              "required": [
+                "source"
+              ],
+              "versionFields": [
+                "version",
+                "approved"
+              ],
+              "expiresField": "expiry",
+              "now": {
+                "$ref": "input.now"
+              },
+              "target": "state"
+            }
+          },
+          {
+            "id": "s2",
+            "tool": "project_rows",
+            "args": {
+              "rows": {
+                "$ref": "s1"
+              },
+              "fields": [
+                "id",
+                "state"
+              ]
+            }
+          }
+        ],
+        "output": {
+          "$ref": "s2"
+        }
+      },
+      "programHash": "ca8e9bd07071eb7d6d04f4f05b34684cc2b878c7c5870e33d1478c1ce2de6fd2",
+      "allowedTools": [
+        "gate_rows",
+        "project_rows"
+      ],
+      "metadataRevision": 1,
+      "status": "published",
+      "permission": {
+        "publicExecution": true,
+        "input": "public_or_fabricated_only",
+        "network": false,
+        "filesystem": false,
+        "shell": false,
+        "modelBilling": false,
+        "payment": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "rows",
+          "now"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "rows": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "version": {},
+                "approved": {},
+                "expiry": {
+                  "type": "string"
+                },
+                "sourceAvailable": {
+                  "type": "boolean"
+                },
+                "translationReviewed": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "now": {
+            "type": "string"
+          }
+        }
+      },
+      "outputFields": [
+        "id",
+        "state"
+      ],
+      "costUsd": 0,
+      "rateLimit": "sandbox actions 30/IP/hour and 2000 aggregate/day",
+      "availability": "stable Cloudflare Workers HTTPS; verified HTTP and standard MCP client 2026-10-13",
+      "actualParticipation": "platform-controlled tests only",
+      "limitations": [
+        "Caller supplied flags only; no source, authority, translation or publication verification."
+      ]
+    },
+    {
+      "id": "minimized-summary-v1",
+      "runId": "R14-matched",
+      "title": "Minimize fields before aggregate v1",
+      "inputContract": "JSON {rows:[{region:string,visits:finite decimal or number,...public extra fields}]}; output [{region,total:number}]. Projects region and visits before aggregating. The historical amount field description was incorrect; executable program unchanged.",
+      "kind": "executable_asset",
+      "owner": "platform-controlled",
+      "independentOwner": false,
+      "program": {
+        "steps": [
+          {
+            "id": "s1",
+            "tool": "project_rows",
+            "args": {
+              "rows": {
+                "$ref": "input.rows"
+              },
+              "fields": [
+                "region",
+                "visits"
+              ]
+            }
+          },
+          {
+            "id": "s2",
+            "tool": "number_rows",
+            "args": {
+              "rows": {
+                "$ref": "s1"
+              },
+              "fields": [
+                "visits"
+              ]
+            }
+          },
+          {
+            "id": "s3",
+            "tool": "group_rows",
+            "args": {
+              "rows": {
+                "$ref": "s2"
+              },
+              "keys": [
+                "region"
+              ],
+              "metrics": [
+                {
+                  "name": "total",
+                  "op": "sum",
+                  "field": "visits"
+                }
+              ]
+            }
+          },
+          {
+            "id": "s4",
+            "tool": "project_rows",
+            "args": {
+              "rows": {
+                "$ref": "s3"
+              },
+              "fields": [
+                "region",
+                "total"
+              ]
+            }
+          }
+        ],
+        "output": {
+          "$ref": "s4"
+        }
+      },
+      "programHash": "32146b1606479e2c78a9cc05a68a7dd87f0e1b68a5fd22fb6ec683b401c53554",
+      "allowedTools": [
+        "group_rows",
+        "number_rows",
+        "project_rows"
+      ],
+      "metadataRevision": 2,
+      "status": "published",
+      "permission": {
+        "publicExecution": true,
+        "input": "public_or_fabricated_only",
+        "network": false,
+        "filesystem": false,
+        "shell": false,
+        "modelBilling": false,
+        "payment": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "rows"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "rows": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "properties": {
+                "region": {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                "visits": {
+                  "type": [
+                    "number",
+                    "string"
+                  ]
+                }
+              },
+              "required": [
+                "region",
+                "visits"
+              ],
+              "additionalProperties": true
+            }
+          }
+        }
+      },
+      "outputFields": [
+        "region",
+        "total"
+      ],
+      "costUsd": 0,
+      "rateLimit": "sandbox actions 30/IP/hour and 2000 aggregate/day",
+      "availability": "stable Cloudflare Workers HTTPS; verified HTTP and standard MCP client 2026-10-13",
+      "actualParticipation": "platform-controlled tests only",
+      "limitations": [
+        "Not a privacy guarantee or anonymization service. No sensitive input."
+      ]
+    },
+    {
+      "id": "notice-readiness-v2",
+      "runId": "LOOP01-feedback",
+      "title": "Notice readiness gate v2 with consumer prerequisite checks",
+      "inputContract": "JSON {rows:[{id,source,version,approved,expiry}],now:explicit RFC3339}. Pure-data checklist only; no notice publication or authority verification. Missing source/version approval or expired notice prevents READY. Also requires sourceAvailable and translationReviewed both exactly true; these are caller assertions, not independent verification. No real publication or customer claim.",
+      "kind": "executable_asset",
+      "owner": "platform-controlled",
+      "independentOwner": false,
+      "program": {
+        "steps": [
+          {
+            "id": "s1",
+            "tool": "gate_rows",
+            "args": {
+              "rows": {
+                "$ref": "input.rows"
+              },
+              "required": [
+                "source",
+                "sourceAvailable",
+                "translationReviewed"
+              ],
+              "equals": {
+                "sourceAvailable": true,
+                "translationReviewed": true
+              },
+              "versionFields": [
+                "version",
+                "approved"
+              ],
+              "expiresField": "expiry",
+              "now": {
+                "$ref": "input.now"
+              },
+              "target": "state"
+            }
+          },
+          {
+            "id": "s2",
+            "tool": "project_rows",
+            "args": {
+              "rows": {
+                "$ref": "s1"
+              },
+              "fields": [
+                "id",
+                "state"
+              ]
+            }
+          }
+        ],
+        "output": {
+          "$ref": "s2"
+        }
+      },
+      "programHash": "19ca1bece4ffd90660c1d88176e5aa675e0198ef9f354dd71597f2b4a5476bb1",
+      "allowedTools": [
+        "gate_rows",
+        "project_rows"
+      ],
+      "metadataRevision": 1,
+      "status": "published",
+      "permission": {
+        "publicExecution": true,
+        "input": "public_or_fabricated_only",
+        "network": false,
+        "filesystem": false,
+        "shell": false,
+        "modelBilling": false,
+        "payment": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "rows",
+          "now"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "rows": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "version": {},
+                "approved": {},
+                "expiry": {
+                  "type": "string"
+                },
+                "sourceAvailable": {
+                  "type": "boolean"
+                },
+                "translationReviewed": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "now": {
+            "type": "string"
+          }
+        }
+      },
+      "outputFields": [
+        "id",
+        "state"
+      ],
+      "costUsd": 0,
+      "rateLimit": "sandbox actions 30/IP/hour and 2000 aggregate/day",
+      "availability": "stable Cloudflare Workers HTTPS; verified HTTP and standard MCP client 2026-10-13",
+      "actualParticipation": "platform-controlled tests only",
+      "limitations": [
+        "Caller supplied flags only; no source, authority, translation or publication verification."
+      ]
+    }
+  ],
+  "externalResources": [],
+  "identityPolicy": "MCP tools and assets are not independent Agents. Anonymous requests and client names never prove independent ownership."
+}

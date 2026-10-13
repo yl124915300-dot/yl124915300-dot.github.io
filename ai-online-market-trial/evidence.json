@@ -1,0 +1,375 @@
+{
+  "at": "2026-10-13T04:33:48.656Z",
+  "baseUrl": "https://ai-online-liquidity.yl124915300.workers.dev",
+  "evidenceCategory": "platform-controlled verification; external protocol client implementation does not imply external ownership",
+  "http": [
+    {
+      "path": "/execute",
+      "status": 200,
+      "result": {
+        "ok": true,
+        "assetId": "minimized-summary-v1",
+        "metadataRevision": 2,
+        "programHash": "32146b1606479e2c78a9cc05a68a7dd87f0e1b68a5fd22fb6ec683b401c53554",
+        "output": [
+          {
+            "region": "north",
+            "total": 5
+          }
+        ],
+        "trace": [
+          {
+            "tool": "project_rows",
+            "inputHash": "fb708ce2e1ddc6bb782fbfa1aa758fc032831ff162659b173fc7043f50e35afe",
+            "outputHash": "6997997140e446bb9b3ce403ce64a4cbaf540eb1d1053311abbe86539ffc11c6",
+            "elapsedMs": 0
+          },
+          {
+            "tool": "number_rows",
+            "inputHash": "45375975b46ca0149708c891c6f40b561d7637e2a4ec4cf5222434af4bf3af80",
+            "outputHash": "43c4a90a3d44c102ce1808ca3d760fa8a60f9aef74958fb2efbb548fd9caa152",
+            "elapsedMs": 0
+          },
+          {
+            "tool": "group_rows",
+            "inputHash": "56e787d2c961bc089776c7ad1fce72dae14ed3e7c5b557524c8a5eccd8fd33fc",
+            "outputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51",
+            "elapsedMs": 0
+          },
+          {
+            "tool": "project_rows",
+            "inputHash": "6d3bed54ed6f68b1ea9d3af3ff9996ca4a9eb3e6eb4505716bfc9af7108e83eb",
+            "outputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51",
+            "elapsedMs": 0
+          }
+        ],
+        "elapsedMs": 0,
+        "externalCalls": 0,
+        "independentUsageVerified": false,
+        "executionId": "9dcd2425-e0de-4635-9a23-b79940f89df4",
+        "idempotentReplay": false,
+        "callerCategory": "platform_test",
+        "serverInputHash": "531361de7c9a51a42420ac57327195fe93a02d9f5fb6692ac98f1fd157aa11be",
+        "serverOutputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51"
+      },
+      "roundTripMs": 3525.811584
+    },
+    {
+      "path": "/execute",
+      "status": 200,
+      "result": {
+        "ok": true,
+        "assetId": "minimized-summary-v1",
+        "metadataRevision": 2,
+        "programHash": "32146b1606479e2c78a9cc05a68a7dd87f0e1b68a5fd22fb6ec683b401c53554",
+        "output": [
+          {
+            "region": "north",
+            "total": 5
+          }
+        ],
+        "trace": [
+          {
+            "tool": "project_rows",
+            "inputHash": "fb708ce2e1ddc6bb782fbfa1aa758fc032831ff162659b173fc7043f50e35afe",
+            "outputHash": "6997997140e446bb9b3ce403ce64a4cbaf540eb1d1053311abbe86539ffc11c6",
+            "elapsedMs": 0
+          },
+          {
+            "tool": "number_rows",
+            "inputHash": "45375975b46ca0149708c891c6f40b561d7637e2a4ec4cf5222434af4bf3af80",
+            "outputHash": "43c4a90a3d44c102ce1808ca3d760fa8a60f9aef74958fb2efbb548fd9caa152",
+            "elapsedMs": 0
+          },
+          {
+            "tool": "group_rows",
+            "inputHash": "56e787d2c961bc089776c7ad1fce72dae14ed3e7c5b557524c8a5eccd8fd33fc",
+            "outputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51",
+            "elapsedMs": 0
+          },
+          {
+            "tool": "project_rows",
+            "inputHash": "6d3bed54ed6f68b1ea9d3af3ff9996ca4a9eb3e6eb4505716bfc9af7108e83eb",
+            "outputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51",
+            "elapsedMs": 0
+          }
+        ],
+        "elapsedMs": 0,
+        "externalCalls": 0,
+        "independentUsageVerified": false,
+        "executionId": "9dcd2425-e0de-4635-9a23-b79940f89df4",
+        "idempotentReplay": true,
+        "callerCategory": "platform_test",
+        "serverInputHash": "531361de7c9a51a42420ac57327195fe93a02d9f5fb6692ac98f1fd157aa11be",
+        "serverOutputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51"
+      },
+      "roundTripMs": 780.1791660000004
+    },
+    {
+      "path": "/execute",
+      "status": 409,
+      "result": {
+        "ok": false,
+        "errorCode": "IDEMPOTENCY_CONFLICT",
+        "message": "requestId already used with different input"
+      },
+      "roundTripMs": 1105.7725420000006
+    },
+    {
+      "path": "/feedback",
+      "status": 200,
+      "result": {
+        "accepted": true,
+        "executionId": "9dcd2425-e0de-4635-9a23-b79940f89df4",
+        "idempotentReplay": false,
+        "independentUsageVerified": false
+      },
+      "roundTripMs": 2343.8443340000003
+    },
+    {
+      "path": "/feedback",
+      "status": 200,
+      "result": {
+        "accepted": true,
+        "executionId": "9dcd2425-e0de-4635-9a23-b79940f89df4",
+        "idempotentReplay": true,
+        "independentUsageVerified": false
+      },
+      "roundTripMs": 591.6843749999989
+    },
+    {
+      "path": "/feedback",
+      "status": 409,
+      "result": {
+        "ok": false,
+        "errorCode": "FEEDBACK_REPLAY",
+        "message": "Execution already has different feedback"
+      },
+      "roundTripMs": 486.2326670000002
+    },
+    {
+      "path": "/feedback",
+      "status": 403,
+      "result": {
+        "ok": false,
+        "errorCode": "RECEIPT_INVALID",
+        "message": "Valid unexpired execution receipt required"
+      },
+      "roundTripMs": 343.4449170000007
+    },
+    {
+      "path": "/execute",
+      "status": 400,
+      "result": {
+        "ok": false,
+        "errorCode": "REQUEST_FIELDS",
+        "message": "Only fixed assetId, input, confirmation and requestId accepted"
+      },
+      "roundTripMs": 285.9079160000001
+    },
+    {
+      "path": "/execute",
+      "status": 403,
+      "result": {
+        "ok": false,
+        "errorCode": "ORIGIN_DENIED",
+        "message": "Origin is not permitted"
+      },
+      "roundTripMs": 274.8840830000008
+    }
+  ],
+  "mcp": {
+    "tools": [
+      "market_assets",
+      "market_match",
+      "market_execute_asset",
+      "market_feedback",
+      "market_metrics"
+    ],
+    "match": {
+      "selected": "minimized-summary-v1",
+      "candidates": [
+        {
+          "assetId": "notice-readiness-v1",
+          "eligible": false,
+          "missingInputs": [
+            "id",
+            "source",
+            "version",
+            "approved",
+            "expiry",
+            "now"
+          ],
+          "missingOutputs": [
+            "region",
+            "total"
+          ],
+          "operations": [
+            "gate_rows",
+            "project_rows"
+          ],
+          "stepCount": 2,
+          "costUsd": 0,
+          "trust": "platform-owned; locally tested; independent value unverified",
+          "permissions": {
+            "publicExecution": true,
+            "input": "public_or_fabricated_only",
+            "network": false,
+            "filesystem": false,
+            "shell": false,
+            "modelBilling": false,
+            "payment": false
+          },
+          "metadataRevision": 1,
+          "programHash": "ca8e9bd07071eb7d6d04f4f05b34684cc2b878c7c5870e33d1478c1ce2de6fd2"
+        },
+        {
+          "assetId": "minimized-summary-v1",
+          "eligible": true,
+          "missingInputs": [],
+          "missingOutputs": [],
+          "operations": [
+            "group_rows",
+            "number_rows",
+            "project_rows"
+          ],
+          "stepCount": 4,
+          "costUsd": 0,
+          "trust": "platform-owned; locally tested; independent value unverified",
+          "permissions": {
+            "publicExecution": true,
+            "input": "public_or_fabricated_only",
+            "network": false,
+            "filesystem": false,
+            "shell": false,
+            "modelBilling": false,
+            "payment": false
+          },
+          "metadataRevision": 2,
+          "programHash": "32146b1606479e2c78a9cc05a68a7dd87f0e1b68a5fd22fb6ec683b401c53554"
+        },
+        {
+          "assetId": "notice-readiness-v2",
+          "eligible": false,
+          "missingInputs": [
+            "id",
+            "source",
+            "version",
+            "approved",
+            "expiry",
+            "now",
+            "sourceAvailable",
+            "translationReviewed"
+          ],
+          "missingOutputs": [
+            "region",
+            "total"
+          ],
+          "operations": [
+            "gate_rows",
+            "project_rows"
+          ],
+          "stepCount": 2,
+          "costUsd": 0,
+          "trust": "platform-owned; locally tested; independent value unverified",
+          "permissions": {
+            "publicExecution": true,
+            "input": "public_or_fabricated_only",
+            "network": false,
+            "filesystem": false,
+            "shell": false,
+            "modelBilling": false,
+            "payment": false
+          },
+          "metadataRevision": 1,
+          "programHash": "19ca1bece4ffd90660c1d88176e5aa675e0198ef9f354dd71597f2b4a5476bb1"
+        }
+      ],
+      "elapsedMs": 0,
+      "basis": "actual required input fields, output fields, fixed operations, permissions and current publication status; no label-based score",
+      "incrementalCapability": "none versus direct invocation of the same asset"
+    },
+    "execution": {
+      "ok": true,
+      "assetId": "minimized-summary-v1",
+      "metadataRevision": 2,
+      "programHash": "32146b1606479e2c78a9cc05a68a7dd87f0e1b68a5fd22fb6ec683b401c53554",
+      "output": [
+        {
+          "region": "north",
+          "total": 5
+        }
+      ],
+      "trace": [
+        {
+          "tool": "project_rows",
+          "inputHash": "fb708ce2e1ddc6bb782fbfa1aa758fc032831ff162659b173fc7043f50e35afe",
+          "outputHash": "6997997140e446bb9b3ce403ce64a4cbaf540eb1d1053311abbe86539ffc11c6",
+          "elapsedMs": 0
+        },
+        {
+          "tool": "number_rows",
+          "inputHash": "45375975b46ca0149708c891c6f40b561d7637e2a4ec4cf5222434af4bf3af80",
+          "outputHash": "43c4a90a3d44c102ce1808ca3d760fa8a60f9aef74958fb2efbb548fd9caa152",
+          "elapsedMs": 0
+        },
+        {
+          "tool": "group_rows",
+          "inputHash": "56e787d2c961bc089776c7ad1fce72dae14ed3e7c5b557524c8a5eccd8fd33fc",
+          "outputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51",
+          "elapsedMs": 0
+        },
+        {
+          "tool": "project_rows",
+          "inputHash": "6d3bed54ed6f68b1ea9d3af3ff9996ca4a9eb3e6eb4505716bfc9af7108e83eb",
+          "outputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51",
+          "elapsedMs": 0
+        }
+      ],
+      "elapsedMs": 0,
+      "externalCalls": 0,
+      "independentUsageVerified": false,
+      "executionId": "e3897f6d-3094-472c-a409-b60180b6dc25",
+      "idempotentReplay": false,
+      "callerCategory": "platform_test",
+      "serverInputHash": "531361de7c9a51a42420ac57327195fe93a02d9f5fb6692ac98f1fd157aa11be",
+      "serverOutputHash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51"
+    },
+    "feedback": {
+      "accepted": true,
+      "executionId": "e3897f6d-3094-472c-a409-b60180b6dc25",
+      "idempotentReplay": false,
+      "independentUsageVerified": false
+    }
+  },
+  "logs": {
+    "events": [
+      {
+        "id": "e3897f6d-3094-472c-a409-b60180b6dc25",
+        "asset_id": "minimized-summary-v1",
+        "program_hash": "32146b1606479e2c78a9cc05a68a7dd87f0e1b68a5fd22fb6ec683b401c53554",
+        "output_hash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51",
+        "ok": 1,
+        "error_code": null,
+        "elapsed_ms": 0,
+        "caller_category": "platform_test",
+        "at": "2026-10-13T04:33:47.961Z"
+      },
+      {
+        "id": "9dcd2425-e0de-4635-9a23-b79940f89df4",
+        "asset_id": "minimized-summary-v1",
+        "program_hash": "32146b1606479e2c78a9cc05a68a7dd87f0e1b68a5fd22fb6ec683b401c53554",
+        "output_hash": "02ed247cc0abd3572d7410858164d54e9d3e24cffef708e559226eeb78395b51",
+        "ok": 1,
+        "error_code": null,
+        "elapsed_ms": 0,
+        "caller_category": "platform_test",
+        "at": "2026-10-13T04:33:39.415Z"
+      }
+    ],
+    "rawInputStored": false,
+    "rawOutputStored": false,
+    "receiptsPublic": false,
+    "independence": "All anonymous events remain unverified; platform tests are separately marked"
+  }
+}
