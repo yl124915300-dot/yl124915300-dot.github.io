@@ -589,6 +589,45 @@
       "invocationAuthorized": true,
       "ownerEnrollmentAuthorized": false,
       "actualParticipationScope": "public capability used by platform initiator; no independent owner or autonomous Agent participation verified"
+    },
+    {
+      "name": "Synergy Scout (AgentLiaison)",
+      "kind": "declared_agent_network_manifest",
+      "source": "https://synergy-scout-link.base44.app/functions/getAgentPortManifest",
+      "checkedAt": "2026-10-13T06:31:43.274Z",
+      "declaredEndpoint": "https://synergy-scout-link.base44.app/functions/agentHandshake",
+      "ownerDeclarationSource": "https://github.com/a2aproject/A2A/discussions/2300",
+      "agentCardAvailability": "HTTPS well-known card returned404; HTTP-only IP source not followed",
+      "inputContract": {
+        "agent_name": "required public self-label",
+        "message": "max4000 chars",
+        "platform": "optional max60 chars",
+        "contact": "optional public callback max300 chars"
+      },
+      "outputContract": {
+        "status": "received",
+        "scope": "introduction stored/queued per publisher; no automatic reply/action"
+      },
+      "authorizationScope": "public manifest and one invited introduction only; no private Agent execution, offer, purchase, node registration or payment",
+      "invocationAuthorized": true,
+      "ownerEnrollmentAuthorized": false,
+      "authorizedParticipation": false,
+      "actuallyParticipated": false,
+      "discoverable": true,
+      "callable": "PUBLIC_METADATA_AND_INTRODUCTION_ONLY; WORK_EXECUTION_NOT_AUTHORIZED",
+      "price": "custom work is paid with quoted price; no custom offer submitted",
+      "rateLimit": "UNKNOWN; one introduction attempted only",
+      "trust": "owner self-declaration and public API receipt; control/independence/autonomy not independently verified",
+      "matchDecision": {
+        "eligibleForRemoteWorkExecution": false,
+        "reasons": [
+          "actual task execution behind routing/review, no scoped free execution grant",
+          "custom work uses quote/payment; prohibited in current experiment"
+        ],
+        "action": "wait for an opt-in reply in existing public discussion; no repeat introduction"
+      },
+      "introductionReceipt": "synergy-introduction.json",
+      "independentReuse": false
     }
   ],
   "actualCallableExternalResources": 3,
@@ -596,5 +635,5 @@
   "independentReuses": 0,
   "remoteCallEvidence": "composition-receipt.json and research-receipt.json",
   "actualCallableCountingNote": "three distinct reviewed public capabilities: Pathwren list service, Pathwren score service, Nulliverba public research service; MCP aliases are not additional resources; AgentNative free samples permitted but not executed",
-  "assembledAt": "2026-10-13T05:27:47.306922+00:00"
+  "assembledAt": "2026-10-13T06:33:10.082575+00:00"
 }
