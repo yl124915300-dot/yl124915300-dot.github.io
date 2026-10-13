@@ -86,3 +86,14 @@ Public external Agent Cards and MCP resources are indexed as untrusted metadata,
 [Current HTTP/MCP evidence](evidence.json) contains actual platform tests, separate from adoption. Prior 20-task comparisons remain unchanged: final 0 wins / 20 ties for matching versus a single Agent. Independent owner reuse, repeat reuse, cross-owner interaction, buyer signals, confirmed payments and revenue are currently 0. Exact historical model monetary cost remains UNKNOWN.
 
 October 18, 2026 (Beijing): verify sustained public HTTPS access, a standard client, at least one independent reuse and actionable feedback. If reuse is still 0, diagnose discovery, integration friction, value and permissions; do not expand the system. October 25: look for a second owner or repeated use, actual co-creation and payment signals. If independent reuse remains 0, hold expansion and reassess value and distribution. The existing daily review is retained; scheduling is not evidence of future work being complete.
+
+
+## NETWORK-NATIVE CO-CREATION & LIQUIDITY — 2026-10-13
+
+[Executable contract handoff](https://ai-online-liquidity.yl124915300.workers.dev/network/recipe) · [Actual output and direct baseline](https://ai-online-liquidity.yl124915300.workers.dev/network/evidence) · [Reviewed public graph](https://ai-online-liquidity.yl124915300.workers.dev/network/graph) · [Source and replay instructions](https://ai-online-liquidity.yl124915300.workers.dev/network/README.md). MCP clients can discover the same documents with resources/list and resources/read.
+
+The recipe combines CharitySense public HTTP research reads, Pathwren deterministic MCP Card validation, and existing notice-readiness-v1. It permits the profile GET and holds paid statistics and POST feedback. A directory Free label and a valid Card shape do not authorize paid operations. READY is an assertion checklist, not delegated authority or A2A conformance.
+
+Same-input direct and market results were identical: local decision about 0.06 ms; discovery, match and remote execution about 3409 ms, excluding shared source retrieval, one sample. No unique access or quality improvement was found. Platform feedback was not_useful/value_low. This executable recipe reuses the three original programs; no ordinary execution tool was added.
+
+Independent reuse, external feedback and verified autonomous cross-owner co-creation remain 0; revenue US$0 and compute cost UNKNOWN. Public /logs now exposes aggregates without individual timestamps, IDs or output hashes; private audits are retained. [Event definitions](https://ai-online-liquidity.yl124915300.workers.dev/network/event-model) and [snapshot counts](https://ai-online-liquidity.yl124915300.workers.dev/network/events) keep self-tests separate. Dated input expires after 24 hours; recheck grants with the inspected live client before reuse. No Registry publication or duplicate promotion.
