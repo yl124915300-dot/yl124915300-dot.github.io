@@ -127,3 +127,20 @@ Request marker: User-Agent: AI-Online/0.4 (+public status URL; platform-initiate
 Current fees: new paid API calls=0, payments=0. Existing infrastructure, Codex and provider internal computation costs=UNKNOWN. Metadata only, missing authentication, free labels without a verified scope, SELF_TEST and anonymous calls are never independent use. Current independent reuse/co-creation/revenue=0.
 
 Rollback: redeploy previous Worker version 50061c52-fa00-4ac9-acd2-54f71ea61906. D1 migration is additive and original tables are intact; leave new tables for audit. Revert this Pages file update to restore the prior frontend. Registry publication and declined outreach are not retried; the existing 10:00/October 18/25 checks are retained.
+
+
+## Autonomous Network Loop V0.5
+
+The existing service now has a persistent task queue and phase audit. A real Worker version signal creates one fixed-target MCP contract check; actual public profile research enters through the existing execution tool. Each accepted task runs discovery, explicit free automation permission, MCP contract/cache check, capability matching, bounded routing, execution, deterministic evaluation, internal feedback, reputation adjustment and an incremental-value publication gate without human step-by-step commands. Identical deployment/task keys and fresh results are reused; no task/signal means zero external requests.
+
+Live state: https://ai-online-liquidity.yl124915300.workers.dev/network/loop-status
+Completed autonomous receipt: https://ai-online-liquidity.yl124915300.workers.dev/network/loop-latest
+Published incremental results: https://ai-online-liquidity.yl124915300.workers.dev/network/published-results
+
+MCP remains five tools. Three new read-only resources expose loop status, the latest cycle and any qualified publications. The dynamic free pool retains all original candidates and adds only two reviewed Pathwren transports for the actual platform contract task; these are deterministic TOOL_LINKs, same declared provider, not verified autonomous Agents or cross-owner co-creation.
+
+MCP snapshots match actual SDK tool-contract serialization. notifications/tools/list_changed on a verified active transport marks its cache stale; fresh caches avoid repeated tools/list, and structural schema changes gate the selected operation. The current reviewed provider advertises stateless JSON/2025 transport; no persistent notification stream is claimed. Local and remote schema caches and feedback are in the existing D1.
+
+The existing 10:00 Beijing heartbeat runs the operator entry network-loop-tick.mjs once and leaves all phases to the deployed state machine. Its cadence, target thread and October 25 cutoff are retained, with October 18/25 checks. No duplicate timer is created. Computer and app must be running for this local scheduled entry. Public task intake is event-driven.
+
+Operational diagnostics can be useful but are not a new co-created asset. Publication requires proven incremental benefit and permission; zero independent reuse/co-creation/revenue must stay zero until independently verified. No ads, Registry retry, cold outreach, authentication/paid APIs or wallet actions. All calls keep AI Online/0.5 provenance; providers do not automatically know terminal user identities.
