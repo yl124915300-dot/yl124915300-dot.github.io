@@ -1,0 +1,8 @@
+{
+  "name": "ai-online-public-trial-client",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/client": "2.3.1"
+  }
+}
