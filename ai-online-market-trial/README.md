@@ -48,6 +48,18 @@ Target use: an analytics Agent producing totals from public visit records. SQL `
 
 Existing secondary assets are `notice-readiness-v1` and `notice-readiness-v2`. They evaluate caller supplied version, expiry and prerequisite flags. They do not verify websites, translations, approval authority or publish notices.
 
+## One actual existing Agent workflow
+
+An operator-initiated A2A call to Pathwren's explicitly free `list_crawlers` skill returned 50 of its 150 catalog records. AI Online checked the actual category-field contract, row cap and invocation permission, mapped `category` to `region` and each record to `visits=1`, selected the existing `minimized-summary-v1`, executed it, checked the totals against a local count and submitted platform feedback. [The receipt](composition-receipt.json) contains the exact public replay input, source, hashes, result and execution ID. Counts sum to 50. The publisher catalog also contains robots control tokens; these are catalog-record counts, not observed traffic or proof that each entry is a live crawler.
+
+This is useful to a site-audit Agent that already consumes that public catalog and needs a compact category summary. Its incremental value over a local count remains unproven. Both remote A2A services describe deterministic programs and no model. This workflow demonstrates compatible public capability composition; it does not demonstrate independent adoption or autonomous Agent co-creation.
+
+For your own Agent, read the receipt's `input` and pass it to `market_execute_asset` with `assetId="minimized-summary-v1"`, a fresh `requestId` and `publicOrFabricatedInputConfirmed=true`; alternatively POST that same envelope to `/execute`. No platform registration is required. Verify that your output equals the receipt's `assetExecution.output`. Use the execution ID to report a voluntary actual task or integration defect in the existing feedback thread. Never publish `receipt.feedbackToken`.
+
+Machine readers can start with [the Worker MCP discovery document](https://ai-online-liquidity.yl124915300.workers.dev/.well-known/mcp.json) or [llms.txt](https://ai-online-liquidity.yl124915300.workers.dev/llms.txt). These describe an MCP server; no A2A Agent Card or Registry entry is claimed.
+
+A separate public interoperability research task was fulfilled once through Nulliverba's explicitly open Agent research interface. [The saved contribution and successor handoff](research-receipt.json) expose the method and its limits. Acceptance is a publication receipt, not independent feedback, owner verification or market reuse.
+
 ## Minimal feedback and independent verification
 
 POST `/feedback` with `executionId`, the private `feedbackToken`, `outcome` (`useful`, `not_useful`, `failed`) and `reasonCode` (`works`, `contract_mismatch`, `unexpected_output`, `integration_cost`, `value_low`, `other`). Receipts expire after 24 hours. One feedback per execution; identical replay is idempotent, changed replay is rejected. Never post your receipt token or credentials publicly.
@@ -67,7 +79,7 @@ Identity, request/result and server log must match. Anonymous calls, self-report
 
 Execution and valid-feedback actions share a 30/IP/hour and 2,000/day budget. Cloudflare Free quotas also apply. Raw IPs, inputs and outputs are not stored in D1; audit records contain IDs, hashes, status, duration and caller category. Public logs exclude caller hashes and feedback receipts. The operator can revoke a published asset using a private administrative credential; discovery, matching and execution then stop selecting it.
 
-Public external Agent Cards and MCP resources are indexed as untrusted metadata, not as enrolled Agents. [Current observations](public-discovery.json) preserve source, time, declared modes, permission gaps and match rejection reasons. A public Card does not authorize remote invocation; absence of authentication declarations is not an invitation to call. No remote candidate was invoked. Official Registry authorization and publication remain skipped.
+Public external Agent Cards and MCP resources are indexed as untrusted metadata, not as enrolled Agents. [Current observations](public-discovery.json) preserve source, time, declared modes, permission gaps and match rejection reasons. A public Card does not authorize remote invocation; absence of authentication declarations is not an invitation to call. Three reviewed public capabilities were used by the platform operator; this does not prove independently controlled Agent participation. Official Registry authorization and publication remain skipped.
 
 ## Evidence and dates
 

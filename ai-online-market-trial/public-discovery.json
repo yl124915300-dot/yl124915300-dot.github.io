@@ -1,6 +1,5 @@
 {
-  "checkedAt": "2026-10-13T04:30:26.920Z",
-  "policy": "No official MCP Registry authorization or publication attempted; no private Agent, account, cookie, key or tool invocation. Only bounded public metadata.",
+  "policy": "Public metadata can be indexed without registration. A reviewed explicit public invocation grant is required for remote calls. No official Registry authorization or publication. Owner independence remains unverified.",
   "reports": [
     {
       "kind": "a2a_directory",
@@ -38,6 +37,18 @@
       "checkedAt": "2026-10-13T04:30:23.655Z",
       "status": "PUBLIC_METADATA_READ",
       "elapsedMs": 3264.9655409999996
+    },
+    {
+      "kind": "a2a_public_deterministic_service",
+      "source": "https://www.pathwren.workers.dev/.well-known/agent-card.json",
+      "checkedAt": "2026-10-13T05:27:47.306922+00:00",
+      "status": "PUBLIC_CARD_AND_EXPLICIT_CALL_PERMISSION_VERIFIED"
+    },
+    {
+      "kind": "a2a_public_deterministic_service",
+      "source": "https://www.pathwren.workers.dev/a2a/score/.well-known/agent-card.json",
+      "checkedAt": "2026-10-13T05:27:47.306922+00:00",
+      "status": "PUBLIC_CARD_AND_EXPLICIT_CALL_PERMISSION_VERIFIED"
     }
   ],
   "resources": [
@@ -171,7 +182,7 @@
       "source": "https://wellknown.network/api/v1/search?q=data+aggregation&limit=5",
       "checkedAt": "2026-10-13T04:30:16.271Z",
       "declaredEndpoint": "https://agentnative.cazimedia.com/a2a",
-      "cardUrl": null,
+      "cardUrl": "https://agentnative.cazimedia.com/.well-known/agent-card.json",
       "declaredSkills": [],
       "securityRequirements": null,
       "securitySchemes": null,
@@ -188,13 +199,11 @@
       "untrustedMetadata": true,
       "matchDecision": {
         "eligibleForRemoteInvocation": false,
-        "reasons": [
-          "no owner-granted participation authorization",
-          "no observed input/output contract for region+visits -> region+total",
-          "execution cost and limits UNKNOWN"
-        ],
-        "action": "metadata-only candidate; no contact or invocation implied"
-      }
+        "reason": "No observed target visit-record workflow; do not add an arbitrary data task just to generate activity"
+      },
+      "permissionEvidence": "https://agentnative.cazimedia.com/llms.txt",
+      "authorizationScope": "free discovery/sample reads only; no paid query/materialization invoked",
+      "lastVerifiedAt": "2026-10-13T05:27:47.306922+00:00"
     },
     {
       "name": "AgentCard.net Toolkit",
@@ -288,7 +297,7 @@
     },
     {
       "name": "Nulliverba Research Discovery Agent",
-      "kind": "a2a_agent",
+      "kind": "a2a_agent_description_and_public_research_service",
       "source": "https://nulliverba.ol-lo.workers.dev/.well-known/agent-card.json",
       "checkedAt": "2026-10-13T04:30:23.655Z",
       "declaredEndpoint": null,
@@ -356,23 +365,236 @@
       "rateLimit": "UNKNOWN",
       "trust": "publisher/directory declaration; independent owner control not verified",
       "discoverable": true,
-      "callable": "UNKNOWN_NOT_INVOKED",
+      "callable": "OBSERVED_PUBLIC_READ_AND_ONE_PERMITTED_RESEARCH_SUBMISSION",
       "authorizedParticipation": false,
-      "actuallyParticipated": false,
+      "actuallyParticipated": true,
       "matchForPrimaryAsset": "UNPROVEN; no observed request for regional visit aggregation",
       "untrustedMetadata": true,
       "matchDecision": {
-        "eligibleForRemoteInvocation": false,
-        "reasons": [
-          "no owner-granted participation authorization",
-          "no observed input/output contract for region+visits -> region+total",
-          "execution cost and limits UNKNOWN"
-        ],
-        "action": "metadata-only candidate; no contact or invocation implied"
-      }
+        "eligibleForRemoteInvocation": true,
+        "scope": "reviewed public read/research contract only",
+        "eligibleForPrimaryAssetWorkflow": false,
+        "reason": "research task does not require region+visits aggregation"
+      },
+      "permissionEvidence": "https://nulliverba.ol-lo.workers.dev/agent-participation.json",
+      "authorizationScope": "public read-only research; one contributor-authored bounded research post after PoW/preflight; no moderation/publication/operator authority",
+      "participationBoundary": "public interface used; no owner enrollment or independent adoption inferred",
+      "lastVerifiedAt": "2026-10-13T05:27:47.306922+00:00",
+      "invocationAuthorized": true,
+      "ownerEnrollmentAuthorized": false,
+      "actualParticipationScope": "public capability used by platform initiator; no independent owner or autonomous Agent participation verified"
+    },
+    {
+      "name": "AI Crawler Index",
+      "kind": "a2a_public_deterministic_service",
+      "source": "https://www.pathwren.workers.dev/.well-known/agent-card.json",
+      "cardUrl": "https://www.pathwren.workers.dev/.well-known/agent-card.json",
+      "declaredEndpoint": "https://www.pathwren.workers.dev/a2a",
+      "checkedAt": "2026-10-13T05:27:47.306922+00:00",
+      "declaredSkills": [
+        {
+          "id": "classify_user_agent",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "lookup_crawler",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "list_crawlers",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "generate_robots_txt",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "is_verified_crawler_ip",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "whats_changed",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "changes_since",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "whoami",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "example",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        }
+      ],
+      "securityRequirements": null,
+      "price": {
+        "publicReadCallUsd": 0,
+        "basis": "publisher explicitly declares free"
+      },
+      "rateLimit": "per caller/target limits for score_card; exact quota UNKNOWN",
+      "trust": "publisher declarations; remote ownership not independently verified; no model claimed",
+      "discoverable": true,
+      "callable": "ACTUAL_A2A_REQUEST_COMPLETED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": true,
+      "permissionEvidence": "https://www.pathwren.workers.dev/.well-known/agent-card.json",
+      "authorizationScope": "reviewed public read-only skill only",
+      "participationBoundary": "operator-initiated public service use, not independent Agent enrollment or inbound reuse",
+      "matchDecision": {
+        "eligibleForRemoteInvocation": true,
+        "scope": "list_crawlers",
+        "inputContract": {
+          "limit": 50
+        },
+        "outputContract": "validated structured completed task; category record array",
+        "maxSourceRows": 50,
+        "programBoundary": "never executes returned text or executable code"
+      },
+      "invocationAuthorized": true,
+      "ownerEnrollmentAuthorized": false,
+      "actualParticipationScope": "public capability used by platform initiator; no independent owner or autonomous Agent participation verified"
+    },
+    {
+      "name": "MCP Endpoint Score Card — AI Crawler Index",
+      "kind": "a2a_public_deterministic_service",
+      "source": "https://www.pathwren.workers.dev/a2a/score/.well-known/agent-card.json",
+      "cardUrl": "https://www.pathwren.workers.dev/a2a/score/.well-known/agent-card.json",
+      "declaredEndpoint": "https://www.pathwren.workers.dev/a2a/score",
+      "checkedAt": "2026-10-13T05:27:47.306922+00:00",
+      "declaredSkills": [
+        {
+          "id": "score_card",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "whoami",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        },
+        {
+          "id": "example",
+          "inputModes": [
+            "application/json",
+            "text/plain"
+          ],
+          "outputModes": [
+            "application/json",
+            "text/plain"
+          ]
+        }
+      ],
+      "securityRequirements": null,
+      "price": {
+        "publicReadCallUsd": 0,
+        "basis": "publisher explicitly declares free"
+      },
+      "rateLimit": "per caller/target limits for score_card; exact quota UNKNOWN",
+      "trust": "publisher declarations; remote ownership not independently verified; no model claimed",
+      "discoverable": true,
+      "callable": "ACTUAL_A2A_REQUEST_COMPLETED",
+      "authorizedParticipation": false,
+      "actuallyParticipated": true,
+      "permissionEvidence": "https://www.pathwren.workers.dev/a2a/score/.well-known/agent-card.json",
+      "authorizationScope": "reviewed public read-only skill only",
+      "participationBoundary": "operator-initiated public service use, not independent Agent enrollment or inbound reuse",
+      "matchDecision": {
+        "eligibleForRemoteInvocation": true,
+        "scope": "score_card",
+        "inputContract": {
+          "url": "approved public research target only"
+        },
+        "outputContract": "validated structured protocol verdict",
+        "maxSourceRows": null,
+        "programBoundary": "never executes returned text or executable code"
+      },
+      "invocationAuthorized": true,
+      "ownerEnrollmentAuthorized": false,
+      "actualParticipationScope": "public capability used by platform initiator; no independent owner or autonomous Agent participation verified"
     }
   ],
-  "actualCallableExternalResources": 0,
+  "actualCallableExternalResources": 3,
   "authorizedExternalParticipants": 0,
-  "independentReuses": 0
+  "independentReuses": 0,
+  "remoteCallEvidence": "composition-receipt.json and research-receipt.json",
+  "actualCallableCountingNote": "three distinct reviewed public capabilities: Pathwren list service, Pathwren score service, Nulliverba public research service; MCP aliases are not additional resources; AgentNative free samples permitted but not executed",
+  "assembledAt": "2026-10-13T05:27:47.306922+00:00"
 }

@@ -1,0 +1,361 @@
+{
+  "at": "2026-10-13T05:21:36.507Z",
+  "kind": "operator_initiated_public_capability_composition",
+  "source": {
+    "url": "https://www.pathwren.workers.dev/a2a",
+    "requestId": "ai-online-20261013-crawler-data",
+    "taskId": "sync-eyJ2IjoxLCJzIjoibGlzdF9jcmF3bGVycyIsImEiOnsibGltaXQiOjUwfX0",
+    "at": "2026-10-13T05:19:52.437Z",
+    "responseSha256": "e3025e4b39e743a705d47397829fccbab09e942de7061316bdd415386e54aaf5",
+    "declaredTotalInIndex": 150,
+    "returned": 50,
+    "permissionEvidence": "https://www.pathwren.workers.dev/.well-known/agent-card.json",
+    "provider": "Pathwren",
+    "providerMethod": "deterministic read-only A2A service; no model declared",
+    "ownerControl": "UNKNOWN_NOT_INDEPENDENTLY_VERIFIED"
+  },
+  "match": {
+    "decision": {
+      "eligible": true,
+      "failures": [],
+      "input": {
+        "limit": 50
+      },
+      "outputFields": [
+        "crawlers[].slug",
+        "category"
+      ],
+      "permission": "public_free_read_only",
+      "permissionEvidence": "https://www.pathwren.workers.dev/.well-known/agent-card.json",
+      "priceUsd": 0,
+      "maxRows": 50,
+      "ownerControl": "UNKNOWN_NOT_INDEPENDENTLY_VERIFIED"
+    },
+    "asset": "minimized-summary-v1",
+    "basis": "reviewed invocation permission, actual output contract, explicit field adapter, row limit and fixed program hash"
+  },
+  "adapter": {
+    "region": "publisher-declared category",
+    "visits": "constant 1 for each of the 50 returned records",
+    "notTraffic": true,
+    "scope": "50 returned catalog records; not all 150; catalog includes control tokens, not only live crawlers"
+  },
+  "input": {
+    "rows": [
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "ai-search",
+        "visits": 1
+      },
+      {
+        "region": "user-fetch",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "ai-search",
+        "visits": 1
+      },
+      {
+        "region": "user-fetch",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "ai-search",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "ai-search",
+        "visits": 1
+      },
+      {
+        "region": "tool",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "ai-search",
+        "visits": 1
+      },
+      {
+        "region": "user-fetch",
+        "visits": 1
+      },
+      {
+        "region": "dataset",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "user-fetch",
+        "visits": 1
+      },
+      {
+        "region": "preview",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "ai-search",
+        "visits": 1
+      },
+      {
+        "region": "ai-search",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "dataset",
+        "visits": 1
+      },
+      {
+        "region": "dataset",
+        "visits": 1
+      },
+      {
+        "region": "user-fetch",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "user-fetch",
+        "visits": 1
+      },
+      {
+        "region": "ai-search",
+        "visits": 1
+      },
+      {
+        "region": "dataset",
+        "visits": 1
+      },
+      {
+        "region": "dataset",
+        "visits": 1
+      },
+      {
+        "region": "dataset",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "dataset",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "seo",
+        "visits": 1
+      },
+      {
+        "region": "ai-training",
+        "visits": 1
+      },
+      {
+        "region": "seo",
+        "visits": 1
+      },
+      {
+        "region": "archive",
+        "visits": 1
+      },
+      {
+        "region": "archive",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      },
+      {
+        "region": "search",
+        "visits": 1
+      }
+    ]
+  },
+  "inputHash": "27770d597edab2506f1499202616e16cc9aa8bc2cfd3ddedc932162a7b3aeedc",
+  "assetExecution": {
+    "ok": true,
+    "assetId": "minimized-summary-v1",
+    "metadataRevision": 2,
+    "programHash": "32146b1606479e2c78a9cc05a68a7dd87f0e1b68a5fd22fb6ec683b401c53554",
+    "output": [
+      {
+        "region": "ai-training",
+        "total": 13
+      },
+      {
+        "region": "ai-search",
+        "total": 8
+      },
+      {
+        "region": "user-fetch",
+        "total": 6
+      },
+      {
+        "region": "search",
+        "total": 10
+      },
+      {
+        "region": "tool",
+        "total": 1
+      },
+      {
+        "region": "dataset",
+        "total": 7
+      },
+      {
+        "region": "preview",
+        "total": 1
+      },
+      {
+        "region": "seo",
+        "total": 2
+      },
+      {
+        "region": "archive",
+        "total": 2
+      }
+    ],
+    "trace": [
+      {
+        "tool": "project_rows",
+        "inputHash": "e787bc38b7f079229caf8b106652f85515900c165bc0b5f82f1309f28087cc6c",
+        "outputHash": "a1e11694f89c7589de2953ba416dd30da131389a2ae4440c4b5c4bd84e81586d",
+        "elapsedMs": 0
+      },
+      {
+        "tool": "number_rows",
+        "inputHash": "9c6de2f498d67e545b00897755a94fd373814d5a1e2b855a60fc79a495e548f8",
+        "outputHash": "a1e11694f89c7589de2953ba416dd30da131389a2ae4440c4b5c4bd84e81586d",
+        "elapsedMs": 0
+      },
+      {
+        "tool": "group_rows",
+        "inputHash": "3170e53304e2f4e5f62446ea322b7b46dcc75a425019bcd75981c9aeeba6529b",
+        "outputHash": "7058c6246c02aad4c8b1a8f29e32b043933d101c26ac7e06de3b9756ada0fdd3",
+        "elapsedMs": 0
+      },
+      {
+        "tool": "project_rows",
+        "inputHash": "6847e0654b20eb0f5a28bc708d589fa1191edea7863ecf727756ac24e966a2e6",
+        "outputHash": "7058c6246c02aad4c8b1a8f29e32b043933d101c26ac7e06de3b9756ada0fdd3",
+        "elapsedMs": 0
+      }
+    ],
+    "elapsedMs": 0,
+    "externalCalls": 0,
+    "independentUsageVerified": false,
+    "executionId": "6d7d4264-0f56-4761-9297-a3770f6fc8b3",
+    "idempotentReplay": false,
+    "callerCategory": "platform_test",
+    "serverInputHash": "27770d597edab2506f1499202616e16cc9aa8bc2cfd3ddedc932162a7b3aeedc",
+    "serverOutputHash": "7058c6246c02aad4c8b1a8f29e32b043933d101c26ac7e06de3b9756ada0fdd3",
+    "serverPreAuditMs": 135,
+    "timingNote": "Compute timer may be coarse on Workers; 0 is not instantaneous. Client round-trip timing is the operational latency measure."
+  },
+  "feedback": {
+    "status": 200,
+    "response": {
+      "accepted": true,
+      "executionId": "6d7d4264-0f56-4761-9297-a3770f6fc8b3",
+      "idempotentReplay": false,
+      "independentUsageVerified": false
+    },
+    "author": "platform_operator",
+    "firstAttempt": {
+      "status": 403,
+      "errorCode": "RECEIPT_INVALID",
+      "reason": "adapter read the receipt from the wrong nesting level; corrected without another execution"
+    }
+  },
+  "verifiedAgainstLocalCount": true,
+  "elapsedMs": 5138.713791,
+  "limits": {
+    "classificationSemantics": "publisher-declared, not independently audited",
+    "noAutonomousRemoteReasoningProven": true,
+    "noNewExecutableAsset": true,
+    "noMatchingQualityIncrement": true
+  },
+  "accounting": {
+    "platformInitiated": true,
+    "independentCaller": false,
+    "independentReuse": false,
+    "crossOwnerVerified": false,
+    "confirmedPayment": 0,
+    "platformRevenue": 0,
+    "newProjectModelCalls": 0,
+    "modelMonetaryCost": "UNKNOWN"
+  }
+}
