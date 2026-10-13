@@ -10,9 +10,9 @@ if(process.argv.includes('--stdio')){
  for await(const line of createInterface({input:process.stdin,crlfDelay:Infinity})){
   if(!line.trim())continue;let message;
   try{if(Buffer.byteLength(line)>65536)throw Error('Input limit');message=JSON.parse(line);const response=await fetch(new URL('/mcp',base),{method:'POST',headers:{'content-type':'application/json',accept:'application/json, text/event-stream','mcp-protocol-version':version},body:line,signal:AbortSignal.timeout(15000)});
-   if(response.status===202)continue;const data=await response.json();if(message.method==='initialize'&&data.result?.protocolVersion)version=data.result.protocolVersion;
+   if(response.status===202)continue;const raw=await response.text();let data;try{data=JSON.parse(raw);}catch{const payloads=raw.split(/\r?\n\r?\n/).map(event=>event.split(/\r?\n/).filter(line=>line.startsWith('data:')).map(line=>line.slice(5).trimStart()).join('\n')).filter(Boolean);const parsed=payloads.map(text=>{try{return JSON.parse(text);}catch{return null;}}).filter(Boolean);data=parsed.find(x=>x.id===message.id)||parsed.at(-1);if(!data)throw Error('HTTP '+response.status+' returned no MCP response');}if(message.method==='initialize'&&data.result?.protocolVersion)version=data.result.protocolVersion;
    process.stdout.write(JSON.stringify(data)+'\n');
-  }catch{if(message&&Object.hasOwn(message,'id'))process.stdout.write(JSON.stringify({jsonrpc:'2.0',id:message.id,error:{code:-32000,message:'Sandbox connection or request failed'}})+'\n');}
+  }catch(e){process.stderr.write('Bridge '+String(message?.method||'parse')+': '+e.message+'\n');if(message&&Object.hasOwn(message,'id'))process.stdout.write(JSON.stringify({jsonrpc:'2.0',id:message.id,error:{code:-32000,message:'Sandbox connection or request failed'}})+'\n');}
  }
 }else{
  const input={rows:[{region:'north',visits:'2',note:'PUBLIC_FIXTURE'},{region:'north',visits:3},{region:'south',visits:1}]};
