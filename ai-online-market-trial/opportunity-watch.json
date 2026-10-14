@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-14",
+  "sourceMode": "verified_public_signals_not_approved_work",
+  "signals": [
+    {
+      "id": "agentgateway-a2a-selector",
+      "source": "https://github.com/agentgateway/agentgateway/issues/3504",
+      "need": "A2A backends discover via Kubernetes label selectors",
+      "status": "capability_permission_blocked",
+      "reason": "Missing required controller/deployment privileges; existing AI Online assets cannot implement this request",
+      "autonomousMatchApproved": false
+    },
+    {
+      "id": "a2a-cli-interface-version",
+      "source": "https://github.com/a2aproject/a2a-cli/issues/88",
+      "need": "Expose protocol versions in CLI text interfaces output",
+      "status": "no_incremental_value",
+      "reason": "Directly reading supportedInterfaces from public Agent Card JSON provides the relevant output; a market combination showed no incremental value",
+      "autonomousMatchApproved": false
+    }
+  ],
+  "qualifiedOpportunities": 0,
+  "verifiedNewAssets": 0,
+  "independentReuse": 0,
+  "notes": "These are observed external needs, NOT accepted orders, Agent collaboration consents or current tasks. Source project owners are not AI Online members."
+}
