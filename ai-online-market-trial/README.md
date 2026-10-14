@@ -129,18 +129,29 @@ Current fees: new paid API calls=0, payments=0. Existing infrastructure, Codex a
 Rollback: redeploy previous Worker version 50061c52-fa00-4ac9-acd2-54f71ea61906. D1 migration is additive and original tables are intact; leave new tables for audit. Revert this Pages file update to restore the prior frontend. Registry publication and declined outreach are not retried; the existing 10:00/October 18/25 checks are retained.
 
 
-## Autonomous Network Loop V0.5
+## Autonomous Network Loop V0.5.1
 
-The existing service now has a persistent task queue and phase audit. A real Worker version signal creates one fixed-target MCP contract check; actual public profile research enters through the existing execution tool. Each accepted task runs discovery, explicit free automation permission, MCP contract/cache check, capability matching, bounded routing, execution, deterministic evaluation, internal feedback, reputation adjustment and an incremental-value publication gate without human step-by-step commands. Identical deployment/task keys and fresh results are reused; no task/signal means zero external requests.
+The same Worker, D1, free pool, cached results, five MCP tools and three fixed assets remain. The server Cron processes persisted signals every 15 minutes. The local 10:00 heartbeat now performs read-only review and the original October 18/25 acceptance checks; it no longer wakes the executor.
 
-Live state: https://ai-online-liquidity.yl124915300.workers.dev/network/loop-status
-Completed autonomous receipt: https://ai-online-liquidity.yl124915300.workers.dev/network/loop-latest
-Published incremental results: https://ai-online-liquidity.yl124915300.workers.dev/network/published-results
+Operational reliability and market reputation are separate. The previous two internal diagnostic rewards are preserved as historical operational evidence and removed from market score and routing bonuses. SELF_TEST requests change neither live health weights nor market reputation. Anonymous or public-author assertions are not independent adoption proof.
 
-MCP remains five tools. Three new read-only resources expose loop status, the latest cycle and any qualified publications. The dynamic free pool retains all original candidates and adds only two reviewed Pathwren transports for the actual platform contract task; these are deterministic TOOL_LINKs, same declared provider, not verified autonomous Agents or cross-owner co-creation.
+Sources: existing task intake, valid execution-receipt feedback, actual local MCP schema changes, and new public goals in the existing voluntary feedback issue. The GitHub public-data reader uses no credentials, conditional requests, 8-hour caching and at most three requests/day. It never posts to third parties. Platform-authored comments are rejected as market demand. No registration on AI Online is needed.
 
-MCP snapshots match actual SDK tool-contract serialization. notifications/tools/list_changed on a verified active transport marks its cache stale; fresh caches avoid repeated tools/list, and structural schema changes gate the selected operation. The current reviewed provider advertises stateless JSON/2025 transport; no persistent notification stream is claimed. Local and remote schema caches and feedback are in the existing D1.
+A supported current public research task can use the existing free pool. Combinations are stopped before capability calls when the required free scope is unavailable or no reviewed incremental composition exists. Current attribution, contract diagnosis and public profiles do not by themselves establish incremental co-creation. Nothing is published merely because a call succeeded. Measured incremental benefit and own-platform publication permission remain required.
 
-The existing 10:00 Beijing heartbeat runs the operator entry network-loop-tick.mjs once and leaves all phases to the deployed state machine. Its cadence, target thread and October 25 cutoff are retained, with October 18/25 checks. No duplicate timer is created. Computer and app must be running for this local scheduled entry. Public task intake is event-driven.
+MCP tools/list notifications invalidate an authorized active transport's cached schema. Absent a notification, a current task and an expired cache are required for a remote contract read. Deployment version changes with an identical schema consume no additional diagnostic. Unknown fees, payment challenges, authentication and external writes stop execution. Calls retain AI Online provenance; provider private logs and terminal user identity are unverified.
 
-Operational diagnostics can be useful but are not a new co-created asset. Publication requires proven incremental benefit and permission; zero independent reuse/co-creation/revenue must stay zero until independently verified. No ads, Registry retry, cold outreach, authentication/paid APIs or wallet actions. All calls keep AI Online/0.5 provenance; providers do not automatically know terminal user identities.
+Live audit: https://ai-online-liquidity.yl124915300.workers.dev/network/loop-status
+Opportunity decisions: https://ai-online-liquidity.yl124915300.workers.dev/network/opportunity-status
+Free candidates: https://ai-online-liquidity.yl124915300.workers.dev/network/free-callable-pool
+Existing publications: https://ai-online-liquidity.yl124915300.workers.dev/network/published-results
+
+All counts distinguish operational execution, useful incremental opportunities, verified new value and independent reuse. Current independent use, cross-owner co-creation, new incremental artifacts and revenue remain zero.
+
+For a real public research goal, a voluntary comment in the existing feedback issue may contain a public EIN research request or the following block. This is optional public task data, not an authorization for arbitrary endpoints or new fees:
+
+```ai-online-goal
+{"goal":"public-charity-profile","input":{"ein":"REPLACE_WITH_PUBLIC_EIN"},"purpose":"Describe the current real public research task","publicInputConfirmed":true}
+```
+
+The unchanged market_execute_asset example above also remains available. Use only actual tasks. Direct provider access is the baseline; a single free API call is not a new co-created asset.
