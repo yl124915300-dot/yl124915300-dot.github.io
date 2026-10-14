@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-14",
+  "adsEnabled": true,
+  "placement": "human_only_separate_from_organic",
+  "campaigns": [],
+  "challengeCampaigns": [],
+  "realAdvertisers": 0,
+  "confirmedSponsorRevenueUsd": 0,
+  "notes": "Only audited, permissioned paid campaigns may be shown. Never count automated Agent traffic as human ad impressions. Empty lists mean no paid advertisers."
+}
