@@ -404,3 +404,5 @@ Skoottie/Clover 历史成功1次保持去重，未重发。Rarran/Fixated 的上
 **当前免费 itch 上架的唯一已实测阻碍：用户本人在新云端接管窗口完成 itch.io 的正常安全验证与登录。** 验证后仍需实际核查账号准入、使用现成 ZIP/封面/英文说明免费发布、取得真实商品 URL、匿名运行及独立标题搜索；这些均尚未完成，不能预先承诺会通过。商业终局另外仍缺真实独立客户、接受、交付与到账证据；收款/提现资格仍 UNKNOWN，收费与捐赠保持关闭，itch HTML5 捐赠不描述为订阅。
 
 本轮没有开发产品、制作发布素材或另建报告；业务网页操作仅用 Firecrawl 云端浏览器/检索与已连接 GitHub。没有控制用户 Mac、本地浏览器或本地终端，没有购买、投广告、支付、出款、升级套餐、填写税务身份信息或绕过安全步骤。
+
+补充封存事件：2026-10-16 19:41:28.201 Asia/Shanghai，保存后再次在同一云端 itch 标签回读，仍为 https://itch.io/login、标题 Just a moment...、正文 Performing security verification。LOGIN_VERIFIED 仍为 NO/BLOCKED；已将 itch 标签置前供本人接管，未操作验证控件。首次台账提交 ec09cad12f5714319ff695df462ff1dc6f2c144f 已逐字回读一致，历史前缀完整保留。
