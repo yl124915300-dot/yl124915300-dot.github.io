@@ -37,7 +37,7 @@ try {
    const c=document.createElement("canvas");c.width=1000;c.height=400;const x=c.getContext("2d");
    window.__paintCapture=color=>{x.fillStyle=color;x.fillRect(0,0,1000,400);x.fillStyle="black";x.font="50px Arial";x.fillText("Synthetic UI fixture only",30,100);};
    window.__paintCapture("white");
-   navigator.mediaDevices.getDisplayMedia=async()=>c.captureStream(5);
+   navigator.mediaDevices.getDisplayMedia=async()=>{const s=c.captureStream(0);window.__captureTimer=setInterval(()=>s.getVideoTracks()[0]?.requestFrame(),100);return s;};
  });
  await page.click("#share");
  await page.waitForFunction(()=>!document.getElementById("advise").disabled);
@@ -60,6 +60,7 @@ try {
  await page.click("#verify");
  await page.waitForFunction(()=>document.getElementById("advice").textContent.includes("HUMAN_REVIEWED_MATCH"));
  await page.click("#stop");
+ await page.evaluate(()=>clearInterval(window.__captureTimer));
  assert.equal(await page.locator("#advise").isDisabled(),true);
  report.syntheticDisplayLifecycle="PASS; mocked display stream, no real game or screen permission";
  // Delayed older decoding must not replace the newer import.
@@ -86,6 +87,8 @@ try {
    assert.ok(bytes.length<15*1024*1024);
    report.source={url,context:"https://github.com/Torch1230/CombatSolver/issues/239",claimedPatch:"111.0 (issue author report)",
      sha256:createHash("sha256").update(bytes).digest("hex"),retrievedAt:new Date().toISOString()};
+   await page.selectOption("#language","chi_sim+eng");
+   report.realScreenshotLanguage="chi_sim+eng";
    await page.locator("#file").setInputFiles({name:"public-game-screenshot.png",mimeType:"image/png",buffer:bytes});
    await page.waitForFunction(()=>!document.getElementById("ocr").disabled);
    await page.click("#ocr");
@@ -104,6 +107,9 @@ try {
  assert.deepEqual(errors,[]);assert.deepEqual(remote,[]);
  report.browserChecks="PASS";report.screenshotUploads=0;report.externalBrowserRequests=0;
  console.log(JSON.stringify(report,null,2));
+} catch(e) {
+ report.failure=e.message;report.dom=await page.evaluate(()=>({status:document.getElementById("status").textContent,advice:document.getElementById("advice").textContent,video:{ready:document.getElementById("video").readyState,width:document.getElementById("video").videoWidth}}));
+ console.log(JSON.stringify(report,null,2));throw e;
 } finally {
  await writeFile("test-results/cloud-evidence.json",JSON.stringify(report,null,2));
  await browser.close();server.kill();
