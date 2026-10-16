@@ -515,3 +515,59 @@ Company Website 为 https://yl124915300-dot.github.io/gamepilot/balatro/ 。没�
 | VERIFIED_NET_REVENUE | 获证 US$0；实际净到账 UNKNOWN |
 
 FIRST_REAL_REVENUE>US$0 尚未实现。没有开收费入口、操作付款/提现、购买、投广告、预付、发送冷邮件/电话/竞标或绕过验证码。开始读取技能说明时误用一次本地终端（只读），已在对话中告知并停止；之后业务操作仅使用云浏览器及已连接 GitHub/Gmail。未新建后台自动跟进任务。
+
+
+---
+
+## GAMEPILOT_ACQUISITION_ONLY — 2026-10-16 20:44–20:59 Asia/Shanghai
+
+**本轮目标未完成：没有新增已发布且玩家可达的目录/市场入口，也没有确认真人试用或合作推进。新增1次定向创作者表单接收，另1次提交尝试的接收状态UNKNOWN；两者不计为合作或分发成果。**
+
+起始时钟20:44:27，最后业务观察20:58:53；秒级网页时间取自Firecrawl远端浏览器。仅使用Firecrawl云端检索/浏览器、已连接Gmail/GitHub与UTC时钟；没有读取本地文件、使用Mac终端或操作本地浏览器。未开发或更改产品，未重复计算器QA。
+
+### 已有线索与反馈检查
+
+- 起始及20:58再次查询已连接Gmail：覆盖Clover/Skoottie、GG/Dan、Fixated/Rarran、The Indie Informer/Marcus、WayTooManyGames/Leo及GamePilot关键词，排除发件、草稿、GitHub通知，均无匹配邮件。未发现需要分类的自动回执或人工回复，未对原五方催促或重发。查询无匹配不代表所有渠道实际回复总量为0。
+- 最后读取[现有问答issue #4](https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/4)，comments=[]。独立玩家输入和反馈新获证0；无法观测的使用仍UNKNOWN。
+
+### 新增创作者联系：接收与未知分别记录
+
+| 时间 Asia/Shanghai | 对象与入口 | 实际结果 |
+|---|---|---|
+| 20:54:09.875点击；20:54:19.675独立回读 | [Gideon’s Gaming](https://gideonsgaming.com/contact/)；直接运营网站/视频频道的Gaming Gideon | 只提交一次；提交后URL出现contact-form-sent=45211，可见Thank you for your response及本次完整正文，表单已隐藏。SUBMISSION_ACK=1，CREATOR_NEW_SENT=1；不是人工阅读/回复/试用/推荐。公开台账不保存带令牌的完整回执URL或回信地址。 |
+| 20:57:06.495点击 | [Wingsplain](https://wingsplain.com/contact/)；直接运营网站的Jason与Lisa | 只点击一次，20:57:06.521可见Sending...。后续独立读取云浏览器连续失败，未取得接收回执；SUBMISSION_ACK不增加，CREATOR_NEW_SENT获证不增加，实际发送/接收UNKNOWN。**为避免重复，后续须先查实质回复或原接收证据，不得直接重发。** |
+
+Gideon相关性/决策权依据：[本人Balatro评测及视频](https://gideonsgaming.com/balatro-review/)、[About及联系政策](https://gideonsgaming.com/about-us/)。阅读其不接受付费评测/客座文章及不覆盖生成式AI美术游戏的政策；邀请仅提供浏览器文字工具链接，如实披露AI-assisted，没有隐藏AI参与、附生成美术或要求正面评价。邀请针对其评测中普通牌到Joker规则变化的教学切入点，请其亲自测试，只有独立认为有用才考虑公开短演示/推荐，也接受批评或拒绝。
+
+Wingsplain相关性/决策权依据：[百小时Balatro评测及讨论](https://wingsplain.com/balatro-review-steam/)、[Jason负责内容/Lisa负责开发编辑的介绍](https://wingsplain.com/about/)。邀请围绕普通牌教学价值向二人直接征询试用和有条件的公开演示。Gmail历史查询及原台账未发现这两方既往接触。
+
+两份正文都准确说明免费、非官方、AI-assisted、手动输入最多8张普通牌、比较1–5张牌的即时得分，无Joker/修饰/截图识别/自动跟踪；Wingsplain正文另明确无弃牌或未来回合优化。不承诺新功能、费用、赞助、佣金或正面推荐；付款保持关闭。演示使用[?ref=gideonsgaming](https://yl124915300-dot.github.io/gamepilot/balatro/?ref=gideonsgaming)及[?ref=wingsplain](https://yl124915300-dot.github.io/gamepilot/balatro/?ref=wingsplain)，ref仅可出现在自愿反馈，没有中心访问计数，不能证明归因。
+
+### 分发平台实际入口核查
+
+未只凭“免费”检索描述申报上架；读取以下官方入口后按限制停止，没有付款、注册、登入尝试或改造产品迎合分类：
+
+- [AlternativeTo FAQ](https://alternativeto.net/faq/)、[Alternative.me投稿规则](https://alternative.me/how-to/submit-software/)、[MakeItLast投稿页](https://www.makeitla.st/submit)、[ToolFame投稿页](https://toolfame.com/submit)、[10words投稿页](https://app.10words.io/submit)：要求账号/实际转登录或注册，未提交。
+- [Something For That](https://www.somethingforthat.com/submit)：真实云浏览器读取嵌入Airtable表单，明确This form is not accepting responses及需表单所有者升级；未提交、未发送升级请求。
+- [NoSubscription](https://nosubscription.org/submit)：免费通道限100%免费开源并需公开repo；仓库根及GamePilot目录树未找到可确认的开源许可证，不能把公开可读源码当开源许可。未申报OSS，未选付费通道。
+- [Toolfio](https://toolfio.com/submit)：真实投稿页要求DR20+与永久反链；未添加徽章、未进入付费通道。[Yo.directory](https://yo.directory/submit)要求登录并有永久反链；停止。
+- [Browse FAQ](https://browse.fyi/faqs)明确投稿必须账号；云浏览器投稿页仍显示SIGN IN，没有认证证据，未填/提交。[Launching Next](https://www.launchingnext.com/submit/)有Quick Check反垃圾验证，未作答或提交。
+- [GameJolt官方说明](https://gamejolt.com/help-docs/creators/add-game)以自己的游戏及附属文件为发布结构，未取得将本独立网页工具作为游戏发布的许可依据；未伪装游戏或模组。[Balatro Wiki规则](https://balatrowiki.org/w/Balatro_Wiki:Wiki_rules)排除非官方创作的正文收录并限制自推，未写入。
+- Rogueliker联系仅邮件且其当前政策不覆盖生成式AI项目；The Punished Backlog联系仅邮件且明确反生成式AI；OldCynic只见联系邮箱。均未发送冷邮件或改用评论推广。Toolfolio读取连接失败，未提交。
+- itch.io沿用HUMAN_REQUIRED，本轮未访问/刷新/重建其会话。未重复尝试历史GitHub 403目录PR/留言；历史Awesome Balatro旧收录不算本轮新增。
+
+### 本轮获证指标
+
+| Metric | 结果 |
+|---|---|
+| NEW_LIVE_LISTING_URL | 无，新增0；没有新商品/目录URL可做匿名与搜索收录验证 |
+| SUBMISSION_ACK | 1：Gideon标识45211；Wingsplain UNKNOWN不计 |
+| CREATOR_NEW_SENT | 1获证；另1次Wingsplain发送/接收UNKNOWN并禁止盲目重发 |
+| REAL_HUMAN_REPLY | 新获证0；已查Gmail无匹配，其他不可观测渠道UNKNOWN |
+| RECOMMENDATION_PUBLISHED | 新获证0；实际总量UNKNOWN |
+| INDEPENDENT_PLAYER_USE | 新获证0；实际总量UNKNOWN |
+| CHECKOUT_ACTIVE | 本轮新增0，未启用收费或捐赠 |
+| VERIFIED_PAID | 新获证0；实际账户流水UNKNOWN，未访问收款账户 |
+| VERIFIED_NET_REVENUE | 获证US$0；实际净到账UNKNOWN |
+
+没有将接收回执、Sending...、草稿、页面可读、自测或工具调用成功算作真人合作、玩家使用或收入。未购买/升级服务、投广告、预付、提现、填写KYC、绕过验证码，未创建后台自动跟进。当前首笔收入目标仍未实现。
