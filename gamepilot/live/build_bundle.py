@@ -6,7 +6,7 @@ import zipfile
 root = Path(__file__).resolve().parent
 out = root / "test-results"
 out.mkdir(exist_ok=True)
-paths = ["index.html", "style.css", "app.mjs", "core.mjs", "sw.js", "manifest.webmanifest", "icon.svg", "launch.py", "README.md"]
+paths = ["index.html", "style.css", "app.mjs", "core.mjs", "recognition.mjs", "sw.js", "manifest.webmanifest", "icon.svg", "launch.py", "README.md"]
 paths += [str(p.relative_to(root)) for p in (root / "vendor").rglob("*") if p.is_file()]
 checksums = {}
 archive = out / "GamePilot-Capture-Review-Research.zip"

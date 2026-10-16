@@ -1,4 +1,6 @@
 import {Session,blankState} from "./core.mjs";
+import {recognizeScreenshot,screenshotAdvice,compareObservations} from "./recognition.mjs";
+let latestObservation=null,previousObservation=null,ocrBusy=false;
 const $=id=>document.getElementById(id),session=new Session();
 const canvas=$("frame"),ctx=canvas.getContext("2d",{willReadFrequently:true});
 let stream=null,worker=null,workerLanguage="",sampling=false,lastSmall=null,installEvent=null;
@@ -8,7 +10,7 @@ $("state").value=JSON.stringify(blankState(),null,2);
 function status(s){$("status").textContent=s;}
 function revoke(s){session.revoke(s);$("advice").textContent="ABSTAIN — "+s;$("acted").disabled=true;}
 function invalidate(s){session.invalidate(s);$("advice").textContent="ABSTAIN — "+s;$("acted").disabled=true;}
-function resetInput(){$("state").value=JSON.stringify(blankState(),null,2);$("text").textContent="No OCR result for this frame.";}
+function resetInput(){latestObservation=null;$("recognition").textContent="No automatic observation for this frame.";$("auto").disabled=true;$("state").value=JSON.stringify(blankState(),null,2);$("text").textContent="No OCR result for this frame.";}
 async function digest(blob){return [...new Uint8Array(await crypto.subtle.digest("SHA-256",await blob.arrayBuffer()))].map(v=>v.toString(16).padStart(2,"0")).join("");}
 function asBlob(){return new Promise(resolve=>canvas.toBlob(resolve,"image/png"));}
 async function setFrame(draw,source){
@@ -18,7 +20,7 @@ async function setFrame(draw,source){
   draw();const at=Date.now(),blob=await asBlob(),hash=await digest(blob);
   if(!session.acceptFrame(revision,{hash,at,source,width:canvas.width,height:canvas.height}))return;
   if(source==="display"&&previous?.source==="display"&&previous.hash===hash)$("state").value=transcript;
-  $("advise").disabled=source!=="display"||!!session.pending;$("verify").disabled=!session.pending||source!=="display";$("ocr").disabled=false;
+  $("advise").disabled=source!=="display"||!!session.pending;$("verify").disabled=!session.pending||source!=="display";$("ocr").disabled=false;$("auto").disabled=false;
   status(source==="display"?"Fresh frame. Review within 15 seconds.":"Imported file: OCR/replay only; no live advice.");
 }
 async function capture(){
@@ -74,6 +76,7 @@ async function getWorker(){
   return worker;
 }
 $("ocr").onclick=async()=>{
+  if(ocrBusy)return;ocrBusy=true;$("auto").disabled=true;
   revoke("OCR in progress; review after reading.");const revision=session.revision,hash=session.frame?.hash;
   $("ocr").disabled=true;
   try{
@@ -84,7 +87,7 @@ $("ocr").onclick=async()=>{
       textLength:result.data.text.length,completeRecognition:false});
     status("OCR finished. Verify all fields; completeness is not automatically detected.");
   }catch(e){if(revision===session.revision){revoke("OCR failed");status(e.message);}}
-  finally{$("ocr").disabled=!session.frame;}
+  finally{ocrBusy=false;$("ocr").disabled=!session.frame?.valid;$("auto").disabled=!session.frame?.valid;}
 };
 $("state").addEventListener("input",()=>revoke("State edited; check again."));
 function state(){return JSON.parse($("state").value);}
@@ -120,3 +123,25 @@ setInterval(async()=>{
 },250);
 document.addEventListener("visibilitychange",()=>{if(document.hidden)invalidate("Companion hidden; capture and review again.");});
 if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(e=>status("Install cache unavailable: "+e.message));
+
+$("auto").onclick=async()=>{
+  if(ocrBusy)return;
+  revoke("Automatic reading in progress.");const revision=session.revision,hash=session.frame?.hash;
+  if(!hash||!session.frame.valid)return;
+  ocrBusy=true;$("ocr").disabled=true;$("auto").disabled=true;
+  try{
+    // Copy the exact pixels before any asynchronous work.
+    const frozen=document.createElement("canvas");frozen.width=canvas.width;frozen.height=canvas.height;
+    frozen.getContext("2d").drawImage(canvas,0,0);
+    const result=await recognizeScreenshot(frozen,await getWorker(),hash);
+    if(revision!==session.revision||hash!==session.frame?.hash||!session.frame.valid)return;
+    latestObservation=result.observation;
+    const comparison=previousObservation?compareObservations(previousObservation,latestObservation):null;
+    $("recognition").textContent=JSON.stringify({observation:latestObservation,comparison},null,2);
+    show(screenshotAdvice(latestObservation));$("acted").disabled=true;
+    session.events.push({type:"automatic_observation",observation:latestObservation,comparison,manualTranscription:false});
+    previousObservation=latestObservation;
+    status("Automatic reading finished. Unknown fields block advice; observed changes do not verify a player action.");
+  }catch(e){if(revision===session.revision){revoke("Automatic reading failed");status(e.message);}}
+  finally{ocrBusy=false;$("ocr").disabled=!session.frame?.valid;$("auto").disabled=!session.frame?.valid;}
+};
