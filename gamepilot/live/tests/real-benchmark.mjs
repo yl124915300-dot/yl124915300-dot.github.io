@@ -14,25 +14,28 @@ const report={schema:1,environment:"GitHub-hosted Chromium; public still-image r
 const server=spawn("python3",["launch.py","--port","8796","--no-browser"],{stdio:["ignore","pipe","inherit"]});
 await new Promise((resolve,reject)=>{server.stdout.once("data",resolve);server.once("error",reject);});
 const browser=await chromium.launch({headless:true}),page=await browser.newPage();
+page.on("console",m=>{if(m.text().startsWith("SCAN_PROGRESS"))console.log(m.text());});
 try {
  await page.goto("http://127.0.0.1:8796/");
  const response=await fetch(api,{signal:AbortSignal.timeout(30000)});assert.ok(response.ok);
  const listing=(await response.json())["2868840"];assert.equal(listing.success,true);
  // Discovery is replaced by a hash-pinned manifest after inspection. No lookup data enters recognition.
  const manifest=listing.data.screenshots.slice(0,4).map(s=>({id:"steam-"+s.id,url:s.path_full,context:sourceContext}));
+ console.log("SOURCE_DISCOVERY "+JSON.stringify(manifest));
  for(const source of manifest){
    const r=await fetch(source.url,{signal:AbortSignal.timeout(30000)});assert.ok(r.ok);
    const bytes=Buffer.from(await r.arrayBuffer());assert.ok(bytes.length<15*1024*1024);
    const sha256=createHash("sha256").update(bytes).digest("hex");
+   console.log("SOURCE_HASH "+JSON.stringify({...source,sha256}));
    const result=await page.evaluate(async ({base64,sha256})=>{
      const {recognizeScreenshot,screenshotAdvice}=await import("./recognition.mjs");
-     const bitmap=await createImageBitmap(await (await fetch("data:image/jpeg;base64,"+base64)).blob());
+     const bitmap=await createImageBitmap(new Blob([Uint8Array.from(atob(base64),c=>c.charCodeAt(0))]));
      const canvas=document.createElement("canvas");canvas.width=bitmap.width;canvas.height=bitmap.height;
      canvas.getContext("2d").drawImage(bitmap,0,0);bitmap.close();
      const w=await Tesseract.createWorker("eng",1,{
        workerPath:new URL("vendor/tesseract/worker.min.js",location.href).href,
        corePath:new URL("vendor/core/",location.href).href,langPath:new URL("vendor/lang",location.href).href,cacheMethod:"none"});
-     let data;try {data=await recognizeScreenshot(canvas,w,sha256);}finally{await w.terminate();}
+     let data;try {data=await recognizeScreenshot(canvas,w,sha256,{onProgress:(region,pass)=>console.log("SCAN_PROGRESS "+region+" "+pass)});}finally{await w.terminate();}
      const preview=document.createElement("canvas");preview.width=960;preview.height=Math.round(canvas.height*960/canvas.width);
      preview.getContext("2d").drawImage(canvas,0,0,preview.width,preview.height);
      return {...data,advice:screenshotAdvice(data.observation),preview:preview.toDataURL("image/jpeg",.65).split(",")[1]};
