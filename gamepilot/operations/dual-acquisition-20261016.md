@@ -265,3 +265,70 @@
 | VERIFIED_NET_REVENUE | 获证US$0；实际净到账UNKNOWN | 无已核验到账、手续费及退款对账 |
 
 **首笔真实客户到账>US$0没有实现。** 本轮剩余必要执行面是Work云端浏览器和相关账号的正常登录/允许写入能力；不能用新增草案、发帖数量、源码提交或自测替代。取得执行面后应先完成真实浏览器QA、itch发布及索引核查，再逐一确认许可并发送3–5位创作者询问；付款资格未核验前保持收费关闭。
+
+
+---
+
+## GAMEPILOT_FIRECRAWL_CLOUD_PUBLISH_ATTEMPT — 2026-10-16
+
+**结论：NO_GO。Firecrawl 连接和普通抓取已实测可用，Interact 工具已开放，但四次实际交互调用全部被并发上限拒绝；未取得云浏览器会话、人工接管链接、端到端 QA 或 itch 商品。**
+
+本节业务观察封存：2026-10-16 19:12:24 Asia/Shanghai（工具 UTC 11:12:24）。实际读取时钟另含 19:10:16、19:11:40；不为首次调用或用户操作编造秒级时间。保存和回读本节发生在封存后。
+
+### 实际动作及直接返回
+
+| 动作 | 实际证据 | 结果/边界 |
+|---|---|---|
+| Firecrawl 连接与余额 | firecrawl_credit_usage 成功；首次 remainingCredits=967，planCredits=1000；封存前 remainingCredits=917 | 当前连接有效；未购买、升级或充值。此为共享团队余额快照，50 的差额不能全部归因本任务，实际任务消耗 UNKNOWN；不是现金支出证明 |
+| 当前连接工具核验 | 已提供 firecrawl_interact、firecrawl_interact_stop、scrape、credit_usage 等；interact 支持 url 或 scrapeId、prompt 或 node/python/bash code；返回字段声明有 liveUrl/sessionUrl | 不是仅搜索/抓取连接；工具声明不代表运行成功。没有列出当前浏览器会话或队列的专用连接工具 |
+| 交互尝试1 | 对 Balatro 产品 URL 调用 interact(prompt) | 原文：You have reached the maximum number of concurrent jobs (2). 无会话ID或URL |
+| 产品公开读取 | basic 代理、maxAge=0，scrape 返回 HTTP 200、正确标题及页面文本；scrapeId 01a14468-42f5-7161-9736-5ce41bbab722 | 匿名网页抓取可达已证；没有点击演示、算分、下一状态、图片预览、键盘、剪贴板或下载端到端证据 |
+| 交互尝试2 | 使用上述真实 scrapeId 调用 node/Playwright 读取标题及按钮 | 同一并发上限错误；代码没有获证执行 |
+| 用户操作 | 用户在本聊天明确回复“已结束闲置会话” | 记录为用户报告；当前工具无法列出会话，未独立验证已关闭哪些会话 |
+| 交互尝试3 | 用户回复后，用产品 scrapeId 重试 | 仍为同一并发上限错误 |
+| 交互尝试4 | 再从 https://itch.io/dashboard 直接以 URL 模式调用 interact(code)，basic 代理 | 仍为同一并发上限错误；未取得登录接管URL，未读取账号后台 |
+| itch 普通抓取 | /dashboard -> https://itch.io/login，HTTP 200，显示用户名/密码及 GitHub 登录入口；scrapeId 01a14469-0186-74fa-8445-fe8d3e077ea7 | 只证明此匿名抓取上下文未登录。用户 itch 账号是否存在、账号发布权限及其它保存会话 UNKNOWN；本次抓取未复现历史 Cloudflare 挑战，不能称挑战已永久解除 |
+| 能力发现 | firecrawl_find_tools providers=[firecrawl]，查询当前浏览器会话/队列管理，成功返回 items=[]；requestId 27104aa4-c1a7-483e-b0ab-d447bb85b274 | 此次目录查询没有补齐管理能力；不证明 Firecrawl 产品没有会话管理API |
+| 本任务资源清理尝试 | 对本任务 docs 抓取 01a14468-0492-74eb-bf70-93cd4aa6d3f4 与 MALF 抓取 01a14468-f3b8-73b9-8533-fc664104d5c8 调用 interact_stop，均404 | 两者没有可停止的获证交互会话；不将404当成功清理，不猜测/终止其它任务会话 |
+| 资产/运营资料 | 通过 GitHub 读取本运营记录、gamepilot/balatro/index.html、gamepilot/releases/itch-listing-v1.txt | 复用现有产品和说明；无新代码、发布包、封面、推广草稿或泛发内容 |
+| MALF 原有入口复核 | https://malf.io/contact/ HTTP 200，显示 sponsorship/business 联系说明、一般联系表单、reCAPTCHA requires verification | 没有当前可执行的云交互面；未填写、提交或绕过验证码。新联系回执0；Clover未重复联系 |
+| 现有回应入口复核 | GitHub issue #4 comments=[]；Gmail after:2026/10/15 -in:sent -in:drafts ("Clover" OR "Skoottie") 返回0匹配 | 限定入口未见新回应；其它渠道 UNKNOWN。未发送邮件 |
+
+### 产品文档能力与当前可用性分别记账
+
+- Firecrawl 官方文档明确 Interact 是支持的 MCP 路径，能从 URL 开始或继续 scrapeId，Node/Python 内有 Playwright page，代码远程执行；文档支持 interactiveLiveViewUrl 供用户点击、输入及登录接管。**本次连接未成功返回这些URL，Playwright执行及真人接管实测均 UNKNOWN/BLOCKED。**
+- 连接 interact 的输出 schema 仅声明 liveUrl/sessionUrl 等字段，未单列官方API的 interactiveLiveViewUrl/CDP字段；工具能否完整透传人工控制URL UNKNOWN，不能把只读观看链接当接管能力。
+- **文件上传：UNKNOWN。** 当前工具没有独立的远程浏览器文件上传参数；执行代码是可能路径，但没有运行成功的 setInputFiles、云端取包或 itch 上传证据。官方 Interact/Browser 页面没有在本次检索中提供专门的文件上传承诺，不能以“Playwright预装”替代实际上传验证。
+- 官方API有 GET /v2/interact 列举会话，但本连接未暴露对应专用工具；没有获取或请求密钥。当前并发占用来源、用户关闭操作是否作用于同一团队、服务端计数是否滞后均 UNKNOWN。
+- 官方速率文档区分并发与每分钟速率；本次只能确认错误原文的并发2上限，不能诊断为未安装、余额不足、账号禁用或 itch 拒绝发布。
+- 不操作用户 Mac、本地浏览器、本地终端或本地文件。无安装、付费、广告、付款入口、身份/税务填写、视觉识别销售、验证码解答或安全挑战规避。
+
+依据：
+- https://docs.firecrawl.dev/features/browser
+- https://docs.firecrawl.dev/features/interact
+- https://docs.firecrawl.dev/rate-limits
+- https://docs.firecrawl.dev/api-reference/endpoint/browser-list
+- https://itch.io/docs/creators/html5
+- https://itch.io/docs/creators/quality-guidelines
+- https://itch.io/docs/creators/getting-indexed
+
+### 本轮真实业务指标
+
+| Metric | 本轮获证状态 |
+|---|---|
+| CLOUD_INTERACTION_AVAILABLE | BLOCKED：四次实际调用同一并发上限错误 |
+| PRODUCT_ANON_FETCH | YES：产品URL普通抓取HTTP 200；不等于浏览器端到端通过 |
+| BROWSER_E2E_QA | 未完成；结果 UNKNOWN |
+| FILE_UPLOAD_VERIFIED | UNKNOWN；未上传 |
+| HUMAN_LOGIN_TAKEOVER | 未取得可交互链接；实测 UNKNOWN |
+| ITCH_AUTHORIZATION | 当前匿名抓取转登录；账号发布权限 UNKNOWN |
+| LIVE_MARKET_LISTING | 新增0；商品URL UNKNOWN，未创建/上传/发布 |
+| ITCH_ANON_EXPERIENCE | UNKNOWN；无本轮新商品 |
+| SEARCH_INDEXED | UNKNOWN；未取得新商品，未把公共规则页当索引证据 |
+| CREATOR_OUTBOUND_SENT | 新增0；无新回执；Clover未重复 |
+| HUMAN_REPLY | 本轮获证0；其它渠道 UNKNOWN |
+| REAL_PLAYERS / COMPLETED_USE | 本轮独立获证0；实际总量 UNKNOWN |
+| QUOTE_ACCEPTED / VERIFIED_PAID | 本轮获证0；无真实客户付款证据；账户实际流水 UNKNOWN |
+| VERIFIED_NET_REVENUE | 获证 US$0；实际净到账 UNKNOWN |
+
+**首笔非测试客户真实到账 > US$0 未实现。** 下一必要动作仍是让当前 Firecrawl 团队的 Interact 真正返回可用会话。用户已报告关闭闲置会话但接口仍拒绝；无需再次安装、付费升级、给出密钥或在 Mac 登录来冒充解锁。可用会话返回后沿用现有资产，依次完成真实浏览器QA、用户正常远程登录/必要真人验证、免费发布、匿名演示与独立搜索收录核查。
