@@ -156,3 +156,112 @@
 **首要后续动作：恢复可调用的 Work 远程云浏览器及用户自有、正常登录且规则允许的玩家社区会话，先核清上面 0 评论候选的截图和当前状态，再在原帖交付一个正确答案并询问反馈。**这比继续扩功能、追加创作者名单或再发计算器宣传更有价值。
 
 可解锁的具体步骤：在有 Work 远程浏览器能力的云端会话中，由用户正常登录 Reddit；如出现验证码由真人完成；先取得目标社区对该类 AI 辅助回复的许可。账号登录不能替代社区许可。当前桌面会话仅让用户登录 Mac 上 Reddit 不会给本任务带来云端写入权限。Pinterest 若用于接收反馈，需要在正常云端登录页核实本 Pin 的评论开关并读取真实评论；Buffer 本身不支持该交互。PayPal 仍须在出现真实价值确认后，再由用户在云端核实合法接收能力。上述步骤均未冒充完成。
+
+
+---
+
+## GAMEPILOT_MARKETPLACE_CREATOR_REVENUE_V1 — 2026-10-16
+
+**结论：NO_GO。已实际提交并成功部署窄场景产品代码；应用市场发布、3–5位创作者真实触达、首笔真实到账均未完成。**
+
+执行起点：2026-10-16 18:29:40 Asia/Shanghai。下述业务观察封存：2026-10-16 18:39:59 Asia/Shanghai；之后仅保存与回读本节及验证报告。没有启动后台持续执行。
+
+### 本轮授权和环境
+
+- 固定路线：同一个 GamePilot，通过游戏工具市场自然发现与 Balatro 创作者合作分发，再连接真实付费。历史章节里的 Reddit 逐帖服务优先级不作为本轮执行指令。
+- 只用了云端工具运行时内存、公共网页读取、GitHub/Gmail连接接口。**未调用本地终端、读取或写入用户本地文件、操作用户 Mac、本地浏览器或桌面。**
+- 已检查工具清单，并两次搜索远程云浏览器/itch/PayPal/消息能力。此会话没有可调用的 Work remote cloud browser、itch 发布接口、创作者 DM/表单写入接口或 PayPal认证读取接口；搜索结果未补齐这些能力。未用本地浏览器替代。
+- GitHub当前仓库 push/admin=true；main起始为 9b4aabb256dfd13931c88a763e6e286edb28f128。读取现有完整社区页、目录树及原台账；仓库树没有 AGENTS.md。通过带 expected_sha 的非强制更新保留并发修改保护。
+- 无支出、付费账号、广告、转账、退款、提现、身份/税务填写、密钥请求或新支付入口。无冷邮件、Reddit评论、Pinterest发帖、公开广告替代触达、Clover重复提交或验证码绕过。
+
+### 实际产物
+
+1. [GamePilot Balatro Hand Coach代码](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/854d25dcc818a867398493660e1efdbe95d9bee1/gamepilot/balatro/index.html)；目标产品URL：[同一GamePilot下的Balatro入口](https://yl124915300-dot.github.io/gamepilot/balatro/)。
+   - 1–8张手动确认的普通、不重复牌；枚举全部1–5张选择，最多218种，按当前支持条件下的即时分数排序；解释牌型、计分牌、基础Chips与Mult、是否达到剩余目标。
+   - 支持手动录入当前牌型基础值、记录自报实际分数、清空建议后手动输入下一状态。不会读游戏、执行游戏动作或自动追踪。
+   - **严格不支持Jokers、增强/版本/蜡封、debuff、Boss效果、Plasma Deck、模组、重复牌、消耗牌行动或弃牌/未来抽牌策略。不是完整Balatro智能下一步助手，也不是长线最优策略。**
+   - 截图控件只有经用户声明有权使用后的浏览器内预览；须自行输入牌面。**SCREENSHOT_AI = BLOCKED：无模型/API、无真实授权图像测试、无自动状态识别或截图连续指导验证。** 未加入游戏图片、官方图案、Logo或第三方代码。
+2. [HTML5 ZIP](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/854d25dcc818a867398493660e1efdbe95d9bee1/gamepilot/releases/gamepilot-balatro-v1.zip)：24,507字节；根目录index.html（23,842 UTF-8字节）与README.txt；无密钥、外部脚本或构建依赖。结构和CRC已核查。
+3. [原创630×500封面PNG](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/854d25dcc818a867398493660e1efdbe95d9bee1/gamepilot/releases/cover-v1.png)：158,108字节，已在云端内存渲染检查。封面为合成算例牌面，不是游戏截图。
+4. 程序内可运行的合成演示：AH KH QH JH TH 9C 9D 2S → 218种选择 → AH KH QH JH TH，(100+51)×8=1,208。标记self_test，不计玩家使用或真实截图。
+5. [准确英文上架说明与配置](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/854d25dcc818a867398493660e1efdbe95d9bee1/gamepilot/releases/itch-listing-v1.txt)、[4份未发送的个性化合作询问与独立链接](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/854d25dcc818a867398493660e1efdbe95d9bee1/gamepilot/releases/creator-brief-v1.txt)、[关闭状态的付费试点条款草案](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/854d25dcc818a867398493660e1efdbe95d9bee1/gamepilot/releases/paid-pilot-terms-draft.txt)。
+6. 原社区页仅加入新入口，原Blue Joker脚本逐字保留；未删除既有页面/问答/历史台账。
+
+### 真实时间与验证证据
+
+| Asia/Shanghai | 实际动作 | 证据与限制 |
+|---|---|---|
+| 18:29:40起 | 读取源代码、历史台账、当前权限与工具能力 | 仅连接接口及云端内存；历史账号会话未被当成当前权限 |
+| 18:32:25 | 运行评分/来源解析31项检查，31通过 | 9类常规牌型、A低顺/不可回绕、kicker、非法输入、升级Pair优先、218组合及来源解析；纯JavaScript，非浏览器/实机/玩家验证 |
+| 18:35:41 | 运行3项界面逻辑检查，3通过 | 内存DOM替身：合成演示→建议/收据、重复输入清除结果、下一状态清除；不证明视觉布局、图片选择、剪贴板或真实浏览器端到端 |
+| 18:37:27 | 核查ZIP根目录、每文件CRC及中央目录 | 两文件完整；没有上传itch或在平台预览 |
+| 18:38:12 | 提交并更新main | [854d25dcc818a867398493660e1efdbe95d9bee1](https://github.com/yl124915300-dot/yl124915300-dot.github.io/commit/854d25dcc818a867398493660e1efdbe95d9bee1)；新源码连接接口回读完全一致 |
+| 18:38:14–18:38:53 | Pages自动构建与部署 | [run 38888534477](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/38888534477)，completed/success；这是部署证据，不是匿名使用证明 |
+| 18:38:49 | ZIP/PNG从GitHub分别回读base64，去空白后与内存原始字节一致 | blob分别 c79f7b275811a2ad18e0efb6ef953e84b4f9a655 / 84393b542640737b199a7869c42b4087f18d3818 |
+| 18:38:49 | Gmail精确查询 after:2026/10/15 ("Clover" OR "Skoottie") | 0匹配；不证明所有渠道无人回复；没有发送邮件 |
+| 18:39:13 | 原Blue Joker脚本相同及3项回归；4个推广代码解析核查 | 20/12→+40 Chips/+480，0/12→+0，1.5→No result；均内存检查 |
+| 截至18:39:41 | 部署后两种公共网页工具分别读取产品页/带参数页/原页面；另读index.html | Pages端均工具访问失败；无法据此判断站点是否故障。**匿名浏览器完整流程UNKNOWN** |
+| 18:39:41 | 匿名读取固定提交的raw.githubusercontent.com源码成功 | 源码公开可读；不等于Pages界面运行成功 |
+| 截至18:39:41 | itch dashboard与完整标题搜索读取均失败 | 无已发布商品URL；不能确认索引。历史Cloudflare阻挡未在当前浏览器复现 |
+| 本轮读取窗口 | PayPal公开账户页转登录；MALF官方联系页可读，GothicLordUK官方Bluesky可读，FrostPrime X 403，Nandre站点不可读 | 公开读取不是登录、DM或提交能力；未送出新询问 |
+
+[验证报告](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/main/gamepilot/releases/validation-v1.json)分别标明计算引擎、DOM替身、归因解析、包、部署和匿名验证的证据等级。
+
+### itch上架：资产已保存，未发布
+
+官方HTML5说明允许单文件HTML或带根目录index.html的ZIP；HTML5款项是捐赠。按Tool/HTML项目准确分类，不能伪装游戏副本或Nexus/Thunderstore模组。新版本须在真实浏览器完成预览后再发布；当前没有这个执行面。
+- 未创建/上传/发布任何itch商品；没有可交付的商品URL。
+- 原创封面、英文说明和ZIP已经GitHub保存并回读；**发布前浏览器QA缺失**，故不将整体上架就绪写成无条件完成。
+- 精确阻碍：本会话缺Work云端浏览器/itch写入工具与可核验登录会话；公共dashboard读取错误。需在可用Work云浏览器中正常登录，遇Cloudflare或验证码由真人正常处理；不能绕过。
+- 发布后还必须匿名运行演示，并在itch按完整标题检查收录；公开发布与搜索索引分别记账。当前搜索读取失败，SEARCH_INDEXED=UNKNOWN。
+- 依据：https://itch.io/docs/creators/html5 、https://itch.io/docs/creators/quality-guidelines 、https://itch.io/docs/creators/getting-indexed 。
+
+### 创作者：新增真实发送0，不把草案当触达
+
+| 创作者 | 当前受众/许可核查 | 唯一链接 | 本轮实际状态 |
+|---|---|---|---|
+| MALF | MLBA官方名单；https://malf.io/contact/允许一般询问并列商务方式 | ?ref=malf | 有表单入口，当前没有表单执行器；历史reCAPTCHA未绕过；未发送 |
+| GothicLordUK | MLBA官方名单；官方Bluesky明确business email | ?ref=gothiclorduk | 邮件不使用；商务DM/表单许可未核实；未发送 |
+| FrostPrime | MLBA官方名单；X当前403 | ?ref=frostprime | 当前一手商务DM/表单许可未核实；未发送 |
+| Nandre | MLBA官方名单；个人站当前不可读 | ?ref=nandre | 当前一手商务DM/表单许可未核实；未发送 |
+
+共同链接前缀为 https://yl124915300-dot.github.io/gamepilot/balatro/ 。**没有完成“3–5位当前合格且允许非邮件商务联系”的筛选和发送要求**。Skoottie/Clover历史已发送1不计本轮，未重复。
+受众依据：https://majorleaguebalatro.com/creators 。只做了与本固定路线有关的定向准备，没有替代为随机玩家服务或泛获客。
+
+归因实测限度：
+- 4个URL代码解析均通过；MALF代码随合成演示进入导出packet的链路在DOM替身中通过。
+- packet可包含来源代码、所填牌面、建议及自报结果，只有用户自愿交回后运营方才能看到。它可以被转发或修改，不证明来源身份或独立用户。
+- 没有接通中央访问采集，不能测ATTRIBUTED_VISITS、跨设备去重、独立完成使用或收入归因。**不能称已验证affiliate tracking或可结算分成**。所有自测排除商业数据。
+- 没有承诺创作者费用、可结算分成、利润或保底。
+
+### 免费体验与付费：设计已保存，收费仍关闭
+
+- 免费：普通牌比较、解释及手动下一状态。
+- 待验证的US$4.99一次性人工复核方案：一个支持范围内局面及一个后续局面的书面解释；不售未实现的截图AI或连续自动指导。此价格只是草案，没有向客户报价、接受或创建结账。
+- 草案要求接受前确定支持范围、实际交付截止时间及退款条件；没有后台人员或未来自动交付承诺。
+- PayPal实际账户地区、商业收款能力、限制、提现币种/银行/费用/最低额、可用余额与退款执行能力均UNKNOWN。公开地区帮助不能验证本账户。未升级账户、开支付链接、做测试收款、付款/退款或提现。
+- itch HTML5如以后启用付款应准确称捐赠；当前收款资格未核验，保持免费且不开放付款。退款草案不是已核验可执行退款机制。
+- 依据：https://itch.io/docs/creators/payments 、https://www.paypal.com/c2/cshelp/article/how-do-i-withdraw-funds-from-my-paypal-account-help394?locale.x=en_C2 。
+
+### 商业指标
+
+“本轮获证0”只表示本轮没有已核验证据，不把不可观测实际总量当成0。自测、源码公开和部署成功均不算获客、独立使用或收入。
+
+| Metric | 本轮证据状态 | 边界 |
+|---|---|---|
+| PRODUCT_ACTUALLY_WORKS | PARTIAL | 窄场景引擎31检查、界面逻辑3检查、旧算术3检查通过；Pages部署成功；真实浏览器/实机/独立玩家完整使用UNKNOWN |
+| SCREENSHOT_AI_VERIFIED | 0；BLOCKED | 无图像模型/API、授权真实图像测试或截图识别证据 |
+| PUBLISH_READY_BUNDLE | PARTIAL | 可上传ZIP、封面、英文说明真实存在且已回读；浏览器发布前QA UNKNOWN |
+| LIVE_MARKET_LISTING | 本轮新增0 | 未发布itch商品、没有新商品URL；账号后台不可观察 |
+| SEARCH_INDEXED | UNKNOWN | 无新商品URL；完整标题搜索读取失败 |
+| CREATOR_OUTBOUND_SENT | 本轮0 | 4份UNSENT草案不计发送；历史Clover 1不重算 |
+| HUMAN_REPLY | 本轮获证0；全渠道UNKNOWN | Issue #4评论0；限定Clover/Skoottie邮箱查询0；其它渠道未完整观测 |
+| ATTRIBUTED_VISITS | UNKNOWN；获证0 | 没有中央访问采集；参数存在不等于流量 |
+| UNIQUE_USERS | UNKNOWN；获证0 | 未验证独立用户或去重 |
+| COMPLETED_USE | UNKNOWN；独立获证0 | 合成自测排除；自报结果机制尚无独立参与 |
+| QUOTE_ACCEPTED | 本轮0 | 草案未向客户发出 |
+| CHECKOUT_ACTIVE | 本产品新增0；账户资格UNKNOWN | 没有支付代码/链接/订阅；PayPal认证不可用 |
+| VERIFIED_PAID | 0笔；账户实际流水UNKNOWN | 无非测试客户完成付款证据 |
+| VERIFIED_NET_REVENUE | 获证US$0；实际净到账UNKNOWN | 无已核验到账、手续费及退款对账 |
+
+**首笔真实客户到账>US$0没有实现。** 本轮剩余必要执行面是Work云端浏览器和相关账号的正常登录/允许写入能力；不能用新增草案、发帖数量、源码提交或自测替代。取得执行面后应先完成真实浏览器QA、itch发布及索引核查，再逐一确认许可并发送3–5位创作者询问；付款资格未核验前保持收费关闭。
