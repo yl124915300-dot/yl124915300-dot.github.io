@@ -637,3 +637,46 @@ FIRST_REAL_REVENUE>US$0 尚未实现。没有开收费入口、操作付款/提�
 | VERIFIED_NET_REVENUE | 获证US$0；实际净到账UNKNOWN |
 
 下一有效推进条件：Bec本人回复并接受一次独立试用/自愿演示；任何分成正式启动还须付费交付、结账、可靠归因及合法结算具备。未创建后台自动跟进或声称持续值守。
+
+
+---
+
+## GAMEPILOT_REVENUE_EXECUTION_V2 — 2026-10-16 23:36–23:44 Asia/Shanghai
+
+**首笔到账目标未达成。支付后台未能回读；用户两次确认已在所给云端页面登录，但同一浏览器会话的实时URL/DOM及一次正常支付设置导航均仍为登录页。记录为 HUMAN_REQUIRED / SESSION_READBACK_CONFLICT，不把用户确认当作支付资格实测通过，也不据此断言用户未登录其它可见页面。**
+
+执行起点23:36:39；本节业务观察截至23:44:56（时钟UTC+8）；23:43:13与23:44:11为云浏览器实测时间。只使用Firecrawl云端、已连接GitHub/Gmail及UTC时钟；未读取/操作Mac、本地终端、文件或浏览器。未开发、改动免费产品、重复核心QA、付费、提现、预付、升级账号、填写KYC、处理凭据或绕过安全验证。
+
+| 时间/窗口 | 真实动作、证据与结果 |
+|---|---|
+| 23:36–23:38 | 读取原台账与引用会话并去重。Payhip首次云端打开超时，未取得状态；页面读取发现 /login 为404，随后依据官方帮助中的真实支付设置入口正常访问，转至 /auth/login?redirect=…settings/payments。没有注册、恢复密码或提交登录。 |
+| 23:36–23:38 | Gmail距历史22:52限流已超过约45分钟，只作一次限定查询：当日、排除发件/草稿/GitHub通知，覆盖GamePilot及七家/Wingsplain。成功返回 emails=[]、无下一页；本轮不再查询。只证明此查询无匹配，不能推断所有入站无人回复。 |
+| 截至23:41:40 | GitHub issue #4 的 comments=[]；release目录回读确认现成ZIP仍在，大小24507 bytes、blob c79f7b275811a2ad18e0efb6ef953e84b4f9a655。未上传商店或验证付费订单交付。 |
+| 23:38–23:44 | 提供本次云端接管入口供用户正常登录；用户两次确认已登录/已看到该云端后台。回读核对会话标识与原会话相同；23:43:13实时URL/title/DOM仍为Login - Payhip，无Products/Account/Marketing导航。 |
+| 23:44:11 | 为核查用户已登录后会话是否生效，在同一会话仅正常打开一次 https://payhip.com/settings/payments ，再次实际转至登录页。未刷新或重新提交登录。下一步请求用户提供其当前已登录Payhip后台的非敏感地址栏URL以定位回读差异；不用重复提供凭据。 |
+| 23:40–23:42 | 独立PayPal云会话创建被服务并发上限(2)拒绝；等其它调用结束后仅一次顺序重试仍相同，停止。复用Payhip的第二标签方案被工具限制拒绝，未导航。**本轮未到达PayPal账户，账户地区、类型、接款和流水均UNKNOWN。** |
+| 23:39–23:41 | 有限检索Balatro/游戏工具目录未找到新增可证的相关自助投稿入口；结果含其它工具repo、计算器自身反馈入口、模组wiki、开发资源及泛AI目录，均未误投。没有新上架/投稿；itch既有HUMAN_REQUIRED未再触发，历史Awesome目录403接口未重试。 |
+
+### 已核清的交易规则（公开规则不等于本账号通过）
+
+- [Payhip支付接入](https://help.payhip.com/article/64-connecting-your-paypal-account)：列明部分地区允许Personal，其余支持地区要求Business；若实际账户地区为中国大陆，不能把Personal视为可接入。本账号地区及连接/接款状态未读到。后台实际卖家准入、支付方式、商品/退款设置与流水均UNKNOWN。
+- [Payhip数字产品](https://help.payhip.com/article/59-adding-a-digital-product)支持ZIP、0+自愿定价及100%优惠券测试；[收款前提](https://help.payhip.com/article/173-how-do-i-get-paid)要求先连接支付处理商；[平台条款](https://payhip.com/terms)要求具备内容分发权并遵守支付商规则。上述能力只属规则核验，未创建商品或测试订单；免费网页版同功能及现有能力边界仍须如实展示。
+- [退款规则](https://help.payhip.com/article/281-refund-request)：卖家管理自己的退款政策，Payhip不持款或直接退款。本账号现有退款条件未能回读，未擅自声称不退款或确定退款期限。
+- [Payhip Affiliates](https://help.payhip.com/article/95-affiliates)：30天、末次触点归因；按销售额百分比设置，卖家自行付款，平台提供月报。不能把销售额40%直接宣称为有效到账净收入40%。本轮未启用或创建可提现佣金。唯一有效比例仍是**创作者40%／GamePilot60%，按可归因且已到账有效订单净收入**；扣费、退款、单订单去重、结算时点/方式须在真实能力具备后与伙伴明确同意。
+- 免费替代路径仅核得**条件式候选Gumroad＋自有PayPal Connect**：[价格](https://gumroad.com/pricing)无月费、直接销售平台费10%+$0.50；[结账接入规则](https://gumroad.com/help/article/275-paypal-connect)要求先配置收款资料，并验证自有PayPal整合，PayPal订单可直接进入连接账户；[收款规则](https://gumroad.com/help/article/13-getting-paid)允许无受限Personal或Business接收平台PayPal付款，但普通平台余额付款门槛US$100且有等待/审查，银行支持表未列中国大陆。**没有Gumroad账号/收款资格实测或活跃商品证据，不把工行卡、OKX钱包、公开规则或平台余额当作可用收款路径/已到账。** 未注册新账号或迁移产品。
+
+### 九项验收（0仅指本轮获证0）
+
+| Metric | 本轮获证及未知边界 |
+|---|---|
+| PAYMENT_ACCOUNT_VERIFIED | 0；UNKNOWN / SESSION_READBACK_CONFLICT，未读到商用接款资格 |
+| REAL_CHECKOUT_URL | 未取得；本轮未创建付费商品或结账链接 |
+| ORDER_FULFILLMENT_VERIFIED | 0；未做商店订单交付测试，现成ZIP存在不等于订单交付 |
+| AFFILIATE_LINK_VERIFIED | 0；未配置/生成经验证的销售联盟链接 |
+| CREATOR_HUMAN_REPLY | 0；限定Gmail查询无匹配，所有渠道实际总量UNKNOWN |
+| ACTUAL_PUBLIC_RECOMMENDATION | 新增0；实际UNKNOWN；历史旧工具目录收录不重计 |
+| INDEPENDENT_PLAYER_USE | 获证0；实际UNKNOWN，无中央统计 |
+| PAID_ORDERS_VERIFIED | 获证0笔；真实账户流水UNKNOWN |
+| NET_REVENUE_RECEIVED | 获证US$0；真实净到账UNKNOWN |
+
+支付路线无可信账户证据且无主动真人兴趣，本轮未联系第八/第九家、未催七家或重发Wingsplain；没有新公开推广、泛Pinterest帖子或冷邮件。当前唯一认证后续动作是定位用户已看到的Payhip后台与工具控制页的差异，再回读支付设置；不重复提交同一登录错误。没有后台值守或自动跟进。
