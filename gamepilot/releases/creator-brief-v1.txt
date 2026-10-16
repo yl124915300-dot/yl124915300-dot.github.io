@@ -1,0 +1,43 @@
+GAMEPILOT_MARKETPLACE_CREATOR_REVENUE_V1 — creator handoff
+Prepared 2026-10-16 Asia/Shanghai. ALL messages below UNSENT.
+No DM or form-writing tool/cloud browser is available. An email business contact is not permission to send a DM. No email, public comment or mass outreach was sent.
+Clover/Skoottie: already submitted historically; excluded. Do not repeat.
+
+Common working demo:
+https://yl124915300-dot.github.io/gamepilot/balatro/
+Each link opens the same product. Referral codes are parsed into optional, self-reported review packets. There is NO central visit collector, no independently verified unique-user counting and no executable commission system. A forwarded or edited code can be misattributed. Do not describe these as verified affiliate tracking links.
+Testing used synthetic/self_test events, which must never be counted as creator-acquired users.
+
+1. MALF
+Audience reference: https://majorleaguebalatro.com/creators
+Current official contact page: https://malf.io/contact/ (general questions form, sponsorship/business email).
+Historical form attempt was stopped by reCAPTCHA and was not sent. Current form submission unavailable; no bypass attempted.
+Unique link: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=malf
+Draft for permitted business form only:
+"Hi MALF — your Major League Balatro audience makes you a relevant reviewer for a small early-run teaching tool. GamePilot now compares every supported 1–5-card selection from a manually entered hand and explains which cards score; it also lets a player enter the next state. This prototype is strictly for ordinary cards without Jokers or modifiers, and it has no screenshot AI or paid checkout. The free synthetic demo is here: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=malf . Would you be open to trying it and, only if useful, discussing an optional demonstration for your audience? The code can appear in voluntary feedback receipts; we cannot measure attributed visits centrally. No sponsorship fee or commission settlement is offered or promised at this stage."
+
+2. GothicLordUK
+Audience reference: https://majorleaguebalatro.com/creators
+Primary business-contact evidence: https://bsky.app/profile/gothiclorduk.bsky.social explicitly lists business email.
+Permitted non-email business DM/form route: UNVERIFIED. Do not send until a permitted route is actually confirmed.
+Unique link: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=gothiclorduk
+Draft, only for a later verified permitted DM/form:
+"Hi GothicLordUK — your Balatro teaching and long involvement with the game are why I selected you for this prototype review. GamePilot is a free manual hand-comparison tool for ordinary cards without Jokers or modifiers. Its explanation separates scoring cards from unscored kickers, and the next-state flow requires fresh player input. Demo: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=gothiclorduk . Would you consider trying it and discussing a small educational demonstration if it helps your viewers? Screenshot recognition is unavailable. The referral code is included only in voluntary feedback packets; visits are not centrally tracked. No fee or commission settlement is promised."
+
+3. FrostPrime
+Audience reference: https://majorleaguebalatro.com/creators
+Current primary business-contact read: https://x.com/TheFrostPrime returned 403. Historical business-email evidence is not sufficient to establish a permitted current DM/form route.
+Permitted non-email business DM/form route: UNVERIFIED.
+Unique link: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=frostprime
+Draft, only after current permission is verified:
+"Hi FrostPrime — your competitive Balatro audience could help judge whether this narrow beginner tool is useful. GamePilot enumerates supported plays from ordinary manually entered cards and shows a score breakdown. It intentionally abstains from Joker/modifier states rather than simulating your competitive builds. Free synthetic demo: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=frostprime . Would you be interested in a hands-on review before any discussion of audience distribution? It has no screenshot AI, paid checkout, central visitor tracking or settled commission offer."
+
+4. Nandre
+Audience reference: https://majorleaguebalatro.com/creators
+Historical primary business-email page: https://www.nandre.tv/ ; current public fetch unavailable.
+Permitted current non-email business DM/form route: UNVERIFIED.
+Unique link: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=nandre
+Draft, only after current permission is verified:
+"Hi Nandre — your MLBA casting makes you a relevant reviewer for an explain-the-play experiment. GamePilot is a free ordinary-card hand comparison tool: enter cards, compare immediate supported scores, then manually enter the next state. Demo: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=nandre . Could this make a useful early-game teaching segment if it passes your own test? Plasma Deck, Jokers and modified scoring are explicitly unsupported, and there is no screenshot AI. Optional feedback packets preserve the code, but no central visit tracking or commission settlement is available. I am asking whether you want to test it; no paid placement or payment is committed."
+
+No messages have been submitted, delivered or read by a creator. These drafts are not successful outreach.

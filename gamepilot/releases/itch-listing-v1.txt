@@ -1,0 +1,47 @@
+GamePilot — Balatro Hand Coach
+Short description: Compare ordinary-card Balatro plays, understand the score, and re-enter the next state. Manual input. Free.
+
+ENGLISH PROJECT DESCRIPTION
+A small, unofficial early-run practice tool for Balatro. Enter 1–8 unique ordinary cards and the current base Chips/Mult from your game's Run Info. GamePilot enumerates every 1–5-card selection, ranks supported immediate scores, and shows which cards actually score.
+After playing, optionally record the observed score and manually enter the next visible state. This is not automatic game tracking.
+
+TRY THE DEMO
+Click "Run synthetic demo". AH KH QH JH TH 9C 9D 2S has 218 legal selections. The best supported selection is AH KH QH JH TH: (100 + 51) × 8 = 1,208. The cards and target are synthetic, not a player's screenshot or testimonial.
+Then click "Enter next state", enter your own ordinary cards, check the current base hand values, confirm the supported rules, and compare again.
+
+STRICT SCOPE
+No Jokers, card enhancements, editions, seals, debuffs, Boss effects, Plasma Deck or mods. No duplicate card codes. No consumable actions, discard probabilities, economy or future-draw optimization.
+An optional local image preview is only a visual reference for manual entry. Screenshot AI is BLOCKED: no image model, OCR, automatic state recognition or screenshot-to-advice pipeline is connected.
+Immediate supported-score ranking is not a guarantee of the best long-term action or a won run.
+
+PRIVACY AND PAYMENT
+The comparison needs no login or payment. Inputs and optional image preview stay in page memory; reload clears them. An optional review packet includes the entered state, recommendation, reported result and referral code. Nothing is submitted automatically. Hosting providers may keep normal access logs.
+Free tool. No active paid service or subscription. Do not enable donations until the actual merchant/payout/refund eligibility is verified. itch HTML5 payments, if later enabled, are donations rather than enforced subscriptions.
+
+CREDITS
+Original code, interface and cover graphic, created with AI assistance. No game artwork, screenshots, logos, music, or copied third-party calculator code bundled. Balatro belongs to its respective owners. Not affiliated with LocalThunk or Playstack.
+Base scoring values cross-checked against EFHIII's published implementation; users must enter their actual in-game values. No current-build in-game reproduction has been completed.
+
+UPLOAD MANIFEST (NOT PUBLISHED)
+Title: GamePilot — Balatro Hand Coach
+Suggested slug: gamepilot-balatro-hand-coach (availability UNKNOWN)
+Classification: Tool / game companion, not a mod or a playable copy of Balatro.
+Kind: HTML. Upload gamepilot-balatro-v1.zip with index.html at ZIP root, or upload the standalone index.html.
+Price: free / disable payments while merchant eligibility remains unverified.
+Status: in development / experimental.
+Language: English only.
+Tags: relevant tool/card-game/poker/strategy tags only; no unrelated tags. Use existing tags where available.
+AI disclosure: select AI-assisted code/graphics categories accurately in the current publishing UI.
+Cover: cover-v1.png, original 630 × 500 PNG. The cover shows a synthetic example, not a game screenshot.
+Demo: the actual runnable "Run synthetic demo" button in the uploaded application; no rendered UI screenshot or recorded video has been verified.
+Embed: allow scrolling; responsive layout. Desktop/mobile browser interaction remains unverified; do not mark mobile support tested.
+Before publishing: preview file loading, demo, invalid-state refusal, next-state clearing, keyboard use and image preview in a real cloud browser.
+After publishing: record canonical itch URL, anonymously load it and run the demo; separately search full title on itch and record indexed status. A public URL is not evidence of search indexing.
+
+CURRENT EXECUTION BLOCK
+No callable Work remote cloud browser, itch publishing connector, or authenticated itch session is exposed in this conversation. Public /dashboard fetch fails. Prior Cloudflare block is historical, not re-tested through a browser. No upload or publishing action was performed.
+Official references:
+https://itch.io/docs/creators/html5
+https://itch.io/docs/creators/quality-guidelines
+https://itch.io/docs/creators/getting-indexed
+https://itch.io/docs/creators/payments

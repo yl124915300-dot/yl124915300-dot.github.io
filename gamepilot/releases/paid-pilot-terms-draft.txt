@@ -1,0 +1,27 @@
+CLOSED DRAFT — GamePilot human-reviewed supported-state pilot
+Not an active offer, accepted quote, subscription, checkout or revenue. Price and demand remain unvalidated.
+
+Free experience: unlimited access to the ordinary-card comparison and synthetic demonstration. Free comparison stays available.
+
+Potential paid deliverable: US$4.99 once for a written explanation of ONE supported Balatro state and ONE subsequent player-supplied state, with alternatives and arithmetic. Human-reviewed and AI-assisted, not an automated screenshot model, continuous coaching, full-run solver or guaranteed win.
+Only accept after the operator confirms scope and a specific delivery deadline during an active session. Suggested target: within 48 hours of accepted scope and verified payment. No background staffing or automatic future delivery is currently active.
+Unsupported or unreadable states must be rejected before payment. Player ownership/permission and visible-state accuracy must be confirmed. No account credentials or private gameplay access requested.
+Potential full refund: cannot deliver the agreed scope by the agreed deadline, or the accepted state proves unsupported. This policy and its actual refund process must be confirmed before opening checkout; no refund or payout action is authorized by this document.
+
+Payment gates NOT passed:
+- actual PayPal account country, account type, merchant acceptance eligibility, limitations and supported commercial product;
+- current receiving ability and actual status of funds (pending/on-hold is not cleared revenue);
+- payout bank/country/currency compatibility, minimums, fees, FX and available balance;
+- usable refund procedure, fees and source of refund funds;
+- customer-visible final price, scope, deadline, cancellation/refund terms and explicit acceptance.
+The public PayPal account page redirects to sign-in. No authenticated PayPal tool exists here. Public regional help articles are general information, not proof this account qualifies. No account upgrade, identity entry, payment link, test transaction, refund or withdrawal was performed.
+Do not use friends/family payments for commercial service.
+
+itch.io HTML5: free browser experience, with donations only if the account and payout gates are later satisfied. No claim of an enforceable paid HTML subscription.
+Creator terms: no payable commission, profit share or settlement promise exists. Any future agreement needs reliable attribution, refund handling, net-revenue definition and independently authorized lawful payout ability.
+
+VERIFIED_PAID requires a real independent customer's non-test transaction confirmed by the processor as completed and available. VERIFIED_NET_REVENUE requires reconciled actual proceeds after fees/refunds, with payout status separately recorded. A quote, receipt draft, pending balance or voluntary packet is insufficient.
+References checked:
+https://itch.io/docs/creators/html5
+https://itch.io/docs/creators/payments
+https://www.paypal.com/c2/cshelp/article/how-do-i-withdraw-funds-from-my-paypal-account-help394?locale.x=en_C2

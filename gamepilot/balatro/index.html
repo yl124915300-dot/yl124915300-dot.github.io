@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1418"><title>GamePilot — Balatro Hand Coach</title><meta name="description" content="Free manual Balatro hand comparison for ordinary cards without Jokers or modifiers. Compare legal plays, see scoring reasons, and re-enter the next state. Screenshot AI is unavailable."><style>:root{color-scheme:dark;--bg:#0b1418;--panel:#14252b;--line:#335059;--ink:#f1f5f0;--muted:#b3c6c9;--mint:#9be1b7;--amber:#ffc376}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,sans-serif}main{max-width:1100px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}a{color:var(--mint)}.brand{font-weight:900;letter-spacing:2px}.tag{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mint)}h1{font-size:clamp(32px,5vw,55px);line-height:1.08;max-width:800px;margin:28px 0 14px}h2{font-size:23px;margin:0 0 14px}h3{font-size:18px;margin:12px 0}p{margin:12px 0}.lead{max-width:800px;color:var(--muted);font-size:19px}.layout{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin:24px 0}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}.notice{border-left:3px solid var(--amber);padding:12px 16px;background:#2d2920}.small{font-size:13px;color:var(--muted)}label{display:block;margin:12px 0}input,textarea,button{font:inherit}input[type=text],input[type=number],textarea{display:block;width:100%;padding:11px;border:1px solid #66838c;border-radius:7px;background:#091b21;color:var(--ink);margin-top:5px}input[type=checkbox]{accent-color:var(--mint);width:18px;height:18px;vertical-align:middle}button,.button{display:inline-block;border:1px solid var(--mint);border-radius:7px;background:var(--mint);color:#0b2320;padding:10px 16px;font-weight:700;cursor:pointer;text-decoration:none;margin:5px 5px 5px 0}button.secondary{background:transparent;color:var(--ink);border-color:#66838c}button:disabled{opacity:.45;cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--amber);outline-offset:3px}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;border-bottom:1px solid var(--line);padding:8px}td input[type=number]{min-width:85px;margin:0;padding:6px}.cards{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.card{background:#e7ede6;color:#16252b;border-radius:7px;padding:10px 9px;font-weight:800;min-width:42px;text-align:center}.card.red{color:#a52739}.score{font-size:44px;font-weight:800;color:var(--mint);line-height:1.1}.error{color:var(--amber);font-weight:700}#preview{max-width:100%;max-height:340px;object-fit:contain}#packet{font-family:ui-monospace,monospace;font-size:12px;min-height:150px}footer{border-top:1px solid var(--line);padding-top:15px;margin:24px 0;color:var(--muted);font-size:13px}[hidden]{display:none!important}details summary{cursor:pointer;color:var(--mint)}@media(max-width:780px){main{padding:16px}.layout{grid-template-columns:1fr}.panel{padding:16px}header{align-items:flex-start;gap:16px}}</style></head>
+<body><main>
+<header><span class="brand">GAMEPILOT</span><span class="tag">Balatro Hand Coach / Free / v1.0.0</span></header>
+<p class="tag">Manual, supported-state comparison</p><h1>Choose a play.<br>See why it scores.</h1>
+<p class="lead">Enter up to eight ordinary cards. Compare every selection of one to five cards, see the scoring breakdown, then enter your next state.</p>
+<div class="notice"><strong>Early-run practice tool.</strong> Supports ordinary unique cards, standard scoring, and manually entered hand base values. It cannot model Jokers, enhancements, editions, seals, debuffs, Boss effects, Plasma Deck, consumable actions or mods. It maximizes the immediate supported score, not your chance of winning a run.</div>
+<div class="layout"><div>
+<section class="panel"><h2>1. Confirm the visible state</h2>
+<details><summary>Optional screenshot reference — manual entry only</summary>
+<p><strong>Screenshot AI: BLOCKED.</strong> No image model or automatic state recognition is connected.</p>
+<label><input type="checkbox" id="rights"> I own this image or have permission to use it.</label>
+<label>Image reference (PNG, JPEG, WebP; under 10 MB)<input type="file" id="image" accept="image/png,image/jpeg,image/webp"></label><p id="imageStatus" class="small">No image selected.</p><img id="preview" alt="Your optional game-state reference" hidden><p class="small">Image preview only. The tool does not upload, store or analyze it.</p></details>
+<label>Cards in hand<input id="hand" type="text" placeholder="AS KH QD JC TH 9C 9D 2S" autocomplete="off" spellcheck="false"></label>
+<p class="small">Ranks 2–9, T (10), J, Q, K, A. Suits S = spades, H = hearts, D = diamonds, C = clubs. Example: AH = ace of hearts. Unique cards only.</p>
+<label>Remaining score needed for this Blind<input id="target" type="number" min="0" max="1000000000000" step="1" value="0"></label><p class="small">Enter target minus score already earned; use 0 to skip this comparison.</p>
+<details><summary>Check hand base Chips and Mult</summary><p class="small">Defaults are level 1. Copy the current values from your in-game Run Info. These are hand base values, before card Chips. Royal Flush uses Straight Flush values.</p><div class="scroll"><table><thead><tr><th>Hand</th><th>Base Chips</th><th>Base Mult</th></tr></thead><tbody id="bases"></tbody></table></div></details>
+<label><input id="scope" type="checkbox"> I checked that this state has no Jokers, card modifiers, debuffs, Boss effects, Plasma Deck or changed scoring rules, and the hand base values match my game.</label>
+<label><input id="own" type="checkbox"> These are cards from my own actual game. Unchecked entries and demos are marked self-test.</label>
+<button id="compare">Compare supported plays</button><button id="demo" class="secondary">Run synthetic demo</button>
+<p id="status" role="status" aria-live="polite">Enter cards or run the clearly labeled demo.</p></section>
+<section id="result" class="panel" hidden><h2>2. Compare the immediate score</h2><p id="bestName" class="tag"></p><div id="bestCards" class="cards"></div><div id="points" class="score"></div><p id="formula"></p><p id="targetResult"></p><p id="enumeration" class="small"></p><div class="scroll"><table><thead><tr><th>Hand</th><th>Play</th><th>Score</th></tr></thead><tbody id="alternatives"></tbody></table></div><p class="small">Unscored kickers are omitted when the score ties. Discard odds, future draws, economy and long-term strategy are not evaluated.</p></section>
+</div><aside>
+<section class="panel"><h2>3. Check in game. Update.</h2><p>After trying a play, optionally record its observed score. A report is not independent verification.</p><label>Observed score for that play<input id="observed" type="number" min="0" max="1000000000000" step="1"></label><button id="complete" disabled>Record observed result</button><p id="completionStatus" class="small" role="status"></p><button id="next" class="secondary">Enter next state</button><p class="small">Next state clears the recommendation. You re-enter cards and target; the tool never reads or controls your game.</p></section>
+<section class="panel"><h2>Free experience</h2><p>No account, payment or game modification required. The calculator and supported comparisons are free.</p><p class="small">A possible human-reviewed paid pilot is closed. No paid screenshot AI, subscription, payment link, delivery guarantee or creator payout is active.</p><p id="source" class="small"></p><p class="small">Referral codes appear only in your optional review packet. There is no automatic visit tracking or server-side attribution.</p></section>
+<section id="packetBox" class="panel" hidden><h2>Optional review packet</h2><p class="small">Contains your entered cards, recommendations, referral code and any reported scores. No image or contact data is included. Nothing is sent automatically. Copy into a voluntary review request if you want feedback.</p><label>Packet<textarea id="packet" readonly></textarea></label><button id="copy" class="secondary">Copy packet</button><button id="download" class="secondary">Download packet</button><p id="copyStatus" class="small" role="status"></p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfh8BDs6HOm-eJZNIMXq24dJRYFQKhInEaG72yWCYFWSLbCvg/viewform" target="_blank" rel="noopener noreferrer">Optional free research review form</a><p class="small">External Google Form; no direct image upload. Submission and response time have not been verified for this release.</p></section>
+</aside></div>
+<details class="panel"><summary>Verification and limits</summary><p>The original comparison code has 31 deterministic checks. No current game build, player screenshot, live game outcome or independent use has been verified.</p><button id="selftests" class="secondary">Run scoring checks</button><p id="testStatus" role="status"></p><p class="small">Base values cross-checked against <a href="https://github.com/EFHIII/balatro-calculator/blob/main/balatro-sim.js" target="_blank" rel="noopener noreferrer">EFHIII's independently authored calculator</a>. This is a reference implementation, not an official game guarantee. Enter your actual in-game values.</p></details>
+<footer>Independent, unofficial tool for Balatro. Not affiliated with LocalThunk or Playstack. Original interface and code; no game artwork or screenshots bundled. AI-assisted development disclosed. Image and hand inputs stay in this page's memory; reloading clears the session. Browser hosts may keep ordinary access logs.<br><a href="https://yl124915300-dot.github.io/gamepilot/community/#calculator" target="_blank" rel="noopener noreferrer">Original Blue Joker calculator</a></footer>
+</main><script>const GamePilotEngine = (() => {
+"use strict";
+const names = ["High Card","Pair","Two Pair","Three of a Kind","Straight","Flush","Full House","Four of a Kind","Straight Flush"];
+const defaults = [[5,1],[10,2],[20,2],[30,3],[30,4],[35,4],[40,4],[60,7],[100,8]];
+function parse(text) {
+  if (typeof text !== "string") throw Error("Enter card codes.");
+  const tokens=text.trim().toUpperCase().replace(/10/g,"T").split(/[\s,]+/).filter(Boolean);
+  if(tokens.length<1||tokens.length>8) throw Error("Enter 1 to 8 ordinary cards.");
+  if(new Set(tokens).size!==tokens.length) throw Error("Duplicate card codes are unsupported. Use unique ordinary cards.");
+  return tokens.map(code=>{
+    if(!/^[2-9TJQKA][SHDC]$/.test(code)) throw Error("Use rank + suit: AS, TH, 9D, 2C. Modifiers are unsupported.");
+    const rank="23456789TJQKA".indexOf(code[0])+2;
+    return {code,rank,suit:code[1],chips:rank===14?11:Math.min(rank,10)};
+  });
+}
+function classify(cards) {
+  const byRank=new Map();
+  cards.forEach(c=>byRank.set(c.rank,(byRank.get(c.rank)||[]).concat(c)));
+  const groups=[...byRank.values()].sort((a,b)=>b.length-a.length||b[0].rank-a[0].rank);
+  const ranks=[...byRank.keys()].sort((a,b)=>a-b);
+  const flush=cards.length===5 && cards.every(c=>c.suit===cards[0].suit);
+  const straight=cards.length===5 && ranks.length===5 && (ranks[4]-ranks[0]===4 || ranks.join(",")==="2,3,4,5,14");
+  let type,scoring;
+  if(straight&&flush){type=8;scoring=cards;}
+  else if(groups[0].length===4){type=7;scoring=groups[0];}
+  else if(groups[0].length===3&&groups[1]?.length===2){type=6;scoring=cards;}
+  else if(flush){type=5;scoring=cards;}
+  else if(straight){type=4;scoring=cards;}
+  else if(groups[0].length===3){type=3;scoring=groups[0];}
+  else if(groups[0].length===2&&groups[1]?.length===2){type=2;scoring=groups[0].concat(groups[1]);}
+  else if(groups[0].length===2){type=1;scoring=groups[0];}
+  else{type=0;scoring=[cards.reduce((a,b)=>a.rank>=b.rank?a:b)];}
+  return {type,name:names[type],scoring,cardChips:scoring.reduce((s,c)=>s+c.chips,0)};
+}
+function validateTable(table) {
+  if(!Array.isArray(table)||table.length!==9||table.some(r=>!Array.isArray(r)||r.length!==2||r.some(n=>!Number.isSafeInteger(n)||n<0||n>1000000))) throw Error("Each hand's base Chips and Mult must be whole numbers from 0 to 1,000,000.");
+}
+function score(cards,table=defaults){
+  validateTable(table);
+  const c=classify(cards),[baseChips,mult]=table[c.type];
+  return {...c,played:cards.map(c=>c.code),scoring:c.scoring.map(c=>c.code),baseChips,mult,totalChips:baseChips+c.cardChips,score:(baseChips+c.cardChips)*mult};
+}
+function compare(text,table=defaults,target=0,confirmed=false) {
+  if(!confirmed) throw Error("Confirm the supported rules before comparing.");
+  if(!Number.isSafeInteger(target)||target<0||target>1000000000000) throw Error("Remaining target must be a whole number from 0 to 1,000,000,000,000.");
+  validateTable(table); const cards=parse(text), results=[];
+  for(let mask=1;mask<(1<<cards.length);mask++){
+    const played=cards.filter((_,i)=>mask&(1<<i));
+    if(played.length<=5)results.push(score(played,table));
+  }
+  results.sort((a,b)=>b.score-a.score||a.played.length-b.played.length||a.played.join().localeCompare(b.played.join()));
+  const seen=new Set(),distinct=[];
+  for(const r of results){const k=r.type+":"+r.scoring.slice().sort().join();if(!seen.has(k)){seen.add(k);distinct.push(r);}}
+  return {cards:cards.map(c=>c.code),combinations:results.length,target,best:distinct[0],alternatives:distinct.slice(0,5),meetsTarget:target>0?distinct[0].score>=target:null};
+}
+function source(query) {
+  const m=/(?:^|[?&])ref=([^&]*)/.exec(query||"");
+  let value="direct"; try { value=m?decodeURIComponent(m[1]):"direct"; } catch { return "unrecognized"; }
+  return ["itch","malf","gothiclorduk","frostprime","nandre","direct"].includes(value)?value:"unrecognized";
+}
+return {version:"1.0.0",names,defaults,parse,classify,score,compare,source};
+})();
+function runGamePilotTests(e) {
+const passed=[];
+function check(name,fn){if(!fn())throw Error("FAIL: "+name);passed.push(name);}
+function val(cards){return e.score(e.parse(cards));}
+function rejects(fn){try{fn();return false;}catch{return true;}}
+const fixtures=[
+["High Card","AS KD 9H 7C 2D",16],
+["Pair","AH AD KS QD 2C",64],
+["Two Pair","KH KD 2S 2D AH",88],
+["Three of a Kind","QH QS QD AS 2C",180],
+["Straight","9S 8H 7D 6C 5S",260],
+["Flush","AS JS 8S 4S 2S",280],
+["Full House","AH AD AC KH KD",372],
+["Four of a Kind","AH AD AC AS KD",728],
+["Straight Flush","AH KH QH JH TH",1208],
+["Straight","AS 2H 3D 4C 5S",220]];
+fixtures.forEach(([name,cards,points])=>check(name+" "+cards,()=>val(cards).name===name&&val(cards).score===points));
+check("Ace cannot wrap Q K A 2 3",()=>val("QH KD AS 2C 3H").type===0);
+check("Kickers never score for a pair",()=>val("AH AD KS QD 2C").scoring.length===2);
+check("10 spelling accepted",()=>e.parse("10h")[0].code==="TH");
+check("Blank rejected",()=>rejects(()=>e.parse("")));
+check("Duplicates rejected",()=>rejects(()=>e.parse("AS AS")));
+check("9 cards rejected",()=>rejects(()=>e.parse("AS KS QS JS TS 9S 8S 7S 6S")));
+check("Markup rejected",()=>rejects(()=>e.parse("<img>")));
+check("Modifier rejected",()=>rejects(()=>e.parse("AS+")));
+check("Missing supported-rules consent rejected",()=>rejects(()=>e.compare("AS",e.defaults,0,false)));
+check("Negative target rejected",()=>rejects(()=>e.compare("AS",e.defaults,-1,true)));
+check("Blank/NaN hand base rejected",()=>rejects(()=>e.compare("AS",e.defaults.map((r,i)=>i===0?[NaN,1]:r),0,true)));
+check("Fractional base rejected",()=>rejects(()=>e.compare("AS",e.defaults.map((r,i)=>i===0?[1.5,1]:r),0,true)));
+check("All 218 subsets for 8 cards considered",()=>e.compare("AH KH QH JH TH 9C 9D 2S",e.defaults,1000,true).combinations===218);
+check("Demo selects 1208 straight flush",()=>e.compare("AH KH QH JH TH 9C 9D 2S",e.defaults,1000,true).best.score===1208);
+check("Smallest tied play avoids throwing kickers",()=>e.compare("AH AD KS QD 2C",e.defaults,0,true).best.played.length===2);
+const leveled=e.defaults.map(r=>r.slice());leveled[1]=[100,10];
+check("Upgraded pair can outrank a flush",()=>e.compare("AH AD KS QS 9S 6S 2S",leveled,0,true).best.type===1);
+check("Target comparison inclusive",()=>e.compare("AS",e.defaults,16,true).meetsTarget===true);
+check("Target above best fails",()=>e.compare("AS",e.defaults,17,true).meetsTarget===false);
+check("Source code preserved",()=>e.source("?ref=malf&test=1")==="malf");
+check("Unknown source bounded",()=>e.source("?ref=%3Cscript%3E")==="unrecognized");
+check("Malformed encoding safe",()=>e.source("?ref=%ZZ")==="unrecognized");
+return {passed:passed.length,failed:0,checks:passed,scope:"Pure scoring and source parser only. No browser, live game, screenshot model, independent user or payment verification."};
+}
+
+(() => {
+"use strict";
+const e=GamePilotEngine,$=id=>document.getElementById(id);
+let last=null,history=[],imageURL=null,step=1,kind="self_test";
+const ref=e.source(location.search),session=crypto.randomUUID?crypto.randomUUID():String(Date.now())+"-"+Math.random().toString(36).slice(2);
+$("source").textContent="Referral code: "+ref+". No visit data is sent.";
+e.names.forEach((name,i)=>{
+ const row=document.createElement("tr");
+ const title=document.createElement("th");title.scope="row";title.textContent=name;row.append(title);
+ ["Chips","Mult"].forEach((label,j)=>{const td=document.createElement("td"),n=document.createElement("input");n.type="number";n.min="0";n.max="1000000";n.step="1";n.value=e.defaults[i][j];n.id="base-"+i+"-"+j;n.setAttribute("aria-label",name+" base "+label);n.addEventListener("input",invalidate);td.append(n);row.append(td);});
+ $("bases").append(row);
+});
+function invalidate(){$("completionStatus").textContent="";$("observed").value="";last=null;$("result").hidden=true;$("packetBox").hidden=true;$("status").textContent="Input changed. Compare again before using a result.";$("complete").disabled=true;}
+function table(){return e.defaults.map((_,i)=>[0,1].map(j=>{const s=$("base-"+i+"-"+j).value;return s.trim()===""?NaN:Number(s);}));}
+function timestamp(){return new Date().toLocaleString("en-GB",{timeZone:"Asia/Shanghai",hour12:false})+" Asia/Shanghai";}
+function event(action,data){history.push({action,time:timestamp(),step,kind,...data});}
+function cards(codes,container){container.replaceChildren();codes.forEach(code=>{const el=document.createElement("span");el.className="card"+(/[HD]$/.test(code)?" red":"");el.textContent=code;container.append(el);});}
+function packet(){if(!last)return;const data={product:"GamePilot Balatro Hand Coach",version:e.version,session,referral:ref,kind,attribution:"Self-reported receipt only; no server visit analytics or verified identity",time:timestamp(),step,state:{cards:last.cards,baseTable:table(),target:last.target,supportedRulesConfirmed:true},recommendation:last.best,history};$("packet").value=JSON.stringify(data,null,2);$("packetBox").hidden=false;}
+function compare(){
+ invalidate();
+ try{
+  const v=$("target").value;const target=v.trim()===""?NaN:Number(v);
+  last=e.compare($("hand").value,table(),target,$("scope").checked);
+  kind=$("own").checked?"player_report":"self_test";
+  const b=last.best;
+  cards(b.played,$("bestCards"));$("bestName").textContent=b.name;$("points").textContent=b.score.toLocaleString("en-US");
+  $("formula").textContent="("+b.baseChips+" base Chips + "+b.cardChips+" scoring-card Chips) × "+b.mult+" Mult = "+b.score+". Scoring cards: "+b.scoring.join(", ")+".";
+  $("targetResult").textContent=last.target===0?"No target comparison requested.":last.meetsTarget?"This supported play reaches the remaining target.":"No supported play in these cards reaches the remaining target. This tool does not evaluate discards or future draws.";
+  $("alternatives").replaceChildren();
+  last.alternatives.forEach(r=>{const tr=document.createElement("tr");[r.name,r.played.join(" "),String(r.score)].forEach(t=>{const td=document.createElement("td");td.textContent=t;tr.append(td);});$("alternatives").append(tr);});
+  $("enumeration").textContent=last.combinations+" legal selections checked. Ties prefer fewer played cards; equal-score ties may exist.";
+  $("status").textContent="Comparison complete for the confirmed rules only.";$("result").hidden=false;$("complete").disabled=false;
+  event("comparison",{cards:last.cards,bestScore:b.score});packet();
+ }catch(err){$("status").textContent=err.message;}
+}
+function demo(){
+ $("hand").value="AH KH QH JH TH 9C 9D 2S";$("target").value="1000";$("scope").checked=true;$("own").checked=false;
+ e.defaults.forEach((r,i)=>r.forEach((n,j)=>{$("base-"+i+"-"+j).value=n;}));compare();
+}
+$("compare").addEventListener("click",compare);$("demo").addEventListener("click",demo);
+["hand","target","scope","own"].forEach(id=>$(id).addEventListener("input",invalidate));
+$("next").addEventListener("click",()=>{step++;$("hand").value="";$("target").value="0";$("scope").checked=false;$("observed").value="";$("image").value="";if(imageURL)URL.revokeObjectURL(imageURL);imageURL=null;$("preview").hidden=true;$("imageStatus").textContent="No image selected.";invalidate();$("status").textContent="State "+step+": enter the cards now visible and the remaining target. Base hand values are retained; update them if they changed.";$("hand").focus();});
+$("complete").addEventListener("click",()=>{
+ if(!last)return;
+ const s=$("observed").value,n=Number(s);
+ if(s.trim()===""||!Number.isSafeInteger(n)||n<0||n>1000000000000){$("completionStatus").textContent="Enter the actual observed score as a whole number.";return;}
+ event("observed_result",{observedScore:n,predictedScore:last.best.score,kind:$("own").checked?"player_report":"self_test"});
+ $("completionStatus").textContent=n===last.best.score?"Reported score matches this prediction. This is a self-report.":"Reported score differs. Recheck inputs and unsupported effects before another recommendation.";
+ packet();
+});
+$("image").addEventListener("change",()=>{
+ if(imageURL)URL.revokeObjectURL(imageURL);imageURL=null;$("preview").hidden=true;
+ const f=$("image").files[0];if(!f){$("imageStatus").textContent="No image selected.";return;}
+ if(!$("rights").checked){$("image").value="";$("imageStatus").textContent="Confirm you own or have permission to use the image first.";return;}
+ if(!["image/png","image/jpeg","image/webp"].includes(f.type)||f.size>10*1024*1024){$("image").value="";$("imageStatus").textContent="Use a PNG, JPEG or WebP smaller than 10 MB.";return;}
+ imageURL=URL.createObjectURL(f);$("preview").src=imageURL;$("preview").hidden=false;$("imageStatus").textContent="Reference image stays in this browser. No recognition runs. Enter and check the visible cards yourself.";
+});
+$("rights").addEventListener("change",()=>{if(!$("rights").checked){$("image").value="";if(imageURL)URL.revokeObjectURL(imageURL);imageURL=null;$("preview").hidden=true;$("imageStatus").textContent="Image removed.";}});
+$("copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("packet").value);$("copyStatus").textContent="Copied. Nothing has been sent.";}catch{$("packet").focus();$("packet").select();$("copyStatus").textContent="Select and copy this packet manually."; }});
+$("download").addEventListener("click",()=>{const u=URL.createObjectURL(new Blob([$("packet").value],{type:"application/json"})),a=document.createElement("a");a.href=u;a.download="gamepilot-review-packet.json";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);});
+$("selftests").addEventListener("click",()=>{try{const r=runGamePilotTests(e);$("testStatus").textContent=r.passed+" scoring/source checks passed. These are self-tests, not player validation.";}catch(err){$("testStatus").textContent=err.message;}});
+})();
+</script></body></html>

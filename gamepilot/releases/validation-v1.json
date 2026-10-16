@@ -1,0 +1,70 @@
+{
+  "time": "2026-10-16 18:35:41 Asia/Shanghai",
+  "engine": {
+    "passed": 31,
+    "failed": 0,
+    "checks": [
+      "High Card AS KD 9H 7C 2D",
+      "Pair AH AD KS QD 2C",
+      "Two Pair KH KD 2S 2D AH",
+      "Three of a Kind QH QS QD AS 2C",
+      "Straight 9S 8H 7D 6C 5S",
+      "Flush AS JS 8S 4S 2S",
+      "Full House AH AD AC KH KD",
+      "Four of a Kind AH AD AC AS KD",
+      "Straight Flush AH KH QH JH TH",
+      "Straight AS 2H 3D 4C 5S",
+      "Ace cannot wrap Q K A 2 3",
+      "Kickers never score for a pair",
+      "10 spelling accepted",
+      "Blank rejected",
+      "Duplicates rejected",
+      "9 cards rejected",
+      "Markup rejected",
+      "Modifier rejected",
+      "Missing supported-rules consent rejected",
+      "Negative target rejected",
+      "Blank/NaN hand base rejected",
+      "Fractional base rejected",
+      "All 218 subsets for 8 cards considered",
+      "Demo selects 1208 straight flush",
+      "Smallest tied play avoids throwing kickers",
+      "Upgraded pair can outrank a flush",
+      "Target comparison inclusive",
+      "Target above best fails",
+      "Source code preserved",
+      "Unknown source bounded",
+      "Malformed encoding safe"
+    ],
+    "scope": "Pure scoring and source parser only. No browser, live game, screenshot model, independent user or payment verification."
+  },
+  "uiHarness": {
+    "passed": 3,
+    "checks": [
+      "Synthetic demo -> recommendation and receipt",
+      "Duplicate input clears result",
+      "Next state clears cards and scope"
+    ],
+    "environment": "In-memory DOM stub, not a browser; layout/file/clipboard not verified"
+  },
+  "archive": {
+    "entries": [
+      {
+        "name": "index.html",
+        "bytes": 23842
+      },
+      {
+        "name": "README.txt",
+        "bytes": 451
+      }
+    ],
+    "totalBytes": 24507,
+    "crcVerified": true,
+    "rootIndex": true
+  },
+  "browserE2E": "UNKNOWN: no callable cloud browser",
+  "imageModel": "BLOCKED",
+  "liveGameReproduction": "UNKNOWN",
+  "independentUsers": "UNKNOWN",
+  "paymentVerification": "NOT_PERFORMED"
+}
