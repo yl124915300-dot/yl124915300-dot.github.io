@@ -65,7 +65,7 @@
 <section class="note good" id="calculator">
 <h3>Try the numbers yourself</h3>
 <div class="tool">
-<label>Cards left in draw deck<input id="deck" type="number" value="35" min="0" max="999" inputmode="numeric"></label>
+<label>Cards left in draw deck (whole cards, 0–999)<input id="deck" type="number" value="35" min="0" max="999" step="1" inputmode="numeric"></label>
 <label>Illustrative Mult<input id="mult" type="number" value="12" min="0" max="1000000" step=".1" inputmode="decimal"></label>
 <div><small>Blue Joker contribution</small><output id="chips" aria-live="polite">+70 Chips</output><small id="estimate">Approx. +840 score at 12 Mult, ignoring other interactions.</small></div>
 </div>
@@ -96,6 +96,6 @@
 <footer><p><strong>GamePilot Decision Desk</strong> · 16 October 2026 · Independent community research, not affiliated with Mega Crit, Grinding Gear Games, LocalThunk or Playstack. Original text and layout; no copied game screenshots or artwork. No paid Mod or live-game automation offered.</p><p><a href="/gamepilot/replays/nibbits-14hp/">See the earlier STS2 replay analysis</a>.</p></footer>
 </main>
 <script>
-(function(){var d=document.getElementById('deck'),m=document.getElementById('mult'),c=document.getElementById('chips'),s=document.getElementById('estimate');function upd(){var n=Math.min(999,Math.max(0,Number(d.value)||0)),mm=Math.min(1000000,Math.max(0,Number(m.value)||0)),chips=2*n;c.textContent='+'+chips.toLocaleString('en-US')+' Chips';s.textContent='Approx. +'+(chips*mm).toLocaleString('en-US',{maximumFractionDigits:1})+' score at '+mm+' Mult, ignoring other interactions.'}d.addEventListener('input',upd);m.addEventListener('input',upd);upd()})();
+(function(){var d=document.getElementById('deck'),m=document.getElementById('mult'),c=document.getElementById('chips'),s=document.getElementById('estimate');function upd(){var n=Number(d.value),mm=Number(m.value);if(d.value.trim()===''||!Number.isInteger(n)||n<0||n>999){c.textContent='No result';s.textContent='Enter a whole number of draw-deck cards from 0 to 999.';return}if(m.value.trim()===''||!Number.isFinite(mm)||mm<0||mm>1000000){c.textContent='No result';s.textContent='Enter an illustrative Mult from 0 to 1,000,000.';return}var chips=2*n;c.textContent='+'+chips.toLocaleString('en-US')+' Chips';s.textContent='Approx. +'+(chips*mm).toLocaleString('en-US',{maximumFractionDigits:1})+' score at '+mm+' Mult, ignoring other interactions.'}d.addEventListener('input',upd);m.addEventListener('input',upd);upd()})();
 </script>
 </body></html>
