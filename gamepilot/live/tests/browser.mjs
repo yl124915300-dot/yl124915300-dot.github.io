@@ -31,6 +31,54 @@ try {
  assert.equal(await page.locator("#advise").isDisabled(),true);
  report.syntheticOCR="PASS";
  report.syntheticNote="Artificial text image; confirms actual bundled OCR execution only.";
+
+ // Synthetic display stream exercises the actual UI lifecycle; this is not game access.
+ await page.evaluate(()=>{
+   const c=document.createElement("canvas");c.width=1000;c.height=400;const x=c.getContext("2d");
+   window.__paintCapture=color=>{x.fillStyle=color;x.fillRect(0,0,1000,400);x.fillStyle="black";x.font="50px Arial";x.fillText("Synthetic UI fixture only",30,100);};
+   window.__paintCapture("white");
+   navigator.mediaDevices.getDisplayMedia=async()=>c.captureStream(5);
+ });
+ await page.click("#share");
+ await page.waitForFunction(()=>!document.getElementById("advise").disabled);
+ const reviewed={game:"STS2",patch:"SYNTHETIC-UI",encounter:"synthetic-only",turn:1,
+   player:{hp:20,block:0,energy:1},enemies:[{id:"e1",hp:20,block:0,intent:"attack",attack:8,hits:1}],
+   hand:[{id:"c1",name:"Strike",cost:1,value:6},{id:"c2",name:"Defend",cost:1,value:5}],
+   review:{completeBattlefield:true,completeHand:true,plainMechanics:true}};
+ await page.locator("#state").fill(JSON.stringify(reviewed));
+ await page.click("#advise");
+ await page.waitForFunction(()=>document.getElementById("advice").textContent.includes("REVIEWED_CANDIDATE"));
+ assert.match(await page.locator("#advice").innerText(),/Defend/);
+ await page.click("#acted");
+ await page.evaluate(()=>window.__paintCapture("#ffeecc"));
+ await page.waitForFunction(()=>document.getElementById("advice").textContent.includes("Shared image changed"));
+ assert.equal(await page.locator("#acted").isDisabled(),true);
+ await page.click("#capture");
+ await page.waitForFunction(()=>!document.getElementById("advise").disabled);
+ const observed=structuredClone(reviewed);observed.player.energy=0;observed.player.block=5;observed.hand=observed.hand.filter(c=>c.id!=="c2");
+ await page.locator("#state").fill(JSON.stringify(observed));
+ await page.click("#verify");
+ await page.waitForFunction(()=>document.getElementById("advice").textContent.includes("HUMAN_REVIEWED_MATCH"));
+ await page.click("#stop");
+ assert.equal(await page.locator("#advise").isDisabled(),true);
+ report.syntheticDisplayLifecycle="PASS; mocked display stream, no real game or screen permission";
+ // Delayed older decoding must not replace the newer import.
+ await page.evaluate(()=>{
+   const original=createImageBitmap;
+   window.createImageBitmap=async file=>{
+     const image=await original(file);if(file.name==="older.png")await new Promise(r=>setTimeout(r,250));return image;
+   };
+ });
+ const tiny=await page.evaluate(()=>{
+   return ["red","blue"].map(color=>{const c=document.createElement("canvas");c.width=20;c.height=20;
+     const x=c.getContext("2d");x.fillStyle=color;x.fillRect(0,0,20,20);return c.toDataURL("image/png").split(",")[1];});
+ });
+ await page.locator("#file").setInputFiles({name:"older.png",mimeType:"image/png",buffer:Buffer.from(tiny[0],"base64")});
+ await page.locator("#file").setInputFiles({name:"newer.png",mimeType:"image/png",buffer:Buffer.from(tiny[1],"base64")});
+ await page.waitForTimeout(500);
+ assert.deepEqual(await page.evaluate(()=>Array.from(document.getElementById("frame").getContext("2d").getImageData(0,0,1,1).data)),[0,0,255,255]);
+ report.importRace="PASS";
+
  const url="https://github.com/user-attachments/assets/72b8fafe-b2ec-41b1-98fc-41a7c2c87b07";
  try {
    const response=await fetch(url);if(!response.ok)throw Error("Source HTTP "+response.status);

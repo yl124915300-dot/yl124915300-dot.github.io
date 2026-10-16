@@ -12,10 +12,12 @@ function resetInput(){$("state").value=JSON.stringify(blankState(),null,2);$("te
 async function digest(blob){return [...new Uint8Array(await crypto.subtle.digest("SHA-256",await blob.arrayBuffer()))].map(v=>v.toString(16).padStart(2,"0")).join("");}
 function asBlob(){return new Promise(resolve=>canvas.toBlob(resolve,"image/png"));}
 async function setFrame(draw,source){
-  const token=session.begin();revoke("New image; previous review cleared.");const revision=session.revision;
+  const previous=session.frame,transcript=$("state").value;
+  session.begin();revoke("New image; previous review cleared.");const revision=session.revision;
   resetInput();$("advise").disabled=true;$("verify").disabled=true;$("ocr").disabled=true;
   draw();const at=Date.now(),blob=await asBlob(),hash=await digest(blob);
   if(!session.acceptFrame(revision,{hash,at,source,width:canvas.width,height:canvas.height}))return;
+  if(source==="display"&&previous?.source==="display"&&previous.hash===hash)$("state").value=transcript;
   $("advise").disabled=source!=="display";$("verify").disabled=!session.pending||source!=="display";$("ocr").disabled=false;
   status(source==="display"?"Fresh frame. Review within 15 seconds.":"Imported file: OCR/replay only; no live advice.");
 }
@@ -44,9 +46,11 @@ $("stop").onclick=stop;
 $("file").onchange=async()=>{
   const file=$("file").files[0];if(!file)return;
   stop();invalidate("Image import started");resetInput();$("advise").disabled=true;$("ocr").disabled=true;
+  const importRevision=session.revision;
   if(file.size>15*1024*1024){status("Image too large (maximum 15 MB).");return;}
   try{
     const bitmap=await createImageBitmap(file);
+    if(importRevision!==session.revision){bitmap.close();return;}
     if(bitmap.width*bitmap.height>16000000)throw Error("Image exceeds 16 megapixels.");
     await setFrame(()=>{canvas.width=bitmap.width;canvas.height=bitmap.height;ctx.drawImage(bitmap,0,0);},"file");
     bitmap.close();
