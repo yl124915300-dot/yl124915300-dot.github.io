@@ -564,3 +564,76 @@ FIRST_REAL_REVENUE>US$0 尚未实现。没有开收费入口、操作付款/提�
 | VERIFIED_NET_REVENUE | 获证US$0；实际净到账UNKNOWN |
 
 未将接收回执、Sending...、草稿、自测或工具成功计为合作、玩家使用或收入。未访问收款账户、购买/升级服务、投广告、预付、提现、填写KYC、绕过验证码或新建后台自动跟进。首笔收入目标未实现。
+
+
+---
+
+## GAMEPILOT_40_PERCENT_CREATOR_ACQUISITION — 2026-10-16
+
+**当前唯一有效条件：推广方固定40%，我们保留60%；计算基础为可归因、已实际到账的有效订单净收入。所有历史50%/30%及阶梯分成草案全部废止，不得继续对外发送或执行。历史正文仅保留审计，不构成当前报价。付费结账、可靠归因、合法结算核验并经双方同意前，只有条件式意向，无现时佣金应付、预付、保底或收益保证。**
+
+本节最早独立时钟22:42:24；截至2026-10-16 22:52:25 Asia/Shanghai。网页操作仅使用Firecrawl云端，账号仅使用已连接Gmail/GitHub；未访问Mac、本地浏览器、终端或文件。未开发或修改产品、重复QA、发送冷邮件、购买、投广告、开启收费、转出资金或绕过验证码。
+
+### 协调、收件与去重
+
+- 原引用会话及最近GamePilot/Work状态已读；22:52线程清单仅当前任务active，既有GamePilot任务idle/notLoaded，未见并行出站。未唤醒旧任务；本轮没有旧分成出站。
+- 起始Gmail查询覆盖GamePilot、Balatro及Clover/Skoottie、GG/Dan、Fixated/Rarran、The Indie Informer、WayTooManyGames、Gideon、Wingsplain；包括in:anywhere并排除发件/草稿的复查，无上述对象人工新回复。返回项仅GitHub通知，历史SpireSage/LatentCat发件不计；旧目录合并通知不计新合作回复。
+- 六家已接收询问均不重发；Wingsplain继续UNKNOWN，未重试；MALF与itch.io均未访问/重试；历史Awesome目录403接口未再尝试。
+- 为封存作出的更窄Gmail查询返回FORBIDDEN / RATE_LIMIT_EXCEEDED / PERMISSION_DENIED；未连续重试。因此最后时点新增邮件UNKNOWN，不能声称全天无人回复。22:51–22:52 GitHub issue #4仍comments=[]。
+- 原台账及Gmail对The Indie Brew、Bec Lumsden-Keys、Press To Start/Rob去重无既往匹配。未将无匹配当作永远未接触的全渠道证明。
+
+### GP40-BREW-001：新增1次定向表单接收
+
+对象：[The Indie Brew创办人Bec Lumsden-Keys](https://theindiebrew.com.au/about-2/)。本人创办及管理内容的证据来自官方About；其[公开Balatro视频](https://www.youtube.com/watch?v=xjsJnJpHdOk)由本频道发布，正文列Balatro、展示普通牌到Joker机制的讲解。本轮公开读取该视频101 views（不据此推断精准Balatro观众数或购买意愿）。个人决策权依据为创办人/创意负责人身份，不是本人已确认合作。
+
+官方About明确保持独立游戏报道免费、无偿；同时开放品牌广告/赞助询问，[品牌资料](https://theindiebrew.com.au/wp-content/uploads/2025/04/Ad-Sponsor-Packages.pdf)与独立报道分开。本次通过[官方公开联系表单](https://theindiebrew.com.au/contact-us/)提出工具品牌/可选转介询问，明确尊重免费报道政策，不购买编辑报道；仅在其品牌政策允许时讨论未来分成，否则不追求该部分。没有订购广告、接受任何付费套餐或承诺费用。
+
+| Asia/Shanghai | 实际动作与回读 | 状态 |
+|---|---|---|
+| 22:50:47 | 项目身份GamePilot Project、已连接账号回信地址、个性化正文逐字段回读；表单checkValidity=true，无验证iframe | 准备完成，不计发送 |
+| 22:51:06 | 仅点击一次Send | 正常UI提交；没有直接调用表单接口 |
+| 22:51:10 | 同次UI产生的POST https://theindiebrew.com.au/wp-admin/admin-ajax.php 返回HTTP200；正文success=true，message=Your submission was successful.；页面同样可见成功状态 | CREATOR_SENT=1；外部唯一回执ID未返回/UNKNOWN |
+| 22:51:25 | 独立再次读取同一页面，成功状态仍可见，message输入框已清空 | 接收已证；真人阅读、同意、试用、推荐均UNKNOWN |
+
+实际发送正文如下（回信地址不写入公开账本）：
+
+> Hello Bec — your PC Game Pass indie-gems video opens with Balatro's ordinary hands before explaining Joker depth. That makes you a relevant person to judge a small beginner practice tool.
+> 
+> I run GamePilot, a free, unofficial, AI-assisted browser prototype: manually enter up to eight ordinary cards, compare 1–5-card plays and their immediate scores, then enter the next state. No Jokers, modifiers, screenshot recognition, automatic game tracking or full-run optimisation.
+> Demo: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=theindiebrew
+> 
+> Would you personally try it and, only if useful, voluntarily show it to your players? Critical feedback or declining is welcome; no positive review is required.
+> 
+> I respect your free, unbiased editorial-coverage policy. This is a tool-brand/referral enquiry, not an offer to buy editorial coverage. Separately, only if your brand policy permits it, would you consider a future fixed referral share: 40% to you and 60% to us of attributable, actually received valid-order net revenue (after agreed platform/payment fees and refunds)?
+> 
+> This is conditional interest only. The current version is free; paid checkout is unverified, central attribution is absent and lawful commission settlement is not ready. No commission is currently accruing or payable. Any arrangement starts only after paid checkout, reliable attribution and lawful settlement are verified and mutually agreed. No upfront fee or guaranteed earnings.
+> 
+> If referral arrangements conflict with your policy, we will not pursue that part. Independent trial feedback is still welcome.
+> GamePilot Project / yl124915300-dot
+
+本次演示ref仅是可出现在自愿反馈packet中的代码；没有中央访问追踪或已验证销售归因，不能以URL访问或表单接收计算使用/合作。
+
+### 其它必要筛查及商业门槛
+
+- [Press To Start / Rob Grover](https://presstostart.co.uk/blog/why-press-start-on-balatro/)有本人Balatro文章，网站明确使用联盟链接并开放合作；[本人社区](https://www.skool.com/press-to-start-launchpad-7566)确认其创办人身份。但[公开联系表单](https://presstostart.co.uk/contact-us/)实际必填Phone，无已有授权项目电话号码，未填造、绕过校验或提交，CONTACT_BLOCKED_REQUIRED_PHONE。不计CREATOR_SENT。
+- [Video Chums规则](https://videochums.com/about)明确拒绝利益交换式刊登；[Higher Plain Games](https://higherplaingames.com/contact/)明确不接收生成式AI代码/素材项目，均排除、未联系。GameStrategyHub官方联系页仅商务邮件；TCGS联系页HTTP522。均未出站，不计合格合作或发送。
+- 公开产品抓取HTTP200；只复核能力说明，未重复核心QA。GitHub当前产品源码blob 9d701b2f7261b9177e14cb05176153721e133cc7 第25行明确paid pilot关闭、无支付链接/创作者付款、无服务器归因；第151行packet仅自报。当前免费版无已开启结账，未更改。
+- 22:51:56仅一次正常只读访问PayPal账户首页，在本Firecrawl会话转至paypal.com/signin。未输入凭据、查看真实账户/流水、升级或开启收费。账号地区、商用收款、提现及创作者合法结算资格UNKNOWN；不能用新云浏览器的匿名状态断言用户所有会话均未登录。
+- itch.io既有Cloudflare HUMAN_REQUIRED继续保留，本轮未访问/刷新/新建itch会话。没有新增市场上架或公开推荐。首笔真实客户净收入>US$0未实现。
+
+### 本轮指标
+
+0仅表示本轮获证事件为0；UNKNOWN表示实际状态/总量未能观测。表单成功不等于合作。
+
+| Metric | 本轮获证及未知边界 |
+|---|---|
+| CREATOR_SENT | 新增1（The Indie Brew）；累计已接收7家；Wingsplain UNKNOWN另列排除；只有新增1使用本轮40%条件 |
+| REAL_HUMAN_REPLY | 获证0；起始查询无人工匹配，最后Gmail限流后的新入站UNKNOWN |
+| TRIAL_ACCEPTED | 获证0；实际UNKNOWN |
+| PUBLIC_RECOMMENDATION_URL | 新增0；当前合作推荐URL UNKNOWN；历史旧工具目录收录不重算 |
+| EXTERNAL_PLAYER_USE | UNKNOWN；获证0，无中心追踪 |
+| ATTRIBUTED_SALES | UNKNOWN；获证0，无可靠中央归因 |
+| VERIFIED_PAID | 获证0笔；实际账户流水UNKNOWN |
+| VERIFIED_NET_REVENUE | 获证US$0；实际净到账UNKNOWN |
+
+下一有效推进条件：Bec本人回复并接受一次独立试用/自愿演示；任何分成正式启动还须付费交付、结账、可靠归因及合法结算具备。未创建后台自动跟进或声称持续值守。
