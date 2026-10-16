@@ -406,3 +406,76 @@ Skoottie/Clover 历史成功1次保持去重，未重发。Rarran/Fixated 的上
 本轮没有开发产品、制作发布素材或另建报告；业务网页操作仅用 Firecrawl 云端浏览器/检索与已连接 GitHub。没有控制用户 Mac、本地浏览器或本地终端，没有购买、投广告、支付、出款、升级套餐、填写税务身份信息或绕过安全步骤。
 
 补充封存事件：2026-10-16 19:41:28.201 Asia/Shanghai，保存后再次在同一云端 itch 标签回读，仍为 https://itch.io/login、标题 Just a moment...、正文 Performing security verification。LOGIN_VERIFIED 仍为 NO/BLOCKED；已将 itch 标签置前供本人接管，未操作验证控件。首次台账提交 ec09cad12f5714319ff695df462ff1dc6f2c144f 已逐字回读一致，历史前缀完整保留。
+
+
+---
+
+## GAMEPILOT_ITCH_ACTUAL_EXECUTION_CONTINUATION — 2026-10-16 19:55–20:02 Asia/Shanghai
+
+**结果：itch.io 未发布。原接管窗口失效且原浏览器会话已销毁；新云端会话正常访问真实登录地址后仍停在 Cloudflare 真人验证。新增 1 次 Fixated 接收的 Rarran 定向询问；没有人工回复、独立玩家使用或真实付款证据。首笔客户付款目标未实现。**
+
+本节时区均为 Asia/Shanghai；首个时钟读数 19:55:43。以下秒级时间来自远端浏览器实际执行时钟；只有调用窗口的事件按分钟窗口记录，不倒推秒级动作时间。保留此前台账全文。
+
+### 会话及实际上架动作
+
+| 时间 | 实际动作 / 回读 | 结果 |
+|---|---|---|
+| 19:55–19:56 | 首次将接管链接内 br 标识用于续接，接口返回 Invalid job ID format；随后读取原台账取得正确 scrapeId | 该次失败不证明原会话过期；无网页发布动作 |
+| 19:56:16 | 新云端浏览器打开用户提供的原 Hangar 接管链接 | 正文 This link is unavailable or has expired.，没有 itch 画面 |
+| 19:56–19:57 | 使用原台账的正确 scrapeId 01a1447f-47c6-741e-b4a5-f84f9e1ec1e8 续接 | Browser session has been destroyed.；原会话无法续用 |
+| 19:56–19:58 | 在本任务新会话正常导航至 https://itch.io/login；自然语言调用连接层超时，未当作导航失败或登录成功 | 后续用代码独立读取当前页面 |
+| 19:58:20.150 | 云端读取全部标签，唯一标签 URL 为 https://itch.io/login，标题 Just a moment...，正文 Performing security verification，明确 Cloudflare | LOGIN_VERIFIED=NO/BLOCKED；没有认证后台或账号发布权限证据 |
+| 19:58–20:01 | itch 标签保留供用户本人接管；创作者操作使用同一云端浏览器的另一个标签 | 未点击、解答、伪装或绕过安全挑战，未输入登录凭据 |
+| 20:01:28.829 | 独立回读 itch 标签 | URL /login；相同 Cloudflare 验证 |
+| 20:01:49.871 | 将 itch 标签置前，再读 URL /login、标题 Just a moment...、正文 Performing security verification | 最后观察仍为 NO/BLOCKED；窗口按本次人工接管需要保留，未承诺永久有效或后台持续值守 |
+
+本轮云端续接 scrapeId：01a14491-cacd-738c-ac49-3932332ae187。含令牌的接管/CDP链接只提供给用户，不写入公开仓库。
+
+既有 ZIP、封面和上架说明已定位；说明通过 GitHub 连接器读取，内容 blob 为 82249c025f2fa849c63a6774bd3c0bc351f2e387。未新增代码、发布包、图片或额外方案。由于未通过登录前安全检查，本轮没有创建商品、上传、预览、保存草稿或发布动作；没有商品 URL 可供匿名运行与搜索收录核验。上一轮窄范围浏览器 QA 作为既有证据保留，没有重复计为本轮 QA。
+
+### Rarran / Fixated：拒收后按字段规则修正，最终接收 1 次
+
+当前相关性及许可的一手依据：
+
+- https://majorleaguebalatro.com/creators ：当前页面列有 Rarran、其 Twitch/YouTube 链接与 Balatro 联赛参赛介绍。
+- https://x.com/RarranHS ：本轮读取简介明示 Business 联系地址使用 fixated.com 域；只用于机构关系核对，没有发送邮件。
+- https://fixated.com/contact ：真实页面 For Brands 标签明示可针对特定创作者提出合作询问，并提供公开表单。未把商务邮件许可扩张为 DM 许可。
+
+| 时间 | 实际动作 / 回读 | 结果 |
+|---|---|---|
+| 19:58:39.552 | 云浏览器新标签打开 Fixated 公开 contact 页 | 可见 For Talent / For Brands / For Press 选项及表单 |
+| 19:59–20:00:00.468 | 两次将 For Brands 当成 button 的点击定位超时；检查实际 DOM，发现控件 role=tab | 无提交；不计已发送 |
+| 20:00:08.110 | 正常点击 For Brands tab | 显示特定创作者合作询问说明、Name / Company / Company Website / What are you looking for / Email；无验证码 iframe |
+| 20:00:29.574 | 填写并逐字段回读 | 项目身份 GamePilot Project；独立免费原型；回信地址来自已连接 GitHub 账号资料，公开台账不列出地址；均通过浏览器字段校验 |
+| 20:00:37.491 | 首次点击提交 | 20:00:37.770 实际表单 POST 返回 HTTP 422，明确 Company 上限 32 字符、Looking for 上限 255 字符；拒收，不计发送 |
+| 20:00:45.180 | 独立回读错误页及该次网络响应 | 页面 Something went wrong. Please try again.；确定是字段验证拒收，不是成功 |
+| 20:00:59.027 | 按服务端公开返回的长度规则缩短 Company 及请求正文，重新逐字段回读 | Company=GamePilot free prototype；正文 254 字符；没有改变为付费投放或承诺预算 |
+| 20:01:06.726 | 正常 UI 再提交修正后的请求 | 20:01:07.566 同一表单接口返回 HTTP 200，正文 success |
+| 20:01:28.829 | 独立再次读取页面可见正文 | MESSAGE SENT，并明确已接收消息；这是提交后可见状态，不是隐藏成功模板 |
+
+最终获接收正文：
+
+> For Rarran (MLBA): unpaid, opt-in feedback on GamePilot, a free unofficial AI-assisted Balatro tool. Manual ordinary-card scores; no Jokers/modifiers, screenshot AI or tracking. No sponsorship budget/fees. Demo on company website. Please route to Rarran.
+
+Company Website 为 https://yl124915300-dot.github.io/gamepilot/balatro/ 。没有冒充注册公司，没有承诺费用、佣金、投放、合作或收费资格。没有通过直接调用表单接口发送；记录的是正常 UI 提交产生的实际网络响应。初次 422 拒收后按校验规则纠正，不把两次按钮点击算作两次有效发送。
+
+**CREATOR_SENT 新增 1，仅表示 Fixated 表单已接收；是否转交 Rarran、人工阅读、反馈、推广或合作仍 UNKNOWN。** Clover/Skoottie 与 GG/Dan 未重发；MALF 未提交或操作验证码；未发冷邮件、DM 或群发。历史 Rarran/Fixated 错误不计为历史成功。
+
+### 本轮指标与未完成门槛
+
+| Metric | 本轮获证状态 |
+|---|---|
+| ORIGINAL_SESSION | 原链接失效；正确原会话续接明确 destroyed |
+| LOGIN_VERIFIED | NO / BLOCKED；新会话实际仍为 Cloudflare 真人验证 |
+| LIVE_ITCH_LISTING | 新增0；没有商品URL，没有上传或发布 |
+| ITCH_ANON_USE | UNKNOWN；无本轮商品 |
+| SEARCH_INDEXED | UNKNOWN；无本轮商品，未拿普通网页可达性代替收录 |
+| CREATOR_SENT | 新增1：Fixated / Rarran 表单接收；失败的首次提交不计 |
+| HUMAN_REPLY | 新获证0；本轮未读收件箱，整体 UNKNOWN |
+| INDEPENDENT_USE / QUOTE_ACCEPTED | 新获证0；没有独立玩家输入、接受或交付证据 |
+| VERIFIED_PAID | 新获证0笔；实际账户流水 UNKNOWN |
+| VERIFIED_REVENUE | 获证 US$0；实际净到账 UNKNOWN |
+
+当前阻碍是**用户本人完成 itch.io 安全验证与正常登录**，不是缺少发布授权：用户已明确授权使用现成资产免费发布。验证与登录完成后，账号准入与发布权限仍需实际核查，不能预先视为通过。无 Joker/修饰、手动计算、无 AI 截图识别的范围保持真实；收费与捐赠未开启。
+
+执行范围偏差：开始读取两份技能说明时误调用了本地终端（只读），违反用户限定，随后已告知并停止。后续业务网页操作仅使用 Firecrawl 云端浏览器/读取与已连接 GitHub；未操作本地浏览器、安装软件、购买或升级服务、投广告、付款、出款、填税务身份资料或绕过验证码。没有新建后台定时任务，没有将任务受理或表单接收冒充上架、成交或收入。
