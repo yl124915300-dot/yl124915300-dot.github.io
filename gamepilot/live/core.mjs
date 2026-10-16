@@ -92,16 +92,19 @@ export class Session {
   }
   confirm(token,state,now=Date.now()){
     this.advice=null;
+    if(this.pending)return {status:"ABSTAIN",errors:["Compare the previous action outcome before requesting another candidate."]};
     if(token!==this.revision||!this.frame?.valid) return {status:"ABSTAIN",errors:["The image changed. Review it again."]};
     if(this.frame.source!=="display"||now-this.frame.at>15000||now<this.frame.at)
       return {status:"ABSTAIN",errors:["Advice requires a shared-window frame captured within 15 seconds. File imports are OCR/replay evidence only."]};
     const result=plan(state);
-    if(result.status==="REVIEWED_CANDIDATE"){this.advice={...result,revision:token,expires:this.frame.at+15000,state:copy(state),frameHash:this.frame.hash};}
+    if(result.status==="REVIEWED_CANDIDATE"){this.advice={...result,revision:token,expires:this.frame.at+15000,state:copy(state),frameHash:this.frame.hash};
+      this.events.push({type:"candidate",frameHash:this.frame.hash,action:copy(result.action),expected:copy(result.expected),humanTranscription:true});}
     return result;
   }
   startAction(now=Date.now()){
     if(!this.advice||this.advice.revision!==this.revision||now>this.advice.expires){this.revoke("Expired");return false;}
     this.pending={expected:this.advice.expected,before:this.frame.hash,encounter:this.advice.state.encounter};
+    this.events.push({type:"player_action_pending",frameHash:this.frame.hash,action:copy(this.advice.action),at:now});
     this.revoke("Waiting for player action and a new image");return true;
   }
   verify(state,now=Date.now()){

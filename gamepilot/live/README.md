@@ -12,7 +12,7 @@ This is an additive capture module in the existing GamePilot web repository. The
 - An exactly identical recaptured image can retain its human transcript; a changed image always clears it.
 - Pixel-change sampling, source-ended events, new frame/import, edits and a 15-second expiry revoke old advice. Sampling can miss tiny changes; it is **not** a validated game-state detector.
 - After a player marks a candidate for execution, a different fresh frame and fully reviewed state are required. Exact mismatch withdraws the candidate. A human-entered match is not independent verification.
-- Exported logs contain hashes and outcomes, no image pixels. Images and OCR text stay in browser memory.
+- Exported logs contain hashes, reviewed state, candidate card/target, predicted state and outcomes, no image pixels. Images and OCR text stay in browser memory.
 
 ## Install the cloud-built archive
 

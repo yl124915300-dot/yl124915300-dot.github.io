@@ -18,7 +18,7 @@ async function setFrame(draw,source){
   draw();const at=Date.now(),blob=await asBlob(),hash=await digest(blob);
   if(!session.acceptFrame(revision,{hash,at,source,width:canvas.width,height:canvas.height}))return;
   if(source==="display"&&previous?.source==="display"&&previous.hash===hash)$("state").value=transcript;
-  $("advise").disabled=source!=="display";$("verify").disabled=!session.pending||source!=="display";$("ocr").disabled=false;
+  $("advise").disabled=source!=="display"||!!session.pending;$("verify").disabled=!session.pending||source!=="display";$("ocr").disabled=false;
   status(source==="display"?"Fresh frame. Review within 15 seconds.":"Imported file: OCR/replay only; no live advice.");
 }
 async function capture(){

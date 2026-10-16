@@ -30,3 +30,11 @@ test("mismatch and terminal/unknown screen abstain",()=>{
  wrong.enemies=[];assert.equal(compare(p.expected,wrong).status,"ABSTAIN");
 });
 test("report cannot manufacture real-game acceptance",()=>{const s=session();assert.equal(s.report().real_game_acceptance,"NOT_RUN");assert.equal(s.report().independent_player_review,"NOT_RUN");});
+
+test("unverified action cannot be silently replaced and evidence records candidate",()=>{
+ const s=session();s.confirm(s.revision,state(),1000);s.startAction(1001);
+ const token=s.begin();s.acceptFrame(token,{hash:"after",source:"display",at:1002});
+ assert.equal(s.confirm(s.revision,state(),1003).status,"ABSTAIN");
+ assert.ok(s.events.some(e=>e.type==="candidate"&&e.action.cardId==="c2"));
+ assert.ok(s.events.some(e=>e.type==="player_action_pending"));
+});
