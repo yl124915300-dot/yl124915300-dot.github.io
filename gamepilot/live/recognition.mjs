@@ -1,6 +1,6 @@
 // Pixel-derived observations only. No fixture labels or source IDs enter this module.
 const finite = n => typeof n === "number" && Number.isFinite(n);
-const normalized = s => s.normalize("NFKC").replace(/[|]/g,"1").replace(/\s+/g," ").trim();
+const normalized = s => String(s).normalize("NFKC").replace(/[|]/g,"1").replace(/\s+/g," ").trim();
 export const REGIONS = [
   {id:"hud",box:[0,0,0.6,0.09],psm:"11"},
   {id:"energy",box:[0,0.68,0.23,0.24],psm:"11"},
@@ -68,14 +68,17 @@ export function parseObservations(scans,meta) {
    e.hp=e.confirmed?e.hpCandidates[0]:null;e.confidence=e.confirmed?Math.min(...e.evidence.map(x=>x.confidence)):0;
    delete e.hpCandidates;
  }
+ const visibleStatusText=lines.filter(l=>l.region==="battlefield"&&finite(l.confidence)&&l.confidence>=80&&/\b(?:Weak|Vulnerable|Frail|Strength|Dexterity|Poison|Doom|Intangible)\b|虚弱|易伤|脆弱|力量|敏捷|中毒|灾厄/iu.test(l.text||"")).map(l=>evidence(l,l.region,l.pass));
  const intentText=lines.filter(l=>l.region==="battlefield"&&/\d+\s*[x×]\s*\d+|攻击|attack|逃跑|escape/iu.test(l.text||"")).map(l=>evidence(l,l.region,l.pass));
+ const layoutSupported=Math.abs(meta.width/meta.height-16/9)<0.025;
  const missing=["player.block","completeHand","card.costsAndEffectiveValues","completeBattlefield","enemy.intentsAndBlock","statusesAndRelicEffects","exactGamePatch"];
+ if(!layoutSupported)missing.push("unsupportedLayout");
  if(hp.value===null)missing.push("player.hp");if(energy.value===null)missing.push("player.energy");if(turn.value===null)missing.push("turn");
- return {schema:1,frameHash:meta.frameHash,width:meta.width,height:meta.height,
+ return {schema:1,frameHash:meta.frameHash,width:meta.width,height:meta.height,layoutSupported,
    player:{hp,energy,block:{value:null,reason:"absence of block is not zero"}},
    turn,hand:{cards:cards.sort((a,b)=>a.bbox.x0-b.bbox.x0),complete:false},
    enemies:enemies.sort((a,b)=>a.bbox.x0-b.bbox.x0),intentText,
-   statuses:{value:null,reason:"icon effects/absence cannot be certified by text OCR"},
+   statuses:{value:null,visibleText:visibleStatusText,reason:"icon effects/absence cannot be certified by text OCR"},
    gate:{status:"ABSTAIN",missing,reason:"Partial observations cannot establish all mechanics needed by the basic-card policy."}};
 }
 export function screenshotAdvice(observation) {
@@ -107,8 +110,8 @@ export async function recognizeScreenshot(canvas,worker,frameHash,{onProgress=()
    const [rx,ry,rw,rh]=region.box,x=Math.floor(rx*canvas.width),y=Math.floor(ry*canvas.height);
    const width=Math.min(canvas.width-x,Math.ceil(rw*canvas.width)),height=Math.min(canvas.height-y,Math.ceil(rh*canvas.height));
    for(const pass of ["color","contrast"]){
-     const crop=document.createElement("canvas"),scale=2;
-     crop.width=width*scale;crop.height=height*scale;
+     const crop=document.createElement("canvas"),scale=Math.min(2,2560/canvas.width);
+     crop.width=Math.ceil(width*scale);crop.height=Math.ceil(height*scale);
      const ctx=crop.getContext("2d",{willReadFrequently:true});ctx.drawImage(canvas,x,y,width,height,0,0,crop.width,crop.height);
      if(pass==="contrast"){
        const pixels=ctx.getImageData(0,0,crop.width,crop.height);
@@ -120,7 +123,8 @@ export async function recognizeScreenshot(canvas,worker,frameHash,{onProgress=()
      }
      await worker.setParameters({tessedit_pageseg_mode:region.psm});
      const {data}=await worker.recognize(crop,{}, {text:true,blocks:true});
-     const lines=flatten(data).map(l=>({...l,bbox:{x0:x+l.bbox.x0/scale,y0:y+l.bbox.y0/scale,x1:x+l.bbox.x1/scale,y1:y+l.bbox.y1/scale}}));
+     const sx=crop.width/width,sy=crop.height/height;
+     const lines=flatten(data).map(l=>({...l,bbox:{x0:x+l.bbox.x0/sx,y0:y+l.bbox.y0/sy,x1:x+l.bbox.x1/sx,y1:y+l.bbox.y1/sy}}));
      scans.push({region:region.id,pass,lines,text:data.text,confidence:data.confidence});
      onProgress(region.id,pass);
    }

@@ -49,3 +49,12 @@ test("changed resource maximum is inconclusive",()=>{
  const a=parseObservations(pair("energy","3/3"),meta),b=parseObservations(pair("energy","2/4"),{...meta,frameHash:"after"});
  assert.equal(compareObservations(a,b).status,"INCONCLUSIVE");
 });
+
+test("visible status words are evidence and never certify absent or fully identified icon effects",()=>{
+ const o=parseObservations(pair("battlefield","Vulnerable 2",1200,600),meta);
+ assert.equal(o.statuses.visibleText.length,2);assert.equal(o.statuses.value,null);assert.equal(screenshotAdvice(o).status,"ABSTAIN");
+});
+test("unsupported aspect ratio is explicitly gated",()=>{
+ const o=parseObservations(pair("hud","51/80"),{...meta,width:1000,height:500});
+ assert.ok(o.gate.missing.includes("unsupportedLayout"));assert.equal(o.layoutSupported,false);
+});

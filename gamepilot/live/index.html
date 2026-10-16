@@ -4,12 +4,12 @@
 <link rel="stylesheet" href="style.css"><title>GamePilot — Capture Review</title>
 <main>
 <header><p>GAMEPILOT / FREE RESEARCH ADD-ON</p><h1>Read a frame. Check a move. Read again.</h1>
-<p>STS2 · screenshot OCR + human review · separate companion window</p></header>
+<p>STS2 · automatic partial observations · separate companion window</p></header>
 <aside>Live-game acceptance: NOT RUN. This add-on is not integrated with the historical V5 ZIP.
-OCR does not detect all enemies, companions, card effects or statuses. It cannot certify a complete battlefield.
+Automatic reading preserves unknown fields and cannot yet certify a complete battlefield or produce a verified action.
 No game control or model service is connected.</aside>
 <section class="controls"><button id="share">Share game window</button><button id="capture" disabled>Capture current frame</button>
-<button id="stop" disabled>Stop sharing</button><label class="button">Import image (OCR only)<input id="file" type="file" accept="image/png,image/jpeg,image/webp"></label>
+<button id="stop" disabled>Stop sharing</button><label class="button">Import image (offline replay)<input id="file" type="file" accept="image/png,image/jpeg,image/webp"></label>
 <button id="install" hidden>Install companion</button></section>
 <p id="status" role="status">Choose a game window or import a screenshot. Images stay in this browser.</p>
 <div class="grid"><section>
@@ -23,8 +23,8 @@ No game control or model service is connected.</aside>
 <p class="small">Reads separate HUD, energy, hand, battlefield and turn regions twice. Unknown fields remain unknown. This research recognizer does not yet produce a verified action.</p>
 <pre id="recognition">No automatic observation for this frame.</pre>
 </section><section>
-<h2>2. Review every field</h2>
-<p>Transcribe the entire current hand and every living enemy from this frame. Use stable, separate IDs.
+<h2>2. Legacy manual policy (optional)</h2>
+<p>This separate legacy path requires manual transcription. Transcribe the entire current hand and every living enemy from this frame. Use stable, separate IDs.
 Enter the effective card values shown in game. The planner only supports cost-1 Strike and Defend.</p>
 <p class="small">Set all three review flags true only after checking the whole image.
 plainMechanics requires no powers, buffs/debuffs, damage modifiers, card triggers, summons, escape, random effects, relic effects or other mechanics that alter this decision. Otherwise leave it false and abstain.</p>

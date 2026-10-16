@@ -6,7 +6,8 @@ This is an additive capture module in the existing GamePilot web repository. The
 
 - A separate browser/PWA companion window. The player chooses a game window with the browser's screen-sharing prompt, or imports an image.
 - Real Tesseract.js OCR from image pixels, using bundled English/Chinese data. No model API, credentials, uploads or game API.
-- OCR produces unstructured text. There is **no automatic complete battlefield/hand detector**. The player must transcribe and verify every critical field.
+- The **Recognize fields and compare frames** path reads HUD health, energy, turn, card-name boxes and enemy-side health candidates directly from pixels. It preserves OCR boxes, scores and missing fields, with agreement between color and contrast passes. It does not require a hand-entered state. OCR scores are not calibrated probabilities; the two passes are correlated.
+- The automatic recognizer is incomplete: card costs/effective values, enemy intent and block, complete hand/enemy counts, icon statuses and relic effects remain unknown. It **abstains from action advice**. The separate legacy manual-review policy still requires a full reviewed transcript; it is not used as automatic-recognition evidence.
 - A narrow candidate policy for confirmed cost-1 Strike/Defend cards using effective values from the current screen. It enumerates plays, prioritizes immediate incoming damage and then enemy HP, and shows only the first move.
 - Unsupported cards/effects, incomplete state, lethal supported lines, stale or imported frames abstain. No automatic End Turn or full-run strategy.
 - An exactly identical recaptured image can retain its human transcript; a changed image always clears it.
@@ -58,3 +59,11 @@ Separate Linux/Windows jobs extract the exact CI-built archive and run the launc
 
 A public screenshot OCR pass is only an input-path result. Engineering tests and matching hand-entered states do not satisfy real-player gates.
 For the first real session, record exact game/browser versions; preserve before/after images privately; review enemy count, companions, HP, intent, block, full hand and all mechanics; record the proposed card/target; let the player operate; capture a fresh frame and independently review the outcome. This limited policy may abstain throughout an ordinary run. A complete recognizer and wider tested rules remain necessary.
+
+## Pixel benchmark
+
+The bounded public-still benchmark is `tests/real-benchmark.mjs`. It records original source URLs, SHA-256, dimensions, retrieval time, OCR spans and automatic missing fields in `test-results/real-benchmark.json`. No source ID or reference label is passed to the recognizer. Public screenshot replay is distinct from sharing a live game window, taking a player action or completing a battle.
+
+Source scope: official Mega Crit promotional screenshots from the [Steam store](https://store.steampowered.com/app/2868840/Slay_the_Spire_2/), with publisher attribution. This is a limited technical review, not a licensed training dataset; no general redistribution right is asserted. Originals are downloaded only by the cloud benchmark and are not included in the companion bundle. Exact gameplay build and recording history are unknown. [Publisher content policy](https://www.megacrit.com/content-policy/) is recorded as context, not a blanket screenshot-dataset license.
+
+Automatic before/after comparison reports shared numeric deltas and unknown coverage. Different pixels or a matching energy delta cannot verify action identity, causality, correct enemy targeting, a complete state or a real game session. It never emits a real-action PASS.
