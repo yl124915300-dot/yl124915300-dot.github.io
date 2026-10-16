@@ -23,7 +23,8 @@ async function setFrame(draw,source){
 }
 async function capture(){
   const v=$("video");
-  if(!stream||v.readyState<2)return;
+  const track=stream?.getVideoTracks()[0];
+  if(!track||track.readyState!=="live"||track.muted||v.readyState<2){invalidate("No active, unmuted source frame.");$("advise").disabled=true;$("verify").disabled=true;return;}
   await setFrame(()=>{canvas.width=v.videoWidth;canvas.height=v.videoHeight;ctx.drawImage(v,0,0);},"display");
 }
 function stop(){
@@ -37,7 +38,7 @@ $("share").onclick=async()=>{
     status("Choose the game window in the browser prompt.");
     stream=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:5},audio:false});
     const track=stream.getVideoTracks()[0];track.addEventListener("ended",stop,{once:true});
-    track.addEventListener("mute",()=>{invalidate("Capture source muted");$("advise").disabled=true;$("verify").disabled=true;},{once:true});
+    track.addEventListener("mute",()=>{invalidate("Capture source muted");$("advise").disabled=true;$("verify").disabled=true;});
     $("video").srcObject=stream;status("Waiting for the first shared frame.");await $("video").play();
     $("capture").disabled=false;$("stop").disabled=false;await capture();
   }catch(e){stop();status("No shared window: "+e.message);}

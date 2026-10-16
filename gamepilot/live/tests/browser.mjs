@@ -60,6 +60,15 @@ try {
  await page.locator("#state").fill(JSON.stringify(observed));
  await page.click("#verify");
  await page.waitForFunction(()=>document.getElementById("advice").textContent.includes("HUMAN_REVIEWED_MATCH"));
+ await page.evaluate(()=>{
+   const track=window.__sourceStream.getVideoTracks()[0];
+   Object.defineProperty(track,"muted",{get:()=>true,configurable:true});
+   track.dispatchEvent(new Event("mute"));track.dispatchEvent(new Event("mute"));
+ });
+ await page.click("#capture");
+ assert.equal(await page.locator("#advise").isDisabled(),true);
+ assert.match(await page.locator("#advice").innerText(),/No active, unmuted/);
+ report.mutedSourceGate="PASS; synthetic track mutation only";
  await page.click("#stop");
  await page.evaluate(()=>clearInterval(window.__captureTimer));
  assert.equal(await page.locator("#advise").isDisabled(),true);
