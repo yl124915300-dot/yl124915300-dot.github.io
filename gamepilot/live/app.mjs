@@ -25,7 +25,7 @@ async function capture(){
   const v=$("video");
   const track=stream?.getVideoTracks()[0];
   if(!track||track.readyState!=="live"||track.muted||v.readyState<2){invalidate("No active, unmuted source frame.");$("advise").disabled=true;$("verify").disabled=true;return;}
-  await setFrame(()=>{canvas.width=v.videoWidth;canvas.height=v.videoHeight;ctx.drawImage(v,0,0);},"display");
+  await setFrame(()=>{canvas.width=v.videoWidth;canvas.height=v.videoHeight;ctx.drawImage(v,0,0);smallCtx.drawImage(v,0,0,64,36);lastSmall=new Uint8ClampedArray(smallCtx.getImageData(0,0,64,36).data);},"display");
 }
 function stop(){
   stream?.getTracks().forEach(t=>t.stop());stream=null;$("video").srcObject=null;session.pending=null;lastSmall=null;
