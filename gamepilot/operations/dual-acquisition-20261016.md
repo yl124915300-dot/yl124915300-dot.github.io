@@ -332,3 +332,75 @@
 | VERIFIED_NET_REVENUE | 获证 US$0；实际净到账 UNKNOWN |
 
 **首笔非测试客户真实到账 > US$0 未实现。** 下一必要动作仍是让当前 Firecrawl 团队的 Interact 真正返回可用会话。用户已报告关闭闲置会话但接口仍拒绝；无需再次安装、付费升级、给出密钥或在 Mac 登录来冒充解锁。可用会话返回后沿用现有资产，依次完成真实浏览器QA、用户正常远程登录/必要真人验证、免费发布、匿名演示与独立搜索收录核查。
+
+
+---
+
+## GAMEPILOT_MARKETPLACE_CREATOR_REVENUE_CONTINUATION — 2026-10-16
+
+**本轮结果：补齐“下一状态重新计算”云端浏览器核验；新增 1 次定向商务表单接收。itch.io 仍被正常登录前的 Cloudflare 安全验证阻挡，没有上传、创建或发布商品；首笔真实客户到账 > US$0 尚未实现。**
+
+本节所有事件时间均为 Asia/Shanghai。19:36:10.815 是本轮首个带远端执行时钟的产品快照；此前的续接/新建尝试不补造秒级时间。最后账号观察为 19:40:14.747。仅追加本节，保留此前记录。
+
+### 云端会话、登录与产品实测
+
+- 尝试沿用历史产品 scrapeId `01a14468-42f5-7161-9736-5ce41bbab722`；首次自然语言交互在连接层 50 秒超时。随后两次代码读取均返回 `another execution is in progress`，不能据此判断登录或已完成任何网页动作。该次调用实际返回本轮新浏览器 session `01a1447d-f06c-709b-9bc0-ce4bb922df39`。只停止此本任务新建的卡住会话；停止接口返回 stopped，sessionDurationMs=85000、creditsBilled=10。未终止其它任务会话。
+- 从 itch dashboard 合法新建云端会话，session `01a1447f-4871-726e-86c5-0369e60459f0`，续接 scrapeId `01a1447f-47c6-741e-b4a5-f84f9e1ec1e8`。实际 `https://itch.io/dashboard` 转至 `https://itch.io/login`，标题 `Just a moment...`，正文 `Performing security verification`，并说明 Cloudflare 验证。没有输入凭据、点击或破解挑战，也没有将用户“继续”当作已登录证据。
+- 已向用户返回工具生成的 interactiveLiveViewUrl 供本人正常接管；含访问令牌的窗口链接不写入公开仓库。此会话按本任务接管需求保留；未声称可永久保留或后台持续值守。
+- 19:39:18.581 在本轮云端浏览器中打开用户提供的旧 Hangar 窗口，实际正文为 `This link is unavailable or has expired.`。这说明旧链接当前不可用，不证明旧账号没有登录过。
+- 19:38:48.749 再读新 itch 标签仍为登录页与相同 Cloudflare 验证；19:40:14.747 最后读取仍为 `Just a moment...`（此时正文为空、URL带挑战参数）。仍无认证后台、账号身份或发布权限证据。没有上传、保存商品草稿或发布操作。
+
+| Asia/Shanghai | 产品实际操作 | 结果与证据边界 |
+|---|---|---|
+| 19:36:10.815 | 云端浏览器新标签匿名打开 https://yl124915300-dot.github.io/gamepilot/balatro/ | 标题 GamePilot — Balatro Hand Coach；真实页面及输入/按钮可读。免费、手动普通牌、无 Joker/修饰、无截图 AI、无收费入口的说明仍在页面 |
+| 19:36:26 | 点击 Run synthetic demo；填写 observed=1208 后 Record observed result | 页面出现 1208 分推荐及候选表；导出 packet 的 step=1、kind=self_test，history 含 comparison 与 observed_result。observed 值由本次自测输入，不是游戏实测或玩家反馈 |
+| 19:36:26 | 点击 Enter next state | hand=""、target="0"、scope=false、observed=""，旧建议清除 |
+| 19:36:26.805 | 手动输入 AH AD 2C 3D 4S；target=60；重新勾选支持范围；点击 Compare supported plays | 31 legal selections；Pair AH AD；(10 base Chips + 22 scoring-card Chips) × 2 Mult = 64；页面显示达到目标。packet step=2、kind=self_test、新牌面和目标60，history 新增第二次 comparison；own=false |
+
+**BROWSER_QA=PASS 仅指本任务要求的窄范围核心浏览器流程，最后未核验项现已补齐。** 这些均为合成自测，排除独立玩家、创作者带来的使用、真实截图、AI识别和收入。没有在 itch 上传包后的预览或匿名嵌入运行证据；移动端、真实游戏复现等未由本次检查验证。
+
+### 创作者合作：本轮新增 1 次真实表单接收
+
+本轮选择 Dan Gheesling，使用当前一手机构网站明示的合作联系表单；没有发送邮件、DM、公开评论或广告。无需登录的表单执行不依赖 itch 登录。
+
+- 受众证据：Dan 的 [LocalThunk / Balatro 播客页面](https://www.youtube.com/watch?v=iaIu0PT8n_o) 和其 [官方频道直播列表](https://www.youtube.com/@DanGheesling/streams)；检索结果明确匹配 DanGheesling 与 Balatro。只用于相关性筛选，不推断当前需求、玩家数量或购买能力。
+- 当前代理及许可：[GG Talent 官方创作者页](https://www.ggtalentgroup.com/creators) 在本轮云端浏览器显示 DanGheesling；[Contact 页面](https://www.ggtalentgroup.com/contact) 明示可填写合作询问表单。
+- GG 首页出现 Fir 的锚点链接，但当前 creators#fir 页面未读到 Fir 本人条目，故没有把 Fir 的当前代理关系当成已确认，也没有以其名义提交。
+- 表单显示名使用项目身份 GamePilot Project，Organization 为 GamePilot — independent free prototype；回信地址来自当前已连接 GitHub 账号资料，不猜测或另行采集私人联系方式。公开台账不列出回信地址。
+- 19:37:58.798 提交前回读：必填字段均有效，success/failure 均未显示，iframe 列表为空。
+- 只点击提交一次。该交互调用随后执行超时，**没有重试提交**。独立回读在 19:38:38.712 观察到跳转至 https://www.ggtalentgroup.com/thank-you ；19:38:48.749 再回读标题 `Thank You | GG Talent Group` 与可见正文 `THANK YOU / We will be in touch soon.`。这是本次提交后的接收回执，不是预先隐藏在 HTML 中的成功文案。
+- CREATOR_SENT 新增1：机构表单已接收。是否转交 Dan、Dan 是否阅读、人工回复、测试意愿及合作均 UNKNOWN，没有承诺付费投放、创作者费用或佣金。
+
+本次实际发送正文：
+
+> Hello GG Talent team — this enquiry is specifically for Dan Gheesling. His Balatro coverage and LocalThunk podcast make him a relevant reviewer for a small beginner teaching tool.
+>
+> GamePilot — Balatro Hand Coach is a free, unofficial, AI-assisted browser prototype. It compares 1–5-card selections from up to eight manually entered ordinary cards, explains the immediate score, and lets the player enter the next state. It supports no Jokers or card modifiers and has no screenshot recognition or automatic game tracking.
+>
+> Working demo: https://yl124915300-dot.github.io/gamepilot/balatro/?ref=dangheesling
+>
+> Would Dan be open to trying it and, if useful, discussing an optional educational demonstration for his audience? This is an unpaid, opt-in prototype review request. No fee, commission or placement is promised; payments remain disabled. The optional referral code appears only in voluntary feedback packets, without central visit tracking.
+>
+> GamePilot project / yl124915300-dot
+
+其它筛查不计触达：GothicLordUK 当前检索仅有商务邮件声明，无已验证允许且可写入的非邮件入口；Haelian 没有找到可核验商务表单/DM；LANCERKUN 官网虽允许商务表单并列 Balatro 为兴趣，但其主要身份为艺术/周边创作者，本轮没有取得相关 Balatro 内容受众证据，未发送。没有为凑数联系弱相关对象。
+
+Skoottie/Clover 历史成功1次保持去重，未重发。Rarran/Fixated 的上一轮错误不计发送，本轮未重试。MALF 的历史 reCAPTCHA 没有绕过或重新提交。上述旧结果来自既有台账及本轮用户接续说明，不冒充本轮重新实测。Nik Carter54 未接触。
+
+### 公开发布、使用、付款与唯一当前上架门槛
+
+| Metric | 本轮截至最后观察的状态 |
+|---|---|
+| LOGIN_VERIFIED | NO / BLOCKED；新云端会话仍在 itch 登录前 Cloudflare 验证，无认证后台证据 |
+| BROWSER_QA | PASS：本轮补齐下一状态重新计算；仅支持范围内的合成浏览器自测 |
+| LIVE_ITCH_LISTING | 本轮新增0；未创建/上传/发布，商品 URL UNKNOWN |
+| ANON_USE | GitHub Pages 产品 YES（自测）；itch 商品 UNKNOWN；独立玩家使用获证0、实际总量 UNKNOWN |
+| SEARCH_INDEXED | UNKNOWN；无本轮商品，未把公开页面、部署或规则文档当搜索收录证据 |
+| CREATOR_SENT | 本轮新增1（GG / Dan 定向表单接收）；历史 Clover 1 未重算；人工送达 UNKNOWN |
+| HUMAN_REPLY | 新获证0；GitHub issue #4 本轮 comments=[]；邮件及其它渠道未在本轮读取，整体 UNKNOWN |
+| VERIFIED_PAID | 新获证0笔；实际账户流水 UNKNOWN，没有访问或操作收款账户 |
+| VERIFIED_REVENUE | 获证 US$0；实际净到账 UNKNOWN |
+
+**当前免费 itch 上架的唯一已实测阻碍：用户本人在新云端接管窗口完成 itch.io 的正常安全验证与登录。** 验证后仍需实际核查账号准入、使用现成 ZIP/封面/英文说明免费发布、取得真实商品 URL、匿名运行及独立标题搜索；这些均尚未完成，不能预先承诺会通过。商业终局另外仍缺真实独立客户、接受、交付与到账证据；收款/提现资格仍 UNKNOWN，收费与捐赠保持关闭，itch HTML5 捐赠不描述为订阅。
+
+本轮没有开发产品、制作发布素材或另建报告；业务网页操作仅用 Firecrawl 云端浏览器/检索与已连接 GitHub。没有控制用户 Mac、本地浏览器或本地终端，没有购买、投广告、支付、出款、升级套餐、填写税务身份信息或绕过安全步骤。
