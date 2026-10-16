@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<title>GamePilot Decision Desk | Real game problems, evidence-first answers</title>
+<meta name="description" content="Three documented game decisions: the escaped Gremlin's gold, PoE2 Entangle movement slow, and Balatro's Blue Joker chips. An independent community discussion desk.">
+<meta property="og:title" content="GamePilot Decision Desk — What did that move cost?">
+<meta property="og:description" content="STS2, Path of Exile 2, Balatro: three evidence-based decisions, honest limits, a free player question desk.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://yl124915300-dot.github.io/gamepilot/community/">
+<link rel="canonical" href="https://yl124915300-dot.github.io/gamepilot/community/">
+<link rel="stylesheet" href="styles.css">
+<style>.mini{font-size:13px;color:var(--muted)}.mast{margin:24px 0}.stats{font-size:37px;font-weight:900;color:var(--mint);margin:3px 0}.tool{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:12px}.tool input{width:100%;background:#0b1525;border:1px solid #5c7188;border-radius:8px;color:#fff;padding:12px;font-size:18px;margin-top:5px}.tool label{font-size:15px;font-weight:700}.tool output{font-size:23px}.record{border-left:4px solid var(--mint);padding:10px 14px;background:#18352f}.limit{border-left:4px solid var(--amber);padding:10px 14px;background:#372f26}@media(max-width:730px){.tool{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+<a class="brand" href="#top">GAME<span>PILOT</span> / Decision Desk</a>
+<nav><a href="#cases">The cases</a><a href="#calculator">Calculator</a><a href="#submit">Bring your question</a><a href="/gamepilot/replays/nibbits-14hp/">Replay lab</a></nav>
+</header>
+<section id="top" class="hero">
+<p class="eyebrow">Community / Issue 001 / 16 October 2026</p>
+<h1>What did that move <em>really</em> cost?</h1>
+<p class="lead">Not an AI pretending it found the perfect play. Three real game questions, each with a source, a useful answer, a limitation, and a question for the community.</p>
+<a class="btn" href="#cases">Explore three decisions ↓</a><a class="btn alt" href="#submit">Ask a free question →</a>
+<div class="box warn"><strong>Evidence matters.</strong> “Documented” means we have a published rule or source. “Player reported” means someone described what happened, not that GamePilot reproduced it. “Untested” means there is no independent live-game verification. No real-time gameplay AI has been validated here.</div>
+</section>
+<section id="cases">
+<h2>Three problems, three games</h2>
+<div class="grid">
+<div class="card"><div class="tag">STS2</div><p class="stats">½ gold</p><h3><a href="#sts2">A fight ends. Did you keep the reward?</a></h3><p>Escaping enemies can change the outcome even when HP loss is zero.</p><span class="pill">Patch rule</span></div>
+<div class="card"><div class="tag">POE2</div><p class="stats">Movement</p><h3><a href="#poe2">Does Entangle actually slow attacks?</a></h3><p>What a tooltip seems to say and what the skill does may differ.</p><span class="pill unverified">Patch-specific test needed</span></div>
+<div class="card"><div class="tag">Balatro</div><p class="stats">2 × N</p><h3><a href="#balatro">When is Blue Joker still worth a slot?</a></h3><p>It counts draw-deck cards left, not cards you started with.</p><span class="pill">Card rule</span></div>
+</div>
+</section>
+<article class="box" id="sts2">
+<p class="eyebrow">01 — Slay the Spire 2 / 杀戮尖塔2</p>
+<h2>0 HP lost ≠ 0 resources lost</h2>
+<p><strong>The player report:</strong> In <a href="https://github.com/Torch1230/CombatSolver/issues/239">CombatSolver #239</a>, the player said a solver chose <code>EndTurn</code> despite having three attacks that, according to their later comment, could kill the Fat Gremlin. The encounter would end either way, but escape changes its gold reward.</p>
+<p class="record"><strong>Documented rule:</strong> The published <a href="https://steamdb.info/patchnotes/23811903/">STS2 v0.107.1 change log</a> says that if the Gremlin Merc hadn't stolen any gold and Fat Gremlin escaped, the player now receives <strong>50% of normal encounter gold</strong> rather than none. It does not mean that every escaping enemy halves rewards.</p>
+<p><strong>Why it matters:</strong> A line valued only by HP loss can wrongly treat kill and escape as equivalent. Gold recovered, escape versus kill, energy, and health should be considered separately. Example arithmetic: if a hypothetical normal reward were 40 gold, the documented escape condition awards 20. <strong>Forty gold is an illustration, not this player's observed reward.</strong></p>
+<h3>Checklist for a fair comparison</h3>
+<ol><li>Check exact build, stolen-gold status, escape timer and remaining enemy HP.</li><li>Check each alleged lethal attack's energy cost, target and effective damage.</li><li>Compare kill and escape outcomes: HP lost, actual reward, stolen gold recovered, and execution legality.</li><li>Reproduce any proposed alternative in the right environment before calling it a verified fix.</li></ol>
+<p class="limit"><strong>Limit:</strong> GamePilot did not run this game or reproduce the solver defect. The three-attack lethal claim is from the player. <a href="https://github.com/Torch1230/CombatSolver/issues/239#issuecomment-6197368674">Our public diagnostic reply</a> suggests tests, not a confirmed fix.</p>
+<p><strong>Your call:</strong> Should a solver prefer preserving HP or earning more gold when both lines end the encounter?</p>
+<p class="mini">Sources: <a href="https://github.com/Torch1230/CombatSolver/issues/239#issuecomment-6196952786">player's follow-up</a> · <a href="https://sts2.dev/enemies/fat-gremlin">Fat Gremlin mechanics</a> · <a href="https://steamdb.info/patchnotes/23811903/">published v0.107.1 notes</a>.</p>
+</article>
+<article class="box" id="poe2">
+<p class="eyebrow">02 — Path of Exile 2 / 流放之路2</p>
+<h2>Entangle: does the slow buy you time to dodge?</h2>
+<p><strong>Player's confusion:</strong> An <a href="https://www.pathofexile.com/forum/view-thread/3886066">official-forum report</a> argues that Entangle's generalized “Slow” wording suggests attack and cast speed should change, yet only enemy movement was observed to slow.</p>
+<p class="record"><strong>Reference answer:</strong> The <a href="https://www.poe2wiki.net/wiki/Entangle">community mechanics page</a> describes the current documented Entangle effect as <strong>movement-speed slow only</strong>. <a href="https://poe2db.tw/us/Entangle">Data listings</a> describe a 15% slow per attached vine, but do not by themselves establish attack/cast slowdown or the precise way multiple vines stack.</p>
+<p><strong>Practical decision:</strong> Treat this as movement control, not guaranteed reduction in attacks per second. If your build depends on avoiding hits, test rather than counting a generic tooltip as an attack-speed debuff.</p>
+<h3>A useful four-step reproduction</h3>
+<ol><li>Note the exact client patch, Entangle gem level, supports and monster type.</li><li>Observe several attacks with no other slows active; record their timings.</li><li>Apply vines, then separately measure movement and attack/cast intervals.</li><li>Repeat and share anonymized timestamps, not a claim based on one animation.</li></ol>
+<p class="limit"><strong>Limit:</strong> The original report is from December 2025. GamePilot has not repeated this on the October 2026 build; patches may change mechanics.</p>
+<p><strong>Your call:</strong> Are you seeing movement-only slowdown in the current patch? Which build, monster and supports?</p>
+<p class="mini">Sources: <a href="https://www.pathofexile.com/forum/view-thread/3886066">official player report</a> · <a href="https://www.poe2wiki.net/wiki/Entangle">PoE2 wiki</a> · <a href="https://poe2db.tw/us/Entangle">PoE2DB</a>.</p>
+</article>
+<article class="box" id="balatro">
+<p class="eyebrow">03 — Balatro / 小丑牌</p>
+<h2>Blue Joker is not a fixed +104 Chips.</h2>
+<p><strong>Documented ability:</strong> Blue Joker adds <strong>2 Chips for every card remaining in the draw deck</strong> when it scores. It does not count your hand, played cards or discarded cards. The bonus falls as the deck is drawn down, so early-Blind value differs from late-Blind value.</p>
+<p class="record"><strong>Rule:</strong> <code>Blue Joker Chips = 2 × cards still in draw deck</code>. This is an additive Chips effect; multiplying that by Mult is only a simplified score estimate when other interactions are excluded.</p>
+<section class="note good" id="calculator">
+<h3>Try the numbers yourself</h3>
+<div class="tool">
+<label>Cards left in draw deck<input id="deck" type="number" value="35" min="0" max="999" inputmode="numeric"></label>
+<label>Illustrative Mult<input id="mult" type="number" value="12" min="0" max="1000000" step=".1" inputmode="decimal"></label>
+<div><small>Blue Joker contribution</small><output id="chips" aria-live="polite">+70 Chips</output><small id="estimate">Approx. +840 score at 12 Mult, ignoring other interactions.</small></div>
+</div>
+<p class="mini">The calculator runs locally in your browser and sends no input anywhere. The initial numbers are illustrative, not observations from a player's run.</p>
+</section>
+<h3>Decision checklist</h3>
+<ol><li>Count what remains in your draw deck <em>now</em>, not the whole deck.</li><li>Compare its +Chips contribution to a replacement Joker's actual effect at your current Mult; a +Mult or ×Mult Joker is not directly comparable by printed value alone.</li><li>Recalculate after more drawing or discarding.</li><li>Include synergy, card modifications, boss effects and the rest of the build before selling.</li></ol>
+<p class="limit"><strong>Limit:</strong> The published ability supports the formula. Without a player's hand, Jokers, upgrades and Blind, there is no defensible universal “sell it” recommendation.</p>
+<p><strong>Your call:</strong> How many cards were actually left in your deck when Blue Joker stopped helping?</p>
+<p class="mini">Sources: <a href="https://teemo.dev/game-design/balatro/wiki/jokers/blue-joker/">ability from referenced game data</a> · <a href="https://balatrogame.fandom.com/wiki/Blue_Joker">community reference</a>.</p>
+</article>
+<section id="submit" class="box">
+<p class="eyebrow">Community contribution · no gatekeeping</p>
+<h2>Bring one hard decision. Let's compare the evidence.</h2>
+<p>Send the game and patch, <strong>a public position link or redacted text description</strong>, and one sentence about the choice. No Steam password, no game installation, no payment.</p>
+<p><strong>Important:</strong> the current anonymous Google Form <em>does not upload files directly</em>. You can paste a previously public game-state/screenshot URL or write a text summary. If you'd like a response, optionally leave a public thread link or contact channel; anonymous entries without one cannot receive private replies.</p>
+<a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfh8BDs6HOm-eJZNIMXq24dJRYFQKhInEaG72yWCYFWSLbCvg/viewform">Ask for a free review — no sign-in →</a>
+<a class="btn alt" href="https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/2">Public GitHub question desk (sign-in) →</a>
+<p class="mini">GamePilot is an experimental human-reviewed, AI-assisted research desk, not a validated live autopilot. Response times are not guaranteed. We won't republish your screenshots as case studies without asking. You are welcome to challenge or correct any answer.</p>
+</section>
+<section class="box">
+<h2>How we mark confidence</h2><div class="scroll"><table><thead><tr><th>Label</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Documented</td><td>Mechanic or patch documented, with conditions and a source.</td></tr>
+<tr><td>Player-reported</td><td>An independent player described or demonstrated an outcome; not yet our reproduction.</td></tr>
+<tr><td>Derived</td><td>Math or inference from stated rules, with assumptions.</td></tr>
+<tr><td>Untested</td><td>Hypothetical action or fix requiring a real check.</td></tr>
+</tbody></table></div></section>
+<footer><p><strong>GamePilot Decision Desk</strong> · 16 October 2026 · Independent community research, not affiliated with Mega Crit, Grinding Gear Games, LocalThunk or Playstack. Original text and layout; no copied game screenshots or artwork. No paid Mod or live-game automation offered.</p><p><a href="/gamepilot/replays/nibbits-14hp/">See the earlier STS2 replay analysis</a>.</p></footer>
+</main>
+<script>
+(function(){var d=document.getElementById('deck'),m=document.getElementById('mult'),c=document.getElementById('chips'),s=document.getElementById('estimate');function upd(){var n=Math.min(999,Math.max(0,Number(d.value)||0)),mm=Math.min(1000000,Math.max(0,Number(m.value)||0)),chips=2*n;c.textContent='+'+chips.toLocaleString('en-US')+' Chips';s.textContent='Approx. +'+(chips*mm).toLocaleString('en-US',{maximumFractionDigits:1})+' score at '+mm+' Mult, ignoring other interactions.'}d.addEventListener('input',upd);m.addEventListener('input',upd);upd()})();
+</script>
+</body></html>
