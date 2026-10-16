@@ -1,0 +1,58 @@
+name: GamePilot one-time public calculator check
+on:
+  push:
+    branches:
+      - codex/gamepilot-demand-public-check-20261016
+    paths:
+      - .github/workflows/gamepilot-demand-public-check.yml
+permissions:
+  contents: read
+jobs:
+  anonymous-calculator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Anonymous live browser input checks
+        shell: bash
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+          node <<'GP_JS'
+          const { chromium } = require('playwright');
+          (async () => {
+            const report = { label: 'OPERATOR_SELF_TEST_NOT_PLAYER', timestamp: new Date().toISOString(), url: 'https://yl124915300-dot.github.io/gamepilot/community/#calculator', cases: [] };
+            let browser;
+            try {
+              browser = await chromium.launch({ headless: true });
+              const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+              const page = await context.newPage();
+              const response = await page.goto(report.url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+              report.httpStatus = response && response.status();
+              report.finalUrl = page.url();
+              report.title = await page.title();
+              if (report.httpStatus !== 200 || !report.title.includes('GamePilot')) throw Error('Public page not verified');
+              for (const test of [
+                { width:1280, height:800, deck:'20', mult:'15', chips:'+40 Chips', score:'Approx. +600 score at 15 Mult, ignoring other interactions.' },
+                { width:390, height:844, deck:'27', mult:'10', chips:'+54 Chips', score:'Approx. +540 score at 10 Mult, ignoring other interactions.' },
+                { width:1280, height:800, deck:'40', mult:'8', chips:'+80 Chips', score:'Approx. +640 score at 8 Mult, ignoring other interactions.' }
+              ]) {
+                await page.setViewportSize({width:test.width,height:test.height});
+                await page.locator('#deck').fill(test.deck);
+                await page.locator('#mult').fill(test.mult);
+                const chips = await page.locator('#chips').innerText();
+                const score = await page.locator('#estimate').innerText();
+                const pass = chips === test.chips && score === test.score;
+                report.cases.push({width:test.width,deck:test.deck,mult:test.mult,chips,score,pass});
+                if (!pass) throw Error('Live input readback mismatch');
+              }
+              report.result = 'PASS';
+            } catch (error) {
+              report.result = 'FAIL';
+              report.error = String(error);
+              process.exitCode = 1;
+            } finally {
+              if (browser) await browser.close();
+              console.log('GP_PROBE_RESULT=' + JSON.stringify(report));
+            }
+          })();
+          GP_JS
