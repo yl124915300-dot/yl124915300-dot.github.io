@@ -58,3 +58,13 @@ test("unsupported aspect ratio is explicitly gated",()=>{
  const o=parseObservations(pair("hud","51/80"),{...meta,width:1000,height:500});
  assert.ok(o.gate.missing.includes("unsupportedLayout"));assert.equal(o.layoutSupported,false);
 });
+
+test("a low-score adjacent icon does not discard a high-score numeric token",()=>{
+ const scans=["color","contrast"].map(pass=>({region:"hud",pass,lines:[{text:"@ 75/75",confidence:60,bbox:{x0:100,y0:10,x1:200,y1:30},
+   words:[{text:"@",confidence:20,bbox:{x0:100,y0:10,x1:120,y1:30}},{text:"75/75",confidence:95,bbox:{x0:130,y0:10,x1:200,y1:30}}]}]}));
+ assert.deepEqual(parseObservations(scans,meta).player.hp.value,{current:75,max:75});
+});
+test("upgraded title stays distinct and unknown cost/effect cannot be defaulted",()=>{
+ const o=parseObservations(pair("hand","Strike+",500,900),meta);
+ assert.equal(o.hand.cards[0].name,"Strike+");assert.equal(o.hand.cards[0].cost,null);
+});

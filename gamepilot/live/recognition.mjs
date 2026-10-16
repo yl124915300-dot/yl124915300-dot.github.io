@@ -2,17 +2,20 @@
 const finite = n => typeof n === "number" && Number.isFinite(n);
 const normalized = s => String(s).normalize("NFKC").replace(/[|]/g,"1").replace(/\s+/g," ").trim();
 export const REGIONS = [
-  {id:"hud",box:[0,0,0.6,0.09],psm:"11"},
-  {id:"energy",box:[0,0.68,0.23,0.24],psm:"11"},
-  {id:"hand",box:[0.18,0.72,0.64,0.28],psm:"11"},
+  {id:"hud",box:[0.082,0.012,0.078,0.047],psm:"7",whitelist:"0123456789/"},
+  {id:"energy",box:[0.05,0.78,0.07,0.10],psm:"7",whitelist:"0123456789/"},
+  {id:"hand",box:[0.16,0.57,0.68,0.43],psm:"11"},
   {id:"battlefield",box:[0.12,0.23,0.82,0.5],psm:"11"},
-  {id:"turn",box:[0.80,0.72,0.20,0.26],psm:"11"}
+  {id:"turn",box:[0.845,0.80,0.10,0.06],psm:"7"}
 ];
 const lexicon = [
  ["Strike",/\bStrike\b|打击/iu],["Defend",/\bDefend\b|防御/iu],
  ["Bash",/\bBash\b|痛击/iu],["Anger",/\bAnger\b|愤怒/iu],
  ["Survivor",/\bSurvivor\b|生存者/iu],["Unleash",/\bUnleash\b/iu],
- ["Zap",/\bZap\b|电击/iu],["Dualcast",/\bDualcast\b|双重施放/iu]
+ ["Zap",/\bZap\b|电击/iu],["Dualcast",/\bDualcast\b|双重施放/iu],
+ ["Rip and Tear",/\bRip and Tear\b/iu],["White Noise",/\bWhite Noise\b/iu],
+ ["Bullet Time",/\bBullet Time\b/iu],["Shadowmeld",/\bShadowmeld\b/iu],
+ ["Escape Plan",/\bEscape Plan\b/iu],["Knife Trap",/\bKnife Trap\b/iu]
 ];
 function boxOf(line){return line.bbox||{x0:0,y0:0,x1:0,y1:0};}
 function evidence(line,region,pass) {
@@ -22,7 +25,8 @@ function flatten(data) {
  return (data.blocks||[]).flatMap(b=>(b.paragraphs||[]).flatMap(p=>p.lines||[]));
 }
 export function parseObservations(scans,meta) {
- const lines=scans.flatMap(s=>(s.lines||flatten(s.data||{})).map(l=>({...l,region:s.region,pass:s.pass})));
+ const rawLines=scans.flatMap(s=>(s.lines||flatten(s.data||{})).map(l=>({...l,region:s.region,pass:s.pass})));
+ const lines=rawLines.flatMap(l=>[l,...(l.words||[]).map(w=>({...w,region:l.region,pass:l.pass}))]);
  function read(region,pattern,convert) {
    const found=[];
    for(const l of lines.filter(l=>l.region===region)) {
@@ -47,7 +51,7 @@ export function parseObservations(scans,meta) {
  for(const l of lines.filter(l=>l.region==="hand"&&finite(l.confidence)&&l.confidence>=80)){
    const text=normalized(l.text||""),match=lexicon.filter(([,p])=>p.test(text));
    if(match.length!==1)continue;
-   const name=match[0][0],b=boxOf(l);
+   const name=match[0][0]+(/\+/.test(text)?"+":""),b=boxOf(l);
    let card=cards.find(c=>c.name===name&&Math.abs(c.bbox.x0-b.x0)<meta.width*0.045&&Math.abs(c.bbox.y0-b.y0)<meta.height*0.08);
    if(!card){card={name,bbox:b,evidence:[],cost:null,effectiveValue:null};cards.push(card);}
    card.evidence.push(evidence(l,l.region,l.pass));
@@ -116,15 +120,17 @@ export async function recognizeScreenshot(canvas,worker,frameHash,{onProgress=()
      if(pass==="contrast"){
        const pixels=ctx.getImageData(0,0,crop.width,crop.height);
        for(let i=0;i<pixels.data.length;i+=4){
-         const v=.299*pixels.data[i]+.587*pixels.data[i+1]+.114*pixels.data[i+2];
-         const g=Math.min(255,Math.max(0,(v-90)*1.8));
+         const rgb=[pixels.data[i],pixels.data[i+1],pixels.data[i+2]];
+         const v=region.id==="hud"?Math.max(...rgb):Math.min(...rgb);
+         const g=v>=140?0:255;
          pixels.data[i]=pixels.data[i+1]=pixels.data[i+2]=g;
        }ctx.putImageData(pixels,0,0);
      }
-     await worker.setParameters({tessedit_pageseg_mode:region.psm});
+     await worker.setParameters({tessedit_pageseg_mode:region.psm,tessedit_char_whitelist:region.whitelist||""});
      const {data}=await worker.recognize(crop,{}, {text:true,blocks:true});
      const sx=crop.width/width,sy=crop.height/height;
-     const lines=flatten(data).map(l=>({...l,bbox:{x0:x+l.bbox.x0/sx,y0:y+l.bbox.y0/sy,x1:x+l.bbox.x1/sx,y1:y+l.bbox.y1/sy}}));
+     const mapBox=b=>({x0:x+b.x0/sx,y0:y+b.y0/sy,x1:x+b.x1/sx,y1:y+b.y1/sy});
+     const lines=flatten(data).map(l=>({...l,bbox:mapBox(l.bbox),words:(l.words||[]).map(w=>({...w,bbox:mapBox(w.bbox)}))}));
      scans.push({region:region.id,pass,lines,text:data.text,confidence:data.confidence});
      onProgress(region.id,pass);
    }
