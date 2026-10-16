@@ -68,3 +68,10 @@ test("upgraded title stays distinct and unknown cost/effect cannot be defaulted"
  const o=parseObservations(pair("hand","Strike+",500,900),meta);
  assert.equal(o.hand.cards[0].name,"Strike+");assert.equal(o.hand.cards[0].cost,null);
 });
+
+test("a matched turn phrase uses its word scores, not an adjacent glyph average",()=>{
+ const scans=["channel","binary"].map(pass=>({region:"turn",pass,lines:[{text:"@ End Turn 3)",confidence:78,bbox:{x0:1600,y0:860,x1:1810,y1:930},
+   words:[{text:"@",confidence:25,bbox:{x0:1600,y0:860,x1:1620,y1:880}},
+     ...["End","Turn","3)"].map((text,i)=>({text,confidence:95,bbox:{x0:1630+i*55,y0:880,x1:1680+i*55,y1:905}}))]}]}));
+ assert.equal(parseObservations(scans,meta).turn.value,3);
+});

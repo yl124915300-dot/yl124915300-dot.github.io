@@ -2,8 +2,8 @@
 const finite = n => typeof n === "number" && Number.isFinite(n);
 const normalized = s => String(s).normalize("NFKC").replace(/[|]/g,"1").replace(/\s+/g," ").trim();
 export const REGIONS = [
-  {id:"hud",box:[0.082,0.012,0.078,0.047],psm:"7",whitelist:"0123456789/"},
-  {id:"energy",box:[0.05,0.78,0.07,0.10],psm:"7",whitelist:"0123456789/"},
+  {id:"hud",box:[0.093,0.018,0.057,0.037],psm:"7"},
+  {id:"energy",box:[0.05,0.78,0.07,0.10],psm:"7"},
   {id:"hand",box:[0.16,0.57,0.68,0.43],psm:"11"},
   {id:"battlefield",box:[0.12,0.23,0.82,0.5],psm:"11"},
   {id:"turn",box:[0.845,0.80,0.10,0.06],psm:"7"}
@@ -26,7 +26,18 @@ function flatten(data) {
 }
 export function parseObservations(scans,meta) {
  const rawLines=scans.flatMap(s=>(s.lines||flatten(s.data||{})).map(l=>({...l,region:s.region,pass:s.pass})));
- const lines=rawLines.flatMap(l=>[l,...(l.words||[]).map(w=>({...w,region:l.region,pass:l.pass}))]);
+ const lines=rawLines.flatMap(l=>{
+   const words=l.words||[],spans=[];
+   // Score only the words that match a field; adjacent decorative glyphs are not its confidence.
+   for(let start=0;start<words.length;start++)for(let length=1;length<=4&&start+length<=words.length;length++){
+     const part=words.slice(start,start+length);
+     if(part.some(w=>!finite(w.confidence)||!w.bbox))continue;
+     spans.push({text:part.map(w=>w.text).join(" "),confidence:Math.min(...part.map(w=>w.confidence)),
+       bbox:{x0:Math.min(...part.map(w=>w.bbox.x0)),y0:Math.min(...part.map(w=>w.bbox.y0)),
+         x1:Math.max(...part.map(w=>w.bbox.x1)),y1:Math.max(...part.map(w=>w.bbox.y1))},region:l.region,pass:l.pass});
+   }
+   return [l,...spans];
+ });
  function read(region,pattern,convert) {
    const found=[];
    for(const l of lines.filter(l=>l.region===region)) {
@@ -113,16 +124,16 @@ export async function recognizeScreenshot(canvas,worker,frameHash,{onProgress=()
  for(const region of REGIONS){
    const [rx,ry,rw,rh]=region.box,x=Math.floor(rx*canvas.width),y=Math.floor(ry*canvas.height);
    const width=Math.min(canvas.width-x,Math.ceil(rw*canvas.width)),height=Math.min(canvas.height-y,Math.ceil(rh*canvas.height));
-   for(const pass of ["color","contrast"]){
+   for(const pass of ["channel","binary"]){
      const crop=document.createElement("canvas"),scale=Math.min(2,2560/canvas.width);
      crop.width=Math.ceil(width*scale);crop.height=Math.ceil(height*scale);
      const ctx=crop.getContext("2d",{willReadFrequently:true});ctx.drawImage(canvas,x,y,width,height,0,0,crop.width,crop.height);
-     if(pass==="contrast"){
+     {
        const pixels=ctx.getImageData(0,0,crop.width,crop.height);
        for(let i=0;i<pixels.data.length;i+=4){
          const rgb=[pixels.data[i],pixels.data[i+1],pixels.data[i+2]];
          const v=region.id==="hud"?Math.max(...rgb):Math.min(...rgb);
-         const g=v>=140?0:255;
+         const g=pass==="binary"?(v>=140?0:255):255-v;
          pixels.data[i]=pixels.data[i+1]=pixels.data[i+2]=g;
        }ctx.putImageData(pixels,0,0);
      }
