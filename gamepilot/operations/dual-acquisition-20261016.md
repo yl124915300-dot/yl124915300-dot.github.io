@@ -479,3 +479,39 @@ Company Website 为 https://yl124915300-dot.github.io/gamepilot/balatro/ 。没�
 当前阻碍是**用户本人完成 itch.io 安全验证与正常登录**，不是缺少发布授权：用户已明确授权使用现成资产免费发布。验证与登录完成后，账号准入与发布权限仍需实际核查，不能预先视为通过。无 Joker/修饰、手动计算、无 AI 截图识别的范围保持真实；收费与捐赠未开启。
 
 执行范围偏差：开始读取两份技能说明时误调用了本地终端（只读），违反用户限定，随后已告知并停止。后续业务网页操作仅使用 Firecrawl 云端浏览器/读取与已连接 GitHub；未操作本地浏览器、安装软件、购买或升级服务、投广告、付款、出款、填税务身份资料或绕过验证码。没有新建后台定时任务，没有将任务受理或表单接收冒充上架、成交或收入。
+
+
+---
+
+## GAMEPILOT_ACQUISITION_ONLY — 2026-10-16 20:24–20:37 Asia/Shanghai
+
+本轮新增 **2 次定向表单接收**，均为有 Balatro 报道的独立游戏媒体团队，明确请求本人试用，并仅在认为有价值时公开推荐/演示。没有新增产品功能或重复核心 QA。以下秒级时间来自云浏览器实际时钟。
+
+| 时间 Asia/Shanghai | 外部入口及实际动作 | 独立回读/结果 |
+|---|---|---|
+| 20:33:50.017 | [The Indie Informer 联系表单](https://theindieinformer.com/contact/)；针对编辑团队及 Marcus Stewart 的 Balatro 报道；仅点击提交一次 | 20:33:57.238 读到可见 Thank you for your response 与本次完整提交正文；URL 的 contact-form-sent=32325。接收已证，人工阅读/回复/试用/推荐 UNKNOWN |
+| 20:36:08.875 | [WayTooManyGames 联系表单](https://waytoomany.games/contact/)；明确面向 Leo Faria / Balatro 作者；仅点击提交一次 | 提交后及 20:36:36.421 独立回读可见 Thank you for your response 与本次完整正文；contact-form-sent=193032。接收已证，人工阅读/回复/试用/推荐 UNKNOWN |
+
+相关性及许可：The Indie Informer 的 [Balatro 移动版报道](https://theindieinformer.com/2024/09/05/balatros-mobile-release-will-tighten-its-grip-on-all-of-us-this-month/) 署名 Marcus Stewart，并链接其 Balatro 评测；站内 Contact 为公开询问表单。WayTooManyGames 的 [Balatro 评测](https://waytoomany.games/2024/02/20/review-balatro/) 署名 Leo Faria；Contact 明示 Inquiries 并允许填写表单。上述内容证明题材相关性，不证明受众人数或购买意愿。原台账未发现两站的既往触达记录。
+
+两次均使用 GamePilot Project 项目身份及已连接账号的回信地址；公开台账不记录地址、带令牌回执链接或浏览器接管令牌。正文如实披露免费、非官方、AI-assisted、手动输入普通牌、无 Joker/修饰、无截图识别或实时跟踪；不承诺广告预算、费用或佣金。具体请求为亲自试用，并在确认有价值时发布一次面向初学者的推荐/演示；同时接受直接回复反馈。演示路径分别为 [Indie Informer](https://yl124915300-dot.github.io/gamepilot/balatro/?ref=indieinformer) 和 [WayTooManyGames](https://yl124915300-dot.github.io/gamepilot/balatro/?ref=waytoomanygames)。ref 仅标签，无中心访问归因证据。
+
+其它执行及限制：
+- itch.io 本轮仅一次正常 dashboard 访问，约20:24–20:25转到 login，实际可见 Performing security verification / Cloudflare；HUMAN_REQUIRED。未刷新重试、操作挑战、上传或发布。后续未再核验 itch；无本轮商品 URL。
+- 历史 [Awesome Balatro PR #150](https://github.com/jie65535/awesome-balatro/pull/150) 已由维护者合并，原目录仍链接旧 Blue Joker 算术工具；该历史收录不计本轮新推荐。为现有 Hand Coach 准备的一行目录链接更新已保存于既有 fork，commit e3f9112e40c36ed57917729d78f8a5537c6afecd；[公开比较](https://github.com/jie65535/awesome-balatro/compare/main...yl124915300-dot:awesome-balatro:gamepilot-hand-coach-link)。
+- 对上游创建 PR 和向原 PR 留言分别被 GitHub 连接器以 403 Resource not accessible by integration 拒绝；云浏览器公开比较页显示 Sign in，未登录。**没有创建新 PR，没有将维护者询问送达**，不计触达。仅目录元数据变更，未改产品代码。
+- [GameGrin 联系表单](https://www.gamegrin.com/about-us/contact-us/) 有媒体询问类别，但出现 hCaptcha；停止，未提交。Balatro HQ / BalatroLab 当前有效联系及工具建议入口仅邮件，未发送；GothicLordUK 官网已过期。未用一般产品报错入口冒充商务投稿。
+- 本轮起始及20:36查询三家既有机构与本轮两站相关收件，排除发件/草稿及 GitHub 通知后无匹配；20:37读取现有 issue #4 的 comments=[]。这是已检查渠道无新反馈证据，不断言其它渠道总量为0。Clover/Skoottie、GG/Dan、Fixated/Rarran 未重发；MALF、关闭线索未接触。
+
+| Metric | 本轮结果 |
+|---|---|
+| LIVE_MARKET_LISTING | 新增0；itch未发布，当前 Hand Coach 新目录更新未送达 |
+| CREATOR_CONTACT_SENT | 新增2个编辑/作者团队表单接收；不是2名真人确认 |
+| HUMAN_REPLY | 新获证0；整体 UNKNOWN |
+| CREATOR_RECOMMENDATION_PUBLISHED | 新获证0；整体 UNKNOWN；历史旧工具目录收录单列 |
+| EXTERNAL_PLAYER_USE | 新获证0；实际总量 UNKNOWN，无中心追踪 |
+| QUOTE_ACCEPTED | 本轮0，未报价 |
+| VERIFIED_CUSTOMER_PAYMENT | 新获证0；未读取流水，实际 UNKNOWN |
+| VERIFIED_NET_REVENUE | 获证 US$0；实际净到账 UNKNOWN |
+
+FIRST_REAL_REVENUE>US$0 尚未实现。没有开收费入口、操作付款/提现、购买、投广告、预付、发送冷邮件/电话/竞标或绕过验证码。开始读取技能说明时误用一次本地终端（只读），已在对话中告知并停止；之后业务操作仅使用云浏览器及已连接 GitHub/Gmail。未新建后台自动跟进任务。
