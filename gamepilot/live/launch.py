@@ -8,7 +8,7 @@ import urllib.request
 import webbrowser
 
 ROOT = Path(__file__).resolve().parent
-STATIC = {"index.html", "style.css", "core.mjs", "app.mjs", "sw.js", "manifest.webmanifest", "icon.svg", "README.md"}
+STATIC = {"index.html", "style.css", "core.mjs", "recognition.mjs", "app.mjs", "sw.js", "manifest.webmanifest", "icon.svg", "README.md"}
 CSP = ("default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; "
        "connect-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob:; "
        "style-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'")

@@ -15,8 +15,10 @@ const report={environment:"GitHub-hosted Chromium/Linux; no game process",synthe
  screenSharePermission:"NOT_RUN",installationUI:"NOT_RUN",completeRecognition:"FAIL",liveGameLoop:"NOT_RUN",independentPlayer:"NOT_RUN"};
 try {
  await page.goto("http://127.0.0.1:8795/");
- await page.evaluate(()=>navigator.serviceWorker.ready);
+ await page.waitForFunction(async()=>Boolean((await navigator.serviceWorker.getRegistration())?.active),{},{timeout:15000});
  await page.reload();
+ const moduleResponse=await page.request.get("http://127.0.0.1:8795/recognition.mjs");
+ assert.equal(moduleResponse.status(),200);
  const uri=await page.evaluate(()=>{
    const c=document.createElement("canvas");c.width=1000;c.height=220;
    const x=c.getContext("2d");x.fillStyle="white";x.fillRect(0,0,c.width,c.height);
@@ -92,7 +94,7 @@ try {
 
  const url="https://github.com/user-attachments/assets/72b8fafe-b2ec-41b1-98fc-41a7c2c87b07";
  try {
-   const response=await fetch(url);if(!response.ok)throw Error("Source HTTP "+response.status);
+   const response=await fetch(url,{signal:AbortSignal.timeout(30000)});if(!response.ok)throw Error("Source HTTP "+response.status);
    const bytes=Buffer.from(await response.arrayBuffer());
    assert.ok(bytes.length<15*1024*1024);
    report.source={url,context:"https://github.com/Torch1230/CombatSolver/issues/239",claimedPatch:"111.0 (issue author report)",
