@@ -34,10 +34,11 @@ function stop(){
 $("share").onclick=async()=>{
   stop();
   try{
+    status("Choose the game window in the browser prompt.");
     stream=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:5},audio:false});
     const track=stream.getVideoTracks()[0];track.addEventListener("ended",stop,{once:true});
     track.addEventListener("mute",()=>{invalidate("Capture source muted");$("advise").disabled=true;$("verify").disabled=true;},{once:true});
-    $("video").srcObject=stream;await $("video").play();
+    $("video").srcObject=stream;status("Waiting for the first shared frame.");await $("video").play();
     $("capture").disabled=false;$("stop").disabled=false;await capture();
   }catch(e){stop();status("No shared window: "+e.message);}
 };

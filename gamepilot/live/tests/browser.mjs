@@ -35,9 +35,9 @@ try {
  // Synthetic display stream exercises the actual UI lifecycle; this is not game access.
  await page.evaluate(()=>{
    const c=document.createElement("canvas");c.width=1000;c.height=400;c.style.cssText="position:fixed;left:-2000px";document.body.append(c);window.__sourceCanvas=c;const x=c.getContext("2d");window.__captureEvents=[];
-   window.__paintCapture=color=>{x.fillStyle=color;x.fillRect(0,0,1000,400);x.fillStyle="black";x.font="50px Arial";x.fillText("Synthetic UI fixture only",30,100);};
+   window.__paintCapture=color=>{window.__captureColor=color;x.fillStyle=color;x.fillRect(0,0,1000,400);x.fillStyle="black";x.font="50px Arial";x.fillText("Synthetic UI fixture only",30,100);};
    window.__paintCapture("white");
-   navigator.mediaDevices.getDisplayMedia=async()=>{window.__captureEvents.push("requested");const s=c.captureStream(0);window.__sourceStream=s;const track=s.getVideoTracks()[0];for(const type of ["mute","unmute","ended"])track.addEventListener(type,()=>window.__captureEvents.push(type));window.__captureTimer=setInterval(()=>{track.requestFrame();},100);return s;};
+   navigator.mediaDevices.getDisplayMedia=async()=>{window.__captureEvents.push("requested");const s=c.captureStream(0);window.__sourceStream=s;const track=s.getVideoTracks()[0];for(const type of ["mute","unmute","ended"])track.addEventListener(type,()=>window.__captureEvents.push(type));window.__captureTimer=setInterval(()=>{window.__paintCapture(window.__captureColor);track.requestFrame();},100);return s;};
    if(!navigator.mediaDevices.getDisplayMedia.toString().includes("__captureEvents"))throw Error("Synthetic capture override unavailable");
  });
  await page.click("#share");
