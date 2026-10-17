@@ -1,0 +1,177 @@
+name: Cat Tales v07 research-only real meow audit
+on:
+  push:
+    branches:
+      - cat-tales/v07-catmeows-audit-20261017
+    paths:
+      - '.github/workflows/cat-tales-v07-catmeows-audit.yml'
+permissions:
+  contents: write
+jobs:
+  research-only-inference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout isolated research branch
+        uses: actions/checkout@v4
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install model and decoding dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --progress-bar off tensorflow-cpu==2.17.1 tensorflow-hub==0.16.1 tf-keras==2.17.0 imageio-ffmpeg==0.6.0
+      - name: Fixed pretrained YAMNet test on real labeled meows
+        shell: bash
+        run: |
+          mkdir -p evidence
+          python - <<'PY'
+          import csv,hashlib,io,json,os,random,re,sys,urllib.request,zipfile
+          from collections import defaultdict,Counter
+          from datetime import datetime,timezone
+          import imageio_ffmpeg, numpy as np, tensorflow as tf, tensorflow_hub as hub
+          from pathlib import Path
+          RESULTS=Path("evidence/v07-result.json")
+          def get_bytes(url,limit):
+              request=urllib.request.Request(url,headers={"User-Agent":"CatTalesResearch/0.7 (+research-only, no redistribution)","Accept":"application/octet-stream,*/*"})
+              with urllib.request.urlopen(request,timeout=45) as f:
+                  raw=f.read(limit+1)
+              if not raw or len(raw)>limit: raise ValueError("empty_or_oversize_media")
+              return raw
+          def decode(data):
+              p=__import__("subprocess").run(
+                  [imageio_ffmpeg.get_ffmpeg_exe(),"-hide_banner","-loglevel","error",
+                   "-nostdin","-i","pipe:0","-t","20","-ac","1","-ar","16000","-f","f32le","pipe:1"],
+                  input=data,stdout=__import__("subprocess").PIPE,stderr=__import__("subprocess").PIPE,timeout=30,check=True)
+              waveform=np.frombuffer(p.stdout,dtype="<f4").copy()
+              if waveform.size<400: raise ValueError("unusable_short_audio")
+              if waveform.size<15600: waveform=np.pad(waveform,(0,15600-waveform.size))
+              if not np.isfinite(waveform).all(): raise ValueError("nonfinite_audio")
+              return waveform
+          def evaluate(wav_bytes,model):
+              waveform=decode(wav_bytes)
+              score,_,_=model(tf.convert_to_tensor(waveform,dtype=tf.float32))
+              a=score.numpy()
+              if a.ndim!=2 or a.shape[1]!=521 or a.shape[0]<1: raise ValueError("unexpected_model_output")
+              top=np.argmax(a,axis=1)
+              top5=np.argsort(a,axis=1)[:,-5:]
+              return {"strict_meow":bool(np.any(top==78)),
+                      "strict_feline_vocal":bool(np.isin(top,[77,78,79,80]).any()),
+                      "review_top5_meow":bool((top5==78).any()),
+                      "review_top5_feline":bool(np.isin(top5,[77,78,79,80]).any()),
+                      "species_cat_top5":bool((top5==76).any()),
+                      "patches":int(len(a)),
+                      "meow_max_uncalibrated":round(float(a[:,78].max()),5)}
+          print("CAT_TALES_V07_MODEL_LOADING",flush=True)
+          model=hub.load("https://tfhub.dev/google/yamnet/1")
+          import csv
+          with open(model.class_map_path().numpy().decode(),encoding="utf-8") as f:
+              classes=list(csv.DictReader(f))
+          for i,name in [(76,"Cat"),(77,"Purr"),(78,"Meow"),(79,"Hiss"),(80,"Caterwaul"),(69,"Dog"),(70,"Bark")]:
+              assert int(classes[i]["index"])==i and classes[i]["display_name"]==name,"class_map_mismatch"
+          # This corpus permits scientific NONCOMMERCIAL research only. No redistribution or training weights.
+          source="https://zenodo.org/records/4008297/files/dataset.zip?download=1"
+          print("CAT_TALES_V07_DOWNLOADING_NONCOMMERCIAL_RESEARCH_CORPUS",flush=True)
+          raw=get_bytes(source,35*1024*1024)
+          expected_md5="b5fa911bcd6514e39dfef6876f747df4"
+          if hashlib.md5(raw).hexdigest()!=expected_md5: raise ValueError("zenodo_file_md5_mismatch")
+          z=zipfile.ZipFile(io.BytesIO(raw))
+          candidates=defaultdict(list)
+          for item in z.infolist():
+              if item.is_dir() or not item.filename.lower().endswith(".wav"):continue
+              name=item.filename.split("/")[-1]
+              # Prefix specifies known recording context and pseudonymous cat identity.
+              m=re.match(r"^([BIF])_([A-Za-z0-9]+)_",name)
+              if m is None:continue
+              if ".." in item.filename.split("/") or item.file_size>1024*1024:raise ValueError("unsafe_archive_member")
+              candidates[(m.group(2),m.group(1))].append(item)
+          unique_cats={cid for cid,_ in candidates}
+          if len(unique_cats)<10:raise ValueError("cat_id_parsing_failed_or_inadequate_individuals")
+          # One actual sound per individual/context avoids inflating metrics with near repeats.
+          chosen=[sorted(items,key=lambda x:x.filename)[0] for (_cid,_ctx),items in sorted(candidates.items())]
+          if not 20 <=len(chosen)<=80:raise ValueError("unexpected_clip_count")
+          cat_results=[]
+          for i in chosen:
+              b=z.read(i)
+              m=re.match(r"^([BIF])_([A-Za-z0-9]+)_",i.filename.split("/")[-1])
+              try: out=evaluate(b,model)
+              except Exception as exc:raise ValueError("positive_audio_decode_or_inference_failed:"+type(exc).__name__) from exc
+              cat_results.append({"cat_id":m.group(2),"context":m.group(1),**out})
+          print("CAT_TALES_V07_REAL_MEOW_FINISHED="+str(len(cat_results)),flush=True)
+          # Independent negatives are ESC-50 dogs/rain, research-only CC BY-NC 3.0.
+          meta=get_bytes("https://raw.githubusercontent.com/karolpiczak/ESC-50/master/meta/esc50.csv",1*1024*1024)
+          rows=list(csv.DictReader(io.StringIO(meta.decode("utf-8-sig"))))
+          negs=[]
+          for subtype in ("dog","rain"):
+              options=sorted([r for r in rows if r["category"]==subtype and r["fold"]=="5"],key=lambda x:x["filename"])[:8]
+              if len(options)<5:raise ValueError("negative_control_missing_"+subtype)
+              for row in options:
+                  name=row["filename"]
+                  if not re.fullmatch(r"[A-Za-z0-9_.-]+\.wav",name):raise ValueError("bad_control_filename")
+                  b=get_bytes("https://raw.githubusercontent.com/karolpiczak/ESC-50/master/audio/"+name,3*1024*1024)
+                  result=evaluate(b,model)
+                  negs.append({"kind":subtype,**result})
+          print("CAT_TALES_V07_REAL_NEGATIVE_FINISHED="+str(len(negs)),flush=True)
+          def count(vals,key):return sum(bool(v[key]) for v in vals)
+          by_context={}
+          for c,label in (("B","brushing"),("F","waiting_for_food"),("I","unfamiliar_isolation")):
+              subset=[v for v in cat_results if v["context"]==c]
+              by_context[label]={"n":len(subset),"strict_meow_hits":count(subset,"strict_meow"),
+                                 "review_top5_meow_hits":count(subset,"review_top5_meow")}
+          by_negative={x:{"n":len([v for v in negs if v["kind"]==x]),
+                            "strict_meow_false_positives":count([v for v in negs if v["kind"]==x],"strict_meow"),
+                            "top5_meow_review_false_positives":count([v for v in negs if v["kind"]==x],"review_top5_meow")}
+                       for x in ("dog","rain")}
+          payload={
+            "status":"RESEARCH_YAMNET_REAL_AUDIO_AUDIT_COMPLETED",
+            "time_utc":datetime.now(timezone.utc).isoformat(),
+            "rights":"CatMeows: research+noncommercial only; ESC-50: CC BY-NC 3.0. NO COMMERCIAL TRAINING OR DEPLOYMENT",
+            "sources":["https://zenodo.org/records/4008297","https://github.com/karolpiczak/ESC-50"],
+            "task":"meow sound-event candidate only; NOT communication semantics, emotion, training or behavior",
+            "model":"https://tfhub.dev/google/yamnet/1",
+            "threshold_policy":"FIXED strict class top-1 and top-5 TRIAGE; no threshold learning or training",
+            "catmeows_original_archive_md5":expected_md5,
+            "catmeows_original_archive_sha256":hashlib.sha256(raw).hexdigest(),
+            "positive":{"clip_count":len(cat_results),"different_cat_ids":len(set(v["cat_id"] for v in cat_results)),
+                        "strict_meow_hits":count(cat_results,"strict_meow"),
+                        "strict_any_feline_vocal_hits":count(cat_results,"strict_feline_vocal"),
+                        "review_top5_meow_hits":count(cat_results,"review_top5_meow"),
+                        "review_top5_feline_hits":count(cat_results,"review_top5_feline"),
+                        "by_source_recording_context":by_context},
+            "negative":{"clip_count":len(negs),"strict_meow_fp":count(negs,"strict_meow"),
+                        "review_top5_meow_fp":count(negs,"review_top5_meow"),
+                        "by_type":by_negative},
+            "limits":["one clip per cat/context from original author source labels",
+                      "all positive clips are meows per dataset curation, not independent double-blind listening",
+                      "negative clips come from different dataset/device/domain; specificity on users' cat recordings NOT proven",
+                      "cats in this audit were not used for model training, which is pretrained and fixed",
+                      "meow sound detection does not decode meaning; no public-ready accuracy conclusion",
+                      "no raw media, embeddings or personal data are published"],
+            "deployment_gate":"NO_GO",
+          }
+          RESULTS.write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding="utf-8")
+          print("CAT_TALES_V07_RESULT="+json.dumps({"positive":payload["positive"],"negative":payload["negative"],"deployment_gate":"NO_GO"},ensure_ascii=False),flush=True)
+          PY
+      - name: Save no-media evidence to isolated Git branch
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p cat-tales/evidence/v07-catmeows
+          if test -f evidence/v07-result.json; then
+            cp evidence/v07-result.json cat-tales/evidence/v07-catmeows/result.json
+          else
+            python - <<'PY'
+          import json,os,pathlib
+          pathlib.Path('cat-tales/evidence/v07-catmeows/result.json').write_text(json.dumps({
+          'status':'NOT_RUN','error':'job_failed_before_successful_complete_inference',
+          'run_url':'https://github.com/'+os.environ.get('GITHUB_REPOSITORY','')+'/actions/runs/'+os.environ.get('GITHUB_RUN_ID','')
+          },indent=2))
+          PY
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add cat-tales/evidence/v07-catmeows/result.json
+          if ! git diff --cached --quiet; then
+            git commit -m "evidence(cat-tales): v07 CatMeows research-only pretrained inference"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi
