@@ -4,12 +4,14 @@ on:
     branches:
       - cat-tales/real-meow-audio-eval-20261017
 permissions:
-  contents: read
+  contents: write
 jobs:
   real-audio-check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Check out isolated branch
+        uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -127,3 +129,27 @@ jobs:
           path: cat_tales_real_audio_results.json
           retention-days: 5
           if-no-files-found: ignore
+
+      - name: Preserve summary on isolated branch only
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p cat-tales/evidence/real-audio-20261017
+          if test -f cat_tales_real_audio_results.json; then
+            cp cat_tales_real_audio_results.json cat-tales/evidence/real-audio-20261017/result.json
+          else
+            python - <<'PY'
+          import json,os,pathlib
+          pathlib.Path('cat-tales/evidence/real-audio-20261017/result.json').write_text(
+              json.dumps({'status':'NOT_RUN','reason':'prerequisite_failed_before_model_results','run_id':os.getenv('GITHUB_RUN_ID'),
+                          'run_url':'https://github.com/'+os.getenv('GITHUB_REPOSITORY','')+'/actions/runs/'+os.getenv('GITHUB_RUN_ID','')},
+                         indent=2))
+          PY
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add cat-tales/evidence/real-audio-20261017/result.json
+          if ! git diff --cached --quiet; then
+            git commit -m "evidence(cat-tales): record licensed real-short sound results"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi
