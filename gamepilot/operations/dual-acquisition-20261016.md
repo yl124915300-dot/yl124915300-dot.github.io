@@ -685,3 +685,75 @@ FIRST_REAL_REVENUE>US$0 尚未实现。没有开收费入口、操作付款/提�
 ### V2续接 — 2026-10-16 23:47:27–23:48:01 Asia/Shanghai
 
 用户授权“你帮我操作”后，续接原Firecrawl云会话实测：仍为Payhip登录页；邮箱字段已填写=false、密码字段已填写=false。没有可直接提交的现成登录输入，未点击空表单、重试登录、重建会话或取用其它位置的凭据。当前可控会话认证仍为HUMAN_REQUIRED；这不能否定用户在其它可见页面的登录确认。唯一必要人工动作是在该云端平台登录页填写自己的账号密码并完成正常认证，凭据不发聊天。其后再回读支付设置。未创建商品、结账或联盟链接，未出站、收付资金；九项验收及实际流水UNKNOWN的边界均不变。仅使用云端和已连接GitHub，未访问本地设备/文件。
+
+
+---
+
+## GAMEPILOT_COMPETITIVENESS_AND_ACQUISITION_V1 — 2026-10-17
+核查窗口：12:27–12:32 Asia/Shanghai；独立服务器事件见下表。结论：商业发行/视觉Agent NO_GO；仅保留窄范围免费服务验证。不是停止项目或需求不存在的结论。
+
+### 最新历史与能力
+已通过Personal Context检索指定三条10月16日晚聊天（返回摘要，不是完整逐字聊天），并读取本台账全量。最新已有免费 /gamepilot/balatro/ Hand Coach，不能再说只有Blue Joker；但普通唯一牌最多8张、枚举1–5张、手动输入手牌/基础值、即时分数/下一状态均不等于视觉Agent。
+PR #3再次读取仍open/draft，head原2e4efcce8c5bc25074b9e0abf5413723bef527e9，OCR数值5/6、卡名0/9、建议0/4，ABSTAIN结构缺口，无新实机闭环证据。未修改PR/产品功能/运行游戏动作。
+
+### 云端验收（均为SELF_TEST，own-game始终未勾选）
+使用Work专属cdp远程云浏览器；Firecrawl两次interact均Insufficient credits，未付费/扩容；未用Mac、终端或本地台账。
+- 原入口 https://yl124915300-dot.github.io/gamepilot/community/#calculator ：20/12 => +40 Chips/+480；0=>0；999=>1998/+23976；牌数1.5、空、-1、1000均No result。Mult 0=>0；1.5=>60（页面明确允许小数）；空、负、超限均No result。上限1,000,000本轮未单测。
+- 点击原页导航Balatro Hand Coach进入 https://yl124915300-dot.github.io/gamepilot/balatro/ 。
+- 12:29:08合成演示AH KH QH JH TH 9C 9D 2S：218 selections，Straight Flush=(100+51)*8=1208。
+- 12:29:19手动AS AH KD QC 2S，target60：31 selections，Pair=(10+22)*2=64。
+- 12:29:25输入observed64仅得到“self-report”；packet kind=self_test，未计外部使用/实际游戏执行。
+- Enter next state清空手牌/target/建议，scope重置，记录按钮禁用。
+- 重复AS AS、空、9张、1S被拒；target小数/负/超1e12/空被拒；scope未勾被拒。
+- 手工下一状态可继续计算；不能证明玩家操作后自动读取更新。
+- 反馈链接实际新开Google Form，可匿名显示字段与Submit，未提交自测。表单文案仍要求STS2位置，与Balatro入口不一致；提交/答复/后台响应UNKNOWN。
+- 移动viewport/触控QA未完成：本云浏览器公开API无viewport控制。响应式CSS存在仅源码证据，不记移动验收PASS。图片上传/下载/剪贴板及所有基础值极限未完整验收；不能宣称完整功能全通过。
+
+### 本轮真实发布
+- 12:30:24 GitHub commit ca5c8c26e3f9fe729a3c3951f07e439d4aef52eb：仅在现有community页面增加原创静态计分示例，不是新产品/新listing。
+- 标题“You played five cards. Three scored zero Chips.”；AS AH KD QC 2S对子64，说明K/Q/2不计此Pair牌面Chips，同时明确额外出牌会影响未来抽牌，不能据此建议保留/打出。
+- 原创合成例、AI辅助、关联身份、普通牌/无Joker范围、免费/无视觉AI明确披露。CTA到原工具，再到现有可选反馈，不强制好评。
+- GitHub源码回读blob ee03b591fe19a79d91a4c7ee1085a479dc57e48e一致。
+- Pages https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39002818535 completed/success，updated_at=2026-10-17T04:31:20Z（12:31:20北京时间）。
+- 12:31–12:32匿名浏览器重载后确认新标题、正文及CTA可见，截图留存。公开URL：https://yl124915300-dot.github.io/gamepilot/community/#balatro-scoring-cards
+- 这是自有页面静态内容分发1次；Google/Bing收录、第三方曝光、点击、使用均UNKNOWN。不能冒充外部获客1人。
+
+### 玩家需求与出站筛选
+1. https://github.com/Torch1230/CombatSolver/issues/239 ：created_at 10月14日00:28:10北京时间，当前open、3 comments、最后更新10月16日00:46:20。作者补充三张攻击能杀胖地精但求解器EndTurn；已有我方两条诊断评论且最后一条仍我方，无新增回应。已触达，未重复。我们未实机复现，不能交付可执行替代出牌线或收费修复。
+2. CombatSolver Workshop https://steamcommunity.com/sharedfiles/filedetails/?id=3790899961 ：10月14日22:06pm（页面时区未核）vxr747询问债务黄金印局外成长，10月15日作者已回复；排除为待答。
+3. 同页10月11日玩家报烘焙手套/王室猛毒计算错误、运行报错；需要实机复现和mod维护，超出当前能力，不推广。
+4. Reddit近期new页及规则检索无可验证合格求助；云浏览器明示“blocked by network security”，已报告access_denied并停止，不解挑战、不换路径绕过。旧Anaglyph无法回读，不当近期待答；旧删除回复未重发。
+5. Steam Balatro论坛当前可读，但页面时区不明；最近帖子包括更新、C++成就，不是本工具可解的具体未答问题。页面显示发帖需要登录。没有向不适合的Issue发广告。
+当前合格新玩家请求（近期+仍待解+能力匹配+平台允许+可写）获证0。平台AI/推广许可未核全，不能视作默许。不新增商家逐家询问；七家旧接收与Wingsplain UNKNOWN均不催促。
+
+### 冷酷对照（GamePilot相对；宣传不当实测）
+| 维度 | 对照 | GamePilot |
+|---|---|---|
+| Blue Joker/普通牌算术 | EFHIII免费网页计分 | 基础计算可用；窄域持平，无已证优势 |
+| Joker、牌修饰、排序优化 | https://github.com/EFHIII/balatro-calculator 与 https://efhiii.github.io/balatro-calculator/ | 弱于：Hand Coach明确不支持；EFHIII亦自述部分Joker可能不正确 |
+| 逐步分数解释 | EFHIII breakdown；社区独立推荐 https://www.reddit.com/r/balatro/comments/1hpqb2j/theres_a_balatro_calculator_that_helps_in/ | 基础解释持平；复杂交互弱于；该推荐是旧帖非当前需求，非购买证据 |
+| STS2原生状态/多回合路线/状态失配重算 | CombatSolver GitHub/Workshop说明 | 弱于：我方未过真实建议门槛；对方错误反馈也证明并非全可靠 |
+| STS2数据库/构筑建议/移动分发 | https://spiresage.app/ ，https://apps.apple.com/us/app/spiresage-slay-the-spire-2/id6760845472 | 弱于：我方无可比已验功能或商店渠道 |
+| 画面理解与任务助手 | Xbox Gaming Copilot历史官方发布 | 我方尚未验证；不拿2025发布当2026成功。2026-05-05已报道停止主机开发/逐步结束移动，不当成功付费范本 |
+| 独立用户 | EFHIII推荐；CombatSolver用户bug；SpireSage商店评价 | 弱于：本轮我方外部使用UNKNOWN，获证0 |
+| 付费证据 | SpireSage商店Jun23用户自述“Recently bought” | 我方弱于：无愿付/订单；自述购买非审计收入。对方网站限量余位不当成交数 |
+| 即开即用 | EFHIII同为免费网页；CombatSolver需装mod | 与EFHIII持平；安装负担低于mod，但功能不同，不能推导总体优势 |
+
+SpireSage美区商店：12 ratings /3.4；列Pro Monthly Plan $1.99、Annual Plan $14.99、Lifetime Plan $29.99，另有$2.99/$24.99/$49.99不同SKU，不能确定当前实际展示套餐。免费3问/日为官方说明，未本轮安装实测；评论既有正评也有空数据/更新/幻觉批评。竞品净收入均UNKNOWN。CombatSolver Workshop抓取同时出现removed/incompatible通用警示与26301 current subscribers/230 comments，分发可用性存在冲突，不把订阅人数当真实活跃或收费客户。NVIDIA G-Assist侧重系统设置性能，不冒充关卡解题直接替代或赚钱证明。
+
+### 收款和漏斗
+12:30–12:31本cdp一次正常只读访问Payhip/settings/payments转Login，未输入凭据；新会话未认证不能否定用户其它页面登录。账户资格、交易流水/提现UNKNOWN，无活跃结账可证。未新建支付链接/服务/商品，不报价不支持的截图AI。创作者仅保留40%/60%按有效到账净收入条件，未激活佣金。
+漏斗：自有静态计分演示（已发布）→原Hand Coach（已点开验收）→自愿真实局面及实际分数（UNKNOWN）→有效反馈（UNKNOWN）→明确愿付（获证0）→既有合法结账（BLOCKED）→真实到账（UNKNOWN）。
+不可替代价值仍缺：对一个真实完整局面，以比免费替代更低输入成本给出可核验正确决策并在行动后继续。静态解释可吸引新手，但还未证明独特、复用或愿付；不据此要求继续堆功能。
+
+| Metric | 本轮结果 |
+|---|---|
+| OWNED_STATIC_CONTENT_PUBLISHED | 1，公开匿名回读；非外部触达 |
+| NEW_EXTERNAL_OUTBOUND / LISTING | 0 / 0 |
+| VERIFIED_INDEPENDENT_USE | 新获证0；实际UNKNOWN |
+| EFFECTIVE_NEW_PLAYER_FEEDBACK | 新获证0；实际UNKNOWN（#4当前comments=[]，未读取私有表单回复/完整邮箱） |
+| EXPLICIT_WILLINGNESS_TO_PAY | 新获证0；实际UNKNOWN |
+| FIRST_COMMISSION | 未验证；获证US$0 |
+| NET_RECEIPT | 未验证；获证US$0，流水UNKNOWN |
+
+GO仅限现有免费窄场景服务/分发验证；商业视觉副驾驶NO_GO。不新增自动化、不碰原六小时监控，不预告持续值守。下一推进证据必须是独立玩家真实局面与实际使用反馈；没有这种证据前，不以更多表单投递或内容更新声称解决获客。
