@@ -1,0 +1,65 @@
+{
+  "status": "RESEARCH_YAMNET_REAL_AUDIO_AUDIT_COMPLETED",
+  "time_utc": "2026-10-17T15:40:03.903397+00:00",
+  "rights": "CatMeows: research+noncommercial only; ESC-50: CC BY-NC 3.0. NO COMMERCIAL TRAINING OR DEPLOYMENT",
+  "sources": [
+    "https://zenodo.org/records/4008297",
+    "https://github.com/karolpiczak/ESC-50"
+  ],
+  "task": "meow sound-event candidate only; NOT communication semantics, emotion, training or behavior",
+  "model": "https://tfhub.dev/google/yamnet/1",
+  "threshold_policy": "FIXED strict class top-1 and top-5 TRIAGE; no threshold learning or training",
+  "catmeows_original_archive_md5": "b5fa911bcd6514e39dfef6876f747df4",
+  "catmeows_original_archive_sha256": "214000280e6ef33b10e39ef063ccc1f2f83d789ab57f2a5d111da63b06f659ae",
+  "positive": {
+    "clip_count": 49,
+    "different_cat_ids": 21,
+    "strict_meow_hits": 0,
+    "strict_any_feline_vocal_hits": 0,
+    "review_top5_meow_hits": 32,
+    "review_top5_feline_hits": 32,
+    "by_source_recording_context": {
+      "brushing": {
+        "n": 17,
+        "strict_meow_hits": 0,
+        "review_top5_meow_hits": 10
+      },
+      "waiting_for_food": {
+        "n": 15,
+        "strict_meow_hits": 0,
+        "review_top5_meow_hits": 10
+      },
+      "unfamiliar_isolation": {
+        "n": 17,
+        "strict_meow_hits": 0,
+        "review_top5_meow_hits": 12
+      }
+    }
+  },
+  "negative": {
+    "clip_count": 16,
+    "strict_meow_fp": 0,
+    "review_top5_meow_fp": 0,
+    "by_type": {
+      "dog": {
+        "n": 8,
+        "strict_meow_false_positives": 0,
+        "top5_meow_review_false_positives": 0
+      },
+      "rain": {
+        "n": 8,
+        "strict_meow_false_positives": 0,
+        "top5_meow_review_false_positives": 0
+      }
+    }
+  },
+  "limits": [
+    "one clip per cat/context from original author source labels",
+    "all positive clips are meows per dataset curation, not independent double-blind listening",
+    "negative clips come from different dataset/device/domain; specificity on users' cat recordings NOT proven",
+    "cats in this audit were not used for model training, which is pretrained and fixed",
+    "meow sound detection does not decode meaning; no public-ready accuracy conclusion",
+    "no raw media, embeddings or personal data are published"
+  ],
+  "deployment_gate": "NO_GO"
+}
