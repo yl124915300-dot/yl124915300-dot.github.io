@@ -159,6 +159,47 @@ jobs:
           cat evidence/official-preflight.log
           TZ=Asia/Shanghai date --iso-8601=seconds > evidence/preflight-end.txt
           exit "$rc"
+      - name: Verify remaining checkpoint selectors and saved route references
+        shell: bash
+        run: |
+          python3 <<'GP_EXTRA'
+          import json,pathlib,subprocess
+          root=pathlib.Path("evidence")
+          structure=json.loads((root/"structure.json").read_text())
+          index=structure["index"]; catalog=index["checkpoints"]
+          by_id={item["checkpointId"]:item for item in catalog}
+          documents={item["path"]:item for item in structure["jsonDocuments"]}
+          relations={"scope":"STATIC_REFERENCES_ONLY_NOT_GAME_EXECUTION","catalogCount":len(catalog),"capturedCheckpointCount":index.get("collection",{}).get("checkpointCount"),"checkpoints":[],"searchResults":[],"searchPolicies":[]}
+          for cp in catalog:
+              meta=documents[cp["metadataPath"]]
+              checks={"checkpointIdMatches":meta.get("checkpointId")==cp["checkpointId"],"eventCursorMatches":meta.get("eventCursor")==cp.get("eventCursor"),"sessionIdMatches":meta.get("sessionId")==index.get("sessionId"),"searchRootExists":meta.get("searchRootId") in by_id}
+              relations["checkpoints"].append({"checkpointId":cp["checkpointId"],"searchRootId":meta.get("searchRootId"),"checks":checks})
+          for field in ("searchResults","searchPolicies"):
+              for number,item in enumerate(index.get(field,[])):
+                  cp=by_id.get(item.get("checkpointId"))
+                  row={"index":number,"checkpointId":item.get("checkpointId"),"eventCursor":item.get("eventCursor"),"checkpointExists":cp is not None,"eventCursorMatches":cp is not None and item.get("eventCursor")==cp.get("eventCursor")}
+                  if field=="searchResults":
+                      actions=item.get("plannedActions")
+                      row.update(plannedActionsPresent="plannedActions" in item,plannedActionsCount=len(actions) if isinstance(actions,list) else None,kinds=[a.get("kind") for a in actions] if isinstance(actions,list) else None,recordedExecutableFlags=[a.get("isExecutable") for a in actions] if isinstance(actions,list) else None)
+                  relations[field].append(row)
+          relations["referencesPass"]=all(all(x["checks"].values()) for x in relations["checkpoints"]) and all(x["checkpointExists"] and x["eventCursorMatches"] for field in ("searchResults","searchPolicies") for x in relations[field])
+          (root/"reference-check.json").write_text(json.dumps(relations,ensure_ascii=False,indent=2))
+          print("GP_REFERENCE_CHECK="+json.dumps(relations,ensure_ascii=False))
+          if not relations["referencesPass"]: raise SystemExit("static_reference_mismatch")
+          results=[]
+          for ordinal,cp in enumerate(catalog):
+              if cp["checkpointId"]==index.get("combatStartCheckpointId"): continue
+              out=root/("official-checkpoint-"+str(ordinal))
+              command=["bash","upstream/tools/replay/run-checkpoint-batch.sh",str(pathlib.Path("bundle.zip").resolve()),"--mode","Preflight","--selector",cp["checkpointId"],"--output",str(out.resolve())]
+              with (root/("official-checkpoint-"+str(ordinal)+".log")).open("w") as log:
+                  completed=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,timeout=120)
+              data=json.loads((out/"results.json").read_text()) if (out/"results.json").exists() else None
+              results.append({"selector":cp["checkpointId"],"exitCode":completed.returncode,"results":data})
+          (root/"official-extra-results.json").write_text(json.dumps(results,ensure_ascii=False,indent=2))
+          print("GP_EXTRA_PREFLIGHT="+json.dumps(results,ensure_ascii=False))
+          if any(item["exitCode"]!=0 for item in results): raise SystemExit("additional_preflight_failed")
+          
+          GP_EXTRA
       - name: Summarize observed results and hash evidence
         if: always()
         shell: bash
@@ -167,7 +208,7 @@ jobs:
           import datetime,hashlib,json,pathlib
           root=pathlib.Path("evidence"); root.mkdir(exist_ok=True)
           result={"finishedAtAsiaShanghai":datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).isoformat(),"battleRestoration":"NOT_RUN","executableAdvice":"NOT_RUN","realGameFrames":"NOT_RUN","video":"NOT_RUN","usersAndReceipts":"NOT_RUN"}
-          for name in ("download-safety.json","structure.json","official/results.json"):
+          for name in ("download-safety.json","structure.json","official/results.json","official-extra-results.json","reference-check.json"):
               p=root/name
               if p.exists():
                   data=json.loads(p.read_text())
@@ -188,5 +229,6 @@ jobs:
           path: |
             evidence/
             !evidence/official/inputs/**
+            !evidence/official-checkpoint-*/inputs/**
           retention-days: 3
           if-no-files-found: error
