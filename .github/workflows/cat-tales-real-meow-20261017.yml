@@ -1,161 +1,157 @@
-name: Cat Tales real cat sound smoke test (isolated)
+name: Cat Tales V0.6 cat-sound research (isolated, non-commercial)
 on:
   push:
     branches:
       - cat-tales/real-meow-audio-eval-20261017
+    paths:
+      - .github/workflows/cat-tales-real-meow-20261017.yml
 permissions:
   contents: write
 jobs:
-  real-audio-check:
+  esc50-exploratory:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
-      - name: Check out isolated branch
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install open-source YAMNet dependencies
+      - name: Install existing official feature extractor and lightweight classifier
         run: |
-          python -m pip install --disable-pip-version-check --quiet tensorflow-cpu==2.17.1 tensorflow-hub==0.16.1 tf-keras==2.17.0 imageio-ffmpeg==0.6.0
-          python -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())"
-      - name: Analyze original licensed short-video audio
+          python -m pip install --disable-pip-version-check tensorflow-cpu==2.17.1 tensorflow-hub==0.16.1 tf-keras==2.17.0 scikit-learn==1.6.1 imageio-ffmpeg==0.6.0
+      - name: Source-disjoint noncommercial ESC-50 cat-versus-dog/rain research
         shell: bash
         run: |
           python - <<'PY'
-          import csv, hashlib, json, os, pathlib, subprocess, urllib.parse, urllib.request
-          from datetime import datetime, timezone
+          import csv,hashlib,io,json,pathlib,subprocess,urllib.request
+          from datetime import datetime,timezone
           import numpy as np
-          import imageio_ffmpeg
           import tensorflow as tf
           import tensorflow_hub as hub
-
-          # License and author come from source file description pages, not model output.
-          entries = [
-              {
-                "id":"cat_holly_bird_chirp", "file":"Cat making noises at the birds outside.webm",
-                "description_page":"https://commons.wikimedia.org/wiki/File:Cat_making_noises_at_the_birds_outside.webm",
-                "author":"Ali T", "license":"CC BY 2.0", "expected":"cat_chirrup"
-              },
-              {
-                "id":"cat_tomcat_calling", "file":"Tomcat calling.webm",
-                "description_page":"https://commons.wikimedia.org/wiki/File:Tomcat_calling.webm",
-                "author":"Drummyfish", "license":"CC0 1.0", "expected":"tomcat_loud_call"
-              },
-              {
-                "id":"cat_thunderstorm_meow", "file":"Thunderstorm in Onex - 20062013 - falling hailstones.webm",
-                "description_page":"https://commons.wikimedia.org/wiki/File:Thunderstorm_in_Onex_-_20062013_-_falling_hailstones.webm",
-                "author":"Clément Bucco-Lechat", "license":"CC BY-SA 3.0", "expected":"cat_meow_in_noisy_background"
-              },
-              {
-                "id":"dog_bark_negative", "file":"Dog barking.webm",
-                "description_page":"https://commons.wikimedia.org/wiki/File:Dog_barking.webm",
-                "author":"Dr. Nono YesMaybe", "license":"CC BY-SA 4.0", "expected":"dog_bark_not_cat"
-              },
-          ]
-
-          # The official 521-class YAMNet weights; this is sound-event classification, NOT translation.
-          source_model = "https://tfhub.dev/google/yamnet/1"
-          print("CAT_TALES_MODEL_LOADING official="+source_model, flush=True)
-          model = hub.load(source_model)
-          classes = list(csv.DictReader(open(model.class_map_path().numpy().decode(),"r",encoding="utf-8")))
-          assert len(classes)==521
-          feline = {"Meow","Purr","Hiss","Caterwaul"}
-          cat_indices = {int(x["index"]) for x in classes if x["display_name"] in feline}
-          assert len(cat_indices)==4
-          results = []
-          for entry in entries:
-              row = {k:entry[k] for k in ("id","description_page","author","license","expected")}
-              url = "https://commons.wikimedia.org/wiki/Special:Redirect/file/" + urllib.parse.quote(entry["file"])
-              try:
-                  headers = {
-                      "User-Agent":"CatTales-SoundResearch/0.1 (noncommercial audit; public licensed media)",
-                      "Accept":"video/webm, audio/webm, application/octet-stream",
-                  }
-                  request = urllib.request.Request(url,headers=headers)
-                  with urllib.request.urlopen(request,timeout=35) as stream:
-                      resolved = stream.geturl()
-                      host = urllib.parse.urlparse(resolved).hostname
-                      if host not in ("upload.wikimedia.org","commons.wikimedia.org"):
-                          raise ValueError("unexpected_media_host:"+str(host))
-                      raw = stream.read(16*1024*1024+1)
-                      if len(raw)>16*1024*1024:
-                          raise ValueError("media_too_large")
-                  if not raw or not raw.startswith(bytes.fromhex("1a45dfa3")):
-                      raise ValueError("not_webm")
-                  fname = "sample_"+entry["id"]+".webm"
-                  pathlib.Path(fname).write_bytes(raw)
-                  decoded = subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),"-hide_banner","-loglevel","error","-nostdin",
-                      "-i",fname,"-t","20","-ac","1","-ar","16000","-f","f32le","-"],
-                      stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=45,check=True)
-                  waveform = np.frombuffer(decoded.stdout,dtype="<f4").copy()
-                  if waveform.size<1600:
-                      raise ValueError("no_audible_waveform")
-                  scores, _, _ = model(tf.convert_to_tensor(waveform,dtype=tf.float32))
-                  a=scores.numpy()
-                  indices=np.argsort(a.mean(axis=0))[-5:][::-1]
-                  best_per_patch=np.argmax(a,axis=1)
-                  cat_patches=[i for i,winner in enumerate(best_per_patch) if int(winner) in cat_indices]
-                  row.update(status="MODEL_INFERENCE_COMPLETE",
-                     sha256=hashlib.sha256(raw).hexdigest(),
-                     media_bytes=len(raw),
-                     sound_seconds=round(len(waveform)/16000,3),
-                     yamnet_patches=len(a),
-                     top_mean_classes=[{"label":classes[int(j)]["display_name"],
-                                       "score":round(float(a.mean(axis=0)[j]),5)} for j in indices],
-                     feline_top_class_patch_count=len(cat_patches),
-                     feline_top_patch_time_ranges_s=[[round(i*.48,2),round(i*.48+.96,2)] for i in cat_patches],
-                     mean_meow_score=round(float(a[:,78].mean()),5),
-                     max_meow_score=round(float(a[:,78].max()),5))
-              except Exception as exc:
-                  row.update(status="NOT_EVALUATED",error_type=type(exc).__name__,error=str(exc)[:250])
-              finally:
-                  try: pathlib.Path("sample_"+entry["id"]+".webm").unlink(missing_ok=True)
-                  except Exception: pass
-              results.append(row)
-              print("CAT_TALES_CLIP="+json.dumps(row,ensure_ascii=False),flush=True)
-          result = {
-              "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-              "model": source_model,
-              "assessment":"Real short-media original sound-event candidates; scores are uncalibrated; no claim of translation, motivation, emotional state, or cat language comprehension.",
-              "clips":results,
-              "model_success_count":sum(v["status"]=="MODEL_INFERENCE_COMPLETE" for v in results)
+          import imageio_ffmpeg
+          from sklearn.linear_model import LogisticRegression
+          from sklearn.preprocessing import StandardScaler
+          model_ref="https://tfhub.dev/google/yamnet/1"
+          out=pathlib.Path("v06_research_result.json")
+          result={
+             "status":"NOT_RUN", "time_utc":datetime.now(timezone.utc).isoformat(),
+             "dataset":"ESC-50",
+             "license":"CC BY-NC 3.0; RESEARCH ONLY; NO DISTRIBUTION OF TRAINED WEIGHTS",
+             "source":"https://github.com/karolpiczak/ESC-50",
+             "model":model_ref,
+             "task":"cat-associated sounds vs dog/rain; NOT confirmed meows or intentions",
+             "split":"ESC-50 published folds 1-3 train, 4 validation, 5 test; source recording disjoint, cat identity UNKNOWN",
+             "output_contains_audio":False,
+             "commercial_or_production_use":"NOT_ALLOWED",
           }
-          pathlib.Path("cat_tales_real_audio_results.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
-          print("CAT_TALES_REAL_AUDIO_RESULT="+json.dumps(result,ensure_ascii=False),flush=True)
-          if result["model_success_count"]==0:
-              raise SystemExit("no_real_media_test_completed")
+          def save():
+              out.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
+          def retrieve(url,cap):
+              request=urllib.request.Request(url,headers={"User-Agent":"CatTalesResearch/0.6 (noncommercial evaluation; license honored)"})
+              with urllib.request.urlopen(request,timeout=35) as resp:
+                  if resp.status!=200: raise RuntimeError("HTTP_NOT_200")
+                  data=resp.read(cap+1)
+              if not data or len(data)>cap: raise RuntimeError("DOWNLOAD_SIZE_OR_EMPTY")
+              return data
+          def met(y,p):
+              a=np.asarray(y,dtype=bool);b=np.asarray(p,dtype=bool)
+              tp=int(np.sum(a&b));fp=int(np.sum(~a&b));tn=int(np.sum(~a&~b));fn=int(np.sum(a&~b))
+              return {"n":len(a),"tp":tp,"fp":fp,"tn":tn,"fn":fn,
+                 "precision":round(tp/(tp+fp),4) if tp+fp else None,
+                 "recall":round(tp/(tp+fn),4) if tp+fn else None,
+                 "false_positive_rate":round(fp/(fp+tn),4) if fp+tn else None}
+          try:
+              meta=retrieve("https://raw.githubusercontent.com/karolpiczak/ESC-50/master/meta/esc50.csv",400000)
+              records=list(csv.DictReader(io.StringIO(meta.decode("utf-8"))))
+              chosen=[]
+              for fold in range(1,6):
+                  for category in ("cat","dog","rain"):
+                      candidates=[r for r in records if r["category"]==category and int(r["fold"])==fold]
+                      candidates.sort(key=lambda r:hashlib.sha256((r["filename"]+"cat-tales-v06").encode()).hexdigest())
+                      if len(candidates)<5: raise RuntimeError("INCOMPLETE_FOLD")
+                      chosen.extend(candidates[:5])
+              assert len(chosen)==75
+              groups={}
+              for r in chosen:
+                  group=r["src_file"];fold=int(r["fold"])
+                  if group in groups and groups[group]!=fold:raise RuntimeError("SOURCE_GROUP_LEAKAGE")
+                  groups[group]=fold
+              print("V06_DATASET selected=75; per-fold 5 cat / 5 dog / 5 rain; cat identities unverified",flush=True)
+              model=hub.load(model_ref)
+              catscores=[];vectors=[];folds=[];truth=[];clip_digests=[]
+              for n,r in enumerate(chosen):
+                  fn=r["filename"]
+                  media_url="https://raw.githubusercontent.com/karolpiczak/ESC-50/master/audio/"+fn
+                  raw=retrieve(media_url,1100000)
+                  if raw[:4]!=b"RIFF" or raw[8:12]!=b"WAVE":raise RuntimeError("BAD_WAV_HEADER")
+                  p=pathlib.Path("current_clip.wav");p.write_bytes(raw)
+                  wav=subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),"-nostdin","-v","error",
+                      "-i",str(p),"-t","6","-ac","1","-ar","16000","-f","f32le","-"],
+                      check=True,capture_output=True,timeout=20).stdout
+                  p.unlink(missing_ok=True)
+                  signal=np.frombuffer(wav,dtype="<f4").copy()
+                  if len(signal)<16000:raise RuntimeError("TRUNCATED_MEDIA")
+                  scores,emb,_=model(tf.convert_to_tensor(signal,dtype=tf.float32))
+                  s=scores.numpy();e=emb.numpy()
+                  if s.ndim!=2 or s.shape[1]!=521 or e.ndim!=2 or e.shape[1]!=1024 or not np.isfinite(e).all():raise RuntimeError("MODEL_SHAPE_ERROR")
+                  catscores.append(bool(np.isin(s.argmax(axis=1),[77,78,79,80]).any()))
+                  vectors.append(e.mean(axis=0));folds.append(int(r["fold"]))
+                  truth.append(r["category"]=="cat")
+                  clip_digests.append(hashlib.sha256(raw).hexdigest())
+                  if (n+1)%15==0:print("V06_SOURCE_AUDIO_PROCESSED="+str(n+1),flush=True)
+              assert len(set(clip_digests))==len(clip_digests)
+              X=np.asarray(vectors,dtype=np.float64)
+              X=X/np.linalg.norm(X,axis=1)[:,None]
+              y=np.asarray(truth,dtype=bool)
+              f=np.asarray(folds)
+              train=(f<=3);valid=(f==4);test=(f==5)
+              scaler=StandardScaler(with_std=False).fit(X[train])
+              XX=scaler.transform(X)
+              head=LogisticRegression(C=0.03,class_weight="balanced",random_state=0,solver="liblinear",max_iter=600)
+              head.fit(XX[train],y[train])
+              score=head.predict_proba(XX)[:,list(head.classes_).index(True)]
+              # Decision threshold must depend only on validation fold, never test labels.
+              thresholds=sorted(set(float(t) for t in score[valid]),reverse=True)
+              ranked=[]
+              for threshold in thresholds:
+                  m=met(y[valid],score[valid]>=threshold)
+                  if m["precision"] is not None and m["precision"]>=0.8 and m["tp"]>0:
+                      ranked.append((m["recall"],m["precision"],threshold))
+              thresh=max(ranked)[2] if ranked else None
+              result.update({
+                 "status":"RESEARCH_AUDIO_EXPERIMENT_COMPLETED",
+                 "finished_at_utc":datetime.now(timezone.utc).isoformat(),
+                 "counts":{"train":int(train.sum()),"validation":int(valid.sum()),"test":int(test.sum()),
+                           "total":len(y),"cats_each_fold":5,"negative_each_fold":10},
+                 "heldout_prior_strict_yamnet":met(y[test],np.asarray(catscores,dtype=bool)[test]),
+                 "threshold_selected_exclusively_on_validation":round(thresh,6) if thresh is not None else None,
+                 "heldout_research_cat_sound_head":met(y[test],score[test]>=thresh) if thresh is not None else None,
+                 "validation_research_head":met(y[valid],score[valid]>=thresh) if thresh is not None else None,
+                 "claim_gate":"NO_GO: ESC-50 cat identity unknown; noncommercial license; no independent live recording validation; no translation",
+                 "source_recording_fold_overlap":0,
+              })
+              save()
+              print("V06_ESC50_RESULT="+json.dumps(result,ensure_ascii=False),flush=True)
+          except Exception as exc:
+              result.update(status="NOT_EVALUATED",reason_type=type(exc).__name__,reason=str(exc)[:150])
+              save()
+              print("V06_ESC50_RESULT="+json.dumps(result,ensure_ascii=False),flush=True)
+              raise
           PY
-      - name: Upload only JSON measurements (never third-party media)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cat-tales-real-audio-measurements
-          path: cat_tales_real_audio_results.json
-          retention-days: 5
-          if-no-files-found: ignore
-
-      - name: Preserve summary on isolated branch only
+      - name: Preserve research-only JSON, without source media or model weights
         if: always()
         shell: bash
         run: |
-          mkdir -p cat-tales/evidence/real-audio-20261017
-          if test -f cat_tales_real_audio_results.json; then
-            cp cat_tales_real_audio_results.json cat-tales/evidence/real-audio-20261017/result.json
+          mkdir -p cat-tales/evidence/esc50-research-v06
+          if [ -f v06_research_result.json ]; then
+            cp v06_research_result.json cat-tales/evidence/esc50-research-v06/result.json
           else
-            python - <<'PY'
-          import json,os,pathlib
-          pathlib.Path('cat-tales/evidence/real-audio-20261017/result.json').write_text(
-              json.dumps({'status':'NOT_RUN','reason':'prerequisite_failed_before_model_results','run_id':os.getenv('GITHUB_RUN_ID'),
-                          'run_url':'https://github.com/'+os.getenv('GITHUB_REPOSITORY','')+'/actions/runs/'+os.getenv('GITHUB_RUN_ID','')},
-                         indent=2))
-          PY
+            printf '{"status":"NOT_RUN","reason":"failed_before_research_script","run_id":"%s"}\n' "$GITHUB_RUN_ID" > cat-tales/evidence/esc50-research-v06/result.json
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add cat-tales/evidence/real-audio-20261017/result.json
+          git add cat-tales/evidence/esc50-research-v06/result.json
           if ! git diff --cached --quiet; then
-            git commit -m "evidence(cat-tales): record licensed real-short sound results"
+            git commit -m "evidence(cat-tales): ESC-50 research-only heldout result"
             git push origin HEAD:"$GITHUB_REF_NAME"
           fi
