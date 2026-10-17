@@ -916,3 +916,98 @@ CombatSolver已覆盖原生状态／路线／战损／重算，直接压缩“�
 收到材料后先核对完整性与实例身份；独立正确建议、原生恢复／执行及录像各自验收。若随后要运行游戏，仍须已有合法云端副本、匹配版本和可调用图形入口；若没有则保持阻塞，不自行购买、租机或改用Mac。账号授权等留到真实素材成立以后。
 
 **GO：仅继续已有真实原生证据的内部读取与核验。NO_GO：当前实机运行、正确建议PASS、自动操作、内容成片／发布、视觉产品及收费承诺。** 本节为实做只读验证与阻塞回执，不是已完成GAMEPILOT_STS2_PLAY_TO_CONTENT_V1端到端目标。
+
+
+## 2026-10-17 GAMEPILOT_STS2_PUBLIC_BUNDLE_PREFLIGHT_V1 — 远端实跑完成
+
+**本轮结论：公开 ZIP 获取 PASS，ZIP 安全检查 PASS，上游官方 Preflight 3/3 materials_valid；实机恢复、正确建议与内容生产仍 NOT_RUN。** 此结果取代上一节“该公开 ZIP 尚未取得、需要用户上传”的传输阻塞；无需用户重传 #239 已公开的同一附件。
+
+### 实际时间、环境与触发权限
+
+- 核查开始：2026-10-17 13:23:08 Asia/Shanghai；本节证据记录截至 13:28:30。所有运行时间来自 GitHub Actions API 和作业日志，未估算。
+- 初次云运行：2026-10-17 13:25:13–13:25:40；下载/安全检查 13:25:17.912327–13:25:18.119260；结果生成 13:25:37.200581。
+- 全检查点云运行：2026-10-17 13:27:05–13:27:32；下载/安全检查 13:27:10.875717–13:27:11.456929；官方三个检查点 testedAt 分别为 13:27:26.551855、13:27:27.627976、13:27:28.683400；结果生成 13:27:28.744539。
+- 通过已连接 GitHub 使用公共仓库的独立 GitHub-hosted Ubuntu 24.04.5 LTS 执行器。没有调用本地终端、桌面浏览器、本地文件或用户 Mac；没有购买、租机、付费服务、游戏安装或运行。没有将当前聊天宿主误称为 ChatGPT Work 游戏运行器。
+- 主分支递归树没有 .github/workflows；另外两条原有分支分别只有 pull_request 产品检查、限定分支 push 的计算器自测，均非可复用手动 Preflight。actions/workflows 列表 GET 被连接器白名单拒绝（400），actions/runs GET 可用。工具清单没有 workflow_dispatch 接口，未伪造 dispatch 请求。
+- 用户已明确允许隔离分支临时验证工作流。新建 gamepilot/public-bundle-preflight-20261017，仅对该分支、该 workflow 文件的 push 触发；保留 workflow_dispatch 声明，但本轮实际 event=push。contents:read，标准云 runner，10 分钟超时，无 secrets、仓库写入/部署步骤、缓存或自托管 runner。工作流未进入 main，也未接触/合并 Draft PR #3。
+- 初次工作流提交 77c5b9f2c469ee455f9d9e613e802b9e9419418a；全检查点工作流提交 a3f6130760f0fa2fa76cfc5ef471dbc736953128。首轮仅 start；第二轮补验另外两个实际存在的 selector 及路线引用。两次均 completed/success，重新下载的附件 SHA-256 相同；不是异步任务创建回执。
+
+### 可回读运行、源码、日志和产物
+
+- 初次运行：https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39006189334
+- 全检查点运行：https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39006300621
+- 最终作业：https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39006300621/job/117319376795
+- 实际运行的工作流：https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/a3f6130760f0fa2fa76cfc5ef471dbc736953128/.github/workflows/gamepilot-public-bundle-preflight.yml
+- 上游固定提交：https://github.com/Torch1230/CombatSolver/tree/5c773caaec742bc55588bc9ee21c361326a732f0
+- 上游文档：https://github.com/Torch1230/CombatSolver/blob/5c773caaec742bc55588bc9ee21c361326a732f0/docs/CHECKPOINT_REPLAY.md
+- 最终产物：https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39006300621/artifacts/12091465933
+- 产物名 gamepilot-sts2-public-bundle-preflight-v1，50,743 bytes；SHA-256 e0a1696cf5f312384db2f44b705477f359ea57283be4060d25a026b9f9abd0bf；API expires_at=2026-10-20T05:27:28Z（北京时间 10 月 20 日 13:27:28）。包括 ZIP manifest/各成员哈希、结构审查、引用核对、官方原始 Preflight 输出、results.json/jsonl/csv/md、运行环境和 SHA256SUMS；排除原 ZIP、输入副本和截图。
+- 初次产物 ID 12090823292，27,273 bytes，SHA-256 fdfef6832280bdb941cdcd99b377a7572dcde99a20f31a297671e2b8ce33d60f。
+- 为避免短期 artifact 到期丢失结果，连接器返回的完整解码作业日志与 GP_RESULT 原样解析结果另存隔离分支；不是重新制作的模拟日志。保存提交 668f48eb711573f6be9438edc1309af574432b37、1e924419b3f85652e165d2b509bf1a7c444b6b47，均已回读全文一致：
+  - https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/1e924419b3f85652e165d2b509bf1a7c444b6b47/gamepilot/operations/evidence/sts2-public-bundle-preflight-20261017/job-117319376795.log
+  - https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/1e924419b3f85652e165d2b509bf1a7c444b6b47/gamepilot/operations/evidence/sts2-public-bundle-preflight-20261017/result.json
+
+### 下载与 ZIP 安全结果
+
+来源报告：https://github.com/Torch1230/CombatSolver/issues/239
+
+原公开附件：https://github.com/user-attachments/files/33394516/CombatSolver-0.50.1-GREMLIN_MERC_NORMAL-93b983344bb44099aa7a94869871147f.zip
+
+| 项目 | 真实结果 |
+| --- | --- |
+| HTTP | GitHub 302 到 objects.githubusercontent.com，最终 200；只接受 HTTPS GitHub/GitHubusercontent 主机 |
+| Content-Type | application/x-zip-compressed |
+| Content-Length / 实收 | 195375 / 195375 bytes；非空且低于 128 MiB=134217728 bytes |
+| 原 ZIP SHA-256 | 882cc5db50d9ab8da83e0e2fae099d7f158b6641bd401b80fcced4ead66302cd |
+| ZIP 成员 / 展开总量 | 34 / 1,090,143 bytes |
+| 完整性 | 全成员流式读至 EOF、大小和 CRC 检查 PASS，未先解压文件 |
+| 防护 | 路径穿越/绝对路径/反斜杠/盘符、大小写重复、符号链接/特殊文件、加密成员、非允许压缩算法检查 PASS |
+| ZIP-bomb 边界 | 下载≤128 MiB、单成员≤128 MiB、总展开≤512 MiB、≤10000 成员、单成员压缩比≤200；实际包全部通过 |
+| JSON | 实际 .json/.save 逐份解析，拒绝重复 JSON key；未改动原 ZIP |
+
+### 官方工具实跑及实际材料
+
+使用未经修改的上游 tools/replay/run-checkpoint-batch.sh，CheckpointTool.csproj 为独立 net9.0 项目，不引用游戏 DLL；tools/Directory.Build.props 只设置仓库/构建目录。成功安装免费 .NET 9 SDK 并构建官方工具，**没有出现游戏 DLL 构建阻断**。命令形态为：
+
+`bash upstream/tools/replay/run-checkpoint-batch.sh /home/runner/work/yl124915300-dot.github.io/yl124915300-dot.github.io/bundle.zip --mode Preflight --selector <实际selector> --output <该次evidence目录>`
+
+上游源码固定 5c773caaec742bc55588bc9ee21c361326a732f0；CheckpointArchive.cs blob 664cdbea2e49728d5f215116524288b13de5b5ab。官方工具二进制环境 hash ab7942cb98f45ec61180e7297a93d092a09e8b3a8b80a094a35b4b1d14450606。没有运行 self-test 来替代真实包检查，没有自定义模拟器。
+
+真实包包含 report.json（schemaVersion=2）、replay/manifest.json（schemaVersion=3）、replay/checkpoint.json（schemaVersion=2）、3 组 metadata/replay-state/native-state/run-state、origin.json、origin.save 和 events.jsonl。
+
+- sessionId=caf0b3c418fb408d96946c7e67f61b2e；bundleId=62c4d37013204a49b9726edc2fe98bfd；encounterId=GREMLIN_MERC_NORMAL。
+- 索引及 manifest 的 diagnosticOnly=false、captureErrors=[]。只报告实际读取的字段，不用不存在字段补造完整性。
+- 实际索引 3 个 checkpoint，sequence=0、1、3；collection.checkpointCount=4 是包内记录的采集计数，不当成 4 份可用快照，也未补造 sequence=2。
+- 四类材料按各索引路径分别存在且非空，官方逐 selector 验证配对、continuation/encounter/session、RNG seed 和原生事件游标等静态协议。
+
+| 实际 selector / checkpointId | 标签 / eventCursor | 官方结果 / exit |
+| --- | --- | --- |
+| start → caf0b3c418fb408d96946c7e67f61b2e:0 | combat_start / 0 | materials_valid / 0 |
+| caf0b3c418fb408d96946c7e67f61b2e:1 | search_request_AutoTurnStart / 0 | materials_valid / 0 |
+| caf0b3c418fb408d96946c7e67f61b2e:3 | export_clicked / 0 | materials_valid / 0 |
+
+材料路径前缀均为 replay/current/，分别位于 checkpoints/<stem>.json、replay-state/<stem>.json、native-state/<stem>.bin、run-state/<stem>.save；实际 stem 为 000000-combat_start、000001-search_request_AutoTurnStart、000003-export_clicked。start 的官方证据目录为 official/requests/78677413ccefc5f1f4340aa7fe64618ee32cc4f9e8f971adc76770457eab1a74/20261017T0527265500345，另两项保存在 official-checkpoint-1/ 与 official-checkpoint-2/。
+
+**路线引用与录制边界：**
+
+- searchResults 实际 2 项，内容相同；均指向 checkpointId=:1、eventCursor=0，每项 plannedActions=7（5 个 PlayCard、2 个 EndTurn）；searchPolicies 实际 1 项，同指向 :1/0。
+- metadata 的 searchRootId：:0→:0、:1→:1、:3→:1；checkpointId/eventCursor/sessionId 和根引用静态核对 PASS。该核对只核对已有引用，未计算新路线或声称路线可执行。
+- 保存路线为飞镖+ → 中和 → 生存者（弃本能反应+）→ 暴露 → 打击 → EndTurn → EndTurn；完整实例状态键、目标身份与 choice 保留于结果。包内 isExecutable 五项 true、EndTurn 两项 false，均只是源字段，不能转换为独立正确建议。
+- recording.complete=true 但 eventCount=0、inputOrigins={}；3 个 checkpoint 的 eventCursor 都是 0，combatEndCheckpointId=null。因此 Preflight 的事件连续性在此包只验了空录制，不能证明存在整场玩家动作或可回放的完整战斗。
+- 包内 build.solverVersion=0.50.1.0、RitsuLib=0.6.7.0，gameVersion 程序集字段=0.1.0.0；issue 自报游戏 111.0。未据此推定当前任意游戏安装兼容。
+
+### 分层证据与最终边界
+
+| 层级 | 本轮结果 |
+| --- | --- |
+| ZIP 实际获取 | PASS，原附件 1 份；两次远端下载 hash 相同 |
+| ZIP 安全检查 | PASS |
+| 官方 Preflight | PASS，实际保留的 3/3 检查点 materials_valid |
+| 原生材料静态存在 | 3 组四材料存在并配对；native 二进制未在游戏解码/对账，不能称完整原生恢复验收 |
+| 完整原生状态/战斗恢复 | NOT_RUN；每项 restorationVerified=false |
+| 独立正确建议/游戏执行 | NOT_RUN；0 条验收、0 次游戏操作 |
+| 真实游戏画面 | NOT_RUN；未启动游戏、未取作者截图作本品牌素材 |
+| 真实录像/成片/发布 | NOT_RUN；0/0/0 |
+| 用户/反馈/订单/净到账 | NOT_RUN；本轮未查外部用户或资金流水，不把文件验证记为获客或收入 |
+
+原始公开问题包仅供本次内部技术验证；没有社媒再发布、作者联系、游戏二进制获取或商业再分发授权声明。本轮目标“远端自取公开包并按官方 Preflight 非游戏验证”已完成；GO 仅限这一层证据。实机恢复、执行建议与视频运营仍需各自独立验收，本轮没有启动或承诺后续异步持续执行。
