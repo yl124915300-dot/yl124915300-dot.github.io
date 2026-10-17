@@ -1,0 +1,192 @@
+name: GAMEPILOT_STS2_PUBLIC_BUNDLE_PREFLIGHT_V1
+on:
+  workflow_dispatch:
+  push:
+    branches: [gamepilot/public-bundle-preflight-20261017]
+    paths: [.github/workflows/gamepilot-public-bundle-preflight.yml]
+permissions:
+  contents: read
+concurrency:
+  group: gamepilot-public-bundle-preflight-20261017
+  cancel-in-progress: false
+jobs:
+  public-bundle-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: '1'
+      UPSTREAM_SHA: 5c773caaec742bc55588bc9ee21c361326a732f0
+    steps:
+      - name: Bounded public download and ZIP safety review
+        shell: bash
+        run: |
+          python3 <<'GP_PY'
+          import datetime, hashlib, json, pathlib, stat, urllib.parse, urllib.request, zipfile
+          OUT=pathlib.Path("evidence"); OUT.mkdir(exist_ok=True)
+          URL="https://github.com/user-attachments/files/33394516/CombatSolver-0.50.1-GREMLIN_MERC_NORMAL-93b983344bb44099aa7a94869871147f.zip"
+          MAX=128*1024*1024
+          def stamp(): return datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).isoformat()
+          result={"task":"GAMEPILOT_STS2_PUBLIC_BUNDLE_PREFLIGHT_V1","startedAtAsiaShanghai":stamp(),"sourceUrl":URL,"status":"STARTED","limits":{"downloadBytes":MAX,"expandedBytes":512*1024*1024,"entries":10000,"ratio":200}}
+          def save(name,value): (OUT/name).write_text(json.dumps(value,ensure_ascii=False,indent=2),encoding="utf-8")
+          def path_ok(name):
+              p=name.rstrip("/")
+              return bool(p) and not p.startswith("/") and "\\" not in p and ":" not in p and "\x00" not in p and all(x not in ("",".","..") for x in p.split("/"))
+          class Redirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,req,fp,code,msg,headers,newurl):
+                  u=urllib.parse.urlparse(newurl)
+                  if u.scheme!="https" or not (u.hostname=="github.com" or (u.hostname or "").endswith(".githubusercontent.com") or (u.hostname or "").endswith(".github.com")): raise ValueError("redirect_host_rejected")
+                  result.setdefault("redirects",[]).append({"status":code,"host":u.hostname})
+                  return super().redirect_request(req,fp,code,msg,headers,newurl)
+          try:
+              req=urllib.request.Request(URL,headers={"User-Agent":"GamePilot-public-bundle-preflight","Accept":"application/zip,application/octet-stream"})
+              with urllib.request.build_opener(Redirect).open(req,timeout=45) as response:
+                  result["httpStatus"]=response.status
+                  result["contentType"]=response.headers.get("Content-Type")
+                  result["contentLength"]=response.headers.get("Content-Length")
+                  result["finalHost"]=urllib.parse.urlparse(response.url).hostname
+                  result["responseDate"]=response.headers.get("Date")
+                  if response.status!=200: raise ValueError("http_status")
+                  if response.headers.get_content_type() not in ("application/zip","application/x-zip-compressed","application/octet-stream"): raise ValueError("content_type_rejected")
+                  declared=response.headers.get("Content-Length")
+                  if declared is not None and (int(declared)<=0 or int(declared)>MAX): raise ValueError("content_length_limit")
+                  total=0; digest=hashlib.sha256()
+                  with open("bundle.zip","wb") as target:
+                      while True:
+                          chunk=response.read(min(1024*1024,MAX-total+1))
+                          if not chunk: break
+                          total+=len(chunk)
+                          if total>MAX: raise ValueError("download_size_limit")
+                          target.write(chunk); digest.update(chunk)
+                  result["fileBytes"]=total; result["sha256"]=digest.hexdigest()
+                  if total==0 or (declared is not None and total!=int(declared)): raise ValueError("download_length_mismatch")
+              manifest=[]; expanded=0; actual=0; names=set(); parsed={}
+              def no_duplicates(pairs):
+                  d={}
+                  for k,v in pairs:
+                      if k in d: raise ValueError("duplicate_json_key:"+k)
+                      d[k]=v
+                  return d
+              with zipfile.ZipFile("bundle.zip") as archive:
+                  entries=archive.infolist()
+                  if not entries or len(entries)>10000: raise ValueError("entry_count_limit")
+                  for entry in entries:
+                      name=entry.filename
+                      if not path_ok(name): raise ValueError("unsafe_path:"+repr(name))
+                      folded=name.rstrip("/").casefold()
+                      if folded in names: raise ValueError("duplicate_path:"+name)
+                      names.add(folded)
+                      kind=stat.S_IFMT(entry.external_attr>>16)
+                      if kind not in (0,stat.S_IFREG,stat.S_IFDIR): raise ValueError("special_file:"+name)
+                      if entry.flag_bits&1: raise ValueError("encrypted_entry:"+name)
+                      if entry.compress_type not in (zipfile.ZIP_STORED,zipfile.ZIP_DEFLATED): raise ValueError("compression_method:"+name)
+                      expanded+=entry.file_size
+                      if entry.file_size>MAX or expanded>512*1024*1024: raise ValueError("expanded_size_limit:"+name)
+                      if entry.file_size/max(entry.compress_size,1)>200: raise ValueError("compression_ratio_limit:"+name)
+                      manifest.append({"path":name,"bytes":entry.file_size,"compressedBytes":entry.compress_size,"crc32":format(entry.CRC,"08x")})
+                  for entry in entries:
+                      count=0; h=hashlib.sha256(); blocks=[]
+                      is_json=entry.filename.endswith((".json",".save")) and entry.file_size<=16*1024*1024
+                      with archive.open(entry) as stream:
+                          while True:
+                              block=stream.read(1024*1024)
+                              if not block: break
+                              count+=len(block); actual+=len(block)
+                              if count>MAX or actual>512*1024*1024: raise ValueError("actual_expansion_limit")
+                              h.update(block)
+                              if is_json: blocks.append(block)
+                      if count!=entry.file_size: raise ValueError("entry_size_mismatch:"+entry.filename)
+                      manifest[entries.index(entry)]["sha256"]=h.hexdigest()
+                      if is_json:
+                          parsed[entry.filename]=json.loads(b"".join(blocks).decode("utf-8-sig"),object_pairs_hook=no_duplicates)
+                  # Streaming every entry to EOF checks decompression and CRC without extracting files.
+              save("zip-manifest.json",manifest)
+              index=parsed.get("replay/checkpoint.json",parsed.get("combat-solver/checkpoint.json"))
+              summary={"indexPath":"replay/checkpoint.json" if "replay/checkpoint.json" in parsed else "combat-solver/checkpoint.json" if "combat-solver/checkpoint.json" in parsed else None,"indexPresent":index is not None,"reportPresent":"report.json" in parsed or "combat-solver/report.json" in parsed,"jsonDocuments":[]}
+              for name,value in parsed.items():
+                  item={"path":name,"type":type(value).__name__}
+                  if isinstance(value,dict):
+                      item["keys"]=list(value)
+                      for key in ("schemaVersion","sessionId","checkpointId","searchRootId","eventCursor","diagnosticOnly","captureErrors","truncated","incompleteReason","encounterId","label"):
+                          if key in value: item[key]=value[key]
+                      for key in ("plannedActions","searchResults"):
+                          if key in value: item[key]={"type":type(value[key]).__name__,"count":len(value[key]) if isinstance(value[key],(list,dict)) else None}
+                  summary["jsonDocuments"].append(item)
+              if isinstance(index,dict):
+                  summary["index"]=index
+                  catalog=[]
+                  for cp in index.get("checkpoints",[]):
+                      if not isinstance(cp,dict): continue
+                      row={"checkpoint":cp,"materials":[]}
+                      for field in ("metadataPath","replayStatePath","nativeStatePath","runStatePath"):
+                          path=cp.get(field)
+                          row["materials"].append({"field":field,"path":path,"present":isinstance(path,str) and any(x["path"]==path for x in manifest)})
+                      catalog.append(row)
+                  summary["catalog"]=catalog
+              save("structure.json",summary)
+              result.update(status="PASS",crcAllEntries="PASS",pathTraversal="PASS",symlinks="PASS",zipBombLimits="PASS",entryCount=len(manifest),expandedBytes=expanded,sameRootSemantics="DELEGATED_TO_OFFICIAL_PREFLIGHT",finishedAtAsiaShanghai=stamp())
+              pathlib.Path("safe-to-preflight").write_text("PASS")
+          except Exception as error:
+              result.update(status="FAIL",error=type(error).__name__+":"+str(error),finishedAtAsiaShanghai=stamp())
+              raise
+          finally:
+              save("download-safety.json",result)
+              print("GP_DOWNLOAD_SAFETY="+json.dumps(result,ensure_ascii=False))
+          
+          GP_PY
+      - name: Prepare official .NET 9 runtime
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          dotnet-version: '9.0.x'
+      - name: Run unmodified official Preflight only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f safe-to-preflight
+          git init upstream
+          git -C upstream remote add origin https://github.com/Torch1230/CombatSolver.git
+          git -C upstream fetch --depth=1 origin "$UPSTREAM_SHA"
+          git -C upstream checkout --detach FETCH_HEAD
+          test "$(git -C upstream rev-parse HEAD)" = "$UPSTREAM_SHA"
+          git -C upstream rev-parse HEAD > evidence/upstream-commit.txt
+          dotnet --info > evidence/dotnet-info.txt
+          TZ=Asia/Shanghai date --iso-8601=seconds > evidence/preflight-start.txt
+          set +e
+          timeout 240 bash upstream/tools/replay/run-checkpoint-batch.sh "$PWD/bundle.zip" --mode Preflight --selector start --output "$PWD/evidence/official" > evidence/official-preflight.log 2>&1
+          rc=$?
+          set -e
+          echo "$rc" > evidence/official-exit-code.txt
+          cat evidence/official-preflight.log
+          TZ=Asia/Shanghai date --iso-8601=seconds > evidence/preflight-end.txt
+          exit "$rc"
+      - name: Summarize observed results and hash evidence
+        if: always()
+        shell: bash
+        run: |
+          python3 <<'GP_RESULT'
+          import datetime,hashlib,json,pathlib
+          root=pathlib.Path("evidence"); root.mkdir(exist_ok=True)
+          result={"finishedAtAsiaShanghai":datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).isoformat(),"battleRestoration":"NOT_RUN","executableAdvice":"NOT_RUN","realGameFrames":"NOT_RUN","video":"NOT_RUN","usersAndReceipts":"NOT_RUN"}
+          for name in ("download-safety.json","structure.json","official/results.json"):
+              p=root/name
+              if p.exists():
+                  data=json.loads(p.read_text())
+                  result[name]=data
+          code=root/"official-exit-code.txt"
+          result["officialExitCode"]=code.read_text().strip() if code.exists() else None
+          (root/"result.json").write_text(json.dumps(result,ensure_ascii=False,indent=2))
+          with (root/"SHA256SUMS").open("w") as output:
+              for p in sorted(root.rglob("*")):
+                  if p.is_file() and p.name!="SHA256SUMS": output.write(hashlib.sha256(p.read_bytes()).hexdigest()+"  "+str(p.relative_to(root))+"\n")
+          print("GP_RESULT="+json.dumps(result,ensure_ascii=False))
+          GP_RESULT
+      - name: Preserve logs and validation evidence without source ZIP or images
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: gamepilot-sts2-public-bundle-preflight-v1
+          path: |
+            evidence/
+            !evidence/official/inputs/**
+          retention-days: 3
+          if-no-files-found: error
