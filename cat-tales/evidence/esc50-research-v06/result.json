@@ -1,0 +1,54 @@
+{
+  "status": "RESEARCH_AUDIO_EXPERIMENT_COMPLETED",
+  "time_utc": "2026-10-17T15:21:23.949016+00:00",
+  "dataset": "ESC-50",
+  "license": "CC BY-NC 3.0; RESEARCH ONLY; NO DISTRIBUTION OF TRAINED WEIGHTS",
+  "source": "https://github.com/karolpiczak/ESC-50",
+  "model": "https://tfhub.dev/google/yamnet/1",
+  "task": "cat-associated sounds vs dog/rain; NOT confirmed meows or intentions",
+  "split": "ESC-50 published folds 1-3 train, 4 validation, 5 test; source recording disjoint, cat identity UNKNOWN",
+  "output_contains_audio": false,
+  "commercial_or_production_use": "NOT_ALLOWED",
+  "finished_at_utc": "2026-10-17T15:21:50.016178+00:00",
+  "counts": {
+    "train": 45,
+    "validation": 15,
+    "test": 15,
+    "total": 75,
+    "cats_each_fold": 5,
+    "negative_each_fold": 10
+  },
+  "heldout_prior_strict_yamnet": {
+    "n": 15,
+    "tp": 1,
+    "fp": 0,
+    "tn": 10,
+    "fn": 4,
+    "precision": 1.0,
+    "recall": 0.2,
+    "false_positive_rate": 0.0
+  },
+  "threshold_selected_exclusively_on_validation": 0.501663,
+  "heldout_research_cat_sound_head": {
+    "n": 15,
+    "tp": 5,
+    "fp": 1,
+    "tn": 9,
+    "fn": 0,
+    "precision": 0.8333,
+    "recall": 1.0,
+    "false_positive_rate": 0.1
+  },
+  "validation_research_head": {
+    "n": 15,
+    "tp": 5,
+    "fp": 0,
+    "tn": 10,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "false_positive_rate": 0.0
+  },
+  "claim_gate": "NO_GO: ESC-50 cat identity unknown; noncommercial license; no independent live recording validation; no translation",
+  "source_recording_fold_overlap": 0
+}
