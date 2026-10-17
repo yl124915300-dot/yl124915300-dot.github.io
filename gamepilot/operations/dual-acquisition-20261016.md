@@ -797,3 +797,122 @@ SpireSage、CombatSolver及其限定价格/评论/缺陷证据见上节。整体
 漏斗当前停在自有内容和自测：曝光未知→真实局面输入未知→行动后实际结果未知→有效反馈未知→明确愿付新获证0→结账未认证→净到账未知。既有ref解析只接受有限代码，许多历史创作者ref会变成unrecognized；无中央分析。此为源码发现，未改功能，也不能据ref参数宣称订单归因已打通。
 
 最终决策不变：**当前不足以作为收费视觉副驾驶竞争，NO_GO；只保留既有免费工具的获客/服务验证，不增加产品开发。**最缺的是在真实完整局面上比免费替代节省输入、给出可核验且持续有效的决策价值；这是需要独立玩家证据验证的价值主张，不是批准继续开发。独立使用、有效反馈、明确愿付、FIRST_COMMISSION、NET_RECEIPT均无新增获证；获证US$0不等于真实流水为0。
+
+
+---
+
+## GAMEPILOT_STS2_PLAY_TO_CONTENT_V1 — 2026-10-17
+
+核查窗口：2026-10-17 13:10:09–13:15:54 Asia/Shanghai（写入和回读时间以本次提交回执为准）。主线固定 Slay the Spire 2；没有开展 Balatro 工作。结论：**真实游戏运行／原生包到正确建议／实机动作／视频试发均 NO_GO，原因是本会话没有获证可用的 Work 云端游戏运行与文件处理入口；不是判定 STS2 技术路线不可行。**
+
+### 本轮实际动作及原始回读
+
+仅使用远端 GitHub 连接、公开网页读取、Buffer 只读查询和聊天元数据读取；没有调用 Mac 终端、文件或浏览器，没有启动游戏、安装、付费、发信、渠道发帖或新增自动化。
+
+| 动作 | 原始回读／证据 |
+| --- | --- |
+| 读取 gamepilot/ops 和 gamepilot/ops/README.md | GitHub NOT_FOUND / HTTP 404；文件搜索 gamepilot/ops 返回 results=[]。不据此新建第二套台账。 |
+| 读取实际原台账 gamepilot/operations/dual-acquisition-20261016.md | 写入前再次读取 sha=92d581360b9042f44c6e525d85a5bd4431cf698e，58227字符；保留全文后追加本节。 |
+| 读取 PR #3 并在本聊天关联 | state=open, draft=true, merged=false, head_sha=2e4efcce8c5bc25074b9e0abf5413723bef527e9。保持研究 NO_GO，卡名0/9、可执行建议0/4；未改PR、分支或应用源码。 |
+| 查询 Buffer 的 My organization | channels=[{service:pinterest,name:yl124915300,isDisconnected:false,isLocked:false}]；没有返回 YouTube/TikTok。仅证明本连接当前可见范围，不证明用户在所有服务上没有这些账号。未使用该Pinterest账号。 |
+| 读取 CombatSolver #239 | open，comments=3，updated_at=2026-10-15T16:46:20Z；现成截图和ZIP链接存在。没有再次评论或联系作者。 |
+| 尝试远端读取该ZIP | 网页读取器返回非重试型错误：跳转后的 application/x-zip-compressed 对该工具不可访问。没有解压、未取得包内哈希／checkpoint内容，不把链接当作已验证完整包。 |
+
+PR与台账：
+- https://github.com/yl124915300-dot/yl124915300-dot.github.io/pull/3
+- https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/main/gamepilot/operations/dual-acquisition-20261016.md
+
+当前聊天运行于桌面宿主，工具清单中没有可操作的远程游戏进程、云端终端／文件系统、游戏控制MCP或录屏端点。没有操作本地工具来填补缺口。只读查阅先前durable云任务记录表明此前有Work专属远程网页浏览器；它没有证明存在Steam游戏安装、合法游戏使用权、图形会话或录制权限。**云端是否实际持有合法STS2副本：UNKNOWN；当前任务能否运行它：未取得可用入口，BLOCKED。** 不把“当前访问不到”写成“所有Work环境都不存在”。
+
+### 本轮新增的源码、版本与正确性核验
+
+1. **CombatSolver发布与源码分开核对。**
+   最新发布入口仍重定向到 v0.50.1（2026-10-06）；发布页显示main比该发布多40个提交。README的“当前0.48.0”文字落后。v0.50.1清单实际为 version=0.50.1、min_game_version=0.111.0、STS2-RitsuLib min_version=0.6.0；这不是对任意更新游戏版本的兼容承诺，也未核得当前Steam客户端实际安装版本。
+   - https://github.com/Torch1230/CombatSolver/releases/tag/v0.50.1
+   - https://github.com/Torch1230/CombatSolver/blob/v0.50.1/CombatSolver.json
+   - 本轮读取清单blob：5dff8e85d65034cdf96a41c1cbf38d4f3adef826。
+
+2. **原生根不是OCR。**
+   直接读取 CombatRootSnapshot.Capture：要求游戏主线程，捕获live continuation，构造模拟状态并比较投影，再检查捕获后的live continuation，变化即抛错。main与v0.50.1该文件blob相同：d0c65c68447154973acc522acdf6f54dd3118a4e。SolverController在读取根之前等待原生动作完成并通过CanSolve；这些是代码中存在的保护，不是本轮运行结果。PreCombatForecastApi v6仍为Windows／单人／非战斗的战前入口，不能作为战斗中的GamePilot建议API。
+   - https://github.com/Torch1230/CombatSolver/blob/v0.50.1/src/Runtime/CombatRootSnapshot.cs
+   - https://github.com/Torch1230/CombatSolver/blob/main/src/Runtime/SolverController.cs
+   - https://github.com/Torch1230/CombatSolver/blob/v0.50.1/README.md
+
+3. **可直接复用现成问题包；无需写模拟适配器。**
+   ExportCurrentAsync在主线程记录export_clicked并冻结材料；ZIP包含report.json、diagnostics环境/路线/日志、replay/checkpoint.json、各根metadata／replay-state／native-state／run-state，以及录制的原生事件。截图和较早整批存档不在该包内，文字中的recording是动作事件录制，不是MP4。
+   main与v0.50.1导出器blob相同：22d91115111646edcb29d62468e473a6e19042c4。回放文档有差异，本轮另读v0.50.1版本，blob=a86ab2170623ac40ce3d574d60b41b0715bbda6b。
+   Preflight只验静态材料；RestoreOnly、ReplayRecorded、SearchOnly、DeploySolver是不同层级。旧包仅continuation匹配、native不可比较时，不能称完整恢复成功。diagnosticOnly／截断／缺政策／缺事件材料不得当完整原生包。
+   - https://github.com/Torch1230/CombatSolver/blob/v0.50.1/src/Runtime/CombatBugReportExporter.cs
+   - https://github.com/Torch1230/CombatSolver/blob/v0.50.1/docs/CHECKPOINT_REPLAY.md
+
+4. **第三方已有实测记录，但正确性不是全域保证。**
+   v0.50.1的药水问题记录列出原生runId d9629992ac31423586c7465510c18f6d、23.63秒机制场景Passed，同时明确原包整场搜索、可见Steam和Linux未验证。它是上游记录，本轮未独立复跑，不计GamePilot PASS。求解为预算内Beam Search，不保证全局最优。
+   - https://github.com/Torch1230/CombatSolver/blob/v0.50.1/docs/issues/potion-opportunity-20261006.md
+   - https://github.com/Torch1230/CombatSolver/blob/v0.50.1/docs/TEST_MATRIX.md
+
+5. **找到现成真实样本线索，尚不能读包或算出正确下一手。**
+   #239报告游戏111.0、CombatSolver0.50.1、RitsuLib0.6.7，附原生ZIP和截图；玩家声称三张攻击能击杀，而求解器选择EndTurn。这是待复现的错误报告，不是可直接采信的伤害／费用证明。没有从截图猜测替代出牌，也没有将他人画面制成GamePilot视频。
+   - https://github.com/Torch1230/CombatSolver/issues/239
+   - https://github.com/user-attachments/files/33394516/CombatSolver-0.50.1-GREMLIN_MERC_NORMAL-93b983344bb44099aa7a94869871147f.zip
+
+6. **RitsuLib按API分支匹配，不只比较版本号。**
+   latest入口为v0.6.7；README区分最高游戏API包、Compat包和variant-pack。CombatSolver与RitsuLib均读取到MIT许可，保留署名及第三方通知；这不授予游戏副本或第三方画面使用权。v0.6.7改为仅申请基本使用遥测，不能称无遥测版本；CombatSolver也有默认在线统计。本轮未安装／联网运行，未来只用匹配API构建并在游戏内核对统计设置，不默认向作者上传问题包。
+   - https://github.com/BAKAOLC/STS2-RitsuLib/releases/tag/v0.6.7
+   - https://github.com/BAKAOLC/STS2-RitsuLib/blob/main/README.md
+   - https://github.com/BAKAOLC/STS2-RitsuLib/blob/main/LICENSE
+   - https://github.com/Torch1230/CombatSolver/blob/main/LICENSE
+
+### STS2自动化候选的实证边界
+
+| 现成项目 | 读到的具体证据 | 本轮结论 |
+| --- | --- | --- |
+| https://github.com/CharTyr/STS2-Agent | 当前状态页列v0.16.1；记录游戏0.111.0上从1层到3层的45次模型决策，最终由token上限停止；明确完整自然对局、Vision等未做。LICENSE为AGPL。 | 有带边界的作者实机记录，比README功能清单强；不是独立复现或整局可靠通关证明。 |
+| https://github.com/dbyrne/ClawTheSpire | README宣称端到端，提供单步／dry-run、JSONL事件日志和STS2-Agent子模块；本轮尝试dashboard/data.json为404。 | 有可检查实现路线，尚未取得可核验通关率／完整运行证据；不能把主项目MIT覆盖到AGPL依赖。 |
+| https://github.com/BMingSY/sts2-ai-mcp | v2决策窗、decision/action ID、预览和动作trace；兼容文档要求读取健康状态／版本，不兼容时拒绝动作；AGPL-3.0-only。 | 实验协议候选，未在本任务连接或验证0.111.0运行兼容；不启用兼容绕过。 |
+| https://github.com/Cher1shYe/SlayTheModel | 固定0.111.0 ABI，状态指纹动作桥；first-legal用于联调，不评估策略；Windows游戏内自动战斗仍待验证，药水未入MCTS。 | 不把联调闭环当可靠AI通关；不新增该框架到GamePilot。 |
+
+读取STS2-Agent当前状态页blob=16e78401d4d0695ad227fbbbd0b746b38865843e：
+https://github.com/CharTyr/STS2-Agent/blob/main/PRODUCT_PLAN_CURRENT.md
+
+以上全部未安装或执行。当前最少模块候选仍是已有CombatSolver＋匹配RitsuLib＋独立录屏；不叠装多个自动控制器、不支付模型API。**未找到本轮能够独立复现、可作为GamePilot素材来源的可靠STS2全局自动化证据；不作“全网不存在”的断言。**
+
+### 录制、内容与账号门槛
+
+FFmpeg官方文档确认Linux x11grab需要可访问的X11显示及相应构建支持；本任务没有显示号、窗口、录制权限、已安装FFmpeg或音轨探测结果，均UNKNOWN。日志导出不替代真实游戏录像。没有可核验自有原片，未制作15–45秒视频、未生成假游戏画面／伪造对局。
+- https://ffmpeg.org/ffmpeg-devices.html#x11grab
+
+Mega Crit公开Content Policy允许游戏实录及平台视频变现，并要求链接对应游戏商店；同页禁止mod及其相关内容收费墙。代码MIT不能代替素材授权；#239玩家截图／录像再利用权限未核实。研究继续免费，不宣称视觉闭环或收费。
+- https://www.megacrit.com/content-policy/
+
+YouTube游戏内容规则已读：发行商商业使用权与紧贴画面的教学解说相关，长时间纯游玩不当然可获利。这不是YPP资格或上传账号授权。TikTok规则页本轮读取失败，未记政策通过。Buffer只见Pinterest；YouTube/TikTok用户控制权、上传scope、目标频道均未验证，故无试发／草稿，不切换到旧穿搭账号。
+- https://support.google.com/youtube/answer/138161?hl=en
+
+### 竞争压力与本品牌应验证的展示
+
+CombatSolver已覆盖原生状态／路线／战损／重算，直接压缩“给一条出牌建议”的价值空间。STS2 AI Coach源码说明每秒读4次、稳定0.5秒再决策、变化清除旧建议；它要求用户自带有额度OpenRouter key，已记测试为0.107.1，原Steam安装完整生产对局仍待验证。SpireSage官方提供移动资料库与AI问答，未因此证明实时战斗控制或答复正确。
+- https://github.com/Ch1nZ/sts2-ai-coach
+- https://spiresage.app/
+
+“解释／低输入／持续跟踪”目前都不能称GamePilot独占或已经领先。唯一值得展示的证据应是同一真实检查点的卡牌实例及目标、费用和效果核验、预测与实际变化对照，以及状态改变后撤销过期建议；同时记录玩家实际输入步骤。当前三项对比实测均未完成，不新增功能来替代证据。
+
+### 分层KPI（本轮；0仅指新增获证数量）
+
+| 层级 | 结果 |
+| --- | --- |
+| 合法游戏运行 | NOT_RUN；副本权利／云端图形游戏入口UNKNOWN |
+| 真实完整原生状态 | 0份验收；#239 ZIP仅取得链接，包内未读 |
+| GamePilot正确可执行建议 | 0条；原生最小门槛NOT_RUN；旧截图研究0/4保持不变 |
+| 游戏动作及操作后原生回读 | 0／0；未调用任何游戏动作接口 |
+| 真实原片／录像链验收 | 0；NOT_RUN |
+| 原创15–45秒竖屏成片／试发／草稿 | 0／0／0 |
+| 外部播放 | 新增获证0；实际UNKNOWN，未读取视频分析 |
+| 独立真实用户／有效反馈 | 新增获证0／0；总体UNKNOWN |
+| 付费订单／净到账 | 新增获证0笔／US$0；未查资金流水，总体UNKNOWN |
+
+### 唯一最小人工输入与最低成本边界
+
+下一步先采用“真实原生包→核验建议”，无需先解决社媒或购买游戏。**唯一即时人工输入：在可处理文件的Work云端会话向本任务提交一份有权使用、未改动的CombatSolver导出证据包，并附同一检查点原图。** 包需保留report／checkpoint索引、根材料、事件、政策和版本；公开#239可供内部研究，但不能据公开下载推定视频再利用授权。不收账号密码或游戏二进制。
+
+收到材料后先核对完整性与实例身份；独立正确建议、原生恢复／执行及录像各自验收。若随后要运行游戏，仍须已有合法云端副本、匹配版本和可调用图形入口；若没有则保持阻塞，不自行购买、租机或改用Mac。账号授权等留到真实素材成立以后。
+
+**GO：仅继续已有真实原生证据的内部读取与核验。NO_GO：当前实机运行、正确建议PASS、自动操作、内容成片／发布、视觉产品及收费承诺。** 本节为实做只读验证与阻塞回执，不是已完成GAMEPILOT_STS2_PLAY_TO_CONTENT_V1端到端目标。
