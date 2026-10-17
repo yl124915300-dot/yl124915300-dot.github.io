@@ -1,0 +1,59 @@
+name: GamePilot cloud checks
+on:
+  pull_request:
+    paths: ['gamepilot/live/**', '.github/workflows/gamepilot-cloud.yml']
+permissions:
+  contents: read
+concurrency:
+  group: gamepilot-cloud-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: gamepilot/live
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - run: npm test
+      - run: python -m unittest discover -s tests -p '*_test.py'
+      - run: python launch.py --self-test
+      - run: npm run vendor
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: python build_bundle.py
+      - name: Preserve cloud evidence and portable research archive
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gamepilot-capture-review
+          path: |
+            gamepilot/live/test-results/
+            gamepilot/live/package-lock.json
+          if-no-files-found: error
+          retention-days: 14
+  extracted-install:
+    needs: verify
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: gamepilot-capture-review
+          path: package
+      - run: python -m zipfile -e package/test-results/GamePilot-Capture-Review-Research.zip extracted
+      - run: python extracted/GamePilot-Capture-Review/launch.py --self-test

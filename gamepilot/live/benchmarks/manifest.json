@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "scope": "Development benchmark, not held-out generalization or a real player session",
+  "annotation": {
+    "method": "Model visual review of publisher screenshot previews; partial field labels only",
+    "independentHumanReview": "NOT_RUN",
+    "runtimeReceivesLabels": false
+  },
+  "rights": {
+    "owner": "Mega Crit",
+    "sourceContext": "https://store.steampowered.com/app/2868840/Slay_the_Spire_2/",
+    "basis": "Public publisher promotional stills referenced for attributed technical review",
+    "redistributionLicense": "NOT_ASSERTED",
+    "trainingUse": false,
+    "originalImagesShipped": false,
+    "policy": "https://www.megacrit.com/content-policy/",
+    "policyIsBlanketDatasetLicense": false
+  },
+  "frames": [
+    {
+      "id": "steam-0",
+      "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2868840/1a373a95229aab0cfd97f553ecbe86092364bb9c/ss_1a373a95229aab0cfd97f553ecbe86092364bb9c.1920x1080.jpg?t=1787169309",
+      "context": "https://store.steampowered.com/app/2868840/Slay_the_Spire_2/",
+      "sha256": "b689b4b5b9512acb9800004f5680c345b8eb7376ae82ec9e738586166f2cf20a",
+      "width": 1920,
+      "height": 1080,
+      "gameBuild": "UNKNOWN promotional build",
+      "retrievedAt": "2026-10-16T07:45:26.082Z",
+      "reference": {
+        "scene": "combat",
+        "hp": {
+          "current": 75,
+          "max": 75
+        },
+        "energy": {
+          "current": 2,
+          "max": 3
+        },
+        "turn": 3,
+        "enemyHP": [
+          {
+            "current": 30,
+            "max": 72
+          }
+        ],
+        "knownCardNames": [
+          "Dualcast",
+          "White Noise",
+          "Rip and Tear"
+        ],
+        "completeHandLabel": false,
+        "notes": "A hovered card obscures part of the hand. Orbs, block and status icons are visible; their full mechanics are not labeled."
+      }
+    },
+    {
+      "id": "steam-1",
+      "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2868840/f3af7cb9693b9c4b6a7555227db3fef943db3992/ss_f3af7cb9693b9c4b6a7555227db3fef943db3992.1920x1080.jpg?t=1787169309",
+      "context": "https://store.steampowered.com/app/2868840/Slay_the_Spire_2/",
+      "sha256": "78ceae724906612fd1f75a095a78ba0f069995f53259eafd383329f1ad3b168e",
+      "width": 1920,
+      "height": 1080,
+      "gameBuild": "UNKNOWN promotional build",
+      "retrievedAt": "2026-10-16T07:45:28.209Z",
+      "reference": {
+        "scene": "combat_animation_coop",
+        "hp": null,
+        "energy": null,
+        "turn": null,
+        "enemyHP": [
+          {
+            "current": 17,
+            "max": 616
+          }
+        ],
+        "knownCardNames": [
+          "Strike",
+          "Defend",
+          "Bullet Time",
+          "Shadowmeld",
+          "Escape Plan",
+          "Knife Trap"
+        ],
+        "completeHandLabel": true,
+        "notes": "HUD/energy/end-turn controls are hidden during an animation. Floating 17 damage is not an enemy intent. Co-op allies are not enemies."
+      }
+    },
+    {
+      "id": "steam-2",
+      "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2868840/c3db69efd984ef012ae85c5b426663720152f0a4/ss_c3db69efd984ef012ae85c5b426663720152f0a4.1920x1080.jpg?t=1787169309",
+      "context": "https://store.steampowered.com/app/2868840/Slay_the_Spire_2/",
+      "sha256": "3b552bd5a60c64d0270d6098ae34b5a1240a251677ea803bbee6c02b345ef389",
+      "width": 1920,
+      "height": 1080,
+      "gameBuild": "UNKNOWN promotional build",
+      "retrievedAt": "2026-10-16T07:45:31.326Z",
+      "reference": {
+        "scene": "character_select",
+        "hp": null,
+        "energy": null,
+        "turn": null,
+        "enemyHP": [],
+        "knownCardNames": [],
+        "completeHandLabel": true,
+        "notes": "66/66 is character-selection metadata, not an active combat HUD."
+      }
+    },
+    {
+      "id": "steam-3",
+      "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2868840/0fdb2940c0d367a40b2be6433daf12e3634089cf/ss_0fdb2940c0d367a40b2be6433daf12e3634089cf.1920x1080.jpg?t=1787169309",
+      "context": "https://store.steampowered.com/app/2868840/Slay_the_Spire_2/",
+      "sha256": "2ebd664e81147bfdc8bca1b1b2ac35b85ac1491c740bab9b00d3499646ff026b",
+      "width": 1920,
+      "height": 1080,
+      "gameBuild": "UNKNOWN promotional build",
+      "retrievedAt": "2026-10-16T07:45:33.009Z",
+      "reference": {
+        "scene": "shop",
+        "hp": {
+          "current": 65,
+          "max": 70
+        },
+        "energy": null,
+        "turn": null,
+        "enemyHP": [],
+        "knownCardNames": [],
+        "completeHandLabel": true,
+        "notes": "Proceed is not End Turn. Merchant and decoration are not enemies."
+      }
+    }
+  ]
+}
