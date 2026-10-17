@@ -1,0 +1,36 @@
+{
+  "status": "RESEARCH_REAL_PAIRED_TEST_COMPLETED",
+  "run_utc": "2026-10-17T16:37:13.071765+00:00",
+  "model_yamnet": "https://tfhub.dev/google/yamnet/1",
+  "model_clap": "laion/clap-htsat-fused",
+  "source_rights": "CatMeows scientific/noncommercial use; ESC-50 CC BY-NC 3.0; RESEARCH ONLY",
+  "intent_translated": false,
+  "commercial_release": "NO_GO",
+  "raw_media_in_report": false,
+  "processed": 65,
+  "summary": {
+    "cat_meow": {
+      "clips": 49,
+      "yamnet_top1_flags": 1,
+      "yamnet_top5_flags": 33,
+      "clap_top1_flags": 41,
+      "clap_top3_flags": 49
+    },
+    "dog": {
+      "clips": 8,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 5
+    },
+    "rain": {
+      "clips": 8,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 0
+    }
+  },
+  "score_meaning": "zero-shot relative prompt rankings, NOT calibrated probabilities; labels from authors",
+  "limitations": "Research/noncommercial samples, no human blind annotation, negatives from another corpus, no cross-home generalization claim"
+}
