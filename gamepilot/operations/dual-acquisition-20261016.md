@@ -1011,3 +1011,51 @@ CombatSolver已覆盖原生状态／路线／战损／重算，直接压缩“�
 | 用户/反馈/订单/净到账 | NOT_RUN；本轮未查外部用户或资金流水，不把文件验证记为获客或收入 |
 
 原始公开问题包仅供本次内部技术验证；没有社媒再发布、作者联系、游戏二进制获取或商业再分发授权声明。本轮目标“远端自取公开包并按官方 Preflight 非游戏验证”已完成；GO 仅限这一层证据。实机恢复、执行建议与视频运营仍需各自独立验收，本轮没有启动或承诺后续异步持续执行。
+
+
+## 2026-10-17 GAMEPILOT_STS2_SAVED_ROUTE_REVIEW_V1 — 历史路线解释、未实机验收
+
+**结论：同一保存根引用 PASS；完整真实玩家决策状态未验收；可生成忠实的历史路线解释。实机门槛仍停于已完成的 Preflight。** 本节只读取已有 GitHub 结果、作业日志、公开 issue/评论及固定版本文档；未重新下载原问题 ZIP，未触发、重跑或新建静态检查，未创建开发项目。
+
+### 本次新增核对
+
+- 直接读取持久化 [result.json](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/1e924419b3f85652e165d2b509bf1a7c444b6b47/gamepilot/operations/evidence/sts2-public-bundle-preflight-20261017/result.json) 与 [job-117319376795.log](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/1e924419b3f85652e165d2b509bf1a7c444b6b47/gamepilot/operations/evidence/sts2-public-bundle-preflight-20261017/job-117319376795.log)；解析日志 GP_RESULT 后与 result.json 的 result 对象逐字段一致。此为已有证据回读，不是新 Preflight PASS。
+- 两条 searchResults 对象逐字段相同，属于同一保存预测的重复记录，不是两次独立玩家决策或两条候选路线。均为 session caf0b3c418fb408d96946c7e67f61b2e、checkpointId=caf0b3c418fb408d96946c7e67f61b2e:1、eventCursor=0、scope=SearchCompletion、startTurnNumber=1。唯一 searchPolicies 也引用 :1/0；导出检查点 :3 的 searchRootId 仍为 :1。不能仅凭同 eventCursor 把 combat_start、首次可操作和导出状态当成相同完整状态。
+- 源预测字段：battleHpLostSoFar=0、projectedBattleHpLost=0、combatEndedTurn=2、deathTurn=null、potionCount=0、battlePotionsUsedSoFar=0。它们是已保存的求解器预测，不是实测结果；官方 Preflight 的 reportedOriginalPrediction、reportedManualPrediction、relativeToManual、betterThanManual、predictionGap 均为 null。
+- 同根源政策含 acceptableBattleHpLoss=0、stopAtAcceptableBattleHpLoss=true、ignoreLongTermRewards=true、profile.stopPortfolioAtHpTarget=true。只能说明该次保存政策和 HP 目标；不能据此认定金币遗漏的内部根因，或认定替代击杀路线成立。
+- diagnosticOnly=false、captureErrors=[] 与 recording.complete=true 均为源字段；eventCount=0、inputOrigins={}、combatEndCheckpointId=null，三份 checkpoint 的 restorationVerified 均为 false。材料静态齐备不等于完整原生状态已恢复，更不等于完整玩家动作历史。
+
+### 历史路线解释、未实机验收
+
+| 保存步骤 | 回合 | 源动作及身份 |
+| --- | --- | --- |
+| 1 | 1 | 飞镖+ → 地精佣兵，targetCombatId=1 |
+| 2 | 1 | 中和 → 卑鄙地精（左起1），targetCombatId=3 |
+| 3 | 1 | 生存者，选择弃本能反应+ |
+| 4 | 1 | 暴露 → 同一 targetCombatId=3 |
+| 5 | 1 | 打击 → 同一 targetCombatId=3 |
+| 6 | 1 | EndTurn |
+| 7 | 2 | EndTurn |
+
+plannedActions 保留 5 个 PlayCard 和 2 个 EndTurn。isExecutable 前五项 true、后两项 false 只按源值报告；未运行其判定逻辑，不能将 true 视作执行验收，也不能单凭 EndTurn 的 false 判定路线失败。上述动作是问题包中的 CombatSolver 保存计划，不是 GamePilot 新生成或自主执行的策略。尚未逐字段解码/核验完整手牌、费用、牌堆、遗物、敌人状态及原生二进制，不能给出可执行性或正确性 PASS。
+
+[原作者补充](https://github.com/Torch1230/CombatSolver/issues/239#issuecomment-6196952786)称下一回合三张攻击可以击杀胖地精，但求解器直接结束；并称即使未被偷钱，放跑也会少一半金币。此为第三方玩家报告，缺少本任务独立重放、击杀/逃跑终态及金币前后对账。不能把“战斗结束/0 HP”解释为击杀、保住金币、最优，不能把既有我方两条评论当成玩家验证。该反馈亦未建立 GamePilot 采用、交付或收入。
+
+### 云端执行与内容权利阻塞证据
+
+- 已有 [工作流](https://github.com/yl124915300-dot/yl124915300-dot.github.io/blob/a3f6130760f0fa2fa76cfc5ef471dbc736953128/.github/workflows/gamepilot-public-bundle-preflight.yml)明确 runs-on=ubuntu-24.04，仅准备 .NET 并运行 Preflight，没有 --game-root、游戏安装或 RestoreOnly 步骤；[作业](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39006300621/job/117319376795)已结束，不是当前可交互游戏实例。当前最近 8 次 runs 回读只有既有 Preflight 与 Pages 部署，未读到新的游戏恢复记录；此快照不证明所有运行记录或所有云端环境均不存在。
+- 当前通过 GitHub 连接器 GET actions/runners?per_page=100 返回 HTTP 400 / INVALID_ARGUMENT：“GitHub Fetch URL is not an allowed public GitHub repository or search endpoint.” 因接口白名单限制，无法核实自托管 runner、合法游戏副本、安装路径和现行运行入口；没有扩大账号权限，也没有以失败读取推断 runner 不存在。
+- [官方固定版本说明](https://github.com/Torch1230/CombatSolver/blob/5c773caaec742bc55588bc9ee21c361326a732f0/docs/CHECKPOINT_REPLAY.md)要求 RestoreOnly 提供 --game-root；需要完整 ContinuationStamp 与 native-state 比较。start 还须核对首次可操作检查点 readyCheckpointVerified。当前未取得可实际读取的合法匹配游戏环境，因此本次不尝试恢复，不用失败启动或重复静态 CI 冒充进展。
+- 已核实免费 GitHub Actions 计算路径；**当前未核实“不新增费用、不使用 Mac、已有合法 STS2 副本且可调用”的游戏运行方式**。这不是对全球所有云游戏方式不存在的断言。问题包的游戏程序集版本字段和 issue 自报版本不能替代实际安装构建、模块/Mod 身份及授权核验。
+- 固定版本 [MIT LICENSE](https://github.com/Torch1230/CombatSolver/blob/5c773caaec742bc55588bc9ee21c361326a732f0/LICENSE)覆盖其软件及相关文档，未取得原作者对 issue ZIP/截图用于 GamePilot 视频、社媒或商业再分发的明确授权。本次仅核对已有文本证据并记录审计结论，没有复制发布原 ZIP/截图、联系作者或对外分发素材。
+
+| 层级 | 状态 |
+| --- | --- |
+| 已有 ZIP 安全检查 / 官方 Preflight | PASS（历史成果；本轮未重跑） |
+| 保存根引用 / 两份预测去重 / 忠实历史解释 | PASS（文本证据范围） |
+| 完整真实玩家决策状态 / RestoreOnly | NOT_RUN |
+| ReplayRecorded / DeploySolver / 正确建议 / 自主玩游戏 | NOT_RUN |
+| 原片 / 成片 / 分发 | NOT_RUN |
+| 用户 / 付费 / 净到账 | NOT_RUN（本次未观测） |
+
+**最短下一步：只在已能读取且不新增费用/权限的合法云端 STS2 环境中，复用原问题包运行官方 RestoreOnly --selector start，并保留 :0 与 ready :1 的完整对账证据；环境未成立则继续停止于 Preflight。** RestoreOnly PASS 也只验证状态恢复，后续仍须独立验收保存计划实际执行与结果，实机复盘 PASS 后才进入录制；第三方素材再利用权另行成立。未操作用户 Mac/终端/桌面，未支付、购买/获取游戏副本、租机、合并 PR #3 或修改产品。
