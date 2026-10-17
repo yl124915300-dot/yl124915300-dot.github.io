@@ -1,0 +1,99 @@
+{
+  "status": "BLOCKED_SOURCE_RATE_LIMIT_DO_NOT_RETRY",
+  "evaluated_utc": "2026-10-17T16:02:08.314001+00:00",
+  "model": "https://tfhub.dev/google/yamnet/1",
+  "source_license": "CC0 1.0 per file pages reviewed 2026-10-17",
+  "task": "sound event candidate only, NOT cat translation, cat intention, training or product evaluation",
+  "content_republication": false,
+  "clips": [
+    {
+      "id": "tsester_meow",
+      "source_page": "https://commons.wikimedia.org/wiki/File:2015-11-24.%CE%BD%CE%B9%CE%B1%CE%BF%CF%8D%CF%81%CE%B9%CF%83%CE%BC%CE%B1.%CE%9D%CE%B9%CE%AC%CE%BF%CF%85.noise_reduced.flac",
+      "author": "Tsester",
+      "license": "CC0-1.0",
+      "uploader_description": "meow",
+      "uploader_label_is_independently_verified": false,
+      "status": "MODEL_INFERENCE_COMPLETE",
+      "original_sha256": "5672d956e6eee58e4d5c54f645ed38df480e77693a95cd537b5464145c68fae0",
+      "audio_seconds": 1.155,
+      "patches": 2,
+      "top_mean": [
+        {
+          "name": "Inside, small room",
+          "score_uncalibrated": 0.12265
+        },
+        {
+          "name": "Speech",
+          "score_uncalibrated": 0.05769
+        },
+        {
+          "name": "Child speech, kid speaking",
+          "score_uncalibrated": 0.01935
+        },
+        {
+          "name": "Crying, sobbing",
+          "score_uncalibrated": 0.01384
+        },
+        {
+          "name": "Inside, large room or hall",
+          "score_uncalibrated": 0.00939
+        }
+      ],
+      "meow_top1_patches": 0,
+      "meow_top5_patches": 0,
+      "dog_bark_top1_patches": 0,
+      "score_is_unvalidated_probability": false
+    },
+    {
+      "id": "george_meow",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Maullido_de_gata_hembra_joven.ogg",
+      "author": "George Miquilena",
+      "license": "CC0-1.0",
+      "uploader_description": "meow",
+      "uploader_label_is_independently_verified": false,
+      "status": "MODEL_INFERENCE_COMPLETE",
+      "original_sha256": "dfe040906e879e92ea0521717a304786e0694a47b436c8faf7e773aa46b5bbf2",
+      "audio_seconds": 1.152,
+      "patches": 2,
+      "top_mean": [
+        {
+          "name": "Vehicle",
+          "score_uncalibrated": 0.50179
+        },
+        {
+          "name": "Motor vehicle (road)",
+          "score_uncalibrated": 0.23336
+        },
+        {
+          "name": "Car",
+          "score_uncalibrated": 0.15166
+        },
+        {
+          "name": "Bus",
+          "score_uncalibrated": 0.13664
+        },
+        {
+          "name": "Car passing by",
+          "score_uncalibrated": 0.09195
+        }
+      ],
+      "meow_top1_patches": 0,
+      "meow_top5_patches": 0,
+      "dog_bark_top1_patches": 0,
+      "score_is_unvalidated_probability": false
+    },
+    {
+      "id": "edo_dog",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Ladrido_perro.ogg",
+      "author": "Edo.pt2",
+      "license": "CC0-1.0",
+      "uploader_description": "dog_bark",
+      "uploader_label_is_independently_verified": false,
+      "status": "DOWNLOAD_HTTP_BLOCKED",
+      "http_status": 429
+    }
+  ],
+  "model_loaded": true,
+  "independent_acoustic_ground_truth": 0,
+  "commercial_model_deployment": "NO_GO"
+}
