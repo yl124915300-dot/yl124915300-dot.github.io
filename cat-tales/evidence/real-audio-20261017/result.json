@@ -1,6 +1,122 @@
 {
-  "status": "NOT_RUN",
-  "reason": "prerequisite_failed_before_model_results",
-  "run_id": "39039670500",
-  "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39039670500"
+  "timestamp_utc": "2026-10-17T14:14:10.746770+00:00",
+  "model": "https://tfhub.dev/google/yamnet/1",
+  "assessment": "Real short-media original sound-event candidates; scores are uncalibrated; no claim of translation, motivation, emotional state, or cat language comprehension.",
+  "clips": [
+    {
+      "id": "cat_holly_bird_chirp",
+      "description_page": "https://commons.wikimedia.org/wiki/File:Cat_making_noises_at_the_birds_outside.webm",
+      "author": "Ali T",
+      "license": "CC BY 2.0",
+      "expected": "cat_chirrup",
+      "status": "MODEL_INFERENCE_COMPLETE",
+      "sha256": "804cdc2b06c68cde6e01676a946823d801b05994985d553a8acfb009670446d4",
+      "media_bytes": 551383,
+      "sound_seconds": 5.043,
+      "yamnet_patches": 10,
+      "top_mean_classes": [
+        {
+          "label": "Domestic animals, pets",
+          "score": 0.07846
+        },
+        {
+          "label": "Animal",
+          "score": 0.07307
+        },
+        {
+          "label": "Inside, small room",
+          "score": 0.06493
+        },
+        {
+          "label": "Cat",
+          "score": 0.06485
+        },
+        {
+          "label": "Crying, sobbing",
+          "score": 0.05621
+        }
+      ],
+      "feline_top_class_patch_count": 0,
+      "feline_top_patch_time_ranges_s": [],
+      "mean_meow_score": 0.02937,
+      "max_meow_score": 0.08906
+    },
+    {
+      "id": "cat_thunderstorm_meow",
+      "description_page": "https://commons.wikimedia.org/wiki/File:Thunderstorm_in_Onex_-_20062013_-_falling_hailstones.webm",
+      "author": "Clément Bucco-Lechat",
+      "license": "CC BY-SA 3.0",
+      "expected": "cat_meow_in_noisy_background",
+      "status": "MODEL_INFERENCE_COMPLETE",
+      "sha256": "341f2ba7c42d4004b708534b057a63a52e856cdb2d3cec84e69a24ad33cc1151",
+      "media_bytes": 8586205,
+      "sound_seconds": 7.14,
+      "yamnet_patches": 14,
+      "top_mean_classes": [
+        {
+          "label": "Inside, small room",
+          "score": 0.20711
+        },
+        {
+          "label": "Typewriter",
+          "score": 0.10997
+        },
+        {
+          "label": "Water",
+          "score": 0.07571
+        },
+        {
+          "label": "Liquid",
+          "score": 0.07169
+        },
+        {
+          "label": "Fire",
+          "score": 0.07136
+        }
+      ],
+      "feline_top_class_patch_count": 0,
+      "feline_top_patch_time_ranges_s": [],
+      "mean_meow_score": 0.00039,
+      "max_meow_score": 0.00533
+    },
+    {
+      "id": "dog_bark_negative",
+      "description_page": "https://commons.wikimedia.org/wiki/File:Dog_barking.webm",
+      "author": "Dr. Nono YesMaybe",
+      "license": "CC BY-SA 4.0",
+      "expected": "dog_bark_not_cat",
+      "status": "MODEL_INFERENCE_COMPLETE",
+      "sha256": "5e84a05f8ee4107290e07bf38a05c44f524bb3cd0e768bd2d7a237fa7e5101f0",
+      "media_bytes": 307406,
+      "sound_seconds": 20.0,
+      "yamnet_patches": 41,
+      "top_mean_classes": [
+        {
+          "label": "Domestic animals, pets",
+          "score": 0.92071
+        },
+        {
+          "label": "Animal",
+          "score": 0.92067
+        },
+        {
+          "label": "Dog",
+          "score": 0.91638
+        },
+        {
+          "label": "Bark",
+          "score": 0.73605
+        },
+        {
+          "label": "Bow-wow",
+          "score": 0.36797
+        }
+      ],
+      "feline_top_class_patch_count": 0,
+      "feline_top_patch_time_ranges_s": [],
+      "mean_meow_score": 0.0,
+      "max_meow_score": 1e-05
+    }
+  ],
+  "model_success_count": 3
 }
