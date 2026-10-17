@@ -1,0 +1,118 @@
+name: Cat Tales V08 CC0 meow sound smoke
+on:
+  push:
+    branches:
+      - cat-tales/v08-cc0-smoke-20261017
+    paths:
+      - '.github/workflows/cat-tales-v08-cc0-smoke.yml'
+permissions:
+  contents: write
+jobs:
+  cc0-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned official sound-model dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --progress-bar off tensorflow-cpu==2.17.1 tensorflow-hub==0.16.1 tf-keras==2.17.0 imageio-ffmpeg==0.6.0
+      - name: Infer from small independently published CC0 samples
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,hashlib,json,subprocess,urllib.request,urllib.error
+          from datetime import datetime, timezone
+          from pathlib import Path
+          import numpy as np
+          import tensorflow as tf, tensorflow_hub as hub, imageio_ffmpeg
+          sources=[
+            ("tsester_meow","https://upload.wikimedia.org/wikipedia/commons/7/74/2015-11-24.%CE%BD%CE%B9%CE%B1%CE%BF%CF%8D%CF%81%CE%B9%CF%83%CE%BC%CE%B1.%CE%9D%CE%B9%CE%AC%CE%BF%CF%85.noise_reduced.flac","meow","Tsester","https://commons.wikimedia.org/wiki/File:2015-11-24.%CE%BD%CE%B9%CE%B1%CE%BF%CF%8D%CF%81%CE%B9%CF%83%CE%BC%CE%B1.%CE%9D%CE%B9%CE%AC%CE%BF%CF%85.noise_reduced.flac"),
+            ("george_meow","https://upload.wikimedia.org/wikipedia/commons/c/c0/Maullido_de_gata_hembra_joven.ogg","meow","George Miquilena","https://commons.wikimedia.org/wiki/File:Maullido_de_gata_hembra_joven.ogg"),
+            ("edo_dog","https://upload.wikimedia.org/wikipedia/commons/f/fd/Ladrido_perro.ogg","dog_bark","Edo.pt2","https://commons.wikimedia.org/wiki/File:Ladrido_perro.ogg"),
+            ("hedubli_voice","https://upload.wikimedia.org/wikipedia/commons/7/7d/Female_Voice_saying_%22Message%22.wav","human_speech","Hedubli","https://commons.wikimedia.org/wiki/File:Female_Voice_saying_%22Message%22.wav")
+          ]
+          evidence={"status":"STARTED","evaluated_utc":datetime.now(timezone.utc).isoformat(),"model":"https://tfhub.dev/google/yamnet/1",
+                    "source_license":"CC0 1.0 per file pages reviewed 2026-10-17",
+                    "task":"sound event candidate only, NOT cat translation, cat intention, training or product evaluation",
+                    "content_republication":False,"clips":[]}
+          def save():
+              Path("v08-results.json").write_text(json.dumps(evidence,indent=2,ensure_ascii=False),encoding="utf-8")
+          save()
+          try:
+              model=hub.load("https://tfhub.dev/google/yamnet/1")
+              classes=list(csv.DictReader(open(model.class_map_path().numpy().decode(),encoding="utf-8")))
+              for i,n in [(69,"Dog"),(70,"Bark"),(76,"Cat"),(77,"Purr"),(78,"Meow"),(79,"Hiss"),(80,"Caterwaul")]:
+                  assert int(classes[i]["index"])==i and classes[i]["display_name"]==n
+              evidence["model_loaded"]=True
+              for sid,url,label,author,page in sources:
+                  rec={"id":sid,"source_page":page,"author":author,"license":"CC0-1.0","uploader_description":label,
+                       "uploader_label_is_independently_verified":False,"status":"NOT_EVALUATED"}
+                  evidence["clips"].append(rec)
+                  try:
+                      request=urllib.request.Request(url,headers={"User-Agent":"CatTalesResearch/0.8 (limited CC0 research sampling; no redistribution)"})
+                      with urllib.request.urlopen(request,timeout=30) as stream:
+                          raw=stream.read(3*1024*1024+1)
+                      if not raw or len(raw)>3*1024*1024:raise ValueError("empty_or_over_3MiB")
+                      wav=subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),"-hide_banner","-loglevel","error","-nostdin",
+                         "-i","pipe:0","-t","30","-ac","1","-ar","16000","-f","f32le","pipe:1"],
+                         input=raw,stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=True,timeout=45)
+                      w=np.frombuffer(wav.stdout,dtype="<f4").copy()
+                      if w.size<15600:w=np.pad(w,(0,15600-w.size))
+                      if w.size>30*16000 or not np.isfinite(w).all() or w.size<15600:raise ValueError("bad_waveform")
+                      scores,_,_=model(tf.convert_to_tensor(w,dtype=tf.float32))
+                      s=scores.numpy()
+                      if s.ndim!=2 or s.shape[1]!=521:raise ValueError("bad_yamnet_output")
+                      rec.update(status="MODEL_INFERENCE_COMPLETE",
+                        original_sha256=hashlib.sha256(raw).hexdigest(),audio_seconds=round(float(len(w)/16000),3),
+                        patches=len(s),
+                        top_mean=[{"name":classes[int(j)]["display_name"],"score_uncalibrated":round(float(s.mean(axis=0)[j]),5)} for j in np.argsort(s.mean(axis=0))[-5:][::-1]],
+                        meow_top1_patches=int((np.argmax(s,axis=1)==78).sum()),
+                        meow_top5_patches=int((np.argsort(s,axis=1)[:,-5:]==78).any(axis=1).sum()),
+                        dog_bark_top1_patches=int((np.argmax(s,axis=1)==70).sum()),
+                        score_is_unvalidated_probability=False)
+                  except urllib.error.HTTPError as exc:
+                      rec.update(status="DOWNLOAD_HTTP_BLOCKED",http_status=exc.code)
+                      if exc.code==429:
+                          evidence["status"]="BLOCKED_SOURCE_RATE_LIMIT_DO_NOT_RETRY"
+                          save()
+                          break
+                  except Exception as exc:
+                      rec.update(status="NOT_EVALUATED",error=type(exc).__name__+":"+str(exc)[:100])
+                  finally: save()
+              if evidence["status"]=="STARTED":
+                  evidence["status"]="SMALL_REAL_CC0_SMOKE_COMPLETED" if any(x["status"]=="MODEL_INFERENCE_COMPLETE" for x in evidence["clips"]) else "NO_REAL_MEDIA_EVALUATED"
+              evidence["independent_acoustic_ground_truth"]=0
+              evidence["commercial_model_deployment"]="NO_GO"
+              save()
+              print("CAT_TALES_V08_SMOKE="+json.dumps({"status":evidence["status"],"clips":evidence["clips"]},ensure_ascii=False),flush=True)
+          except Exception as exc:
+              evidence["status"]="NOT_RUN_MODEL_ERROR"
+              evidence["error"]=type(exc).__name__+":"+str(exc)[:300]
+              save()
+              raise
+          PY
+      - name: Persist metadata and model scores only
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p cat-tales/evidence/v08-cc0-smoke
+          if test -f v08-results.json; then
+            cp v08-results.json cat-tales/evidence/v08-cc0-smoke/result.json
+          else
+            python - <<'PY'
+          import json,os,pathlib
+          pathlib.Path('cat-tales/evidence/v08-cc0-smoke/result.json').write_text(json.dumps({
+          'status':'NOT_RUN_DEPENDENCY_FAILED','run_url':'https://github.com/'+os.environ.get('GITHUB_REPOSITORY','')+'/actions/runs/'+os.environ.get('GITHUB_RUN_ID','')
+          },indent=2))
+          PY
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add cat-tales/evidence/v08-cc0-smoke/result.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'evidence(cat-tales): V08 real CC0 sound research-only smoke'
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi
