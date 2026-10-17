@@ -39,6 +39,11 @@ jobs:
                 "author":"Ali T", "license":"CC BY 2.0", "expected":"cat_chirrup"
               },
               {
+                "id":"cat_tomcat_calling", "file":"Tomcat calling.webm",
+                "description_page":"https://commons.wikimedia.org/wiki/File:Tomcat_calling.webm",
+                "author":"Drummyfish", "license":"CC0 1.0", "expected":"tomcat_loud_call"
+              },
+              {
                 "id":"cat_thunderstorm_meow", "file":"Thunderstorm in Onex - 20062013 - falling hailstones.webm",
                 "description_page":"https://commons.wikimedia.org/wiki/File:Thunderstorm_in_Onex_-_20062013_-_falling_hailstones.webm",
                 "author":"Clément Bucco-Lechat", "license":"CC BY-SA 3.0", "expected":"cat_meow_in_noisy_background"
