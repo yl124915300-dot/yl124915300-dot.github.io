@@ -757,3 +757,43 @@ SpireSage美区商店：12 ratings /3.4；列Pro Monthly Plan $1.99、Annual Pla
 | NET_RECEIPT | 未验证；获证US$0，流水UNKNOWN |
 
 GO仅限现有免费窄场景服务/分发验证；商业视觉副驾驶NO_GO。不新增自动化、不碰原六小时监控，不预告持续值守。下一推进证据必须是独立玩家真实局面与实际使用反馈；没有这种证据前，不以更多表单投递或内容更新声称解决获客。
+
+
+### 云端任务结果复核与补充市场证据 — 2026-10-17 12:34–12:36 Asia/Shanghai
+
+以下补充来自同一任务的公开网页检索与已连接GitHub读取，不是新增外部触达。Work云端执行结果已通过GitHub回读复核；全程未调用用户Mac终端、文件或桌面浏览器。Firecrawl额度不足没有通过付费解决；核心桌面QA与自有内容发布由Work专属远程浏览器实际完成。不要把“Firecrawl失败”写成“所有Work浏览器不可用”。
+
+#### 市场扩展对照：价格、渠道、用户证据分别判断
+
+| 对照及一手URL | 可核实能力/价格/渠道 | 用户与商业证据边界 | 对GamePilot的判断 |
+|---|---|---|---|
+| [EFHIII](https://github.com/EFHIII/balatro-calculator)、[可用网页](https://efhiii.github.io/balatro-calculator/) | 网页输入Joker/手牌/升级，手牌和Joker排序优化、修饰与Breakdown；免费浏览器入口、GitHub和玩家互荐 | [玩家主动推荐例](https://www.reddit.com/r/balatro/comments/1w80rs3/joker_orders/)；作者README承认部分Joker可能有误；活跃人数和收入未知 | 基础普通牌比较功能窄域持平，整体覆盖弱于；免安装与免费同为持平，未发现独有优势 |
+| [Balatro HQ](https://balatrohq.com/tools/) | 站方列5种免费工具：计分、Seed Advisor、Shop Replay、Seed Analyzer、Deck Builder；无账号；数据库/攻略互链提供自然搜索入口 | 确认是当前官方产品页自述；没有本轮功能操作、独立用户或收入核验，不采信“exact”文案为正确性实证 | 功能覆盖声明强于我方；精度/使用/转化均尚未验证。不能凭SEO页面数宣称成熟生意 |
+| [SpireVault](https://github.com/c3rooks/SpireVault) | 免费MIT项目；本地跑局统计、网页导入、合作匹配；README列可选Run Coach截图窗口及用户自带AI Key；通过GitHub Releases、站点、Discord分发 | README截图明确含样本数据；合作/测试由作者自述；本轮未运行，不把截图或合作声明记为真实用户数 | 已有代码/说明覆盖跑局记录与截图建议场景；实机正确性、外部使用、输入成本相对优势尚未验证，不能给GamePilot此项加分 |
+| [NVIDIA G-Assist](https://www.nvidia.com/en-us/software/nvidia-app/g-assist/) | 官方支持表侧重画质设置、性能诊断、录制及外设控制；免费，本地RTX运行；NVIDIA App与mod.io插件渠道 | 存在可安装分发入口；本轮未安装，无活跃/付费数据。不是已证Balatro或STS2出牌求解器 | 不应作为直接战术竞品或赚钱证明；GamePilot免特定GPU是访问门槛优势，未证明决策价值 |
+| [Razer AVA Beta](https://www.razer.com/razer-ava/beta-program)、[预订条款](https://www.razer.com/concepts/project-ava/reservation) | 官方仍展示Cortex筛选Beta/NDA与2026下半年预计出货；硬件预订页面不能当现货交付；最终售价未由本轮页面核得 | 没有本轮独立持续使用或收入证据；不申请Beta、不预订、不接受NDA | 我方真实画面连续建议尚未验证；也不能拿对方概念演示/预订反推游戏副驾驶已经成功商业化 |
+
+SpireSage、CombatSolver及其限定价格/评论/缺陷证据见上节。整体不存在“GamePilot在核心解题能力已强于免费替代”的证据。唯一可明确比较的轻量访问优势主要针对需特定硬件/安装Mod的产品，面对同类免费网页工具并不存在。
+
+#### 近期玩家问题：公开检索可读，浏览器写入仍未获得
+
+以下帖子在本轮公开读取时分别显示4h/10h/12h，属于近期线索；绝对发帖时间未核实，不伪造到秒。读取不意味着登录、写入许可或第三方已使用GamePilot。Work浏览器的Reddit安全拦截不重试/绕过；其它公开检索结果仅用于内容评估。
+
+| 需求URL | 已有回答/是否仍未解 | 可检验处置与能力匹配 |
+|---|---|---|
+| [Joker复制顺序](https://www.reddit.com/r/BalatroHelp/comments/1x7wf6o/just_curious_what_order_i_need_to_put_things_in/) | 已有“需看牌堆”与Baron/Mime复制分配回复；是否仍待解决未知 | 需核实实际持牌、Steel/Red Seal、Baron/Mime及复制数，再比较同一状态得分；不能把评论中“2/1分配”普遍化。现有Hand Coach不支持，不能伪称已解 |
+| [Steel x2.6、2/7较多的商店选择](https://www.reddit.com/r/BalatroHelp/comments/1x7os0b/whats_the_move_here_steel_is_at_x26_deck_is_heavy/) | OP补充Wee +260，已有多条回复；手牌等级不可见，未见完整结案证据 | 正确比较需手牌等级、完整Joker与替换目标、牌堆/经济及剩余Blind；不能靠x2.6和+260两数给卖牌结论。超出现有普通牌即时计算能力 |
+| [Sell Oops or Bloodstone](https://www.reddit.com/r/BalatroHelp/comments/1x7kjj9/sell_oops_or_bloodstone/) | OP已经感谢并接受答案；排除为待答/获客对象 | 不再次附推广或重复“帮助”，不计新解答、反馈或潜在付费；未触达 |
+| [CombatSolver #239](https://github.com/Torch1230/CombatSolver/issues/239) | 仍open，已有我方两条评论；未出现新回应 | 需同根状态与合法行动复现，不能以已有静态规则说明冒充已修复、可收费或新服务交付 |
+
+[r/balatro管理员规则提醒](https://www.reddit.com/r/balatro/comments/1dt478x/)和[后续规则更新](https://www.reddit.com/r/balatro/comments/1jvswc8/)明确禁止AI生成内容；不向该社区发布AI辅助推广。r/BalatroHelp规则页未展开明确AI/自推许可，不能把没有展示规则解释为已准许。没有在其它帐号、跨帖或私信绕过限制。
+
+**观察结果：这些高意向问题大多要求Joker/复制/修饰/局势决策；我方现有功能主要覆盖新手普通牌教学，供给与需求错位。**这支持当前低竞争力判断，但样本小且已筛选，不能推导全市场无人需要普通牌工具。
+
+#### 可立即展示的内容与转化判断
+
+本轮已发布的A对子64分示例，是“常见计分误解→明确算式→同一工具自己试”的诚实内容入口；合成演示、未支持Joker与视觉能力均明示。它可以验证新手是否愿意使用，不能当长期差异化或护城河。现有静态页具备公开URL与标题/说明并不等于搜索引擎已收录；本轮没有搜索排名、自然访问或独立点击证据。
+
+漏斗当前停在自有内容和自测：曝光未知→真实局面输入未知→行动后实际结果未知→有效反馈未知→明确愿付新获证0→结账未认证→净到账未知。既有ref解析只接受有限代码，许多历史创作者ref会变成unrecognized；无中央分析。此为源码发现，未改功能，也不能据ref参数宣称订单归因已打通。
+
+最终决策不变：**当前不足以作为收费视觉副驾驶竞争，NO_GO；只保留既有免费工具的获客/服务验证，不增加产品开发。**最缺的是在真实完整局面上比免费替代节省输入、给出可核验且持续有效的决策价值；这是需要独立玩家证据验证的价值主张，不是批准继续开发。独立使用、有效反馈、明确愿付、FIRST_COMMISSION、NET_RECEIPT均无新增获证；获证US$0不等于真实流水为0。
