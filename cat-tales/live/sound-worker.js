@@ -2,9 +2,9 @@
    Never interprets cat intention and does not record audio. */
 let classifier = null;
 let busy = false;
-const modelURL = "https://storage.googleapis.com/mediapipe-models/audio_classifier/yamnet/float32/1/yamnet.tflite";
-const wasmURL = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-audio@0.10.22/wasm";
-const esmURL = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-audio@0.10.22/+esm";
+const modelURL = new URL("./vendor/yamnet.tflite", self.location.href).href;
+const wasmURL = new URL("./vendor/wasm", self.location.href).href;
+const esmURL = new URL("./vendor/audio_bundle.mjs", self.location.href).href;
 self.onmessage = async (event) => {
   const d = event.data || {};
   if(d.type === "init") {
