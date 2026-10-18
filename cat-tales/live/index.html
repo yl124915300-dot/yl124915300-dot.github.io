@@ -6,16 +6,16 @@
 <meta name="theme-color" content="#f6f8f2">
 <meta name="description" content="猫猫物语实时互动实验版：与猫咪旁边的 AI 助手说话，获得保守的互动建议，可选择开启摄像头与本地声音候选识别。">
 <title>猫猫物语 LIVE｜和猫一起聊一聊</title>
-<link rel="stylesheet" href="./live.css?v=20261018d">
+<link rel="stylesheet" href="./live.css?v=20261018e">
 </head>
 <body>
 <header class="topbar"><div class="wrap topinner">
 <a class="brand" href="../app/" aria-label="猫猫物语"><span class="paw">🐱</span><span>猫猫物语 <small>CAT TALES</small></span></a>
-<nav aria-label="网站导航"><span class="navlive">● LIVE BETA · v2.1</span><a href="../app/">观察手账</a><a href="#about">技术与隐私</a></nav>
+<nav aria-label="网站导航"><span class="navlive">● LIVE BETA · v2.2</span><a href="../app/">观察手账</a><a href="#about">技术与隐私</a></nav>
 </div></header>
 <main class="wrap">
 <section class="intro">
-<div><div class="eyebrow">CAT TALES / LIVE COMMUNICATION ALPHA</div><h1>和猫咪一起，<br><em>好好聊一聊。</em></h1><p>不必再填写一长串问卷。打开麦克风，直接跟我说说猫咪刚才做了什么；我会通过语音回应，并陪你继续观察。</p><div class="badges"><span>🎙️ 主人语音交流</span><span>📷 摄像头可选</span><span>🐾 猫声候选研究</span></div></div>
+<div><div class="eyebrow">CAT TALES / LIVE COMMUNICATION ALPHA</div><h1>和猫咪一起，<br><em>好好聊一聊。</em></h1><p>不必再填写一长串问卷。打开麦克风，直接跟我说说猫咪刚才做了什么；我会通过语音回应，并陪你继续观察。</p><div class="badges"><span>🎙️ 主人语音交流</span><span>📷 摄像头物体识别（需单独开启）</span><span>🐾 猫声候选研究</span></div></div>
 <div class="intro-cat" aria-hidden="true"><span class="cat-icon">🐈</span><span class="note n1">你说，我听着。</span><span class="note n2">喵，今天聊什么？</span></div>
 </section>
 <div class="cols">
@@ -28,7 +28,14 @@
 <div class="extras"><button type="button" id="camera" class="outline" aria-pressed="false">📷 开启摄像头</button><label class="tts-toggle"><input type="checkbox" id="tts" checked> 助手语音回答</label></div>
 <div class="voice-options"><label><input type="checkbox" id="manual-mode"> 环境嘈杂时，仅在我点击后转写一句话</label><button type="button" id="listen-once" class="outline" disabled>🎙️ 听我说一句</button></div>
 <p class="footnote">默认自动轮流说话。单次模式下只有点击按钮才触发主人语音转写；麦克风仍为已授权会话开启，可用于你单独启用的声音分类。切到后台自动停止。</p>
-<div id="camera-box" class="camera-box hidden"><div class="camera-label">摄像头本地预览 · 暂无视觉AI分析</div><video id="camera-video" autoplay muted playsinline></video></div>
+<div id="camera-box" class="camera-box hidden"><div class="camera-label">摄像头预览 · 本地视觉识别需单独开启</div><video id="camera-video" autoplay muted playsinline></video></div>
+<div class="vision-panel" aria-labelledby="vision-title">
+ <div class="row"><div><h3 id="vision-title">👀 猫咪画面观察（研究功能）</h3><p class="muted small">可选在本机识别猫/狗等物体轮廓，不识别情绪、叫声来源或具体动作。</p></div><span class="tag" id="vision-status">未运行</span></div>
+ <label class="vision-consent"><input type="checkbox" id="vision-consent"> 允许本次对摄像头画面进行设备内物体识别（只在本机分析）</label>
+ <button type="button" id="enable-vision" class="outline wide" disabled>启用本地猫咪视觉识别</button>
+ <p id="vision-detail" class="footnote" role="status">打开摄像头并单独授权后，才能启用视觉分析。摄像头预览本身不会启动模型。</p>
+ <div class="vision-evidence"><b id="vision-candidate">尚无实时视觉证据</b><p id="fused-status" class="footnote">尚无可联合复核的声音与画面证据；不会自动确认猫在发声。</p></div>
+</div>
 <div class="divider"></div>
 <div class="row"><div><h3>🔊 猫声候选（研究功能）</h3><p class="muted small">可选加载真正的 YAMNet 音频事件模型；只显示候选，永不自动宣称猫在说话。</p></div><span id="sound-status" class="tag">未加载</span></div>
 <button type="button" id="enable-sound" class="outline wide" disabled>下载并启用本地声音分类模型</button>
@@ -41,7 +48,7 @@
 <div class="bubble assistant"><span class="who">🐾 猫猫物语</span><p>你好呀！我可以陪你观察猫咪。比如试着说：“它刚吃完饭，为什么还在门口叫？”</p><small>这是语音互动实验版，不是猫语翻译。</small></div>
 </div>
 <div id="interim" class="interim" aria-live="polite">等待你开口……</div>
-<div class="quick-prompts" aria-label="示例提问"><button type="button" data-example="我家猫刚吃完饭，还在门口叫">刚吃完还在叫</button><button type="button" data-example="它刚才走开了，接下来呢">它走开了</button><button type="button" data-example="我想让它过来，应该怎么做">想让它过来</button></div>
+<div class="quick-prompts" aria-label="示例提问"><button type="button" data-example="你从摄像头画面检测到猫了吗？">镜头里有猫吗？</button><button type="button" data-example="请结合刚才的声音和画面说明能确认什么">结合音视频证据</button><button type="button" data-example="我家猫刚吃完饭，还在门口叫">刚吃完还在叫</button><button type="button" data-example="它刚才走开了，接下来呢">它走开了</button><button type="button" data-example="我想让它过来，应该怎么做">想让它过来</button></div>
 <form id="compose" class="compose"><label for="message-input" class="sr-only">输入消息</label><input id="message-input" type="text" placeholder="或者打字：我家猫刚刚一直在叫……" maxlength="700" autocomplete="off"><button type="submit" id="send" class="send">发送 ↗</button></form>
 <div class="chat-tools"><button type="button" id="reset" class="text-btn">清空当前对话</button><button type="button" id="try-ai" class="text-btn" disabled>设备内生成式 AI：检测中</button></div>
 <div class="context"><h3>🐾 这只猫的已知背景 <small>选填 · 只在本次页面有效</small></h3>
@@ -52,11 +59,13 @@
 </div>
 <section class="bottom-grid" id="about">
 <div class="info"><h3>真实可用的语音交互</h3><p>麦克风需要授权。支持的浏览器会将你的话转为文字，系统用语音回答并尝试继续监听。遇到浏览器不支持或识别服务不可用，可以使用文字输入。语音回复来自浏览器语音合成。</p></div>
-<div class="info"><h3>声音识别与摄像头</h3><p>摄像头现在是实时本地预览，<b>尚未进行画面 AI 理解</b>。YAMNet 音频分类可单独启用，但仅给“可能是猫、人声、狗叫、闹钟”等声音候选，不能推断意图。未加载就不会显示伪造结果。</p></div>
-<div class="info"><h3>数据与安全</h3><p>本页不会把对话文字、照片或视频提交到本站后台，也不长期保存；短暂的情境线索只存在当前页面，点击清空或刷新即删除。切换到后台自动结束麦克风和摄像头。浏览器语音识别可能将声音发送给浏览器供应商的语音服务。猫咪异常呼吸、排尿困难等应尽快联系兽医；嘶叫或躲避应停止互动。<a href="../app/">旧版观察手账 →</a></p></div>
+<div class="info"><h3>声音识别与摄像头</h3><p>摄像头可以在你单独授权后运行 EfficientDet-Lite0 物体检测，提供猫/狗等<b>画面物体候选</b>，不能判断猫咪情绪、口型或行为意图。YAMNet 音频分类可单独启用，但仅给“可能是猫、人声、狗叫、闹钟”等声音候选，不能推断意图。未加载就不会显示伪造结果。</p></div>
+<div class="info"><h3>数据与安全</h3><p>本页不会把对话文字、照片或视频提交到本站后台，也不长期保存；短暂的情境线索只存在当前页面，点击清空或刷新即删除。切换到后台自动结束麦克风、摄像头和本地视觉识别。浏览器语音识别可能将声音发送给浏览器供应商的语音服务。MediaPipe 也可能处理性能/使用统计，但本站不上传摄像头帧。猫咪异常呼吸、排尿困难等应尽快联系兽医；嘶叫或躲避应停止互动。<a href="../app/">旧版观察手账 →</a></p></div>
 </section>
 </main><footer class="wrap footer">CAT TALES LIVE ALPHA · 免费测试 · 没有猫语互译、兽医诊断或保证准确的猫声识别。<br>© 2026 猫猫物语 · <a href="https://github.com/yl124915300-dot/yl124915300-dot.github.io/tree/main/cat-tales/live">查看公开代码</a></footer>
-<script src="./dialogue.js?v=20261018d" defer></script>
-<script src="./sound-policy.js?v=20261018d" defer></script>
-<script src="./live.js?v=20261018d" defer></script>
+<script src="./dialogue.js?v=20261018e" defer></script>
+<script src="./sound-policy.js?v=20261018e" defer></script>
+<script src="./vision-policy.js?v=20261018e" defer></script>
+<script src="./vision.js?v=20261018e" defer></script>
+<script src="./live.js?v=20261018e" defer></script>
 </body></html>

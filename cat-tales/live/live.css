@@ -6,3 +6,9 @@ button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 /* LIVE v2.1 contextual conversation and noisy-room controls */
 .voice-options{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:12px 13px;border-radius:13px;background:#f2f9ef;border:1px solid var(--line)}.voice-options label{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink);font-weight:730}.voice-options input{accent-color:var(--green)}.voice-options .outline{white-space:nowrap;font-size:12px;padding:8px 11px}.quick-prompts{display:flex;gap:6px;flex-wrap:wrap;margin:5px 0 10px}.quick-prompts button{border:1px solid #d6e6d8;background:#f1f8f0;border-radius:999px;color:#426b56;padding:6px 10px;font-size:11px}.quick-prompts button:hover{background:#deefe3}@media(max-width:500px){.voice-options{flex-direction:column;align-items:stretch}.voice-options .outline{align-self:flex-start}}
+
+/* LIVE v2.2: consent-driven, honest computer vision evidence */
+.vision-panel{margin:14px 0 8px;border:1px solid #cee2d6;background:linear-gradient(155deg,#f3faf1,#fffdf7);border-radius:17px;padding:16px}
+.vision-panel .row{align-items:center}.vision-panel h3{font-size:15px;margin:0}.vision-consent{display:flex;align-items:center;gap:8px;font-size:12px;margin:13px 0 1px;color:#426a58}.vision-consent input{accent-color:var(--green)}
+.vision-evidence{background:#fff;border:1px dashed #badbc7;border-radius:12px;padding:11px;margin-top:12px;font-size:12px;color:#416c56}
+.vision-evidence p{margin:4px 0 0}.vision-panel .wide{margin-top:11px}

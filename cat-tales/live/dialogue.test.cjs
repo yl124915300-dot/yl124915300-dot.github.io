@@ -96,3 +96,24 @@ test('new audio and privacy controls render in the correct load order',()=>{
  assert.ok(h.indexOf('sound-policy.js')<h.indexOf('live.js'));
  assert.match(h,/切换到后台/);
 });
+
+test('camera preview is not the same as AI seeing a cat',()=>{
+ const msg=respond('摄像头画面里看到猫了吗',ctx,null,null,null);
+ assert.equal(msg.type,'vision');assert.match(msg.answer,/没有来自真实视觉模型/);
+});
+test('verified fresh cat detections are only bounded visual evidence',()=>{
+ const vision={verified:true,catCandidate:true,catScore:.81,at:Date.now()};
+ const msg=respond('镜头里有猫吗',ctx,null,null,vision);
+ assert.equal(msg.type,'vision');assert.match(msg.answer,/EfficientDet/);assert.match(msg.answer,/无法判断它在做什么/);
+});
+test('sound and vision do not prove that a visible cat made the sound',()=>{
+ const at=Date.now();
+ const sound={verified:true,label:'Meow',score:.68,catCandidate:true,at};
+ const vision={verified:true,catCandidate:true,catScore:.81,at};
+ const msg=respond('请结合刚才的声音和画面说明能确认什么',ctx,sound,null,vision);
+ assert.equal(msg.type,'multimodal');assert.match(msg.answer,/不能确定声音来自画面里的猫/);
+});
+test('old vision result does not become fresh evidence',()=>{
+ const old={verified:true,catCandidate:true,catScore:1,at:Date.now()-20000};
+ assert.match(respond('你从画面看见猫了吗',ctx,null,null,old).answer,/没有来自真实视觉模型/);
+});

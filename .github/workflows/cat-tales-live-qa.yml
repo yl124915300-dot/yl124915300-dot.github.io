@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '22'
       - name: Unit and safety checks
-        run: node --test cat-tales/live/dialogue.test.cjs
+        run: node --test cat-tales/live/dialogue.test.cjs cat-tales/live/vision-policy.test.cjs
       - name: Install isolated browser test tool
         run: npm install --prefix /tmp/cattales-qa --no-package-lock --no-save playwright@1.55.1
       - name: Host the static app for browser checks
@@ -30,3 +30,10 @@ jobs:
 
       - name: Actual YAMNet audio model load and live inference
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/model-smoke.cjs
+
+      - name: Retrieve rights-checked upstream vision fixture for real inference QA only
+        run: |
+          curl --fail --location --retry 3 --connect-timeout 20 --max-time 90 -o cat-tales/live/vision-fixture.jpg https://storage.googleapis.com/mediapipe-tasks/object_detector/cat_and_dog.jpg
+          test "$(stat -c%s cat-tales/live/vision-fixture.jpg)" -gt 10000
+      - name: Actual EfficientDet vision model load and cat/dog image inference
+        run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/vision-smoke.cjs

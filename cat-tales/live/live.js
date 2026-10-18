@@ -43,8 +43,10 @@ function context(){
 }
 function safeReply(q) {
   const sound=state.recentSound&&Date.now()-state.recentSound.at<=30000?state.recentSound:null;
-  return window.CatTalesDialogue.respond(q,context(),sound,state.memory);
+  const vision=window.CatTalesVision&&window.CatTalesVision.getFresh();
+  return window.CatTalesDialogue.respond(q,context(),sound,state.memory,vision);
 }
+window.CatTalesLiveEvidence=()=>state.recentSound&&Date.now()-state.recentSound.at<=5000?state.recentSound:null;
 function isManual(){return $("manual-mode").checked;}
 function updateManualControls(){
   $("listen-once").disabled=!state.active||state.blocked||!state.recognition||!isManual()||state.recognizing||state.thinking;
@@ -296,6 +298,7 @@ async function start(){
   }
 }
 function stopCamera(){
+  if(window.CatTalesVision)window.CatTalesVision.onCameraChange(false);
   if(state.cameraStream)state.cameraStream.getTracks().forEach(t=>t.stop());
   state.cameraStream=null;
   $("camera-video").srcObject=null;display("camera-box",false);
@@ -310,6 +313,7 @@ function stop(){
   state.micStream=null;stopCamera();closeAudio();
   if(state.worker){try{state.worker.terminate();}catch(e){}}
   state.worker=null;state.soundReady=false;state.soundLoading=false;state.soundPending=false;state.recentSound=null;state.catStreak=0;
+  if(window.CatTalesVision)window.CatTalesVision.refreshFusion();
   if(state.soundWatchdog)clearTimeout(state.soundWatchdog);
   setText("sound-status","未加载");setText("sound-candidate","尚无真实模型结果");
   setText("sound-classes","已经结束本次声音采集。");
@@ -328,6 +332,7 @@ async function toggleCamera(){
     if(cameraToken!==state.stopToken||document.hidden){video.getTracks().forEach(t=>t.stop());return;}
     state.cameraStream=video;$("camera-video").srcObject=video;
     display("camera-box",true);
+    if(window.CatTalesVision)window.CatTalesVision.onCameraChange(true);
     try{await $("camera-video").play();}catch(e){}
     $("camera").textContent="■ 关闭摄像头";$("camera").setAttribute("aria-pressed","true");
   }catch(err){setStatus("摄像头未开启（"+String(err&&err.name||"权限限制")+"）。这不影响语音使用。","warn");}
@@ -354,6 +359,7 @@ function soundResult(d){
   const catCandidate=gate.catCandidate;
   const score=Math.max(0,Math.min(1,Number(first.score)||0));
   state.recentSound={verified:true,label:first.label,score:score,catCandidate:catCandidate,at:Date.now()};
+  if(window.CatTalesVision)window.CatTalesVision.refreshFusion();
   $("ask-sound").disabled=false;
   setText("sound-candidate",catCandidate?"连续候选：疑似猫声（未确认）":"候选："+first.label);
   setText("sound-classes",top.slice(0,4).map(x=>x.label+" "+Number(x.score).toFixed(2)).join(" · ")+"。模型类别排序分数未经校准，不是确认概率，更不是猫咪意图。");
@@ -448,6 +454,7 @@ $("ask-sound").addEventListener("click",()=>{
 $("reset").addEventListener("click",()=>{
   $("messages").replaceChildren();bubble("assistant","对话记录已清空。麦克风会话是否继续，由左侧按钮控制。");
   state.turn=0;state.recentSound=null;state.catStreak=0;
+  if(window.CatTalesVision)window.CatTalesVision.refreshFusion();
   state.memory=window.CatTalesDialogue.createMemory();
   state.stopToken++;state.thinking=false;stopSpeech();
   if(state.active&&!state.blocked)scheduleListen(450);

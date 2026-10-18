@@ -31,10 +31,11 @@
     return q.length>=2&&!/^(?:喵+|咪+|啊+|嗯+|哦+|呃+|呜+|哈+|哼+)$/.test(q);
   }
 
-  function respond(input, context, sound, memory) {
+  function respond(input, context, sound, memory, vision) {
     const q = String(input || "").trim();
     const c = context || {},m=memory||createMemory();
     const s = sound && sound.verified && (!Number.isFinite(sound.at)||Date.now()-sound.at<=30000) ? sound : null;
+    const v = vision&&vision.verified&&Number.isFinite(vision.at)&&Date.now()-vision.at<=6500?vision:null;
     const short = q.slice(0,600);
     const where = detectScene(q) || c.scene || m.scene || "";
     const fed = /刚喂|喂过|刚吃|吃过|喂完/.test(q) ? "recent" : c.feeding || m.feeding || "";
@@ -63,6 +64,16 @@
       if(m.lastTopic==="toy")return {type:"followup",answer:"猫咪愿意时再轻轻玩一小会儿，转头或离开就结束。它现在主动玩耍了吗？"};
       if(m.lastTopic==="cue")return {type:"followup",answer:"固定口令轻声说一次即可，不要反复催促；转头不代表它听懂了。它现在自愿靠近了吗？"};
       return {type:"abstain",answer:"我还不确定你指的是哪次互动。请说说猫咪现在在哪里、在做什么，再给你一个安全建议。"};
+    }
+    if ((/镜头|摄像头|画面|看见|看到|识别.*猫|拍到/.test(short) && /猫|狗|里面|看到|看见|画面|镜头|摄像头/.test(short)) || (/声/.test(short)&&/画面|摄像头/.test(short))) {
+      if(/声音|猫叫|声源|结合/.test(short)&&/画面|摄像头|镜头/.test(short)) {
+        if(v&&v.catCandidate&&s&&s.catCandidate&&Math.abs(v.at-s.at)<=5000) return {type:"multimodal",answer:"最近同一时段，视觉模型检测到猫的物体候选，音频模型也给出疑似猫声候选。但这并不能确定声音来自画面里的猫。需要你亲眼观察猫张嘴发声，以及当时的环境。"};
+        return {type:"multimodal",answer:"目前没有同时足够新的猫咪画面候选与猫声候选，所以不能确认猫咪在发声。摄像头预览不等于视觉识别；你可以单独启用本地物体检测和 YAMNet，并观察猫咪真实动作。"};
+      }
+      if(!v)return {type:"vision",answer:"当前还没有来自真实视觉模型、且足够新的画面结果。仅打开摄像头不代表我看见了猫；需要另外勾选并启用本地画面识别。"};
+      if(v.catCandidate)return {type:"vision",answer:"本地 EfficientDet-Lite0 最近连续两次检测到猫的物体轮廓候选，原始分数约 "+Number(v.catScore).toFixed(2)+"（未经校准）。这只能说明画面里有猫的可能性，无法判断它在做什么、是否张嘴发声或想表达什么。"};
+      if(v.dogCandidate)return {type:"vision",answer:"视觉模型当前检测到狗的物体候选，还没有稳定的猫候选；这不能证明画面中没有猫。可以调整镜头或光线再观察。"};
+      return {type:"vision",answer:"本地模型已经检查了最近的画面，但没有形成稳定的猫物体候选。画面可能存在遮挡或光照不足，这不等于没有猫，也不代表猫咪没有发声。"};
     }
     if (has(short, ["叫它过来","让它过来","让猫过来","怎么叫过来","和猫说话","猫语","翻译","交流","沟通"])) {
       return {type:"cue", answer:"我们可以建立温和、固定的互动信号，但不能把人话翻译成猫语。试着在它放松时，用同一个短词轻声呼唤一次，等它自愿回应；不靠近就停下。你想让它靠近，还是想知道它为何叫？"};
