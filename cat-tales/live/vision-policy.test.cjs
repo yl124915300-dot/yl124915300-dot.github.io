@@ -32,3 +32,10 @@ test('vision: scripts parse and privacy consent is exposed',()=>{
  for(const n of ['id="vision-consent"','id="enable-vision"','id="vision-candidate"','id="fused-status"','vision-policy.js','vision.js'])
  assert.ok(h.includes(n),n);
 });
+
+test('motion policy loads before vision script and shows opt-in owner controls',()=>{
+ const h=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+ assert.ok(h.indexOf('motion-policy.js')<h.indexOf('vision.js'));
+ for(const x of ['id="motion-status"','id="motion-detail"','id="motion-owner-note"','data-motion-owner="camera"'])assert.ok(h.includes(x),x);
+ new Function(fs.readFileSync(path.join(__dirname,'motion-policy.js'),'utf8'));
+});
