@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '22'
       - name: Unit and safety checks
-        run: node --test cat-tales/live/dialogue.test.cjs cat-tales/live/vision-policy.test.cjs cat-tales/live/motion-policy.test.cjs
+        run: node --test cat-tales/live/dialogue.test.cjs cat-tales/live/vision-policy.test.cjs cat-tales/live/motion-policy.test.cjs cat-tales/live/beta.test.cjs
       - name: Install isolated browser test tool
         run: npm install --prefix /tmp/cattales-qa --no-package-lock --no-save playwright@1.55.1
       - name: Host the static app for browser checks
@@ -27,6 +27,8 @@ jobs:
           sleep 3
       - name: Real Chrome browser interaction with fake devices
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/e2e.cjs
+      - name: Private beta feedback export on mobile viewport
+        run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/beta.e2e.cjs
 
       - name: Actual YAMNet audio model load and live inference
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/model-smoke.cjs
