@@ -11,7 +11,7 @@
 <body>
 <header class="topbar"><div class="wrap topinner">
 <a class="brand" href="../app/" aria-label="猫猫物语"><span class="paw">🐱</span><span>猫猫物语 <small>CAT TALES</small></span></a>
-<nav aria-label="网站导航"><span class="navlive">● LIVE BETA · v2.3</span><a href="../app/">观察手账</a><a href="#about">技术与隐私</a></nav>
+<nav aria-label="网站导航"><span class="navlive">● LIVE BETA · v2.3</span><a href="../app/">观察手账</a><a href="#beta">3分钟试用</a><a href="#about">技术与隐私</a></nav>
 </div></header>
 <main class="wrap">
 <section class="intro">
@@ -67,6 +67,41 @@
 </div>
 </section>
 </div>
+<section id="beta" class="card" aria-labelledby="beta-heading">
+ <details id="beta-test">
+  <summary class="beta-summary"><span><strong id="beta-heading">🐱 真实家庭体验测试 · 3分钟</strong><small>免费参与 · 不上传录音或视频 · 可只做部分项目</small></span><span aria-hidden="true">展开测试 ↘</span></summary>
+  <div class="beta-body">
+   <p>这是 V2.3 的独立真人体验验证，<b>不是猫语翻译准确率测试</b>。自然观察家中已有的猫咪行为，不要刻意刺激、惊吓猫咪，也不要播放威胁声。呼吸困难、排尿异常等请优先联系兽医。</p>
+   <div class="beta-tasks">
+    <p><b>① 对话：</b>先在上方授权麦克风，对助手说一句实际发生的情况，再自然地追问“然后呢”。也可用文字代替。</p>
+    <p><b>② 音视频：</b>可选择开启摄像头和本地视觉检测，观察是否检测到猫；如果有正常的生活环境声音，可选开启 YAMNet。<b>不需要诱导猫叫</b>。</p>
+    <p><b>③ 结束：</b>关闭麦克风、摄像头，回到这里选择实际体验结果。体验记录由你主动复制或提交，不自动发送。</p>
+   </div>
+   <label class="beta-check"><input type="checkbox" id="beta-consent"><span>我自愿开启一次测试；仅允许网页临时统计本次按钮启用后的对话条数、模型显示状态与持续时间，<b>不记录对话正文、录音、画面或身份信息</b>。</span></label>
+   <div class="beta-actions"><button type="button" id="beta-begin" class="primary" disabled>▶ 开始3分钟体验</button><button type="button" id="beta-finish" class="outline" disabled>■ 结束并生成反馈</button><span id="beta-elapsed">尚未开始</span></div>
+   <p id="beta-status" class="footnote" role="status">此功能默认关闭。可以先正常试用网站，准备反馈时再展开这里。</p>
+   <div class="beta-fields">
+    <label>本次测试环境<select id="beta-sample"><option value="">可不填</option><option value="real">真实家庭猫咪（自然发生的互动）</option><option value="no_cat">没有猫的家庭噪声对照</option><option value="video">公开视频演示（非家庭实测）</option><option value="unknown">未填写</option></select></label>
+    <label>浏览器<select id="beta-browser"><option value="">可不填</option><option value="chrome">Chrome</option><option value="safari">Safari</option><option value="edge">Edge</option><option value="other">其他或未知</option></select></label>
+    <label>画面中确实有猫吗（主人观察）<select id="beta-picture"><option value="">可不填</option><option value="yes">是</option><option value="no">否</option><option value="unknown">不确定</option><option value="unused">没开启摄像头</option></select></label>
+    <label>视觉检测是否符合主人观察<select id="beta-cameraMatch"><option value="">可不填</option><option value="yes">符合</option><option value="no">不符合</option><option value="unknown">无法判断</option><option value="unused">没开启视觉检测</option></select></label>
+    <label>声音环境<select id="beta-noise"><option value="">可不填</option><option value="cat">疑似真实猫声</option><option value="people">人声或电视声</option><option value="noise">其他家庭环境声</option><option value="quiet">安静</option><option value="mixed">多类混合</option><option value="unknown">未测试</option></select></label>
+    <label>非猫声音有没有被误认为“疑似猫声”？<select id="beta-falseMeow"><option value="">可不填</option><option value="yes">有</option><option value="no">没有观察到</option><option value="unsure">无法判断</option><option value="untested">未测试</option></select></label>
+    <label>本次助手回答是否有帮助<select id="beta-response"><option value="">可不填</option><option value="useful">有帮助</option><option value="some">有一点帮助</option><option value="no">没有帮助</option><option value="untested">没测试</option></select></label>
+    <label>愿意下次再次使用吗<select id="beta-reuse"><option value="">可不填</option><option value="yes">愿意</option><option value="no">不愿意</option><option value="unsure">不确定</option></select></label>
+    <label>假如有人复核专属猫咪互动解读，会考虑付费吗？<select id="beta-pay"><option value="">可不填</option><option value="yes">会考虑</option><option value="no">不会</option><option value="unsure">不确定</option></select></label>
+   </div>
+   <label class="beta-note-label" for="beta-note">最影响体验的一个问题（可选，勿填姓名、电话、住址或敏感信息）</label>
+   <textarea id="beta-note" maxlength="250" rows="2" placeholder="例：电视声被误转成主人说话；摄像头在低光时检测不到猫"></textarea>
+   <label class="beta-note-label" for="beta-report">待分享的反馈单（可以检查或手动编辑）</label>
+   <textarea id="beta-report" rows="8" placeholder="结束测试后在这里生成报告；只有你主动复制、下载或提交才会离开此网页。"></textarea>
+   <div class="beta-actions"><button type="button" class="outline" id="beta-copy" disabled>复制反馈</button><button type="button" class="outline" id="beta-download" disabled>保存 TXT</button><button type="button" class="outline" id="beta-clear">清空本页测试记录</button></div>
+   <label class="beta-check"><input type="checkbox" id="beta-public-consent"><span>我已经检查反馈内容，知道<strong>GitHub 提交会公开给其他人</strong>，同意自己选择是否公开。需要 GitHub 登录。</span></label>
+   <button type="button" class="outline" id="beta-public" disabled>在 GitHub 提交公开反馈（可选） ↗</button>
+   <p class="footnote">这个页面不会向项目方自动上报试用结果。复制或保存的反馈必须由你自行发送给项目负责人；即使点击 GitHub 按钮，也要在 GitHub 页面再次确认提交。</p>
+  </div>
+ </details>
+</section>
 <section class="bottom-grid" id="about">
 <div class="info"><h3>真实可用的语音交互</h3><p>麦克风需要授权。支持的浏览器会将你的话转为文字，系统用语音回答并尝试继续监听。遇到浏览器不支持或识别服务不可用，可以使用文字输入。语音回复来自浏览器语音合成。</p></div>
 <div class="info"><h3>声音识别与摄像头</h3><p>摄像头可以在你单独授权后运行 EfficientDet-Lite0 物体检测，提供猫/狗等<b>画面物体候选</b>，也可比较数帧间检测框在画面中的位置变化。但手机移动会产生类似效果，不能判断猫咪情绪、耳朵/尾巴动作、口型或行为意图。YAMNet 音频分类可单独启用，但仅给“可能是猫、人声、狗叫、闹钟”等声音候选，不能推断意图。未加载就不会显示伪造结果。</p></div>
@@ -79,4 +114,5 @@
 <script src="./motion-policy.js?v=20261018f" defer></script>
 <script src="./vision.js?v=20261018f" defer></script>
 <script src="./live.js?v=20261018f" defer></script>
+<script src="./beta.js?v=20261018g" defer></script>
 </body></html>
