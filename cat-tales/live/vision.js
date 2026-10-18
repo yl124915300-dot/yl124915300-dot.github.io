@@ -155,5 +155,10 @@ reportButtons.forEach(button=>button.addEventListener("click",()=>{
  reportButtons.forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
 }));
 button.addEventListener("click",()=>{void enable();});
-root.CatTalesVision={getFresh,onCameraChange,refreshFusion,stopModel};
+function clearOwnerReport(){
+ s.ownerReport=null;if(s.last)s.last.ownerReport=null;
+ ownerNote.textContent="主人尚未确认变化来源。";
+ reportButtons.forEach(b=>b.setAttribute("aria-pressed","false"));
+}
+root.CatTalesVision={getFresh,onCameraChange,refreshFusion,stopModel,clearOwnerReport};
 })(typeof window!=="undefined"?window:globalThis);
