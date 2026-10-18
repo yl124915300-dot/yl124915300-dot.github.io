@@ -65,6 +65,16 @@
       if(m.lastTopic==="cue")return {type:"followup",answer:"固定口令轻声说一次即可，不要反复催促；转头不代表它听懂了。它现在自愿靠近了吗？"};
       return {type:"abstain",answer:"我还不确定你指的是哪次互动。请说说猫咪现在在哪里、在做什么，再给你一个安全建议。"};
     }
+    if(/(?:动了吗|移动了吗|有没有动|在动吗|位置变化|换位置|动作|姿态|尾巴|耳朵|张嘴|走路|走动)/.test(short)&&/猫|它|画面|镜头|摄像头/.test(short)){
+      if(!v)return {type:"motion",answer:"目前没有足够新的连续画面证据。仅打开摄像头并不代表我看到了猫咪动作；请另外授权本地视觉检测，并等待连续采样。"};
+      if(/尾巴|耳朵|张嘴|姿态|走路/.test(short))return {type:"motion",answer:"目前模型只检测猫物体及检测框位置，不能看懂耳朵、尾巴、张嘴或走路等具体动作。请你亲自观察并告诉我；我不会用框的位置猜测它的意图。"};
+      if(v.ownerReport&&v.ownerReport.key==="camera")return {type:"motion",answer:"【主人报告】你刚才移动了手机或镜头，因此不能把画面中检测框的位置变化解释成猫自己移动。"};
+      if(v.ownerReport&&v.ownerReport.key==="cat_self")return {type:"motion",answer:"【主人报告】你亲眼看到猫自己换了位置。这是你提供的观察，与模型测量画面位置变化不同；我们仍不知道猫咪为什么这样做。"};
+      if(v.motionStatus==="frame_position_shift")return {type:"motion",answer:"最近约"+Number(v.motionSeconds).toFixed(1)+"秒内，猫物体检测框在画面中的位置发生了变化。但这可能来自猫、手机或检测误差。你亲眼看到猫自己移动了吗？"};
+      if(v.motionStatus==="no_large_frame_shift")return {type:"motion",answer:"最近几帧中，猫检测框中心位置没有明显变化。但这不能证明它没有运动，更无法说明耳朵、尾巴等细节。"};
+      if(v.motionStatus==="multiple_cats")return {type:"motion",answer:"画面可能包含多只猫，模型无法判断连续帧是不是同一只，因此我不推断移动。"};
+      return {type:"motion",answer:"还没有足够的连续猫目标画面来判断位置变化。请先保持手机稳定几秒；即使框发生位移，也不能证明猫在走路。"};
+    }
     if ((/镜头|摄像头|画面|看见|看到|识别.*猫|拍到/.test(short) && /猫|狗|里面|看到|看见|画面|镜头|摄像头/.test(short)) || (/声/.test(short)&&/画面|摄像头/.test(short))) {
       if(/声音|猫叫|声源|结合/.test(short)&&/画面|摄像头|镜头/.test(short)) {
         if(v&&v.catCandidate&&s&&s.catCandidate&&Math.abs(v.at-s.at)<=5000) return {type:"multimodal",answer:"最近同一时段，视觉模型检测到猫的物体候选，音频模型也给出疑似猫声候选。但这并不能确定声音来自画面里的猫。需要你亲眼观察猫张嘴发声，以及当时的环境。"};
