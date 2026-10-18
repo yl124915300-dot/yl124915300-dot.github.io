@@ -1,13 +1,13 @@
 {
-  "status": "RESEARCH_REAL_PAIRED_TEST_COMPLETED",
-  "run_utc": "2026-10-17T16:37:13.071765+00:00",
+  "status": "RESEARCH_V10_EXPANDED_INTERFERENCE_TEST_COMPLETED",
+  "run_utc": "2026-10-18T03:19:46.084023+00:00",
   "model_yamnet": "https://tfhub.dev/google/yamnet/1",
   "model_clap": "laion/clap-htsat-fused",
   "source_rights": "CatMeows scientific/noncommercial use; ESC-50 CC BY-NC 3.0; RESEARCH ONLY",
   "intent_translated": false,
   "commercial_release": "NO_GO",
   "raw_media_in_report": false,
-  "processed": 65,
+  "processed": 105,
   "summary": {
     "cat_meow": {
       "clips": 49,
@@ -15,6 +15,13 @@
       "yamnet_top5_flags": 33,
       "clap_top1_flags": 41,
       "clap_top3_flags": 49
+    },
+    "cat": {
+      "clips": 8,
+      "yamnet_top1_flags": 1,
+      "yamnet_top5_flags": 8,
+      "clap_top1_flags": 7,
+      "clap_top3_flags": 8
     },
     "dog": {
       "clips": 8,
@@ -29,8 +36,64 @@
       "yamnet_top5_flags": 0,
       "clap_top1_flags": 0,
       "clap_top3_flags": 0
+    },
+    "crying_baby": {
+      "clips": 4,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 3
+    },
+    "laughing": {
+      "clips": 4,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 2
+    },
+    "coughing": {
+      "clips": 4,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 0
+    },
+    "breathing": {
+      "clips": 4,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 0
+    },
+    "keyboard_typing": {
+      "clips": 4,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 2
+    },
+    "washing_machine": {
+      "clips": 4,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 0
+    },
+    "vacuum_cleaner": {
+      "clips": 4,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 0,
+      "clap_top3_flags": 0
+    },
+    "clock_alarm": {
+      "clips": 4,
+      "yamnet_top1_flags": 0,
+      "yamnet_top5_flags": 0,
+      "clap_top1_flags": 2,
+      "clap_top3_flags": 4
     }
   },
   "score_meaning": "zero-shot relative prompt rankings, NOT calibrated probabilities; labels from authors",
-  "limitations": "Research/noncommercial samples, no human blind annotation, negatives from another corpus, no cross-home generalization claim"
+  "limitations": "ESC50 noncommercial; CatMeows research-only; sample labels from authors, cat class in ESC50 is not confirmed meow; most negatives from different corpus, no cross-household false alarm rate; NO PRODUCT ACCURACY"
 }
