@@ -338,7 +338,7 @@ function enableSound(){
   setText("sound-status","正在加载");
   setText("sound-classes","正在从外部 CDN 下载 MediaPipe WASM 和 YAMNet 模型；只在你点击后开始，不上传录音到本站服务器。");
   try{
-    const worker=new Worker("./sound-worker.js?v=20261018b",{type:"module"});
+    const worker=new Worker("./sound-worker.js?v=20261018c",{type:"classic"});
     state.worker=worker;
     state.soundWatchdog=setTimeout(()=>{if(!state.soundReady)soundError("加载超时（45秒），请检查网络和浏览器兼容性");},45000);
     worker.onmessage=(ev)=>{
