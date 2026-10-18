@@ -17,7 +17,7 @@ try{
  const status=await page.locator('#sound-status').innerText();
  const body=await page.locator('#sound-classes').innerText();
  if(status!=='模型已加载')throw Error('Model unavailable: '+status+' '+body);
- await page.waitForFunction(()=>document.getElementById('sound-classes').textContent.includes('模型类别分数'),null,{timeout:30000});
+ await page.waitForFunction(()=>document.getElementById('sound-classes').textContent.includes('模型类别排序分数'),null,{timeout:30000});
  const evidence=await page.locator('#sound-classes').innerText();
  if(!evidence.match(/\d+\.\d{2}/))throw Error('No scored YAMNet inference results: '+evidence);
  console.log('YAMNET_REAL_MODEL_PASS:',evidence.slice(0,260),'browser errors:',errors.length);
