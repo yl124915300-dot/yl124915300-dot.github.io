@@ -117,3 +117,26 @@ test('old vision result does not become fresh evidence',()=>{
  const old={verified:true,catCandidate:true,catScore:1,at:Date.now()-20000};
  assert.match(respond('你从画面看见猫了吗',ctx,null,null,old).answer,/没有来自真实视觉模型/);
 });
+
+test('no frame evidence never becomes a movement claim',()=>{
+ const d=respond('猫在镜头里动了吗',ctx,null,null,null);
+ assert.equal(d.type,'motion');assert.match(d.answer,/没有足够新的连续画面证据/);
+});
+test('fresh box displacement is frame-relative only',()=>{
+ const v={verified:true,at:Date.now(),catCandidate:true,motionStatus:'frame_position_shift',motionSeconds:4.2};
+ const d=respond('猫在画面里移动了吗',ctx,null,null,v);
+ assert.equal(d.type,'motion');assert.match(d.answer,/手机或检测误差/);
+});
+test('owner-report camera movement is not interpreted as cat walking',()=>{
+ const v={verified:true,at:Date.now(),motionStatus:'frame_position_shift',ownerReport:{key:'camera'}};
+ const d=respond('它动了吗',ctx,null,null,v);
+ assert.equal(d.type,'motion');assert.match(d.answer,/主人报告/);assert.match(d.answer,/不能把/);
+});
+test('owner sees cat change position, but AI does not infer why',()=>{
+ const v={verified:true,at:Date.now(),motionStatus:'frame_position_shift',ownerReport:{key:'cat_self'}};
+ assert.match(respond('它刚才动了吗',ctx,null,null,v).answer,/你亲眼看到/);
+});
+test('model does not invent ears tail mouth or walking',()=>{
+ const v={verified:true,at:Date.now(),motionStatus:'frame_position_shift',catCandidate:true};
+ assert.match(respond('它尾巴动了吗',ctx,null,null,v).answer,/不能看懂耳朵/);
+});
