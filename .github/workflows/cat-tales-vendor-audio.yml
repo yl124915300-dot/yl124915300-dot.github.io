@@ -1,0 +1,53 @@
+name: Cat Tales vendor audio assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cat-tales-vendor-audio.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch pinned Apache-2.0 MediaPipe audio runtime
+        run: |
+          npm install --prefix /tmp/cattales-model --no-save --no-package-lock @mediapipe/tasks-audio@0.10.35
+          PKG=/tmp/cattales-model/node_modules/@mediapipe/tasks-audio
+          test -f "$PKG/audio_bundle.mjs"
+          test -d "$PKG/wasm"
+          mkdir -p cat-tales/live/vendor
+          cp "$PKG/audio_bundle.mjs" cat-tales/live/vendor/audio_bundle.mjs
+          cp -R "$PKG/wasm" cat-tales/live/vendor/wasm
+          echo "Runtime files:"
+          find cat-tales/live/vendor -type f -printf '%p %kKB\n'
+      - name: Retrieve official YAMNet audio event model
+        run: |
+          curl --fail --location --retry 3 --connect-timeout 20 --max-time 120 -o cat-tales/live/vendor/yamnet.tflite 'https://storage.googleapis.com/mediapipe-models/audio_classifier/yamnet/float32/1/yamnet.tflite'
+          test "$(stat -c%s cat-tales/live/vendor/yamnet.tflite)" -gt 100000
+          file cat-tales/live/vendor/yamnet.tflite
+          sha256sum cat-tales/live/vendor/yamnet.tflite
+      - name: Preserve source provenance and license notices
+        run: |
+          cat >cat-tales/live/vendor/ATTRIBUTION.md <<'EOF'
+          # Third-party runtime
+          - MediaPipe Tasks Audio @0.10.35, Apache License 2.0, https://github.com/google-ai-edge/mediapipe
+          - Official YAMNet AudioSet TFLite model, https://storage.googleapis.com/mediapipe-models/audio_classifier/yamnet/float32/1/yamnet.tflite
+          - This package is for on-device research sound-event candidates only; not a cat-language decoder.
+          - The model runs on-device. Google notes that MediaPipe may send performance/usage metrics; review https://www.npmjs.com/package/@mediapipe/tasks-audio before deploying beyond a beta.
+          EOF
+          sha256sum cat-tales/live/vendor/audio_bundle.mjs cat-tales/live/vendor/yamnet.tflite >cat-tales/live/vendor/SHA256SUMS
+      - name: Commit vetted local assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cat-tales/live/vendor
+          if git diff --cached --quiet; then echo "Assets unchanged"; else git commit -m "cat-tales live: vendor pinned on-device audio model and wasm runtime"; git push; fi
