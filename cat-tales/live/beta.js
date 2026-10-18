@@ -103,12 +103,12 @@ function finish(){
 }
 async function copy(){
  if(!s.report)return;
- try{await navigator.clipboard.writeText(s.report);text("beta-status","反馈已复制。你可以自行粘贴到 ChatGPT、微信、Telegram 或其他聊天工具。");}
+ try{await navigator.clipboard.writeText($("beta-report").value);text("beta-status","反馈已复制。你可以自行粘贴到 ChatGPT、微信、Telegram 或其他聊天工具。");}
  catch(e){$("beta-report").focus();$("beta-report").select();text("beta-status","浏览器不允许自动复制，已选中反馈，请手动复制。");}
 }
 function download(){
  if(!s.report)return;
- const blob=new Blob([s.report],{type:"text/plain;charset=utf-8"});
+ const blob=new Blob([$("beta-report").value],{type:"text/plain;charset=utf-8"});
  const url=URL.createObjectURL(blob),a=document.createElement("a");
  a.href=url;a.download="CatTales-V2.3-field-feedback.txt";a.click();
  setTimeout(()=>URL.revokeObjectURL(url),1000);
@@ -116,7 +116,7 @@ function download(){
 function openIssue(){
  if(!s.report||!$("beta-public-consent").checked)return;
  const title="Cat Tales V2.3｜真实场景试用反馈（用户自愿提交）";
- const url="https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new?title="+encodeURIComponent(title)+"&body="+encodeURIComponent(s.report.slice(0,4200));
+ const url="https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new?title="+encodeURIComponent(title)+"&body="+encodeURIComponent($("beta-report").value.slice(0,4200));
  window.open(url,"_blank","noopener,noreferrer");
  text("beta-status","已经打开 GitHub 反馈页面（需要 GitHub 账号）。内容尚未提交；请预览并确认后再自行发布。");
 }
