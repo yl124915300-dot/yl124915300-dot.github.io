@@ -27,3 +27,6 @@ jobs:
           sleep 3
       - name: Real Chrome browser interaction with fake devices
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/e2e.cjs
+
+      - name: Actual YAMNet audio model load and live inference
+        run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/model-smoke.cjs
