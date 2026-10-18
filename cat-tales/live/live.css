@@ -12,3 +12,11 @@ button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.
 .vision-panel .row{align-items:center}.vision-panel h3{font-size:15px;margin:0}.vision-consent{display:flex;align-items:center;gap:8px;font-size:12px;margin:13px 0 1px;color:#426a58}.vision-consent input{accent-color:var(--green)}
 .vision-evidence{background:#fff;border:1px dashed #badbc7;border-radius:12px;padding:11px;margin-top:12px;font-size:12px;color:#416c56}
 .vision-evidence p{margin:4px 0 0}.vision-panel .wide{margin-top:11px}
+
+/* V2.3: bounded temporal visual evidence, explicitly confirmed by owner */
+.motion-card{background:#fff;border:1px solid #d8e4dd;border-radius:13px;margin-top:12px;padding:13px}
+.motion-card .row b{font-size:13px;color:#275540}
+.motion-card .footnote{line-height:1.7}
+.motion-confirm{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.motion-confirm .outline{font-size:11px;padding:7px 9px}
+.motion-confirm .outline[aria-pressed="true"]{background:#dff3e6;border-color:#61ad80;color:#1b5b39}
