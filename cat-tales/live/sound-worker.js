@@ -12,6 +12,15 @@ self.onmessage = async (event) => {
     try {
       const kit = await import(esmURL);
       const fileset = await kit.FilesetResolver.forAudioTasks(wasmURL);
+      // MediaPipe audio's module-worker loading can fail to register ModuleFactory.
+      // Preload pinned same-origin WASM glue in this isolated worker, then skip duplicate loader.
+      if(fileset.wasmLoaderPath && !self.ModuleFactory) {
+        const glue = await fetch(fileset.wasmLoaderPath, {cache:"force-cache"});
+        if(!glue.ok)throw Error("MediaPipe WASM glue HTTP "+glue.status);
+        (0,eval)(await glue.text());
+        if(!self.ModuleFactory)throw Error("WASM glue loaded but ModuleFactory absent");
+        delete fileset.wasmLoaderPath;
+      }
       classifier = await kit.AudioClassifier.createFromOptions(fileset, {
         baseOptions: {modelAssetPath:modelURL},
         maxResults:30
