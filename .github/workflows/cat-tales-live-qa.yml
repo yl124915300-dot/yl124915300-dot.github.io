@@ -1,0 +1,29 @@
+name: Cat Tales Live cloud QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cat-tales/live/**'
+      - '.github/workflows/cat-tales-live-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit and safety checks
+        run: node --test cat-tales/live/dialogue.test.cjs
+      - name: Install isolated browser test tool
+        run: npm install --prefix /tmp/cattales-qa --no-package-lock --no-save playwright@1.55.1
+      - name: Host the static app for browser checks
+        run: |
+          nohup python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/cat-tales-http.log 2>&1 &
+          sleep 3
+      - name: Real Chrome browser interaction with fake devices
+        run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/e2e.cjs
