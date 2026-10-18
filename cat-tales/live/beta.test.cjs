@@ -23,7 +23,7 @@ test('no in-page media capture, background upload, or analytics collection is us
  assert.doesNotMatch(app,/\.innerHTML\s*=/);
 });
 test('feedback identifies manual labels as unverified rather than model accuracy',()=>{
- assert.match(app,/未经独立人工复核/);
+ assert.match(app,/未经过独立人工复核/);
  assert.match(app,/用户自述/);
  assert.match(app,/未保存音频、视频、对话正文/);
 });
