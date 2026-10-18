@@ -45,7 +45,7 @@ test('html includes privacy consent, proper script order and stop controls',()=>
     assert.ok(h.includes(s),s);
   }
   assert.match(h,/浏览器供应商/);
-  assert.match(h,/未进行画面 AI 理解/);
+  assert.match(h,/不识别情绪、叫声来源或具体动作/);
 });
 
 const {createMemory,updateMemory,shouldHandleTranscript}=require('./dialogue.js');
