@@ -114,4 +114,4 @@ consent.addEventListener("change",()=>{
 });
 button.addEventListener("click",()=>{void enable();});
 root.CatTalesVision={getFresh,onCameraChange,refreshFusion,stopModel};
-})();
+})(typeof window!=="undefined"?window:globalThis);
