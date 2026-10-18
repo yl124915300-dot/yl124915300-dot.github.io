@@ -24,7 +24,7 @@ for(const [name,question,type,pattern] of cases){
 }
 test('audio result labelled as candidate only',()=>{
   const r=respond('刚才什么声音',ctx,{verified:true,label:'Meow',score:.61,catCandidate:true});
-  assert.equal(r.type,'sound');assert.match(r.answer,/候选/);assert.doesNotMatch(r.answer,/确认叫声/);
+  assert.equal(r.type,'sound');assert.match(r.answer,/候选/);assert.match(r.answer,/不是确认叫声/);
 });
 test('unverified sound metadata does not count as inference',()=>{
   const r=respond('刚才什么声音',ctx,{verified:false,label:'Meow',score:.99});
