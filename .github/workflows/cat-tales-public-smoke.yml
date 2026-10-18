@@ -1,0 +1,53 @@
+name: Cat Tales public HTTPS beta smoke
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cat-tales-public-smoke.yml'
+      - 'cat-tales/live/index.html'
+      - 'cat-tales/live/beta.js'
+      - 'cat-tales/live/beta.e2e.cjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-beta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Confirm actual public HTTPS origin is serving beta release
+        env:
+          SITE: https://yl124915300-dot.github.io/cat-tales/live/
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 22); do
+            code=$(curl --silent --show-error --location --max-time 20 \
+              --output /tmp/cat-tales-public.html --write-out '%{http_code}' "$SITE" || true)
+            if [ "$code" = "200" ] && grep -Fq 'id="beta-test"' /tmp/cat-tales-public.html \
+              && grep -Fq 'beta.js?v=20261018g' /tmp/cat-tales-public.html; then
+              echo "PUBLIC_HTML_PASS: HTTP 200, expected beta script and UI are present"
+              break
+            fi
+            if [ "$attempt" -eq 22 ]; then
+              echo "::error::Public beta version not served (last HTTP $code)"
+              exit 1
+            fi
+            sleep 12
+          done
+          for file in beta.js live.js dialogue.js sound-policy.js vision.js; do
+            curl --fail --show-error --silent --location --max-time 25 \
+              -o "/tmp/cat-tales-$file" "$SITE$file"
+            test -s "/tmp/cat-tales-$file"
+            echo "PUBLIC_ASSET_PASS: $file"
+          done
+      - name: Install isolated Chromium test library
+        run: npm install --prefix /tmp/cattales-public --no-save --no-package-lock playwright@1.55.1
+      - name: Actual public HTTPS mobile browser feedback test
+        env:
+          CAT_TALES_TEST_URL: https://yl124915300-dot.github.io/cat-tales/live/
+          NODE_PATH: /tmp/cattales-public/node_modules
+        run: node cat-tales/live/beta.e2e.cjs
