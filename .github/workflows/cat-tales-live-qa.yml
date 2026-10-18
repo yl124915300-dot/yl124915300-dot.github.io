@@ -37,3 +37,5 @@ jobs:
           test "$(stat -c%s cat-tales/live/vision-fixture.jpg)" -gt 10000
       - name: Actual EfficientDet vision model load and cat/dog image inference
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/vision-smoke.cjs
+      - name: End-to-end local camera-frame cat detection with real model and shutdown
+        run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/vision-live-smoke.cjs
