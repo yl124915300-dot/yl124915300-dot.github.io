@@ -5,7 +5,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
   const context=await browser.newContext({viewport:{width:390,height:844},acceptDownloads:true});
   const page=await context.newPage(),errors=[];
   page.on('pageerror',err=>errors.push(String(err)));
-  await page.goto('http://127.0.0.1:8765/cat-tales/live/',{waitUntil:'domcontentloaded'});
+  await page.goto(process.env.CAT_TALES_TEST_URL||'http://127.0.0.1:8765/cat-tales/live/',{waitUntil:'domcontentloaded'});
   assert.equal(await page.locator('#beta-test').evaluate(x=>x.open),false,'Beta must start collapsed');
   await page.locator('#beta-test summary').click();
   assert.equal(await page.locator('#beta-begin').isDisabled(),true);
