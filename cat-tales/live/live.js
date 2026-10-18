@@ -161,7 +161,7 @@ function guard(reply){
   return t;
 }
 async function answer(q,core){
-  if(!state.aiReady||!state.ai||["urgent","stop","sound","abstain"].includes(core.type))return core.answer;
+  if(!state.aiReady||!state.ai||["urgent","stop","sound","vision","multimodal","motion","abstain"].includes(core.type))return core.answer;
   try{
     const c=context();
     const result=await state.ai.prompt(
@@ -184,7 +184,7 @@ async function ask(raw,origin){
   if(token!==state.stopToken)return;
   state.memory=window.CatTalesDialogue.updateMemory(state.memory,q,core);
   state.thinking=false;
-  bubble("assistant",response,state.aiReady&&response!==core.answer?"设备内生成式 AI · 仍需主人核验":"保守情境建议 · 未运行视频理解");
+  bubble("assistant",response,state.aiReady&&response!==core.answer?"设备内生成式 AI · 仍需主人核验":"保守情境建议 · 视觉仅限物体/画面位置，非姿态或意图识别");
   setText("interim","你可以接着说……");
   if(state.active)await speak(response);
   if(token!==state.stopToken)return;
@@ -456,6 +456,7 @@ $("reset").addEventListener("click",()=>{
   state.turn=0;state.recentSound=null;state.catStreak=0;
   if(window.CatTalesVision)window.CatTalesVision.refreshFusion();
   state.memory=window.CatTalesDialogue.createMemory();
+  if(window.CatTalesVision)window.CatTalesVision.clearOwnerReport();
   state.stopToken++;state.thinking=false;stopSpeech();
   if(state.active&&!state.blocked)scheduleListen(450);
   if(state.ai&&state.ai.destroy){try{state.ai.destroy();}catch(e){}state.ai=null;state.aiReady=false;$("brain").textContent="情境规则";void testBuiltInAI();}
