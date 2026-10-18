@@ -11,7 +11,8 @@ const state = {
   ctx:null, source:null, analyser:null, processor:null, silentGain:null, waveformHandle:null,
   worker:null, soundReady:false, soundLoading:false, soundPending:false, audioQueue:null,
   audioPos:0, recentSound:null, catStreak:0, soundWatchdog:null, ai:null, aiReady:false,
-  aiStarting:false, turn:0, stopToken:0
+  aiStarting:false, turn:0, stopToken:0, manualRequested:false,
+  memory:window.CatTalesDialogue.createMemory()
 };
 function setText(id, text) { $(id).textContent=String(text); }
 function display(id, visible){$(id).classList.toggle("hidden",!visible);}
@@ -41,7 +42,12 @@ function context(){
     scene:$("cat-scene").value,feeding:$("cat-feeding").value,behavior:$("cat-behavior").value};
 }
 function safeReply(q) {
-  return window.CatTalesDialogue.respond(q,context(),state.recentSound);
+  const sound=state.recentSound&&Date.now()-state.recentSound.at<=30000?state.recentSound:null;
+  return window.CatTalesDialogue.respond(q,context(),sound,state.memory);
+}
+function isManual(){return $("manual-mode").checked;}
+function updateManualControls(){
+  $("listen-once").disabled=!state.active||state.blocked||!state.recognition||!isManual()||state.recognizing||state.thinking;
 }
 function clearRestart(){
   if(state.restartTimer){clearTimeout(state.restartTimer);state.restartTimer=null;}
@@ -66,9 +72,16 @@ function setupRecognition(){
     }
     if(interim) setText("interim","正在听："+interim);
     if(finalText.trim()){
-      setText("interim","已听到："+finalText.trim());
-      stopRecognizing();
-      void ask(finalText.trim(),"voice");
+      const transcript=finalText.trim();
+      state.manualRequested=false;stopRecognizing();
+      if(!window.CatTalesDialogue.shouldHandleTranscript(transcript)){
+        setText("interim","这一小段声音不足以确认主人在说话，已忽略。请说完整一句。");
+        if(state.active&&!isManual())scheduleListen(600);
+        updateManualControls();return;
+      }
+      setText("interim","已听到："+transcript);
+      updateManualControls();
+      void ask(transcript,"voice");
     }
   };
   rec.onerror=(event)=>{
@@ -77,12 +90,20 @@ function setupRecognition(){
       state.blocked=true;clearRestart();
       setOrb("idle","语音转文字不可用");
       setStatus("浏览器语音识别不可用（"+err+"）。麦克风仍可用于可选声音事件筛查；请改用文字聊天。","warn");
+    } else if(err==="no-speech"&&isManual()){
+      state.manualRequested=false;
+      setText("interim","没有听清这句话，可点击「听我说一句」重试。");
+      updateManualControls();
     } else if(err!=="no-speech"&&err!=="aborted"){
       setText("interim","识别暂时失败："+err+"；可以继续打字。");
     }
   };
   rec.onend=()=>{
     state.startPending=false;state.recognizing=false;
+    if(isManual()&&!state.thinking&&state.manualRequested){
+      state.manualRequested=false;setText("interim","本次聆听结束。继续说话请再点一次。");
+    }
+    updateManualControls();
     if(state.active&&!state.speaking&&!state.thinking&&!state.blocked)scheduleListen(450);
   };
   state.recognition=rec;return true;
@@ -94,9 +115,9 @@ function stopRecognizing(){
 }
 function scheduleListen(delay){
   clearRestart();
-  if(!state.active||state.blocked||state.speaking||state.thinking||!state.recognition)return;
+  if(!state.active||state.blocked||state.speaking||state.thinking||!state.recognition||(isManual()&&!state.manualRequested)||document.hidden)return;
   state.restartTimer=setTimeout(()=>{
-    if(!state.active||state.blocked||state.speaking||state.thinking||state.recognizing||state.startPending)return;
+    if(!state.active||state.blocked||state.speaking||state.thinking||state.recognizing||state.startPending||(isManual()&&!state.manualRequested)||document.hidden)return;
     state.startPending=true;
     try{state.recognition.start();}
     catch(e){state.startPending=false;state.restartTimer=setTimeout(()=>scheduleListen(750),1200);}
@@ -143,7 +164,7 @@ async function answer(q,core){
     const c=context();
     const result=await state.ai.prompt(
       "主人说："+q.slice(0,450)+"\n主人填写的猫咪背景（未核验）："+
-      JSON.stringify(c)+"\n安全的保守建议基线："+core.answer+
+      JSON.stringify(c)+"\n本次会话先前由主人报告的线索："+JSON.stringify(state.memory)+"\n安全的保守建议基线："+core.answer+
       "\n请用简短、自然的中文语音对话口吻回答，最多80字。不要假称听见猫叫、看过摄像头或翻译猫语。");
     return guard(result)||core.answer;
   }catch(e){setText("brain","设备内AI出错，已退回情境规则");return core.answer;}
@@ -158,7 +179,8 @@ async function ask(raw,origin){
   setStatus("正在整理你的问题。","on");
   const core=safeReply(q);
   const response=await answer(q,core);
-  if(token!==state.stopToken){state.thinking=false;return;}
+  if(token!==state.stopToken)return;
+  state.memory=window.CatTalesDialogue.updateMemory(state.memory,q,core);
   state.thinking=false;
   bubble("assistant",response,state.aiReady&&response!==core.answer?"设备内生成式 AI · 仍需主人核验":"保守情境建议 · 未运行视频理解");
   setText("interim","你可以接着说……");
@@ -168,6 +190,7 @@ async function ask(raw,origin){
     setOrb("listen",state.blocked?"改用文字输入":"等待你继续说话");
     if(!state.blocked)scheduleListen(500);
     else setStatus("语音识别不可用，请使用文字输入。","warn");
+    updateManualControls();
   }else setOrb("idle","文字聊天可继续");
 }
 function initWaveform(){
@@ -249,7 +272,8 @@ async function start(){
   try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:false,autoGainControl:true},video:false});
     if(!$("mic-consent").checked){stream.getTracks().forEach(t=>t.stop());return;}
-    state.micStream=stream;state.active=true;state.blocked=false;state.stopToken++;
+    if(document.hidden){stream.getTracks().forEach(t=>t.stop());setStatus("页面已经在后台，不启动麦克风。");return;}
+    state.micStream=stream;state.active=true;state.blocked=false;state.manualRequested=false;state.stopToken++;
     const track=stream.getAudioTracks()[0];
     if(track)track.addEventListener("ended",()=>{if(state.active)stop();});
     prepareAudioGraph(stream);
@@ -261,9 +285,10 @@ async function start(){
       state.blocked=true;setStatus("麦克风已授权，但该浏览器不支持 Web Speech 语音识别。可以使用文字聊天，或尝试 Chrome 桌面版。","warn");
     }else{
       setStatus("麦克风已连接。直接和我说话，比如：‘它为什么一直在门口叫？’","on");
-      scheduleListen(250);
+      if(!isManual())scheduleListen(250);
     }
-    setText("interim",state.blocked?"语音转文字不可用 · 可以打字":"正在等你说话……");
+    updateManualControls();
+    setText("interim",state.blocked?"语音转文字不可用 · 可以打字":isManual()?"点「听我说一句」再说完整一句。":"正在等你说话……");
   }catch(err){
     const label=String(err&&err.name||"");
     setStatus("麦克风未开启（"+label+"）。请在地址栏允许麦克风，或改用文字输入。","warn");
@@ -277,7 +302,7 @@ function stopCamera(){
   $("camera").textContent="📷 开启摄像头";$("camera").setAttribute("aria-pressed","false");
 }
 function stop(){
-  state.active=false;state.stopToken++;state.blocked=false;
+  state.active=false;state.stopToken++;state.blocked=false;state.manualRequested=false;
   state.thinking=false;state.speaking=false;
   clearRestart();stopRecognizing();stopSpeech();
   state.recognition=null;state.startPending=false;state.recognizing=false;
@@ -290,15 +315,17 @@ function stop(){
   setText("sound-classes","已经结束本次声音采集。");
   $("ask-sound").disabled=true;$("enable-sound").disabled=true;
   $("start").disabled=!$("mic-consent").checked;$("stop").disabled=true;
+  updateManualControls();
   setOrb("idle","会话已经结束");setStatus("已停止麦克风、摄像头和声音分类。再次使用请重新点击开始。");
   setText("interim","会话已结束 · 文字聊天仍可使用。");
 }
 async function toggleCamera(){
   if(state.cameraStream){stopCamera();return;}
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){setStatus("摄像头功能在这个浏览器中不可用。","warn");return;}
-  $("camera").disabled=true;
+  $("camera").disabled=true;const cameraToken=state.stopToken;
   try{
     const video=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"},audio:false});
+    if(cameraToken!==state.stopToken||document.hidden){video.getTracks().forEach(t=>t.stop());return;}
     state.cameraStream=video;$("camera-video").srcObject=video;
     display("camera-box",true);
     try{await $("camera-video").play();}catch(e){}
@@ -318,17 +345,18 @@ function soundError(error){
 }
 function soundResult(d){
   state.soundPending=false;
+  if(!state.active||!state.soundReady)return;
   const top=Array.isArray(d.top)?d.top:[];
   const first=top[0];
   if(!first)return;
-  state.catStreak=d.catTop?state.catStreak+1:0;
-  const humanScore=top.filter(x=>/^(speech|conversation|narration, monologue|television|music|dog|bark|alarm|clock)$/i.test(x.label)).reduce((v,x)=>Math.max(v,x.score),0);
-  const catCandidate=state.catStreak>=2 && humanScore<0.35;
+  const gate=window.CatTalesSoundPolicy.assess(top,state.catStreak,d.catTop);
+  state.catStreak=gate.streak;
+  const catCandidate=gate.catCandidate;
   const score=Math.max(0,Math.min(1,Number(first.score)||0));
   state.recentSound={verified:true,label:first.label,score:score,catCandidate:catCandidate,at:Date.now()};
   $("ask-sound").disabled=false;
   setText("sound-candidate",catCandidate?"连续候选：疑似猫声（未确认）":"候选："+first.label);
-  setText("sound-classes",top.slice(0,4).map(x=>x.label+" "+Math.round(x.score*100)+"%").join(" · ")+"。这是模型类别分数，不是猫咪意图概率。");
+  setText("sound-classes",top.slice(0,4).map(x=>x.label+" "+Number(x.score).toFixed(2)).join(" · ")+"。模型类别排序分数未经校准，不是确认概率，更不是猫咪意图。");
 }
 function enableSound(){
   if(!state.active||state.soundLoading||state.soundReady)return;
@@ -336,7 +364,7 @@ function enableSound(){
   state.soundLoading=true;$("enable-sound").disabled=true;
   $("enable-sound").textContent="正在获取模型…";
   setText("sound-status","正在加载");
-  setText("sound-classes","正在从外部 CDN 下载 MediaPipe WASM 和 YAMNet 模型；只在你点击后开始，不上传录音到本站服务器。");
+  setText("sound-classes","正在从本站静态资源加载 MediaPipe WASM 和 YAMNet；音频在浏览器本地推理，不会上传到本站服务器。");
   try{
     const worker=new Worker("./sound-worker.js?v=20261018c",{type:"classic"});
     state.worker=worker;
@@ -387,6 +415,21 @@ async function enableAI(){
     bubble("assistant","该浏览器的设备内语言模型未能启动，仍可以正常使用实时语音和保守情境建议。");
   }finally{state.aiStarting=false;}
 }
+$("manual-mode").addEventListener("change",()=>{
+  state.manualRequested=false;clearRestart();stopRecognizing();
+  if(state.active){
+    setText("interim",isManual()?"已切换单次模式。点击「听我说一句」。":"已切换自动语音对话，等待你说话。");
+    if(!isManual()&&!state.blocked)scheduleListen(400);
+  }
+  updateManualControls();
+});
+$("listen-once").addEventListener("click",()=>{
+  if(!state.active||state.blocked||!isManual()||!state.recognition||state.thinking)return;
+  state.manualRequested=true;setText("interim","这一次正在聆听，请说完整一句……");scheduleListen(50);updateManualControls();
+});
+document.querySelectorAll("[data-example]").forEach(button=>{
+  button.addEventListener("click",()=>{const input=$("message-input");input.value=button.dataset.example||"";input.focus();});
+});
 $("mic-consent").addEventListener("change",()=>{
   if(!$("mic-consent").checked&&state.active)stop();
   $("start").disabled=!$("mic-consent").checked||state.active;
@@ -405,6 +448,9 @@ $("ask-sound").addEventListener("click",()=>{
 $("reset").addEventListener("click",()=>{
   $("messages").replaceChildren();bubble("assistant","对话记录已清空。麦克风会话是否继续，由左侧按钮控制。");
   state.turn=0;state.recentSound=null;state.catStreak=0;
+  state.memory=window.CatTalesDialogue.createMemory();
+  state.stopToken++;state.thinking=false;stopSpeech();
+  if(state.active&&!state.blocked)scheduleListen(450);
   if(state.ai&&state.ai.destroy){try{state.ai.destroy();}catch(e){}state.ai=null;state.aiReady=false;$("brain").textContent="情境规则";void testBuiltInAI();}
 });
 $("compose").addEventListener("submit",(ev)=>{
@@ -417,7 +463,10 @@ $("compose").addEventListener("submit",(ev)=>{
 $("tts").addEventListener("change",()=>{if(!$("tts").checked){stopSpeech();if(state.active&&!state.blocked)scheduleListen(300);}});
 $("try-ai").addEventListener("click",()=>{void enableAI();});
 document.addEventListener("visibilitychange",()=>{
-  if(document.hidden&&state.active){setText("interim","页面转到后台；浏览器可能会暂停麦克风或语音识别。");}
+  if(document.hidden&&(state.active||state.cameraStream)){
+    stop();setText("interim","页面切到后台，已自动停止麦克风和摄像头。");
+    setStatus("为保护隐私，切换到后台已自动结束音视频采集。返回后需要重新开启。");
+  }
 });
 window.addEventListener("pagehide",()=>{
   stop();if(state.waveformHandle)cancelAnimationFrame(state.waveformHandle);

@@ -44,9 +44,10 @@ self.onmessage = async (event) => {
         .sort((a,b)=>b.score-a.score);
       const catSet = new Set(["cat","meow","purr","caterwaul"]);
       const negativeSet = new Set(["dog","bark","speech","conversation","narration, monologue","music","alarm","clock"]);
+      const isNegative = label => negativeSet.has(label)||/crying|baby|infant|laugh|keyboard|typing|typewriter|television|radio|siren|phone ringing|bell/i.test(label);
       const candidate = top[0] || null;
       const catTop = !!(candidate && catSet.has(candidate.label.trim().toLowerCase()) && candidate.score >= 0.40);
-      const negMax = top.filter(x=>negativeSet.has(x.label.trim().toLowerCase())).reduce((m,x)=>Math.max(m,x.score),0);
+      const negMax = top.filter(x=>isNegative(x.label.trim().toLowerCase())).reduce((m,x)=>Math.max(m,x.score),0);
       self.postMessage({type:"result",top:top.slice(0,6),catTop:catTop&&negMax<0.35,model:"YAMNet",stamp:Date.now()});
     } catch(e) {
       self.postMessage({type:"error",message:"音频推理失败："+String(e&&e.message||e).slice(0,230)});

@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#f6f8f2">
 <meta name="description" content="猫猫物语实时互动实验版：与猫咪旁边的 AI 助手说话，获得保守的互动建议，可选择开启摄像头与本地声音候选识别。">
 <title>猫猫物语 LIVE｜和猫一起聊一聊</title>
-<link rel="stylesheet" href="./live.css?v=20261018b">
+<link rel="stylesheet" href="./live.css?v=20261018d">
 </head>
 <body>
 <header class="topbar"><div class="wrap topinner">
 <a class="brand" href="../app/" aria-label="猫猫物语"><span class="paw">🐱</span><span>猫猫物语 <small>CAT TALES</small></span></a>
-<nav aria-label="网站导航"><span class="navlive">● LIVE BETA</span><a href="../app/">观察手账</a><a href="#about">技术与隐私</a></nav>
+<nav aria-label="网站导航"><span class="navlive">● LIVE BETA · v2.1</span><a href="../app/">观察手账</a><a href="#about">技术与隐私</a></nav>
 </div></header>
 <main class="wrap">
 <section class="intro">
@@ -25,7 +25,9 @@
 <p id="system-status" class="notice" role="status">当前是公开测试版。先勾选授权，再点击「开始实时沟通」。</p>
 <div class="consent"><label><input type="checkbox" id="mic-consent"><span><b>允许本次麦克风语音会话</b><small>本网站不保存录音。浏览器语音转文字服务（如 Chrome）可能将声音发送给浏览器供应商；不同于本地声音事件模型。请在没有旁人敏感谈话的环境使用。</small></span></label></div>
 <div class="call-controls"><button type="button" id="start" class="primary" disabled>🎙️ 开始实时沟通</button><button type="button" id="stop" class="stop" disabled>■ 结束会话</button></div>
-<div class="extras"><button type="button" id="camera" class="outline" aria-pressed="false">📷 开启摄像头</button><label class="tts-toggle"><input type="checkbox" id="tts" checked> AI 助手语音回答</label></div>
+<div class="extras"><button type="button" id="camera" class="outline" aria-pressed="false">📷 开启摄像头</button><label class="tts-toggle"><input type="checkbox" id="tts" checked> 助手语音回答</label></div>
+<div class="voice-options"><label><input type="checkbox" id="manual-mode"> 环境嘈杂时，仅在我点击后转写一句话</label><button type="button" id="listen-once" class="outline" disabled>🎙️ 听我说一句</button></div>
+<p class="footnote">默认自动轮流说话。单次模式下只有点击按钮才触发主人语音转写；麦克风仍为已授权会话开启，可用于你单独启用的声音分类。切到后台自动停止。</p>
 <div id="camera-box" class="camera-box hidden"><div class="camera-label">摄像头本地预览 · 暂无视觉AI分析</div><video id="camera-video" autoplay muted playsinline></video></div>
 <div class="divider"></div>
 <div class="row"><div><h3>🔊 猫声候选（研究功能）</h3><p class="muted small">可选加载真正的 YAMNet 音频事件模型；只显示候选，永不自动宣称猫在说话。</p></div><span id="sound-status" class="tag">未加载</span></div>
@@ -34,11 +36,12 @@
 <div id="sound-card" class="sound-card"><div class="row"><span class="sound-title">最近音频片段</span><span id="sound-candidate" class="tag">尚无真实模型结果</span></div><p id="sound-classes">只有成功加载模型并进行实际推理后，才显示声音事件名称与分数。</p><button type="button" id="ask-sound" class="outline" disabled>向助手询问这段声音</button></div>
 </section>
 <section class="card chat-panel" aria-labelledby="chat-title">
-<div class="row"><div><h2 id="chat-title">我们的实时对话</h2><p class="muted small">你说一句，我用声音回应；也可以直接输入文字。</p></div><span id="brain" class="tag">情境规则</span></div>
+<div class="row"><div><h2 id="chat-title">我们的实时对话</h2><p class="muted small">你说一句，我用声音回应；本次页面会记住你之前报告的门口、喂食等线索。也可打字。</p></div><span id="brain" class="tag">情境规则</span></div>
 <div id="messages" class="messages" role="log" aria-live="polite" aria-relevant="additions">
 <div class="bubble assistant"><span class="who">🐾 猫猫物语</span><p>你好呀！我可以陪你观察猫咪。比如试着说：“它刚吃完饭，为什么还在门口叫？”</p><small>这是语音互动实验版，不是猫语翻译。</small></div>
 </div>
 <div id="interim" class="interim" aria-live="polite">等待你开口……</div>
+<div class="quick-prompts" aria-label="示例提问"><button type="button" data-example="我家猫刚吃完饭，还在门口叫">刚吃完还在叫</button><button type="button" data-example="它刚才走开了，接下来呢">它走开了</button><button type="button" data-example="我想让它过来，应该怎么做">想让它过来</button></div>
 <form id="compose" class="compose"><label for="message-input" class="sr-only">输入消息</label><input id="message-input" type="text" placeholder="或者打字：我家猫刚刚一直在叫……" maxlength="700" autocomplete="off"><button type="submit" id="send" class="send">发送 ↗</button></form>
 <div class="chat-tools"><button type="button" id="reset" class="text-btn">清空当前对话</button><button type="button" id="try-ai" class="text-btn" disabled>设备内生成式 AI：检测中</button></div>
 <div class="context"><h3>🐾 这只猫的已知背景 <small>选填 · 只在本次页面有效</small></h3>
@@ -50,9 +53,10 @@
 <section class="bottom-grid" id="about">
 <div class="info"><h3>真实可用的语音交互</h3><p>麦克风需要授权。支持的浏览器会将你的话转为文字，系统用语音回答并尝试继续监听。遇到浏览器不支持或识别服务不可用，可以使用文字输入。语音回复来自浏览器语音合成。</p></div>
 <div class="info"><h3>声音识别与摄像头</h3><p>摄像头现在是实时本地预览，<b>尚未进行画面 AI 理解</b>。YAMNet 音频分类可单独启用，但仅给“可能是猫、人声、狗叫、闹钟”等声音候选，不能推断意图。未加载就不会显示伪造结果。</p></div>
-<div class="info"><h3>数据与安全</h3><p>本页默认不上传或保存会话文字、照片和视频；关闭页面即可停止。浏览器语音识别可能需要访问第三方语音服务。猫咪异常呼吸、排尿困难等应尽快联系兽医；嘶叫或躲避应停止互动。<a href="../app/">旧版观察手账 →</a></p></div>
+<div class="info"><h3>数据与安全</h3><p>本页不会把对话文字、照片或视频提交到本站后台，也不长期保存；短暂的情境线索只存在当前页面，点击清空或刷新即删除。切换到后台自动结束麦克风和摄像头。浏览器语音识别可能将声音发送给浏览器供应商的语音服务。猫咪异常呼吸、排尿困难等应尽快联系兽医；嘶叫或躲避应停止互动。<a href="../app/">旧版观察手账 →</a></p></div>
 </section>
 </main><footer class="wrap footer">CAT TALES LIVE ALPHA · 免费测试 · 没有猫语互译、兽医诊断或保证准确的猫声识别。<br>© 2026 猫猫物语 · <a href="https://github.com/yl124915300-dot/yl124915300-dot.github.io/tree/main/cat-tales/live">查看公开代码</a></footer>
-<script src="./dialogue.js?v=20261018b" defer></script>
-<script src="./live.js?v=20261018c" defer></script>
+<script src="./dialogue.js?v=20261018d" defer></script>
+<script src="./sound-policy.js?v=20261018d" defer></script>
+<script src="./live.js?v=20261018d" defer></script>
 </body></html>

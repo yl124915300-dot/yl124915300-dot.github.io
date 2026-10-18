@@ -2,13 +2,42 @@
 (function (root) {
   "use strict";
   function has(q, words) { return words.some(function(w){ return q.includes(w); }); }
-  function respond(input, context, sound) {
+
+  function detectScene(q){
+    if(/门口|门外|开门|出门|叫门/.test(q))return "door";
+    if(/食盆|饭盆|饭碗|猫粮/.test(q))return "bowl";
+    if(/逗猫棒|玩具/.test(q))return "toy";
+    if(/窗边|窗外|看鸟|阳台/.test(q))return "window";
+    return "";
+  }
+  function createMemory(){return {scene:"",feeding:"",lastTopic:"",turnCount:0};}
+  function updateMemory(previous, input, result){
+    const m=Object.assign(createMemory(),previous||{}),q=String(input||"").slice(0,600),scene=detectScene(q);
+    if(scene)m.scene=scene;
+    if(/刚喂|喂过|刚吃|吃过|喂完/.test(q))m.feeding="recent";
+    if(/没吃|没喂|还没喂|快到饭点/.test(q))m.feeding="due";
+    if(result&&result.type==="urgent")m.lastTopic="urgent";
+    else if(result&&result.type==="stop")m.lastTopic="stop";
+    else if(result&&result.type==="cue")m.lastTopic="cue";
+    else if(result&&result.type==="sound")m.lastTopic="sound";
+    else if(/刚喂|喂过|刚吃|吃过|喂完|饿|饭点/.test(q))m.lastTopic="food";
+    else if(scene)m.lastTopic=scene;
+    else if(result&&result.type==="uncertain")m.lastTopic="vocal";
+    m.turnCount=Math.min(1000,(Number(m.turnCount)||0)+1);
+    return m;
+  }
+  function shouldHandleTranscript(input){
+    const q=String(input||"").trim().replace(/[，。！？.!?,\s]/g,"");
+    return q.length>=2&&!/^(?:喵+|咪+|啊+|嗯+|哦+|呃+|呜+|哈+|哼+)$/.test(q);
+  }
+
+  function respond(input, context, sound, memory) {
     const q = String(input || "").trim();
-    const c = context || {};
-    const s = sound && sound.verified ? sound : null;
+    const c = context || {},m=memory||createMemory();
+    const s = sound && sound.verified && (!Number.isFinite(sound.at)||Date.now()-sound.at<=30000) ? sound : null;
     const short = q.slice(0,600);
-    const where = c.scene || "";
-    const fed = c.feeding || "";
+    const where = detectScene(q) || c.scene || m.scene || "";
+    const fed = /刚喂|喂过|刚吃|吃过|喂完/.test(q) ? "recent" : c.feeding || m.feeding || "";
     const behavior = c.behavior || "";
     const catName = String(c.name || "你的猫咪").slice(0,30);
     if (!short) return {type:"abstain", answer:"我还没收到你的问题。可以告诉我猫咪在哪里、在做什么，或者直接问我怎样和它安全互动。"};
@@ -18,14 +47,31 @@
     if (has(short, ["哈气","嘶叫","躲起来","一直躲","逃跑","害怕","咬我","发抖","怕我"]) || behavior==="hide") {
       return {type:"stop", answer:catName+"可能需要空间。先别靠近、追逐或反复播放声音，让它自由离开。等情绪放松后再观察；如果行为突然改变或持续异常，请联系兽医。"};
     }
+    // Explicit owner feedback takes priority over older context rules.
+    if(has(short,["它走了","离开了","过来了","靠近了","转头了","没有反应","还在叫","不理我","试过了","试了没用"])){
+      const prior=m.lastTopic==="door"?"你之前提到门口的情境；":m.lastTopic==="food"?"你之前提到喂食的情境；":m.lastTopic==="toy"?"你之前提到玩耍的情境；":"";
+      if(has(short,["没有反应","不理我","试过了","试了没用"])){
+        return {type:"feedback",answer:prior+"你报告这次没有明显反应。先不要反复呼唤或增加刺激，让它自己选择要不要互动。单次反应不能证明它理解了建议；观察是否离开或放松。"};
+      }
+      return {type:"feedback",answer:prior+"这是有用的一次主人观察。不过单次反应不能证明它理解了我们的建议。先尊重它的选择，看看类似情况是否重复出现。你愿意描述一下它现在的姿态吗？"};
+    }
+    if(/^(?:(?:那|所以|接下来|之后|现在)?(?:然后呢|现在呢|下一步呢|下一步|怎么办|接下来呢|该做什么))[？?。！!]*$/.test(short)){
+      if(m.lastTopic==="urgent")return {type:"urgent",answer:"前面提到的症状可能紧急。请联系兽医或急诊动物医院，不要继续测试声音。"};
+      if(m.lastTopic==="stop")return {type:"stop",answer:"先给它空间，不主动靠近；若行为突然改变或伴随身体不适，请咨询兽医。"};
+      if(m.lastTopic==="food")return {type:"followup",answer:"继续观察它是否正常喝水、进食和活动。若已经喂过，不必为了测试再加餐。它现在离开食盆了吗？"};
+      if(m.lastTopic==="door")return {type:"followup",answer:"接下来先保持门窗安全，不要急着开门。看看它是看门、靠近你还是走开，再告诉我结果。"};
+      if(m.lastTopic==="toy")return {type:"followup",answer:"猫咪愿意时再轻轻玩一小会儿，转头或离开就结束。它现在主动玩耍了吗？"};
+      if(m.lastTopic==="cue")return {type:"followup",answer:"固定口令轻声说一次即可，不要反复催促；转头不代表它听懂了。它现在自愿靠近了吗？"};
+      return {type:"abstain",answer:"我还不确定你指的是哪次互动。请说说猫咪现在在哪里、在做什么，再给你一个安全建议。"};
+    }
     if (has(short, ["叫它过来","让它过来","让猫过来","怎么叫过来","和猫说话","猫语","翻译","交流","沟通"])) {
       return {type:"cue", answer:"我们可以建立温和、固定的互动信号，但不能把人话翻译成猫语。试着在它放松时，用同一个短词轻声呼唤一次，等它自愿回应；不靠近就停下。你想让它靠近，还是想知道它为何叫？"};
     }
     if (has(short, ["识别","刚才什么声音","检测到","是猫叫吗","你听到","听到了吗","声音分析","声音是什么"])) {
       if (!s) return {type:"sound",answer:"目前我还没有可复核的声音模型结果。麦克风连接和语音转文字不等于猫叫识别。如果你启用了本地 YAMNet，页面会显示候选类别；也可以告诉我你亲耳听到的声音和猫咪的动作。"};
       const label=s.label||"未知";
-      const score=Number.isFinite(s.score)?Math.round(s.score*100):null;
-      return {type:"sound",answer:"刚才本地 YAMNet 对一段声音给出的首位候选是“"+label+"”"+(score===null?"":"（模型分数约 "+score+"%）")+"。它只是声音事件的候选，不是确认叫声，更不能说明猫咪想表达什么。你能看到猫当时张嘴发声吗？"};
+      const score=Number.isFinite(s.score)?s.score.toFixed(2):null;
+      return {type:"sound",answer:"刚才本地 YAMNet 对一段声音给出的首位候选是“"+label+"”"+(score===null?"":"（未经校准的类别分数 "+score+"）")+"。它只是声音事件的候选，不是确认叫声，更不能说明猫咪想表达什么。你能看到猫当时张嘴发声吗？"};
     }
     if (has(short,["饿","吃饭","喂食","饭盆","食盆","碗","吃完","零食","肚子"]) || where==="bowl") {
       if (fed==="recent" || has(short,["刚喂","刚吃","吃过了","喂过"])) {
@@ -56,7 +102,7 @@
     }
     return {type:"abstain",answer:"我听到你的描述了，但现有证据还不足以判断这只猫的具体意图。可以补充它当时的位置、是否亲眼看见发声、刚吃过没有，以及有没有靠近或躲避。我会先给一条安全建议，不乱猜。"};
   }
-  const api={respond};
+  const api={respond,createMemory,updateMemory,shouldHandleTranscript};
   if(typeof module!=="undefined" && module.exports) module.exports=api;
   root.CatTalesDialogue=api;
 })(typeof window!=="undefined"?window:globalThis);
