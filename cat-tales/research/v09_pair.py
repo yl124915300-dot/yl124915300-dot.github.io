@@ -51,9 +51,14 @@ def specimens():
  for item in chosen:yield "cat_meow",archive.read(item)
  csv_bytes=fetch("https://raw.githubusercontent.com/karolpiczak/ESC-50/master/meta/esc50.csv",2_000_000)
  meta=list(csv.DictReader(io.StringIO(csv_bytes.decode("utf-8-sig"))))
- for label in ("dog","rain"):
-  files=sorted(v["filename"] for v in meta if v["fold"]=="5" and v["category"]==label)[:8]
-  if len(files)!=8:raise ValueError("ESC50_controls_missing")
+ # More difficult interference classes; ESC-50 folds remain source-disjoint.
+ # These are research-only source labels, NOT real household continuous audio.
+ controls=[("cat",8),("dog",8),("rain",8),
+           ("crying_baby",4),("laughing",4),("coughing",4),("breathing",4),
+           ("keyboard_typing",4),("washing_machine",4),("vacuum_cleaner",4),("clock_alarm",4)]
+ for label,n in controls:
+  files=sorted(v["filename"] for v in meta if v["fold"]=="5" and v["category"]==label)[:n]
+  if len(files)!=n:raise ValueError("ESC50_controls_missing_"+label)
   for file in files:
    if not re.fullmatch(r"[A-Za-z0-9_.-]+\.wav",file):raise ValueError("bad_filename")
    yield label,fetch("https://raw.githubusercontent.com/karolpiczak/ESC-50/master/audio/"+file,3_000_000)
@@ -100,16 +105,21 @@ def main():
   if len(results)%10==0:
    save(status="INFERENCE_IN_PROGRESS",processed=len(results))
  summary={}
- for label in ("cat_meow","dog","rain"):
+ for label in ("cat_meow", "cat", "dog", "rain", "crying_baby", "laughing",
+               "coughing", "breathing", "keyboard_typing", "washing_machine",
+               "vacuum_cleaner", "clock_alarm"):
   subset=[r for r in results if r["kind"]==label]
   summary[label]={"clips":len(subset)}
   for k in ("yamnet_top1","yamnet_top5","clap_top1","clap_top3"):
    summary[label][k+"_flags"]=sum(int(r[k]) for r in subset)
- if (summary["cat_meow"]["clips"],summary["dog"]["clips"],summary["rain"]["clips"])!=(49,8,8):
+ expected={"cat_meow":49,"cat":8,"dog":8,"rain":8,
+           "crying_baby":4,"laughing":4,"coughing":4,"breathing":4,
+           "keyboard_typing":4,"washing_machine":4,"vacuum_cleaner":4,"clock_alarm":4}
+ if any(summary[k]["clips"]!=v for k,v in expected.items()):
   raise ValueError("paired_sample_coverage_incomplete")
- save(status="RESEARCH_REAL_PAIRED_TEST_COMPLETED",processed=len(results),summary=summary,
+ save(status="RESEARCH_V10_EXPANDED_INTERFERENCE_TEST_COMPLETED",processed=len(results),summary=summary,
       score_meaning="zero-shot relative prompt rankings, NOT calibrated probabilities; labels from authors",
-      limitations="Research/noncommercial samples, no human blind annotation, negatives from another corpus, no cross-home generalization claim")
+      limitations="ESC50 noncommercial; CatMeows research-only; sample labels from authors, cat class in ESC50 is not confirmed meow; most negatives from different corpus, no cross-household false alarm rate; NO PRODUCT ACCURACY")
 if __name__=="__main__":
  save()
  try:main()
