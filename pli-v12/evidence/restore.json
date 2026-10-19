@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-19T06:03:22.961Z",
+  "total": 8,
+  "failed": 0,
+  "independentCloudJob": true,
+  "checks": [
+    {
+      "name": "travel separate-job exact recovery",
+      "result": "PASS"
+    },
+    {
+      "name": "travel all causal frames recover",
+      "result": "PASS"
+    },
+    {
+      "name": "travel continues after recovery",
+      "result": "PASS"
+    },
+    {
+      "name": "travel serialization roundtrip",
+      "result": "PASS"
+    },
+    {
+      "name": "household separate-job exact recovery",
+      "result": "PASS"
+    },
+    {
+      "name": "household all causal frames recover",
+      "result": "PASS"
+    },
+    {
+      "name": "household continues after recovery",
+      "result": "PASS"
+    },
+    {
+      "name": "household serialization roundtrip",
+      "result": "PASS"
+    }
+  ]
+}

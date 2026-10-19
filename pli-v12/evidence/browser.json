@@ -1,0 +1,98 @@
+{
+  "at": "2026-10-19T06:03:11.903Z",
+  "url": "http://127.0.0.1:8765/pli-v12/",
+  "anonymous": true,
+  "public": false,
+  "total": 22,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "anonymous HTTPS or isolated cloud HTTP 200",
+      "result": "PASS"
+    },
+    {
+      "name": "honest LLM label",
+      "result": "PASS"
+    },
+    {
+      "name": "six synthetic selections",
+      "result": "PASS"
+    },
+    {
+      "name": "initial virtual budgets",
+      "result": "PASS"
+    },
+    {
+      "name": "complete travel chain",
+      "result": "PASS"
+    },
+    {
+      "name": "causal replay at event two",
+      "result": "PASS"
+    },
+    {
+      "name": "replay to latest",
+      "result": "PASS"
+    },
+    {
+      "name": "different household chain",
+      "result": "PASS"
+    },
+    {
+      "name": "new page restores browser-only state",
+      "result": "PASS"
+    },
+    {
+      "name": "copy checkpoint restoration",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown event abstains",
+      "result": "PASS"
+    },
+    {
+      "name": "text content resists XSS",
+      "result": "PASS"
+    },
+    {
+      "name": "input text preserved literally",
+      "result": "PASS"
+    },
+    {
+      "name": "multiple synthetic profiles update",
+      "result": "PASS"
+    },
+    {
+      "name": "overbudget input blocked",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid restored state refused",
+      "result": "PASS"
+    },
+    {
+      "name": "saved state deletion",
+      "result": "PASS"
+    },
+    {
+      "name": "mobile no horizontal overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "mobile submit control usable",
+      "result": "PASS"
+    },
+    {
+      "name": "no script exceptions",
+      "result": "PASS"
+    },
+    {
+      "name": "no external mutation requests",
+      "result": "PASS"
+    },
+    {
+      "name": "anonymous no authentication cookies",
+      "result": "PASS"
+    }
+  ]
+}

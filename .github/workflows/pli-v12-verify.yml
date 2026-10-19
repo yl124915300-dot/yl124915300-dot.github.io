@@ -1,0 +1,70 @@
+name: PLI V1.2 cloud verification
+on:
+  push:
+    branches: [pli-v12-20261019]
+    paths: ['pli-v12/**', '.github/workflows/pli-v12-verify.yml']
+permissions:
+  contents: read
+concurrency:
+  group: pli-v12-verify
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    outputs:
+      checkpoint: ${{ steps.persist.outputs.sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Read-only V1.1 main, draft PR, actual HTTPS, source freshness and true schedule audit
+        run: python3 pli-v12/audit.py
+      - name: Rule, causal replay, provenance and adversarial validation
+        run: |
+          node --check pli-v12/engine.mjs
+          node --check pli-v12/app.mjs
+          node pli-v12/test.mjs
+      - name: Install isolated cloud browser
+        run: |
+          npm install --prefix /tmp/pli-v12-qa --no-package-lock --no-save playwright@1.55.1
+          /tmp/pli-v12-qa/node_modules/.bin/playwright install chromium
+      - name: Desktop mobile XSS checkpoint multi-profile and network checks
+        env:
+          NODE_PATH: /tmp/pli-v12-qa/node_modules
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/pli-v12-http.log 2>&1 &
+          node pli-v12/browser.cjs
+      - name: Persist only synthetic checkpoints and evidence on the development branch
+        id: persist
+        if: always()
+        run: |
+          git config user.name 'PLI V1.2 cloud validation'
+          git config user.email 'pli-v12@users.noreply.github.com'
+          git add pli-v12/state/ pli-v12/evidence/
+          if ! git diff --cached --quiet; then
+            git commit -m 'PLI V1.2: record cloud test evidence and replay checkpoints'
+            git push origin HEAD:pli-v12-20261019
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  independent-restore:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.verify.outputs.checkpoint }}
+      - name: Reconstruct both causal chains in a separate cloud job and continue
+        run: |
+          node pli-v12/restore.mjs
+          node pli-v12/summarize.mjs
+      - name: Record actual independent restoration and summary
+        run: |
+          git config user.name 'PLI V1.2 cloud restoration'
+          git config user.email 'pli-v12@users.noreply.github.com'
+          git add pli-v12/evidence/restore.json pli-v12/evidence/summary.json
+          git commit -m 'PLI V1.2: verify independent cloud checkpoint recovery'
+          git push origin HEAD:pli-v12-20261019

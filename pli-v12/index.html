@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self';script-src 'self';style-src 'self';connect-src 'self';img-src 'self' data:;object-src 'none';base-uri 'none';form-action 'none'">
+<meta name="referrer" content="no-referrer"><title>PLI V1.2 · 合成生活实验</title><link rel="stylesheet" href="./style.css"></head>
+<body><main>
+<header><p class="eyebrow">PERSONAL LIFE INTELLIGENCE / V1.2</p><h1>连续生活实验</h1>
+<p>选择合成样本，添加事件，查看预算、计划与撤销如何相互影响。</p>
+<p id="model" role="status" class="warning"><strong>LLM_NOT_CONNECTED</strong> · 规则降级模式；自由文本不会被理解。无通用自主 LLM。</p>
+<p>全部状态为 SYNTHETIC。仅在当前浏览器内模拟，不执行付款、下单、账户操作或消息发送。不要输入个人信息。</p>
+<nav><a href="../pli-v11/">V1.1 真实事件观察台</a> · <a href="./README.md">说明与限制</a></nav></header>
+<section><h2>1. 选择样本</h2><fieldset id="profiles"><legend>可多选；每个样本拥有独立的虚拟预算</legend></fieldset></section>
+<section><h2>2. 输入合成事件</h2><form id="eventForm">
+<label>事件描述<textarea id="text" maxlength="6000" required placeholder="例如：合成的通勤计划因临时约束需要调整"></textarea></label>
+<div class="grid">
+<label>结构化操作<select id="kind"><option value="note">陌生事件 / 请求分析</option><option value="plan">提出模拟计划</option><option value="expense">记录模拟开支</option><option value="constraint">更新约束</option><option value="cancel">取消 / 撤销</option></select></label>
+<label>类别<select id="category"><option value="travel">出行</option><option value="work">工作</option><option value="household">家庭</option><option value="study">学习</option><option value="other">其他</option></select></label>
+<label>虚拟金额（美元）<input id="amount" type="number" min="0" max="1000000" step="0.01" value="20"></label>
+<label>计划时段标识<input id="slot" value="morning" maxlength="80" pattern="[A-Za-z0-9_-]{1,80}"></label>
+<label>目标事件 ID（取消时）<input id="target" maxlength="80" placeholder="例如 t7"></label>
+<label>区域<select id="county"><option value="*">全部所选样本（合成范围）</option><option>NYC061</option><option>WAC033</option><option>CAC037</option><option>CAC075</option><option>FLC086</option><option>ILC031</option></select></label>
+<label>有效时长（分钟）<input id="ttl" type="number" min="1" max="1440" value="120"></label>
+<label class="check"><input id="blocked" type="checkbox" checked>新增阻碍约束（取消勾选即清除同类约束）</label></div>
+<button type="submit">立即模拟</button></form><p id="feedback" role="status">自由文本事件将返回需澄清，不会编造推理结果。</p></section>
+<section><h2>连续事件链与重放</h2><div class="buttons"><button id="travel">出行与预算链（8步）</button><button id="household">家庭与约束链（6步）</button><button id="reset">重置模拟</button></div>
+<p id="clock"></p><label>重放至第 <output id="stepCount">0</output> 个事件<input id="replay" type="range" min="0" max="0" value="0"></label>
+<p id="storage"></p><div class="buttons"><button id="save">保存到本浏览器</button><button id="load">恢复本浏览器存档</button><button id="clearSaved">删除本浏览器存档</button><button id="export">显示可复制存档</button><button id="import">恢复粘贴存档</button></div>
+<label>合成存档（不会上传）<textarea id="checkpoint" maxlength="2000000" placeholder="复制或粘贴 SYNTHETIC 存档"></textarea></label></section>
+<section><h2>3. 状态变化与依据</h2><div id="states" class="cards"></div><h3>决策记录</h3><div id="decisions"></div><details><summary>因果 / 决策记忆</summary><pre id="history"></pre></details></section>
+<section><h2>已验证的云端证据</h2><p id="evidence">正在读取证据；读取失败不表示已通过。</p></section>
+<footer>真实交易 0 · 净收入 0 · 不保存私密状态或凭证 · 300 个事件上限 · <a href="https://docs.github.com/en/github-models">模型连接核查来源</a></footer>
+<script type="module" src="./app.mjs"></script></main></body></html>
