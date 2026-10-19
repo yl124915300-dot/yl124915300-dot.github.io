@@ -1,6 +1,6 @@
 {
   "result": "PASS",
-  "at": "2026-10-19T05:22:46.082Z",
+  "at": "2026-10-19T05:24:42.234Z",
   "url": "http://127.0.0.1:8765/pli-v11/",
   "anonymous": true,
   "authCookies": 0,
@@ -60,16 +60,16 @@
   ],
   "sourceCounts": [
     {
-      "name": "USGS",
-      "result": "PASS",
-      "accepted": 210
-    },
-    {
       "name": "NWS",
       "result": "PASS",
       "accepted": 17
+    },
+    {
+      "name": "USGS",
+      "result": "PASS",
+      "accepted": 211
     }
   ],
-  "snapshotAt": "2026-10-19T05:22:34.810823+00:00",
+  "snapshotAt": "2026-10-19T05:24:21.059997+00:00",
   "testsUseBrowserOnlyFixtureForStaleness": true
 }
