@@ -78,6 +78,7 @@ function applyAnswers(values) {
 function validateStep() {
   say("");
   errorBox.hidden = true;
+  errorBox.textContent = "";
   if (step === 0 && !form.elements.namedItem("scope").value) {
     errorBox.textContent = "Choose the flight coverage category; selecting Not sure is allowed.";
   } else if (step === 1 && !form.elements.namedItem("disruption").value) {
