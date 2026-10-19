@@ -1,0 +1,77 @@
+name: PLI V1.1 cloud verification
+on:
+  push:
+    branches: [pli-v11-20261019]
+    paths: ['pli-v11/**', '.github/workflows/pli-v11-verify.yml']
+permissions:
+  contents: read
+concurrency:
+  group: pli-v11-verify
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pages: read
+    outputs:
+      checkpoint: ${{ steps.persist.outputs.sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Read existing Pages configuration without changing it
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-v11/cloud_pages.py inspect
+      - name: Rule, geography and authenticity tests
+        run: |
+          python3 pli-v11/qa.py
+          node --check pli-v11/app.js
+      - name: Actual public feeds and durable snapshot
+        env:
+          PLI_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 pli-v11/engine.py refresh
+          python3 pli-v11/engine.py verify
+      - name: Install isolated cloud browser
+        run: |
+          npm install --prefix /tmp/pli-v11-qa --no-package-lock --no-save playwright@1.55.1
+          /tmp/pli-v11-qa/node_modules/.bin/playwright install chromium
+      - name: Anonymous browser desktop, mobile, filters and stale-data gate
+        env:
+          NODE_PATH: /tmp/pli-v11-qa/node_modules
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/pli-v11-http.log 2>&1 &
+          node pli-v11/browser.cjs
+      - name: Live provenance gate (no mocks, no minimum event-count claim)
+        run: |
+          python3 - <<'PY'
+          import json
+          s=json.load(open('pli-v11/state/refresh.json'))
+          assert s['result']=='PASS',s
+          assert len(s['sources'])==2 and all(x['http_status']==200 and x['response_sha256'] for x in s['sources'])
+          print('LIVE_PROVENANCE_GATE PASS')
+          PY
+      - name: Persist only independent PLI evidence and state
+        id: persist
+        if: always()
+        run: |
+          git config user.name 'PLI cloud verification'
+          git config user.email 'pli-verification@users.noreply.github.com'
+          git add pli-v11/data.json pli-v11/state/ pli-v11/evidence/
+          if ! git diff --cached --quiet; then
+            git commit -m 'PLI V1.1: persist actual cloud verification evidence and snapshot'
+            git push origin HEAD:pli-v11-20261019
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  independent-restore:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.verify.outputs.checkpoint }}
+          persist-credentials: false
+      - name: Reopen versioned memory in a separate cloud job
+        run: python3 pli-v11/engine.py verify
