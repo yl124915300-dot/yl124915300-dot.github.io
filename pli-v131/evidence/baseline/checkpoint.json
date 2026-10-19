@@ -1,0 +1,213 @@
+{
+  "at": "2026-10-19T07:54:00.000Z",
+  "memory": {
+    "version": "1.2.0",
+    "classification": "SYNTHETIC",
+    "journal": [
+      {
+        "event": {
+          "id": "b01_0",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "Simulate traveling by the harbor shuttle to meet the synthetic arrival deadline.",
+          "payload": {
+            "amountCents": 1525,
+            "category": "travel",
+            "slot": "b01"
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      },
+      {
+        "event": {
+          "id": "b02_0",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "Simulate a plan to reserve the cedar workroom for $9.40.",
+          "payload": {
+            "amountCents": 940,
+            "category": "work",
+            "slot": "b02"
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      },
+      {
+        "event": {
+          "id": "b03_0",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "Simulate reserving the study budget for the astronomy textbook.",
+          "payload": {
+            "amountCents": 705,
+            "category": "study",
+            "slot": "b03"
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      },
+      {
+        "event": {
+          "id": "b04_ctl0",
+          "kind": "constraint",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S4"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S4. The saffron cooking class costs $14. The household restriction is active. Ask for resolution of the restriction before making a new plan. SYNTHETIC constraint: S4 blocks household.",
+          "payload": {
+            "category": "household",
+            "blocked": true
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      },
+      {
+        "event": {
+          "id": "b05_0",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "Simulate choosing the digital lesson as the study option",
+          "payload": {
+            "amountCents": 0,
+            "category": "study",
+            "slot": "b05"
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      },
+      {
+        "event": {
+          "id": "b08_ctl0",
+          "kind": "expense",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S1. The simulator recorded a new travel expense; do not record it twice. Report the effect on previous tentative travel reservations and seek clarification; no new plan. SYNTHETIC ledger: S1 spent $90.",
+          "payload": {
+            "amountCents": 9000,
+            "category": "travel"
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      },
+      {
+        "event": {
+          "id": "b10_0",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "Simulate a plan to acquire the conference badge for the synthetic training course.",
+          "payload": {
+            "amountCents": 900,
+            "category": "study",
+            "slot": "b10"
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      },
+      {
+        "event": {
+          "id": "b23_ctl0",
+          "kind": "expense",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S5"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S5. The ink studio costs $2. The newly recorded expense is already in the ledger. The studio meets the current synthetic work need. Tentatively reserve only if it fits the remaining budget. SYNTHETIC ledger: S5 spent $98.",
+          "payload": {
+            "amountCents": 9800,
+            "category": "other"
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      },
+      {
+        "event": {
+          "id": "b26_0",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:54:00.000Z",
+          "expiresAt": "2026-10-19T09:54:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "Simulate a work plan using the synthetic workspace.",
+          "payload": {
+            "amountCents": 100,
+            "category": "work",
+            "slot": "b26"
+          }
+        },
+        "observedAt": "2026-10-19T07:54:00.000Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,563 @@
+{
+  "verdict": "NO_GO",
+  "assessment": "FROZEN_AUTOMATIC_FIELD_ORACLE_NOT_THIRD_PARTY_SEMANTIC_REVIEW",
+  "arm": "baseline",
+  "evaluated": 30,
+  "automatic_full_field_pass": 1,
+  "dimensions": {
+    "action": 27,
+    "category": 26,
+    "profile": 6,
+    "object_price": 25,
+    "factual_basis": 27,
+    "continuous_state": 1,
+    "permission": 30
+  },
+  "accepted_binding_errors": 0,
+  "independent_human_semantic_reviews": 0,
+  "unscored": "Rationale, assumptions, unknowns and full natural-language semantics require independent blind review",
+  "cases": [
+    {
+      "id": "b01",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": true,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": true,
+        "permission": true
+      },
+      "all_fields_correct": true,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "PROPOSED"
+    },
+    {
+      "id": "b02",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "PROPOSED"
+    },
+    {
+      "id": "b03",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "PROPOSED"
+    },
+    {
+      "id": "b04",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b05",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "PROPOSED"
+    },
+    {
+      "id": "b06",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b07",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": true,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b08",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": true,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b09",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": true,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b10",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": true,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "PROPOSED"
+    },
+    {
+      "id": "b11",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": true,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b12",
+      "checks": {
+        "action": false,
+        "category": false,
+        "profile": false,
+        "object_price": false,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "REJECTED_UNKNOWN_OR_UNSUPPORTED_COST"
+    },
+    {
+      "id": "b13",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b14",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b15",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": false,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b16",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": false,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b17",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": false,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b18",
+      "checks": {
+        "action": true,
+        "category": false,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b19",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b20",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b21",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "REJECTED_V12_PROVIDER_BUDGET_OR_SCHEMA"
+    },
+    {
+      "id": "b22",
+      "checks": {
+        "action": true,
+        "category": false,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b23",
+      "checks": {
+        "action": false,
+        "category": false,
+        "profile": false,
+        "object_price": false,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b24",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": false,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "REJECTED_UNKNOWN_OR_UNSUPPORTED_COST"
+    },
+    {
+      "id": "b25",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b26",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": false,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "PROPOSED"
+    },
+    {
+      "id": "b27",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b28",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "clarify",
+      "gate_code": "NEEDS_CLARIFICATION"
+    },
+    {
+      "id": "b29",
+      "checks": {
+        "action": true,
+        "category": true,
+        "profile": false,
+        "object_price": true,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "REJECTED_V12_PROVIDER_BUDGET_OR_SCHEMA"
+    },
+    {
+      "id": "b30",
+      "checks": {
+        "action": false,
+        "category": true,
+        "profile": false,
+        "object_price": false,
+        "factual_basis": true,
+        "continuous_state": false,
+        "permission": true
+      },
+      "all_fields_correct": false,
+      "accepted_binding_error": false,
+      "requires_blind_rationale_review": true,
+      "failure": null,
+      "action": "simulate_plan",
+      "gate_code": "REJECTED_UNKNOWN_OR_UNSUPPORTED_COST"
+    }
+  ],
+  "realTransactions": 0,
+  "netReceiptsUSD": 0
+}
