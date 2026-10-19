@@ -1,0 +1,761 @@
+{
+  "base": "http://127.0.0.1:8765/pli-v131/",
+  "public": false,
+  "checks": [
+    {
+      "name": "desktop: evidence loaded",
+      "pass": true
+    },
+    {
+      "name": "desktop: NO_GO is visible",
+      "pass": true
+    },
+    {
+      "name": "desktop: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b01",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b02",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b03",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b04",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b05",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b06",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b07",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b08",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b09",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b10",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b11",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b12",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b13",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b14",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b15",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b16",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b17",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b18",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b19",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b20",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b21",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b22",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b23",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b24",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b25",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b26",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b27",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b28",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b29",
+      "pass": true
+    },
+    {
+      "name": "desktop:baseline:b30",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b01",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b02",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b03",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b04",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b05",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b06",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b07",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b08",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b09",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b10",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b11",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b12",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b13",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b14",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b15",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b16",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b17",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b18",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b19",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b20",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b21",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b22",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b23",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b24",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b25",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b26",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b27",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b28",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b29",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-sampling:b30",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b01",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b02",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b03",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b04",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b05",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b06",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b07",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b08",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b09",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b10",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b11",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b12",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b13",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b14",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b15",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b16",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b17",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b18",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b19",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b20",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b21",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b22",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b23",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b24",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b25",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b26",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b27",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b28",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b29",
+      "pass": true
+    },
+    {
+      "name": "desktop:fixed-greedy:b30",
+      "pass": true
+    },
+    {
+      "name": "mobile: evidence loaded",
+      "pass": true
+    },
+    {
+      "name": "mobile: NO_GO is visible",
+      "pass": true
+    },
+    {
+      "name": "mobile: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b01",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b02",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b03",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b04",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b05",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b06",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b07",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b08",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b09",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b10",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b11",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b12",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b13",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b14",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b15",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b16",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b17",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b18",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b19",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b20",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b21",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b22",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b23",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b24",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b25",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b26",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b27",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b28",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b29",
+      "pass": true
+    },
+    {
+      "name": "mobile:baseline:b30",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b01",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b02",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b03",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b04",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b05",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b06",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b07",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b08",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b09",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b10",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b11",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b12",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b13",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b14",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b15",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b16",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b17",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b18",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b19",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b20",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b21",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b22",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b23",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b24",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b25",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b26",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b27",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b28",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b29",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-sampling:b30",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b01",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b02",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b03",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b04",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b05",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b06",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b07",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b08",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b09",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b10",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b11",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b12",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b13",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b14",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b15",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b16",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b17",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b18",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b19",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b20",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b21",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b22",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b23",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b24",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b25",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b26",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b27",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b28",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b29",
+      "pass": true
+    },
+    {
+      "name": "mobile:fixed-greedy:b30",
+      "pass": true
+    },
+    {
+      "name": "model/input HTML rendered as inert text",
+      "pass": true
+    },
+    {
+      "name": "zero external inference or action requests",
+      "pass": true
+    }
+  ],
+  "externalInferenceRequests": 0,
+  "passed": 188,
+  "failed": 0
+}

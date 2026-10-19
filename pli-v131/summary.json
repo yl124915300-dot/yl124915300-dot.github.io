@@ -1,0 +1,1153 @@
+{
+  "verdict": "NO_GO",
+  "reason": "Independent complete semantic review unavailable; field scores do not establish semantic accuracy.",
+  "assessmentType": "IMPLEMENTER_AUTHORED_HOLDOUT_WITH_FROZEN_AUTOMATIC_ORACLE",
+  "thirdPartyBlindReviews": 0,
+  "trueSemanticAccuracy": "UNKNOWN",
+  "caseCount": 30,
+  "actualArms": {
+    "baseline": {
+      "inference": {
+        "status": "REAL_LLM_RAN_SEMANTIC_NO_GO",
+        "arm": "baseline",
+        "model": "Qwen/Qwen3-4B-GGUF",
+        "quantization": "Q4_K_M",
+        "license": "Apache-2.0",
+        "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+        "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39218946987",
+        "source_commit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+        "realTransactions": 0,
+        "netReceiptsUSD": 0,
+        "thirdPartySemanticReview": "UNAVAILABLE",
+        "realtime": false,
+        "hardware": {
+          "cpu_count": 4,
+          "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+          "meminfo": "MemTotal:       16373452 kB",
+          "runner": "GitHub Actions 1000000604",
+          "cpu": "model name\t: AMD EPYC 7763 64-Core Processor"
+        },
+        "binary": {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-ubuntu-x64.tar.gz",
+          "bytes": 17851611,
+          "sha256": "cf07c1c112d709bd67e522017471de57ed0ec8bea031d732c5422351c07f65ac"
+        },
+        "weights": {
+          "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf",
+          "bytes": 2497280256,
+          "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+        },
+        "license_file": {
+          "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/LICENSE",
+          "bytes": 11544,
+          "sha256": "5de36594c10839788a8c589443a8ef9d8b8d17c65a1b5807206ae037fc36c6bd"
+        },
+        "digests": {
+          "pli-v13/prompt.txt": "746c53e136f0d4b5db00dd60e18fe0d83b625a2636613bf0c821ad30cecabcc4",
+          "pli-v13/schema.json": "eb597ff15759fbad487c990febe75866902198e4ce72430de892d4b14130c252",
+          "pli-v131/holdout.json": "e70a1d2168e49bfa36c50b6d0999faccc2b71405c5e88e8971d2eccf651aecba",
+          "pli-v131/grade.py": "dd338f31e9e911c0159fc65a7d0944c98b15c4fd4b7ab4edb1de993077586a21",
+          "pli-v131/gate.mjs": "250e02bcdfba1732d23198754d5d4b7850d0053189dc4055a6cdaf3f0295972b",
+          "pli-v131/POLICY.md": "c29407c1acca9606584531b7969319998100952c80261baa8c1c6464091280d0"
+        },
+        "parameters": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0,
+          "presence_penalty": 1.5,
+          "seed": 1313
+        },
+        "inference_seconds": 1190.146,
+        "inference_wall_seconds": 1193.015,
+        "attempts": 30,
+        "parsed_outputs": 30,
+        "children_resources": {
+          "max_rss_kib": 5062728,
+          "user_cpu_seconds": 4736.539,
+          "system_cpu_seconds": 4.098
+        },
+        "total_seconds": 1205.683
+      },
+      "automaticEvaluation": {
+        "verdict": "NO_GO",
+        "assessment": "FROZEN_AUTOMATIC_FIELD_ORACLE_NOT_THIRD_PARTY_SEMANTIC_REVIEW",
+        "arm": "baseline",
+        "evaluated": 30,
+        "automatic_full_field_pass": 1,
+        "dimensions": {
+          "action": 27,
+          "category": 26,
+          "profile": 6,
+          "object_price": 25,
+          "factual_basis": 27,
+          "continuous_state": 1,
+          "permission": 30
+        },
+        "accepted_binding_errors": null,
+        "independent_human_semantic_reviews": 0,
+        "unscored": "Rationale, assumptions, unknowns and full natural-language semantics require independent blind review",
+        "realTransactions": 0,
+        "netReceiptsUSD": 0,
+        "binding_metric_note": "NOT_MEASURED: the frozen baseline counter is a constant zero; do not interpret it as observed zero errors."
+      },
+      "failures": [
+        {
+          "id": "b02",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "PROPOSED"
+        },
+        {
+          "id": "b03",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "PROPOSED"
+        },
+        {
+          "id": "b04",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b05",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "PROPOSED"
+        },
+        {
+          "id": "b06",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b07",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b08",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b09",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b10",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "PROPOSED"
+        },
+        {
+          "id": "b11",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b12",
+          "checks": {
+            "action": false,
+            "category": false,
+            "profile": false,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "REJECTED_UNKNOWN_OR_UNSUPPORTED_COST"
+        },
+        {
+          "id": "b13",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b14",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b15",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b16",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b17",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b18",
+          "checks": {
+            "action": true,
+            "category": false,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b19",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b20",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b21",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "REJECTED_V12_PROVIDER_BUDGET_OR_SCHEMA"
+        },
+        {
+          "id": "b22",
+          "checks": {
+            "action": true,
+            "category": false,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b23",
+          "checks": {
+            "action": false,
+            "category": false,
+            "profile": false,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b24",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "REJECTED_UNKNOWN_OR_UNSUPPORTED_COST"
+        },
+        {
+          "id": "b25",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b26",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "PROPOSED"
+        },
+        {
+          "id": "b27",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b28",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "NEEDS_CLARIFICATION"
+        },
+        {
+          "id": "b29",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": false,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "REJECTED_V12_PROVIDER_BUDGET_OR_SCHEMA"
+        },
+        {
+          "id": "b30",
+          "checks": {
+            "action": false,
+            "category": true,
+            "profile": false,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": false,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "REJECTED_UNKNOWN_OR_UNSUPPORTED_COST"
+        }
+      ],
+      "rawResultsSha256": "5e372593e869e51f0541f59d4f867a82d9d9f4ed224b993a61dafb5474e42de0"
+    },
+    "fixed-sampling": {
+      "inference": {
+        "status": "REAL_LLM_RAN_SEMANTIC_NO_GO",
+        "arm": "fixed-sampling",
+        "model": "Qwen/Qwen3-4B-GGUF",
+        "quantization": "Q4_K_M",
+        "license": "Apache-2.0",
+        "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+        "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39218946987",
+        "source_commit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+        "realTransactions": 0,
+        "netReceiptsUSD": 0,
+        "thirdPartySemanticReview": "UNAVAILABLE",
+        "realtime": false,
+        "hardware": {
+          "cpu_count": 4,
+          "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+          "meminfo": "MemTotal:       16373452 kB",
+          "runner": "GitHub Actions 1000000605",
+          "cpu": "model name\t: AMD EPYC 9V74 80-Core Processor"
+        },
+        "binary": {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-ubuntu-x64.tar.gz",
+          "bytes": 17851611,
+          "sha256": "cf07c1c112d709bd67e522017471de57ed0ec8bea031d732c5422351c07f65ac"
+        },
+        "weights": {
+          "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf",
+          "bytes": 2497280256,
+          "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+        },
+        "license_file": {
+          "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/LICENSE",
+          "bytes": 11544,
+          "sha256": "5de36594c10839788a8c589443a8ef9d8b8d17c65a1b5807206ae037fc36c6bd"
+        },
+        "digests": {
+          "pli-v131/prompt.txt": "83a1c479913041cc0029f9daad62e2cd0eaa33d099dbbb181cbd4f480a8d40be",
+          "pli-v131/schema.json": "3f5e73cb5736c7a9e5a2225dd6d299e41362b4630c2d8d1eb9d804de5cedfec4",
+          "pli-v131/holdout.json": "e70a1d2168e49bfa36c50b6d0999faccc2b71405c5e88e8971d2eccf651aecba",
+          "pli-v131/grade.py": "dd338f31e9e911c0159fc65a7d0944c98b15c4fd4b7ab4edb1de993077586a21",
+          "pli-v131/gate.mjs": "250e02bcdfba1732d23198754d5d4b7850d0053189dc4055a6cdaf3f0295972b",
+          "pli-v131/POLICY.md": "c29407c1acca9606584531b7969319998100952c80261baa8c1c6464091280d0"
+        },
+        "parameters": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0,
+          "presence_penalty": 1.5,
+          "seed": 1313
+        },
+        "inference_seconds": 1393.303,
+        "inference_wall_seconds": 1396.187,
+        "attempts": 30,
+        "parsed_outputs": 30,
+        "children_resources": {
+          "max_rss_kib": 8533500,
+          "user_cpu_seconds": 5542.171,
+          "system_cpu_seconds": 4.831
+        },
+        "total_seconds": 1406.457
+      },
+      "automaticEvaluation": {
+        "verdict": "NO_GO",
+        "assessment": "FROZEN_AUTOMATIC_FIELD_ORACLE_NOT_THIRD_PARTY_SEMANTIC_REVIEW",
+        "arm": "fixed-sampling",
+        "evaluated": 30,
+        "automatic_full_field_pass": 21,
+        "dimensions": {
+          "action": 26,
+          "category": 28,
+          "profile": 30,
+          "object_price": 25,
+          "factual_basis": 27,
+          "continuous_state": 30,
+          "permission": 30
+        },
+        "accepted_binding_errors": 0,
+        "independent_human_semantic_reviews": 0,
+        "unscored": "Rationale, assumptions, unknowns and full natural-language semantics require independent blind review",
+        "realTransactions": 0,
+        "netReceiptsUSD": 0
+      },
+      "failures": [
+        {
+          "id": "b05",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b07",
+          "checks": {
+            "action": false,
+            "category": true,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b11",
+          "checks": {
+            "action": false,
+            "category": true,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b15",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b16",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b17",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b18",
+          "checks": {
+            "action": true,
+            "category": false,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "ASK"
+        },
+        {
+          "id": "b22",
+          "checks": {
+            "action": false,
+            "category": false,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "revoke_plan",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b25",
+          "checks": {
+            "action": false,
+            "category": true,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "HOLD"
+        }
+      ],
+      "rawResultsSha256": "4d121a9c60edc7bd11b4fb41e923ff7d8133ec15660156885e58bb71728a2870"
+    },
+    "fixed-greedy": {
+      "inference": {
+        "status": "REAL_LLM_RAN_SEMANTIC_NO_GO",
+        "arm": "fixed-greedy",
+        "model": "Qwen/Qwen3-4B-GGUF",
+        "quantization": "Q4_K_M",
+        "license": "Apache-2.0",
+        "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+        "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39218946987",
+        "source_commit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+        "realTransactions": 0,
+        "netReceiptsUSD": 0,
+        "thirdPartySemanticReview": "UNAVAILABLE",
+        "realtime": false,
+        "hardware": {
+          "cpu_count": 4,
+          "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+          "meminfo": "MemTotal:       16373452 kB",
+          "runner": "GitHub Actions 1000000603",
+          "cpu": "model name\t: AMD EPYC 9V45 96-Core Processor"
+        },
+        "binary": {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-ubuntu-x64.tar.gz",
+          "bytes": 17851611,
+          "sha256": "cf07c1c112d709bd67e522017471de57ed0ec8bea031d732c5422351c07f65ac"
+        },
+        "weights": {
+          "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf",
+          "bytes": 2497280256,
+          "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+        },
+        "license_file": {
+          "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/LICENSE",
+          "bytes": 11544,
+          "sha256": "5de36594c10839788a8c589443a8ef9d8b8d17c65a1b5807206ae037fc36c6bd"
+        },
+        "digests": {
+          "pli-v131/prompt.txt": "83a1c479913041cc0029f9daad62e2cd0eaa33d099dbbb181cbd4f480a8d40be",
+          "pli-v131/schema.json": "3f5e73cb5736c7a9e5a2225dd6d299e41362b4630c2d8d1eb9d804de5cedfec4",
+          "pli-v131/holdout.json": "e70a1d2168e49bfa36c50b6d0999faccc2b71405c5e88e8971d2eccf651aecba",
+          "pli-v131/grade.py": "dd338f31e9e911c0159fc65a7d0944c98b15c4fd4b7ab4edb1de993077586a21",
+          "pli-v131/gate.mjs": "250e02bcdfba1732d23198754d5d4b7850d0053189dc4055a6cdaf3f0295972b",
+          "pli-v131/POLICY.md": "c29407c1acca9606584531b7969319998100952c80261baa8c1c6464091280d0"
+        },
+        "parameters": {
+          "temperature": 0,
+          "top_p": 1,
+          "top_k": 0,
+          "min_p": 0,
+          "presence_penalty": 0,
+          "seed": 1313
+        },
+        "inference_seconds": 656.904,
+        "inference_wall_seconds": 659.042,
+        "attempts": 30,
+        "parsed_outputs": 30,
+        "children_resources": {
+          "max_rss_kib": 8545120,
+          "user_cpu_seconds": 2611.691,
+          "system_cpu_seconds": 2.79
+        },
+        "total_seconds": 671.089
+      },
+      "automaticEvaluation": {
+        "verdict": "NO_GO",
+        "assessment": "FROZEN_AUTOMATIC_FIELD_ORACLE_NOT_THIRD_PARTY_SEMANTIC_REVIEW",
+        "arm": "fixed-greedy",
+        "evaluated": 30,
+        "automatic_full_field_pass": 22,
+        "dimensions": {
+          "action": 27,
+          "category": 28,
+          "profile": 30,
+          "object_price": 26,
+          "factual_basis": 27,
+          "continuous_state": 30,
+          "permission": 30
+        },
+        "accepted_binding_errors": 0,
+        "independent_human_semantic_reviews": 0,
+        "unscored": "Rationale, assumptions, unknowns and full natural-language semantics require independent blind review",
+        "realTransactions": 0,
+        "netReceiptsUSD": 0
+      },
+      "failures": [
+        {
+          "id": "b05",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b07",
+          "checks": {
+            "action": false,
+            "category": true,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b15",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b16",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b17",
+          "checks": {
+            "action": true,
+            "category": true,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": false,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b18",
+          "checks": {
+            "action": true,
+            "category": false,
+            "profile": true,
+            "object_price": true,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "clarify",
+          "gate_code": "ASK"
+        },
+        {
+          "id": "b22",
+          "checks": {
+            "action": false,
+            "category": false,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "revoke_plan",
+          "gate_code": "HOLD"
+        },
+        {
+          "id": "b25",
+          "checks": {
+            "action": false,
+            "category": true,
+            "profile": true,
+            "object_price": false,
+            "factual_basis": true,
+            "continuous_state": true,
+            "permission": true
+          },
+          "all_fields_correct": false,
+          "accepted_binding_error": false,
+          "requires_blind_rationale_review": true,
+          "failure": null,
+          "action": "simulate_plan",
+          "gate_code": "HOLD"
+        }
+      ],
+      "rawResultsSha256": "1d1b1591add80c2d89b9a6c401b73dedc3a759b7e6237523a908b14bb70bfd6b"
+    }
+  },
+  "sameBeforeStateSamplingVsGreedy": [
+    "b01",
+    "b02",
+    "b03",
+    "b04",
+    "b05",
+    "b06",
+    "b07",
+    "b08",
+    "b09",
+    "b10",
+    "b11",
+    "b12",
+    "b13",
+    "b14",
+    "b15",
+    "b16",
+    "b17",
+    "b18",
+    "b19",
+    "b20",
+    "b21",
+    "b22",
+    "b23",
+    "b24",
+    "b25",
+    "b26",
+    "b27",
+    "b28",
+    "b29",
+    "b30"
+  ],
+  "comparisonLimit": "All arms process same ordered raw events with their own continuous state; only listed identical-state rows support a controlled sampling comparison.",
+  "runtimeComparisonCaveat": "Same standard runner class but CPU models may differ. Timings are observations, not a causal speed benchmark. One seed/run per arm does not verify repeatability.",
+  "restoration": {
+    "passed": 366,
+    "failed": 0
+  },
+  "v11Audit": {
+    "checkedAtBeijing": "2026-10-19T16:19:51.177960+08:00",
+    "query": "event=schedule",
+    "repositoryScheduleTotal": 0,
+    "v11ScheduleRuns": [],
+    "pushIsCron": false
+  },
+  "realTransactions": 0,
+  "netReceiptsUSD": 0,
+  "totalModelInferenceSeconds": 3240.353,
+  "noMacOrLocalExecution": true,
+  "pr": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/pull/10"
+}
