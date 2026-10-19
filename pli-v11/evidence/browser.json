@@ -1,6 +1,6 @@
 {
   "result": "PASS",
-  "at": "2026-10-19T05:24:42.234Z",
+  "at": "2026-10-19T05:26:29.974Z",
   "url": "http://127.0.0.1:8765/pli-v11/",
   "anonymous": true,
   "authCookies": 0,
@@ -42,6 +42,10 @@
       "result": "PASS"
     },
     {
+      "name": "BROWSER_ONLY_PROPOSAL_FIXTURE_VISIBLE",
+      "result": "PASS"
+    },
+    {
       "name": "STALE_SNAPSHOT_VISIBLE",
       "result": "PASS"
     },
@@ -67,9 +71,9 @@
     {
       "name": "USGS",
       "result": "PASS",
-      "accepted": 211
+      "accepted": 212
     }
   ],
-  "snapshotAt": "2026-10-19T05:24:21.059997+00:00",
+  "snapshotAt": "2026-10-19T05:26:13.268006+00:00",
   "testsUseBrowserOnlyFixtureForStaleness": true
 }
