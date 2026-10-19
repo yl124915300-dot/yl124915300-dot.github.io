@@ -214,7 +214,8 @@ def ingest_batch(state, name, data, receipt, t):
                 continue
             e["batch_sha256"] = receipt["response_sha256"]
             old = state["events"].get(e["id"])
-            if old and stamp(old["updated_at"]) > stamp(e["updated_at"]):
+            if old and (stamp(old["updated_at"]) > stamp(e["updated_at"]) or
+                        (old.get("superseded_at") and stamp(e["updated_at"]) <= stamp(old["superseded_at"]))):
                 skipped += 1
                 continue
             state["events"][e["id"]] = e

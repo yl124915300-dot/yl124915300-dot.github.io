@@ -1,0 +1,44 @@
+name: PLI V1.1 anonymous public deployment verification
+on:
+  push:
+    branches: [main]
+    paths: ['pli-v11/app.js', 'pli-v11/index.html', 'pli-v11/browser.cjs', '.github/workflows/pli-v11-public.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pli-v11-public-check
+  cancel-in-progress: false
+jobs:
+  public-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+      - name: Anonymous HTTPS reads and deployed app checksum
+        run: python3 pli-v11/wait_public.py
+      - name: Install isolated cloud browser
+        run: |
+          npm install --prefix /tmp/pli-v11-public --no-package-lock --no-save playwright@1.55.1
+          /tmp/pli-v11-public/node_modules/.bin/playwright install chromium
+      - name: Real anonymous browser against deployed HTTPS URL
+        env:
+          NODE_PATH: /tmp/pli-v11-public/node_modules
+          PLI_PUBLIC_URL: https://yl124915300-dot.github.io/pli-v11/
+        run: node pli-v11/browser.cjs
+      - name: Commit only public access evidence, preserving concurrent snapshot commits
+        run: |
+          git config user.name 'PLI public verification'
+          git config user.email 'pli-verification@users.noreply.github.com'
+          git fetch origin main
+          git reset --soft origin/main
+          git restore --staged .
+          git add pli-v11/evidence/public-*
+          if ! git diff --cached --quiet; then
+            git commit -m 'PLI V1.1: record actual anonymous public browser verification'
+            git push origin HEAD:main
+          fi

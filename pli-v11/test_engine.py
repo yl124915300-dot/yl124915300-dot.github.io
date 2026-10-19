@@ -178,6 +178,15 @@ class EngineTests(unittest.TestCase):
         ingest_batch(s,"NWS",dict(type="FeatureCollection",features=[f]),{"response_sha256":"fixture"},T)
         self.assertEqual(s["events"][old["id"]]["status"],"cancelled")
 
+    def test_superseded_event_cannot_reappear_in_same_feed(self):
+        s=ready()
+        prior=event()
+        prior.update(status="cancelled",superseded_by="nws:new",superseded_at=iso(T))
+        s["events"][prior["id"]]=prior
+        c=ingest_batch(s,"NWS",dict(type="FeatureCollection",features=[weather()]),{"response_sha256":"fixture"},T)
+        self.assertEqual(c["skipped"],1)
+        self.assertEqual(s["events"][prior["id"]]["status"],"cancelled")
+
     def test_older_revision_cannot_reactivate(self):
         s=ready()
         old=event()

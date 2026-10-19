@@ -52,7 +52,7 @@ state/refresh.json is actual source health/count/hash evidence.
 evidence/tests.json is explicitly TEST_FIXTURE_ONLY; it proves deterministic logic, not live collection.
 evidence/browser.json and screenshots are created by a cloud headless browser against a cloud static server. Browser staleness tests intercept only that browser's response and never replace live files.
 The independent cloud job verifies memory/snapshot digests and provenance from a fresh checkout.
-A public browser smoke must separately verify the deployed HTTPS URL without credentials/cookies.
+The dedicated public browser workflow separately verifies the deployed HTTPS URL without credentials/cookies, checks the actual app checksum and records evidence/public-http.json, evidence/public-browser.json and screenshots.
 
 Development and tests run only in authorized GitHub cloud jobs. Nothing needs to run on the owner's Mac. No extra Actions artifact/cache storage is requested.
 
