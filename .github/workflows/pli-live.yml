@@ -1,0 +1,104 @@
+name: PLI live autonomous public event loop
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'normal, first or second verification batch'
+        required: false
+        default: normal
+        type: choice
+        options: [normal, first, second]
+  push:
+    branches: [main]
+    paths: ['.github/workflows/pli-live.yml']
+permissions:
+  contents: read
+concurrency:
+  group: pli-live-public-state
+  cancel-in-progress: false
+env:
+  PLI_IMPL_SHA: 7cce2f3e123a85093d23cfb66279132ff5c79c0c
+  PLI_PHASE: ${{ inputs.phase || 'normal' }}
+jobs:
+  bootstrap:
+    if: github.event_name == 'push' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 7cce2f3e123a85093d23cfb66279132ff5c79c0c
+      - name: Start explicitly labeled first workflow_dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-live/cloud.py dispatch first
+  refresh:
+    if: github.event_name != 'push' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: write
+      pages: write
+      actions: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 7cce2f3e123a85093d23cfb66279132ff5c79c0c
+      - name: Verify frozen safe boundary
+        run: python3 pli-live/test_engine.py
+      - name: Restore, fetch real public sources, decide and persist only own paths
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-live/cloud.py refresh
+  restore:
+    needs: refresh
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 7cce2f3e123a85093d23cfb66279132ff5c79c0c
+      - name: Independently restore published state in a new cloud job
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-live/cloud.py restore
+  public:
+    needs: restore
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: write
+      pages: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 7cce2f3e123a85093d23cfb66279132ff5c79c0c
+      - name: Wait for successful Pages build and anonymous byte equality
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-live/cloud.py accept
+      - name: Anonymous cloud browser
+        run: |
+          npm install --prefix /tmp/pli-live-qa --no-package-lock --no-save playwright@1.55.1
+          /tmp/pli-live-qa/node_modules/.bin/playwright install chromium
+      - name: Desktop, mobile and explicitly synthetic stale/failure UI checks
+        env:
+          NODE_PATH: /tmp/pli-live-qa/node_modules
+        run: node pli-live/browser.cjs
+      - name: Persist actual browser and Pages receipts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-live/cloud.py record
+      - name: Start second independent workflow_dispatch exactly once
+        if: inputs.phase == 'first'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-live/cloud.py dispatch second
