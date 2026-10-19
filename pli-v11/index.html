@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="PLI V1.1：合成生活样本与公开事件的只读规则决策演示，显示来源与数据新鲜度。">
+<title>PLI V1.1 · 生活事件观察台</title><link rel="stylesheet" href="./style.css"><script defer src="./app.js"></script></head>
+<body><main>
+<header><p class="eyebrow">PERSONAL LIFE INTELLIGENCE / V1.1</p><h1>生活事件观察台</h1>
+<p class="intro">查看公开事件如何影响六个合成生活样本，以及规则引擎为什么提出或撤销建议。</p>
+<div class="tags"><span>SYNTHETIC 生活样本</span><span>REAL_PUBLIC 事件</span><span>只读规则引擎</span></div></header>
+<section aria-label="数据新鲜度" class="freshness"><strong id="freshness" role="status">正在读取快照</strong><p id="clock"></p><p id="schedule">每小时约第 23 分钟更新；可能延迟或跳过，不是实时预警。</p><button id="reload" type="button">重新读取快照</button></section>
+<p class="notice">这是固定规则的演示，非通用自主 LLM Agent。所有建议均未执行；请核验官方信息。真实付款 0 · 净收入 $0。</p>
+<section><div class="section-head"><h2>合成生活样本</h2><p>位置、时间和预算均为虚构测试设定</p></div><div id="profiles" class="grid"></div></section>
+<section><div class="section-head"><h2>来源与完整性</h2><p>抓取失败不会被测试数据替代</p></div><div id="sources" class="grid sources"></div><p id="mapping"></p></section>
+<section><div class="section-head"><h2>事件与决策样例</h2><p id="counts"></p></div>
+<div class="filters"><label>生活样本 <select id="profile"><option value="all">全部样本</option></select></label><label>事件类型 <select id="kind"><option value="all">全部事件</option><option value="earthquake">地震</option><option value="weather">天气警报</option></select></label></div>
+<p id="empty"></p><div id="events" class="event-list"></div></section>
+<section><div class="section-head"><h2>提议与撤销历史</h2><p>保留发生时的判断；历史提议不代表当前有效</p></div><div id="history"></div></section>
+<footer><p id="memory"></p><p><a href="./data.json">公开快照 JSON</a> · <a href="./state/refresh.json">最近抓取回执</a> · <a href="./README.md">范围与限制</a> · <a href="https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions">云端运行记录</a></p>
+<p>静态页面 + 定期云端批处理 + 版本化状态。页面不运行 Python 后端，不收集个人信息，不接受付款或订单。</p></footer>
+<noscript><p>需要启用 JavaScript 查看决策。原始数据可从“公开快照 JSON”读取。</p></noscript>
+</main></body></html>

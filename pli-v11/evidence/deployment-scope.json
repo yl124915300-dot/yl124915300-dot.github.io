@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-19",
+  "source_commit": "d5f41fd700bdf94ddd29cd3ba8f8ba2904091255",
+  "base_commit": "93bde53319490f287dcce3b97c287656c89e104d",
+  "ci_run": 39204536766,
+  "verification": {
+    "rule_fixture_tests": 43,
+    "cloud_browser_checks": 14,
+    "independent_restore": "PASS"
+  },
+  "deployment_scope": "Add only pli-v11/ and dedicated new workflows; no PR merge and no existing file modification",
+  "unchanged_existing_blob_count": 160,
+  "paths": [
+    {
+      "path": ".github/workflows/pli-v11-hourly.yml",
+      "sha": "35c1b8f14349a09bd793c11e5f1b1a0b32734b2d"
+    },
+    {
+      "path": ".github/workflows/pli-v11-public.yml",
+      "sha": "f1701985351146a00a46821206da8cbba954162b"
+    },
+    {
+      "path": ".github/workflows/pli-v11-verify.yml",
+      "sha": "e026b734f0d4b768e4b3926547f92fc2f4835aaf"
+    },
+    {
+      "path": "pli-v11/README.md",
+      "sha": "d0e4a6f624940e11d3b23f261508a7481826ea2a"
+    },
+    {
+      "path": "pli-v11/app.js",
+      "sha": "ecfa0b658e5a8b4426bf3a0c5286c4644b445e5c"
+    },
+    {
+      "path": "pli-v11/browser.cjs",
+      "sha": "9db945703b84ba8ecc5b3302fec62d1add27408e"
+    },
+    {
+      "path": "pli-v11/cloud_pages.py",
+      "sha": "3032c664e5803ad78503657cb03c3e113c39d3e3"
+    },
+    {
+      "path": "pli-v11/data.json",
+      "sha": "1460d6a9db0e9990283a69a91f0e14d3f61116c3"
+    },
+    {
+      "path": "pli-v11/engine.py",
+      "sha": "9c81d00b36a20c5d92164fe6c74594464b109444"
+    },
+    {
+      "path": "pli-v11/evidence/browser.json",
+      "sha": "d83bf8216988833cbe1a5b9286c8eb1dbed41bc0"
+    },
+    {
+      "path": "pli-v11/evidence/desktop.png",
+      "sha": "b252053a3a7aa63975b45240814f9e6d4e1ac493"
+    },
+    {
+      "path": "pli-v11/evidence/mobile.png",
+      "sha": "51b0d60eeab53ce631600ebf9a447dd2f47b6e29"
+    },
+    {
+      "path": "pli-v11/evidence/pages-config.json",
+      "sha": "969318a2a37078f1d3e1a60e6459432086779791"
+    },
+    {
+      "path": "pli-v11/evidence/tests.json",
+      "sha": "c9015462409fac59ed79992d9c450f05dff63155"
+    },
+    {
+      "path": "pli-v11/index.html",
+      "sha": "f360b117041ff90f950e30fa05ac788f5c371ca3"
+    },
+    {
+      "path": "pli-v11/qa.py",
+      "sha": "41ccc3e97c53e429591083412bc20ee75b6071ec"
+    },
+    {
+      "path": "pli-v11/state/memory.json",
+      "sha": "7f977c80fd2d29fffd70358cec3db04ea6074cd5"
+    },
+    {
+      "path": "pli-v11/state/refresh.json",
+      "sha": "1bc12b03e7fa55c4b9fc3e92fbbbdc091b1c0d76"
+    },
+    {
+      "path": "pli-v11/style.css",
+      "sha": "aa46d97c2911bb35e87772ae1e3c5de357bf7ecc"
+    },
+    {
+      "path": "pli-v11/test_engine.py",
+      "sha": "d5bd289608eb0a0d992c099e82d22f1dfd90fad2"
+    },
+    {
+      "path": "pli-v11/wait_public.py",
+      "sha": "ca2e12400907936f00055777832a42e2b9e8325c"
+    }
+  ]
+}
