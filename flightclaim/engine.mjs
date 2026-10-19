@@ -56,7 +56,10 @@ export function assess(raw = {}) {
     refund = true;
     add("DELAY_REFUND_OPTION", "A five-hour-or-longer departure delay may allow reimbursement of unused travel if you choose not to travel.");
   }
-  if (departure !== null && departure >= 2) care = true;
+  // Assistance threshold depends on distance: 2h / 3h / 4h under Article 6.
+  const careThreshold = x.distance === "short" ? 2 : (x.distance === "medium" || (x.distance === "long" && x.intraEU === "yes")) ? 3 : x.distance === "long" ? 4 : null;
+  if (departure !== null && careThreshold !== null && departure >= careThreshold) care = true;
+  else if (departure !== null && departure >= 2 && careThreshold === null) questions.push("Distance is needed to evaluate the 2/3/4-hour duty-of-care threshold.");
   if (disruption === "cancellation") {
     refund = true;
     care = true;
