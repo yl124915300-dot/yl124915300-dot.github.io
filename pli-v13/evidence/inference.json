@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
   "runner": "ubuntu-24.04 standard public repository",
-  "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39212268952",
-  "source_commit": "d205728bb709ff04a59bca2e558e5b69d9e1c1c9",
+  "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39213166104",
+  "source_commit": "9fd73ca9380569132c30b9cb9b8ab21f6b7430e1",
   "realTransactions": 0,
   "netIncomeUSD": 0,
   "realtime": false,
@@ -30,13 +30,13 @@
     "bytes": 11544,
     "sha256": "5de36594c10839788a8c589443a8ef9d8b8d17c65a1b5807206ae037fc36c6bd"
   },
-  "prompt_sha256": "3f0f94af2ccd7a6574f8b068c68da25cb3ce190bc0413baceb7aaf7133dfb68a",
-  "cases_sha256": "0258b838e16b6deb5c562a87bf1b43f24b73028bea5ff641ca374b847f6ff67a",
-  "schema_sha256": "549a16a1399555d0b177b93c6c80027256c4e22140d5bb0d7b3a6a012e7fae28",
-  "inference_seconds": 291.95,
+  "prompt_sha256": "746c53e136f0d4b5db00dd60e18fe0d83b625a2636613bf0c821ad30cecabcc4",
+  "cases_sha256": "7d33775f99600b227dd225405e7a05ae4cba520779599b9f17919e71e3906a6b",
+  "schema_sha256": "eb597ff15759fbad487c990febe75866902198e4ce72430de892d4b14130c252",
+  "inference_seconds": 414.372,
   "attempts": 10,
   "parsed_outputs": 10,
-  "validated_outputs": 9,
-  "model_process_max_rss_kb": 6104400,
-  "total_seconds": 312.532
+  "validated_outputs": 10,
+  "model_process_max_rss_kb": 4984740,
+  "total_seconds": 426.712
 }

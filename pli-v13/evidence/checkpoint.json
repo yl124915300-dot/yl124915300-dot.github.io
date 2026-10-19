@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-19T06:51:06.000Z",
+  "at": "2026-10-19T07:00:10.000Z",
   "memory": {
     "version": "1.2.0",
     "classification": "SYNTHETIC",
@@ -12,8 +12,8 @@
           "evidence": "SYNTHETIC",
           "source": "user_simulation",
           "operation": "simulate",
-          "at": "2026-10-19T06:51:06.000Z",
-          "expiresAt": "2026-10-19T08:51:06.000Z",
+          "at": "2026-10-19T07:00:10.000Z",
+          "expiresAt": "2026-10-19T09:00:10.000Z",
           "profileIds": [
             "S1"
           ],
@@ -24,99 +24,30 @@
             "blocked": true
           }
         },
-        "observedAt": "2026-10-19T06:51:06.000Z"
+        "observedAt": "2026-10-19T07:00:10.000Z"
       },
       {
         "event": {
-          "id": "v03_0",
+          "id": "w02_0",
           "kind": "plan",
           "classification": "SYNTHETIC",
           "evidence": "SYNTHETIC",
           "source": "user_simulation",
           "operation": "simulate",
-          "at": "2026-10-19T06:51:06.000Z",
-          "expiresAt": "2026-10-19T08:51:06.000Z",
+          "at": "2026-10-19T07:00:10.000Z",
+          "expiresAt": "2026-10-19T09:00:10.000Z",
           "profileIds": [
             "S1"
           ],
           "county": "*",
-          "text": "Check if the community kitchen session is still available for attendance after the restriction is lifted",
+          "text": "Simulate purchasing a badge from the campus printer to minimize costs.",
           "payload": {
-            "amountCents": 1400,
-            "category": "household",
-            "slot": "v03"
+            "amountCents": 600,
+            "category": "study",
+            "slot": "w02"
           }
         },
-        "observedAt": "2026-10-19T06:51:06.000Z"
-      },
-      {
-        "event": {
-          "id": "v04_0",
-          "kind": "plan",
-          "classification": "SYNTHETIC",
-          "evidence": "SYNTHETIC",
-          "source": "user_simulation",
-          "operation": "simulate",
-          "at": "2026-10-19T06:51:06.000Z",
-          "expiresAt": "2026-10-19T08:51:06.000Z",
-          "profileIds": [
-            "S1"
-          ],
-          "county": "*",
-          "text": "Simulate using the community workspace for the interview, assuming no additional costs beyond the $12 minimum if the cafe is chosen.",
-          "payload": {
-            "amountCents": 0,
-            "category": "work",
-            "slot": "v04"
-          }
-        },
-        "observedAt": "2026-10-19T06:51:06.000Z"
-      },
-      {
-        "event": {
-          "id": "v04_1",
-          "kind": "plan",
-          "classification": "SYNTHETIC",
-          "evidence": "SYNTHETIC",
-          "source": "user_simulation",
-          "operation": "simulate",
-          "at": "2026-10-19T06:51:06.000Z",
-          "expiresAt": "2026-10-19T08:51:06.000Z",
-          "profileIds": [
-            "S1"
-          ],
-          "county": "*",
-          "text": "Simulate using the cafe for the interview, assuming the $12 minimum is covered by the remaining budget.",
-          "payload": {
-            "amountCents": 1200,
-            "category": "work",
-            "slot": "v04"
-          }
-        },
-        "observedAt": "2026-10-19T06:51:06.000Z"
-      },
-      {
-        "event": {
-          "id": "v09_0",
-          "kind": "plan",
-          "classification": "SYNTHETIC",
-          "evidence": "SYNTHETIC",
-          "source": "user_simulation",
-          "operation": "simulate",
-          "at": "2026-10-19T06:51:06.000Z",
-          "expiresAt": "2026-10-19T08:51:06.000Z",
-          "profileIds": [
-            "S1"
-          ],
-          "county": "*",
-          "text": "Assess if the $95 hotel quote fits within the remaining budget of $100.0",
-          "payload": {
-            "amountCents": 9500,
-            "category": "travel",
-            "slot": "v09"
-          }
-        },
-        "observedAt": "2026-10-19T06:51:06.000Z"
+        "observedAt": "2026-10-19T07:00:10.000Z"
       }
     ]
   }
