@@ -32,6 +32,6 @@ try{
  }
  el("stage").addEventListener("input",e=>render(Number(e.target.value)));el("case").addEventListener("change",e=>render(Number(e.target.value)));el("previous").addEventListener("click",()=>render(stage-1));el("next").addEventListener("click",()=>render(stage+1));
  put("cron","真实 schedule 记录："+(audit.scheduleCount??"未知")+"；V1.1 定时成功："+(audit.scheduleVerified?"已核验":"未证实")+"。核查于 "+audit.checkedAt+"。push 不计作 cron。");
- const age=audit.snapshotAt?(Date.now()-Date.parse(audit.snapshotAt))/3600000:NaN;const stale=!Number.isFinite(age)||age>2;put("freshness",(stale?"STALE / 数据已过期或时效未知":"FRESH / 两小时以内")+" · 快照 "+(audit.snapshotAt??"未知")+" · 当前年龄 "+(Number.isFinite(age)?age.toFixed(2)+" 小时":"未知"));el("freshness").className=stale?"warning":"";
+ function refreshAge(){const age=audit.snapshotAt?(Date.now()-Date.parse(audit.snapshotAt))/3600000:NaN;const stale=!Number.isFinite(age)||age>2;put("freshness",(stale?"STALE / 数据已过期或时效未知":"FRESH / 两小时以内")+" · 快照 "+(audit.snapshotAt??"未知")+" · 当前年龄 "+(Number.isFinite(age)?age.toFixed(2)+" 小时":"未知"));el("freshness").className=stale?"warning":"";}refreshAge();setInterval(refreshAge,60000);window.addEventListener("focus",refreshAge);document.addEventListener("visibilitychange",refreshAge);
  render(1);put("health","已载入十项原始证据。模型可能犯错，规则通过不代表语义正确。");el("health").dataset.ready="true";
 }catch(e){put("health","NO_GO：证据载入失败："+e.message);el("health").dataset.ready="false";}

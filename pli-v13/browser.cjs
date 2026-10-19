@@ -27,6 +27,7 @@ const {chromium}=require("playwright");const fs=require("node:fs");const path=re
   await page.route("**/pli-v13/evidence/results.json",async route=>{const r=await route.fetch();const rows=await r.json();rows[0].model_output.candidates[0].description='<img id="xss-proof" src=x onerror=alert(1)>';await route.fulfill({json:rows});});
   await page.reload({waitUntil:"networkidle"});await page.locator('#health[data-ready="true"]').waitFor();
   check(device+" model output XSS inert",dialogs===0&&await page.locator("#xss-proof").count()===0&&(await page.locator("#candidates").textContent()).includes("<img"));
+  const audit=JSON.parse(fs.readFileSync(path.join(root,"evidence/v11-audit.json"),"utf8"));await page.evaluate(at=>{Date.now=()=>Date.parse(at)+7201000;window.dispatchEvent(new Event("focus"));},audit.snapshotAt);check(device+" snapshot becomes stale after two hours while page stays open",(await page.locator("#freshness").textContent()).includes("STALE"));
   await context.close();
  }
  await browser.close();report.passed=report.checks.filter(x=>x.pass).length;report.failed=report.checks.filter(x=>!x.pass).length;fs.mkdirSync(path.join(root,"evidence"),{recursive:true});fs.writeFileSync(path.join(root,"evidence",(publicMode?"public-":"")+"browser.json"),JSON.stringify(report,null,2));console.log(JSON.stringify(report));if(report.failed)process.exitCode=1;
