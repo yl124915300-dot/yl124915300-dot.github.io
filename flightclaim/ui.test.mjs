@@ -80,3 +80,25 @@ test("anonymous wizard validates, evaluates EU delay, prepares letter and create
   assert.equal($("#wizardForm").elements.namedItem("arrivalDelay").value, "", "previous delay cleared");
   assert.equal($("#letterText").value, "", "old claim letter removed");
 });
+
+test("legacy cancellation drafts infer rerouting only with both timings and do not reuse stale selections", () => {
+  const base = { scope: "eu_departure", disruption: "cancellation", cause: "airline_technical",
+    cancellationNoticeDays: "2", distance: "short", flightNumber: "QA-LEGACY" };
+  const cases = [
+    { ref: "FC-LOCAL-LEGACY1", createdAt: "2026-10-19T00:00:00Z", answers: { ...base, rerouteEarlyDeparture: "2", rerouteArrivalLate: "5" }, status: "DRAFT" },
+    { ref: "FC-LOCAL-LEGACY2", createdAt: "2026-10-19T00:01:00Z", answers: { ...base, flightNumber: "QA-UNKNOWN", rerouteEarlyDeparture: "", rerouteArrivalLate: "" }, status: "DRAFT" }
+  ];
+  localStorage.setItem("flightclaim_v0_local_drafts", JSON.stringify(cases));
+  document.querySelector('nav [data-nav="drafts"]').click();
+  const cards = [...document.querySelectorAll("#draftList .draft")];
+  assert.equal(cards.length, 2);
+  const open = card => [...card.querySelectorAll("button")].find(b => b.textContent === "Open in checker").click();
+  open(cards[0]);
+  assert.equal($("#wizardForm").elements.namedItem("rerouteOffered").value, "yes");
+  assert.match($("#resultState").textContent, /Potential claim/);
+  document.querySelector('nav [data-nav="drafts"]').click();
+  open([...document.querySelectorAll("#draftList .draft")][1]);
+  assert.equal($("#wizardForm").elements.namedItem("rerouteOffered").value, "unknown");
+  assert.match($("#resultState").textContent, /Needs individual review/);
+  localStorage.removeItem("flightclaim_v0_local_drafts");
+});
