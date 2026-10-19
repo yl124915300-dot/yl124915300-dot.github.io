@@ -1,0 +1,86 @@
+{
+  "sourceRun": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39218946987",
+  "sourceCommit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+  "arms": [
+    {
+      "arm": "baseline",
+      "hardware": {
+        "cpu_count": 4,
+        "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+        "meminfo": "MemTotal:       16373452 kB",
+        "runner": "GitHub Actions 1000000604",
+        "cpu": "model name\t: AMD EPYC 7763 64-Core Processor"
+      },
+      "inferenceSeconds": 1190.146,
+      "totalSeconds": 1205.683,
+      "childrenResources": {
+        "max_rss_kib": 5062728,
+        "user_cpu_seconds": 4736.539,
+        "system_cpu_seconds": 4.098
+      }
+    },
+    {
+      "arm": "fixed-sampling",
+      "hardware": {
+        "cpu_count": 4,
+        "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+        "meminfo": "MemTotal:       16373452 kB",
+        "runner": "GitHub Actions 1000000605",
+        "cpu": "model name\t: AMD EPYC 9V74 80-Core Processor"
+      },
+      "inferenceSeconds": 1393.303,
+      "totalSeconds": 1406.457,
+      "childrenResources": {
+        "max_rss_kib": 8533500,
+        "user_cpu_seconds": 5542.171,
+        "system_cpu_seconds": 4.831
+      }
+    },
+    {
+      "arm": "fixed-greedy",
+      "hardware": {
+        "cpu_count": 4,
+        "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+        "meminfo": "MemTotal:       16373452 kB",
+        "runner": "GitHub Actions 1000000603",
+        "cpu": "model name\t: AMD EPYC 9V45 96-Core Processor"
+      },
+      "inferenceSeconds": 656.904,
+      "totalSeconds": 671.089,
+      "childrenResources": {
+        "max_rss_kib": 8545120,
+        "user_cpu_seconds": 2611.691,
+        "system_cpu_seconds": 2.79
+      }
+    }
+  ],
+  "totalInferenceSeconds": 3240.353,
+  "totalChildrenCpuSeconds": 12902.12,
+  "maxChildRssGiB": 8.149,
+  "actionsTiming": {
+    "billable": {
+      "UBUNTU": {
+        "total_ms": 0,
+        "jobs": 3,
+        "job_runs": [
+          {
+            "job_id": 117949426670,
+            "duration_ms": 0
+          },
+          {
+            "job_id": 117949427042,
+            "duration_ms": 0
+          },
+          {
+            "job_id": 117949427120,
+            "duration_ms": 0
+          }
+        ]
+      }
+    },
+    "run_duration_ms": 1417000
+  },
+  "interpretation": "GitHub reports billable UBUNTU total_ms=0 for these 3 public standard-runner jobs; run_duration_ms is wall time and is not model inference time.",
+  "realTransactions": 0,
+  "netReceiptsUSD": 0
+}
