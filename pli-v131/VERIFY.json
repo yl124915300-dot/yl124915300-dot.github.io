@@ -1,0 +1,7 @@
+{
+  "inferenceRun": 39218946987,
+  "sourceCommit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+  "completedModelResponses": 90,
+  "independentSemanticReviewerCount": 0,
+  "purpose": "Separate cloud restoration and anonymous preview QA; no new model calls"
+}
