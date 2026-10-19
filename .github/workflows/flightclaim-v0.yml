@@ -30,6 +30,10 @@ jobs:
           node --check flightclaim/engine.test.mjs
       - name: Run deterministic EU261 scenarios
         run: node --test flightclaim/engine.test.mjs
+      - name: Install isolated DOM browser simulator
+        run: npm install --prefix flightclaim --no-save --ignore-scripts --no-audit --no-fund jsdom@24.1.3
+      - name: Run real UI wizard and local draft integration test
+        run: node --test flightclaim/ui.test.mjs
       - name: Verify zero-server-submission pilot contract
         run: |
           node --input-type=module -e '
