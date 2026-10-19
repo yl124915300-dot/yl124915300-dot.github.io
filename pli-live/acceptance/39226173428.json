@@ -1,0 +1,100 @@
+{
+  "http": {
+    "at": "2026-10-19T08:56:43.668604+00:00",
+    "files": {
+      "app.js": {
+        "matches": true,
+        "sha256": "da9f73353d05e340b0c2c8e2aa3b6cb4123514ca93c14924116ce6262f2ad831",
+        "status": 200
+      },
+      "data.json": {
+        "matches": true,
+        "sha256": "ccc40ac5e30db81023844d2e3acf2963c835dbe4a69958a683b04fd4a8efb8ec",
+        "status": 200
+      },
+      "index.html": {
+        "matches": true,
+        "sha256": "6de1d4d5418053e66107e7b47632bdd2daa081dc565f97c72daaa18ded261b16",
+        "status": 200
+      },
+      "style.css": {
+        "matches": true,
+        "sha256": "afaf056efcffaafeff32011aeb916029877639e62f5946f1a8f26d3d3312e22a",
+        "status": 200
+      }
+    },
+    "pages": {
+      "commit": "2ca932d4401a76349c85ad72adc6e6307f66ca0d",
+      "created_at": "2026-10-19T08:55:35Z",
+      "duration": 62758,
+      "error": {
+        "message": null
+      },
+      "pusher": {
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+        "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+        "gravatar_id": "",
+        "html_url": "https://github.com/apps/github-actions",
+        "id": 41898282,
+        "login": "github-actions[bot]",
+        "node_id": "MDM6Qm90NDE4OTgyODI=",
+        "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+        "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+        "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+        "site_admin": false,
+        "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+        "type": "Bot",
+        "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+        "user_view_type": "public"
+      },
+      "status": "built",
+      "updated_at": "2026-10-19T08:56:37Z",
+      "url": "https://api.github.com/repos/yl124915300-dot/yl124915300-dot.github.io/pages/builds/1296539304"
+    },
+    "run_id": "39226173428",
+    "status": "HTTP_PASS_BROWSER_PENDING",
+    "url": "https://yl124915300-dot.github.io/pli-live/"
+  },
+  "browser": {
+    "pass": true,
+    "classification": "ANONYMOUS_PUBLIC_REAL_BROWSER",
+    "run_id": "39226173428",
+    "url": "https://yl124915300-dot.github.io/pli-live/?accept=39226173428",
+    "desktop": true,
+    "mobile": true,
+    "checks": [
+      {
+        "viewport": "desktop",
+        "real_valid_proposals": 1,
+        "overflow": false,
+        "js_errors": []
+      },
+      {
+        "viewport": "mobile",
+        "real_valid_proposals": 1,
+        "overflow": false,
+        "js_errors": []
+      }
+    ],
+    "synthetic_ui_checks": [
+      {
+        "viewport": "desktop",
+        "case": "SYNTHETIC_OLD_SNAPSHOT",
+        "pass": true
+      },
+      {
+        "viewport": "mobile",
+        "case": "SYNTHETIC_OLD_SNAPSHOT",
+        "pass": true
+      },
+      {
+        "case": "SYNTHETIC_NETWORK_FAILURE",
+        "pass": true
+      }
+    ]
+  }
+}
