@@ -5,9 +5,9 @@ from urllib.request import Request,urlopen
 ROOT=Path(__file__).resolve().parent
 OUT=ROOT/"evidence";OUT.mkdir(exist_ok=True)
 TMP=Path("/tmp/pli-v13");TMP.mkdir(exist_ok=True)
-MODEL_REV="91cad51170dc346986eccefdc2dd33a9da36ead9"
-MODEL_FILE="qwen2.5-1.5b-instruct-q4_k_m.gguf"
-MODEL_BASE="https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/"+MODEL_REV+"/"
+MODEL_REV="bc640142c66e1fdd12af0bd68f40445458f3869b"
+MODEL_FILE="Qwen3-4B-Q4_K_M.gguf"
+MODEL_BASE="https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/"+MODEL_REV+"/"
 BINARY="https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-ubuntu-x64.tar.gz"
 def sha(p):
  h=hashlib.sha256()
@@ -28,7 +28,7 @@ def get(url,target,limit,expected=None):
  if expected and digest!=expected:raise RuntimeError("SHA256_MISMATCH")
  return {"url":url,"bytes":n,"sha256":digest}
 started=time.time()
-receipt={"status":"NO_GO","model":"Qwen/Qwen2.5-1.5B-Instruct-GGUF","quantization":"Q4_K_M","license":"Apache-2.0","revision":MODEL_REV,"runner":"ubuntu-24.04 standard public repository","run_url":"https://github.com/"+os.environ["GITHUB_REPOSITORY"]+"/actions/runs/"+os.environ["GITHUB_RUN_ID"],"source_commit":os.environ["GITHUB_SHA"],"realTransactions":0,"netIncomeUSD":0,"realtime":False}
+receipt={"status":"NO_GO","model":"Qwen/Qwen3-4B-GGUF","quantization":"Q4_K_M","license":"Apache-2.0","revision":MODEL_REV,"runner":"ubuntu-24.04 standard public repository","run_url":"https://github.com/"+os.environ["GITHUB_REPOSITORY"]+"/actions/runs/"+os.environ["GITHUB_RUN_ID"],"source_commit":os.environ["GITHUB_SHA"],"realTransactions":0,"netIncomeUSD":0,"realtime":False}
 save("inference.json",receipt)
 server=None;rows=[]
 try:
@@ -36,7 +36,7 @@ try:
  receipt["hardware"]={"cpu_count":os.cpu_count(),"platform":platform.platform(),"meminfo":Path("/proc/meminfo").read_text().splitlines()[0]}
  receipt["binary"]=get(BINARY,TMP/"llama.tar.gz",30_000_000,"cf07c1c112d709bd67e522017471de57ed0ec8bea031d732c5422351c07f65ac")
  with tarfile.open(TMP/"llama.tar.gz") as tf:tf.extractall(TMP/"bin",filter="data")
- receipt["weights"]=get(MODEL_BASE+MODEL_FILE,TMP/"model.gguf",1_200_000_000,"6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e")
+ receipt["weights"]=get(MODEL_BASE+MODEL_FILE,TMP/"model.gguf",2_600_000_000,"7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5")
  receipt["license_file"]=get(MODEL_BASE+"LICENSE",OUT/"MODEL-LICENSE.txt",100000)
  assert "Apache License" in (OUT/"MODEL-LICENSE.txt").read_text()
  exe=next((TMP/"bin").rglob("llama-server"))
@@ -62,9 +62,11 @@ try:
  for case in cases:
   if time.time()-infer_start>900:raise RuntimeError("INFERENCE_BUDGET_900_SECONDS")
   state=json.loads(subprocess.check_output(["node",str(ROOT/"step.mjs"),"state",now],input=json.dumps(checkpoint),text=True))
-  user=json.dumps({"event":case,"state":state["people"]["S1"],"permissions":"SYNTHETIC simulation only; all external actions denied"},ensure_ascii=False)
-  formatted="<|im_start|>system\n"+prompt+"<|im_end|>\n<|im_start|>user\n"+user+"<|im_end|>\n<|im_start|>assistant\n"
-  request={"prompt":formatted,"temperature":0,"seed":1313,"n_predict":640,"json_schema":schema,"cache_prompt":False,"stop":["<|im_end|>"],"stream":False}
+  person=state["people"]["S1"]
+  context={"profile":"SYNTHETIC S1","budget_dollars":person["budgetCents"]/100,"available_dollars":person["availableCents"]/100,"reserved_dollars":person["reservedCents"]/100,"blocked_categories":[c["category"] for c in person["constraints"].values() if c["active"]],"existing_plans":[{"text":p["text"],"cost_dollars":p["amountCents"]/100,"status":p["status"]} for p in person["plans"].values()]}
+  user=json.dumps({"event":case,"state":context,"permissions":"SYNTHETIC simulation only; all external actions denied"},ensure_ascii=False)
+  formatted="<|im_start|>system\n"+prompt+"<|im_end|>\n<|im_start|>user\n"+user+"<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+  request={"prompt":formatted,"temperature":0.7,"top_p":0.8,"top_k":20,"min_p":0,"presence_penalty":1.5,"seed":1313,"n_predict":640,"json_schema":schema,"cache_prompt":False,"stop":["<|im_end|>"],"stream":False}
   row={"input":case,"request":request,"before":state,"checkpoint_before":checkpoint,"at":now};t=time.time()
   try:
    with urlopen(Request("http://127.0.0.1:8091/completion",data=json.dumps(request).encode(),headers={"Content-Type":"application/json"}),timeout=100) as r:response=json.load(r)

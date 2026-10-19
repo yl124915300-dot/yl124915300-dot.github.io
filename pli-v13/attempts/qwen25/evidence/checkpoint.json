@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-19T06:45:33.000Z",
+  "memory": {
+    "version": "1.2.0",
+    "classification": "SYNTHETIC",
+    "journal": [
+      {
+        "event": {
+          "id": "initial_household_constraint",
+          "kind": "constraint",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T06:45:33.000Z",
+          "expiresAt": "2026-10-19T08:45:33.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC household activity is blocked pending clarification.",
+          "payload": {
+            "category": "household",
+            "blocked": true
+          }
+        },
+        "observedAt": "2026-10-19T06:45:33.000Z"
+      }
+    ]
+  }
+}

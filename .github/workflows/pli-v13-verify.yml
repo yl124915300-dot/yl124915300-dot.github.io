@@ -2,7 +2,7 @@ name: PLI V1.3 bounded real LLM experiment
 on:
   push:
     branches: [pli-v13-20261019]
-    paths: ['pli-v13/cases.json', 'pli-v13/run.py', 'pli-v13/gate.mjs', 'pli-v13/step.mjs', 'pli-v13/schema.json', 'pli-v13/prompt.txt', '.github/workflows/pli-v13-verify.yml']
+    paths: ['pli-v13/cases.json']
 permissions:
   contents: read
 concurrency:
