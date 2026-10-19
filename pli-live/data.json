@@ -1,7 +1,7 @@
 {
   "autonomous_real_affairs": "NO_GO",
   "commercial_kpi": "NOT_MET",
-  "generated_at": "2026-10-19T08:53:12.896440+00:00",
+  "generated_at": "2026-10-19T08:55:07.694103+00:00",
   "journal": [
     {
       "at": "2026-10-19T08:53:12.896440+00:00",
@@ -140,7 +140,7 @@
       "cost_cents": 0,
       "decision_method": "PRESET_DETERMINISTIC_RULE",
       "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
-      "evidence_fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "evidence_fetched_at": "2026-10-19T08:55:07.694103+00:00",
       "evidence_url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
       "external_execution": false,
       "goal": "检查营业影响",
@@ -159,7 +159,7 @@
         "真实地点及个人风险",
         "交通、价格、营业影响均未知"
       ],
-      "valid_until": "2026-10-19T10:53:12.896440+00:00"
+      "valid_until": "2026-10-19T10:55:07.694103+00:00"
     }
   ],
   "real_transactions": 0,
@@ -190,16 +190,43 @@
       "state_payload_sha256": "0af40af200f58082915ecdddead0377bd18469fe95c21f89789b147c377ebc7c",
       "transitions": 1,
       "unchanged_proposals": 0
+    },
+    {
+      "active_proposals": 1,
+      "at": "2026-10-19T08:55:07.694103+00:00",
+      "before_state_sha256": "34e1f5b17b8e6123c3127c506f77377f8a638075221066aba54f33532c911189",
+      "decision_method": "PRESET_DETERMINISTIC_RULE",
+      "duplicate_input_events": 0,
+      "event": "workflow_dispatch",
+      "event_count": 250,
+      "id": "39226173428",
+      "implementation_commit": "7cce2f3e123a85093d23cfb66279132ff5c79c0c",
+      "journal_after": 1,
+      "journal_before": 1,
+      "llm_status": "LLM_NOT_AUTONOMOUS",
+      "net_receipts_usd": 0,
+      "phase": "second",
+      "real_transactions": 0,
+      "restored_from_run": "39225935486",
+      "restored_state_file_sha256": "772d5ee72576ed51586f2792f38a8a5872444d1c66deda050ab193a6b54dbf28",
+      "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39226173428",
+      "source_health": {
+        "NWS": true,
+        "USGS": true
+      },
+      "state_payload_sha256": "4e8f0bbbed419eaa72257b3ccf4879766080a76c777c13396afceee44ead70c0",
+      "transitions": 0,
+      "unchanged_proposals": 1
     }
   ],
   "schedule_audit": {
     "all_repository_schedule_total": 0,
-    "at": "2026-10-19T08:53:12.896440+00:00",
+    "at": "2026-10-19T08:55:07.694103+00:00",
     "continuous_schedule": "NOT_OBSERVED",
     "pli_live_schedule_observed": 0,
     "queried_page_limit": 100,
     "schedule_receipts": [],
-    "v11_age_seconds": 12312,
+    "v11_age_seconds": 12427,
     "v11_generated_at": "2026-10-19T05:28:00.692226+00:00",
     "v11_schedule_observed": 0
   },
@@ -208,25 +235,25 @@
     "NWS": {
       "cache_age": "0",
       "feature_count": 22,
-      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
-      "fetched_epoch": 1792399992.89644,
+      "fetched_at": "2026-10-19T08:55:07.694103+00:00",
+      "fetched_epoch": 1792400107.6941028,
       "final_url": "https://api.weather.gov/alerts/active?area=CA,WA,NY,FL,IL",
-      "http_date": "Mon, 19 Oct 2026 08:53:13 GMT",
+      "http_date": "Mon, 19 Oct 2026 08:55:08 GMT",
       "http_status": 200,
       "ok": true,
       "sha256": "26a49ccbd5878bc0d8915c1dabdef8a1230e2b3be23067cb31a154794aea49f2",
       "url": "https://api.weather.gov/alerts/active?area=CA,WA,NY,FL,IL"
     },
     "USGS": {
-      "cache_age": "15",
-      "feature_count": 226,
-      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
-      "fetched_epoch": 1792399992.89644,
+      "cache_age": "3",
+      "feature_count": 227,
+      "fetched_at": "2026-10-19T08:55:07.694103+00:00",
+      "fetched_epoch": 1792400107.6941028,
       "final_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson",
-      "http_date": "Mon, 19 Oct 2026 08:52:58 GMT",
+      "http_date": "Mon, 19 Oct 2026 08:55:05 GMT",
       "http_status": 200,
       "ok": true,
-      "sha256": "8e30a137fa5bc1f399c9125719937fb952a806a625ccd244fd64bac07abcfb43",
+      "sha256": "74194ec05562b7f8a58cefcbcca93c51633b43c3974cf3d56a67149bf933c44f",
       "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
     }
   },
@@ -235,7 +262,7 @@
     "definition": "Real NWS ID absent from V1.1 snapshot and all prior live runs; no real IDs in synthetic unit fixtures",
     "events": [
       {
-        "id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+        "id": "urn:oid:2.49.0.1.840.0.06e1ad429f1df13ec589a0dac62f6e36fb77832c.002.1",
         "matches": [
           {
             "basis": {
@@ -244,18 +271,18 @@
               "method": "official_point_zones_or_exact_county",
               "zones": []
             },
-            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "event_id": "urn:oid:2.49.0.1.840.0.06e1ad429f1df13ec589a0dac62f6e36fb77832c.002.1",
             "matched": false,
             "role_id": "S1"
           },
           {
             "basis": {
               "county_exact": false,
-              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+              "mapping_sha256": "17819c1fac4c95d4c75cd57aa72066a6486727a6e0b8b74e09767edb85d33cec",
               "method": "official_point_zones_or_exact_county",
               "zones": []
             },
-            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "event_id": "urn:oid:2.49.0.1.840.0.06e1ad429f1df13ec589a0dac62f6e36fb77832c.002.1",
             "matched": false,
             "role_id": "S2"
           },
@@ -266,18 +293,18 @@
               "method": "official_point_zones_or_exact_county",
               "zones": []
             },
-            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "event_id": "urn:oid:2.49.0.1.840.0.06e1ad429f1df13ec589a0dac62f6e36fb77832c.002.1",
             "matched": false,
             "role_id": "S3"
           },
           {
             "basis": {
               "county_exact": false,
-              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+              "mapping_sha256": "480421878287ff598ffe150d15963409bf18bce4d20b828e41b9e0adeee65f27",
               "method": "official_point_zones_or_exact_county",
               "zones": []
             },
-            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "event_id": "urn:oid:2.49.0.1.840.0.06e1ad429f1df13ec589a0dac62f6e36fb77832c.002.1",
             "matched": false,
             "role_id": "S4"
           },
@@ -288,7 +315,7 @@
               "method": "official_point_zones_or_exact_county",
               "zones": []
             },
-            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "event_id": "urn:oid:2.49.0.1.840.0.06e1ad429f1df13ec589a0dac62f6e36fb77832c.002.1",
             "matched": false,
             "role_id": "S5"
           },
@@ -299,305 +326,13 @@
               "method": "official_point_zones_or_exact_county",
               "zones": []
             },
-            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "event_id": "urn:oid:2.49.0.1.840.0.06e1ad429f1df13ec589a0dac62f6e36fb77832c.002.1",
             "matched": false,
             "role_id": "S6"
           }
         ],
-        "revision": "a7deca84772add8c729d8e4e93aef2e1e6ca67225b4b7da708eea807ea3d529a",
-        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1"
-      },
-      {
-        "id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
-        "matches": [
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
-            "matched": false,
-            "role_id": "S1"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
-            "matched": false,
-            "role_id": "S2"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
-            "matched": false,
-            "role_id": "S3"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
-            "matched": false,
-            "role_id": "S4"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
-            "matched": false,
-            "role_id": "S5"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
-            "matched": false,
-            "role_id": "S6"
-          }
-        ],
-        "revision": "ae759931dbc262a33c670c02b4a5d54751f7b5274b580871eb410643f9df733d",
-        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1"
-      },
-      {
-        "id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
-        "matches": [
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
-            "matched": false,
-            "role_id": "S1"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
-            "matched": false,
-            "role_id": "S2"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
-            "matched": false,
-            "role_id": "S3"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
-            "matched": false,
-            "role_id": "S4"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
-            "matched": false,
-            "role_id": "S5"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
-            "matched": false,
-            "role_id": "S6"
-          }
-        ],
-        "revision": "2f0f3e81826a8dd15001af7e98684dd99472e63a35f2ca29a8b0b21b63d1adef",
-        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2"
-      },
-      {
-        "id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
-        "matches": [
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
-            "matched": false,
-            "role_id": "S1"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
-            "matched": false,
-            "role_id": "S2"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
-            "matched": false,
-            "role_id": "S3"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
-            "matched": false,
-            "role_id": "S4"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
-            "matched": false,
-            "role_id": "S5"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
-            "matched": false,
-            "role_id": "S6"
-          }
-        ],
-        "revision": "96d026bd284e2cdc35c3484e3d1a6134de123fa8b58dd5142ed24a91ef48d0c6",
-        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2"
-      },
-      {
-        "id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
-        "matches": [
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
-            "matched": false,
-            "role_id": "S1"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
-            "matched": false,
-            "role_id": "S2"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
-            "matched": false,
-            "role_id": "S3"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
-            "matched": false,
-            "role_id": "S4"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
-            "matched": false,
-            "role_id": "S5"
-          },
-          {
-            "basis": {
-              "county_exact": false,
-              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
-              "method": "official_point_zones_or_exact_county",
-              "zones": []
-            },
-            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
-            "matched": false,
-            "role_id": "S6"
-          }
-        ],
-        "revision": "314c4b97478941a9c2788df90732fa7661a978e5bfdcba96f749fdd5268da0cf",
-        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3"
+        "revision": "0986776780c82da78851053dcab49952ab8b2d9968dee48560075bb884b13ea5",
+        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.06e1ad429f1df13ec589a0dac62f6e36fb77832c.002.1"
       }
     ],
     "status": "OBSERVED"
