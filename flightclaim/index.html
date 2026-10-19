@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a233a">
+  <meta name="description" content="Independent, free EU261 flight disruption self-help checker. Understand compensation, refunds and expense reimbursement separately; prepare an airline claim yourself. No account, no uploads, no payments.">
+  <meta name="robots" content="index,follow">
+  <title>FlightClaim Agent — Understand your flight rights</title>
+  <style>
+    :root { --navy:#0b233b; --deep:#05192b; --teal:#007d88; --ink:#172d3f; --muted:#5d7281; --bg:#f4f7fa; --line:#d8e3e9; --white:#fff; --danger:#9b4734; --gold:#c17a21; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; }
+    button,input,select,textarea { font:inherit; }
+    button { cursor:pointer; }
+    a { color:#005f77; text-underline-offset:3px; }
+    a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:3px solid #f2ab52; outline-offset:2px; }
+    header { background:var(--navy); color:white; position:sticky; top:0; z-index:20; box-shadow:0 8px 30px #071b2f18; }
+    .wrap { max-width:1100px; margin:auto; padding:0 24px; }
+    .header-row { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:15px 0; flex-wrap:wrap; }
+    .brand { font-family:Georgia,serif; letter-spacing:-.6px; font-size:24px; font-weight:700; color:white; text-decoration:none; }
+    .brand span { color:#84d9da; }
+    nav { display:flex; flex-wrap:wrap; gap:7px; align-items:center; }
+    nav button { border:1px solid transparent; color:#d3e7ed; background:transparent; border-radius:8px; padding:9px 11px; font-size:14px; }
+    nav button[aria-current="page"], nav button:hover { color:white; border-color:#416175; background:#24445a; }
+    .lang { color:white; border:1px solid #588190; background:transparent; border-radius:8px; padding:8px 10px; }
+    .banner { background:#dceff0; color:#134f5b; padding:12px 0; border-bottom:1px solid #b7d3d6; font-size:14px; }
+    main { min-height:65vh; }
+    .view { padding:52px 0 74px; }
+    .view[hidden], .step[hidden], .hide[hidden] { display:none !important; }
+    .hero { display:grid; grid-template-columns:1.3fr .7fr; align-items:center; gap:48px; padding:32px 0 40px; }
+    h1,h2,h3 { font-family:Georgia,"Times New Roman",serif; color:var(--navy); line-height:1.15; letter-spacing:-.5px; }
+    h1 { font-size:clamp(39px,5vw,66px); margin:12px 0 20px; }
+    h2 { font-size:clamp(30px,3.5vw,40px); margin:0 0 16px; }
+    h3 { font-size:24px; margin:0 0 12px; }
+    p { margin:12px 0; }
+    .eyebrow { letter-spacing:.17em; text-transform:uppercase; font-weight:800; font-size:12px; color:var(--teal); }
+    .lede { font-size:20px; line-height:1.5; max-width:650px; color:#3d5668; }
+    .hero-card { background:linear-gradient(145deg,#113a54,#06243b); color:#f5feff; padding:29px; border-radius:18px; box-shadow:0 20px 48px #102b3a29; }
+    .hero-card h3 { color:white; font-size:26px; }
+    .hero-card .step-number { display:inline-flex; justify-content:center; align-items:center; width:34px; height:34px; border:1px solid #76a0aa; border-radius:99px; margin-right:9px; }
+    .hero-card p { color:#cce0e8; margin:18px 0; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--line); background:white; color:var(--ink); border-radius:10px; min-height:44px; padding:11px 18px; font-weight:700; text-decoration:none; margin:5px 8px 5px 0; }
+    .btn:hover { filter:brightness(.96); }
+    .btn.primary { color:white; background:var(--teal); border-color:var(--teal); }
+    .btn.ghost { background:transparent; border-color:#cadce2; }
+    .btn.danger { color:var(--danger); border-color:#e7bbb2; }
+    .card { border:1px solid var(--line); background:white; border-radius:16px; padding:25px; box-shadow:0 7px 25px #14324a09; }
+    .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:22px; }
+    .grid2 { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .small { font-size:14px; color:var(--muted); }
+    .callout { border-left:4px solid var(--teal); padding:14px 18px; background:#eaf4f4; margin:20px 0; border-radius:0 10px 10px 0; }
+    .warning { border-left-color:var(--gold); background:#fff6e6; }
+    .critical { border-left-color:var(--danger); background:#fff3ee; }
+    .wizard { max-width:850px; margin:auto; }
+    .steps-meta { color:var(--teal); font-size:13px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; margin-bottom:8px; }
+    .progress-track { height:7px; background:#dce7eb; border-radius:50px; overflow:hidden; margin:0 0 30px; }
+    #progressFill { height:100%; width:20%; background:var(--teal); transition:width .2s; border-radius:50px; }
+    form { margin:0; }
+    .field { display:block; margin:20px 0; }
+    .field > span, .field legend { display:block; font-weight:750; margin-bottom:9px; }
+    input,select,textarea { width:100%; border:1px solid #b9ced6; background:white; border-radius:9px; padding:12px 14px; min-height:46px; color:var(--ink); }
+    textarea { min-height:210px; resize:vertical; font-size:14px; }
+    input::placeholder { color:#7e939e; }
+    .field-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .help { display:block; color:var(--muted); font-size:13px; margin-top:5px; font-weight:400; }
+    .wizard-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:28px; }
+    .section-title { padding-bottom:12px; border-bottom:1px solid var(--line); margin:34px 0 16px; }
+    .result-state { border:1px solid #b9d5d8; background:#ecf7f7; color:#125761; border-radius:12px; padding:18px; font-weight:800; font-size:19px; }
+    .result-state.review { border-color:#edcb98; background:#fff7e9; color:#735011; }
+    .result-state.unlikely { border-color:#efcbc4; background:#fff4ef; color:#913f35; }
+    .metric { background:#f4f8fa; padding:20px; border-radius:12px; border:1px solid var(--line); }
+    .metric b { display:block; font-size:18px; margin-bottom:5px; }
+    li { margin:8px 0; }
+    .tag { display:inline-block; padding:3px 9px; background:#e4f1f1; color:#185763; border-radius:10px; font:700 12px/1.9 system-ui; }
+    .mono { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px; overflow-wrap:anywhere; }
+    .draft { margin-bottom:15px; }
+    .draft-top { display:flex; gap:15px; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+    .draft select { max-width:265px; }
+    footer { background:var(--deep); padding:30px 0; color:#bfd5df; font-size:14px; }
+    footer a { color:#c1e5e5; }
+    .footer-links { display:flex; gap:16px; flex-wrap:wrap; }
+    #notice { min-height:20px; color:#135b63; font-weight:600; margin:12px 0; }
+    @media(max-width:820px) {
+      .hero { grid-template-columns:1fr; gap:18px; }
+      .grid3,.grid2 { grid-template-columns:1fr; }
+      .header-row { align-items:flex-start; }
+      .view { padding-top:28px; }
+      h1 { font-size:40px; }
+    }
+    @media(max-width:520px) { .wrap { padding:0 16px; } .field-row { grid-template-columns:1fr; } nav button { padding:8px; } .card { padding:18px; } .wizard-actions { flex-wrap:wrap; } }
+    @media print { header,nav,.banner,.no-print,footer { display:none !important; } .view { padding:0; } body { background:white; } }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap header-row">
+    <a class="brand" href="#home" data-nav="home">FlightClaim <span>Agent</span></a>
+    <nav aria-label="Primary">
+      <button type="button" data-nav="home" aria-current="page" data-i18n="navHome">Home</button>
+      <button type="button" data-nav="checker" data-i18n="navCheck">Check rights</button>
+      <button type="button" data-nav="drafts" data-i18n="navDrafts">My local drafts</button>
+      <button type="button" data-nav="guide" data-i18n="navGuide">Airline links</button>
+      <button type="button" data-nav="fees" data-i18n="navFees">Fees & privacy</button>
+      <button id="langSwitch" type="button" class="lang" aria-label="Switch interface language">中文</button>
+    </nav>
+  </div>
+</header>
+<div class="banner"><div class="wrap"><strong data-i18n="banner">Free passenger-rights self-help pilot.</strong> No airline affiliation · No online case submission · No payment or identity collection.</div></div>
+<main id="main">
+  <section class="view" id="view-home" data-view="home">
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">Air passenger rights / EU261</div>
+          <h1 data-i18n="heroTitle">Your flight changed.<br>Your rights shouldn't be a mystery.</h1>
+          <p class="lede" data-i18n="heroLead">Check whether EU flight disruption rules may apply, understand the difference between compensation and refunds, and prepare a claim you can submit yourself.</p>
+          <button type="button" class="btn primary" data-nav="checker" data-i18n="start">Start free check →</button>
+          <button type="button" class="btn ghost" data-nav="guide" data-i18n="officialLinks">Official airline links</button>
+          <p class="small">No account, no uploads, no payment. Answers stay in this browser until you explicitly save a local draft.</p>
+        </div>
+        <aside class="hero-card" aria-label="How it works">
+          <h3>From disruption to action</h3>
+          <p><span class="step-number">1</span> Answer a few flight questions</p>
+          <p><span class="step-number">2</span> Review an explainable, cautious result</p>
+          <p><span class="step-number">3</span> Prepare your evidence and submit directly to your airline</p>
+          <div class="tag">Independently operated self-help pilot</div>
+        </aside>
+      </div>
+      <h2>Know which right you are using</h2>
+      <div class="grid3">
+        <div class="card"><h3>Compensation</h3><p>Potential fixed-rate EU261 payment in some disruptions, subject to flight coverage, arrival delay, notice, cause and exceptions.</p><a href="#checker" data-nav="checker">Check potential eligibility →</a></div>
+        <div class="card"><h3>Ticket refund</h3><p>Reimbursement of eligible unused travel after certain cancellations or long departure delays. This is not the same as compensation.</p><a href="#guide" data-nav="guide">Understand the difference →</a></div>
+        <div class="card"><h3>Care expenses</h3><p>Meals, hotels and transfers may be covered in qualifying disruptions. Keep reasonable receipts and follow the airline's claim process.</p><a href="#guide" data-nav="guide">Official guidance →</a></div>
+      </div>
+      <div class="callout warning"><strong>Free direct filing:</strong> You can contact the operating airline directly without paying this website or a claims company. We do not file claims, negotiate with airlines or guarantee payment.</div>
+    </div>
+  </section>
+
+  <section class="view" id="view-checker" data-view="checker" hidden>
+    <div class="wrap wizard">
+      <div class="steps-meta" id="stepLabel">Step 1 of 5</div><div class="progress-track"><div id="progressFill"></div></div>
+      <form id="wizardForm" autocomplete="off" novalidate>
+        <section class="step" data-step="0">
+          <h2 data-i18n="step1">Where did your flight operate?</h2>
+          <p class="small">EU includes EEA countries and Switzerland for this preliminary scope check. On an inbound journey, the operating airline matters.</p>
+          <label class="field"><span>Flight scope *</span><select name="scope" required>
+            <option value="">Select your route coverage</option>
+            <option value="eu_departure">Departed EU / EEA / Switzerland (any airline)</option>
+            <option value="inbound_eligible">Arrived there from outside, operated by eligible EU / EEA / Swiss airline</option>
+            <option value="inbound_non_eu">Arrived there from outside, operated by non-EU airline</option>
+            <option value="uk_only">UK-only / UK law situation</option>
+            <option value="outside">Neither flight endpoint was EU / EEA / Switzerland</option>
+            <option value="unknown">Not sure</option>
+          </select></label>
+          <div class="field-row">
+            <label class="field"><span>Operating flight number (optional)</span><input name="flightNumber" maxlength="14" placeholder="EZY1234"><small class="help">For your own letter only. No booking reference needed.</small></label>
+            <label class="field"><span>Flight date (optional)</span><input type="date" name="flightDate"></label>
+            <label class="field"><span>Origin airport (optional)</span><input name="origin" maxlength="50" placeholder="e.g. CDG"></label>
+            <label class="field"><span>Final destination airport (optional)</span><input name="destination" maxlength="50" placeholder="e.g. VIE"></label>
+          </div>
+        </section>
+        <section class="step" data-step="1" hidden>
+          <h2 data-i18n="step2">What happened?</h2>
+          <label class="field"><span>Disruption type *</span><select name="disruption" required>
+            <option value="">Choose one</option><option value="delay">Arrived late</option><option value="cancellation">Flight was cancelled</option><option value="denied">Denied boarding against my will</option>
+          </select></label>
+          <label class="field"><span>Was a connecting flight part of one reservation?</span><select name="connection">
+            <option value="no">No / single flight</option><option value="yes">Yes, same booking</option><option value="unknown">Not sure</option>
+          </select></label>
+          <div class="callout">For a single-reservation connection, focus on arrival at the <strong>final destination</strong>, not just one leg.</div>
+        </section>
+        <section class="step" data-step="2" hidden>
+          <h2 data-i18n="step3">How long and when?</h2>
+          <p class="small">Leave a value empty when unknown. Missing facts produce a review-required result, not a false promise.</p>
+          <div class="field-row">
+            <label class="field"><span>Hours late at FINAL destination</span><input name="arrivalDelay" type="number" step="0.25" min="0" max="240" placeholder="e.g. 4.5"></label>
+            <label class="field"><span>Departure delay, hours</span><input name="departureDelay" type="number" step="0.25" min="0" max="240" placeholder="e.g. 5"></label>
+          </div>
+          <label class="field"><span>If delayed 5+ hours at departure, did you choose not to travel?</span><select name="notTraveled">
+            <option value="unknown">Not sure / not relevant</option><option value="yes">Yes</option><option value="no">No, I travelled</option>
+          </select></label>
+          <label class="field"><span>If cancelled: days of advance notice</span><input name="cancellationNoticeDays" type="number" step="0.25" min="0" max="365" placeholder="e.g. 2 (leave empty if unknown)"></label>
+        </section>
+        <section class="step" data-step="3" hidden>
+          <h2 data-i18n="step4">What is known about the cause?</h2>
+          <label class="field"><span>Reported main cause</span><select name="cause">
+            <option value="unknown">Unknown / conflicting reasons</option><option value="airline_technical">Ordinary aircraft technical issue</option>
+            <option value="airline_operations">Airline operations / crew scheduling</option>
+            <option value="atc">Air traffic control / airport restrictions</option><option value="weather">Severe weather</option><option value="other">Other or disputed</option>
+          </select></label>
+          <div class="field-row">
+            <label class="field"><span>Flight distance band (if known)</span><select name="distance"><option value="unknown">Unknown</option><option value="short">1,500 km or less</option><option value="medium">1,501–3,500 km</option><option value="long">More than 3,500 km</option></select></label>
+            <label class="field"><span>For long flights, entirely within EU?</span><select name="intraEU"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          </div>
+          <div class="card" style="margin:18px 0;background:#f9fbfc">
+            <strong>Only for cancellations with a replacement flight:</strong>
+            <div class="field-row">
+              <label class="field"><span>Alternative flight departed how many hours BEFORE original? (0 if later)</span><input type="number" name="rerouteEarlyDeparture" min="0" max="72" step=".25" placeholder="unknown"></label>
+              <label class="field"><span>Alternative flight arrived how many hours AFTER original? (0 if not later)</span><input type="number" name="rerouteArrivalLate" min="0" max="240" step=".25" placeholder="unknown"></label>
+            </div>
+            <small class="help">Simplified rerouting questions: uncertain or unusual alternatives still need a case-specific review.</small>
+          </div>
+          <div class="field-row">
+            <label class="field"><span>If denied boarding: involuntary?</span><select name="involuntary"><option value="unknown">Unknown / not relevant</option><option value="yes">Yes</option><option value="no">No, voluntary</option></select></label>
+            <label class="field"><span>On time for check-in with valid booking?</span><select name="checkedIn"><option value="unknown">Unknown / not relevant</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          </div>
+        </section>
+        <section class="step" data-step="4" hidden>
+          <h2 data-i18n="step5">Your preliminary result</h2>
+          <div id="resultState" class="result-state" aria-live="polite"></div>
+          <p class="small">This is an explainable, conservative rules-based screen, not a flight-status lookup or decision by an airline.</p>
+          <div id="resultFlags" class="grid3" aria-label="Rights considered"></div>
+          <div class="section-title"><h3>Why this result?</h3></div>
+          <ul id="resultReasons"></ul>
+          <div class="section-title"><h3>What still needs checking?</h3></div>
+          <ul id="resultQuestions"></ul>
+          <div id="amountNote" class="callout" hidden></div>
+          <div class="section-title"><h3>Suggested evidence checklist</h3></div>
+          <ul id="evidenceList"></ul>
+          <div class="section-title"><h3>Prepare a direct-to-airline request</h3></div>
+          <p class="small">Do not submit this text to FlightClaim Agent; copy it to the actual operating airline's official claims channel after checking every fact. Fill your name/booking privately on the airline site.</p>
+          <textarea id="letterText" readonly aria-label="Draft airline claim letter"></textarea>
+          <div class="no-print">
+            <button class="btn" id="copyLetter" type="button">Copy letter</button>
+            <button class="btn" id="downloadLetter" type="button">Download TXT</button>
+            <button class="btn" id="saveDraft" type="button">Save local draft</button>
+          </div>
+          <div class="callout warning"><strong>Important:</strong> Your result and case record have NOT been submitted to anyone. You can file with the airline directly at no service charge.</div>
+        </section>
+      </form>
+      <div id="wizardError" class="callout critical" role="alert" hidden></div>
+      <div class="wizard-actions no-print">
+        <button type="button" id="previousStep" class="btn ghost">← Back</button>
+        <button type="button" id="nextStep" class="btn primary">Continue →</button>
+      </div>
+      <p id="notice" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="view" id="view-drafts" data-view="drafts" hidden>
+    <div class="wrap">
+      <div class="eyebrow">Local device only</div><h2 data-i18n="draftsTitle">My case drafts</h2>
+      <p class="lede">These are your browser's own notes. We cannot see them; they are not submitted, reviewed or tracked by an airline or by us.</p>
+      <div class="callout warning">On a shared device, anyone who can access this browser profile may access saved drafts. Do not save passport details, payment information, booking references or other sensitive data here.</div>
+      <div id="draftList"></div>
+      <button type="button" id="eraseAll" class="btn danger">Delete all local drafts</button>
+      <button type="button" class="btn primary" data-nav="checker">Create a new check</button>
+      <p id="draftNotice" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="view" id="view-guide" data-view="guide" hidden>
+    <div class="wrap">
+      <div class="eyebrow">Official routes, no affiliate links</div><h2>Know the right claim channel</h2>
+      <p class="lede">First contact the operating airline. The claim forms often require you to verify your own booking and identity.</p>
+      <div class="grid2">
+        <div class="card"><h3>European Union rules</h3><p>Read which flights are covered, rights for delays, cancellations, boarding denial, ticket reimbursement and care.</p><p><a href="https://europa.eu/youreurope/citizens/travel/passenger-rights/air/" target="_blank" rel="noopener noreferrer">EU Your Europe — passenger rights ↗</a></p></div>
+        <div class="card"><h3>United Kingdom</h3><p>UK rights are not calculated by our EU-only V0; use the UK Civil Aviation Authority.</p><p><a href="https://www.caa.co.uk/air-passengers/travel-problems-and-rights/travel-complaints/making-a-claim/claiming-for-costs-and-compensation/" target="_blank" rel="noopener noreferrer">UK CAA — claiming costs and compensation ↗</a></p></div>
+        <div class="card"><h3>easyJet</h3><p>Official EC261 claim form requires real flight and booking details from the traveler.</p><p><a href="https://www.easyjet.com/en/claim/EU261" target="_blank" rel="noopener noreferrer">easyJet official EC261 claims form ↗</a></p></div>
+        <div class="card"><h3>Ryanair</h3><p>Ryanair requires passengers to begin with its own claim process and may require identity verification.</p><p><a href="https://help.ryanair.com/hc/en-us/sections/12488602662545-EU-261-Passenger-Rights" target="_blank" rel="noopener noreferrer">Ryanair official EU261 help ↗</a></p></div>
+      </div>
+      <div class="section-title"><h3>Refund ≠ compensation ≠ care reimbursement</h3></div>
+      <p>Ticket reimbursement usually concerns unused transport after eligible cancellation or a long departure delay. Fixed statutory compensation is a separate right that depends on fault, delay at final destination, notice, and other exceptions. Expenses for reasonable care can have a separate procedure and supporting receipts.</p>
+      <p class="small">Regulation (EC) 261/2004 is used for the current V0 screening. The 2026 amendment 2026/2202 applies from 23 October 2027, not now. Other national laws may apply.</p>
+      <p><a href="https://eur-lex.europa.eu/eli/reg/2004/261/oj/eng" target="_blank" rel="noopener noreferrer">Read Regulation (EC) 261/2004 ↗</a> · <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32026R2202" target="_blank" rel="noopener noreferrer">Read future regulation 2026/2202 ↗</a></p>
+    </div>
+  </section>
+
+  <section class="view" id="view-fees" data-view="fees" hidden>
+    <div class="wrap">
+      <div class="eyebrow">No payment connected</div><h2>Fees, money and privacy</h2>
+      <div class="grid2">
+        <div class="card"><h3>Current pilot: €0</h3><p>The checker, evidence list, local drafts and letter preparation are free. No PayPal, card payment, payment collection, payout account or escrow has been connected.</p><p><strong>No promise:</strong> We cannot guarantee airline cash payments or ticket refunds.</p></div>
+        <div class="card"><h3>Future service — NOT OPEN</h3><p>Professional case handling and partner referrals would require a separate agreement, clear fees, appropriate authorizations and direct informed traveler consent.</p><p>Future professional services must not be represented as live or endorsed by any airline/agency today.</p></div>
+      </div>
+      <div class="section-title"><h3>How money would move if a service were contracted</h3></div>
+      <div class="card"><p><b>Operating airline → passenger</b> (or an independently authorized professional claim handler under its own engagement agreement). This website does not receive or hold compensation funds.</p><p><b>Our own service fee → €0 today.</b> Any future fee would require express agreement, a verified payment processor, a transparent refund policy, and compliance checks. Ticket refunds are the airline's obligation under applicable rules, not a refund guarantee from this website.</p></div>
+      <div class="section-title"><h3>Privacy and local data</h3></div>
+      <p>Answers are processed in your browser. No traveler names, emails, telephone numbers, passports, booking references, documents or payments are requested. We do not submit your answers to a server, airline or intermediary. You can optionally save drafts to localStorage on the current browser device only. Local drafts are not synced, automatically reviewed, or followed up. They can be exported or erased at any time.</p>
+      <p>Standard website hosting may produce access logs handled by the host under its separate privacy policies. No third-party tracking or analytics are embedded by this pilot.</p>
+      <div class="callout warning">The service operator's legal identity, contact point and full privacy documentation have not yet been configured. Therefore real online intake, personal-data collection, professional representation and commercial submission are <strong>disabled</strong>. Do not send confidential information to this website.</div>
+      <div class="section-title"><h3>Terms of use</h3></div>
+      <p>This is an independent educational preparation tool, not a law firm, government agency, airline representative or claims management company. Outputs are estimates from user-provided information and may be wrong or incomplete. The tool cannot confirm actual flight records or liability. Always verify airline information and the current law before filing. Use is voluntary, and no paid service or agency relationship is formed.</p>
+      <p>Users may complete a claim directly and for free with the airline. Country-specific deadlines, exceptions, technical failure causes, connecting itineraries, and compensation reductions require individual attention.</p>
+      <p class="small">Rules reference date: 2026-10-19. <a href="https://europa.eu/youreurope/citizens/travel/passenger-rights/air/" target="_blank" rel="noopener noreferrer">Official EU guidance</a>.</p>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">
+  <strong>FlightClaim Agent</strong> · Free self-help pilot · No representation, airline filing, official affiliation or fees.
+  <div class="footer-links"><a href="#guide" data-nav="guide">Official claim channels</a><a href="#fees" data-nav="fees">Privacy & fees</a><a href="https://europa.eu/youreurope/citizens/travel/passenger-rights/air/" target="_blank" rel="noopener noreferrer">EU official passenger rights ↗</a></div>
+</div></footer>
+<script type="module" src="./app.mjs"></script>
+</body>
+</html>
