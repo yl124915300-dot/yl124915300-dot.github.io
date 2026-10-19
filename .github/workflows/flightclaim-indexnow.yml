@@ -1,0 +1,54 @@
+name: FlightClaim IndexNow submission
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "flightclaim/**"
+      - ".github/workflows/flightclaim-indexnow.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    name: Notify participating search engines (not proof of indexing)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify scoped proof and submit ONE public URL
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://yl124915300-dot.github.io/flightclaim/"
+          key="fcagent20261019e061a9b4c75f28d03a641bfe"
+          location="${base}${key}.txt"
+
+          # Allow GitHub Pages publication to catch up with the main commit.
+          verified=0
+          for attempt in $(seq 1 12); do
+            body="$(curl -fsSL --max-time 12 "$location" || true)"
+            if [ "$body" = "$key" ]; then verified=1; break; fi
+            echo "Key file not deployed yet; attempt $attempt"
+            sleep 5
+          done
+          if [ "$verified" -ne 1 ]; then
+            echo "ERROR: host proof unavailable; NOT submitting IndexNow."
+            exit 1
+          fi
+          echo "IndexNow host proof verified."
+
+          code="$(curl -sS --max-time 25 -G \
+              --data-urlencode "url=$base" \
+              --data-urlencode "key=$key" \
+              --data-urlencode "keyLocation=$location" \
+              -o /tmp/indexnow-response.txt \
+              -w '%{http_code}' \
+              'https://api.indexnow.org/indexnow')"
+          echo "IndexNow HTTP response code: $code"
+          if [ -s /tmp/indexnow-response.txt ]; then head -c 400 /tmp/indexnow-response.txt; echo; fi
+          case "$code" in
+            200) echo "Accepted by IndexNow. Indexing NOT guaranteed." ;;
+            202) echo "Received; engine may be verifying key. Indexing NOT guaranteed." ;;
+            *) echo "Rejected or unavailable, not submitted successfully."; exit 1 ;;
+          esac
