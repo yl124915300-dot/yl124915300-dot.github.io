@@ -10,12 +10,34 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   notify:
     name: Notify participating search engines (not proof of indexing)
     runs-on: ubuntu-latest
     steps:
+      - name: Wait for GitHub Pages deployment of this exact main commit
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "Need Pages build and deployment success for exact SHA: $GITHUB_SHA"
+          ready=0
+          for attempt in $(seq 1 24); do
+            runs="$(curl -fsSL --retry 2 --max-time 15 \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs?per_page=60")"
+            match="$(printf '%s' "$runs" | jq -r --arg sha "$GITHUB_SHA" \
+              '[.workflow_runs[] | select(.head_sha == $sha and .name == "pages build and deployment" and .status == "completed" and .conclusion == "success")] | length')"
+            if [ "$match" -ge 1 ]; then ready=1; break; fi
+            echo "Matching Pages deployment not confirmed yet (attempt $attempt)."
+            sleep 10
+          done
+          if [ "$ready" -ne 1 ]; then echo "No verified Pages deployment for this commit. Do not ping stale URL."; exit 1; fi
+          echo "Matching Pages deployment completed successfully."
       - name: Verify scoped proof and submit ONE public URL
         shell: bash
         run: |
