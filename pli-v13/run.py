@@ -1,5 +1,5 @@
 """Bounded CI-only inference. No secret, external executor, paid backend, or user device."""
-import hashlib,json,os,platform,resource,subprocess,tarfile,time
+import copy,hashlib,json,os,platform,re,resource,subprocess,tarfile,time
 from pathlib import Path
 from urllib.request import Request,urlopen
 ROOT=Path(__file__).resolve().parent
@@ -63,10 +63,14 @@ try:
   if time.time()-infer_start>900:raise RuntimeError("INFERENCE_BUDGET_900_SECONDS")
   state=json.loads(subprocess.check_output(["node",str(ROOT/"step.mjs"),"state",now],input=json.dumps(checkpoint),text=True))
   person=state["people"]["S1"]
-  context={"profile":"SYNTHETIC S1","budget_dollars":person["budgetCents"]/100,"available_dollars":person["availableCents"]/100,"reserved_dollars":person["reservedCents"]/100,"blocked_categories":[c["category"] for c in person["constraints"].values() if c["active"]],"existing_plans":[{"text":p["text"],"cost_dollars":p["amountCents"]/100,"status":p["status"]} for p in person["plans"].values()]}
+  context={"profile":"SYNTHETIC S1","budget_dollars":person["budgetCents"]/100,"available_dollars":person["availableCents"]/100,"reserved_dollars":person["reservedCents"]/100,"blocked_categories":[c["category"] for c in person["constraints"].values() if c["active"]],"reserved_plans":[{"category":p["category"],"cost_dollars":p["amountCents"]/100,"status":p["status"]} for p in person["plans"].values() if p["status"]=="PROPOSED"]}
   user=json.dumps({"event":case,"state":context,"permissions":"SYNTHETIC simulation only; all external actions denied"},ensure_ascii=False)
   formatted="<|im_start|>system\n"+prompt+"<|im_end|>\n<|im_start|>user\n"+user+"<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
-  request={"prompt":formatted,"temperature":0.7,"top_p":0.8,"top_k":20,"min_p":0,"presence_penalty":1.5,"seed":1313,"n_predict":640,"json_schema":schema,"cache_prompt":False,"stop":["<|im_end|>"],"stream":False}
+  spans=[s[:180] for s in re.split(r"(?<=[.!?])\s+(?=[A-Z])",case["text"]) if s]
+  case_schema=copy.deepcopy(schema)
+  case_schema["properties"]["facts"]["items"]["enum"]=spans
+  case_schema["properties"]["candidates"]["items"]["properties"]["evidence_quote"]["enum"]=[""]+spans
+  request={"prompt":formatted,"temperature":0.7,"top_p":0.8,"top_k":20,"min_p":0,"presence_penalty":1.5,"seed":1313,"n_predict":640,"json_schema":case_schema,"cache_prompt":False,"stop":["<|im_end|>"],"stream":False}
   row={"input":case,"request":request,"before":state,"checkpoint_before":checkpoint,"at":now};t=time.time()
   try:
    with urlopen(Request("http://127.0.0.1:8091/completion",data=json.dumps(request).encode(),headers={"Content-Type":"application/json"}),timeout=100) as r:response=json.load(r)

@@ -45,7 +45,7 @@
     "candidates": {
       "type": "array",
       "minItems": 1,
-      "maxItems": 2,
+      "maxItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
