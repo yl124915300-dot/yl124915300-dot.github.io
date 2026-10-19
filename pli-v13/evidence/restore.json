@@ -1,0 +1,75 @@
+{
+  "checks": [
+    {
+      "name": "independent replay u01",
+      "pass": true
+    },
+    {
+      "name": "independent replay u02",
+      "pass": true
+    },
+    {
+      "name": "independent replay u03",
+      "pass": true
+    },
+    {
+      "name": "independent replay u04",
+      "pass": true
+    },
+    {
+      "name": "independent replay u05",
+      "pass": true
+    },
+    {
+      "name": "independent replay u06",
+      "pass": true
+    },
+    {
+      "name": "independent replay u07",
+      "pass": true
+    },
+    {
+      "name": "independent replay u08",
+      "pass": true
+    },
+    {
+      "name": "independent replay u09",
+      "pass": true
+    },
+    {
+      "name": "independent replay u10",
+      "pass": true
+    },
+    {
+      "name": "checkpoint restored independently",
+      "pass": true
+    },
+    {
+      "name": "deny pay",
+      "pass": true
+    },
+    {
+      "name": "deny order",
+      "pass": true
+    },
+    {
+      "name": "deny send_message",
+      "pass": true
+    },
+    {
+      "name": "deny cancel_real",
+      "pass": true
+    },
+    {
+      "name": "forged fact rejected",
+      "pass": true
+    },
+    {
+      "name": "all execution is synthetic",
+      "pass": true
+    }
+  ],
+  "passed": 17,
+  "failed": 0,
+  "modelQuality": "REQUIRES_SEPARATE_SEMANTIC_REVIEW_NOT_PROVEN_BY_RULE_TESTS"
+}
