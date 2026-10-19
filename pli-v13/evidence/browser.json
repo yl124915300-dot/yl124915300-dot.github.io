@@ -1,0 +1,325 @@
+{
+  "base": "http://127.0.0.1:8765/pli-v13/",
+  "publicMode": false,
+  "checks": [
+    {
+      "name": "desktop real model labelled",
+      "pass": true
+    },
+    {
+      "name": "desktop offline boundary",
+      "pass": true
+    },
+    {
+      "name": "desktop ten events",
+      "pass": true
+    },
+    {
+      "name": "desktop event 1 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 1 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 1 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 2 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 2 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 2 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 3 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 3 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 3 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 4 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 4 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 4 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 5 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 5 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 5 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 6 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 6 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 6 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 7 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 7 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 7 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 8 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 8 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 8 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 9 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 9 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 9 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop event 10 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "desktop event 10 no overflow",
+      "pass": true
+    },
+    {
+      "name": "desktop event 10 has review",
+      "pass": true
+    },
+    {
+      "name": "desktop initial state navigable",
+      "pass": true
+    },
+    {
+      "name": "desktop next navigation",
+      "pass": true
+    },
+    {
+      "name": "desktop explicit stale marker",
+      "pass": true
+    },
+    {
+      "name": "desktop zero external requests",
+      "pass": true
+    },
+    {
+      "name": "desktop zero JS errors",
+      "pass": true
+    },
+    {
+      "name": "desktop model output XSS inert",
+      "pass": true
+    },
+    {
+      "name": "mobile real model labelled",
+      "pass": true
+    },
+    {
+      "name": "mobile offline boundary",
+      "pass": true
+    },
+    {
+      "name": "mobile ten events",
+      "pass": true
+    },
+    {
+      "name": "mobile event 1 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 1 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 1 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 2 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 2 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 2 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 3 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 3 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 3 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 4 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 4 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 4 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 5 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 5 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 5 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 6 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 6 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 6 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 7 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 7 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 7 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 8 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 8 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 8 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 9 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 9 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 9 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile event 10 independently replayed",
+      "pass": true
+    },
+    {
+      "name": "mobile event 10 no overflow",
+      "pass": true
+    },
+    {
+      "name": "mobile event 10 has review",
+      "pass": true
+    },
+    {
+      "name": "mobile initial state navigable",
+      "pass": true
+    },
+    {
+      "name": "mobile next navigation",
+      "pass": true
+    },
+    {
+      "name": "mobile explicit stale marker",
+      "pass": true
+    },
+    {
+      "name": "mobile zero external requests",
+      "pass": true
+    },
+    {
+      "name": "mobile zero JS errors",
+      "pass": true
+    },
+    {
+      "name": "mobile model output XSS inert",
+      "pass": true
+    }
+  ],
+  "screenshots": [
+    "desktop.png",
+    "mobile.png"
+  ],
+  "checkedAt": "2026-10-19T07:16:59.755Z",
+  "passed": 78,
+  "failed": 0
+}

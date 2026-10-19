@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-10-19T07:16:51Z",
+  "scheduleVerified": false,
+  "realTransactions": 0,
+  "netIncomeUSD": 0,
+  "schedule": {
+    "total_count": 0,
+    "workflow_runs": []
+  },
+  "publicRefresh": {
+    "at": "2026-10-19T05:28:00.692226+00:00",
+    "mapping_errors": [],
+    "memory_sha256": "61064066b75cdf93fec31771462511e7bb158d5aeec303cfce762c0cf16878c2",
+    "result": "PASS",
+    "sources": [
+      {
+        "accepted": 17,
+        "attempted_at": "2026-10-19T05:28:00.692226+00:00",
+        "errors": [],
+        "evidence": "REAL_PUBLIC",
+        "features": 17,
+        "final_url": "https://api.weather.gov/alerts/active?area=CA,WA,NY,FL,IL",
+        "http_date": "2026-10-19T05:28:01+00:00",
+        "http_status": 200,
+        "name": "NWS",
+        "rejected": 0,
+        "response_sha256": "7d484d5e80d9877812d02eeaf1d44f6e9d3c65c5c77bd5c79dea65b5825d48d6",
+        "result": "PASS",
+        "skipped": 0,
+        "success_at": "2026-10-19T05:28:00.692226+00:00",
+        "url": "https://api.weather.gov/alerts/active?area=CA,WA,NY,FL,IL"
+      },
+      {
+        "accepted": 213,
+        "attempted_at": "2026-10-19T05:28:00.692226+00:00",
+        "errors": [],
+        "evidence": "REAL_PUBLIC",
+        "features": 214,
+        "final_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson",
+        "http_date": "2026-10-19T05:27:05+00:00",
+        "http_status": 200,
+        "name": "USGS",
+        "rejected": 0,
+        "response_sha256": "ee1061d07f243b70fe3da3b64af070a057163a64e2b042cd16882686a02d87f6",
+        "result": "PASS",
+        "skipped": 1,
+        "source_generated_at": "2026-10-19T05:27:05+00:00",
+        "success_at": "2026-10-19T05:28:00.692226+00:00",
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+      }
+    ],
+    "total_runs": 4
+  },
+  "scheduleCount": 0,
+  "latestTrueSchedule": [],
+  "snapshotAt": "2026-10-19T05:28:00.692226+00:00",
+  "ageSeconds": 6532,
+  "freshness": "FRESH"
+}

@@ -67,9 +67,29 @@
     {
       "name": "all execution is synthetic",
       "pass": true
+    },
+    {
+      "name": "unknown cost cannot enter memory",
+      "pass": true
+    },
+    {
+      "name": "unsupported amount cannot enter memory",
+      "pass": true
+    },
+    {
+      "name": "V1.2 budget rejects evidence-supported excess",
+      "pass": true
+    },
+    {
+      "name": "V1.2 household constraint enforced",
+      "pass": true
+    },
+    {
+      "name": "valid synthetic plan updates continuous budget only",
+      "pass": true
     }
   ],
-  "passed": 17,
+  "passed": 22,
   "failed": 0,
   "modelQuality": "REQUIRES_SEPARATE_SEMANTIC_REVIEW_NOT_PROVEN_BY_RULE_TESTS"
 }
