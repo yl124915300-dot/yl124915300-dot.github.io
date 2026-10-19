@@ -76,6 +76,13 @@ def phase_one():
             results = agent.read_public()
             check("TWO_LIVE_PUBLIC_EVENT_READS", len(results) == 2 and all(x["result"] == "PASS" and x["http_status"] == 200 for x in results), results)
             check("REAL_EVENTS_HAVE_PROVENANCE", all(e["source_url"] and e["raw"] and e["evidence"] == "REAL_PUBLIC" for e in agent.snapshot()["events"]), {"events": len(agent.snapshot()["events"])})
+            negative = dict(id="test:negative-magnitude:" + uuid.uuid4().hex,
+                            kind="earthquake", status="active", title="SYNTHETIC microquake",
+                            updated_at=now(),
+                            expires_at=(datetime.now(timezone.utc) + timedelta(hours=1)).isoformat(),
+                            payload={"lat": 47.61, "lon": -122.33, "magnitude": -0.8})
+            result = agent.ingest(negative)
+            check("VALID_NEGATIVE_MAGNITUDE_ACCEPTED_WITHOUT_ACTION", result["accepted"] and not active(agent.snapshot(), negative["id"]))
             event = unknown_event()
             check("UNSEEN_EVENT_ABSENT_BEFORE_INPUT", all(x["id"] != event["id"] for x in agent.snapshot()["events"]), event["id"])
             code, body = request(base, "/api/events", event)

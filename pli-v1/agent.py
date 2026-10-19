@@ -113,7 +113,7 @@ class Agent:
             for k in ("lat", "lon", "magnitude"):
                 if not isinstance(p.get(k), (int, float)) or not math.isfinite(p[k]):
                     raise ValueError("Invalid earthquake parameters")
-            if not (-90 <= p["lat"] <= 90 and -180 <= p["lon"] <= 180 and 0 <= p["magnitude"] <= 10):
+            if not (-90 <= p["lat"] <= 90 and -180 <= p["lon"] <= 180 and -10 <= p["magnitude"] <= 10):
                 raise ValueError("Earthquake parameters out of range")
         else:
             if p.get("severity") not in ("Extreme", "Severe", "Moderate", "Minor", "Unknown"):
@@ -162,7 +162,7 @@ class Agent:
         evidence.update(rule="R3", matching_rule="R1" if e["kind"] == "weather" else "R2",
                         available_minutes=p["spare_minutes"], required_minutes=5,
                         estimated_cost_usd=0, budget_usd=p["budget_usd"],
-                        reason="matched public event with synthetic location and constraints")
+                        reason="matched event with synthetic location and constraints")
         return action, evidence
 
     def reconcile(self):
