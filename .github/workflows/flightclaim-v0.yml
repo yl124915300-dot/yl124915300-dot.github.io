@@ -52,6 +52,7 @@ jobs:
 
   public-smoke:
     name: Production HTTPS /flightclaim/ readback
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
     steps:
       - name: Fetch anonymous public site and JavaScript modules

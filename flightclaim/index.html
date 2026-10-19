@@ -194,7 +194,8 @@
             <label class="field"><span>For long flights, entirely within EU?</span><select name="intraEU"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
           </div>
           <div class="card" style="margin:18px 0;background:#f9fbfc">
-            <strong>Only for cancellations with a replacement flight:</strong>
+            <strong>Only for cancellations: replacement flight offered?</strong>
+            <label class="field"><span>Did the airline offer an alternative flight?</span><select name="rerouteOffered"><option value="unknown">Not sure / not relevant</option><option value="yes">Yes, replacement flight offered</option><option value="no">No replacement flight offered</option></select><small class="help">If no alternative was offered, leave the two timing questions below empty. If yes, fill them in.</small></label>
             <div class="field-row">
               <label class="field"><span>Alternative flight departed how many hours BEFORE original? (0 if later)</span><input type="number" name="rerouteEarlyDeparture" min="0" max="72" step=".25" placeholder="unknown"></label>
               <label class="field"><span>Alternative flight arrived how many hours AFTER original? (0 if not later)</span><input type="number" name="rerouteArrivalLate" min="0" max="240" step=".25" placeholder="unknown"></label>
@@ -245,7 +246,7 @@
       <div class="callout warning">On a shared device, anyone who can access this browser profile may access saved drafts. Do not save passport details, payment information, booking references or other sensitive data here.</div>
       <div id="draftList"></div>
       <button type="button" id="eraseAll" class="btn danger">Delete all local drafts</button>
-      <button type="button" class="btn primary" data-nav="checker">Create a new check</button>
+      <button type="button" class="btn primary" data-nav="checker" data-new-check="true">Create a new check</button>
       <p id="draftNotice" role="status" aria-live="polite"></p>
     </div>
   </section>

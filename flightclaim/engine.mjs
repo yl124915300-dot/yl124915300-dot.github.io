@@ -57,9 +57,9 @@ export function assess(raw = {}) {
     add("DELAY_REFUND_OPTION", "A five-hour-or-longer departure delay may allow reimbursement of unused travel if you choose not to travel.");
   }
   // Assistance threshold depends on distance: 2h / 3h / 4h under Article 6.
-  const careThreshold = x.distance === "short" ? 2 : (x.distance === "medium" || (x.distance === "long" && x.intraEU === "yes")) ? 3 : x.distance === "long" ? 4 : null;
+  const careThreshold = x.distance === "short" ? 2 : (x.distance === "medium" || (x.distance === "long" && x.intraEU === "yes")) ? 3 : (x.distance === "long" && x.intraEU === "no") ? 4 : null;
   if (departure !== null && careThreshold !== null && departure >= careThreshold) care = true;
-  else if (departure !== null && departure >= 2 && careThreshold === null) questions.push("Distance is needed to evaluate the 2/3/4-hour duty-of-care threshold.");
+  else if (departure !== null && departure >= 2 && careThreshold === null) questions.push("Flight distance and (for routes over 3,500 km) intra-EU status are needed to evaluate the 2/3/4-hour duty-of-care threshold.");
   if (disruption === "cancellation") {
     refund = true;
     care = true;
@@ -70,9 +70,12 @@ export function assess(raw = {}) {
     } else if (cancelDays >= 14) {
       category = "GENERALLY_UNLIKELY"; compensation = category;
       add("NOTICE_14_DAYS", "Fixed-rate EU261 cancellation compensation is generally not due when notified at least 14 days before departure.");
-    } else if (!known(x.rerouteEarlyDeparture) || !known(x.rerouteArrivalLate)) {
-      add("REROUTING_UNKNOWN", "Cancellation compensation depends on notice time and replacement-flight timing.");
-      questions.push("Did the airline offer an alternative flight, and when did it depart/arrive relative to the original?");
+    } else if (x.rerouteOffered === "no") {
+      category = "POSSIBLY_ELIGIBLE"; compensation = category;
+      add("NO_REROUTE_OFFERED", "Reported short notice and no replacement flight offer may support compensation, subject to cause and airline evidence.");
+    } else if (x.rerouteOffered !== "yes" || !known(x.rerouteEarlyDeparture) || !known(x.rerouteArrivalLate)) {
+      add("REROUTING_UNKNOWN", "Cancellation compensation depends on whether rerouting was offered and, if so, its timing.");
+      questions.push("Did the airline offer a replacement flight? If so, provide its departure and final-arrival timing.");
     } else {
       const early = nonneg(x.rerouteEarlyDeparture), late = nonneg(x.rerouteArrivalLate);
       const timely = cancelDays >= 7 ? (early <= 2 && late < 4) : (early <= 1 && late < 2);
@@ -124,8 +127,9 @@ export function assess(raw = {}) {
   if (category === "POSSIBLY_ELIGIBLE" && disruption !== "cancellation") {
     if (x.distance === "short") amount = 250;
     else if (x.distance === "medium" || (x.distance === "long" && x.intraEU === "yes")) amount = 400;
-    else if (x.distance === "long" && x.intraEU !== "yes") amount = disruption === "delay" && arrival !== null && arrival < 4 ? 300 : 600;
+    else if (x.distance === "long" && x.intraEU === "no") amount = disruption === "delay" && arrival !== null && arrival < 4 ? 300 : 600;
   }
+  if (category === "POSSIBLY_ELIGIBLE" && x.distance === "long" && x.intraEU !== "yes" && x.intraEU !== "no") questions.push("Confirm whether this long flight was entirely within the EU before estimating €400 versus €600.");
   if (disruption === "cancellation") cautions.push("Amount reductions, rerouting and relevant court rulings require case-specific review.");
   cautions.push("Service providers may charge fees; you can first claim directly from the airline for free.");
   return done();

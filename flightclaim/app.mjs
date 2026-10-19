@@ -62,6 +62,17 @@ document.addEventListener("click", event => {
   const el = event.target.closest("[data-nav]");
   if (!el) return;
   event.preventDefault();
+  if (el.dataset.newCheck === "true") {
+    form.reset();
+    step = 0;
+    lastInput = null;
+    lastResult = null;
+    errorBox.textContent = "";
+    errorBox.hidden = true;
+    $("#resultState").replaceChildren();
+    $("#letterText").value = "";
+    say("");
+  }
   showView(el.dataset.nav);
 });
 window.addEventListener("hashchange", () => showView(location.hash.slice(1)));
@@ -70,7 +81,17 @@ function getAnswers() {
   return Object.fromEntries(new FormData(form).entries());
 }
 function applyAnswers(values) {
-  for (const [name, value] of Object.entries(values || {})) {
+  form.reset(); // Never leak a prior case selection into the reopened draft.
+  const normalized = { ...(values || {}) };
+  if (!Object.hasOwn(normalized, "rerouteOffered")) {
+    const hasEarly = normalized.rerouteEarlyDeparture !== "" && normalized.rerouteEarlyDeparture != null;
+    const hasLate = normalized.rerouteArrivalLate !== "" && normalized.rerouteArrivalLate != null;
+    // Pre-upgrade saved cancellation cases did not ask whether rerouting was offered.
+    // Infer "yes" only when the passenger supplied BOTH replacement timings; otherwise
+    // retain an explicit UNKNOWN and require review instead of inventing a missing offer.
+    normalized.rerouteOffered = normalized.disruption === "cancellation" && hasEarly && hasLate ? "yes" : "unknown";
+  }
+  for (const [name, value] of Object.entries(normalized)) {
     const el = form.elements.namedItem(name);
     if (el && typeof el.value === "string") el.value = String(value ?? "");
   }
