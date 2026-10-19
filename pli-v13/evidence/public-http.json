@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-19T07:23:11Z",
+  "checks": [
+    {
+      "path": "index.html",
+      "expectedSha256": "6b785d47d4825cf3a48e925c06b9a326ba67bfe20c53db92da2073ff9ad887cb",
+      "pass": true,
+      "actualSha256": "6b785d47d4825cf3a48e925c06b9a326ba67bfe20c53db92da2073ff9ad887cb"
+    },
+    {
+      "path": "app.mjs",
+      "expectedSha256": "73acc288f83ef1d86b5811c6768cd12c2781401dd9be99667b353bd2763bec2d",
+      "pass": true,
+      "actualSha256": "73acc288f83ef1d86b5811c6768cd12c2781401dd9be99667b353bd2763bec2d"
+    },
+    {
+      "path": "style.css",
+      "expectedSha256": "9352f649fe92685c3c5ee92eff83d6a2e57d5bb429bbfb8beca4e9e01f59ebae",
+      "pass": true,
+      "actualSha256": "9352f649fe92685c3c5ee92eff83d6a2e57d5bb429bbfb8beca4e9e01f59ebae"
+    },
+    {
+      "path": "gate.mjs",
+      "expectedSha256": "1496dabf17716ce4413d36da975ff971e121374df2d60ff6b21d914c81161bbd",
+      "pass": true,
+      "actualSha256": "1496dabf17716ce4413d36da975ff971e121374df2d60ff6b21d914c81161bbd"
+    },
+    {
+      "path": "evidence/inference.json",
+      "expectedSha256": "24285c387b33dfa56b0db613e2bfe76949a7c3f776783b8f641ed75ee0013e8f",
+      "pass": true,
+      "actualSha256": "24285c387b33dfa56b0db613e2bfe76949a7c3f776783b8f641ed75ee0013e8f"
+    },
+    {
+      "path": "evidence/results.json",
+      "expectedSha256": "29820cfd4488cc56703eca14f2aea93da0b19567826cc7e59591755da720a13e",
+      "pass": true,
+      "actualSha256": "29820cfd4488cc56703eca14f2aea93da0b19567826cc7e59591755da720a13e"
+    },
+    {
+      "path": "evidence/checkpoint.json",
+      "expectedSha256": "c6ec956e40d1e1303cda1ffa1d773a66d68a8f5b0d7553e8ff6af5a1cbe3e686",
+      "pass": true,
+      "actualSha256": "c6ec956e40d1e1303cda1ffa1d773a66d68a8f5b0d7553e8ff6af5a1cbe3e686"
+    },
+    {
+      "path": "evidence/review.json",
+      "expectedSha256": "8506492c857179706e16412ef51c3aa8936e79b0704e986400ce6bd57b63d76a",
+      "pass": true,
+      "actualSha256": "8506492c857179706e16412ef51c3aa8936e79b0704e986400ce6bd57b63d76a"
+    }
+  ],
+  "passed": 8,
+  "failed": 0
+}
