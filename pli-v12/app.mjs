@@ -46,4 +46,4 @@ $("save").onclick=()=>{try{localStorage.setItem(key,checkpoint(memory));$("stora
 $("load").onclick=()=>{try{importMemory(localStorage.getItem(key)||"");$("storage").textContent="本浏览器合成存档已恢复。";}catch(e){$("storage").textContent="恢复失败："+e.message;}};
 $("clearSaved").onclick=()=>{try{localStorage.removeItem(key);$("storage").textContent="本浏览器合成存档已删除。";}catch{$("storage").textContent="浏览器存储不可用。";}};
 show();
-fetch("./evidence/summary.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json();}).then(x=>{$("evidence").textContent=JSON.stringify(x);}).catch(()=>{$("evidence").textContent="尚未读到云端验收汇总；不得视为验收通过。";});
+fetch("./evidence/summary.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json();}).then(x=>{$("evidence").textContent="云端验证 "+x.total+" 项，失败 "+x.failed+"；模型状态："+x.llm+"。详细记录见说明文档中的 evidence 文件。";}).catch(()=>{$("evidence").textContent="尚未读到云端验收汇总；不得视为验收通过。";});

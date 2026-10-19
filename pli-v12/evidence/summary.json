@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-19T06:03:22.991Z",
+  "at": "2026-10-19T06:25:27.929Z",
   "phase": "ci",
   "total": 115,
   "failed": 0,
@@ -24,7 +24,7 @@
   "realLLMInferenceRequests": 0,
   "realTransactions": 0,
   "netIncome": 0,
-  "ciRun": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39207682034",
+  "ciRun": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39209759720",
   "limitations": [
     "Synthetic structured-field rules only; free text needs clarification",
     "Browser storage is browser-local; no shared private backend",

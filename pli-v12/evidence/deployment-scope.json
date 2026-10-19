@@ -2,9 +2,9 @@
   "at": "2026-10-19",
   "authorized": "Additive isolated pli-v12/ and dedicated new workflows only; no PR merge or settings change",
   "baseCommit": "420398c74248b123278a0eb9a37cbf1054641334",
-  "validatedCode": "1a0256b69548e921fdeab7a415bfe1f290d4cc67",
-  "validatedCheckpoint": "36a954e34ca48adbfeefa4b998668e887eeb95a6",
-  "ci": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39207682034",
+  "validatedCode": "e0b749e7b8d1b76ce1130f2825f10bace3089ecd",
+  "validatedCheckpoint": "18ed9dafb0475628e82196c9a7d28e895bea966d",
+  "ci": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39209759720",
   "preservedBlobCount": 186,
   "preservedBlobs": {
     ".github/workflows/cat-tales-live-qa.yml": "43ab2db77d098d200942d0c2e9ee0a554a1226bc",
@@ -221,5 +221,11 @@
     "pli-v12/summarize.mjs",
     "pli-v12/test.mjs",
     "pli-v12/evidence/deployment-scope.json"
-  ]
+  ],
+  "initialPublicFailure": {
+    "run": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39207831673",
+    "failedCheck": "mobile no horizontal overflow",
+    "resolvedBy": "e0b749e7b8d1b76ce1130f2825f10bace3089ecd"
+  },
+  "preservedOriginalBlobs": 186
 }

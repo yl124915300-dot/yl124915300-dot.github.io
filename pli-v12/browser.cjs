@@ -39,7 +39,8 @@ const {chromium}=require("playwright"),fs=require("fs"),assert=require("assert/s
  check("saved state deletion",await page.evaluate(()=>localStorage.getItem("pli-v12-synthetic-v1")===null));
  await page.screenshot({path:"pli-v12/evidence/"+(isPublic?"public-":"")+"desktop.png",fullPage:true});
  await page.setViewportSize({width:390,height:844});
- check("mobile no horizontal overflow",await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ const fits=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth);if(!fits)console.log("OVERFLOW_DIAGNOSTICS",await page.evaluate(()=>[...document.querySelectorAll("*")].filter(e=>e.getBoundingClientRect().right>innerWidth).map(e=>({tag:e.tagName,id:e.id,width:e.getBoundingClientRect().width,text:e.textContent.slice(0,160)}))));
+ check("mobile no horizontal overflow",fits);
  check("mobile submit control usable",await page.locator('button[type="submit"]').isVisible());
  await page.screenshot({path:"pli-v12/evidence/"+(isPublic?"public-":"")+"mobile.png",fullPage:true});
  check("no script exceptions",errors.length===0);
