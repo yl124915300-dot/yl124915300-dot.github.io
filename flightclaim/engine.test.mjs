@@ -43,11 +43,11 @@ test("Cancellation notice 14 days before: no fixed-rate compensation but refund 
   assert.equal(r.refundPossible, true);
 });
 test("Cancellation within 7 days, timely reroute: generally no fixed compensation", () => {
-  const r = run({ disruption: "cancellation", cancellationNoticeDays: 5, rerouteEarlyDeparture: 1, rerouteArrivalLate: 1 });
+  const r = run({ disruption: "cancellation", cancellationNoticeDays: 5, rerouteOffered: "yes", rerouteEarlyDeparture: 1, rerouteArrivalLate: 1 });
   assert.equal(r.category, "GENERALLY_UNLIKELY");
 });
 test("Cancellation within 7 days, late reroute and airline cause: potentially eligible", () => {
-  const r = run({ disruption: "cancellation", cancellationNoticeDays: 5, rerouteEarlyDeparture: 2, rerouteArrivalLate: 5 });
+  const r = run({ disruption: "cancellation", cancellationNoticeDays: 5, rerouteOffered: "yes", rerouteEarlyDeparture: 2, rerouteArrivalLate: 5 });
   assert.equal(r.category, "POSSIBLY_ELIGIBLE");
   assert.equal(r.indicativeAmountEUR, null);
 });
@@ -84,4 +84,25 @@ test("Unknown distance does not invent a fixed care eligibility threshold", () =
   const r = run({ distance: "unknown", departureDelay: 2.5 });
   assert.equal(r.carePossible, false);
   assert.ok(r.questions.some(q => q.includes("2/3/4-hour")));
+});
+
+test("Unknown intra-EU status on >3500km route must not assume €600", () => {
+  const r = run({ distance: "long", intraEU: "unknown", arrivalDelay: 5 });
+  assert.equal(r.category, "POSSIBLY_ELIGIBLE");
+  assert.equal(r.indicativeAmountEUR, null);
+  assert.ok(r.questions.some(q => q.includes("€400 versus €600")));
+});
+test("Long flight with unknown intra-EU status must not invent 4h care threshold", () => {
+  const r = run({ distance: "long", intraEU: "unknown", departureDelay: 3.5 });
+  assert.equal(r.carePossible, false);
+  assert.ok(r.questions.some(q => q.includes("intra-EU")));
+});
+test("Cancellation with confirmed no reroute may qualify, subject to carrier cause", () => {
+  const r = run({ disruption: "cancellation", cancellationNoticeDays: 3, rerouteOffered: "no", rerouteEarlyDeparture: "", rerouteArrivalLate: "", cause: "airline_technical" });
+  assert.equal(r.category, "POSSIBLY_ELIGIBLE");
+  assert.ok(r.reasons.some(x => x.code === "NO_REROUTE_OFFERED"));
+});
+test("Cancellation with unconfirmed reroute status must not auto-qualify", () => {
+  const r = run({ disruption: "cancellation", cancellationNoticeDays: 3, rerouteOffered: "unknown", cause: "airline_technical" });
+  assert.equal(r.category, "REVIEW_REQUIRED");
 });
