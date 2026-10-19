@@ -29,7 +29,20 @@ const fs=require("fs"),path=require("path"),assert=require("assert/strict");
   check("MOBILE_NO_HORIZONTAL_OVERFLOW",await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.screenshot({path:path.join(out,process.env.PLI_PUBLIC_URL?"public-mobile.png":"mobile.png"),fullPage:true});
   // Interception affects this isolated browser only; fixtures are never written as live data.
-  const stale=structuredClone(data);stale.generated_at="2000-01-01T00:00:00Z";
+  const freshFixture=structuredClone(data);
+  // A browser-only decision fixture makes the stale gate non-vacuous even if no real alert matches.
+  freshFixture.generated_at=new Date().toISOString();
+  for(const s of freshFixture.sources){s.result="PASS";s.success_at=new Date().toISOString();}
+  if(freshFixture.decisions.length){
+    const d=freshFixture.decisions[0];d.status="PROPOSED";d.action="check_official_advice";
+    d.event_expires_at=new Date(Date.now()+3600000).toISOString();
+    const ev=freshFixture.events.find(e=>e.id===d.event_id);ev.expires_at=d.event_expires_at;
+    await page.route("**/data.json?*",r=>r.fulfill({status:200,contentType:"application/json",body:JSON.stringify(freshFixture)}));
+    await page.click("#reload");await page.waitForSelector(".proposed");
+    check("BROWSER_ONLY_PROPOSAL_FIXTURE_VISIBLE",await page.locator(".proposed").count()>0);
+    await page.unroute("**/data.json?*");
+  }
+  const stale=structuredClone(freshFixture);stale.generated_at="2000-01-01T00:00:00Z";
   await page.route("**/data.json?*",r=>r.fulfill({status:200,contentType:"application/json",body:JSON.stringify(stale)}));
   await page.click("#reload");
   await page.waitForFunction(()=>document.querySelector("#freshness").textContent.includes("快照已过期"));

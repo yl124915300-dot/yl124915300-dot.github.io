@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);
 const node=(tag,text,cls)=>{const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n;};
 let data=null;
 const names={PROPOSED:"待人工核验",REVOKED:"已撤销",NO_MATCH:"未触发",STALE:"数据过期 / 来源不可用"};
-const reasons={fixture_or_synthetic_not_live:"测试或合成事件不能作为真实事件",source_unavailable_or_stale:"来源失败或已过期",cancelled_or_expired:"事件已取消或过期",not_yet_effective:"事件尚未生效",scope_or_threshold_not_matched:"区域或强度阈值未匹配",human_review_of_official_source:"请人工核验官方信息"};
+const reasons={exposure_not_matched:"没有已设定的海滩或海上活动暴露；区域匹配不足以触发",fixture_or_synthetic_not_live:"测试或合成事件不能作为真实事件",source_unavailable_or_stale:"来源失败或已过期",cancelled_or_expired:"事件已取消或过期",not_yet_effective:"事件尚未生效",scope_or_threshold_not_matched:"区域或强度阈值未匹配",human_review_of_official_source:"请人工核验官方信息"};
 const actions={check_official_advice:"检查官方建议",flag_schedule_conflict:"提示日程冲突"};
 const date=s=>s?new Date(s).toLocaleString("zh-CN",{hour12:false})+"（浏览器本地时间）":"无成功记录";
 function link(url,label){const a=node("a",label);try{const u=new URL(url);if(u.protocol==="https:"&&["api.weather.gov","www.weather.gov","earthquake.usgs.gov","github.com"].includes(u.hostname)){a.href=u.href;a.target="_blank";a.rel="noopener noreferrer";}}catch{}return a;}

@@ -45,6 +45,23 @@ class EngineTests(unittest.TestCase):
     def test_unknown_message_rejected(self):
         self.assertIsNone(normalize(weather(message="Ack"),"NWS",T,live=True))
 
+    def test_urn_official_event_has_https_link(self):
+        f=weather()
+        f["properties"]["id"]="urn:oid:example"
+        self.assertEqual(event(f)["official_url"],"https://api.weather.gov/alerts/urn:oid:example")
+
+    def test_rip_current_requires_beach_exposure(self):
+        f=weather(ugc=["FLC086"])
+        f["properties"]["event"]="Rip Current Statement"
+        d=evaluate(event(f),PROFILES[4],ready(),T)
+        self.assertEqual(d["reason"],"exposure_not_matched")
+        self.assertEqual(d["status"],"NO_MATCH")
+
+    def test_marine_requires_marine_exposure(self):
+        f=weather(ugc=["WAC033"])
+        f["properties"]["event"]="Gale Warning"
+        self.assertEqual(evaluate(event(f),PROFILES[1],ready(),T)["status"],"NO_MATCH")
+
     def test_polygon_inside(self):
         self.assertEqual(weather_scope(event(weather(polygon())),PROFILES[1],{},T),(True,"official_polygon"))
 

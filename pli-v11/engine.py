@@ -9,7 +9,7 @@ import os
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, quote
 from urllib.request import Request, urlopen
 
 VERSION = "1.1.0"
@@ -128,8 +128,8 @@ def normalize(feature, name, t, live=False):
         e = dict(id="nws:"+str(prop["id"]), kind="weather", title=prop.get("headline") or prop.get("event") or "NWS alert",
                  status="cancelled" if prop["messageType"] == "Cancel" else "active",
                  starts_at=prop.get("effective") or prop["sent"], updated_at=prop["sent"], expires_at=prop["expires"],
-                 official_url=prop["id"], references=[str(x["identifier"]) for x in prop.get("references", []) if x.get("identifier")],
-                 payload=dict(severity=severity, ugc=ugc, zones=zones, geometry=feature.get("geometry")))
+                 official_url="https://api.weather.gov/alerts/"+quote(str(prop["id"]),safe=":."), references=[str(x["identifier"]) for x in prop.get("references", []) if x.get("identifier")],
+                 payload=dict(severity=severity, event_type=prop.get("event","Unknown"), ugc=ugc, zones=zones, geometry=feature.get("geometry")))
     else:
         raise ValueError("unsupported source")
     if stamp(e["updated_at"]) > t+600 or stamp(e["starts_at"]) > t+31*86400:
@@ -249,6 +249,12 @@ def evaluate(event, profile, state, t):
         matched, method = weather_scope(event,profile,state["mappings"],t)
         basis.update(matching_rule="R1",method=method,severity=event["payload"]["severity"])
         matched = matched and event["payload"]["severity"] in ("Moderate","Severe","Extreme")
+        event_type = event["payload"].get("event_type","Unknown")
+        # These six synthetic profiles contain no verified beach or marine activity.
+        # A forecast-zone match alone cannot establish such exposure.
+        if event_type in ("Rip Current Statement","Beach Hazards Statement","High Surf Advisory","High Surf Warning") or any(word in event_type for word in ("Marine","Gale","Storm Force Wind","Hurricane Force Wind")):
+            basis.update(event_type=event_type,exposure="beach_or_marine_activity_not_configured")
+            return result("NO_MATCH","exposure_not_matched")
     else:
         x = event["payload"]
         km = distance(profile["lat"],profile["lon"],x["lat"],x["lon"])
