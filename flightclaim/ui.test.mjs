@@ -72,4 +72,11 @@ test("anonymous wizard validates, evaluates EU delay, prepares letter and create
   assert.equal(saved[0].status, "SENT_BY_TRAVELER");
   [...card.querySelectorAll("button")].find(el => el.textContent === "Delete").click();
   assert.equal(JSON.parse(localStorage.getItem("flightclaim_v0_local_drafts")).length, 0);
+  const newCheck = document.querySelector('[data-new-check="true"]');
+  assert.ok(newCheck);
+  newCheck.click();
+  assert.match($("#stepLabel").textContent, /1 of 5/, "new check starts at first step");
+  assert.equal($("#wizardForm").elements.namedItem("scope").value, "", "previous flight scope cleared");
+  assert.equal($("#wizardForm").elements.namedItem("arrivalDelay").value, "", "previous delay cleared");
+  assert.equal($("#letterText").value, "", "old claim letter removed");
 });
