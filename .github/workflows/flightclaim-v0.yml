@@ -1,0 +1,47 @@
+name: FlightClaim V0 checks
+
+on:
+  push:
+    paths:
+      - 'flightclaim/**'
+      - '.github/workflows/flightclaim-v0.yml'
+  pull_request:
+    paths:
+      - 'flightclaim/**'
+      - '.github/workflows/flightclaim-v0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: EU261 logic, JavaScript syntax and static safety
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript module syntax
+        run: |
+          node --check flightclaim/engine.mjs
+          node --check flightclaim/app.mjs
+          node --check flightclaim/engine.test.mjs
+      - name: Run deterministic EU261 scenarios
+        run: node --test flightclaim/engine.test.mjs
+      - name: Verify zero-server-submission pilot contract
+        run: |
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import assert from "node:assert/strict";
+            const html = fs.readFileSync("flightclaim/index.html", "utf8");
+            const js = fs.readFileSync("flightclaim/app.mjs", "utf8");
+            assert.match(html, /Free passenger-rights self-help pilot/);
+            assert.match(html, /No online case submission/);
+            assert.match(html, /easyjet.com\/en\/claim\/EU261/);
+            assert.match(html, /help.ryanair.com/);
+            assert.match(js, /localStorage/);
+            assert.doesNotMatch(js, /fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon/);
+            console.log("Static no-submission checks passed.");
+          '
