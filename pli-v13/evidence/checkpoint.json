@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-19T07:00:10.000Z",
+  "memory": {
+    "version": "1.2.0",
+    "classification": "SYNTHETIC",
+    "journal": [
+      {
+        "event": {
+          "id": "initial_household_constraint",
+          "kind": "constraint",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:00:10.000Z",
+          "expiresAt": "2026-10-19T09:00:10.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC household activity is blocked pending clarification.",
+          "payload": {
+            "category": "household",
+            "blocked": true
+          }
+        },
+        "observedAt": "2026-10-19T07:00:10.000Z"
+      },
+      {
+        "event": {
+          "id": "w02_0",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:00:10.000Z",
+          "expiresAt": "2026-10-19T09:00:10.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "Simulate purchasing a badge from the campus printer to minimize costs.",
+          "payload": {
+            "amountCents": 600,
+            "category": "study",
+            "slot": "w02"
+          }
+        },
+        "observedAt": "2026-10-19T07:00:10.000Z"
+      }
+    ]
+  }
+}

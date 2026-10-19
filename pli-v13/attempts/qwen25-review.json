@@ -1,0 +1,8 @@
+{
+  "verdict": "NO_GO",
+  "attempts": 10,
+  "parsed": 10,
+  "validated": 0,
+  "notes": "All outputs rejected for ungrounded facts. Dollar/cent errors and prohibited action suggestions. No state changes. Preserve this failed experiment; never count JSON validity as reasoning success.",
+  "run": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39211749353"
+}

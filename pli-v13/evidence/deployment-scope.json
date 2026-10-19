@@ -1,0 +1,932 @@
+{
+  "baselineCommit": "02ece4706c5ac4a9097ce36caba1be0abab66fa1",
+  "mainParent": "02ece4706c5ac4a9097ce36caba1be0abab66fa1",
+  "developmentEvidenceCommit": "58588dc5a3c8130d640a0ae5d7d2c491e8ad2776",
+  "method": "separate additive publication, no PR merge or settings change",
+  "preexistingBlobsPreserved": 217,
+  "changedPreexistingBlobs": [],
+  "addedPaths": [
+    ".github/workflows/pli-v13-verify.yml",
+    ".github/workflows/pli-v13-viewer.yml",
+    "pli-v13/README.md",
+    "pli-v13/app.mjs",
+    "pli-v13/attempts/qwen25-review.json",
+    "pli-v13/attempts/qwen25/cases.json",
+    "pli-v13/attempts/qwen25/evidence/MODEL-LICENSE.txt",
+    "pli-v13/attempts/qwen25/evidence/checkpoint.json",
+    "pli-v13/attempts/qwen25/evidence/inference.json",
+    "pli-v13/attempts/qwen25/evidence/restore.json",
+    "pli-v13/attempts/qwen25/evidence/results.json",
+    "pli-v13/attempts/qwen25/evidence/server.log",
+    "pli-v13/attempts/qwen25/prompt.txt",
+    "pli-v13/attempts/qwen25/run.py",
+    "pli-v13/attempts/qwen3-initial-review.json",
+    "pli-v13/attempts/qwen3-initial/cases.json",
+    "pli-v13/attempts/qwen3-initial/evidence/MODEL-LICENSE.txt",
+    "pli-v13/attempts/qwen3-initial/evidence/checkpoint.json",
+    "pli-v13/attempts/qwen3-initial/evidence/inference.json",
+    "pli-v13/attempts/qwen3-initial/evidence/restore.json",
+    "pli-v13/attempts/qwen3-initial/evidence/results.json",
+    "pli-v13/attempts/qwen3-initial/evidence/server.log",
+    "pli-v13/attempts/qwen3-initial/gate.mjs",
+    "pli-v13/attempts/qwen3-initial/prompt.txt",
+    "pli-v13/attempts/qwen3-initial/run.py",
+    "pli-v13/attempts/qwen3-initial/schema.json",
+    "pli-v13/audit.py",
+    "pli-v13/browser.cjs",
+    "pli-v13/cases.json",
+    "pli-v13/evidence/MODEL-LICENSE.txt",
+    "pli-v13/evidence/browser.json",
+    "pli-v13/evidence/checkpoint.json",
+    "pli-v13/evidence/desktop.png",
+    "pli-v13/evidence/inference.json",
+    "pli-v13/evidence/mobile.png",
+    "pli-v13/evidence/restore.json",
+    "pli-v13/evidence/results.json",
+    "pli-v13/evidence/review.json",
+    "pli-v13/evidence/server.log",
+    "pli-v13/evidence/v11-audit.json",
+    "pli-v13/gate.mjs",
+    "pli-v13/index.html",
+    "pli-v13/prompt.txt",
+    "pli-v13/public.py",
+    "pli-v13/restore.mjs",
+    "pli-v13/run.py",
+    "pli-v13/schema.json",
+    "pli-v13/step.mjs",
+    "pli-v13/style.css"
+  ],
+  "preserved": [
+    {
+      "path": ".github/workflows/cat-tales-live-qa.yml",
+      "sha": "43ab2db77d098d200942d0c2e9ee0a554a1226bc"
+    },
+    {
+      "path": ".github/workflows/cat-tales-public-smoke.yml",
+      "sha": "ed4a2be0135f8156ec51a08821ae6c777c2e90e9"
+    },
+    {
+      "path": ".github/workflows/cat-tales-vendor-audio.yml",
+      "sha": "6c086efd5bdb56c623410516240442f018d6436f"
+    },
+    {
+      "path": ".github/workflows/cat-tales-vendor-vision.yml",
+      "sha": "3e889a3a58100c12a3df028338eaf2c17374a3aa"
+    },
+    {
+      "path": ".github/workflows/pli-v11-hourly.yml",
+      "sha": "35c1b8f14349a09bd793c11e5f1b1a0b32734b2d"
+    },
+    {
+      "path": ".github/workflows/pli-v11-public.yml",
+      "sha": "f1701985351146a00a46821206da8cbba954162b"
+    },
+    {
+      "path": ".github/workflows/pli-v11-verify.yml",
+      "sha": "e026b734f0d4b768e4b3926547f92fc2f4835aaf"
+    },
+    {
+      "path": ".github/workflows/pli-v12-public.yml",
+      "sha": "8aa4d8f783f8fdaf36d803351c1c2a050fcb90f8"
+    },
+    {
+      "path": ".github/workflows/pli-v12-verify.yml",
+      "sha": "f99dfea14fd14e1be5150b9157f955c121296e51"
+    },
+    {
+      "path": "5b6be22d1f9d4641a83ab30909f4cb52.txt",
+      "sha": "0b898f8af65bc40daf8e6b61243b4559e9d88746"
+    },
+    {
+      "path": "ai-online-market-trial/README.md",
+      "sha": "9a73b00256fc59a13f907bfe840ecf4235c36f08"
+    },
+    {
+      "path": "ai-online-market-trial/activation-status.json",
+      "sha": "7473d0197a60ad46b5c8b57e6cee4480f7bd060e"
+    },
+    {
+      "path": "ai-online-market-trial/agent-native-client.zip",
+      "sha": "8e288af4193c5defd44e8a92ca04071e2e184e2c"
+    },
+    {
+      "path": "ai-online-market-trial/assets.json",
+      "sha": "51f4d03488dc02679dcc8b63938ebd5ab2d32c20"
+    },
+    {
+      "path": "ai-online-market-trial/bounded-public-dns.mjs",
+      "sha": "5ce6094ea7a801e3bd6bbad2714fc8ea6af94391"
+    },
+    {
+      "path": "ai-online-market-trial/client-config.json",
+      "sha": "4354f286fb766c5b0cf37f22baa85496de8e4683"
+    },
+    {
+      "path": "ai-online-market-trial/client-http.mjs",
+      "sha": "7fe77dfe321b2eb5ad5dab859710819622de96c7"
+    },
+    {
+      "path": "ai-online-market-trial/client.mjs",
+      "sha": "54ed5b2bc5b85755d9e951b8f1dbc9a3b74f8642"
+    },
+    {
+      "path": "ai-online-market-trial/composition-receipt.json",
+      "sha": "fb276015d8924173b1ddfbc286193b86a962f56d"
+    },
+    {
+      "path": "ai-online-market-trial/evidence.json",
+      "sha": "1c8d2c2d84562f208b48f7cb3b296a61bc3bdeb0"
+    },
+    {
+      "path": "ai-online-market-trial/index.html",
+      "sha": "6626e321458a270e628f297ffba720784fa2b64e"
+    },
+    {
+      "path": "ai-online-market-trial/opportunity-watch.json",
+      "sha": "5a0d169bfb7c24d1f67b263ae72ad82bde80c8be"
+    },
+    {
+      "path": "ai-online-market-trial/package.json",
+      "sha": "e54248c2de6dc214821254d9f0eb3561ce69bb8e"
+    },
+    {
+      "path": "ai-online-market-trial/public-discovery.json",
+      "sha": "fe1d96fe55c42f175c3842f92a3899e6a7c5def4"
+    },
+    {
+      "path": "ai-online-market-trial/research-receipt.json",
+      "sha": "d5ad70ef1e3303f5a6f316663266e11de0104608"
+    },
+    {
+      "path": "ai-online-market-trial/sponsored-campaigns.json",
+      "sha": "7c4e4924599cbf53503178f1d2036525df3adcfc"
+    },
+    {
+      "path": "ai-online-market-trial/verify-public-asset.mjs",
+      "sha": "ed821b7b77156148fcf1ffe163fc1fc79b702be3"
+    },
+    {
+      "path": "california-3-day-used-car-return/index.html",
+      "sha": "b54fd4e1d0dc8fa1e1e07b9c26e2e8c304a4b643"
+    },
+    {
+      "path": "california-deal-review/analytics.js",
+      "sha": "6bab89f3b37c976da5fb520b382cd285db4374b8"
+    },
+    {
+      "path": "california-deal-review/favicon.svg",
+      "sha": "c4c04bea4d36c2f99ad27cd0a06dc0159ac795e9"
+    },
+    {
+      "path": "california-deal-review/index.html",
+      "sha": "29c32eeb299696c7cc349ed6cf68b16ced0f89a4"
+    },
+    {
+      "path": "california-deal-review/sitemap.xml",
+      "sha": "964dd5c401d8b2a9727a5a33e2f1ddea11be8f0c"
+    },
+    {
+      "path": "california-deal-review/styles.css",
+      "sha": "a231e46153db7e4a026ee51b72a5a6755dd158a4"
+    },
+    {
+      "path": "cat-tales/app/APP_INFO.md",
+      "sha": "cb59f1a70a0cc9ee0a1d94117eb3dfee312fd055"
+    },
+    {
+      "path": "cat-tales/app/index.html",
+      "sha": "51124bd71c3780b3a94ce748007fb5701b97b6d4"
+    },
+    {
+      "path": "cat-tales/live/beta.e2e.cjs",
+      "sha": "048f16ff254758d03f5ea7202995160ed280ca0b"
+    },
+    {
+      "path": "cat-tales/live/beta.js",
+      "sha": "bdacbd0a0d51c9b27703ea9b8a5e9a54998941df"
+    },
+    {
+      "path": "cat-tales/live/beta.test.cjs",
+      "sha": "f5b8a607aff455f48074b85f4535f54e6709581b"
+    },
+    {
+      "path": "cat-tales/live/dialogue.js",
+      "sha": "48003ba290dd9db15b49bbfed05f9f4eb3121273"
+    },
+    {
+      "path": "cat-tales/live/dialogue.test.cjs",
+      "sha": "c7eb1addaec9dc169f82c9c3b166269115cd8a17"
+    },
+    {
+      "path": "cat-tales/live/e2e.cjs",
+      "sha": "3bee7284f1c6ecac5592b9f54963e909e238b0a5"
+    },
+    {
+      "path": "cat-tales/live/index.html",
+      "sha": "8c886cede72a29bcdcc137d4aae4459a98ae30a2"
+    },
+    {
+      "path": "cat-tales/live/live.css",
+      "sha": "29e89300c5b86eddcf0b5b78fb04d37a82664667"
+    },
+    {
+      "path": "cat-tales/live/live.js",
+      "sha": "f80821daba9580f8bc3769c3110325c741a5c5f3"
+    },
+    {
+      "path": "cat-tales/live/model-smoke.cjs",
+      "sha": "16feaa6bb1626c633e3e52d08e075e51eb65e325"
+    },
+    {
+      "path": "cat-tales/live/motion-policy.js",
+      "sha": "e804a609f34a81b5626a0a87540d97b978f25e5a"
+    },
+    {
+      "path": "cat-tales/live/motion-policy.test.cjs",
+      "sha": "b642c6d696d3fdfa70b7a2b42bc8a6446e3d44f9"
+    },
+    {
+      "path": "cat-tales/live/sound-policy.js",
+      "sha": "78c8423e1649fa6bf0f6421df0a85d12bde12816"
+    },
+    {
+      "path": "cat-tales/live/sound-worker.js",
+      "sha": "7c9fdc087f93d71f592ade47f60d5d7e16606f79"
+    },
+    {
+      "path": "cat-tales/live/vendor/ATTRIBUTION.md",
+      "sha": "0763b3ba6ac258ee8d54213e9a51c71c96da0bc4"
+    },
+    {
+      "path": "cat-tales/live/vendor/SHA256SUMS",
+      "sha": "e723c80a5400b516fcf0c40ab631a61e8460a94b"
+    },
+    {
+      "path": "cat-tales/live/vendor/audio_bundle.mjs",
+      "sha": "232b2bea45943d1a3a1c1294141f5799bbe80760"
+    },
+    {
+      "path": "cat-tales/live/vendor/wasm/audio_wasm_internal.js",
+      "sha": "acb746a91f437a0c1ec39f784e89803e8e46abf2"
+    },
+    {
+      "path": "cat-tales/live/vendor/wasm/audio_wasm_internal.wasm",
+      "sha": "7d073a314b004304773c8b73e45a50738a01d700"
+    },
+    {
+      "path": "cat-tales/live/vendor/wasm/audio_wasm_module_internal.js",
+      "sha": "ec15fafa6de710a4b92fb626689e94307851e3b2"
+    },
+    {
+      "path": "cat-tales/live/vendor/wasm/audio_wasm_module_internal.wasm",
+      "sha": "e446150b8ca71a18bf7e4952640eea340295782e"
+    },
+    {
+      "path": "cat-tales/live/vendor/wasm/audio_wasm_nosimd_internal.js",
+      "sha": "d1c75209940e12e2ddd32c1c2930f8db76aa613d"
+    },
+    {
+      "path": "cat-tales/live/vendor/wasm/audio_wasm_nosimd_internal.wasm",
+      "sha": "5965ba1d1bcc9d1bf852af9ffc514710443c859e"
+    },
+    {
+      "path": "cat-tales/live/vendor/yamnet.tflite",
+      "sha": "4d46551d9f07b0971b7e9e04ed25568a703c8dbf"
+    },
+    {
+      "path": "cat-tales/live/vision-live-smoke.cjs",
+      "sha": "7c7a675b7c04b7b7480bff06e336c1aa4100bd9e"
+    },
+    {
+      "path": "cat-tales/live/vision-policy.js",
+      "sha": "baaa084ee593bf7599d8bd714188d77fff301e40"
+    },
+    {
+      "path": "cat-tales/live/vision-policy.test.cjs",
+      "sha": "7c35921ed6424bdc70da059b80e6d3a88fd5541c"
+    },
+    {
+      "path": "cat-tales/live/vision-smoke.cjs",
+      "sha": "ad64092fceaac7b141ce4a8dece15902f1d292f5"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/ATTRIBUTION.md",
+      "sha": "c250c113d6dcec0158f9c9535716ba4f13784054"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/SHA256SUMS",
+      "sha": "0fba034272c281a2ee48f0cce2d9362636d64c31"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/efficientdet_lite0.tflite",
+      "sha": "b43cc06a45b8ae2790685851df6cd81639b05220"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/vision_bundle.mjs",
+      "sha": "f2aa30d27d064478102154e46cbf7f31ebfc8859"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/wasm/vision_wasm_internal.js",
+      "sha": "164a2410225ffc8479fe3d57bf8ab04ff5af4827"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/wasm/vision_wasm_internal.wasm",
+      "sha": "7ca3e0582b3bf153fbdbb46ea63d683a1537814a"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/wasm/vision_wasm_module_internal.js",
+      "sha": "8cd5730029d34580c621232de05d1eb4b7f227c8"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/wasm/vision_wasm_module_internal.wasm",
+      "sha": "9c82447f2324b403f17abe0c63b11c849800b9de"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/wasm/vision_wasm_nosimd_internal.js",
+      "sha": "3dffe5f4b0c44e6d6d98c1e480a11254370d3095"
+    },
+    {
+      "path": "cat-tales/live/vision-vendor/wasm/vision_wasm_nosimd_internal.wasm",
+      "sha": "82cd2e165e24d9e88a07106c4b5af06120c925ad"
+    },
+    {
+      "path": "cat-tales/live/vision.js",
+      "sha": "34cf705225c64b653a5a0c8f0bd49ac9db33c977"
+    },
+    {
+      "path": "dealer-add-ons-california/index.html",
+      "sha": "0e536115664edfc92b5309f9911c643c0b67effb"
+    },
+    {
+      "path": "dealer-changed-price-california/index.html",
+      "sha": "20c61e83532f3500275c249a0bafc4a43f2cc9e2"
+    },
+    {
+      "path": "deals.json",
+      "sha": "eba66b546877a3a6571eb3d2b7051873427d67cf"
+    },
+    {
+      "path": "exact-part-gateway/.nojekyll",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "exact-part-gateway/1461ed1bf0ed97cc34f717113844a26f.txt",
+      "sha": "681790ded7a5b636ee2c251854d26552adac7ae3"
+    },
+    {
+      "path": "exact-part-gateway/404.html",
+      "sha": "ed5a0d54bda0dcc051fde4d11fb2feeb6692c894"
+    },
+    {
+      "path": "exact-part-gateway/asm/ws10zg-500-420t-l10-m4-m12/index.html",
+      "sha": "9cf30d53ed12ef98f219b1034f32a434dffdde18"
+    },
+    {
+      "path": "exact-part-gateway/assets/intelligence.css",
+      "sha": "55bd93d9c24f55d591e058158ab3ce79c2b66695"
+    },
+    {
+      "path": "exact-part-gateway/assets/marketplace.js",
+      "sha": "72d060f6579493b70a4d926f43555949b2e376e7"
+    },
+    {
+      "path": "exact-part-gateway/assets/style.css",
+      "sha": "d8c772352e80e6e05880f4211a0c12dfa48c9495"
+    },
+    {
+      "path": "exact-part-gateway/atos/dhi-0713-13/index.html",
+      "sha": "cb6f0072d2c5749ddcd7a90b145035b7a92b3b47"
+    },
+    {
+      "path": "exact-part-gateway/balluff/bmf-305k-ps-c-2-pu-05/index.html",
+      "sha": "5fcff57da0982c685263ca889bae29f159721924"
+    },
+    {
+      "path": "exact-part-gateway/banner-engineering/k30l2grypq-803685/index.html",
+      "sha": "d11cbbb0680db6175c0103ef9eab09d21e0e63e2"
+    },
+    {
+      "path": "exact-part-gateway/bansbach/kol2p-3-120-416-002/index.html",
+      "sha": "ac7126ac994d84cae364fe4f099641e7f8882de5"
+    },
+    {
+      "path": "exact-part-gateway/bansbach/kom2p03-110-400-001/index.html",
+      "sha": "585005991dc81655752ab8bf5436a49afd4f3b5a"
+    },
+    {
+      "path": "exact-part-gateway/catalog.json",
+      "sha": "887a36208ab3a595a3d053c88c924947f60fd9f2"
+    },
+    {
+      "path": "exact-part-gateway/dansensor/checkmate-4/index.html",
+      "sha": "64a0f2f09e53cdaf70af21490ac9741778854acb"
+    },
+    {
+      "path": "exact-part-gateway/endress-hauser/fmb70-3bb1c121glaa/index.html",
+      "sha": "d87242ac31d85267cbadd18a9f3320ae951c5d87"
+    },
+    {
+      "path": "exact-part-gateway/endress-hauser/fmb70-3bb1f121glaa/index.html",
+      "sha": "6ae13d2821c6247040f9ee3b1bee3d9f04ff62c8"
+    },
+    {
+      "path": "exact-part-gateway/euchner/ng1hb-510-m/index.html",
+      "sha": "df320464b4603bb8e5b27d8df1d6aff93078144b"
+    },
+    {
+      "path": "exact-part-gateway/factory-metrics.json",
+      "sha": "c6d9dd87bbc4ed39849fb66e7ac9a4d582970c24"
+    },
+    {
+      "path": "exact-part-gateway/factory/README.md",
+      "sha": "9f443d92aecbe30e80f9920d1f0ce4e4c43f6a8d"
+    },
+    {
+      "path": "exact-part-gateway/factory/factory.py",
+      "sha": "5bef593181df5bab9e56a0109d2847b868bf44d4"
+    },
+    {
+      "path": "exact-part-gateway/factory/index.html",
+      "sha": "31411d564a523b1165be306c232e989e870823a8"
+    },
+    {
+      "path": "exact-part-gateway/factory/qualified-evidence.json",
+      "sha": "c746ffbb056f507f8d5d23147fd4fd0dc8c79c68"
+    },
+    {
+      "path": "exact-part-gateway/factory/test_factory.py",
+      "sha": "4bd2a5b9c3be7b7f4b9bd1a259186b967a400d36"
+    },
+    {
+      "path": "exact-part-gateway/fuji-electric/ms4sa-ap-adc/index.html",
+      "sha": "6fb514c6de1852f974b8f50673978527559ecaff"
+    },
+    {
+      "path": "exact-part-gateway/ifm/if6028/index.html",
+      "sha": "98fbd1bd30db3ce3fb54626e99313444241344eb"
+    },
+    {
+      "path": "exact-part-gateway/ifm/sm9100/index.html",
+      "sha": "f28d884be01b5fd63e740bc3989d96020f73d80a"
+    },
+    {
+      "path": "exact-part-gateway/index.html",
+      "sha": "b118cd531aacd26fe0e9da79e08cc4b388b71c8e"
+    },
+    {
+      "path": "exact-part-gateway/industrial-servo-drive-parts/index.html",
+      "sha": "085153543133d6d459aaa1536467bebf6c4a9c32"
+    },
+    {
+      "path": "exact-part-gateway/invt/gd20-2r2g-4-eu/index.html",
+      "sha": "a0f0ba17c1fda4cd2a42f10b270ac6df8f8ac848"
+    },
+    {
+      "path": "exact-part-gateway/kraus-naimer/kg20bt203-nlb512e/index.html",
+      "sha": "5deea42633b6cf276de41b865bec2eb23f9b0d93"
+    },
+    {
+      "path": "exact-part-gateway/lenze/mdsksbs056-33/index.html",
+      "sha": "2d30e12e56c062152554a6d60f73356920df04f2"
+    },
+    {
+      "path": "exact-part-gateway/linak/361203200000ba-612g305700cs000/index.html",
+      "sha": "b0a8767d33d99130f3218b28a6ba2e265c1e8204"
+    },
+    {
+      "path": "exact-part-gateway/mac-valves/0071372-00/index.html",
+      "sha": "d8f4e974b0575efce1ed8ec7a745d1a9f2758215"
+    },
+    {
+      "path": "exact-part-gateway/marketplace-data.json",
+      "sha": "3f6055537cf4dc5366aa7adb175b56349121b57b"
+    },
+    {
+      "path": "exact-part-gateway/mitsubishi-electric/mds-ch-cv-260/index.html",
+      "sha": "98d7cae74248048e23cf02c40e672e85f587a846"
+    },
+    {
+      "path": "exact-part-gateway/moteck/md21-24w6-345-545/index.html",
+      "sha": "0f37413d3b0c65e4c10b37117f20d3d66ac29c5d"
+    },
+    {
+      "path": "exact-part-gateway/pneumax/mhs-p-pvc/index.html",
+      "sha": "bd24114c18ef4fb10b48f3bbcdd1aad818503dba"
+    },
+    {
+      "path": "exact-part-gateway/schneider-electric/fr-d740-036sc-ec/index.html",
+      "sha": "80a309b4a92dbbf1ef665a0ccf6fa3a2ead745a9"
+    },
+    {
+      "path": "exact-part-gateway/series/siemens-s7-1200/index.html",
+      "sha": "6670a5b9b45c489166eec177feb10e2567fc34c5"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6av6381-2bp08-1ah0/index.html",
+      "sha": "2478b9d3a2be60b087f76f9d20158da5980072c1"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6es7214-1ag40-0xb0/index.html",
+      "sha": "b49a961dbde85ad3b8182de57c263b86376abf7c"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6es7215-1ag40-0xb0/index.html",
+      "sha": "16ecc718028004f5429defc7696e3a11e111301c"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6es7215-1bg40-0xb0/index.html",
+      "sha": "ca18f9ff45078b619d0701a1f5c943188850e516"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6es7223-1pl32-0xb0/index.html",
+      "sha": "405575a32a5b6b8513f563789247fe50582dd096"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6es7231-4hd32-0xb0/index.html",
+      "sha": "946cf74ffd61d8dfc971fe24d31410271742c544"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6es7231-4hf32-0xb0/index.html",
+      "sha": "793e79d18b1f70cc5169a3c0e84edae8d8294ac5"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6es7511-1ck01-0ab0/index.html",
+      "sha": "72df49c3c4da492ab0cc004860105ecc64994c2a"
+    },
+    {
+      "path": "exact-part-gateway/siemens/6es7512-1ck01-0ab0/index.html",
+      "sha": "2630632904e950936141575c8995499aeb2092b2"
+    },
+    {
+      "path": "exact-part-gateway/siemens/7mh4960-6aa01/index.html",
+      "sha": "7ae48e812f804228fedcb096c716df6727c509d2"
+    },
+    {
+      "path": "exact-part-gateway/sitemap.xml",
+      "sha": "8e7692a534c0786fe5650c12637874c389a9c8d4"
+    },
+    {
+      "path": "exact-part-gateway/spg/s8ka200b-l33/index.html",
+      "sha": "fdf6ec8a32c27ad43bbb64265bfe6d2f57f7b5f8"
+    },
+    {
+      "path": "exact-part-gateway/tox-pressotechnik/pfhl-056-002/index.html",
+      "sha": "fea4704d294eee29b37cedb135695f00a6b38588"
+    },
+    {
+      "path": "exact-part-gateway/wenglor/p3ec401/index.html",
+      "sha": "c0cc53bbda625e62f5a26baa9156d7e151bfd423"
+    },
+    {
+      "path": "exact-part-gateway/yaskawa/sgmah-04aaa61d-oy/index.html",
+      "sha": "0fbcfdb3ebd5c10a991474191f664672ee937b41"
+    },
+    {
+      "path": "fulfillment-referrals.html",
+      "sha": "c1bba0d028330bc6289d95031a4928b4a354f9e8"
+    },
+    {
+      "path": "gamepilot/balatro/index.html",
+      "sha": "9d701b2f7261b9177e14cb05176153721e133cc7"
+    },
+    {
+      "path": "gamepilot/community/blue-joker-free-check.png",
+      "sha": "cf16d246318aa1851bb136a335c6561580fc18f7"
+    },
+    {
+      "path": "gamepilot/community/index.html",
+      "sha": "ee03b591fe19a79d91a4c7ee1085a479dc57e48e"
+    },
+    {
+      "path": "gamepilot/community/styles.css",
+      "sha": "50a3226cd12e7563a226da48003bd382e62eadaa"
+    },
+    {
+      "path": "gamepilot/operations/dual-acquisition-20261016.md",
+      "sha": "64d896f4602923e18263113f8f1ad29513328b56"
+    },
+    {
+      "path": "gamepilot/releases/cover-v1.png",
+      "sha": "84393b542640737b199a7869c42b4087f18d3818"
+    },
+    {
+      "path": "gamepilot/releases/creator-brief-v1.txt",
+      "sha": "24a572bfcf6098805603b10a99548372ed6b015c"
+    },
+    {
+      "path": "gamepilot/releases/gamepilot-balatro-v1.zip",
+      "sha": "c79f7b275811a2ad18e0efb6ef953e84b4f9a655"
+    },
+    {
+      "path": "gamepilot/releases/itch-listing-v1.txt",
+      "sha": "82249c025f2fa849c63a6774bd3c0bc351f2e387"
+    },
+    {
+      "path": "gamepilot/releases/paid-pilot-terms-draft.txt",
+      "sha": "b067134ca5e943612680f0bca0fabcf9206e6f4b"
+    },
+    {
+      "path": "gamepilot/releases/validation-v1.json",
+      "sha": "5706ffafe64ca827dcfc55df74bb80131010b57b"
+    },
+    {
+      "path": "gamepilot/replays/nibbits-14hp/index.html",
+      "sha": "d66252a2d85e1c7b93fa0cb1bf6e9744e8091c55"
+    },
+    {
+      "path": "gamepilot/replays/nibbits-14hp/target-priority-check.png",
+      "sha": "90fb8be628aca79d5227b0f8c87be3d9df6079c2"
+    },
+    {
+      "path": "googleb74874610bb618c4.html",
+      "sha": "de02c494b3aea647829a4f0a22dd79909a1c231b"
+    },
+    {
+      "path": "hollywood-sign-tour-under-50/index.html",
+      "sha": "c2330a8de9623c24db8f6d1edca525705e6ef047"
+    },
+    {
+      "path": "index.html",
+      "sha": "8c097cb6bd8af8773483e2c87f6f622ae24c0227"
+    },
+    {
+      "path": "intent-commerce/docs/index.html",
+      "sha": "d0520a38618b7d57cb1d8599fb80ad6e3b8e85d3"
+    },
+    {
+      "path": "intent-commerce/index.html",
+      "sha": "21f9edc8911324043288b66a4135c3397ad62f18"
+    },
+    {
+      "path": "intent-commerce/privacy/index.html",
+      "sha": "5233f8831e60e835186bd271572b8e53498b0ba5"
+    },
+    {
+      "path": "intent-commerce/support/index.html",
+      "sha": "b6d80ea6a8f62442e843e30056264906f2ce51b9"
+    },
+    {
+      "path": "intent-commerce/terms/index.html",
+      "sha": "4b0eaee9f350953ea3bb9a2b555d1f60fec24e93"
+    },
+    {
+      "path": "landing.css",
+      "sha": "bb737e3cfd47247f9d3bc43ad80877f266c64518"
+    },
+    {
+      "path": "long-beach-aquarium-under-100/index.html",
+      "sha": "2b071f0f6de8388ed87b94f499fd6f6b27a60587"
+    },
+    {
+      "path": "los-angeles-studio-tour-under-100/index.html",
+      "sha": "84dec539b34ff25d909bc6b7d6af624d1620f9b2"
+    },
+    {
+      "path": "payrescue/endpoint.json",
+      "sha": "a15da927d87f17090edb2d0b80ac8419104b79fc"
+    },
+    {
+      "path": "payrescue/index.html",
+      "sha": "320c00cecccd46977b31a8924123e2277437776f"
+    },
+    {
+      "path": "payrescue/instrument-declined-checkout-stuck/index.html",
+      "sha": "f12f8820bb4407b4c7f0674f5d838a8cbdefd16f"
+    },
+    {
+      "path": "payrescue/paypal-capture-completed-order-pending/index.html",
+      "sha": "57a7b10ef6956d9689d3a671ff64bb2ccf438d7d"
+    },
+    {
+      "path": "payrescue/paypal-paid-woocommerce-failed/index.html",
+      "sha": "adca8615c5264bb85e6482856253dee6573bd721"
+    },
+    {
+      "path": "payrescue/paypal-paid-woocommerce-pending/index.html",
+      "sha": "da5d48363be45894b5657f6f9f3d21e8d058fbab"
+    },
+    {
+      "path": "pli-v11/README.md",
+      "sha": "d0e4a6f624940e11d3b23f261508a7481826ea2a"
+    },
+    {
+      "path": "pli-v11/app.js",
+      "sha": "ecfa0b658e5a8b4426bf3a0c5286c4644b445e5c"
+    },
+    {
+      "path": "pli-v11/browser.cjs",
+      "sha": "9db945703b84ba8ecc5b3302fec62d1add27408e"
+    },
+    {
+      "path": "pli-v11/cloud_pages.py",
+      "sha": "3032c664e5803ad78503657cb03c3e113c39d3e3"
+    },
+    {
+      "path": "pli-v11/data.json",
+      "sha": "0797272db66051f92d6f9fa19987a15e9acccaaa"
+    },
+    {
+      "path": "pli-v11/engine.py",
+      "sha": "9c81d00b36a20c5d92164fe6c74594464b109444"
+    },
+    {
+      "path": "pli-v11/evidence/browser.json",
+      "sha": "d83bf8216988833cbe1a5b9286c8eb1dbed41bc0"
+    },
+    {
+      "path": "pli-v11/evidence/deployment-scope.json",
+      "sha": "7a6885dc8d9d0b66894774687f917c2468512261"
+    },
+    {
+      "path": "pli-v11/evidence/desktop.png",
+      "sha": "b252053a3a7aa63975b45240814f9e6d4e1ac493"
+    },
+    {
+      "path": "pli-v11/evidence/mobile.png",
+      "sha": "51b0d60eeab53ce631600ebf9a447dd2f47b6e29"
+    },
+    {
+      "path": "pli-v11/evidence/pages-config.json",
+      "sha": "19c32eed809e8cc1985c2722d711e51b28d4ff54"
+    },
+    {
+      "path": "pli-v11/evidence/public-browser.json",
+      "sha": "1fa416270ba371761ff71ec5d81cd2c91dd8a8a4"
+    },
+    {
+      "path": "pli-v11/evidence/public-desktop.png",
+      "sha": "bce270596663da38b3d7bd7218f9f7056104854e"
+    },
+    {
+      "path": "pli-v11/evidence/public-http.json",
+      "sha": "e1f2b3624055deb2bdc871a752adeb005112bdfc"
+    },
+    {
+      "path": "pli-v11/evidence/public-mobile.png",
+      "sha": "f35b54b92194054136af08c07ef0c92ff146312a"
+    },
+    {
+      "path": "pli-v11/evidence/tests.json",
+      "sha": "c9015462409fac59ed79992d9c450f05dff63155"
+    },
+    {
+      "path": "pli-v11/index.html",
+      "sha": "f360b117041ff90f950e30fa05ac788f5c371ca3"
+    },
+    {
+      "path": "pli-v11/qa.py",
+      "sha": "41ccc3e97c53e429591083412bc20ee75b6071ec"
+    },
+    {
+      "path": "pli-v11/state/memory.json",
+      "sha": "3460d7718c80009442bda1eea9d92712db7e87ae"
+    },
+    {
+      "path": "pli-v11/state/refresh.json",
+      "sha": "01b51a847a2d234d3f40566a46c561b9053de0cf"
+    },
+    {
+      "path": "pli-v11/style.css",
+      "sha": "aa46d97c2911bb35e87772ae1e3c5de357bf7ecc"
+    },
+    {
+      "path": "pli-v11/test_engine.py",
+      "sha": "d5bd289608eb0a0d992c099e82d22f1dfd90fad2"
+    },
+    {
+      "path": "pli-v11/wait_public.py",
+      "sha": "ca2e12400907936f00055777832a42e2b9e8325c"
+    },
+    {
+      "path": "pli-v12/README.md",
+      "sha": "06c67df79f62490e0df20d8c855b97c461b1e68b"
+    },
+    {
+      "path": "pli-v12/app.mjs",
+      "sha": "d75d338a45d8b1c6b1079cda56d94d524f076db4"
+    },
+    {
+      "path": "pli-v12/audit.py",
+      "sha": "f6842258a15ab43e0c6379cc1089c6f542c96d91"
+    },
+    {
+      "path": "pli-v12/browser.cjs",
+      "sha": "cb23c8d144a467af706800de4470c75845008b4c"
+    },
+    {
+      "path": "pli-v12/engine.mjs",
+      "sha": "440bb6d2b7b812a090c57e46ca28337355d27af6"
+    },
+    {
+      "path": "pli-v12/evidence/browser.json",
+      "sha": "54f2093e5058331a07e763a6697657b1023fe8a3"
+    },
+    {
+      "path": "pli-v12/evidence/deployment-scope.json",
+      "sha": "f910e5cc90b0f87356984b181be2f0bc33da063f"
+    },
+    {
+      "path": "pli-v12/evidence/desktop.png",
+      "sha": "962293ceacd57fb87c3d76ada6821fef42bb4a92"
+    },
+    {
+      "path": "pli-v12/evidence/mobile.png",
+      "sha": "1763050696b877677f1bb12ab94e1b226d84c378"
+    },
+    {
+      "path": "pli-v12/evidence/public-browser.json",
+      "sha": "8157e35b06d16fa9180024a1fd390d0301e90fd9"
+    },
+    {
+      "path": "pli-v12/evidence/public-desktop.png",
+      "sha": "d67ed3e5b06599f0d1b4b9b21603950e0b34817f"
+    },
+    {
+      "path": "pli-v12/evidence/public-http.json",
+      "sha": "9c3377c9d11e6e02435dc74d032f95bb781b36c2"
+    },
+    {
+      "path": "pli-v12/evidence/public-mobile.png",
+      "sha": "64269708c2257e31985e39be5ace96ff8ee17642"
+    },
+    {
+      "path": "pli-v12/evidence/public-summary.json",
+      "sha": "b29c8ab9ca7447918148dd0c0a1b427605be5292"
+    },
+    {
+      "path": "pli-v12/evidence/restore.json",
+      "sha": "e15dfb41d746506f6005d15f1188d797f3c37cf6"
+    },
+    {
+      "path": "pli-v12/evidence/summary.json",
+      "sha": "32cfe3cc60547b0d43a5d4cfdde9d1f199a2ac1d"
+    },
+    {
+      "path": "pli-v12/evidence/unit.json",
+      "sha": "20cf9fae8fc9b5ac08c24bdee3265d1ca1e9c89b"
+    },
+    {
+      "path": "pli-v12/evidence/v11-audit.json",
+      "sha": "0544f6cbcbbc0c5351aa58ea0736e6bed904e785"
+    },
+    {
+      "path": "pli-v12/index.html",
+      "sha": "be67a18d0b094fd44a7f49d125897815a3abf8be"
+    },
+    {
+      "path": "pli-v12/package.json",
+      "sha": "06de6d67fb2f7be712f7d4547519b88b3eab714f"
+    },
+    {
+      "path": "pli-v12/provider.mjs",
+      "sha": "281b646f76693f86d60bc7dfb2889bec7a81a061"
+    },
+    {
+      "path": "pli-v12/public.py",
+      "sha": "4880a017353491e28c576ff777ec207443b155b4"
+    },
+    {
+      "path": "pli-v12/restore.mjs",
+      "sha": "16e4e36d5bb67cc548d839a00f658f42efabe5d2"
+    },
+    {
+      "path": "pli-v12/scenarios.mjs",
+      "sha": "4372c914e98bcaf0b6ef77cb155512b5cb2e21b3"
+    },
+    {
+      "path": "pli-v12/state/household.json",
+      "sha": "6ea6863179b1386809bcb116376724caa9bf1ba0"
+    },
+    {
+      "path": "pli-v12/state/travel.json",
+      "sha": "8a3f74f7f8894c205ded7e9d6072a3ec7e053139"
+    },
+    {
+      "path": "pli-v12/style.css",
+      "sha": "b52046c1313771cd853a029e19e8de318801d844"
+    },
+    {
+      "path": "pli-v12/summarize.mjs",
+      "sha": "db0a68669878a18002cc2f2e5fcab63084e8aeeb"
+    },
+    {
+      "path": "pli-v12/test.mjs",
+      "sha": "c23cdaaec2d204c8b08a7c5a305f21f5575ce6ff"
+    },
+    {
+      "path": "robots.txt",
+      "sha": "766c5c7aecbc47f6e9ee49eced958fe27ebe2322"
+    },
+    {
+      "path": "sitemap.xml",
+      "sha": "7ba22a8330ab8181ae9e25a87e4410adb5a90b6d"
+    },
+    {
+      "path": "used-car-contract-review-california/index.html",
+      "sha": "166145f12ae3f60d7772d32f26d746ba55b94db8"
+    }
+  ],
+  "semanticRelease": "NO_GO_EXPERIMENTAL_REPLAY_ONLY",
+  "realTransactions": 0,
+  "netReceiptsUSD": 0
+}

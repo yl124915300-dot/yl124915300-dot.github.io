@@ -1,0 +1,54 @@
+name: PLI V1.3 anonymous viewer acceptance
+on:
+  push:
+    branches: [pli-v13-20261019, main]
+    paths: ['pli-v13/index.html', 'pli-v13/app.mjs', 'pli-v13/style.css', 'pli-v13/browser.cjs', 'pli-v13/public.py', 'pli-v13/audit.py', 'pli-v13/evidence/review.json', '.github/workflows/pli-v13-viewer.yml']
+permissions:
+  contents: read
+concurrency:
+  group: pli-v13-viewer-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  browser:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Read-only true cron and public snapshot freshness audit
+        run: python3 pli-v13/audit.py
+      - name: Check syntax and independent replay
+        run: |
+          node --check pli-v13/app.mjs
+          node --check pli-v13/browser.cjs
+          node pli-v13/restore.mjs
+      - name: Install CJK fonts in the ephemeral cloud runner for readable Chinese screenshots
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+      - name: Install ephemeral cloud browser without artifact or cache storage
+        run: |
+          npm install --prefix /tmp/pli-v13-qa --no-package-lock --no-save playwright@1.55.1
+          /tmp/pli-v13-qa/node_modules/.bin/playwright install chromium
+      - name: Actual deployed byte verification
+        if: github.ref == 'refs/heads/main'
+        run: python3 pli-v13/public.py
+      - name: Anonymous desktop and mobile browser acceptance
+        env:
+          NODE_PATH: /tmp/pli-v13-qa/node_modules
+          PLI_PUBLIC: ${{ github.ref == 'refs/heads/main' && '1' || '0' }}
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/pli-v13-viewer.log 2>&1 &
+          node pli-v13/browser.cjs
+      - name: Persist bounded evidence without changing application or prior projects
+        if: always()
+        run: |
+          git config user.name 'PLI V1.3 anonymous cloud acceptance'
+          git config user.email 'pli-v13@users.noreply.github.com'
+          git add pli-v13/evidence/
+          if ! git diff --cached --quiet; then
+            git commit -m 'PLI V1.3: record actual anonymous browser and true cron audit'
+            git push origin HEAD:${{ github.ref_name }}
+          fi

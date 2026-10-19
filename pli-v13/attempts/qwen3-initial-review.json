@@ -1,0 +1,40 @@
+{
+  "verdict": "NO_GO_SEMANTIC_RELIABILITY",
+  "model": "Qwen/Qwen3-4B-GGUF",
+  "parsed": 10,
+  "structurally_valid": 9,
+  "meaning": "Structural validity is not semantic correctness",
+  "run": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39212268952",
+  "defects": [
+    {
+      "id": "v01",
+      "note": "Non-verbatim fact and invented inability to use stairs."
+    },
+    {
+      "id": "v04",
+      "note": "Unrelated kitchen uncertainty and muddled workspace/cafe description."
+    },
+    {
+      "id": "v05",
+      "note": "Copied unrelated workspace plan."
+    },
+    {
+      "id": "v06",
+      "note": "Simulation of unauthorized messaging proposed; blocked unknown amount."
+    },
+    {
+      "id": "v07",
+      "note": "Wrong event uncertainty and copied workspace plan."
+    },
+    {
+      "id": "v08",
+      "note": "Copied unrelated workspace plan."
+    },
+    {
+      "id": "v10",
+      "note": "Truncated rumor qualification in facts and copied workspace plan."
+    }
+  ],
+  "realTransactions": 0,
+  "netIncomeUSD": 0
+}
