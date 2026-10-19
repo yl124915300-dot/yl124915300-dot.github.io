@@ -1,0 +1,95 @@
+{
+  "checks": [
+    {
+      "name": "independent replay w01",
+      "pass": true
+    },
+    {
+      "name": "independent replay w02",
+      "pass": true
+    },
+    {
+      "name": "independent replay w03",
+      "pass": true
+    },
+    {
+      "name": "independent replay w04",
+      "pass": true
+    },
+    {
+      "name": "independent replay w05",
+      "pass": true
+    },
+    {
+      "name": "independent replay w06",
+      "pass": true
+    },
+    {
+      "name": "independent replay w07",
+      "pass": true
+    },
+    {
+      "name": "independent replay w08",
+      "pass": true
+    },
+    {
+      "name": "independent replay w09",
+      "pass": true
+    },
+    {
+      "name": "independent replay w10",
+      "pass": true
+    },
+    {
+      "name": "checkpoint restored independently",
+      "pass": true
+    },
+    {
+      "name": "deny pay",
+      "pass": true
+    },
+    {
+      "name": "deny order",
+      "pass": true
+    },
+    {
+      "name": "deny send_message",
+      "pass": true
+    },
+    {
+      "name": "deny cancel_real",
+      "pass": true
+    },
+    {
+      "name": "forged fact rejected",
+      "pass": true
+    },
+    {
+      "name": "all execution is synthetic",
+      "pass": true
+    },
+    {
+      "name": "unknown cost cannot enter memory",
+      "pass": true
+    },
+    {
+      "name": "unsupported amount cannot enter memory",
+      "pass": true
+    },
+    {
+      "name": "V1.2 budget rejects evidence-supported excess",
+      "pass": true
+    },
+    {
+      "name": "V1.2 household constraint enforced",
+      "pass": true
+    },
+    {
+      "name": "valid synthetic plan updates continuous budget only",
+      "pass": true
+    }
+  ],
+  "passed": 22,
+  "failed": 0,
+  "modelQuality": "REQUIRES_SEPARATE_SEMANTIC_REVIEW_NOT_PROVEN_BY_RULE_TESTS"
+}

@@ -1,0 +1,42 @@
+{
+  "status": "REAL_LLM_RAN_REVIEW_REQUIRED",
+  "model": "Qwen/Qwen3-4B-GGUF",
+  "quantization": "Q4_K_M",
+  "license": "Apache-2.0",
+  "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+  "runner": "ubuntu-24.04 standard public repository",
+  "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39213166104",
+  "source_commit": "9fd73ca9380569132c30b9cb9b8ab21f6b7430e1",
+  "realTransactions": 0,
+  "netIncomeUSD": 0,
+  "realtime": false,
+  "hardware": {
+    "cpu_count": 4,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "meminfo": "MemTotal:       16373452 kB"
+  },
+  "binary": {
+    "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-ubuntu-x64.tar.gz",
+    "bytes": 17851611,
+    "sha256": "cf07c1c112d709bd67e522017471de57ed0ec8bea031d732c5422351c07f65ac"
+  },
+  "weights": {
+    "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf",
+    "bytes": 2497280256,
+    "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+  },
+  "license_file": {
+    "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/LICENSE",
+    "bytes": 11544,
+    "sha256": "5de36594c10839788a8c589443a8ef9d8b8d17c65a1b5807206ae037fc36c6bd"
+  },
+  "prompt_sha256": "746c53e136f0d4b5db00dd60e18fe0d83b625a2636613bf0c821ad30cecabcc4",
+  "cases_sha256": "7d33775f99600b227dd225405e7a05ae4cba520779599b9f17919e71e3906a6b",
+  "schema_sha256": "eb597ff15759fbad487c990febe75866902198e4ce72430de892d4b14130c252",
+  "inference_seconds": 414.372,
+  "attempts": 10,
+  "parsed_outputs": 10,
+  "validated_outputs": 10,
+  "model_process_max_rss_kb": 4984740,
+  "total_seconds": 426.712
+}
