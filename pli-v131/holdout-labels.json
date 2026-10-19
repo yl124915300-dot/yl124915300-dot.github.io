@@ -1,0 +1,456 @@
+{
+  "b01": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "travel",
+    "object": "harbor shuttle",
+    "cents": 1525,
+    "source": "q0",
+    "available": {
+      "S1": 8475,
+      "S2": 10000,
+      "S3": 10000,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b02": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "work",
+    "object": "cedar workroom",
+    "cents": 940,
+    "source": "q0",
+    "available": {
+      "S1": 8475,
+      "S2": 9060,
+      "S3": 10000,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b03": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "study",
+    "object": "astronomy textbook",
+    "cents": 705,
+    "source": "q0",
+    "available": {
+      "S1": 8475,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b04": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "household",
+    "available": {
+      "S1": 8475,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b05": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "study",
+    "object": "digital lesson",
+    "cents": 0,
+    "source": "q0",
+    "available": {
+      "S1": 8475,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b06": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "other",
+    "available": {
+      "S1": 8475,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b07": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "travel",
+    "available": {
+      "S1": 8475,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b08": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "travel",
+    "available": {
+      "S1": 1000,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b09": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "travel",
+    "available": {
+      "S1": 1000,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b10": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "study",
+    "object": "conference badge",
+    "cents": 900,
+    "source": "q0",
+    "available": {
+      "S1": 100,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b11": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "study",
+    "available": {
+      "S1": 100,
+      "S2": 9060,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b12": {
+    "actions": [
+      "revoke_plan"
+    ],
+    "category": "work",
+    "target": "b02_plan",
+    "source": "q0",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b13": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "other",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b14": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "work",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b15": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "travel",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b16": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "travel",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b17": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "household",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b18": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "travel",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b19": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "other",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b20": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "other",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 9295,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b21": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "travel",
+    "object": "estuary ferry",
+    "cents": 560,
+    "source": "q0",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b22": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "work",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 10000,
+      "S5": 10000,
+      "S6": 10000
+    }
+  },
+  "b23": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "work",
+    "object": "ink studio",
+    "cents": 200,
+    "source": "q0",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 10000,
+      "S5": 0,
+      "S6": 10000
+    }
+  },
+  "b24": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "study",
+    "object": "open lesson",
+    "cents": 0,
+    "source": "q0",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 10000,
+      "S5": 0,
+      "S6": 10000
+    }
+  },
+  "b25": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "household",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 10000,
+      "S5": 0,
+      "S6": 10000
+    }
+  },
+  "b26": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "work",
+    "object": "ash workspace",
+    "cents": 100,
+    "source": "q0",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 9900,
+      "S5": 0,
+      "S6": 10000
+    }
+  },
+  "b27": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "travel",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 9900,
+      "S5": 0,
+      "S6": 10000
+    }
+  },
+  "b28": {
+    "actions": [
+      "clarify"
+    ],
+    "category": "work",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 9900,
+      "S5": 0,
+      "S6": 10000
+    }
+  },
+  "b29": {
+    "actions": [
+      "simulate_plan"
+    ],
+    "category": "travel",
+    "object": "local bus",
+    "cents": 7,
+    "source": "q0",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 9900,
+      "S5": 0,
+      "S6": 9993
+    }
+  },
+  "b30": {
+    "actions": [
+      "revoke_plan"
+    ],
+    "category": "travel",
+    "target": "b29_plan",
+    "source": "q1",
+    "available": {
+      "S1": 100,
+      "S2": 10000,
+      "S3": 8735,
+      "S4": 9900,
+      "S5": 0,
+      "S6": 10000
+    }
+  }
+}
