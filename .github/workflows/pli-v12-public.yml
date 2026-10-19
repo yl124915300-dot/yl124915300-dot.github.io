@@ -1,0 +1,44 @@
+name: PLI V1.2 anonymous public acceptance
+on:
+  push:
+    branches: [main]
+    paths: ['pli-v12/index.html', 'pli-v12/app.mjs', 'pli-v12/engine.mjs', '.github/workflows/pli-v12-public.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pli-v12-public-acceptance
+  cancel-in-progress: false
+jobs:
+  actual-public:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+      - name: Wait for actual deployed bytes
+        run: python3 pli-v12/public.py
+      - name: Install anonymous cloud browser
+        run: |
+          npm install --prefix /tmp/pli-v12-public --no-package-lock --no-save playwright@1.55.1
+          /tmp/pli-v12-public/node_modules/.bin/playwright install chromium
+      - name: Anonymous desktop and mobile against deployed HTTPS
+        env:
+          NODE_PATH: /tmp/pli-v12-public/node_modules
+          PLI_PUBLIC_URL: https://yl124915300-dot.github.io/pli-v12/
+        run: node pli-v12/browser.cjs
+      - name: Fresh read-only audit and actual acceptance summary
+        run: |
+          python3 pli-v12/audit.py
+          node pli-v12/summarize.mjs public
+      - name: Persist only V1.2 public evidence without merging a PR
+        run: |
+          git config user.name 'PLI V1.2 public acceptance'
+          git config user.email 'pli-v12@users.noreply.github.com'
+          git add pli-v12/evidence/
+          git commit -m 'PLI V1.2: record actual anonymous public acceptance'
+          git pull --rebase origin main
+          git push origin HEAD:main
