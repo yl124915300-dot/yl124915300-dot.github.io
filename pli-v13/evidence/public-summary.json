@@ -1,0 +1,62 @@
+{
+  "status": "LIVE_EXPERIMENT_SEMANTIC_NO_GO",
+  "url": "https://yl124915300-dot.github.io/pli-v13/",
+  "codeCommit": "9eb1027cf8dfab69a299f19f9b145fa068d3e09d",
+  "publicAcceptanceRun": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39215862207",
+  "pagesRun": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39215860385",
+  "inferenceRun": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39213166104",
+  "draftPR": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/pull/9",
+  "model": "Qwen/Qwen3-4B-GGUF Q4_K_M",
+  "license": "Apache-2.0",
+  "inferenceSeconds": 414.372,
+  "totalInferenceJobSeconds": 426.712,
+  "maxModelRssKiB": 4984740,
+  "tests": {
+    "publicBrowser": {
+      "passed": 80,
+      "failed": 0
+    },
+    "restorationAndSafety": {
+      "passed": 22,
+      "failed": 0
+    },
+    "publicBytes": {
+      "passed": 8,
+      "failed": 0
+    }
+  },
+  "reasoning": {
+    "cases": 10,
+    "structurallyValid": 10,
+    "semanticPass": 4,
+    "semanticPartial": 5,
+    "semanticFail": 1,
+    "syntheticPlansRecorded": 1,
+    "clarifications": 6,
+    "amountOrEvidenceRejections": 3,
+    "verdict": "NO_GO",
+    "reviewer": "implementing assistant, not independent blinded human"
+  },
+  "preservation": {
+    "baseline": "02ece4706c5ac4a9097ce36caba1be0abab66fa1",
+    "verifiedMain": "062d473d6bf95be436cfa9ee0717b90c03c9d7d7",
+    "originalBlobs": 217,
+    "changedOriginalBlobs": 0
+  },
+  "v11": {
+    "scheduleCount": 0,
+    "scheduleSuccessVerified": false,
+    "auditAt": "2026-10-19T07:25:20Z",
+    "snapshotAt": "2026-10-19T05:28:00.692226+00:00",
+    "staleAfterSeconds": 7200,
+    "openPageExpiryDesktopAndMobileVerified": true
+  },
+  "limitations": [
+    "Offline generated results only, not realtime chat.",
+    "Source quote grammar is a grounding constraint, not proof of reasoning quality.",
+    "Prior two failed experiments retained; no future model job scheduled.",
+    "No PR merged, no settings change, no user Mac or local tools used."
+  ],
+  "realTransactions": 0,
+  "netReceiptsUSD": 0
+}
