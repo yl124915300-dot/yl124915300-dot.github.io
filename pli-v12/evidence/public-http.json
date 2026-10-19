@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-19T06:28:26.950410+00:00",
+  "anonymous": true,
+  "total": 7,
+  "failed": 0,
+  "checks": [
+    {
+      "url": "https://yl124915300-dot.github.io/pli-v12/index.html?accept=1792391306767947319",
+      "sha256": "2ea214b9eac88e18b439c29e415fb2e0bf8cd69381fade26018f55cb5a5a20c0",
+      "httpStatus": 200,
+      "matchesSource": true
+    },
+    {
+      "url": "https://yl124915300-dot.github.io/pli-v12/engine.mjs?accept=1792391306799186421",
+      "sha256": "5b2045d1584d94529069dd5e622c6cbbacfb600750d5cde0dc8994301328bb33",
+      "httpStatus": 200,
+      "matchesSource": true
+    },
+    {
+      "url": "https://yl124915300-dot.github.io/pli-v12/provider.mjs?accept=1792391306844889092",
+      "sha256": "47c00172eb415914ee9ecf1ec18e5c42613a93898abb880ad8eb8ea4df7ddaa4",
+      "httpStatus": 200,
+      "matchesSource": true
+    },
+    {
+      "url": "https://yl124915300-dot.github.io/pli-v12/app.mjs?accept=1792391306870106640",
+      "sha256": "54b06d49ad87634b6de4d3dafa5057c81ecd6fff883fc3cce63121f549486f6c",
+      "httpStatus": 200,
+      "matchesSource": true
+    },
+    {
+      "url": "https://yl124915300-dot.github.io/pli-v12/scenarios.mjs?accept=1792391306884375827",
+      "sha256": "6521e7a366363bf8b84584c1c415f97b1e20bb53ae33626c9e163c217da9ec39",
+      "httpStatus": 200,
+      "matchesSource": true
+    },
+    {
+      "url": "https://yl124915300-dot.github.io/pli-v12/style.css?accept=1792391306912054572",
+      "sha256": "6b7c1c61621f05d3bf3582cb3114ffd33ce9e988a2173653d51bb2b810da85cf",
+      "httpStatus": 200,
+      "matchesSource": true
+    },
+    {
+      "url": "https://yl124915300-dot.github.io/pli-v12/evidence/summary.json?accept=1792391306932267784",
+      "sha256": "264f05ea857710198288e16d4ceb98904770912fa01d7c4334a4ca7088d70c6f",
+      "httpStatus": 200,
+      "matchesSource": true
+    }
+  ]
+}

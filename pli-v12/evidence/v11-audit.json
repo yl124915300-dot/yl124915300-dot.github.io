@@ -1,24 +1,24 @@
 {
-  "at": "2026-10-19T06:24:58.320492+00:00",
+  "at": "2026-10-19T06:28:42.839738+00:00",
   "method": "actual anonymous cloud HTTPS GET; no fixture sources",
   "sources": [
     {
       "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson",
       "httpStatus": 200,
-      "sha256": "350ad4f085f9b030fd88a969a7e4317e5a77f537a72f37ad83537f4c0043fad7",
-      "httpDate": "Mon, 19 Oct 2026 06:24:05 GMT",
+      "sha256": "66c10aeb166ff8054f034bd15891f9a5e4ca903b764798c8eddc7d2efee5cf9d",
+      "httpDate": "Mon, 19 Oct 2026 06:28:34 GMT",
       "name": "USGS",
-      "featureCount": 237,
-      "generatedAtEpochMs": 1792391045000
+      "featureCount": 240,
+      "generatedAtEpochMs": 1792391314000
     },
     {
       "url": "https://api.weather.gov/alerts/active?area=CA,WA,NY,FL,IL",
       "httpStatus": 200,
-      "sha256": "feeb75a17332cfb0bda88f207b6b606231c897d6c4ee256b8c4872ae691982c8",
-      "httpDate": "Mon, 19 Oct 2026 06:24:59 GMT",
+      "sha256": "778f0968778e74da71467e176828c958068d7742a7b07696593be516bcb31f93",
+      "httpDate": "Mon, 19 Oct 2026 06:28:43 GMT",
       "name": "NWS",
-      "featureCount": 18,
-      "latestSent": "2026-10-19T02:22:00-04:00"
+      "featureCount": 22,
+      "latestSent": "2026-10-19T02:26:00-04:00"
     }
   ],
   "v11Public": [
@@ -39,7 +39,7 @@
     }
   ],
   "v11SnapshotAt": "2026-10-19T05:28:00.692226+00:00",
-  "v11SnapshotAgeSeconds": 3417.628266,
+  "v11SnapshotAgeSeconds": 3642.147512,
   "v11SnapshotSourceCounts": [
     {
       "name": "NWS",
@@ -62,5 +62,5 @@
     "merged_at": null,
     "head": "d5f41fd700bdf94ddd29cd3ba8f8ba2904091255"
   },
-  "main": "40dd0412b25ad14c32100d57e1fc9a3d7f06cc51"
+  "main": "eed999f51825b16cd3f443e8db028be9760b9851"
 }
