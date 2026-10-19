@@ -49,3 +49,29 @@ jobs:
             assert.doesNotMatch(js, /fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon/);
             console.log("Static no-submission checks passed.");
           '
+
+  public-smoke:
+    name: Production HTTPS /flightclaim/ readback
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch anonymous public site and JavaScript modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://yl124915300-dot.github.io/flightclaim"
+          ok=0
+          for attempt in $(seq 1 12); do
+            if curl -fsSL --max-time 15 "$base/" -o /tmp/flightclaim-home.html \
+               && grep -q "FlightClaim Agent" /tmp/flightclaim-home.html \
+               && curl -fsSL --max-time 15 "$base/app.mjs" -o /tmp/flightclaim-app.mjs \
+               && curl -fsSL --max-time 15 "$base/engine.mjs" -o /tmp/flightclaim-engine.mjs \
+               && grep -q "RULESET_VERSION" /tmp/flightclaim-engine.mjs; then
+                 ok=1; break
+            fi
+            echo "Anonymous readback not yet consistent (attempt $attempt)"
+            sleep 5
+          done
+          if [ "$ok" -ne 1 ]; then echo "Public site not verified"; exit 1; fi
+          node --check /tmp/flightclaim-app.mjs
+          node --check /tmp/flightclaim-engine.mjs
+          echo "PASS: anonymous HTML + two JS modules returned and passed source/syntax checks."
