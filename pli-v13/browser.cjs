@@ -5,7 +5,7 @@ const {chromium}=require("playwright");const fs=require("node:fs");const path=re
  for(const [device,viewport]of [["desktop",{width:1440,height:1000}],["mobile",{width:390,height:844}]]){
   const context=await browser.newContext({viewport});const page=await context.newPage();const errors=[],external=[];
   page.on("pageerror",e=>errors.push(e.message));page.on("request",r=>{if(new URL(r.url()).origin!==new URL(base).origin)external.push(r.url());});
-  await page.goto(base,{waitUntil:"networkidle",timeout:45000});await page.locator('#health[data-ready="true"]').waitFor({timeout:10000});
+  await page.goto(base,{waitUntil:"networkidle",timeout:45000});await page.locator('#health[data-ready="true"]').waitFor({timeout:10000});await page.evaluate(()=>document.fonts.ready);
   check(device+" real model labelled",await page.locator("#provenance").textContent().then(x=>x.includes("Qwen3-4B")&&x.includes("Apache-2.0")));
   check(device+" offline boundary",await page.locator("body").textContent().then(x=>x.includes("不是实时聊天")&&x.includes("净到账")));
   check(device+" ten events",await page.locator("#case option").count()===10);

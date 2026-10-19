@@ -24,6 +24,10 @@ jobs:
           node --check pli-v13/app.mjs
           node --check pli-v13/browser.cjs
           node pli-v13/restore.mjs
+      - name: Install CJK fonts in the ephemeral cloud runner for readable Chinese screenshots
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
       - name: Install ephemeral cloud browser without artifact or cache storage
         run: |
           npm install --prefix /tmp/pli-v13-qa --no-package-lock --no-save playwright@1.55.1
