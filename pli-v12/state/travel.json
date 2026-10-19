@@ -1,0 +1,3179 @@
+{
+  "asOf": "2026-10-19T00:30:00.000Z",
+  "memory": {
+    "version": "1.2.0",
+    "classification": "SYNTHETIC",
+    "journal": [
+      {
+        "event": {
+          "id": "t1",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T00:10:00.000Z",
+          "expiresAt": "2026-10-19T02:10:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "合成实验 t1",
+          "payload": {
+            "amountCents": 6000,
+            "category": "travel",
+            "slot": "morning"
+          }
+        },
+        "observedAt": "2026-10-19T00:10:00.000Z"
+      },
+      {
+        "event": {
+          "id": "t2",
+          "kind": "constraint",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T00:11:00.000Z",
+          "expiresAt": "2026-10-19T02:11:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "合成实验 t2",
+          "payload": {
+            "category": "travel",
+            "blocked": true
+          }
+        },
+        "observedAt": "2026-10-19T00:11:00.000Z"
+      },
+      {
+        "event": {
+          "id": "t3",
+          "kind": "constraint",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T00:12:00.000Z",
+          "expiresAt": "2026-10-19T02:12:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "合成实验 t3",
+          "payload": {
+            "category": "travel",
+            "blocked": false
+          }
+        },
+        "observedAt": "2026-10-19T00:12:00.000Z"
+      },
+      {
+        "event": {
+          "id": "t4",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T00:13:00.000Z",
+          "expiresAt": "2026-10-19T02:13:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "合成实验 t4",
+          "payload": {
+            "amountCents": 3000,
+            "category": "travel",
+            "slot": "alternate"
+          }
+        },
+        "observedAt": "2026-10-19T00:13:00.000Z"
+      },
+      {
+        "event": {
+          "id": "t5",
+          "kind": "expense",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T00:14:00.000Z",
+          "expiresAt": "2026-10-19T02:14:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "合成实验 t5",
+          "payload": {
+            "amountCents": 8000,
+            "category": "household"
+          }
+        },
+        "observedAt": "2026-10-19T00:14:00.000Z"
+      },
+      {
+        "event": {
+          "id": "t6",
+          "kind": "cancel",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T00:15:00.000Z",
+          "expiresAt": "2026-10-19T02:15:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "合成实验 t6",
+          "payload": {
+            "targetId": "t5"
+          }
+        },
+        "observedAt": "2026-10-19T00:15:00.000Z"
+      },
+      {
+        "event": {
+          "id": "t7",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T00:16:00.000Z",
+          "expiresAt": "2026-10-19T02:16:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "合成实验 t7",
+          "payload": {
+            "amountCents": 2000,
+            "category": "travel",
+            "slot": "later"
+          }
+        },
+        "observedAt": "2026-10-19T00:16:00.000Z"
+      },
+      {
+        "event": {
+          "id": "t8",
+          "kind": "cancel",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T00:17:00.000Z",
+          "expiresAt": "2026-10-19T02:17:00.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "合成实验 t8",
+          "payload": {
+            "targetId": "t7"
+          }
+        },
+        "observedAt": "2026-10-19T00:17:00.000Z"
+      }
+    ]
+  },
+  "expected": {
+    "version": "1.2.0",
+    "mode": "LLM_NOT_CONNECTED",
+    "asOf": "2026-10-19T00:30:00.000Z",
+    "classification": "SYNTHETIC",
+    "people": {
+      "S1": {
+        "id": "S1",
+        "label": "纽约通勤者",
+        "county": "NYC061",
+        "budgetCents": 10000,
+        "classification": "SYNTHETIC",
+        "spentCents": 0,
+        "plans": {
+          "t1": {
+            "id": "t1",
+            "amountCents": 6000,
+            "category": "travel",
+            "slot": "morning",
+            "status": "REVOKED_CONSTRAINT",
+            "expiresAt": "2026-10-19T02:10:00.000Z",
+            "createdBy": "t1",
+            "lastCause": "t2",
+            "text": "合成实验 t1"
+          },
+          "t4": {
+            "id": "t4",
+            "amountCents": 3000,
+            "category": "travel",
+            "slot": "alternate",
+            "status": "REVOKED_BUDGET",
+            "expiresAt": "2026-10-19T02:13:00.000Z",
+            "createdBy": "t4",
+            "lastCause": "t5",
+            "text": "合成实验 t4"
+          },
+          "t7": {
+            "id": "t7",
+            "amountCents": 2000,
+            "category": "travel",
+            "slot": "later",
+            "status": "CANCELLED",
+            "expiresAt": "2026-10-19T02:16:00.000Z",
+            "createdBy": "t7",
+            "lastCause": "t8",
+            "text": "合成实验 t7"
+          }
+        },
+        "constraints": {
+          "t2": {
+            "id": "t2",
+            "category": "travel",
+            "blocked": true,
+            "active": false,
+            "expiresAt": "2026-10-19T02:11:00.000Z"
+          },
+          "t3": {
+            "id": "t3",
+            "category": "travel",
+            "blocked": false,
+            "active": false,
+            "expiresAt": "2026-10-19T02:12:00.000Z"
+          }
+        },
+        "expenses": {
+          "t5": {
+            "id": "t5",
+            "amountCents": 8000,
+            "category": "household",
+            "active": false
+          }
+        },
+        "availableCents": 10000,
+        "reservedCents": 0
+      },
+      "S2": {
+        "id": "S2",
+        "label": "西雅图配送员",
+        "county": "WAC033",
+        "budgetCents": 10000,
+        "classification": "SYNTHETIC",
+        "spentCents": 0,
+        "plans": {},
+        "constraints": {},
+        "expenses": {},
+        "availableCents": 10000,
+        "reservedCents": 0
+      },
+      "S3": {
+        "id": "S3",
+        "label": "洛杉矶旅客",
+        "county": "CAC037",
+        "budgetCents": 10000,
+        "classification": "SYNTHETIC",
+        "spentCents": 0,
+        "plans": {},
+        "constraints": {},
+        "expenses": {},
+        "availableCents": 10000,
+        "reservedCents": 0
+      },
+      "S4": {
+        "id": "S4",
+        "label": "旧金山家庭",
+        "county": "CAC075",
+        "budgetCents": 10000,
+        "classification": "SYNTHETIC",
+        "spentCents": 0,
+        "plans": {},
+        "constraints": {},
+        "expenses": {},
+        "availableCents": 10000,
+        "reservedCents": 0
+      },
+      "S5": {
+        "id": "S5",
+        "label": "迈阿密店主",
+        "county": "FLC086",
+        "budgetCents": 10000,
+        "classification": "SYNTHETIC",
+        "spentCents": 0,
+        "plans": {},
+        "constraints": {},
+        "expenses": {},
+        "availableCents": 10000,
+        "reservedCents": 0
+      },
+      "S6": {
+        "id": "S6",
+        "label": "芝加哥学生",
+        "county": "ILC031",
+        "budgetCents": 10000,
+        "classification": "SYNTHETIC",
+        "spentCents": 0,
+        "plans": {},
+        "constraints": {},
+        "expenses": {},
+        "availableCents": 10000,
+        "reservedCents": 0
+      }
+    },
+    "decisions": [
+      {
+        "id": "t1:S1",
+        "eventId": "t1",
+        "profileId": "S1",
+        "status": "PROPOSED",
+        "reason": "within_budget_and_constraints",
+        "source": {
+          "classification": "SYNTHETIC",
+          "source": "user_simulation",
+          "eventId": "t1"
+        },
+        "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 4000
+        },
+        "changed": [
+          "t1"
+        ],
+        "externalExecution": false
+      },
+      {
+        "id": "t2:S1",
+        "eventId": "t2",
+        "profileId": "S1",
+        "status": "CONSTRAINT_ADDED",
+        "reason": "synthetic_input_only",
+        "source": {
+          "classification": "SYNTHETIC",
+          "source": "user_simulation",
+          "eventId": "t2"
+        },
+        "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 4000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "changed": [
+          "t1"
+        ],
+        "externalExecution": false
+      },
+      {
+        "id": "t3:S1",
+        "eventId": "t3",
+        "profileId": "S1",
+        "status": "CONSTRAINT_CLEARED",
+        "reason": "synthetic_input_only",
+        "source": {
+          "classification": "SYNTHETIC",
+          "source": "user_simulation",
+          "eventId": "t3"
+        },
+        "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "changed": [],
+        "externalExecution": false
+      },
+      {
+        "id": "t4:S1",
+        "eventId": "t4",
+        "profileId": "S1",
+        "status": "PROPOSED",
+        "reason": "within_budget_and_constraints",
+        "source": {
+          "classification": "SYNTHETIC",
+          "source": "user_simulation",
+          "eventId": "t4"
+        },
+        "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 7000
+        },
+        "changed": [
+          "t4"
+        ],
+        "externalExecution": false
+      },
+      {
+        "id": "t5:S1",
+        "eventId": "t5",
+        "profileId": "S1",
+        "status": "SIMULATED_EXPENSE",
+        "reason": "synthetic_input_only",
+        "source": {
+          "classification": "SYNTHETIC",
+          "source": "user_simulation",
+          "eventId": "t5"
+        },
+        "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 7000
+        },
+        "after": {
+          "spentCents": 8000,
+          "availableCents": 2000
+        },
+        "changed": [
+          "t4"
+        ],
+        "externalExecution": false
+      },
+      {
+        "id": "t6:S1",
+        "eventId": "t6",
+        "profileId": "S1",
+        "status": "SIMULATED_REFUND",
+        "reason": "synthetic_input_only",
+        "source": {
+          "classification": "SYNTHETIC",
+          "source": "user_simulation",
+          "eventId": "t6"
+        },
+        "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+        "before": {
+          "spentCents": 8000,
+          "availableCents": 2000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "changed": [
+          "t5"
+        ],
+        "externalExecution": false
+      },
+      {
+        "id": "t7:S1",
+        "eventId": "t7",
+        "profileId": "S1",
+        "status": "PROPOSED",
+        "reason": "within_budget_and_constraints",
+        "source": {
+          "classification": "SYNTHETIC",
+          "source": "user_simulation",
+          "eventId": "t7"
+        },
+        "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 8000
+        },
+        "changed": [
+          "t7"
+        ],
+        "externalExecution": false
+      },
+      {
+        "id": "t8:S1",
+        "eventId": "t8",
+        "profileId": "S1",
+        "status": "CANCELLED",
+        "reason": "synthetic_input_only",
+        "source": {
+          "classification": "SYNTHETIC",
+          "source": "user_simulation",
+          "eventId": "t8"
+        },
+        "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 8000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "changed": [
+          "t7"
+        ],
+        "externalExecution": false
+      }
+    ],
+    "history": [
+      {
+        "cause": "t1",
+        "profileId": "S1",
+        "change": "PROPOSED",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 4000
+        },
+        "targets": [
+          "t1"
+        ]
+      },
+      {
+        "cause": "t2",
+        "profileId": "S1",
+        "change": "CONSTRAINT_ADDED",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 4000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "targets": [
+          "t1"
+        ]
+      },
+      {
+        "cause": "t3",
+        "profileId": "S1",
+        "change": "CONSTRAINT_CLEARED",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "targets": []
+      },
+      {
+        "cause": "t4",
+        "profileId": "S1",
+        "change": "PROPOSED",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 7000
+        },
+        "targets": [
+          "t4"
+        ]
+      },
+      {
+        "cause": "t5",
+        "profileId": "S1",
+        "change": "SIMULATED_EXPENSE",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 7000
+        },
+        "after": {
+          "spentCents": 8000,
+          "availableCents": 2000
+        },
+        "targets": [
+          "t4"
+        ]
+      },
+      {
+        "cause": "t6",
+        "profileId": "S1",
+        "change": "SIMULATED_REFUND",
+        "before": {
+          "spentCents": 8000,
+          "availableCents": 2000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "targets": [
+          "t5"
+        ]
+      },
+      {
+        "cause": "t7",
+        "profileId": "S1",
+        "change": "PROPOSED",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 8000
+        },
+        "targets": [
+          "t7"
+        ]
+      },
+      {
+        "cause": "t8",
+        "profileId": "S1",
+        "change": "CANCELLED",
+        "before": {
+          "spentCents": 0,
+          "availableCents": 8000
+        },
+        "after": {
+          "spentCents": 0,
+          "availableCents": 10000
+        },
+        "targets": [
+          "t7"
+        ]
+      }
+    ],
+    "realTransactions": 0,
+    "netIncome": 0
+  },
+  "frames": [
+    {
+      "eventId": "t1",
+      "at": "2026-10-19T00:10:00.000Z",
+      "state": {
+        "version": "1.2.0",
+        "mode": "LLM_NOT_CONNECTED",
+        "asOf": "2026-10-19T00:10:00.000Z",
+        "classification": "SYNTHETIC",
+        "people": {
+          "S1": {
+            "id": "S1",
+            "label": "纽约通勤者",
+            "county": "NYC061",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {
+              "t1": {
+                "id": "t1",
+                "amountCents": 6000,
+                "category": "travel",
+                "slot": "morning",
+                "status": "PROPOSED",
+                "expiresAt": "2026-10-19T02:10:00.000Z",
+                "createdBy": "t1",
+                "lastCause": "t1",
+                "text": "合成实验 t1"
+              }
+            },
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 4000,
+            "reservedCents": 6000
+          },
+          "S2": {
+            "id": "S2",
+            "label": "西雅图配送员",
+            "county": "WAC033",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S3": {
+            "id": "S3",
+            "label": "洛杉矶旅客",
+            "county": "CAC037",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S4": {
+            "id": "S4",
+            "label": "旧金山家庭",
+            "county": "CAC075",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S5": {
+            "id": "S5",
+            "label": "迈阿密店主",
+            "county": "FLC086",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S6": {
+            "id": "S6",
+            "label": "芝加哥学生",
+            "county": "ILC031",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          }
+        },
+        "decisions": [
+          {
+            "id": "t1:S1",
+            "eventId": "t1",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t1"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          }
+        ],
+        "history": [
+          {
+            "cause": "t1",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "targets": [
+              "t1"
+            ]
+          }
+        ],
+        "realTransactions": 0,
+        "netIncome": 0
+      }
+    },
+    {
+      "eventId": "t2",
+      "at": "2026-10-19T00:11:00.000Z",
+      "state": {
+        "version": "1.2.0",
+        "mode": "LLM_NOT_CONNECTED",
+        "asOf": "2026-10-19T00:11:00.000Z",
+        "classification": "SYNTHETIC",
+        "people": {
+          "S1": {
+            "id": "S1",
+            "label": "纽约通勤者",
+            "county": "NYC061",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {
+              "t1": {
+                "id": "t1",
+                "amountCents": 6000,
+                "category": "travel",
+                "slot": "morning",
+                "status": "REVOKED_CONSTRAINT",
+                "expiresAt": "2026-10-19T02:10:00.000Z",
+                "createdBy": "t1",
+                "lastCause": "t2",
+                "text": "合成实验 t1"
+              }
+            },
+            "constraints": {
+              "t2": {
+                "id": "t2",
+                "category": "travel",
+                "blocked": true,
+                "active": true,
+                "expiresAt": "2026-10-19T02:11:00.000Z"
+              }
+            },
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S2": {
+            "id": "S2",
+            "label": "西雅图配送员",
+            "county": "WAC033",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S3": {
+            "id": "S3",
+            "label": "洛杉矶旅客",
+            "county": "CAC037",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S4": {
+            "id": "S4",
+            "label": "旧金山家庭",
+            "county": "CAC075",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S5": {
+            "id": "S5",
+            "label": "迈阿密店主",
+            "county": "FLC086",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S6": {
+            "id": "S6",
+            "label": "芝加哥学生",
+            "county": "ILC031",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          }
+        },
+        "decisions": [
+          {
+            "id": "t1:S1",
+            "eventId": "t1",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t1"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t2:S1",
+            "eventId": "t2",
+            "profileId": "S1",
+            "status": "CONSTRAINT_ADDED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t2"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          }
+        ],
+        "history": [
+          {
+            "cause": "t1",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t2",
+            "profileId": "S1",
+            "change": "CONSTRAINT_ADDED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t1"
+            ]
+          }
+        ],
+        "realTransactions": 0,
+        "netIncome": 0
+      }
+    },
+    {
+      "eventId": "t3",
+      "at": "2026-10-19T00:12:00.000Z",
+      "state": {
+        "version": "1.2.0",
+        "mode": "LLM_NOT_CONNECTED",
+        "asOf": "2026-10-19T00:12:00.000Z",
+        "classification": "SYNTHETIC",
+        "people": {
+          "S1": {
+            "id": "S1",
+            "label": "纽约通勤者",
+            "county": "NYC061",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {
+              "t1": {
+                "id": "t1",
+                "amountCents": 6000,
+                "category": "travel",
+                "slot": "morning",
+                "status": "REVOKED_CONSTRAINT",
+                "expiresAt": "2026-10-19T02:10:00.000Z",
+                "createdBy": "t1",
+                "lastCause": "t2",
+                "text": "合成实验 t1"
+              }
+            },
+            "constraints": {
+              "t2": {
+                "id": "t2",
+                "category": "travel",
+                "blocked": true,
+                "active": false,
+                "expiresAt": "2026-10-19T02:11:00.000Z"
+              },
+              "t3": {
+                "id": "t3",
+                "category": "travel",
+                "blocked": false,
+                "active": false,
+                "expiresAt": "2026-10-19T02:12:00.000Z"
+              }
+            },
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S2": {
+            "id": "S2",
+            "label": "西雅图配送员",
+            "county": "WAC033",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S3": {
+            "id": "S3",
+            "label": "洛杉矶旅客",
+            "county": "CAC037",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S4": {
+            "id": "S4",
+            "label": "旧金山家庭",
+            "county": "CAC075",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S5": {
+            "id": "S5",
+            "label": "迈阿密店主",
+            "county": "FLC086",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S6": {
+            "id": "S6",
+            "label": "芝加哥学生",
+            "county": "ILC031",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          }
+        },
+        "decisions": [
+          {
+            "id": "t1:S1",
+            "eventId": "t1",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t1"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t2:S1",
+            "eventId": "t2",
+            "profileId": "S1",
+            "status": "CONSTRAINT_ADDED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t2"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t3:S1",
+            "eventId": "t3",
+            "profileId": "S1",
+            "status": "CONSTRAINT_CLEARED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t3"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [],
+            "externalExecution": false
+          }
+        ],
+        "history": [
+          {
+            "cause": "t1",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t2",
+            "profileId": "S1",
+            "change": "CONSTRAINT_ADDED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t3",
+            "profileId": "S1",
+            "change": "CONSTRAINT_CLEARED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": []
+          }
+        ],
+        "realTransactions": 0,
+        "netIncome": 0
+      }
+    },
+    {
+      "eventId": "t4",
+      "at": "2026-10-19T00:13:00.000Z",
+      "state": {
+        "version": "1.2.0",
+        "mode": "LLM_NOT_CONNECTED",
+        "asOf": "2026-10-19T00:13:00.000Z",
+        "classification": "SYNTHETIC",
+        "people": {
+          "S1": {
+            "id": "S1",
+            "label": "纽约通勤者",
+            "county": "NYC061",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {
+              "t1": {
+                "id": "t1",
+                "amountCents": 6000,
+                "category": "travel",
+                "slot": "morning",
+                "status": "REVOKED_CONSTRAINT",
+                "expiresAt": "2026-10-19T02:10:00.000Z",
+                "createdBy": "t1",
+                "lastCause": "t2",
+                "text": "合成实验 t1"
+              },
+              "t4": {
+                "id": "t4",
+                "amountCents": 3000,
+                "category": "travel",
+                "slot": "alternate",
+                "status": "PROPOSED",
+                "expiresAt": "2026-10-19T02:13:00.000Z",
+                "createdBy": "t4",
+                "lastCause": "t4",
+                "text": "合成实验 t4"
+              }
+            },
+            "constraints": {
+              "t2": {
+                "id": "t2",
+                "category": "travel",
+                "blocked": true,
+                "active": false,
+                "expiresAt": "2026-10-19T02:11:00.000Z"
+              },
+              "t3": {
+                "id": "t3",
+                "category": "travel",
+                "blocked": false,
+                "active": false,
+                "expiresAt": "2026-10-19T02:12:00.000Z"
+              }
+            },
+            "expenses": {},
+            "availableCents": 7000,
+            "reservedCents": 3000
+          },
+          "S2": {
+            "id": "S2",
+            "label": "西雅图配送员",
+            "county": "WAC033",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S3": {
+            "id": "S3",
+            "label": "洛杉矶旅客",
+            "county": "CAC037",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S4": {
+            "id": "S4",
+            "label": "旧金山家庭",
+            "county": "CAC075",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S5": {
+            "id": "S5",
+            "label": "迈阿密店主",
+            "county": "FLC086",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S6": {
+            "id": "S6",
+            "label": "芝加哥学生",
+            "county": "ILC031",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          }
+        },
+        "decisions": [
+          {
+            "id": "t1:S1",
+            "eventId": "t1",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t1"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t2:S1",
+            "eventId": "t2",
+            "profileId": "S1",
+            "status": "CONSTRAINT_ADDED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t2"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t3:S1",
+            "eventId": "t3",
+            "profileId": "S1",
+            "status": "CONSTRAINT_CLEARED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t3"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [],
+            "externalExecution": false
+          },
+          {
+            "id": "t4:S1",
+            "eventId": "t4",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t4"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          }
+        ],
+        "history": [
+          {
+            "cause": "t1",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t2",
+            "profileId": "S1",
+            "change": "CONSTRAINT_ADDED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t3",
+            "profileId": "S1",
+            "change": "CONSTRAINT_CLEARED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": []
+          },
+          {
+            "cause": "t4",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "targets": [
+              "t4"
+            ]
+          }
+        ],
+        "realTransactions": 0,
+        "netIncome": 0
+      }
+    },
+    {
+      "eventId": "t5",
+      "at": "2026-10-19T00:14:00.000Z",
+      "state": {
+        "version": "1.2.0",
+        "mode": "LLM_NOT_CONNECTED",
+        "asOf": "2026-10-19T00:14:00.000Z",
+        "classification": "SYNTHETIC",
+        "people": {
+          "S1": {
+            "id": "S1",
+            "label": "纽约通勤者",
+            "county": "NYC061",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 8000,
+            "plans": {
+              "t1": {
+                "id": "t1",
+                "amountCents": 6000,
+                "category": "travel",
+                "slot": "morning",
+                "status": "REVOKED_CONSTRAINT",
+                "expiresAt": "2026-10-19T02:10:00.000Z",
+                "createdBy": "t1",
+                "lastCause": "t2",
+                "text": "合成实验 t1"
+              },
+              "t4": {
+                "id": "t4",
+                "amountCents": 3000,
+                "category": "travel",
+                "slot": "alternate",
+                "status": "REVOKED_BUDGET",
+                "expiresAt": "2026-10-19T02:13:00.000Z",
+                "createdBy": "t4",
+                "lastCause": "t5",
+                "text": "合成实验 t4"
+              }
+            },
+            "constraints": {
+              "t2": {
+                "id": "t2",
+                "category": "travel",
+                "blocked": true,
+                "active": false,
+                "expiresAt": "2026-10-19T02:11:00.000Z"
+              },
+              "t3": {
+                "id": "t3",
+                "category": "travel",
+                "blocked": false,
+                "active": false,
+                "expiresAt": "2026-10-19T02:12:00.000Z"
+              }
+            },
+            "expenses": {
+              "t5": {
+                "id": "t5",
+                "amountCents": 8000,
+                "category": "household",
+                "active": true
+              }
+            },
+            "availableCents": 2000,
+            "reservedCents": 0
+          },
+          "S2": {
+            "id": "S2",
+            "label": "西雅图配送员",
+            "county": "WAC033",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S3": {
+            "id": "S3",
+            "label": "洛杉矶旅客",
+            "county": "CAC037",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S4": {
+            "id": "S4",
+            "label": "旧金山家庭",
+            "county": "CAC075",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S5": {
+            "id": "S5",
+            "label": "迈阿密店主",
+            "county": "FLC086",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S6": {
+            "id": "S6",
+            "label": "芝加哥学生",
+            "county": "ILC031",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          }
+        },
+        "decisions": [
+          {
+            "id": "t1:S1",
+            "eventId": "t1",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t1"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t2:S1",
+            "eventId": "t2",
+            "profileId": "S1",
+            "status": "CONSTRAINT_ADDED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t2"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t3:S1",
+            "eventId": "t3",
+            "profileId": "S1",
+            "status": "CONSTRAINT_CLEARED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t3"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [],
+            "externalExecution": false
+          },
+          {
+            "id": "t4:S1",
+            "eventId": "t4",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t4"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t5:S1",
+            "eventId": "t5",
+            "profileId": "S1",
+            "status": "SIMULATED_EXPENSE",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t5"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "after": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          }
+        ],
+        "history": [
+          {
+            "cause": "t1",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t2",
+            "profileId": "S1",
+            "change": "CONSTRAINT_ADDED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t3",
+            "profileId": "S1",
+            "change": "CONSTRAINT_CLEARED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": []
+          },
+          {
+            "cause": "t4",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "targets": [
+              "t4"
+            ]
+          },
+          {
+            "cause": "t5",
+            "profileId": "S1",
+            "change": "SIMULATED_EXPENSE",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "after": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "targets": [
+              "t4"
+            ]
+          }
+        ],
+        "realTransactions": 0,
+        "netIncome": 0
+      }
+    },
+    {
+      "eventId": "t6",
+      "at": "2026-10-19T00:15:00.000Z",
+      "state": {
+        "version": "1.2.0",
+        "mode": "LLM_NOT_CONNECTED",
+        "asOf": "2026-10-19T00:15:00.000Z",
+        "classification": "SYNTHETIC",
+        "people": {
+          "S1": {
+            "id": "S1",
+            "label": "纽约通勤者",
+            "county": "NYC061",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {
+              "t1": {
+                "id": "t1",
+                "amountCents": 6000,
+                "category": "travel",
+                "slot": "morning",
+                "status": "REVOKED_CONSTRAINT",
+                "expiresAt": "2026-10-19T02:10:00.000Z",
+                "createdBy": "t1",
+                "lastCause": "t2",
+                "text": "合成实验 t1"
+              },
+              "t4": {
+                "id": "t4",
+                "amountCents": 3000,
+                "category": "travel",
+                "slot": "alternate",
+                "status": "REVOKED_BUDGET",
+                "expiresAt": "2026-10-19T02:13:00.000Z",
+                "createdBy": "t4",
+                "lastCause": "t5",
+                "text": "合成实验 t4"
+              }
+            },
+            "constraints": {
+              "t2": {
+                "id": "t2",
+                "category": "travel",
+                "blocked": true,
+                "active": false,
+                "expiresAt": "2026-10-19T02:11:00.000Z"
+              },
+              "t3": {
+                "id": "t3",
+                "category": "travel",
+                "blocked": false,
+                "active": false,
+                "expiresAt": "2026-10-19T02:12:00.000Z"
+              }
+            },
+            "expenses": {
+              "t5": {
+                "id": "t5",
+                "amountCents": 8000,
+                "category": "household",
+                "active": false
+              }
+            },
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S2": {
+            "id": "S2",
+            "label": "西雅图配送员",
+            "county": "WAC033",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S3": {
+            "id": "S3",
+            "label": "洛杉矶旅客",
+            "county": "CAC037",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S4": {
+            "id": "S4",
+            "label": "旧金山家庭",
+            "county": "CAC075",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S5": {
+            "id": "S5",
+            "label": "迈阿密店主",
+            "county": "FLC086",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S6": {
+            "id": "S6",
+            "label": "芝加哥学生",
+            "county": "ILC031",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          }
+        },
+        "decisions": [
+          {
+            "id": "t1:S1",
+            "eventId": "t1",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t1"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t2:S1",
+            "eventId": "t2",
+            "profileId": "S1",
+            "status": "CONSTRAINT_ADDED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t2"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t3:S1",
+            "eventId": "t3",
+            "profileId": "S1",
+            "status": "CONSTRAINT_CLEARED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t3"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [],
+            "externalExecution": false
+          },
+          {
+            "id": "t4:S1",
+            "eventId": "t4",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t4"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t5:S1",
+            "eventId": "t5",
+            "profileId": "S1",
+            "status": "SIMULATED_EXPENSE",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t5"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "after": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t6:S1",
+            "eventId": "t6",
+            "profileId": "S1",
+            "status": "SIMULATED_REFUND",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t6"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t5"
+            ],
+            "externalExecution": false
+          }
+        ],
+        "history": [
+          {
+            "cause": "t1",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t2",
+            "profileId": "S1",
+            "change": "CONSTRAINT_ADDED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t3",
+            "profileId": "S1",
+            "change": "CONSTRAINT_CLEARED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": []
+          },
+          {
+            "cause": "t4",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "targets": [
+              "t4"
+            ]
+          },
+          {
+            "cause": "t5",
+            "profileId": "S1",
+            "change": "SIMULATED_EXPENSE",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "after": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "targets": [
+              "t4"
+            ]
+          },
+          {
+            "cause": "t6",
+            "profileId": "S1",
+            "change": "SIMULATED_REFUND",
+            "before": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t5"
+            ]
+          }
+        ],
+        "realTransactions": 0,
+        "netIncome": 0
+      }
+    },
+    {
+      "eventId": "t7",
+      "at": "2026-10-19T00:16:00.000Z",
+      "state": {
+        "version": "1.2.0",
+        "mode": "LLM_NOT_CONNECTED",
+        "asOf": "2026-10-19T00:16:00.000Z",
+        "classification": "SYNTHETIC",
+        "people": {
+          "S1": {
+            "id": "S1",
+            "label": "纽约通勤者",
+            "county": "NYC061",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {
+              "t1": {
+                "id": "t1",
+                "amountCents": 6000,
+                "category": "travel",
+                "slot": "morning",
+                "status": "REVOKED_CONSTRAINT",
+                "expiresAt": "2026-10-19T02:10:00.000Z",
+                "createdBy": "t1",
+                "lastCause": "t2",
+                "text": "合成实验 t1"
+              },
+              "t4": {
+                "id": "t4",
+                "amountCents": 3000,
+                "category": "travel",
+                "slot": "alternate",
+                "status": "REVOKED_BUDGET",
+                "expiresAt": "2026-10-19T02:13:00.000Z",
+                "createdBy": "t4",
+                "lastCause": "t5",
+                "text": "合成实验 t4"
+              },
+              "t7": {
+                "id": "t7",
+                "amountCents": 2000,
+                "category": "travel",
+                "slot": "later",
+                "status": "PROPOSED",
+                "expiresAt": "2026-10-19T02:16:00.000Z",
+                "createdBy": "t7",
+                "lastCause": "t7",
+                "text": "合成实验 t7"
+              }
+            },
+            "constraints": {
+              "t2": {
+                "id": "t2",
+                "category": "travel",
+                "blocked": true,
+                "active": false,
+                "expiresAt": "2026-10-19T02:11:00.000Z"
+              },
+              "t3": {
+                "id": "t3",
+                "category": "travel",
+                "blocked": false,
+                "active": false,
+                "expiresAt": "2026-10-19T02:12:00.000Z"
+              }
+            },
+            "expenses": {
+              "t5": {
+                "id": "t5",
+                "amountCents": 8000,
+                "category": "household",
+                "active": false
+              }
+            },
+            "availableCents": 8000,
+            "reservedCents": 2000
+          },
+          "S2": {
+            "id": "S2",
+            "label": "西雅图配送员",
+            "county": "WAC033",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S3": {
+            "id": "S3",
+            "label": "洛杉矶旅客",
+            "county": "CAC037",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S4": {
+            "id": "S4",
+            "label": "旧金山家庭",
+            "county": "CAC075",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S5": {
+            "id": "S5",
+            "label": "迈阿密店主",
+            "county": "FLC086",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S6": {
+            "id": "S6",
+            "label": "芝加哥学生",
+            "county": "ILC031",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          }
+        },
+        "decisions": [
+          {
+            "id": "t1:S1",
+            "eventId": "t1",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t1"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t2:S1",
+            "eventId": "t2",
+            "profileId": "S1",
+            "status": "CONSTRAINT_ADDED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t2"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t3:S1",
+            "eventId": "t3",
+            "profileId": "S1",
+            "status": "CONSTRAINT_CLEARED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t3"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [],
+            "externalExecution": false
+          },
+          {
+            "id": "t4:S1",
+            "eventId": "t4",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t4"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t5:S1",
+            "eventId": "t5",
+            "profileId": "S1",
+            "status": "SIMULATED_EXPENSE",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t5"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "after": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t6:S1",
+            "eventId": "t6",
+            "profileId": "S1",
+            "status": "SIMULATED_REFUND",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t6"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t5"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t7:S1",
+            "eventId": "t7",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t7"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 8000
+            },
+            "changed": [
+              "t7"
+            ],
+            "externalExecution": false
+          }
+        ],
+        "history": [
+          {
+            "cause": "t1",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t2",
+            "profileId": "S1",
+            "change": "CONSTRAINT_ADDED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t3",
+            "profileId": "S1",
+            "change": "CONSTRAINT_CLEARED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": []
+          },
+          {
+            "cause": "t4",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "targets": [
+              "t4"
+            ]
+          },
+          {
+            "cause": "t5",
+            "profileId": "S1",
+            "change": "SIMULATED_EXPENSE",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "after": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "targets": [
+              "t4"
+            ]
+          },
+          {
+            "cause": "t6",
+            "profileId": "S1",
+            "change": "SIMULATED_REFUND",
+            "before": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t5"
+            ]
+          },
+          {
+            "cause": "t7",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 8000
+            },
+            "targets": [
+              "t7"
+            ]
+          }
+        ],
+        "realTransactions": 0,
+        "netIncome": 0
+      }
+    },
+    {
+      "eventId": "t8",
+      "at": "2026-10-19T00:17:00.000Z",
+      "state": {
+        "version": "1.2.0",
+        "mode": "LLM_NOT_CONNECTED",
+        "asOf": "2026-10-19T00:17:00.000Z",
+        "classification": "SYNTHETIC",
+        "people": {
+          "S1": {
+            "id": "S1",
+            "label": "纽约通勤者",
+            "county": "NYC061",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {
+              "t1": {
+                "id": "t1",
+                "amountCents": 6000,
+                "category": "travel",
+                "slot": "morning",
+                "status": "REVOKED_CONSTRAINT",
+                "expiresAt": "2026-10-19T02:10:00.000Z",
+                "createdBy": "t1",
+                "lastCause": "t2",
+                "text": "合成实验 t1"
+              },
+              "t4": {
+                "id": "t4",
+                "amountCents": 3000,
+                "category": "travel",
+                "slot": "alternate",
+                "status": "REVOKED_BUDGET",
+                "expiresAt": "2026-10-19T02:13:00.000Z",
+                "createdBy": "t4",
+                "lastCause": "t5",
+                "text": "合成实验 t4"
+              },
+              "t7": {
+                "id": "t7",
+                "amountCents": 2000,
+                "category": "travel",
+                "slot": "later",
+                "status": "CANCELLED",
+                "expiresAt": "2026-10-19T02:16:00.000Z",
+                "createdBy": "t7",
+                "lastCause": "t8",
+                "text": "合成实验 t7"
+              }
+            },
+            "constraints": {
+              "t2": {
+                "id": "t2",
+                "category": "travel",
+                "blocked": true,
+                "active": false,
+                "expiresAt": "2026-10-19T02:11:00.000Z"
+              },
+              "t3": {
+                "id": "t3",
+                "category": "travel",
+                "blocked": false,
+                "active": false,
+                "expiresAt": "2026-10-19T02:12:00.000Z"
+              }
+            },
+            "expenses": {
+              "t5": {
+                "id": "t5",
+                "amountCents": 8000,
+                "category": "household",
+                "active": false
+              }
+            },
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S2": {
+            "id": "S2",
+            "label": "西雅图配送员",
+            "county": "WAC033",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S3": {
+            "id": "S3",
+            "label": "洛杉矶旅客",
+            "county": "CAC037",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S4": {
+            "id": "S4",
+            "label": "旧金山家庭",
+            "county": "CAC075",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S5": {
+            "id": "S5",
+            "label": "迈阿密店主",
+            "county": "FLC086",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          },
+          "S6": {
+            "id": "S6",
+            "label": "芝加哥学生",
+            "county": "ILC031",
+            "budgetCents": 10000,
+            "classification": "SYNTHETIC",
+            "spentCents": 0,
+            "plans": {},
+            "constraints": {},
+            "expenses": {},
+            "availableCents": 10000,
+            "reservedCents": 0
+          }
+        },
+        "decisions": [
+          {
+            "id": "t1:S1",
+            "eventId": "t1",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t1"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t2:S1",
+            "eventId": "t2",
+            "profileId": "S1",
+            "status": "CONSTRAINT_ADDED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t2"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t1"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t3:S1",
+            "eventId": "t3",
+            "profileId": "S1",
+            "status": "CONSTRAINT_CLEARED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t3"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [],
+            "externalExecution": false
+          },
+          {
+            "id": "t4:S1",
+            "eventId": "t4",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t4"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t5:S1",
+            "eventId": "t5",
+            "profileId": "S1",
+            "status": "SIMULATED_EXPENSE",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t5"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "after": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "changed": [
+              "t4"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t6:S1",
+            "eventId": "t6",
+            "profileId": "S1",
+            "status": "SIMULATED_REFUND",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t6"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t5"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t7:S1",
+            "eventId": "t7",
+            "profileId": "S1",
+            "status": "PROPOSED",
+            "reason": "within_budget_and_constraints",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t7"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 8000
+            },
+            "changed": [
+              "t7"
+            ],
+            "externalExecution": false
+          },
+          {
+            "id": "t8:S1",
+            "eventId": "t8",
+            "profileId": "S1",
+            "status": "CANCELLED",
+            "reason": "synthetic_input_only",
+            "source": {
+              "classification": "SYNTHETIC",
+              "source": "user_simulation",
+              "eventId": "t8"
+            },
+            "uncertainty": "用户输入未经现实核验；规则仅理解结构化字段。",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 8000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "changed": [
+              "t7"
+            ],
+            "externalExecution": false
+          }
+        ],
+        "history": [
+          {
+            "cause": "t1",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t2",
+            "profileId": "S1",
+            "change": "CONSTRAINT_ADDED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 4000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t1"
+            ]
+          },
+          {
+            "cause": "t3",
+            "profileId": "S1",
+            "change": "CONSTRAINT_CLEARED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": []
+          },
+          {
+            "cause": "t4",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "targets": [
+              "t4"
+            ]
+          },
+          {
+            "cause": "t5",
+            "profileId": "S1",
+            "change": "SIMULATED_EXPENSE",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 7000
+            },
+            "after": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "targets": [
+              "t4"
+            ]
+          },
+          {
+            "cause": "t6",
+            "profileId": "S1",
+            "change": "SIMULATED_REFUND",
+            "before": {
+              "spentCents": 8000,
+              "availableCents": 2000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t5"
+            ]
+          },
+          {
+            "cause": "t7",
+            "profileId": "S1",
+            "change": "PROPOSED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 8000
+            },
+            "targets": [
+              "t7"
+            ]
+          },
+          {
+            "cause": "t8",
+            "profileId": "S1",
+            "change": "CANCELLED",
+            "before": {
+              "spentCents": 0,
+              "availableCents": 8000
+            },
+            "after": {
+              "spentCents": 0,
+              "availableCents": 10000
+            },
+            "targets": [
+              "t7"
+            ]
+          }
+        ],
+        "realTransactions": 0,
+        "netIncome": 0
+      }
+    }
+  ]
+}
