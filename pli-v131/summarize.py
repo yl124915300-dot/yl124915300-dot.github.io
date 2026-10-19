@@ -9,6 +9,9 @@ for arm in arms:
  d=OUT/arm
  meta=json.loads((d/"inference.json").read_text());evaluation=json.loads((d/"evaluation.json").read_text());rows=json.loads((d/"results.json").read_text())
  summary[arm]={"inference":meta,"automaticEvaluation":{k:v for k,v in evaluation.items() if k!="cases"},"failures":[r for r in evaluation["cases"] if not r["all_fields_correct"]],"rawResultsSha256":hashlib.sha256((d/"results.json").read_bytes()).hexdigest()}
+ if arm=="baseline":
+  summary[arm]["automaticEvaluation"]["accepted_binding_errors"]=None
+  summary[arm]["automaticEvaluation"]["binding_metric_note"]="NOT_MEASURED: the frozen baseline counter is a constant zero; do not interpret it as observed zero errors."
  data[arm]=[{"id":r["input"]["id"],"profileId":r["input"]["profileId"],"text":r["input"]["text"],"output":r.get("model_output"),"failure":r.get("failure"),"gateCode":r["gate"].get("code"),"gateDetail":r["gate"].get("detail"),"selectedOption":r["gate"].get("option"),"available":{p:v["availableCents"] for p,v in r["gate"]["state"]["people"].items()},"assessment":evaluation["cases"][i]} for i,r in enumerate(rows)]
 def canonical_state(r):
  p=r["before"]["people"]
