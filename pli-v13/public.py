@@ -10,7 +10,7 @@ for name in paths:
  for attempt in range(12):
   try:
    with urlopen(Request("https://yl124915300-dot.github.io/pli-v13/"+name+"?pli13="+str(time.time_ns()),headers={"Cache-Control":"no-cache","User-Agent":"PLI13-public-acceptance"}),timeout=20) as r:body=r.read()
-   actual=hashlib.sha256(body).hexdigest();result.update(actualSha256=actual,pass=actual==expected)
+   actual=hashlib.sha256(body).hexdigest();result.update({"actualSha256":actual,"pass":actual==expected})
    if result["pass"]:break
   except Exception as e:result["error"]=str(e)
   time.sleep(5)
