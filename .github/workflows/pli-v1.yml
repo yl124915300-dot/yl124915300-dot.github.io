@@ -1,0 +1,16 @@
+name: PLI V1 cloud verification
+on:
+  push:
+    branches: [pli-v1-20261019]
+    paths: ['pli-v1/**', '.github/workflows/pli-v1.yml']
+permissions:
+  contents: read
+jobs:
+  cloud-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify standard cloud runtime
+        run: |
+          python3 --version
+          python3 -c "import sqlite3, urllib.request, http.server; print('CLOUD_RUNTIME_PROBE PASS')"
