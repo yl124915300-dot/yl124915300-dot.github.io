@@ -1,43 +1,43 @@
 {
   "checks": [
     {
-      "name": "independent replay u01",
+      "name": "independent replay v01",
       "pass": true
     },
     {
-      "name": "independent replay u02",
+      "name": "independent replay v02",
       "pass": true
     },
     {
-      "name": "independent replay u03",
+      "name": "independent replay v03",
       "pass": true
     },
     {
-      "name": "independent replay u04",
+      "name": "independent replay v04",
       "pass": true
     },
     {
-      "name": "independent replay u05",
+      "name": "independent replay v05",
       "pass": true
     },
     {
-      "name": "independent replay u06",
+      "name": "independent replay v06",
       "pass": true
     },
     {
-      "name": "independent replay u07",
+      "name": "independent replay v07",
       "pass": true
     },
     {
-      "name": "independent replay u08",
+      "name": "independent replay v08",
       "pass": true
     },
     {
-      "name": "independent replay u09",
+      "name": "independent replay v09",
       "pass": true
     },
     {
-      "name": "independent replay u10",
+      "name": "independent replay v10",
       "pass": true
     },
     {
