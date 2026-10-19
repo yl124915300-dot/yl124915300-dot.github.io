@@ -1,0 +1,348 @@
+{
+  "at": "2026-10-19T06:03:01.737Z",
+  "suite": "rules_and_adversarial_synthetic",
+  "total": 85,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "six fixed synthetic identities",
+      "result": "PASS"
+    },
+    {
+      "name": "initial independent budgets",
+      "result": "PASS"
+    },
+    {
+      "name": "plan reserves virtual budget",
+      "result": "PASS"
+    },
+    {
+      "name": "no spending occurs for a proposal",
+      "result": "PASS"
+    },
+    {
+      "name": "plan carries source event",
+      "result": "PASS"
+    },
+    {
+      "name": "plan states uncertainty",
+      "result": "PASS"
+    },
+    {
+      "name": "multi profile creates separate decisions",
+      "result": "PASS"
+    },
+    {
+      "name": "regional mismatch cannot affect another profile",
+      "result": "PASS"
+    },
+    {
+      "name": "exact county match accepted",
+      "result": "PASS"
+    },
+    {
+      "name": "substring county match rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown region is no match",
+      "result": "PASS"
+    },
+    {
+      "name": "expired event rejected with no reservation",
+      "result": "PASS"
+    },
+    {
+      "name": "future event rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid date rejects input",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid TTL rejects input",
+      "result": "PASS"
+    },
+    {
+      "name": "seven day maximum TTL",
+      "result": "PASS"
+    },
+    {
+      "name": "plan expiration releases reserved budget",
+      "result": "PASS"
+    },
+    {
+      "name": "expired plan records expiration cause",
+      "result": "PASS"
+    },
+    {
+      "name": "budget excess blocked",
+      "result": "PASS"
+    },
+    {
+      "name": "budget exact bound allowed",
+      "result": "PASS"
+    },
+    {
+      "name": "negative amount rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "fractional cents rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "amount string rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "nonfinite amount rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "virtual expense persists beyond input expiry",
+      "result": "PASS"
+    },
+    {
+      "name": "expense cannot overdraw total",
+      "result": "PASS"
+    },
+    {
+      "name": "conflicting slot blocked",
+      "result": "PASS"
+    },
+    {
+      "name": "cancellation frees slot and reservation",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown cancellation is explicit",
+      "result": "PASS"
+    },
+    {
+      "name": "duplicate events rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown profiles rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "duplicate profiles rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "empty selection rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "real provenance spoof rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "real identity spoof rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "official source spoof rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "source URL fields rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "external action in event rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "nested account credential field rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "prototype injection rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "oversized text rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "irrelevant payload fields rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "boolean string constraint rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "clock rollback rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "checkpoint version tampering rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "checkpoint extra state injection rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "checkpoint decision tampering cannot override replay",
+      "result": "PASS"
+    },
+    {
+      "name": "checkpoint journal time order checked",
+      "result": "PASS"
+    },
+    {
+      "name": "checkpoint size bounded",
+      "result": "PASS"
+    },
+    {
+      "name": "input memory not mutated",
+      "result": "PASS"
+    },
+    {
+      "name": "travel chain eight cause frames",
+      "result": "PASS"
+    },
+    {
+      "name": "travel constraint revokes prior plan",
+      "result": "PASS"
+    },
+    {
+      "name": "clearing constraint changes later feasibility",
+      "result": "PASS"
+    },
+    {
+      "name": "new expense revokes over-budget proposal",
+      "result": "PASS"
+    },
+    {
+      "name": "refund restores simulated spent amount",
+      "result": "PASS"
+    },
+    {
+      "name": "cancellation releases final reservation",
+      "result": "PASS"
+    },
+    {
+      "name": "revoked plans retain triggering cause",
+      "result": "PASS"
+    },
+    {
+      "name": "household chain six cause frames",
+      "result": "PASS"
+    },
+    {
+      "name": "household independent final spend",
+      "result": "PASS"
+    },
+    {
+      "name": "household independent final reserved amount",
+      "result": "PASS"
+    },
+    {
+      "name": "household final available amount",
+      "result": "PASS"
+    },
+    {
+      "name": "household does not change commuter",
+      "result": "PASS"
+    },
+    {
+      "name": "cancelled constraint permits new plan",
+      "result": "PASS"
+    },
+    {
+      "name": "each chain frame replays exactly",
+      "result": "PASS"
+    },
+    {
+      "name": "deny pay",
+      "result": "PASS"
+    },
+    {
+      "name": "deny purchase",
+      "result": "PASS"
+    },
+    {
+      "name": "deny place_order",
+      "result": "PASS"
+    },
+    {
+      "name": "deny send_message",
+      "result": "PASS"
+    },
+    {
+      "name": "deny login_real_account",
+      "result": "PASS"
+    },
+    {
+      "name": "deny transfer_funds",
+      "result": "PASS"
+    },
+    {
+      "name": "unseen free-text event 1 safely abstains",
+      "result": "PASS"
+    },
+    {
+      "name": "unseen free-text event 2 safely abstains",
+      "result": "PASS"
+    },
+    {
+      "name": "unseen free-text event 3 safely abstains",
+      "result": "PASS"
+    },
+    {
+      "name": "LLM mode honestly disconnected",
+      "result": "PASS"
+    },
+    {
+      "name": "provider disconnected has no claims",
+      "result": "PASS"
+    },
+    {
+      "name": "structured simulated provider output validates without execution",
+      "result": "PASS"
+    },
+    {
+      "name": "untyped provider cost rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "provider invented source rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "provider unauthorized action rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "provider overbudget output rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "provider real account field rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "provider unsupported factual claim rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "provider profile escalation rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "provider cannot claim connection",
+      "result": "PASS"
+    },
+    {
+      "name": "disconnected provider cannot smuggle proposal",
+      "result": "PASS"
+    }
+  ]
+}
