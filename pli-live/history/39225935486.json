@@ -1,0 +1,3056 @@
+{
+  "after_state_digest": "34e1f5b17b8e6123c3127c506f77377f8a638075221066aba54f33532c911189",
+  "decisions": {
+    "matching": [
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.12af82296dafb4ae5b0256187b8c6b6470bb0a24.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.12af82296dafb4ae5b0256187b8c6b6470bb0a24.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.12af82296dafb4ae5b0256187b8c6b6470bb0a24.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.12af82296dafb4ae5b0256187b8c6b6470bb0a24.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.12af82296dafb4ae5b0256187b8c6b6470bb0a24.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.12af82296dafb4ae5b0256187b8c6b6470bb0a24.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.39dd854d4a94cc681dc6e408592022092bb235fb.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.39dd854d4a94cc681dc6e408592022092bb235fb.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.39dd854d4a94cc681dc6e408592022092bb235fb.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.39dd854d4a94cc681dc6e408592022092bb235fb.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.39dd854d4a94cc681dc6e408592022092bb235fb.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.39dd854d4a94cc681dc6e408592022092bb235fb.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.9c9a7be38e3a42cdc83cbf9b81ca3d7696ed762f.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.9c9a7be38e3a42cdc83cbf9b81ca3d7696ed762f.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.9c9a7be38e3a42cdc83cbf9b81ca3d7696ed762f.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.9c9a7be38e3a42cdc83cbf9b81ca3d7696ed762f.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.9c9a7be38e3a42cdc83cbf9b81ca3d7696ed762f.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.9c9a7be38e3a42cdc83cbf9b81ca3d7696ed762f.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "method": "official_polygon"
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ae8e54e11e9105fc7e4866ee9a809176c3d3d8bf.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "method": "official_polygon"
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ae8e54e11e9105fc7e4866ee9a809176c3d3d8bf.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "method": "official_polygon"
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ae8e54e11e9105fc7e4866ee9a809176c3d3d8bf.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "method": "official_polygon"
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ae8e54e11e9105fc7e4866ee9a809176c3d3d8bf.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "method": "official_polygon"
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ae8e54e11e9105fc7e4866ee9a809176c3d3d8bf.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "method": "official_polygon"
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ae8e54e11e9105fc7e4866ee9a809176c3d3d8bf.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.be9b779bff7450d2eb75c68bdeecbe5930e5de8b.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.be9b779bff7450d2eb75c68bdeecbe5930e5de8b.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.be9b779bff7450d2eb75c68bdeecbe5930e5de8b.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.be9b779bff7450d2eb75c68bdeecbe5930e5de8b.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.be9b779bff7450d2eb75c68bdeecbe5930e5de8b.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.be9b779bff7450d2eb75c68bdeecbe5930e5de8b.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.cc90550140e8c47feef4ebe3d88cb41cfed4b4b4.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.cc90550140e8c47feef4ebe3d88cb41cfed4b4b4.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.cc90550140e8c47feef4ebe3d88cb41cfed4b4b4.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.cc90550140e8c47feef4ebe3d88cb41cfed4b4b4.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.cc90550140e8c47feef4ebe3d88cb41cfed4b4b4.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.cc90550140e8c47feef4ebe3d88cb41cfed4b4b4.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.dae08ea6ad3808f145088085e7632c94dd47d730.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.dae08ea6ad3808f145088085e7632c94dd47d730.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.dae08ea6ad3808f145088085e7632c94dd47d730.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.dae08ea6ad3808f145088085e7632c94dd47d730.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.dae08ea6ad3808f145088085e7632c94dd47d730.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.dae08ea6ad3808f145088085e7632c94dd47d730.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.2",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.2",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.2",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.2",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.2",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.001.2",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.2",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.2",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.2",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.2",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.2",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.002.2",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": [
+            "https://api.weather.gov/zones/forecast/FLZ173"
+          ]
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
+        "matched": true,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.2",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.2",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.2",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.2",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.2",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.2",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.002.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.002.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.002.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.002.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.002.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.002.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.003.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.003.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.003.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.003.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.003.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.003.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.1",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.1",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.1",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.1",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.1",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.1",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "county_exact": false,
+          "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+          "method": "official_point_zones_or_exact_county",
+          "zones": []
+        },
+        "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 5440.338,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usbbnn",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 2415.432,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usbbnn",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 3884.378,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usbbnn",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 3347.032,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usbbnn",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 6504.368,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usbbnn",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 4641.104,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usbbnn",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 5127.233,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscgsl",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 2382.346,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscgsl",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 3904.512,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscgsl",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 3389.707,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscgsl",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 6276.123,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscgsl",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 4385.683,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscgsl",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 5618.223,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscmes",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 2407.747,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscmes",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 3821.02,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscmes",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 3272.464,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscmes",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 6610.546,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscmes",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 4775.123,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026uscmes",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 5353.69,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdhjn",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 2192.429,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdhjn",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 3641.844,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdhjn",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 3100.837,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdhjn",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 6353.797,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdhjn",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 4512.762,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdhjn",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 5368.631,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdlbq",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 2196.964,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdlbq",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 3642.737,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdlbq",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 3100.921,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdlbq",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 6365.002,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdlbq",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 4525.563,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdlbq",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 5308.552,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdrrt",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 2232.403,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdrrt",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 3702.42,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdrrt",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 3166.295,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdrrt",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 6342.605,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdrrt",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 4488.522,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:aka2026usdrrt",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 7911.409,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:hv75060741",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 4330.168,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:hv75060741",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 4007.718,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:hv75060741",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 3785.392,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:hv75060741",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 7654.13,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:hv75060741",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 6766.784,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:hv75060741",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 4120.042,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452041",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 976.238,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452041",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 669.484,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452041",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 122.783,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452041",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 4214.755,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452041",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 2976.834,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452041",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 4119.051,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452051",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 978.673,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452051",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 666.34,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452051",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 119.877,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452051",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 4212.55,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452051",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 2975.789,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452051",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 4121.443,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452061",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 977.937,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452061",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 668.754,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452061",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 121.417,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452061",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 4215.448,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452061",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 2978.212,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452061",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 4119.851,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452071",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 976.231,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452071",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 669.357,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452071",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 122.731,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452071",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 4214.554,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452071",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 2976.642,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452071",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 4121.451,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452076",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 977.919,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452076",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 668.778,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452076",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 121.439,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452076",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 4215.465,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452076",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 2978.22,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:nc75452076",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 13559.428,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bc",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 9857.807,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bc",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 9637.682,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bc",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 9432.499,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bc",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 13068.583,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bc",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 12414.955,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bc",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 13556.821,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3be",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 9854.486,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3be",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 9635.316,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3be",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 9429.789,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3be",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 13067.35,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3be",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 12412.327,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3be",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 13572.981,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bi",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 9872.055,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bi",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 9650.931,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bi",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 9446.177,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bi",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 13079.984,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bi",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 12428.535,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bi",
+        "matched": false,
+        "role_id": "S6"
+      },
+      {
+        "basis": {
+          "km": 13599.409,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bk",
+        "matched": false,
+        "role_id": "S1"
+      },
+      {
+        "basis": {
+          "km": 9894.487,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bk",
+        "matched": false,
+        "role_id": "S2"
+      },
+      {
+        "basis": {
+          "km": 9678.424,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bk",
+        "matched": false,
+        "role_id": "S3"
+      },
+      {
+        "basis": {
+          "km": 9472.113,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bk",
+        "matched": false,
+        "role_id": "S4"
+      },
+      {
+        "basis": {
+          "km": 13111.061,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bk",
+        "matched": false,
+        "role_id": "S5"
+      },
+      {
+        "basis": {
+          "km": 12454.863,
+          "method": "distance_80km_magnitude_4.5"
+        },
+        "event_id": "usgs:us6000u3bk",
+        "matched": false,
+        "role_id": "S6"
+      }
+    ],
+    "receipt": {
+      "active_proposals": 1,
+      "at": "2026-10-19T08:53:12.896440+00:00",
+      "before_state_sha256": "44dde84b9d4277073fb0cafc1b1c7057234aae4a19d9a1d33c6b047c8f38c0dc",
+      "decision_method": "PRESET_DETERMINISTIC_RULE",
+      "duplicate_input_events": 0,
+      "event": "workflow_dispatch",
+      "event_count": 249,
+      "id": "39225935486",
+      "implementation_commit": "7cce2f3e123a85093d23cfb66279132ff5c79c0c",
+      "journal_after": 1,
+      "journal_before": 0,
+      "llm_status": "LLM_NOT_AUTONOMOUS",
+      "net_receipts_usd": 0,
+      "phase": "first",
+      "real_transactions": 0,
+      "restored_from_run": null,
+      "restored_state_file_sha256": null,
+      "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39225935486",
+      "source_health": {
+        "NWS": true,
+        "USGS": true
+      },
+      "state_payload_sha256": "0af40af200f58082915ecdddead0377bd18469fe95c21f89789b147c377ebc7c",
+      "transitions": 1,
+      "unchanged_proposals": 0
+    },
+    "rejected": []
+  },
+  "journal_delta": [
+    {
+      "at": "2026-10-19T08:53:12.896440+00:00",
+      "event_id": "urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
+      "evidence_url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.ed5148c074e8a21898a74e652d77c1f4292b31d2.003.1",
+      "from_revision": null,
+      "from_status": null,
+      "reason": "RULE_CANDIDATE",
+      "revision": "3db0f7fe7555daf57e2d45cda5e6bf6bf3f58e12d5881317f1b56c7fbb11d55f",
+      "risk_resolved": false,
+      "role_id": "S5",
+      "run_id": "39225935486",
+      "seq": 1,
+      "to_status": "PROPOSED"
+    }
+  ],
+  "mapping_receipts": {
+    "S1": {
+      "cache_age": "0",
+      "classification": "SYNTHETIC_LOCATION_REAL_MAPPING",
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://api.weather.gov/points/40.75,-73.99",
+      "http_date": "Mon, 19 Oct 2026 08:53:13 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+      "url": "https://api.weather.gov/points/40.75,-73.99",
+      "zones": [
+        "https://api.weather.gov/zones/forecast/NYZ072",
+        "https://api.weather.gov/zones/county/NYC061",
+        "https://api.weather.gov/zones/fire/NYZ212"
+      ]
+    },
+    "S2": {
+      "cache_age": "0",
+      "classification": "SYNTHETIC_LOCATION_REAL_MAPPING",
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://api.weather.gov/points/47.61,-122.33",
+      "http_date": "Mon, 19 Oct 2026 08:53:13 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+      "url": "https://api.weather.gov/points/47.61,-122.33",
+      "zones": [
+        "https://api.weather.gov/zones/forecast/WAZ315",
+        "https://api.weather.gov/zones/county/WAC033",
+        "https://api.weather.gov/zones/fire/WAZ654"
+      ]
+    },
+    "S3": {
+      "cache_age": "0",
+      "classification": "SYNTHETIC_LOCATION_REAL_MAPPING",
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://api.weather.gov/points/34.05,-118.24",
+      "http_date": "Mon, 19 Oct 2026 08:53:13 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+      "url": "https://api.weather.gov/points/34.05,-118.24",
+      "zones": [
+        "https://api.weather.gov/zones/forecast/CAZ368",
+        "https://api.weather.gov/zones/county/CAC037",
+        "https://api.weather.gov/zones/fire/CAZ368"
+      ]
+    },
+    "S4": {
+      "cache_age": "0",
+      "classification": "SYNTHETIC_LOCATION_REAL_MAPPING",
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://api.weather.gov/points/37.77,-122.42",
+      "http_date": "Mon, 19 Oct 2026 08:53:13 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+      "url": "https://api.weather.gov/points/37.77,-122.42",
+      "zones": [
+        "https://api.weather.gov/zones/forecast/CAZ006",
+        "https://api.weather.gov/zones/county/CAC075",
+        "https://api.weather.gov/zones/fire/CAZ006"
+      ]
+    },
+    "S5": {
+      "cache_age": "0",
+      "classification": "SYNTHETIC_LOCATION_REAL_MAPPING",
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://api.weather.gov/points/25.77,-80.19",
+      "http_date": "Mon, 19 Oct 2026 08:53:13 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+      "url": "https://api.weather.gov/points/25.77,-80.19",
+      "zones": [
+        "https://api.weather.gov/zones/forecast/FLZ173",
+        "https://api.weather.gov/zones/county/FLC086",
+        "https://api.weather.gov/zones/fire/FLZ173"
+      ]
+    },
+    "S6": {
+      "cache_age": "0",
+      "classification": "SYNTHETIC_LOCATION_REAL_MAPPING",
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://api.weather.gov/points/41.88,-87.63",
+      "http_date": "Mon, 19 Oct 2026 08:53:14 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+      "url": "https://api.weather.gov/points/41.88,-87.63",
+      "zones": [
+        "https://api.weather.gov/zones/forecast/ILZ104",
+        "https://api.weather.gov/zones/county/ILC031",
+        "https://api.weather.gov/zones/fire/ILZ014"
+      ]
+    }
+  },
+  "normalization_rejected": [],
+  "post_freeze_heldout": {
+    "event_id": "urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+    "raw": {
+      "geometry": null,
+      "id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+      "properties": {
+        "@id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+        "@type": "wx:Alert",
+        "affectedZones": [
+          "https://api.weather.gov/zones/forecast/LMZ541"
+        ],
+        "areaDesc": "Rock Island Passage to Sturgeon Bay WI",
+        "category": "Met",
+        "certainty": "Likely",
+        "code": "IPAWSv1.0",
+        "description": "* WHAT...Southwest winds 10 to 20 kt with gusts up to 25 kt and\nwaves 3 to 5 ft.\n\n* WHERE...Lake Michigan nearshore waters from Washington Island\nto Sturgeon Bay.\n\n* WHEN...Until 7 AM CDT this morning.\n\n* IMPACTS...Conditions will be hazardous to small craft.",
+        "effective": "2026-10-19T00:54:00-05:00",
+        "ends": "2026-10-19T07:00:00-05:00",
+        "event": "Small Craft Advisory",
+        "eventCode": {
+          "NationalWeatherService": [
+            "SCY"
+          ],
+          "SAME": [
+            "NWS"
+          ]
+        },
+        "expires": "2026-10-19T07:00:00-05:00",
+        "geocode": {
+          "SAME": [
+            "092541"
+          ],
+          "UGC": [
+            "LMZ541"
+          ]
+        },
+        "headline": "Small Craft Advisory issued October 19 at 12:54AM CDT until October 19 at 7:00AM CDT by NWS Green Bay WI",
+        "id": "urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1",
+        "instruction": "Inexperienced mariners, especially those operating smaller\nvessels, should avoid navigating in hazardous conditions.",
+        "language": "en-US",
+        "messageType": "Update",
+        "note": null,
+        "onset": "2026-10-19T00:54:00-05:00",
+        "parameters": {
+          "AWIPSidentifier": [
+            "MWWGRB"
+          ],
+          "BLOCKCHANNEL": [
+            "EAS",
+            "NWEM",
+            "CMAS"
+          ],
+          "NWSheadline": [
+            "SMALL CRAFT ADVISORY REMAINS IN EFFECT UNTIL 7 AM CDT THIS MORNING"
+          ],
+          "VTEC": [
+            "/O.CON.KGRB.SC.Y.0091.000000T0000Z-261019T1200Z/"
+          ],
+          "WMOidentifier": [
+            "WHUS73 KGRB 190554"
+          ],
+          "eventEndingTime": [
+            "2026-10-19T07:00:00-05:00"
+          ],
+          "expiredReferences": [
+            "w-nws.webmaster@noaa.gov,urn:oid:2.49.0.1.840.0.6941718ecfde2318e186e7237bae3e4208dbd353.001.1,2026-10-17T21:28:00-05:00 w-nws.webmaster@noaa.gov,urn:oid:2.49.0.1.840.0.9dbfdba844ac8e84b2e34b4dc0ec1af3a41871b3.001.1,2026-10-17T15:07:00-05:00 w-nws.webmaster@noaa.gov,urn:oid:2.49.0.1.840.0.affcb2003707a5ed239e1d690e36100cb952362c.001.1,2026-10-17T23:42:00-05:00 w-nws.webmaster@noaa.gov,urn:oid:2.49.0.1.840.0.7dd8444dd82a82fcc813b287347bc57487ae91ea.001.1,2026-10-17T10:06:00-05:00 w-nws.webmaster@noaa.gov,urn:oid:2.49.0.1.840.0.75cb195c5659b074a54eed18a75bffbb23f30ee8.002.1,2026-10-17T02:58:00-05:00"
+          ]
+        },
+        "references": [
+          {
+            "@id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.8561bc0713c96f195771ac049a8fb1848cf6a284.001.2",
+            "identifier": "urn:oid:2.49.0.1.840.0.8561bc0713c96f195771ac049a8fb1848cf6a284.001.2",
+            "sender": "w-nws.webmaster@noaa.gov",
+            "sent": "2026-10-18T14:07:00-05:00"
+          },
+          {
+            "@id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.91dec2e12a49f4d2274a0dcf73679aa18189a6a3.001.2",
+            "identifier": "urn:oid:2.49.0.1.840.0.91dec2e12a49f4d2274a0dcf73679aa18189a6a3.001.2",
+            "sender": "w-nws.webmaster@noaa.gov",
+            "sent": "2026-10-18T20:03:00-05:00"
+          }
+        ],
+        "response": "Avoid",
+        "scope": "Public",
+        "sender": "w-nws.webmaster@noaa.gov",
+        "senderName": "NWS Green Bay WI",
+        "sent": "2026-10-19T00:54:00-05:00",
+        "severity": "Minor",
+        "status": "Actual",
+        "urgency": "Expected",
+        "web": "http://www.weather.gov"
+      },
+      "type": "Feature"
+    },
+    "receipt": {
+      "cache_age": "0",
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://api.weather.gov/alerts/active",
+      "http_date": "Mon, 19 Oct 2026 08:53:14 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "7ac75d6675584b8a59ed03aaa4aecbd28b3a2bdc3d545d54051fa59583fd6050",
+      "url": "https://api.weather.gov/alerts/active"
+    },
+    "selection": "first sorted valid CAP ID absent from V1.1 and prior loop state; may match no profile",
+    "status": "OBSERVED",
+    "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.02cf99cb1d8b0750f7f1efd1478dae90208aa9e9.002.1"
+  },
+  "prior_state_digest": "44dde84b9d4277073fb0cafc1b1c7057234aae4a19d9a1d33c6b047c8f38c0dc",
+  "receipt": {
+    "active_proposals": 1,
+    "at": "2026-10-19T08:53:12.896440+00:00",
+    "before_state_sha256": "44dde84b9d4277073fb0cafc1b1c7057234aae4a19d9a1d33c6b047c8f38c0dc",
+    "decision_method": "PRESET_DETERMINISTIC_RULE",
+    "duplicate_input_events": 0,
+    "event": "workflow_dispatch",
+    "event_count": 249,
+    "id": "39225935486",
+    "implementation_commit": "7cce2f3e123a85093d23cfb66279132ff5c79c0c",
+    "journal_after": 1,
+    "journal_before": 0,
+    "llm_status": "LLM_NOT_AUTONOMOUS",
+    "net_receipts_usd": 0,
+    "phase": "first",
+    "real_transactions": 0,
+    "restored_from_run": null,
+    "restored_state_file_sha256": null,
+    "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39225935486",
+    "source_health": {
+      "NWS": true,
+      "USGS": true
+    },
+    "state_payload_sha256": "0af40af200f58082915ecdddead0377bd18469fe95c21f89789b147c377ebc7c",
+    "transitions": 1,
+    "unchanged_proposals": 0
+  },
+  "source_receipts": {
+    "NWS": {
+      "cache_age": "0",
+      "feature_count": 22,
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://api.weather.gov/alerts/active?area=CA,WA,NY,FL,IL",
+      "http_date": "Mon, 19 Oct 2026 08:53:13 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "26a49ccbd5878bc0d8915c1dabdef8a1230e2b3be23067cb31a154794aea49f2",
+      "url": "https://api.weather.gov/alerts/active?area=CA,WA,NY,FL,IL"
+    },
+    "USGS": {
+      "cache_age": "15",
+      "feature_count": 226,
+      "fetched_at": "2026-10-19T08:53:12.896440+00:00",
+      "fetched_epoch": 1792399992.89644,
+      "final_url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson",
+      "http_date": "Mon, 19 Oct 2026 08:52:58 GMT",
+      "http_status": 200,
+      "ok": true,
+      "sha256": "8e30a137fa5bc1f399c9125719937fb952a806a625ccd244fd64bac07abcfb43",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+    }
+  },
+  "unseen_real_event": {
+    "definition": "Real NWS ID absent from V1.1 snapshot and all prior live runs; no real IDs in synthetic unit fixtures",
+    "events": [
+      {
+        "id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+        "matches": [
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "matched": false,
+            "role_id": "S1"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "matched": false,
+            "role_id": "S2"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "matched": false,
+            "role_id": "S3"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "matched": false,
+            "role_id": "S4"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "matched": false,
+            "role_id": "S5"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1",
+            "matched": false,
+            "role_id": "S6"
+          }
+        ],
+        "revision": "a7deca84772add8c729d8e4e93aef2e1e6ca67225b4b7da708eea807ea3d529a",
+        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.2a6fe58317a97152ab08c550ebb3e2d8c9a9bbb6.001.1"
+      },
+      {
+        "id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+        "matches": [
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+            "matched": false,
+            "role_id": "S1"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+            "matched": false,
+            "role_id": "S2"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+            "matched": false,
+            "role_id": "S3"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+            "matched": false,
+            "role_id": "S4"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+            "matched": false,
+            "role_id": "S5"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1",
+            "matched": false,
+            "role_id": "S6"
+          }
+        ],
+        "revision": "ae759931dbc262a33c670c02b4a5d54751f7b5274b580871eb410643f9df733d",
+        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.1"
+      },
+      {
+        "id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+        "matches": [
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+            "matched": false,
+            "role_id": "S1"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+            "matched": false,
+            "role_id": "S2"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+            "matched": false,
+            "role_id": "S3"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+            "matched": false,
+            "role_id": "S4"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+            "matched": false,
+            "role_id": "S5"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2",
+            "matched": false,
+            "role_id": "S6"
+          }
+        ],
+        "revision": "2f0f3e81826a8dd15001af7e98684dd99472e63a35f2ca29a8b0b21b63d1adef",
+        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.5afb7e3e0436dccdc0847c9aefa8f34adf71dfa9.001.2"
+      },
+      {
+        "id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+        "matches": [
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+            "matched": false,
+            "role_id": "S1"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+            "matched": false,
+            "role_id": "S2"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+            "matched": false,
+            "role_id": "S3"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+            "matched": false,
+            "role_id": "S4"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+            "matched": false,
+            "role_id": "S5"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2",
+            "matched": false,
+            "role_id": "S6"
+          }
+        ],
+        "revision": "96d026bd284e2cdc35c3484e3d1a6134de123fa8b58dd5142ed24a91ef48d0c6",
+        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.004.2"
+      },
+      {
+        "id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+        "matches": [
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b5ae271c1c00ee326ff95cc8b939684e5cf0444359d4b5eac70a99ba5fe86c22",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+            "matched": false,
+            "role_id": "S1"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "e0fae888b128bce658c9641743a8ac9f0c02ee16130a608b060209b46d8252a7",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+            "matched": false,
+            "role_id": "S2"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "a25ab466e97de2e1d663bef7043df90be35cb9b0bf3f1e664d9091b9161ab563",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+            "matched": false,
+            "role_id": "S3"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "7f29a26b997d336b4050f877603bc9b795dff3ffaa1d0f2135571ccd2babe117",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+            "matched": false,
+            "role_id": "S4"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "b320671fdbc54e047cfc5c39d044e9b7007a3671ac740863ee51bcfc0075ee41",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+            "matched": false,
+            "role_id": "S5"
+          },
+          {
+            "basis": {
+              "county_exact": false,
+              "mapping_sha256": "97d40703bc35cd01db77e3b260eec41125066d49ef3213b46ce1fe91ff17865c",
+              "method": "official_point_zones_or_exact_county",
+              "zones": []
+            },
+            "event_id": "urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3",
+            "matched": false,
+            "role_id": "S6"
+          }
+        ],
+        "revision": "314c4b97478941a9c2788df90732fa7661a978e5bfdcba96f749fdd5268da0cf",
+        "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.fb3727dc9940cb0d474f0ddbab0cef3c71145320.001.3"
+      }
+    ],
+    "status": "OBSERVED"
+  }
+}

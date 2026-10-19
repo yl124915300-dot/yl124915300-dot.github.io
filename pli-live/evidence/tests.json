@@ -1,0 +1,351 @@
+{
+  "classification": "SYNTHETIC_TEST_ONLY",
+  "tests": 24,
+  "failures": 0,
+  "errors": 0,
+  "pass": true,
+  "cases": [
+    "test_01_matching",
+    "test_02_wrong_geography",
+    "test_03_polygon_overrides_county",
+    "test_04_expired",
+    "test_05_future",
+    "test_06_duplicate_same_batch_and_rerun",
+    "test_07_cap_cancel_and_old_reappears",
+    "test_08_cap_update",
+    "test_09_wrong_sender_cancel",
+    "test_10_cross_role_guard",
+    "test_11_missing_evidence",
+    "test_12_source_failure",
+    "test_13_source_stale",
+    "test_14_nonzero_budget_action",
+    "test_15_permission_and_real_identity",
+    "test_16_no_money_or_executor",
+    "test_17_disappearance_then_reappearance",
+    "test_18_expiry_never_means_safe",
+    "test_19_marine_role_unknown_and_zero_minutes",
+    "test_20_unknown_or_stale_mapping",
+    "test_21_synthetic_not_accepted_in_production",
+    "test_22_json_restore_and_chain",
+    "test_23_polygon_holes",
+    "test_24_stale_update_cannot_cancel_later"
+  ],
+  "lifecycle": [
+    {
+      "at": "2026-10-19T08:00:00+00:00",
+      "journal": {
+        "id": "SYNTHETIC_TEST_RUN",
+        "event": "SYNTHETIC",
+        "at": "2026-10-19T08:00:00+00:00",
+        "before_state_sha256": "44dde84b9d4277073fb0cafc1b1c7057234aae4a19d9a1d33c6b047c8f38c0dc",
+        "journal_before": 0,
+        "journal_after": 1,
+        "transitions": 1,
+        "unchanged_proposals": 0,
+        "duplicate_input_events": 0,
+        "source_health": {
+          "NWS": true,
+          "USGS": true
+        },
+        "event_count": 1,
+        "active_proposals": 1,
+        "real_transactions": 0,
+        "net_receipts_usd": 0,
+        "llm_status": "LLM_NOT_AUTONOMOUS",
+        "decision_method": "PRESET_DETERMINISTIC_RULE",
+        "state_payload_sha256": "47e8d68da3ac835d9195c10e21d282e1ba02f3415fc4af1283287178315c6700"
+      },
+      "proposals": {
+        "S1|SYNTHETIC-ONLY-1": {
+          "id": "S1|SYNTHETIC-ONLY-1",
+          "role_id": "S1",
+          "event_id": "SYNTHETIC-ONLY-1",
+          "revision": "SYNTHETIC-revision-1",
+          "source": "NWS",
+          "status": "PROPOSED",
+          "action": "review_official_notice",
+          "text": "根据该合成角色的目标核对官方通知及原文指引；由人确认个人安排，系统不执行现实操作。",
+          "goal": "SYNTHETIC goal",
+          "basis": {
+            "method": "official_point_zones_or_exact_county",
+            "zones": [
+              "https://api.weather.gov/zones/forecast/XXZ001"
+            ],
+            "county_exact": false,
+            "mapping_sha256": "SYNTHETIC-map"
+          },
+          "rule": "PLI_RULES_1",
+          "decision_method": "PRESET_DETERMINISTIC_RULE",
+          "classification": "SYNTHETIC_PERSON_REAL_EVENT",
+          "evidence_url": "https://api.weather.gov/alerts/SYNTHETIC-ONLY-1",
+          "evidence_fetched_at": "2026-10-19T08:00:00+00:00",
+          "valid_until": "2026-10-19T08:10:00+00:00",
+          "cost_cents": 0,
+          "required_minutes": 5,
+          "unknowns": [
+            "真实个人风险及当前现场情况",
+            "交通、价格、服务可用性均未知"
+          ],
+          "external_execution": false,
+          "risk_resolved": false,
+          "last_changed_at": "2026-10-19T08:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T08:00:01+00:00",
+      "journal": {
+        "id": "SYNTHETIC_TEST_RUN",
+        "event": "SYNTHETIC",
+        "at": "2026-10-19T08:00:01+00:00",
+        "before_state_sha256": "b3ab64db02012be91c7f9aabc2d60efaf0b4a3a9e590340d856c76c703f63cb3",
+        "journal_before": 1,
+        "journal_after": 1,
+        "transitions": 0,
+        "unchanged_proposals": 1,
+        "duplicate_input_events": 0,
+        "source_health": {
+          "NWS": true,
+          "USGS": true
+        },
+        "event_count": 1,
+        "active_proposals": 1,
+        "real_transactions": 0,
+        "net_receipts_usd": 0,
+        "llm_status": "LLM_NOT_AUTONOMOUS",
+        "decision_method": "PRESET_DETERMINISTIC_RULE",
+        "state_payload_sha256": "f7ba3abf7b01477981e62431ab0fbbd3c72fdf35c98baf5476a753ba558fa1fc"
+      },
+      "proposals": {
+        "S1|SYNTHETIC-ONLY-1": {
+          "id": "S1|SYNTHETIC-ONLY-1",
+          "role_id": "S1",
+          "event_id": "SYNTHETIC-ONLY-1",
+          "revision": "SYNTHETIC-revision-1",
+          "source": "NWS",
+          "status": "PROPOSED",
+          "action": "review_official_notice",
+          "text": "根据该合成角色的目标核对官方通知及原文指引；由人确认个人安排，系统不执行现实操作。",
+          "goal": "SYNTHETIC goal",
+          "basis": {
+            "method": "official_point_zones_or_exact_county",
+            "zones": [
+              "https://api.weather.gov/zones/forecast/XXZ001"
+            ],
+            "county_exact": false,
+            "mapping_sha256": "SYNTHETIC-map"
+          },
+          "rule": "PLI_RULES_1",
+          "decision_method": "PRESET_DETERMINISTIC_RULE",
+          "classification": "SYNTHETIC_PERSON_REAL_EVENT",
+          "evidence_url": "https://api.weather.gov/alerts/SYNTHETIC-ONLY-1",
+          "evidence_fetched_at": "2026-10-19T08:00:00+00:00",
+          "valid_until": "2026-10-19T08:10:00+00:00",
+          "cost_cents": 0,
+          "required_minutes": 5,
+          "unknowns": [
+            "真实个人风险及当前现场情况",
+            "交通、价格、服务可用性均未知"
+          ],
+          "external_execution": false,
+          "risk_resolved": false,
+          "last_changed_at": "2026-10-19T08:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T08:00:02+00:00",
+      "journal": {
+        "id": "SYNTHETIC_TEST_RUN",
+        "event": "SYNTHETIC",
+        "at": "2026-10-19T08:00:02+00:00",
+        "before_state_sha256": "4f15ba81ad33117185bd11b8167f1259493a173822f832a7f4750a4146925a2d",
+        "journal_before": 1,
+        "journal_after": 3,
+        "transitions": 2,
+        "unchanged_proposals": 0,
+        "duplicate_input_events": 0,
+        "source_health": {
+          "NWS": true,
+          "USGS": true
+        },
+        "event_count": 1,
+        "active_proposals": 1,
+        "real_transactions": 0,
+        "net_receipts_usd": 0,
+        "llm_status": "LLM_NOT_AUTONOMOUS",
+        "decision_method": "PRESET_DETERMINISTIC_RULE",
+        "state_payload_sha256": "da47df7033c0ea4e96a63c69ca24574fbe10cbd4e00785ceeadb74466b5c3f62"
+      },
+      "proposals": {
+        "S1|SYNTHETIC-ONLY-1": {
+          "id": "S1|SYNTHETIC-ONLY-1",
+          "role_id": "S1",
+          "event_id": "SYNTHETIC-ONLY-1",
+          "revision": "SYNTHETIC-revision-1",
+          "source": "NWS",
+          "status": "WITHDRAWN",
+          "action": "review_official_notice",
+          "text": "根据该合成角色的目标核对官方通知及原文指引；由人确认个人安排，系统不执行现实操作。",
+          "goal": "SYNTHETIC goal",
+          "basis": {
+            "method": "official_point_zones_or_exact_county",
+            "zones": [
+              "https://api.weather.gov/zones/forecast/XXZ001"
+            ],
+            "county_exact": false,
+            "mapping_sha256": "SYNTHETIC-map"
+          },
+          "rule": "PLI_RULES_1",
+          "decision_method": "PRESET_DETERMINISTIC_RULE",
+          "classification": "SYNTHETIC_PERSON_REAL_EVENT",
+          "evidence_url": "https://api.weather.gov/alerts/SYNTHETIC-ONLY-1",
+          "evidence_fetched_at": "2026-10-19T08:00:00+00:00",
+          "valid_until": "2026-10-19T08:10:00+00:00",
+          "cost_cents": 0,
+          "required_minutes": 5,
+          "unknowns": [
+            "真实个人风险及当前现场情况",
+            "交通、价格、服务可用性均未知"
+          ],
+          "external_execution": false,
+          "risk_resolved": false,
+          "last_changed_at": "2026-10-19T08:00:02+00:00",
+          "reason": "CAP_SUPERSEDED"
+        },
+        "S1|SYNTHETIC-UP": {
+          "id": "S1|SYNTHETIC-UP",
+          "role_id": "S1",
+          "event_id": "SYNTHETIC-UP",
+          "revision": "SYNTHETIC-R2",
+          "source": "NWS",
+          "status": "PROPOSED",
+          "action": "review_official_notice",
+          "text": "根据该合成角色的目标核对官方通知及原文指引；由人确认个人安排，系统不执行现实操作。",
+          "goal": "SYNTHETIC goal",
+          "basis": {
+            "method": "official_point_zones_or_exact_county",
+            "zones": [
+              "https://api.weather.gov/zones/forecast/XXZ001"
+            ],
+            "county_exact": false,
+            "mapping_sha256": "SYNTHETIC-map"
+          },
+          "rule": "PLI_RULES_1",
+          "decision_method": "PRESET_DETERMINISTIC_RULE",
+          "classification": "SYNTHETIC_PERSON_REAL_EVENT",
+          "evidence_url": "https://api.weather.gov/alerts/SYNTHETIC-UP",
+          "evidence_fetched_at": "2026-10-19T08:00:00+00:00",
+          "valid_until": "2026-10-19T08:10:00+00:00",
+          "cost_cents": 0,
+          "required_minutes": 5,
+          "unknowns": [
+            "真实个人风险及当前现场情况",
+            "交通、价格、服务可用性均未知"
+          ],
+          "external_execution": false,
+          "risk_resolved": false,
+          "last_changed_at": "2026-10-19T08:00:02+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-10-19T08:00:03+00:00",
+      "journal": {
+        "id": "SYNTHETIC_TEST_RUN",
+        "event": "SYNTHETIC",
+        "at": "2026-10-19T08:00:03+00:00",
+        "before_state_sha256": "c838b66d6e63c0e0f957b8be0e871ee426a587b213fde71c684b209f94766bd1",
+        "journal_before": 3,
+        "journal_after": 4,
+        "transitions": 1,
+        "unchanged_proposals": 1,
+        "duplicate_input_events": 0,
+        "source_health": {
+          "NWS": true,
+          "USGS": true
+        },
+        "event_count": 1,
+        "active_proposals": 0,
+        "real_transactions": 0,
+        "net_receipts_usd": 0,
+        "llm_status": "LLM_NOT_AUTONOMOUS",
+        "decision_method": "PRESET_DETERMINISTIC_RULE",
+        "state_payload_sha256": "bb6eb8ffa46ea461beaeaa08c6f2d279f3abc466b5b5f9cbc6434c318f1d76b0"
+      },
+      "proposals": {
+        "S1|SYNTHETIC-ONLY-1": {
+          "id": "S1|SYNTHETIC-ONLY-1",
+          "role_id": "S1",
+          "event_id": "SYNTHETIC-ONLY-1",
+          "revision": "SYNTHETIC-revision-1",
+          "source": "NWS",
+          "status": "WITHDRAWN",
+          "action": "review_official_notice",
+          "text": "根据该合成角色的目标核对官方通知及原文指引；由人确认个人安排，系统不执行现实操作。",
+          "goal": "SYNTHETIC goal",
+          "basis": {
+            "method": "official_point_zones_or_exact_county",
+            "zones": [
+              "https://api.weather.gov/zones/forecast/XXZ001"
+            ],
+            "county_exact": false,
+            "mapping_sha256": "SYNTHETIC-map"
+          },
+          "rule": "PLI_RULES_1",
+          "decision_method": "PRESET_DETERMINISTIC_RULE",
+          "classification": "SYNTHETIC_PERSON_REAL_EVENT",
+          "evidence_url": "https://api.weather.gov/alerts/SYNTHETIC-ONLY-1",
+          "evidence_fetched_at": "2026-10-19T08:00:00+00:00",
+          "valid_until": "2026-10-19T08:10:00+00:00",
+          "cost_cents": 0,
+          "required_minutes": 5,
+          "unknowns": [
+            "真实个人风险及当前现场情况",
+            "交通、价格、服务可用性均未知"
+          ],
+          "external_execution": false,
+          "risk_resolved": false,
+          "last_changed_at": "2026-10-19T08:00:02+00:00",
+          "reason": "CAP_SUPERSEDED"
+        },
+        "S1|SYNTHETIC-UP": {
+          "id": "S1|SYNTHETIC-UP",
+          "role_id": "S1",
+          "event_id": "SYNTHETIC-UP",
+          "revision": "SYNTHETIC-R2",
+          "source": "NWS",
+          "status": "WITHDRAWN",
+          "action": "review_official_notice",
+          "text": "根据该合成角色的目标核对官方通知及原文指引；由人确认个人安排，系统不执行现实操作。",
+          "goal": "SYNTHETIC goal",
+          "basis": {
+            "method": "official_point_zones_or_exact_county",
+            "zones": [
+              "https://api.weather.gov/zones/forecast/XXZ001"
+            ],
+            "county_exact": false,
+            "mapping_sha256": "SYNTHETIC-map"
+          },
+          "rule": "PLI_RULES_1",
+          "decision_method": "PRESET_DETERMINISTIC_RULE",
+          "classification": "SYNTHETIC_PERSON_REAL_EVENT",
+          "evidence_url": "https://api.weather.gov/alerts/SYNTHETIC-UP",
+          "evidence_fetched_at": "2026-10-19T08:00:00+00:00",
+          "valid_until": "2026-10-19T08:10:00+00:00",
+          "cost_cents": 0,
+          "required_minutes": 5,
+          "unknowns": [
+            "真实个人风险及当前现场情况",
+            "交通、价格、服务可用性均未知"
+          ],
+          "external_execution": false,
+          "risk_resolved": false,
+          "last_changed_at": "2026-10-19T08:00:03+00:00",
+          "reason": "CAP_CANCEL"
+        }
+      }
+    }
+  ],
+  "independent_semantic_review": 0
+}
