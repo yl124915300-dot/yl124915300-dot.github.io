@@ -71,3 +71,17 @@ test("Generated claim letter has placeholders and is not a submitted airline cla
   assert.match(text, /not a filed claim/i);
   assert.match(text, /\[Your full name/);
 });
+
+test("Medium-distance routes require 3h departure delay for routine care assistance", () => {
+  assert.equal(run({ distance: "medium", departureDelay: 2.5 }).carePossible, false);
+  assert.equal(run({ distance: "medium", departureDelay: 3 }).carePossible, true);
+});
+test("Long non-intra-EU routes require 4h departure delay for routine care assistance", () => {
+  assert.equal(run({ distance: "long", intraEU: "no", departureDelay: 3.5 }).carePossible, false);
+  assert.equal(run({ distance: "long", intraEU: "no", departureDelay: 4 }).carePossible, true);
+});
+test("Unknown distance does not invent a fixed care eligibility threshold", () => {
+  const r = run({ distance: "unknown", departureDelay: 2.5 });
+  assert.equal(r.carePossible, false);
+  assert.ok(r.questions.some(q => q.includes("2/3/4-hour")));
+});
