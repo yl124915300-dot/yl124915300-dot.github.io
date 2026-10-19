@@ -62,6 +62,17 @@ document.addEventListener("click", event => {
   const el = event.target.closest("[data-nav]");
   if (!el) return;
   event.preventDefault();
+  if (el.dataset.newCheck === "true") {
+    form.reset();
+    step = 0;
+    lastInput = null;
+    lastResult = null;
+    errorBox.textContent = "";
+    errorBox.hidden = true;
+    $("#resultState").replaceChildren();
+    $("#letterText").value = "";
+    say("");
+  }
   showView(el.dataset.nav);
 });
 window.addEventListener("hashchange", () => showView(location.hash.slice(1)));
