@@ -159,6 +159,10 @@
       "pass": true
     },
     {
+      "name": "desktop snapshot becomes stale after two hours while page stays open",
+      "pass": true
+    },
+    {
       "name": "mobile real model labelled",
       "pass": true
     },
@@ -313,13 +317,17 @@
     {
       "name": "mobile model output XSS inert",
       "pass": true
+    },
+    {
+      "name": "mobile snapshot becomes stale after two hours while page stays open",
+      "pass": true
     }
   ],
   "screenshots": [
     "public-desktop.png",
     "public-mobile.png"
   ],
-  "checkedAt": "2026-10-19T07:23:11.554Z",
-  "passed": 78,
+  "checkedAt": "2026-10-19T07:26:01.283Z",
+  "passed": 80,
   "failed": 0
 }

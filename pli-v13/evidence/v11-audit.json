@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-19T07:22:48Z",
+  "checkedAt": "2026-10-19T07:25:20Z",
   "scheduleVerified": false,
   "realTransactions": 0,
   "netIncomeUSD": 0,
@@ -54,6 +54,6 @@
   "scheduleCount": 0,
   "latestTrueSchedule": [],
   "snapshotAt": "2026-10-19T05:28:00.692226+00:00",
-  "ageSeconds": 6888,
+  "ageSeconds": 7040,
   "freshness": "FRESH"
 }
