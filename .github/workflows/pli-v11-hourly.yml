@@ -1,0 +1,56 @@
+name: PLI V1.1 hourly public snapshot
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['pli-v11/engine.py', 'pli-v11/cloud_pages.py', '.github/workflows/pli-v11-hourly.yml']
+permissions:
+  contents: read
+concurrency:
+  group: pli-v11-main-publish
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main' && github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+      - name: Verify existing hosting and fixed synthetic profiles
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-v11/cloud_pages.py inspect
+      - name: Fetch real public data; preserve explicit failure states
+        env:
+          PLI_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 pli-v11/engine.py refresh
+          python3 pli-v11/engine.py verify
+      - name: Publish only PLI snapshots with a normal fast-forward push
+        run: |
+          git config user.name 'PLI hourly snapshot'
+          git config user.email 'pli-snapshot@users.noreply.github.com'
+          git add pli-v11/data.json pli-v11/state/ pli-v11/evidence/pages-config.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'PLI V1.1: update public event snapshot and bounded memory'
+            git push origin HEAD:main
+          fi
+      - name: Request existing Pages build (token pushes do not auto-build Pages)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 pli-v11/cloud_pages.py build
+      - name: Source health gate
+        run: |
+          python3 - <<'PY'
+          import json
+          r=json.load(open('pli-v11/state/refresh.json'))
+          print(json.dumps(r))
+          assert r['result']=='PASS','Snapshot published with explicit degraded/failed source; inspect receipt'
+          PY

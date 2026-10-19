@@ -1,0 +1,79 @@
+{
+  "result": "PASS",
+  "at": "2026-10-19T05:26:29.974Z",
+  "url": "http://127.0.0.1:8765/pli-v11/",
+  "anonymous": true,
+  "authCookies": 0,
+  "checks": [
+    {
+      "name": "ANONYMOUS_HTTP_200",
+      "result": "PASS"
+    },
+    {
+      "name": "SIX_SYNTHETIC_CARDS",
+      "result": "PASS"
+    },
+    {
+      "name": "TWO_SOURCE_CARDS",
+      "result": "PASS"
+    },
+    {
+      "name": "FRESHNESS_VISIBLE",
+      "result": "PASS"
+    },
+    {
+      "name": "REAL_EVENT_PROVENANCE",
+      "result": "PASS"
+    },
+    {
+      "name": "LIVE_DECISION_SAMPLES",
+      "result": "PASS"
+    },
+    {
+      "name": "PROFILE_FILTER",
+      "result": "PASS"
+    },
+    {
+      "name": "NO_PUBLIC_ACTION_CONTROLS",
+      "result": "PASS"
+    },
+    {
+      "name": "MOBILE_NO_HORIZONTAL_OVERFLOW",
+      "result": "PASS"
+    },
+    {
+      "name": "BROWSER_ONLY_PROPOSAL_FIXTURE_VISIBLE",
+      "result": "PASS"
+    },
+    {
+      "name": "STALE_SNAPSHOT_VISIBLE",
+      "result": "PASS"
+    },
+    {
+      "name": "STALE_SUPPRESSES_ALL_ACTIVE_PROPOSALS",
+      "result": "PASS"
+    },
+    {
+      "name": "STALE_PROFILE_COUNTS_ZERO",
+      "result": "PASS"
+    },
+    {
+      "name": "NO_BROWSER_SCRIPT_ERRORS",
+      "result": "PASS"
+    }
+  ],
+  "sourceCounts": [
+    {
+      "name": "NWS",
+      "result": "PASS",
+      "accepted": 17
+    },
+    {
+      "name": "USGS",
+      "result": "PASS",
+      "accepted": 212
+    }
+  ],
+  "snapshotAt": "2026-10-19T05:26:13.268006+00:00",
+  "testsUseBrowserOnlyFixtureForStaleness": true
+}
