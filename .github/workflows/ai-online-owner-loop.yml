@@ -1,0 +1,38 @@
+name: AI Online authorized task collaboration
+on:
+  issues:
+    types: [opened, edited, reopened]
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: ai-online-task-${{ github.event.issue.number }}
+  cancel-in-progress: false
+jobs:
+  collaborate:
+    if: >-
+      !github.event.issue.pull_request &&
+      (startsWith(github.event.issue.title, '[AI Online task]') || startsWith(github.event.issue.title, '[AI Online owner]')) &&
+      github.event.sender.id == github.event.issue.user.id &&
+      (github.event_name != 'issue_comment' || github.event.comment.body == '/ai-online retry')
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Discover authorized Agents, converse, deliver and read back
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 ai-online-market-trial/network/runner.py live
+      - name: Preserve verified public conversation
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ai-online-task-${{ github.event.issue.number }}
+          path: network-evidence/
+          if-no-files-found: ignore
+          retention-days: 14
