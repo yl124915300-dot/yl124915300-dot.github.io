@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "taskIssue": 31,
+  "ownerId": 239416297,
+  "taskBody": "Operator-authorized technical experiment from the current AI ONLINE AUTONOMOUS EXECUTION V1 request. Same authenticated owner controls both grants #24 and #25. No independent human, adoption, sale or payment is claimed. This title is deliberately outside the legacy public-issue runner prefix; creating or editing this issue must not trigger model inference.\n\nAuthorize only a manually dispatched GitHub-hosted standard public ubuntu-24.04 job, at most 8 minutes, pinned Qwen3-0.6B Q8_0 local CPU inference, no secrets or paid API. Model outputs an ordered capability proposal only. The trusted executor rechecks this open unchanged issue and both current grants before every effect. Closing this issue revokes future steps.\n\nFixed Worker origin: https://ai-online-liquidity.yl124915300.workers.dev . Public reads /health and /assets only. At most one new minimized-summary-v1 execution on actual public catalog permission counts, plus one identical same-day confirmation replay. No feedback, arbitrary URL, shell, payment, private data, model-directed filesystem access, GitHub comments or outreach. Delivery is bounded public Actions logs/summary/artifact. No automated edits to code. Unknown/changed cost or unverified idempotency blocks the POST.\n\n```json\n{\"kind\":\"bounded-autonomous-task-v1\",\"goal\":\"audit-ai-online-public-contract\",\"collector\":\"gh:239416297:contract-collector\",\"reviewer\":\"gh:239416297:contract-reviewer\",\"grantIssues\":[24,25],\"publicOnly\":true,\"sameOwnerTechnicalTest\":true,\"modelProposalAuthorized\":true,\"allowedCapabilities\":[\"public-contract-inventory\",\"minimized-summary-v1\",\"public-contract-review\"],\"maxNewExecutions\":1,\"maxPostAttempts\":2,\"maxCostUsd\":0,\"expiresAt\":\"2026-10-21T11:30:00Z\"}\n```\n\nA successful fixture, deterministic CI probe, model proposal, POST acknowledgement, or earlier run is not this experiment passing. PASS requires this run’s real model output, validated ordered plan, current authority, real Worker execution, verified output and readback; ambiguous confirmation fails closed. Worker idempotency is documented as caller/day scoped; crossing its day or changing the caller requires manual reconciliation rather than a new POST.",
+  "grants": [
+    {
+      "issue": 24,
+      "hash": "b026d598dd692613cd30faf5715f3ee6031564b1290167b5b75d7863f6d5248f"
+    },
+    {
+      "issue": 25,
+      "hash": "312d934f3eba3dde433f7b7cac814072e46fc83c16b06538091aafcb7d6c9a10"
+    }
+  ],
+  "sourceContractCommit": "e07f5396e4834f5390d7667a5b7ac8ea73cb093a",
+  "sourceContractPath": "ai-online-market-trial/README.md",
+  "idempotency": "caller/day scoped; no POST retry; ambiguous completion requires reconciliation",
+  "costPolicy": "live asset costUsd must equal 0; standard public runner only; no paid APIs"
+}
