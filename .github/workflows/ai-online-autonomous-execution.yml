@@ -1,0 +1,21 @@
+# Registration-only default-branch stub for task #31.
+# Deliberately contains no checkout, model, Worker request, credential or artifact step.
+# Do not dispatch this stub as a probe: any dispatch of this path consumes V1's
+# fail-closed first-dispatch history gate, even when the job is skipped.
+# The authorized experiment must be selected explicitly on its reviewed branch.
+name: AI Online autonomous execution V1
+run-name: Registration only - execution disabled
+on:
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: ai-online-autonomous-task-31
+  cancel-in-progress: false
+jobs:
+  registration-only:
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Inert placeholder
+        run: "true"
