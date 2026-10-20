@@ -1,0 +1,29 @@
+name: AI Online autonomous boundary checks
+on:
+  pull_request:
+    paths:
+      - 'ai-online-market-trial/network/execution_v1.py'
+      - 'ai-online-market-trial/network/autonomous*'
+      - 'ai-online-market-trial/network/test_autonomous_v1.py'
+      - '.github/workflows/ai-online-autonomous*.yml'
+permissions:
+  contents: read
+jobs:
+  checks:
+    if: >-
+      github.repository == 'yl124915300-dot/yl124915300-dot.github.io' &&
+      github.event.repository.visibility == 'public' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Syntax check without executing the inference entry point
+        run: python3 -m py_compile ai-online-market-trial/network/execution_v1.py ai-online-market-trial/network/autonomous_inference_v1.py
+      - name: Rejection and recovery fixtures; zero real inference
+        run: python3 -m unittest discover -s ai-online-market-trial/network -p 'test_*.py' -v
+      - name: Current authorization and Worker contract read-only preflight
+        run: python3 ai-online-market-trial/network/execution_v1.py preflight

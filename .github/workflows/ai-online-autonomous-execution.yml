@@ -1,0 +1,40 @@
+name: AI Online autonomous execution V1
+run-name: Manual bounded autonomous execution V1
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ai-online-autonomous-task-31
+  cancel-in-progress: false
+jobs:
+  bounded-execution:
+    if: >-
+      github.repository == 'yl124915300-dot/yl124915300-dot.github.io' &&
+      github.event.repository.visibility == 'public' &&
+      github.event_name == 'workflow_dispatch' &&
+      github.actor_id == '239416297' &&
+      github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      REPOSITORY_VISIBILITY: ${{ github.event.repository.visibility }}
+      SOURCE_COMMIT: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Permission and recovery rejection fixtures
+        run: python3 -m unittest discover -s ai-online-market-trial/network -p 'test_*.py' -v
+      - name: Actual isolated model proposal and bounded Worker execution
+        run: python3 ai-online-market-trial/network/autonomous_inference_v1.py
+      - name: Retain only bounded public delivery records
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ai-online-autonomous-task-31
+          path: autonomous-evidence/
+          retention-days: 7
+          if-no-files-found: warn
