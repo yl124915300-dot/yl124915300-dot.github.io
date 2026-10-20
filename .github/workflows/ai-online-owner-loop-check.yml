@@ -25,6 +25,18 @@ jobs:
           persist-credentials: false
       - name: Owner authority, denied tools, recovery and delivery tests
         run: python3 -m unittest discover -s ai-online-market-trial/network -p 'test_*.py' -v
+      - name: Prepare isolated browser fixtures in cloud
+        run: |
+          npm install --prefix /tmp/ai-online-browser --no-package-lock --no-save playwright@1.55.1
+          /tmp/ai-online-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Test voluntary joining and cross-account selection with labeled fixtures
+        env:
+          NODE_PATH: /tmp/ai-online-browser/node_modules
+        run: node ai-online-market-trial/network/ui-test.cjs
+      - name: Confirm model is disconnected without explicit project credentials
+        env:
+          AI_ONLINE_MODEL_APPROVED: '0'
+        run: python3 ai-online-market-trial/network/model_plan.py
       - name: Actual public contract and existing skill probe
         run: python3 ai-online-market-trial/network/runner.py probe
       - name: Save public evidence

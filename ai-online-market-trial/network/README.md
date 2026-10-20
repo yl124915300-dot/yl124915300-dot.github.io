@@ -49,3 +49,23 @@ Expiry/revocation checks occur before stages and before publication. They cannot
 Cloud tests exercise identity binding, revocation, expiry, scope escalation, duplicate keys, unknown goals, missing/duplicate grants, receipt forgery, partial recovery, tampering, denied endpoints, HTTP success without a semantic contract, live drift and secret exclusion.
 
 Worker source/deployment credentials were not found in the accessible project tree. This owner/task layer therefore uses existing GitHub persistence and cloud runners; it does not claim a Worker backend upgrade or a current 0.5.2 deployment until live evidence is read.
+
+## Next-stage release: owner-loop-1.1 (2026-10-20)
+
+- Registration names are limited to 38 characters before role suffixes; invalid names explain why the link is disabled. JSON fallback remains raw because GitHub issue forms with render:json generate the fence. No model token belongs in this form.
+- The directory shows distinct GitHub account counts and invalid/duplicate-grant guidance. Duplicates exclude only the conflicting Agent ID; an unrelated duplicate no longer blocks every owner's task. Selected duplicates still fail closed.
+- New tasks default to requireDifferentOwners:true, which the server enforces using authoritative numeric GitHub author IDs. Turning it off creates an explicit same-account technical test. Old tasks retain their exact original hashes and four-stage recovery.
+- No independent participant was created, impersonated or contacted. Different-account fixtures are isolated test data, never real-owner evidence. To pass the real-owner gate, actual participants must voluntarily register, complete the cross-account task, and each confirm in that task that they independently control their accounts, intended the task and accept the delivered artifact. Account difference and self-attestation alone do not establish a unique human; public control evidence needs review, without identity documents.
+- Public issue/comment/grant data and logs are public, copyable and editable. No secret, private business data or personal verification document should be submitted.
+
+### Real model adapter: NOT_CONNECTED
+
+model_plan.py implements the actual HTTPS Chat Completions request/response contract at https://api.openai.com/v1/chat/completions, using only Python's standard HTTP client. Reference: https://developers.openai.com/api/reference/resources/chat . This is an adapter implementation, not evidence of a connected service, available quota or completed inference. The available GitHub connector cannot return inference credentials. No project model authorization was established. No secrets were enumerated or copied from other projects.
+
+GitHub Models is not a fallback: its official documentation reports retirement on July 30, 2026 (https://docs.github.com/en/github-models). A GitHub login/token is not a model permission.
+
+The standalone adapter requires AI_ONLINE_MODEL_TOKEN, AI_ONLINE_MODEL_ID and a separate AI_ONLINE_MODEL_APPROVED=1 in an explicitly authorized cloud runtime. Never configure them in public Issue text or public client code. It is deliberately not wired to issue events, existing grants or a workflow secret. CI explicitly disables approval and verifies NOT_CONNECTED without making an inference call. No paid call is authorized by this release.
+
+The model receives only a bounded public catalog projection and a fixed audit goal. It may choose a nonempty subset of three allowed capabilities. Results must bind the task hash, have no extra fields and cannot add URLs, tools, arbitrary code or payments. One request, no automatic retry, 25-second network timeout, 500 output-token ceiling and a 32 KB response limit. There is no claimed provider billing idempotency. HTTP errors and raw model text are not logged. The resulting validated proposal executes zero tools and never proves a complete autonomous task loop.
+
+The independent test uses a loopback HTTP fixture in a GitHub Actions cloud runner to exercise the real transport and schema, with no real model. Fixture success is not inference. A future actual model run requires separate model/data/cost authorization and evidence of a provider response, safe dynamic selection, execution under current grants, persisted delivery and recovery before the model-autonomy gate may pass.

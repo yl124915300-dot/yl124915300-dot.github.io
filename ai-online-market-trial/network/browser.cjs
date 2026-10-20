@@ -6,8 +6,9 @@ const base='https://yl124915300-dot.github.io/ai-online-market-trial/network/';
 const hash=s=>createHash('sha256').update(s).digest('hex');
 (async()=>{
   const expected=hash(readFileSync('ai-online-market-trial/network/app.js'));
+  const expectedHtml=hash(readFileSync('ai-online-market-trial/network/index.html'));
   let ready=false,lastError;
-  for(let i=0;i<18;i++){try{const r=await fetch(base+'app.js',{signal:AbortSignal.timeout(10000),cache:'no-store'});if(r.ok&&hash(await r.text())===expected){ready=true;break;}}catch(e){lastError=e.message;}await new Promise(r=>setTimeout(r,5000));}
+  for(let i=0;i<18;i++){try{const r=await fetch(base+'app.js',{signal:AbortSignal.timeout(10000),cache:'no-store'});const html=await fetch(base,{signal:AbortSignal.timeout(10000),cache:'no-store'});if(r.ok&&html.ok&&hash(await r.text())===expected&&hash(await html.text())===expectedHtml){ready=true;break;}}catch(e){lastError=e.message;}await new Promise(r=>setTimeout(r,5000));}
   assert(ready,'Deployed app checksum did not match current source: '+lastError);
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage({viewport:{width:1280,height:1000}});
@@ -21,12 +22,16 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
   assert.equal(grantUrl.hostname,'github.com');
   assert.equal(grant.kind,'agent-grant');assert.equal(grant.role,'collector');
   assert(grant.scopes.includes('asset.execute'));assert(Date.parse(grant.expiresAt)>Date.now());
+  assert.match(await page.locator('#model-status').innerText(),/NOT_CONNECTED/);
+  assert.match(await page.locator('#public-notice').innerText(),/公开 GitHub/);
+  assert.equal(await page.locator('#different-owners').isChecked(),true);
   const directory=await page.locator('#directory-status').innerText();
   assert(!directory.includes('读取失败'),directory);
   const collectorCount=await page.locator('#collector option').count();
   const reviewerCount=await page.locator('#reviewer option').count();
   if(collectorCount>1&&reviewerCount>1){
     await page.locator('#collector').selectOption({index:1});await page.locator('#reviewer').selectOption({index:1});
+    await page.locator('#different-owners').uncheck();
     const taskUrl=new URL(await page.locator('#create-task').getAttribute('href'));
     const task=JSON.parse(taskUrl.searchParams.get('payload'));
     assert.equal(task.goal,'audit-ai-online-public-contract');
@@ -36,7 +41,7 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
   mkdirSync('network-evidence',{recursive:true});
   await page.screenshot({path:'network-evidence/public-page.png',fullPage:true});
   const result={url:page.url(),at:new Date().toISOString(),deployedChecksum:expected,sourceCommit:process.env.GITHUB_SHA,
-    invitationFormVerified:true,directoryReadback:directory,tasksReadback:await page.locator('#tasks').innerText(),
+    invitationUrlPayloadVerified:true,signedInSubmissionVerified:false,modelStatus:'NOT_CONNECTED',deployedHtmlChecksum:expectedHtml,directoryReadback:directory,tasksReadback:await page.locator('#tasks').innerText(),
     taskHandoffVerified:collectorCount>1&&reviewerCount>1,independentOwnersVerified:0,verifiedSales:0,errors};
   writeFileSync('network-evidence/public-browser.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
   await browser.close();
