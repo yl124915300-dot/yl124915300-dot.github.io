@@ -1,0 +1,161 @@
+{
+  "verdict": "NO_GO",
+  "publicReplay": "https://yl124915300-dot.github.io/pli-v131/",
+  "draftPR": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/pull/10",
+  "freezeCommit": "aa54815a05ead5a9b2b9b20e1295cc6e4ddf565b",
+  "holdoutCommit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+  "publishCommit": "4694ba27ae89682d0588d8e831fcdc28cd45933b",
+  "inferenceRun": 39218946987,
+  "restorationAndPreviewRun": 39221981800,
+  "anonymousPublicRun": 39222190190,
+  "pagesDeploymentRun": 39222174082,
+  "holdoutEvents": 30,
+  "syntheticProfiles": 6,
+  "actualModelResponses": 90,
+  "automaticFullFieldPass": {
+    "baseline": 1,
+    "fixedSampling": 21,
+    "fixedGreedy": 22
+  },
+  "automaticCorrectAction": {
+    "baseline": 27,
+    "fixedSampling": 26,
+    "fixedGreedy": 27
+  },
+  "independentThirdPartyBlindReviews": 0,
+  "trueCompleteSemanticAccuracy": "UNKNOWN",
+  "acceptedBindingErrorsNewArms": 0,
+  "legacyAcceptedBindingErrors": "NOT_MEASURED_BY_FROZEN_COUNTER",
+  "sameBeforeStateForNewParameterArms": 30,
+  "ruleTests": {
+    "passed": 21,
+    "failed": 0
+  },
+  "independentCloudRestoration": {
+    "passed": 366,
+    "failed": 0
+  },
+  "anonymousPublicDesktopMobile": {
+    "passed": 188,
+    "failed": 0
+  },
+  "deployedFileSha256Matches": {
+    "passed": 5,
+    "failed": 0
+  },
+  "model": "Qwen/Qwen3-4B-GGUF Q4_K_M",
+  "license": "Apache-2.0",
+  "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+  "weightsSha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5",
+  "totalInferenceSeconds": 3240.353,
+  "resources": {
+    "sourceRun": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39218946987",
+    "sourceCommit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+    "arms": [
+      {
+        "arm": "baseline",
+        "hardware": {
+          "cpu_count": 4,
+          "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+          "meminfo": "MemTotal:       16373452 kB",
+          "runner": "GitHub Actions 1000000604",
+          "cpu": "model name\t: AMD EPYC 7763 64-Core Processor"
+        },
+        "inferenceSeconds": 1190.146,
+        "totalSeconds": 1205.683,
+        "childrenResources": {
+          "max_rss_kib": 5062728,
+          "user_cpu_seconds": 4736.539,
+          "system_cpu_seconds": 4.098
+        }
+      },
+      {
+        "arm": "fixed-sampling",
+        "hardware": {
+          "cpu_count": 4,
+          "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+          "meminfo": "MemTotal:       16373452 kB",
+          "runner": "GitHub Actions 1000000605",
+          "cpu": "model name\t: AMD EPYC 9V74 80-Core Processor"
+        },
+        "inferenceSeconds": 1393.303,
+        "totalSeconds": 1406.457,
+        "childrenResources": {
+          "max_rss_kib": 8533500,
+          "user_cpu_seconds": 5542.171,
+          "system_cpu_seconds": 4.831
+        }
+      },
+      {
+        "arm": "fixed-greedy",
+        "hardware": {
+          "cpu_count": 4,
+          "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+          "meminfo": "MemTotal:       16373452 kB",
+          "runner": "GitHub Actions 1000000603",
+          "cpu": "model name\t: AMD EPYC 9V45 96-Core Processor"
+        },
+        "inferenceSeconds": 656.904,
+        "totalSeconds": 671.089,
+        "childrenResources": {
+          "max_rss_kib": 8545120,
+          "user_cpu_seconds": 2611.691,
+          "system_cpu_seconds": 2.79
+        }
+      }
+    ],
+    "totalInferenceSeconds": 3240.353,
+    "totalChildrenCpuSeconds": 12902.12,
+    "maxChildRssGiB": 8.149,
+    "actionsTiming": {
+      "billable": {
+        "UBUNTU": {
+          "total_ms": 0,
+          "jobs": 3,
+          "job_runs": [
+            {
+              "job_id": 117949426670,
+              "duration_ms": 0
+            },
+            {
+              "job_id": 117949427042,
+              "duration_ms": 0
+            },
+            {
+              "job_id": 117949427120,
+              "duration_ms": 0
+            }
+          ]
+        }
+      },
+      "run_duration_ms": 1417000
+    },
+    "interpretation": "GitHub reports billable UBUNTU total_ms=0 for these 3 public standard-runner jobs; run_duration_ms is wall time and is not model inference time.",
+    "realTransactions": 0,
+    "netReceiptsUSD": 0
+  },
+  "v11CronAudit": {
+    "checkedAtBeijing": "2026-10-19T16:22:45+08:00",
+    "query": "event=schedule",
+    "repositoryTotal": 0,
+    "v11Total": 0,
+    "independentBlocker": true,
+    "pushIsCron": false
+  },
+  "originalFilesChanged": 0,
+  "originalFilesAudited": 272,
+  "publicAddedFiles": 5,
+  "existingPR9Merged": false,
+  "thisPRMerged": false,
+  "repositorySettingsChanged": false,
+  "realTransactions": 0,
+  "netReceiptsUSD": 0,
+  "noMacLocalTerminalFilesOrDesktopBrowserUsed": true,
+  "nextSingleIssue": "Align model action selection with the already supplied current-person, budget and uncertainty facts.",
+  "limitations": [
+    "Automatic field correctness is not complete semantic correctness; free-text assumptions, implications and rationale require blind independent assessment.",
+    "The implementer authored the post-freeze application holdout; it is not third-party blinded authoring or evidence of absence from training data.",
+    "Only one run and seed per arm. Different CPU models prevent interpreting timing differences as a causal parameter speedup.",
+    "Plural price syntax and empty-source grammar handling remain failed held-out examples. Frozen algorithm, oracle and labels were not changed after results."
+  ]
+}

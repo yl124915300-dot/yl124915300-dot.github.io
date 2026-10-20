@@ -1,0 +1,62 @@
+{
+  "status": "REAL_LLM_RAN_SEMANTIC_NO_GO",
+  "arm": "fixed-sampling",
+  "model": "Qwen/Qwen3-4B-GGUF",
+  "quantization": "Q4_K_M",
+  "license": "Apache-2.0",
+  "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+  "run_url": "https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/39218946987",
+  "source_commit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+  "realTransactions": 0,
+  "netReceiptsUSD": 0,
+  "thirdPartySemanticReview": "UNAVAILABLE",
+  "realtime": false,
+  "hardware": {
+    "cpu_count": 4,
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "meminfo": "MemTotal:       16373452 kB",
+    "runner": "GitHub Actions 1000000605",
+    "cpu": "model name\t: AMD EPYC 9V74 80-Core Processor"
+  },
+  "binary": {
+    "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-ubuntu-x64.tar.gz",
+    "bytes": 17851611,
+    "sha256": "cf07c1c112d709bd67e522017471de57ed0ec8bea031d732c5422351c07f65ac"
+  },
+  "weights": {
+    "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf",
+    "bytes": 2497280256,
+    "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+  },
+  "license_file": {
+    "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/LICENSE",
+    "bytes": 11544,
+    "sha256": "5de36594c10839788a8c589443a8ef9d8b8d17c65a1b5807206ae037fc36c6bd"
+  },
+  "digests": {
+    "pli-v131/prompt.txt": "83a1c479913041cc0029f9daad62e2cd0eaa33d099dbbb181cbd4f480a8d40be",
+    "pli-v131/schema.json": "3f5e73cb5736c7a9e5a2225dd6d299e41362b4630c2d8d1eb9d804de5cedfec4",
+    "pli-v131/holdout.json": "e70a1d2168e49bfa36c50b6d0999faccc2b71405c5e88e8971d2eccf651aecba",
+    "pli-v131/grade.py": "dd338f31e9e911c0159fc65a7d0944c98b15c4fd4b7ab4edb1de993077586a21",
+    "pli-v131/gate.mjs": "250e02bcdfba1732d23198754d5d4b7850d0053189dc4055a6cdaf3f0295972b",
+    "pli-v131/POLICY.md": "c29407c1acca9606584531b7969319998100952c80261baa8c1c6464091280d0"
+  },
+  "parameters": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 1313
+  },
+  "inference_seconds": 1393.303,
+  "inference_wall_seconds": 1396.187,
+  "attempts": 30,
+  "parsed_outputs": 30,
+  "children_resources": {
+    "max_rss_kib": 8533500,
+    "user_cpu_seconds": 5542.171,
+    "system_cpu_seconds": 4.831
+  },
+  "total_seconds": 1406.457
+}

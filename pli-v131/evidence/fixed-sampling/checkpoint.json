@@ -1,0 +1,324 @@
+{
+  "at": "2026-10-19T07:53:57.000Z",
+  "memory": {
+    "version": "1.2.0",
+    "classification": "SYNTHETIC",
+    "journal": [
+      {
+        "event": {
+          "id": "b01_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S1. The harbor shuttle costs $15.25 and the ridge tram costs $29. Both meet the same synthetic arrival deadline. Propose the less expensive tentative travel plan; no ticket purchase.",
+          "payload": {
+            "amountCents": 1525,
+            "category": "travel",
+            "slot": "b01"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b02_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S2"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S2. The cedar workroom costs $9.40. This room meets the client's synthetic design-review requirements. Propose a tentative work reservation only.",
+          "payload": {
+            "amountCents": 940,
+            "category": "work",
+            "slot": "b02"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b03_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S3"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S3. The astronomy textbook costs $7.05. This exact textbook meets the synthetic syllabus. Tentatively reserve the study budget only.",
+          "payload": {
+            "amountCents": 705,
+            "category": "study",
+            "slot": "b03"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b04_ctl0",
+          "kind": "constraint",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S4"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S4. The saffron cooking class costs $14. The household restriction is active. Ask for resolution of the restriction before making a new plan. SYNTHETIC constraint: S4 blocks household.",
+          "payload": {
+            "category": "household",
+            "blocked": true
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b08_ctl0",
+          "kind": "expense",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S1. The simulator recorded a new travel expense; do not record it twice. Report the effect on previous tentative travel reservations and seek clarification; no new plan. SYNTHETIC ledger: S1 spent $90.",
+          "payload": {
+            "amountCents": 9000,
+            "category": "travel"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b10_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S1"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S1. The conference badge costs $9. The badge meets the synthetic training course requirements. Make a tentative study preparation plan only.",
+          "payload": {
+            "amountCents": 900,
+            "category": "study",
+            "slot": "b10"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b12_revoke",
+          "kind": "cancel",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S2"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S2. Revoke tentative plan b02_plan. Withdraw only this unpaid synthetic work reservation, releasing its reserved amount. Do not cancel a real booking or record a refund.",
+          "payload": {
+            "targetId": "b02_plan"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b21_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S3"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S3. The estuary ferry costs $5.60. A prior narrative mentioned a workroom belonging to a different event; ignore that old plan. This ferry meets the current synthetic travel need. Make only a tentative ferry plan.",
+          "payload": {
+            "amountCents": 560,
+            "category": "travel",
+            "slot": "b21"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b23_ctl0",
+          "kind": "expense",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S5"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S5. The ink studio costs $2. The newly recorded expense is already in the ledger. The studio meets the current synthetic work need. Tentatively reserve only if it fits the remaining budget. SYNTHETIC ledger: S5 spent $98.",
+          "payload": {
+            "amountCents": 9800,
+            "category": "other"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b23_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S5"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S5. The ink studio costs $2. The newly recorded expense is already in the ledger. The studio meets the current synthetic work need. Tentatively reserve only if it fits the remaining budget. SYNTHETIC ledger: S5 spent $98.",
+          "payload": {
+            "amountCents": 200,
+            "category": "work",
+            "slot": "b23"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b24_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S5"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S5. The open lesson is free. The synthetic study lesson is feasible and has no fees. Propose it as a tentative study fallback even if available funds are zero.",
+          "payload": {
+            "amountCents": 0,
+            "category": "study",
+            "slot": "b24"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b26_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S4"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S4. The ash workspace costs $1. The synthetic workspace meets the work requirement. The active restriction applies to household activities only. Propose the tentative work plan.",
+          "payload": {
+            "amountCents": 100,
+            "category": "work",
+            "slot": "b26"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b29_plan",
+          "kind": "plan",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S6"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S6. The local bus costs $0.07 and the island ferry costs $3.20. Both satisfy the same synthetic travel purpose. Tentatively choose the lower cost without buying anything.",
+          "payload": {
+            "amountCents": 7,
+            "category": "travel",
+            "slot": "b29"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      },
+      {
+        "event": {
+          "id": "b30_revoke",
+          "kind": "cancel",
+          "classification": "SYNTHETIC",
+          "evidence": "SYNTHETIC",
+          "source": "user_simulation",
+          "operation": "simulate",
+          "at": "2026-10-19T07:53:57.000Z",
+          "expiresAt": "2026-10-19T09:53:57.000Z",
+          "profileIds": [
+            "S6"
+          ],
+          "county": "*",
+          "text": "SYNTHETIC profile S6. A refund of a historical $31 travel charge is only a possibility; no eligibility or payment evidence exists. Revoke tentative plan b29_plan. Withdraw only the unpaid synthetic bus reservation. Do not cancel the historical paid charge or credit any potential refund.",
+          "payload": {
+            "targetId": "b29_plan"
+          }
+        },
+        "observedAt": "2026-10-19T07:53:57.000Z"
+      }
+    ]
+  }
+}

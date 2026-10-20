@@ -1,0 +1,37 @@
+{
+  "base": "https://yl124915300-dot.github.io/pli-v131/",
+  "checks": [
+    {
+      "file": "index.html",
+      "expectedSha256": "0cbc656401bb10d3cfd18c7f82d16b2823cb11eebb1e9b26ddc2c9fd1e67e7d7",
+      "observedSha256": "0cbc656401bb10d3cfd18c7f82d16b2823cb11eebb1e9b26ddc2c9fd1e67e7d7",
+      "pass": true
+    },
+    {
+      "file": "app.mjs",
+      "expectedSha256": "7d46f85546e4b59c7d8794e0e2d0a11a5f220b5780010d6fdf8e3c7497271e42",
+      "observedSha256": "7d46f85546e4b59c7d8794e0e2d0a11a5f220b5780010d6fdf8e3c7497271e42",
+      "pass": true
+    },
+    {
+      "file": "style.css",
+      "expectedSha256": "df66186f5d06c97bf570c51b1471e3c9a6101b05367fba7e0adb3dddbc5dc7c4",
+      "observedSha256": "df66186f5d06c97bf570c51b1471e3c9a6101b05367fba7e0adb3dddbc5dc7c4",
+      "pass": true
+    },
+    {
+      "file": "summary.json",
+      "expectedSha256": "8db654fef34ef18f26fa62abdde43c3181855779b33120ba5a5479d15195d712",
+      "observedSha256": "8db654fef34ef18f26fa62abdde43c3181855779b33120ba5a5479d15195d712",
+      "pass": true
+    },
+    {
+      "file": "replay.json",
+      "expectedSha256": "0f77719a76970d8c2cab391a4795c32fbccf3678794b9756bf2388ad3413c872",
+      "observedSha256": "0f77719a76970d8c2cab391a4795c32fbccf3678794b9756bf2388ad3413c872",
+      "pass": true
+    }
+  ],
+  "passed": 5,
+  "failed": 0
+}

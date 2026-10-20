@@ -1,0 +1,57 @@
+name: PLI V1.3.1 frozen 30-case real semantic experiment
+on:
+  push:
+    branches: [pli-v131-semantic-20261019]
+    paths: ['pli-v131/START.json']
+permissions:
+  contents: read
+concurrency:
+  group: pli-v131-semantic
+  cancel-in-progress: false
+jobs:
+  infer:
+    if: github.event.repository.private == false
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [baseline, fixed-sampling, fixed-greedy]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 38
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Frozen harness and previous files
+        run: |
+          python3 -m py_compile pli-v131/run.py pli-v131/grade.py
+          node --check pli-v131/gate.mjs
+          node pli-v131/test.mjs
+          python3 pli-v131/scope.py
+      - name: Real pinned CPU model; no paid service, cache or artifact storage
+        env:
+          PLI_ARM: ${{ matrix.arm }}
+        run: python3 pli-v131/run.py
+      - name: Automatic held-out field oracle, not independent semantic review
+        if: always()
+        env:
+          PLI_ARM: ${{ matrix.arm }}
+        run: python3 pli-v131/grade.py "$PLI_ARM"
+      - name: Persist bounded genuine receipts on isolated development branch
+        if: always()
+        env:
+          PLI_ARM: ${{ matrix.arm }}
+        run: |
+          git config user.name 'PLI V1.3.1 cloud evidence'
+          git config user.email 'pli-v131@users.noreply.github.com'
+          git add "pli-v131/evidence/$PLI_ARM/"
+          if ! git diff --cached --quiet; then
+            git commit -m "PLI V1.3.1: actual $PLI_ARM model outputs and frozen evaluation"
+            for attempt in 1 2 3 4 5; do
+              git fetch origin pli-v131-semantic-20261019
+              git rebase origin/pli-v131-semantic-20261019
+              if git push origin HEAD:pli-v131-semantic-20261019; then break; fi
+              sleep 3
+            done
+          fi
