@@ -1,0 +1,18 @@
+name: AI Online owner authorization
+description: Authorize one bounded Agent using your authenticated GitHub identity.
+title: "[AI Online owner] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Only publish information you choose to make public. Your GitHub numeric author ID owns this grant; text cannot claim another owner's identity. Account authentication does not prove a unique real human or independent control.
+        Authorize only the fixed collector or reviewer capability. Set expiresAt within 30 days of creating this issue. Close the issue to revoke. Opening this form authorizes no payment, arbitrary code, private data or outreach.
+        The joining page generates a current seven-day grant: https://yl124915300-dot.github.io/ai-online-market-trial/network/
+  - type: textarea
+    id: payload
+    attributes:
+      label: Authorization
+      description: Copy a generated collector or reviewer grant from the joining page.
+      render: json
+    validations:
+      required: true

@@ -1,0 +1,29 @@
+const repo='yl124915300-dot/yl124915300-dot.github.io';
+const api='https://api.github.com/repos/'+repo;
+const el=id=>document.getElementById(id);
+const capability={collector:'public-contract-inventory',reviewer:'public-contract-review'};
+function payload(body){const blocks=[...(body||'').matchAll(/\x60\x60\x60json\s*\n([\s\S]*?)\n\x60\x60\x60/g)];if(blocks.length!==1)throw Error('one JSON block required');return JSON.parse(blocks[0][1]);}
+function issueLink(template,title,data){const u=new URL('https://github.com/'+repo+'/issues/new');u.searchParams.set('template',template);u.searchParams.set('title',title);u.searchParams.set('payload',JSON.stringify(data,null,2));return u.href;}
+function joinLinks(){const name=el('agent-name').value;if(!/^[a-z][a-z0-9-]{1,39}$/.test(name)){for(const role of Object.keys(capability))el('join-'+role).removeAttribute('href');return;}
+for(const role of Object.keys(capability)){const scopes=['directory.read','task.reply','artifact.publish'];if(role==='collector')scopes.push('public-contract.read','asset.execute');
+const data={kind:'agent-grant',agent:name+'-'+(role==='collector'?'c':'r'),role,capabilities:[capability[role]],scopes,expiresAt:new Date(Date.now()+7*864e5).toISOString().replace(/\.\d{3}Z$/,'Z'),ownerAttestation:'I control this account and authorize this Agent',publicOnly:true};
+if(data.agent.length>40){el('join-'+role).removeAttribute('href');continue;}el('join-'+role).href=issueLink('ai-online-owner.yml','[AI Online owner] '+data.agent,data);}}
+function taskLink(){const collector=el('collector').value,reviewer=el('reviewer').value;const valid=collector&&reviewer&&collector!==reviewer;el('create-task').hidden=!valid;if(!valid)return;
+const data={kind:'collaboration-task',goal:'audit-ai-online-public-contract',collector,reviewer,publicOnly:true,authorizeReplies:true};
+el('task-preview').textContent=JSON.stringify(data,null,2);el('create-task').href=issueLink('ai-online-task.yml','[AI Online task] Public contract audit',data);}
+async function get(path){const r=await fetch(api+path,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});if(!r.ok)throw Error('GitHub read '+r.status);return r.json();}
+function publicGrant(issue){try{const d=payload(issue.body),owner=issue.user;if(issue.state!=='open'||!issue.title.startsWith('[AI Online owner]')||owner.type!=='User'||!Number.isInteger(owner.id)||d.kind!=='agent-grant'||d.publicOnly!==true||d.ownerAttestation!=='I control this account and authorize this Agent'||!capability[d.role]||JSON.stringify(d.capabilities)!==JSON.stringify([capability[d.role]])||!/^[a-z][a-z0-9-]{1,39}$/.test(d.agent))return null;
+const fields=['kind','agent','role','capabilities','scopes','expiresAt','ownerAttestation','publicOnly'];if(Object.keys(d).sort().join()!=fields.sort().join())return null;
+const required=['directory.read','task.reply','artifact.publish',...(d.role==='collector'?['public-contract.read','asset.execute']:[])];if(!Array.isArray(d.scopes)||d.scopes.length!==required.length||[...d.scopes].sort().join()!=required.sort().join())return null;
+const expiry=Date.parse(d.expiresAt);if(!d.expiresAt.endsWith('Z')||!Number.isFinite(expiry)||expiry<=Date.now()||expiry>Date.parse(issue.created_at)+30*864e5)return null;
+return {id:'gh:'+owner.id+':'+d.agent,role:d.role,ownerId:owner.id,login:owner.login,url:issue.html_url,expiry:d.expiresAt};}catch{return null;}}
+function textNode(tag,text,parent){const node=document.createElement(tag);node.textContent=text;parent.append(node);return node;}
+async function load(){try{const issues=[];for(let page=1;page<=5;page++){const batch=await get('/issues?state=open&per_page=100&page='+page);issues.push(...batch);if(batch.length<100)break;if(page===5)throw Error('Directory pagination limit');}
+const candidates=issues.map(publicGrant).filter(Boolean);const counts=new Map();for(const g of candidates)counts.set(g.id,(counts.get(g.id)||0)+1);
+const grants=candidates.filter(g=>counts.get(g.id)===1);el('directory').replaceChildren();el('directory-status').textContent=grants.length+' 项当前有效的声明授权；真人独立性均未验证。重复同名授权不参与发现。最终执行以云端校验为准。';
+for(const g of grants){const card=document.createElement('article');textNode('strong',g.id,card);textNode('p','能力：'+capability[g.role]+'；所有者账号：'+g.login+'（ID '+g.ownerId+'）',card);const a=textNode('a','回读授权及撤销入口',card);a.href=g.url;textNode('small','有效期至 '+g.expiry+'；独立真实所有者：未验证',card);el('directory').append(card);const o=document.createElement('option');o.value=g.id;o.textContent=g.id;el(g.role).append(o);}
+el('tasks').replaceChildren();for(const issue of issues.filter(i=>!i.pull_request&&i.title.startsWith('[AI Online task]')).slice(0,10)){const card=document.createElement('article');const a=textNode('a','#'+issue.number+' '+issue.title,card);a.href=issue.html_url;textNode('p','任务所有者账号 ID '+issue.user.id,card);
+try{const comments=await get('/issues/'+issue.number+'/comments?per_page=100');const records=comments.filter(c=>c.user.login==='github-actions[bot]'&&c.body.startsWith('AI Online · ')).map(c=>payload(c.body));textNode('p','已回读阶段：'+(records.map(r=>r.stage).join(' → ')||'尚无 Agent 回复'),card);
+const delivery=records.find(r=>r.stage==='delivery');if(delivery){textNode('p','交付：'+delivery.data.report.delivery+'；核查技能数 '+delivery.data.report.assetCount+'；既有技能输出核验 '+delivery.data.report.skillOutputVerified,card);textNode('small','交付哈希 '+delivery.hash+'；页面展示不代替云端证据链校验',card);}}catch{ textNode('p','对话暂不可读，不能推定已完成。',card);}el('tasks').append(card);}if(!el('tasks').children.length)el('tasks').textContent='尚未发现公开任务。';taskLink();
+}catch(error){el('directory-status').textContent='目录读取失败：'+error.message+'。不能推定授权或协作已成功。';el('tasks').textContent='任务回读不可用。';}}
+el('agent-name').addEventListener('input',joinLinks);el('collector').addEventListener('change',taskLink);el('reviewer').addEventListener('change',taskLink);joinLinks();load();

@@ -1,0 +1,36 @@
+name: AI Online owner joining public browser verification
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ai-online-market-trial/network/**'
+      - '.github/workflows/ai-online-owner-loop-public.yml'
+permissions:
+  contents: read
+concurrency:
+  group: ai-online-owner-public
+  cancel-in-progress: false
+jobs:
+  public-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare isolated cloud browser
+        run: |
+          npm install --prefix /tmp/ai-online-browser --no-package-lock --no-save playwright@1.55.1
+          /tmp/ai-online-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Verify deployed checksum, owner form, discovery and task handoff
+        env:
+          NODE_PATH: /tmp/ai-online-browser/node_modules
+        run: node ai-online-market-trial/network/browser.cjs
+      - name: Save public browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ai-online-owner-public-browser
+          path: network-evidence/
+          if-no-files-found: warn
+          retention-days: 14

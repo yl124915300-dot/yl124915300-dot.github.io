@@ -1,0 +1,37 @@
+name: AI Online owner loop cloud verification
+on:
+  pull_request:
+    paths:
+      - 'ai-online-market-trial/network/**'
+      - '.github/workflows/ai-online-owner-loop*.yml'
+      - '.github/ISSUE_TEMPLATE/ai-online-*.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'ai-online-market-trial/network/**'
+      - '.github/workflows/ai-online-owner-loop*.yml'
+permissions:
+  contents: read
+concurrency:
+  group: ai-online-check-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Owner authority, denied tools, recovery and delivery tests
+        run: python3 -m unittest discover -s ai-online-market-trial/network -p 'test_*.py' -v
+      - name: Actual public contract and existing skill probe
+        run: python3 ai-online-market-trial/network/runner.py probe
+      - name: Save public evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ai-online-cloud-probe
+          path: network-evidence/
+          if-no-files-found: warn
+          retention-days: 14
