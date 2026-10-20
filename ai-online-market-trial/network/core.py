@@ -48,7 +48,7 @@ def identity(issue):
     return user["id"]
 
 def grant(issue, now):
-    if not issue.get("title", "").startswith(TITLE_OWNER) or issue.get("state") != "open":
+    if issue.get("pull_request") or not issue.get("title", "").startswith(TITLE_OWNER) or issue.get("state") != "open":
         raise ValueError("GRANT_CLOSED_OR_WRONG_TYPE")
     data = payload(issue.get("body"))
     fields(data, ["kind", "agent", "role", "capabilities", "scopes", "expiresAt", "ownerAttestation", "publicOnly"])
@@ -79,7 +79,9 @@ def task(issue):
     if not issue.get("title", "").startswith(TITLE_TASK) or issue.get("state") != "open":
         raise ValueError("TASK_CLOSED_OR_WRONG_TYPE")
     data = payload(issue.get("body"))
-    fields(data, ["kind", "goal", "collector", "reviewer", "publicOnly", "authorizeReplies"])
+    fields(data, ["kind", "goal", "collector", "reviewer", "publicOnly", "authorizeReplies"] + (["requireDifferentOwners"] if "requireDifferentOwners" in data else []))
+    if "requireDifferentOwners" in data and type(data["requireDifferentOwners"]) is not bool:
+        raise ValueError("OWNER_MODE_INVALID")
     if data["kind"] != "collaboration-task" or data["goal"] != "audit-ai-online-public-contract":
         raise ValueError("GOAL_DENIED")
     if data["publicOnly"] is not True or data["authorizeReplies"] is not True:
@@ -95,20 +97,25 @@ def task(issue):
 
 def select_agents(current_task, issues, now):
     directory = {}
+    ambiguous = set()
     for issue in issues:
         try:
             item = grant(issue, now)
         except (ValueError, KeyError, TypeError):
             continue
         if item["id"] in directory:
-            raise ValueError("AMBIGUOUS_AGENT_GRANTS")
+            ambiguous.add(item["id"])
         directory[item["id"]] = item
     selected = []
     for role in ("collector", "reviewer"):
+        if current_task[role] in ambiguous:
+            raise ValueError("AMBIGUOUS_AGENT_GRANTS")
         item = directory.get(current_task[role])
         if item is None or item["role"] != role:
             raise ValueError("VALID_ROLE_GRANT_REQUIRED")
         selected.append(item)
+    if current_task.get("requireDifferentOwners") is True and selected[0]["ownerId"] == selected[1]["ownerId"]:
+        raise ValueError("DIFFERENT_ACCOUNTS_REQUIRED_NOT_HUMAN_PROOF")
     return selected
 
 def envelope(task_hash, stage, actor, data, previous="ROOT"):
