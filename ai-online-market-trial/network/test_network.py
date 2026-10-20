@@ -3,7 +3,7 @@ from pathlib import Path
 from unittest.mock import patch
 from core import digest, envelope, grant, payload, select_agents, task, validate_chain, review
 from agent import request, summarize
-from runner import receipts, role_process, BOT
+from runner import receipts, receipt_text, role_process, BOT
 
 NOW = 1792497600
 def issue(number, title, value, owner=239416297):
@@ -90,6 +90,18 @@ class RecoveryTests(unittest.TestCase):
         body = "AI Online · discovery\n\n\x60\x60\x60json\n" + json.dumps(record) + "\n\x60\x60\x60"
         self.assertEqual(receipts([{"user": {"login": "untrusted-user"}, "body": body}], "taskhash"), [])
         self.assertEqual(len(receipts([{"user": {"login": BOT}, "body": body}], "taskhash")), 1)
+
+    def test_full_public_inventory_receipt_roundtrips_and_resumes(self):
+        snapshot = json.loads((Path(__file__).resolve().parents[1] / "assets.json").read_text())
+        discovery = envelope("large-task", "discovery", {"id": "directory"}, {"agents": []})
+        collector = envelope("large-task", "collector", {"id": "collector"},
+                             {"snapshot": snapshot, "boundedEvidence": "x" * 13000}, discovery["hash"])
+        comments = [{"user": {"login": BOT}, "body": receipt_text(r)} for r in [discovery, collector]]
+        with self.assertRaisesRegex(ValueError, "BODY_LIMIT"):
+            payload(comments[1]["body"])
+        recovered = receipts(comments, "large-task")
+        self.assertEqual(recovered, [discovery, collector])
+        self.assertEqual(validate_chain(recovered, "large-task"), collector["hash"])
 
 class ToolAndDeliveryTests(unittest.TestCase):
     def test_no_arbitrary_url_or_endpoint(self):

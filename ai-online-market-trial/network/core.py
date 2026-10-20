@@ -14,8 +14,8 @@ def canonical(value):
 def digest(value):
     return hashlib.sha256(canonical(value).encode()).hexdigest()
 
-def payload(body):
-    if not isinstance(body, str) or len(body.encode()) > 12000:
+def payload(body, limit=12000):
+    if not isinstance(body, str) or len(body.encode()) > limit:
         raise ValueError("BODY_LIMIT")
     matches = re.findall(r"\x60\x60\x60json\s*\n(.*?)\n\x60\x60\x60", body, re.S)
     if len(matches) != 1:

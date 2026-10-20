@@ -54,7 +54,7 @@ def receipts(comments, task_hash):
     for item in comments:
         if item.get("user", {}).get("login") != BOT or not item.get("body", "").startswith(prefix):
             continue
-        record = payload(item["body"])
+        record = payload(item["body"], limit=60000)
         # Edited task bodies are a new authorization, never silently mix old outputs.
         if record.get("taskHash") != task_hash:
             raise ValueError("TASK_CHANGED_AFTER_EXECUTION_CREATE_NEW_TASK")
