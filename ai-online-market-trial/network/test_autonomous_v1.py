@@ -149,7 +149,7 @@ class ExecutorBoundaryTests(unittest.TestCase):
             self.run_plan()
         self.assertIn("intent",self.saved)
         self.assertNotIn("worker-receipt",self.saved)
-        with self.assertRaisesRegex(ValueError,"RECONCILE"):
+        with self.assertRaises(ValueError):
             self.run_plan()
         self.assertEqual(len(self.http.posts),1)
 

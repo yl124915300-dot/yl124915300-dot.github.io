@@ -1,7 +1,7 @@
 import errno, hashlib, json, os, pathlib, re, shutil, signal, subprocess, sys, tarfile, tempfile, time, urllib.parse, urllib.request
 sys.path.insert(0, "ai-online-market-trial/network")
 from core import canonical, digest
-from execution_v1 import current_authority, public_task, BoundedHTTP, live
+from execution_v1 import current_authority, public_task, BoundedHTTP, live, validate_order
 from model_plan import CAPABILITIES, strict_json, validate_decision
 
 MODEL_REV = "23749fefcc72300e3a2ad315e1317431b06b590a"
@@ -230,9 +230,10 @@ os.execv(binary, sys.argv[1:])
     evidence.update({"rawOutputBytes": len(raw), "rawOutputSha256": hashlib.sha256(raw).hexdigest(),
                      "transportFraming": "exact fixed llama-completion EOG footer removed; no JSON extraction or repair"})
     decision = parse_output(raw)
+    validate_order(decision, TASK_HASH)
     evidence.update({"safeDecision": "YES", "decision": decision, "decisionHash": digest(decision),
                      "rawOutputPublic": raw.decode().strip(),
-                     "semanticTaskMatch": "public-contract-review" in decision["capabilities"],
+                     "semanticTaskMatch": "minimized-summary-v1" in decision["capabilities"],
                      "status": "REAL_INFERENCE_SAFE_PROPOSAL"})
     # Execute only the exact validated order. Never repair/reorder/fallback on rejection.
     delivery = live(decision, TASK_HASH, AUTHORITY)

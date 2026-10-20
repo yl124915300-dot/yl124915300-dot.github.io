@@ -4,7 +4,7 @@ Fixtures exercise the same boundary with a fake transport and are never inferenc
 """
 import json, os, re, threading, time, urllib.error, urllib.request
 from pathlib import Path
-from core import canonical, digest, fields, grant, payload, stamp
+from core import canonical, digest, fields, grant, payload, stamp, review
 from model_plan import CAPABILITIES, strict_json, validate_decision
 from agent import BASE, NoRedirect
 
@@ -194,8 +194,10 @@ def execute(decision, task_hash, authority, http, save, guard):
             save("worker-receipt", receipt)
             result = receipt
         else:
-            result = {"inventoryHash": digest(inventory), "assetCount": len(inventory["assets"]),
-                      "publicPermissionsVerified": True, "summaryAvailableAtReview": receipt is not None}
+            result = review({"snapshot": SNAPSHOT, "snapshotHash": digest(SNAPSHOT),
+                             "live": {"/assets": {"semanticValid": True, "data": inventory}},
+                             "skillExecution": receipt or {"verified": False, "error": "summary not yet scheduled"}})
+            result["summaryAvailableAtReview"] = receipt is not None
         previous = records[-1]["hash"] if records else "ROOT"
         record = {"taskHash": task_hash, "capability": choice, "result": result, "previous": previous}
         records.append({**record, "hash": digest(record)})
@@ -222,8 +224,11 @@ def writer(name, value):
         raise ValueError("DELIVERY_BOUND")
     path = root / (name + ".json")
     # Exclusive create and exact readback; no duplicate publication within this runner.
-    with path.open("x") as stream:
-        stream.write(raw)
+    try:
+        with path.open("x") as stream:
+            stream.write(raw)
+    except FileExistsError:
+        raise ValueError("PRIOR_INTENT_OR_RECEIPT_RECONCILE")
     if strict_json(path.read_text()) != value:
         raise ValueError("DELIVERY_READBACK")
     print("PUBLIC_RECEIPT=" + canonical({"name": name, "sha256": digest(value), "value": value}), flush=True)
