@@ -229,7 +229,7 @@ jobs:
                      "/usr/bin/python3", "-c", wrapper, str(binary),
                      "-m", str(model), "-f", str(prompt), "-no-cnv", "--no-display-prompt", "--simple-io",
                      "--offline", "-ngl", "0", "-t", "2", "-tb", "2", "-c", "1024", "-b", "128", "-ub", "128",
-                     "-n", "192", "--temp", "0", "--seed", "1", "--no-warmup", "--perf", "--log-colors", "off",
+                     "-n", "192", "--temp", "0", "--seed", "1", "--no-warmup", "--perf", "--verbosity", "4", "--log-colors", "off",
                      "--json-schema-file", str(schema)]
               started = time.monotonic()
               evidence["inferenceAttempted"] = True
@@ -253,7 +253,7 @@ jobs:
               if not proof or json.loads(proof[1])["execTargetSha256"] != evidence["executableSha256"]:
                   raise ValueError("PROCESS_PROOF_REQUIRED")
               evidence["processProof"] = json.loads(proof[1])
-              native_lines = [line for line in native.splitlines() if re.search(r"build:|general.architecture|model type|model params|model size|eval time|sample time|total time|ISOLATION_PROOF", line)]
+              native_lines = [line for line in native.splitlines() if re.search(r"build:|general.architecture|model type|model params|model size|eval time|sample time|total time|error:|ISOLATION_PROOF", line)]
               evidence["nativeLogSummary"] = "\n".join(native_lines)[:4096]
               if code != 0 or "qwen3" not in native.lower() or not re.search(r"(?<!prompt )eval time\s*=", native):
                   raise ValueError("NATIVE_GENERATION_EVIDENCE_REQUIRED")
