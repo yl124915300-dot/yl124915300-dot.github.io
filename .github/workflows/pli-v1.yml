@@ -1,0 +1,71 @@
+name: PLI V1 cloud verification
+on:
+  push:
+    branches: [pli-v1-20261019]
+    paths: ['pli-v1/**', '.github/workflows/pli-v1.yml']
+permissions:
+  contents: read
+concurrency:
+  group: pli-v1-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  session-one:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pli-v1-20261019
+      - name: Validate source syntax
+        shell: bash
+        run: |
+          python3 -m py_compile pli-v1/agent.py pli-v1/e2e.py
+          node --check pli-v1/web/app.js
+      - name: Live feeds, novel event, restart and permission gates
+        shell: bash
+        run: python3 pli-v1/e2e.py 1
+      - name: Persist synthetic and public checkpoint in GitHub
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "PLI verification"
+          git config user.email "pli-verification@users.noreply.github.com"
+          git add pli-v1/state/
+          if ! git diff --cached --quiet; then
+            git commit -m "PLI: persist public event checkpoint and first-session evidence"
+            git push origin HEAD:pli-v1-20261019
+          fi
+      - name: Record test evidence
+        if: always()
+        shell: bash
+        run: |
+          if [ -f pli-v1/state/phase1.json ]; then
+            cat pli-v1/state/phase1.json >> "$GITHUB_STEP_SUMMARY"
+          fi
+  independent-session-two:
+    needs: session-one
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pli-v1-20261019
+      - name: Reconstruct memory in an independent cloud job
+        shell: bash
+        run: python3 pli-v1/e2e.py 2
+      - name: Persist final verification result
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "PLI verification"
+          git config user.email "pli-verification@users.noreply.github.com"
+          git add pli-v1/state/phase2.json
+          if ! git diff --cached --quiet; then
+            git commit -m "PLI: record independent cloud-session verification"
+            git push origin HEAD:pli-v1-20261019
+          fi
+          cat pli-v1/state/phase2.json >> "$GITHUB_STEP_SUMMARY"

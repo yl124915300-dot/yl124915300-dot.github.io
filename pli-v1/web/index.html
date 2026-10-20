@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PLI 中央生活 Agent</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body><main><header><p class="eyebrow">PERSONAL LIFE INTELLIGENCE · V1.0</p><h1>中央生活 Agent</h1><p>6 个 <strong>SYNTHETIC</strong> 生活状态 · 公开现实事件 · 可审计规则决策</p><p>所有人物均为合成样本。建议不会执行真实付款、提交、预订或发信。</p></header>
+<section class="toolbar"><button id="refresh">读取最新公开事件</button><button id="reload">刷新状态</button><span id="status" role="status">读取中</span></section>
+<section><h2>生活状态 <small>SYNTHETIC</small></h2><div id="profiles" class="grid"></div></section>
+<section><h2>公开数据读取凭据</h2><div id="sources"></div></section>
+<section><h2>当前提议</h2><div id="actions"></div></section>
+<section><h2>输入新事件 <small>SYNTHETIC</small></h2><p>规则支持天气与地震。手动输入统一记为 SYNTHETIC，标题为描述，决策依据为结构化字段。</p><textarea id="event" rows="14" aria-label="合成事件 JSON"></textarea><div class="toolbar"><button id="ingest">处理合成事件</button><button id="cancel">撤销此事件</button><button id="deny">测试付款门禁</button></div><pre id="result"></pre></section>
+<section><h2>决策历史</h2><p id="counts"></p><div id="history"></div></section>
+<footer>规则 R0：有效期 / 取消 · R1：天气地域与暴露 · R2：震级与距离 · R3：目标、时间、预算约束。没有真实交易，收入为 0。常驻执行与轮询只在服务器运行时有效。</footer></main></body></html>
