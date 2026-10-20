@@ -79,6 +79,14 @@ jobs:
                       h.update(chunk)
               return h.hexdigest()
           
+          def unframe_output(stdout):
+              # Verified tools/completion/completion.cpp emits this fixed transport footer.
+              # It is not model text. Accept exactly one terminal footer, never search for JSON.
+              footer = b" [end of text]\n\n\n"
+              if not stdout.endswith(footer) or stdout.count(footer) != 1:
+                  raise ValueError("COMPLETION_FRAMING_REQUIRED")
+              return stdout[:-len(footer)]
+          
           def parse_output(raw):
               if not raw or len(raw) > MAX_RAW:
                   raise ValueError("OUTPUT_BOUND")
@@ -106,7 +114,15 @@ jobs:
                   pass
               else:
                   raise AssertionError("PARSER_ACCEPTED_ADVERSARIAL_INPUT")
-          print("PARSER_CHECKS_PASS: 1 valid fixture; 10 rejected fixtures; real inference count so far 0", flush=True)
+          assert unframe_output(good + b" [end of text]\n\n\n") == good
+          for framed in (good, good + b" [end of text]\n\n\nextra", good + b" [end of text]\n\n\n" * 2):
+              try:
+                  unframe_output(framed)
+              except ValueError:
+                  pass
+              else:
+                  raise AssertionError("FRAMING_ACCEPTED_ADVERSARIAL_INPUT")
+          print("PARSER_CHECKS_PASS: 11 JSON and 4 transport fixtures; real inference count so far 0", flush=True)
           
           class SafeRedirect(urllib.request.HTTPRedirectHandler):
               def redirect_request(self, req, fp, code, msg, headers, newurl):
@@ -245,7 +261,7 @@ jobs:
               raw = outpath.read_bytes()
               logs = errpath.read_bytes()
               evidence.update({"wallSeconds": round(time.monotonic() - started, 3), "processExit": code,
-                               "rawOutputBytes": len(raw), "rawOutputSha256": hashlib.sha256(raw).hexdigest(),
+                               "stdoutBytes": len(raw), "stdoutSha256": hashlib.sha256(raw).hexdigest(),
                                "nativeLogSha256": hashlib.sha256(logs).hexdigest()})
               # Native diagnostics are public fixed-model data, never arbitrary model stdout.
               native = logs.decode("utf-8", errors="replace")
@@ -258,6 +274,9 @@ jobs:
               if code != 0 or "qwen3" not in native.lower() or not re.search(r"(?<!prompt )eval time\s*=", native):
                   raise ValueError("NATIVE_GENERATION_EVIDENCE_REQUIRED")
               evidence["realInference"] = "YES"
+              raw = unframe_output(raw)
+              evidence.update({"rawOutputBytes": len(raw), "rawOutputSha256": hashlib.sha256(raw).hexdigest(),
+                               "transportFraming": "exact fixed llama-completion EOG footer removed; no JSON extraction or repair"})
               decision = parse_output(raw)
               evidence.update({"safeDecision": "YES", "decision": decision, "decisionHash": digest(decision),
                                "rawOutputPublic": raw.decode().strip(),
