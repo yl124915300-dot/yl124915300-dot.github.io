@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "vendor": "node vendor.mjs",
+    "test:browser": "node tests/browser.mjs && node tests/real-benchmark.mjs"
+  },
+  "dependencies": {
+    "tesseract.js": "7.0.0",
+    "tesseract.js-core": "7.0.0",
+    "@tesseract.js-data/eng": "1.0.0",
+    "@tesseract.js-data/chi_sim": "1.0.0"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}
