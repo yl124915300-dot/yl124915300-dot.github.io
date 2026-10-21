@@ -28,7 +28,9 @@ jobs:
             code=$(curl --silent --show-error --location --max-time 20 \
               --output /tmp/cat-tales-public.html --write-out '%{http_code}' "$SITE" || true)
             if [ "$code" = "200" ] && grep -Fq 'id="beta-test"' /tmp/cat-tales-public.html \
-              && grep -Fq 'beta.js?v=20261018g' /tmp/cat-tales-public.html; then
+              && grep -Fq 'beta.js?v=20261018g' /tmp/cat-tales-public.html \
+              && grep -Fq 'cat-ui.css?v=20261021a' /tmp/cat-tales-public.html \
+              && grep -Fq 'cat-ui.js?v=20261021a' /tmp/cat-tales-public.html; then
               echo "PUBLIC_HTML_PASS: HTTP 200, expected beta script and UI are present"
               break
             fi
@@ -38,7 +40,7 @@ jobs:
             fi
             sleep 12
           done
-          for file in beta.js live.js dialogue.js sound-policy.js vision.js; do
+          for file in beta.js live.js dialogue.js sound-policy.js vision.js cat-ui.css cat-ui.js; do
             curl --fail --show-error --silent --location --max-time 25 \
               -o "/tmp/cat-tales-$file" "$SITE$file"
             test -s "/tmp/cat-tales-$file"
@@ -51,3 +53,9 @@ jobs:
           CAT_TALES_TEST_URL: https://yl124915300-dot.github.io/cat-tales/live/
           NODE_PATH: /tmp/cattales-public/node_modules
         run: node cat-tales/live/beta.e2e.cjs
+
+      - name: Actual public HTTPS feline UI and keepsake flow
+        env:
+          CAT_TALES_TEST_URL: https://yl124915300-dot.github.io/cat-tales/live/
+          NODE_PATH: /tmp/cattales-public/node_modules
+        run: node cat-tales/live/cat-ui.e2e.cjs

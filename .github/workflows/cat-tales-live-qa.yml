@@ -1,5 +1,9 @@
 name: Cat Tales Live cloud QA
 on:
+  pull_request:
+    paths:
+      - 'cat-tales/live/**'
+      - '.github/workflows/cat-tales-live-qa.yml'
   push:
     branches: [main]
     paths:
@@ -29,6 +33,9 @@ jobs:
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/e2e.cjs
       - name: Private beta feedback export on mobile viewport
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/beta.e2e.cjs
+
+      - name: Cat-branded mobile UI and privacy-safe keepsake
+        run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/cat-ui.e2e.cjs
 
       - name: Actual YAMNet audio model load and live inference
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/model-smoke.cjs
