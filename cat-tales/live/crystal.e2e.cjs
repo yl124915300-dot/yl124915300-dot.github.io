@@ -14,6 +14,11 @@ const {chromium}=require('playwright');
    assert.equal(await page.locator('body').getAttribute('class'),'crystal-paw');
    const peek=page.locator('#cat-real-peek');
    await peek.waitFor({state:'attached'});
+   // Real photography is a required feature, not just a decorative URL string.
+   await page.waitForFunction(() => {
+     const imgs=[...document.querySelectorAll('.hero-cat-photo,.cat-photo-peek img')];
+     return imgs.length===2 && imgs.every(img=>img.complete && img.naturalWidth>0);
+   },null,{timeout:20000});
    assert.equal(await peek.getAttribute('aria-hidden'),'true','decorative cats should stay out of assistive text');
    assert.equal(await page.locator('#cat-cameo-toggle').getAttribute('aria-pressed'),'true');
    assert.equal(await page.locator('#start').isDisabled(),true,'original mic permission gate');
