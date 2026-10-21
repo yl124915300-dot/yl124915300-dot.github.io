@@ -31,7 +31,9 @@
     return memory;
   }
   function shouldHandleTranscript(text){
-    const q=String(text||"").trim().replace(/[.!?,;:~\s]/g,"");
+    const raw=String(text||"").trim();
+    const q=raw.replace(/[.!?,;:~\s]/g,"");
+    if(/^(meow|mew|miaow|purr|woof|bark|hiss)(\s+(meow|mew|miaow|purr|woof|bark|hiss))*$/i.test(raw))return false;
     if(q.length<5)return false;
     if(/^(meow|mew|miaow|purr|woof|bark|hiss)+$/i.test(q))return false;
     return true;
@@ -64,7 +66,7 @@
       if(vision.dogCandidate)return {type:"vision",answer:"The detector has a dog-shaped object candidate but no stable cat candidate yet. Lighting, angle and occlusion can all affect results."};
       return {type:"vision",answer:"No stable cat-shaped object has been detected in the latest frames. This doesn't establish that there is no cat nearby."};
     }
-    if(/\b(what sound|heard|hearing|is that a cat|sound model|audio model|the noise|detect(ed)? (a )?meow)\b/.test(q)){
+    if(/\b(sound|noise|heard|hearing|is that a cat|sound model|audio model|the noise|detect(ed)? (a )?meow)\b/.test(q)){
       if(sound?.verified){
         const type=sound.catCandidate?"a possible cat vocalization":"an audio category of "+String(sound.label||"unknown").slice(0,38);
         return {type:"sound",answer:"The optional on-device audio classifier flagged "+type+". It's only a research candidate, not a verified sound source or a translation. What did you see your cat doing at the time?"};
