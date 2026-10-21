@@ -3,11 +3,13 @@ on:
   pull_request:
     paths:
       - 'cat-tales/live/**'
+      - 'cat-tales/app/**'
       - '.github/workflows/cat-tales-live-qa.yml'
   push:
     branches: [main]
     paths:
       - 'cat-tales/live/**'
+      - 'cat-tales/app/**'
       - '.github/workflows/cat-tales-live-qa.yml'
   workflow_dispatch:
 permissions:
@@ -36,6 +38,9 @@ jobs:
 
       - name: Cat-branded mobile UI and privacy-safe keepsake
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/cat-ui.e2e.cjs
+
+      - name: Cat observation journal feline theme and consent regression
+        run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/journal-ui.e2e.cjs
 
       - name: Actual YAMNet audio model load and live inference
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/model-smoke.cjs
