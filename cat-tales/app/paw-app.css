@@ -1,0 +1,139 @@
+/* Cat Tales 2.4 visual bridge: legacy observation journal and PAW ROOM share one identity.
+ * UI only; preserves the V1.1 report, consent, local opt-in history and safety logic. */
+:root {
+ --ink:#49384c;--soft:#766a79;--green:#9d5479;--mint:#f7e9f0;
+ --pale:#fff8f1;--cream:#fff9f3;--line:#eadce1;
+ --peach:#fce0d7;--orange:#efab7e;--white:#fffdfb;
+}
+html{scroll-padding-top:80px}
+body{
+ background:radial-gradient(circle at 6% 4%,#fee8dd 0,transparent 30%),
+ radial-gradient(circle at 91% 23%,#eee7f9 0,transparent 40%),#fff9f3;
+ color:var(--ink)
+}
+body::before{
+ content:"";position:fixed;inset:0;z-index:-1;opacity:.3;pointer-events:none;
+ background:radial-gradient(#e7c9d3 1.1px,transparent 1.1px) 0 0/31px 31px;
+ mask-image:linear-gradient(180deg,#0005,transparent 50%);
+}
+a{color:#914c70}
+.top{padding:15px 0 11px}
+.brand{color:#4c3c50;font-size:20px}
+.brandmark{width:48px;height:48px;border-radius:16px;background:#fbe5e8;transform:none;box-shadow:inset 0 0 0 1px #ecd1db}
+.brandmark svg{width:41px;height:41px}
+.brand small{display:block;font-size:10px!important;font-weight:800!important;line-height:1.1;letter-spacing:.14em;color:#9d7891!important}
+.nav{gap:17px;font-size:13px}
+.nav a{color:#856c7e;font-weight:800;padding:6px 8px;border-radius:10px}
+.nav a:hover{color:#93506f;background:#f8e8ef}
+.live-teaser{
+ margin:4px 0 23px;padding:15px 19px;
+ display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;
+ background:linear-gradient(105deg,#fff2e3,#f7e7f1);
+ border:1px solid #edcfda;border-radius:20px;color:#6a5068;
+ box-shadow:0 6px 24px #a47a901a;
+}
+.live-teaser strong{font-size:15px;color:#864d73}
+.live-teaser small{color:#826b7c;font-size:12px}
+.live-teaser a{
+ display:inline-flex;align-items:center;justify-content:center;min-height:45px;
+ padding:10px 17px;border-radius:16px;background:#a85b7b;color:white;
+ text-decoration:none;font-size:13px;font-weight:850;box-shadow:0 8px 18px #ae739132;
+}
+.live-teaser a:hover{background:#884865}
+.hero{
+ padding:28px 32px 25px;margin:0 0 25px;border:1px solid #f0d9da;border-radius:30px;
+ background:linear-gradient(110deg,#fffdf9,#fff3eb 58%,#f2e9f9);
+ box-shadow:0 17px 35px #9b768713;
+ grid-template-columns:minmax(0,1.28fr) minmax(0,.72fr)
+}
+.eyebrow{font-size:11px;color:#a36082;letter-spacing:.12em}
+.hero h1{color:#49364c;letter-spacing:-.055em}
+.hero h1 span{color:#b85e7d}
+.lede{color:#76677a;font-size:15px}
+.hero-art{
+ width:245px;height:240px;min-height:0;justify-self:center;
+ border-radius:46% 47% 50% 49%;background:radial-gradient(circle at 40% 20%,#fffbec,#f1c9d4 64%,#e3c9eb);
+ border:3px solid #fff8f3;box-shadow:0 18px 37px #aa73912b;
+ overflow:visible
+}
+.hero-art svg{width:208px;height:212px;filter:drop-shadow(0 11px 6px #bf899f27)}
+.float{border:1px solid #f5e3e8;background:#fffdfb;color:#775b73;box-shadow:0 7px 19px #94738924}
+.step{background:#fffcfacc;border-color:#eddae3;color:#86607b}
+.card{border-color:#eadde1;background:#fffdfbf5;border-radius:26px;box-shadow:0 12px 32px #957e8c12}
+.card h2{color:#604764}
+.card h3{color:#6d526a}
+.tiny{color:#7c6c79}
+.pill,.status{background:#f9ebf0;color:#955879}
+.notice{background:#fff8f1;border-color:#eddbdb;color:#785e71}
+.notice.warn{background:#fff2eb;border-color:#edcfbb;color:#835b4b}
+.field>label,.field legend{color:#6d526b}
+.field input:not([type=checkbox]):not([type=radio]):not([type=file]),select,textarea{
+ border-color:#e8d7e0;background:#fffcfa;color:#49384c
+}
+.field input[type=file]{border-color:#e0baca;background:#fff6f5}
+.chips{gap:8px}
+.checkchip{background:#faf2f6;border:1px solid #eddae3;color:#795c73;min-height:38px;border-radius:14px}
+.checkchip:has(input:checked){background:#f1dfe9;border-color:#bb86a4;color:#7f3d61}
+.checkchip input,.consent input,.save-row input{accent-color:#a85b7b}
+.preview{background:#fff8f5}
+.ghost{border-color:#dec7d3;color:#885575;border-radius:12px;background:#fffbfa;min-height:39px}
+.ghost:hover{background:#f7e9f0}
+.consent{background:#fff7f3;border-color:#eacfd5;border-radius:17px}
+.primary{
+ background:#aa5d7e;color:#fff;border-radius:17px;
+ min-height:50px;box-shadow:0 7px 19px #a7789628;transition:transform .2s,background .2s
+}
+.primary:hover:enabled{background:#89496c;transform:translateY(-1px)}
+#analyze{font-size:15px}
+.blank{border-color:#e9cdd7;background:linear-gradient(130deg,#fff9ed,#f7eaf2)}
+.blank .icon{filter:drop-shadow(0 5px 4px #debbb6)}
+.reaction{background:#fff9f5;border-color:#e8d5dd;color:#795670;min-height:40px}
+.reaction.selected{background:#a75c7f;border-color:#a75c7f}
+.result-section{border-color:#eddee5}
+.kicker{color:#92516e}
+.story{background:#fff4e8;border-color:#e6b8a4}
+.history-entry{border-color:#eddee5}
+.info-grid article{background:#fff8f7;border-color:#eddee3;border-radius:17px}
+.footer{border-color:#ecdee2;color:#847481}
+.paw-journal-tabs{display:none}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{
+ outline:3px solid #a8597f;outline-offset:3px;
+}
+@media(max-width:850px){
+ .hero{grid-template-columns:minmax(0,1fr) 170px;padding:22px}
+ .hero-art{width:180px;height:175px}
+ .hero-art svg{width:162px;height:163px}
+}
+@media(max-width:620px){
+ body{padding-bottom:calc(88px + env(safe-area-inset-bottom, 0px))}
+ .wrap{width:min(100% - 24px,550px)}
+ .top{padding:10px 0}
+ .brand{font-size:18px}
+ .brandmark{width:43px;height:43px}
+ .brandmark svg{width:38px;height:38px}
+ .nav{gap:0}.nav a{display:none}
+ .live-teaser{padding:14px 16px;margin-bottom:14px}
+ .live-teaser a{width:100%}
+ .hero{display:block;padding:22px 19px;margin-bottom:17px;border-radius:24px}
+ .hero h1{font-size:clamp(31px,8vw,38px)}
+ .lede{font-size:14px}
+ .hero-art{width:185px;height:177px;margin:18px auto 0}
+ .hero-art svg{width:165px;height:165px}
+ .float.one{left:-27px}.float.two{right:-27px}
+ .card{padding:17px;border-radius:22px}
+ .paw-journal-tabs{
+ position:fixed;z-index:50;left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom, 0px));
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;
+ padding:9px 7px;border:1px solid #ecd8df;border-radius:22px;
+ background:#fffcf9ed;backdrop-filter:blur(16px);box-shadow:0 10px 36px #83647c45
+ }
+ .paw-journal-tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:48px;border-radius:13px;font-size:10px;font-weight:800;text-decoration:none;color:#846a7d}
+ .paw-journal-tabs a span{font-size:20px;line-height:1}
+ .paw-journal-tabs a:hover,.paw-journal-tabs a:focus{background:#f7e8ef;color:#9b5276}
+}
+@media(max-width:390px){
+ .two{grid-template-columns:1fr}
+ .brand{font-size:17px}
+ .hero-art{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
