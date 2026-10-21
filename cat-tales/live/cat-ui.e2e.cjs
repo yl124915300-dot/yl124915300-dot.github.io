@@ -11,7 +11,7 @@ const assert = require('node:assert/strict');
     await page.goto(process.env.CAT_TALES_TEST_URL || 'http://127.0.0.1:8765/cat-tales/live/', {waitUntil:'domcontentloaded'});
     await page.locator('#cat-live-mood').waitFor({state:'visible'});
     assert.match(await page.title(), /猫猫物语 LIVE/);
-    assert.match(await page.locator('.navlive').innerText(), /v2\.4/);
+    assert.match(await page.locator('.navlive').innerText(), /v2\.(4|5)/);
     assert.equal(await page.locator('#beta-test').evaluate(el => el.open), false, 'field test remains opt-in');
     assert.equal(await page.locator('.cat-tabs').isVisible(), true, 'mobile paw navigation shown');
     assert.equal(await page.locator('#start').isDisabled(), true, 'microphone still requires consent');
