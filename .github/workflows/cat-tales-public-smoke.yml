@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/cat-tales-public-smoke.yml'
+      - 'cat-tales/app/**'
       - 'cat-tales/live/index.html'
       - 'cat-tales/live/beta.js'
       - 'cat-tales/live/beta.e2e.cjs'
@@ -30,7 +31,10 @@ jobs:
             if [ "$code" = "200" ] && grep -Fq 'id="beta-test"' /tmp/cat-tales-public.html \
               && grep -Fq 'beta.js?v=20261018g' /tmp/cat-tales-public.html \
               && grep -Fq 'cat-ui.css?v=20261021a' /tmp/cat-tales-public.html \
-              && grep -Fq 'cat-ui.js?v=20261021a' /tmp/cat-tales-public.html; then
+              && grep -Fq 'cat-ui.js?v=20261021a' /tmp/cat-tales-public.html \
+              && curl --fail --silent --show-error --location --max-time 20 \
+                 -o /tmp/cat-tales-journal.html "$SITE../app/" \
+              && grep -Fq 'paw-app.css?v=20261021a' /tmp/cat-tales-journal.html; then
               echo "PUBLIC_HTML_PASS: HTTP 200, expected beta script and UI are present"
               break
             fi
@@ -46,6 +50,8 @@ jobs:
             test -s "/tmp/cat-tales-$file"
             echo "PUBLIC_ASSET_PASS: $file"
           done
+      - name: Confirm deployed observation journal feline stylesheet
+        run: curl --fail --show-error --silent --location --max-time 25 -o /tmp/paw-app.css https://yl124915300-dot.github.io/cat-tales/app/paw-app.css && test -s /tmp/paw-app.css
       - name: Install isolated Chromium test library
         run: npm install --prefix /tmp/cattales-public --no-save --no-package-lock playwright@1.55.1
       - name: Actual public HTTPS mobile browser feedback test
@@ -59,3 +65,9 @@ jobs:
           CAT_TALES_TEST_URL: https://yl124915300-dot.github.io/cat-tales/live/
           NODE_PATH: /tmp/cattales-public/node_modules
         run: node cat-tales/live/cat-ui.e2e.cjs
+
+      - name: Public feline observation journal mobile flow
+        env:
+          CAT_TALES_JOURNAL_URL: https://yl124915300-dot.github.io/cat-tales/app/
+          NODE_PATH: /tmp/cattales-public/node_modules
+        run: node cat-tales/live/journal-ui.e2e.cjs
