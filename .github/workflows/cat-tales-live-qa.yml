@@ -47,6 +47,9 @@ jobs:
       - name: English Cat Tales mobile and desktop interaction tests
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/en/e2e.cjs
 
+      - name: V2.5 photographic cat crystal and accessibility regression
+        run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/crystal.e2e.cjs
+
       - name: Actual YAMNet audio model load and live inference
         run: NODE_PATH=/tmp/cattales-qa/node_modules node cat-tales/live/model-smoke.cjs
 
