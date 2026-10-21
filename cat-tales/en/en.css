@@ -1,0 +1,57 @@
+/* English Cat Tales: same PAW ROOM identity, tuned for shorter English microcopy. */
+:root{--cat-ink:#49384c;--cat-coral:#ae5c80}
+html{scroll-padding-top:90px}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.brand{letter-spacing:-.04em}.brand small{letter-spacing:.18em}
+.language-switch{border:1px solid #ecd2df!important;background:#fdf1f5;color:#925373!important;font-size:12px;border-radius:12px;padding:7px 11px!important;white-space:nowrap}
+.intro h1{font-size:clamp(39px,4.8vw,62px)}
+.intro h1 em{color:#b65e78}
+.intro p{line-height:1.7}
+.hero-jump{min-height:46px}
+.orb span:last-child{font-size:13px;text-align:center}
+.orb[data-mode=listen] .orb-core{animation:cat-listen 2.6s ease-in-out infinite}
+#start{font-size:14px;gap:8px}
+.vision-consent{align-items:flex-start}
+.vision-consent input{margin-top:5px;flex-shrink:0}
+.motion-confirm button{min-height:40px;flex:1 1 100px}
+.footnote{font-size:12px}
+.consent small{font-size:12px;line-height:1.55}
+.context small{display:inline-block}
+.context h3{margin:0 0 12px}
+.quick-prompts button{font-size:11px;min-height:34px}
+.cat-tabs a{white-space:nowrap}
+.vision-panel,.sound-lab{min-width:0}
+.keepsake{width:100%}
+#cat-note-text{font-size:13px}
+.state{white-space:normal;text-align:center}
+#live-help-link{display:inline-flex;align-items:center;margin:6px 0 0;color:#8e5e7b}
+@media(max-width:970px){.intro{grid-template-columns:minmax(0,1fr) 220px}}
+@media(max-width:750px){.intro h1{font-size:clamp(37px,6vw,50px)}.topbar nav a:not(.language-switch){display:none}}
+@media(max-width:670px){
+ .topbar nav .language-switch{display:inline-flex;font-size:11px;padding:6px 9px!important}
+ .topbar nav .navlive{display:none}
+ .intro{padding:25px 20px 19px}
+ .intro h1{font-size:37px}
+ .intro-cat{height:175px;width:190px}
+ .note.n1{left:-34px}.note.n2{right:-30px}
+ .call-controls{grid-template-columns:minmax(0,1fr) minmax(98px,0.45fr)}
+ #start{padding:8px 6px;font-size:13px}
+ .button-paw{width:32px;height:32px}
+ .lab-heading{flex-wrap:wrap}
+ .lab-grid .sound-lab{padding:14px}
+ .messages{min-height:300px}
+ .quick-prompts{gap:6px}
+ .quick-prompts button{font-size:11px}
+ .extras{gap:9px}
+ .voice-options{flex-direction:column;align-items:stretch}
+ .voice-options button{align-self:stretch}
+ .keepsake-actions .primary,.keepsake-actions .outline{flex:1 1 170px}
+}
+@media(max-width:390px){
+ .brand{font-size:17px}
+ .topbar nav{gap:3px}
+ .intro h1{font-size:33px}
+ .intro-cat{max-width:100%}
+ .call-controls{grid-template-columns:1fr 96px}
+}
+@media(prefers-reduced-motion:reduce){.orb[data-mode=listen] .orb-core{animation:none}}
