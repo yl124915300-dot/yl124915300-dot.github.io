@@ -18,7 +18,7 @@ test('stress and hiding trigger non-forcing stop guidance',()=>{
 });
 test('voice only handles meaningful human speech, not cat noise',()=>{
  assert.equal(D.shouldHandleTranscript('Meow'),false);
- assert.equal(D.shouldHandleTranscript('meow meow'),true); // not a faithful cat-noise decoder
+ assert.equal(D.shouldHandleTranscript('meow meow'),false);
  assert.equal(D.shouldHandleTranscript('Hi there, I am here'),true);
  assert.equal(D.shouldHandleTranscript('Hi'),false);
 });
