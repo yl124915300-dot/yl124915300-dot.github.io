@@ -11,7 +11,7 @@ const assert = require('node:assert/strict');
   await page.goto(process.env.CAT_TALES_JOURNAL_URL || 'http://127.0.0.1:8765/cat-tales/app/', {waitUntil:'domcontentloaded'});
   assert.match(await page.title(), /猫猫物语/);
   assert.equal(await page.locator('.paw-journal-tabs').isVisible(), true);
-  assert.equal(await page.locator('a[href="../live/?v=2.4"]').first().isVisible(), true);
+  assert.equal(await page.locator('.live-teaser a[href="../live/?v=2.4"]').isVisible(), true);
   assert.equal(await page.locator('#analyze').isDisabled(), true, 'consent still required');
   assert.equal(await page.locator('#result').isVisible(), false, 'do not fabricate a result before input');
   const css = await page.locator('.hero').evaluate(el => getComputedStyle(el).borderRadius);
