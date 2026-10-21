@@ -28,11 +28,8 @@
     if(!enabled||document.hidden||reduced.matches||!peek.querySelector("img")?.complete)return;
     const now=Date.now();
     if(shown||now-last<2300)return;
-    const panel=peek.closest(".live-panel");
-    if(!panel)return;
-    const rect=panel.getBoundingClientRect();
-    // Do not summon photos outside the part of the page the user is actually using.
-    if(rect.bottom<70||rect.top>window.innerHeight-45)return;
+    // Fixed viewport-edge photo may appear during either the live panel or the chat panel.
+    // It never uses camera data or audio inference.
     last=now;flip++;
     peek.dataset.side=flip%2===0?"left":"right";
     peek.dataset.height=flip%3===0?"lower":"upper";
