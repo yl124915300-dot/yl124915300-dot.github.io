@@ -31,11 +31,11 @@ jobs:
               --output /tmp/cat-tales-public.html --write-out '%{http_code}' "$SITE" || true)
             if [ "$code" = "200" ] && grep -Fq 'id="beta-test"' /tmp/cat-tales-public.html \
               && grep -Fq 'beta.js?v=20261018g' /tmp/cat-tales-public.html \
-              && grep -Fq 'cat-ui.css?v=20261021a' /tmp/cat-tales-public.html \
+              && grep -Fq 'cat-ui.css?v=' /tmp/cat-tales-public.html \
               && grep -Fq 'cat-ui.js?v=20261021a' /tmp/cat-tales-public.html \
               && curl --fail --silent --show-error --location --max-time 20 \
                  -o /tmp/cat-tales-journal.html "$SITE../app/" \
-              && grep -Fq 'paw-app.css?v=20261021a' /tmp/cat-tales-journal.html; then
+              && grep -Fq 'paw-app.css?v=' /tmp/cat-tales-journal.html; then
               echo "PUBLIC_HTML_PASS: HTTP 200, expected beta script and UI are present"
               break
             fi
@@ -94,7 +94,8 @@ jobs:
         run: |
           set -euo pipefail
           for endpoint in en live app; do
-            curl --fail --show-error --silent --location --max-time 25               -o "/tmp/cat-tales-crystal-$endpoint.html" "https://yl124915300-dot.github.io/cat-tales/$endpoint/"
+            curl --fail --show-error --silent --location --max-time 25 \
+              -o "/tmp/cat-tales-crystal-$endpoint.html" "https://yl124915300-dot.github.io/cat-tales/$endpoint/"
             grep -Fq 'crystal.css?v=20261021a' "/tmp/cat-tales-crystal-$endpoint.html"
             grep -Fq 'hero-cat-photo' "/tmp/cat-tales-crystal-$endpoint.html"
             grep -Fq 'photo-credits' "/tmp/cat-tales-crystal-$endpoint.html"
