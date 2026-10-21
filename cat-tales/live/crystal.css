@@ -87,10 +87,9 @@ body.crystal-paw{
  background:radial-gradient(circle at 35% 20%,rgba(255,255,255,.97),rgba(240,221,252,.89),rgba(199,178,221,.88))!important;
 }
 /* Photo cameos are tap-driven, not a constantly moving animation. Keep text and controls readable. */
-.crystal-paw .live-panel{overflow:hidden}
 .crystal-paw .cat-photo-peek{
-  position:absolute;top:150px;right:-12px;width:135px;height:172px;
-  z-index:5;pointer-events:none;user-select:none;
+  position:fixed;top:32vh;right:-42px;width:155px;height:184px;
+  z-index:38;pointer-events:none;user-select:none;
   opacity:0;transform:translateX(110%) rotate(4deg);
   transition:transform .48s cubic-bezier(.25,.8,.2,1),opacity .35s ease;
   contain:layout style;
@@ -99,10 +98,10 @@ body.crystal-paw{
   display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;
   filter:drop-shadow(0 11px 10px rgba(81,53,73,.20));
 }
-.crystal-paw .cat-photo-peek[data-side="left"]{right:auto;left:-17px;transform:translateX(-115%) rotate(-5deg)}
+.crystal-paw .cat-photo-peek[data-side="left"]{right:auto;left:-42px;transform:translateX(-115%) rotate(-5deg)}
 .crystal-paw .cat-photo-peek[data-visible="true"]{opacity:.9;transform:translateX(0) rotate(-3deg)}
 .crystal-paw .cat-photo-peek[data-visible="true"][data-side="left"]{transform:translateX(0) rotate(3deg)}
-.crystal-paw .cat-photo-peek[data-height="lower"]{top:210px}
+.crystal-paw .cat-photo-peek[data-height="lower"]{top:50vh}
 .crystal-paw .cat-cameo-tools{display:flex;flex-wrap:wrap;gap:9px;align-items:center;justify-content:space-between;margin:9px 0 11px}
 .crystal-paw .cat-cameo-tools button{
  border:1px solid rgba(255,255,255,.95);background:rgba(250,235,244,.80);
@@ -165,16 +164,16 @@ body.crystal-paw{
 /* Existing cartoon-orb pulse is disabled: photographs react to user actions instead. */
 .crystal-paw .orb,.crystal-paw .orb-core{animation:none!important}
 @media(max-width:920px){
- .crystal-paw .cat-photo-peek{width:110px;height:146px;top:155px}
- .crystal-paw .cat-photo-peek[data-height="lower"]{top:215px}
+ .crystal-paw .cat-photo-peek{width:122px;height:160px;top:33vh}
+ .crystal-paw .cat-photo-peek[data-height="lower"]{top:52vh}
 }
 @media(max-width:670px){
  .crystal-paw .intro,.crystal-paw .hero,.crystal-paw .card{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
  .crystal-paw .intro-cat .hero-cat-photo{width:183px;max-height:165px;transform:translateY(8px)}
  .crystal-paw .hero-art .hero-cat-photo{width:168px;max-height:159px;transform:translateY(6px)}
- .crystal-paw .cat-photo-peek{width:92px;height:126px;top:142px;right:-9px}
- .crystal-paw .cat-photo-peek[data-side="left"]{left:-10px}
- .crystal-paw .cat-photo-peek[data-height="lower"]{top:187px}
+ .crystal-paw .cat-photo-peek{width:104px;height:136px;top:32vh;right:-37px}
+ .crystal-paw .cat-photo-peek[data-side="left"]{left:-37px}
+ .crystal-paw .cat-photo-peek[data-height="lower"]{top:49vh}
  .crystal-paw .cat-cameo-tools{flex-direction:column;align-items:flex-start}
  .crystal-paw .cat-cameo-tools button{min-height:42px}
  .crystal-paw .cat-cameo-tools small{font-size:11px}
