@@ -90,8 +90,23 @@ jobs:
           NODE_PATH: /tmp/cattales-public/node_modules
         run: node cat-tales/live/journal-ui.e2e.cjs
 
+      - name: Confirm public V2.5 crystalline interfaces and photograph credits
+        run: |
+          set -euo pipefail
+          for endpoint in en live app; do
+            curl --fail --show-error --silent --location --max-time 25               -o "/tmp/cat-tales-crystal-$endpoint.html" "https://yl124915300-dot.github.io/cat-tales/$endpoint/"
+            grep -Fq 'crystal.css?v=20261021a' "/tmp/cat-tales-crystal-$endpoint.html"
+            grep -Fq 'hero-cat-photo' "/tmp/cat-tales-crystal-$endpoint.html"
+            grep -Fq 'photo-credits' "/tmp/cat-tales-crystal-$endpoint.html"
+          done
       - name: Public English mobile user flow
         env:
           CAT_TALES_EN_TEST_URL: https://yl124915300-dot.github.io/cat-tales/en/
           NODE_PATH: /tmp/cattales-public/node_modules
         run: node cat-tales/en/e2e.cjs
+
+      - name: Public V2.5 crystal photo interaction and reduced-motion checks
+        env:
+          CAT_TALES_CRYSTAL_ORIGIN: https://yl124915300-dot.github.io
+          NODE_PATH: /tmp/cattales-public/node_modules
+        run: node cat-tales/live/crystal.e2e.cjs

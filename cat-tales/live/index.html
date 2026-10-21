@@ -10,11 +10,12 @@
 <link rel="alternate" hreflang="zh-CN" href="https://yl124915300-dot.github.io/cat-tales/live/">
 <link rel="stylesheet" href="./live.css?v=20261018f">
 <link rel="stylesheet" href="./cat-ui.css?v=20261021b">
+<link rel="stylesheet" href="./crystal.css?v=20261021a">
 </head>
-<body>
+<body class="crystal-paw">
 <header class="topbar"><div class="wrap topinner">
 <a class="brand" href="../app/" aria-label="猫猫物语"><span class="paw" aria-hidden="true"><svg class="cat-mark" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 30 12 10 29 21c8-3 15-3 22 0L68 10l-2 20c7 8 9 17 6 27-4 13-17 19-32 19S11 70 8 57c-3-10-1-19 6-27Z" fill="#fff8ef" stroke="#865977" stroke-width="3.5" stroke-linejoin="round"/><ellipse cx="28" cy="44" rx="4" ry="5" fill="#67485f"/><ellipse cx="52" cy="44" rx="4" ry="5" fill="#67485f"/><path d="m36 54 4 3 4-3-4-3-4 3Zm4 3v5m0 0q-5 5-10 0m10 0q5 5 10 0" fill="#df98a3" stroke="#865977" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><path d="m21 55-14-3m14 7-13 2m51-6 14-3m-14 7 13 2" stroke="#865977" stroke-width="2" stroke-linecap="round"/></svg></span><span>猫猫物语 <small>CAT TALES</small></span></a>
-<nav aria-label="网站导航"><span class="navlive">✦ PAW ROOM · v2.4</span><a href="#chat-room">喵喵对话</a><a href="#cat-senses">猫咪感知</a><a href="#beta">3分钟试用</a><a href="#about">技术与隐私</a><a href="../en/" lang="en" class="language-switch">English</a></nav>
+<nav aria-label="网站导航"><span class="navlive">✦ CRYSTAL PAW · v2.5</span><a href="#chat-room">喵喵对话</a><a href="#cat-senses">猫咪感知</a><a href="#beta">3分钟试用</a><a href="#about">技术与隐私</a><a href="../en/" lang="en" class="language-switch">English</a></nav>
 </div></header>
 <main class="wrap">
 <section class="intro" aria-labelledby="hero-title">
@@ -28,19 +29,7 @@
     <a class="hero-jump" href="#live-room">进入喵喵直播间 <span aria-hidden="true">↓</span></a>
   </div>
   <div class="intro-cat" aria-hidden="true">
-    <svg class="hero-cat-drawing" viewBox="0 0 240 245" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="125" cy="223" rx="87" ry="11" fill="#B88FAF" opacity=".22"/>
-      <path d="M178 180c38 2 44-26 37-40-8-16-33-13-32 2 0 8 12 7 14 1" stroke="#966D86" stroke-width="14" stroke-linecap="round"/>
-      <path d="M72 131c-22 20-28 70-14 90 17 14 108 13 128 0 15-19 8-67-15-90" fill="#FFFBF5" stroke="#6A5069" stroke-width="5"/>
-      <path d="M75 86 58 27l48 25c12-4 26-4 39 0l48-25-16 59c13 18 14 45 0 63-14 18-29 25-56 25s-49-7-62-25c-15-19-12-45 16-63Z" fill="#FFFAF0" stroke="#6A5069" stroke-width="5" stroke-linejoin="round"/>
-      <path d="M79 73 71 45l23 17M165 72l14-27-26 16" fill="#F4BAC1"/>
-      <path d="M92 108c8-9 18-9 26 0M139 108c8-9 18-9 26 0" stroke="#6A5069" stroke-width="5" stroke-linecap="round"/>
-      <path d="m117 131 10 7 10-7-10-6-10 6Z" fill="#D78499"/><path d="M127 139v7m0 0c-6 7-13 7-18 0m18 0c6 7 13 7 18 0" stroke="#6A5069" stroke-width="3" stroke-linecap="round"/>
-      <path d="m94 135-31-7m31 16-31 3m95-12 31-7m-31 16 31 3" stroke="#936F87" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M78 210c5-15 22-15 27 0m34 0c5-15 22-15 27 0" stroke="#6A5069" stroke-width="5" stroke-linecap="round"/>
-      <path d="M116 171q10 12 20 0" stroke="#E0A3AD" stroke-width="5" stroke-linecap="round"/>
-      <path d="m23 83 6 8 9-6-3 10 9 5-11 1-3 11-5-10-11-1 10-6-1-12ZM202 56l4 7 8-3-3 8 7 5-9 1-3 9-4-9-9-1 8-6 1-11Z" fill="#C887A5"/>
-    </svg>
+    <img class="hero-cat-photo" src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Orange_and_white_tabby_kitten_%28no_background%29.png" width="482" height="379" decoding="async" fetchpriority="high" alt="">
     <span class="note n1">今天也一起听喵</span><span class="note n2">喵～慢慢来 ♡</span>
   </div>
 </section>
@@ -49,6 +38,7 @@
 <div class="row"><div><h2 id="live-title">🐾 喵喵直播间</h2><p class="muted small">会话仅在你主动启动后使用麦克风。</p></div><span id="connection" class="state" role="status">未开始</span></div>
 <div class="orb-area"><div class="orb" id="orb" data-mode="idle"><span class="orb-core" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 29 15 4 39 18c7-2 15-2 22 0L85 4l-7 25c10 10 14 25 7 39-6 14-18 20-35 20S21 82 15 68c-7-14-3-29 7-39Z" fill="#FFFAF4" stroke="#6A5069" stroke-width="3.5" stroke-linejoin="round"/><path d="M29 49q8-8 15 0m13 0q8-8 15 0" stroke="#6A5069" stroke-width="3.4" stroke-linecap="round"/><path d="m45 61 5 4 5-4-5-3-5 3Z" fill="#D889A1"/><path d="M50 65v5m0 0q-5 5-10 0m10 0q5 5 10 0" stroke="#6A5069" stroke-width="2.4" stroke-linecap="round"/><path d="m30 63-22-5m22 12-21 3m61-10 22-5m-22 12 21 3" stroke="#906780" stroke-width="2" stroke-linecap="round"/></svg></span><span id="orb-hint">准备好时，开始说话</span></div><canvas id="wave" width="600" height="72" role="img" aria-label="实时麦克风声音波形"></canvas><div class="meter-wrap"><div id="meter" class="meter"></div></div><p id="cat-live-mood" class="mood-tip" aria-live="polite">小猫已就位，等待你开口</p></div>
 <p id="system-status" class="notice" role="status">当前是公开测试版。先勾选授权，再点击「开始实时沟通」。</p>
+<div class="cat-cameo-tools"><button id="cat-cameo-toggle" type="button" aria-pressed="true">🐾 真实猫咪探头：开启</button><small>实拍猫咪仅随你的操作短暂出镜，不代表真实摄像头分析。</small></div>
 <div class="consent"><label><input type="checkbox" id="mic-consent"><span><b>允许本次麦克风语音会话</b><small>本网站不保存录音。浏览器语音转文字服务（如 Chrome）可能将声音发送给浏览器供应商；不同于本地声音事件模型。请在没有旁人敏感谈话的环境使用。</small></span></label></div>
 <div class="call-controls"><button type="button" id="start" class="primary" disabled><span class="button-paw" aria-hidden="true">🐾</span><span>开始喵喵对话</span></button><button type="button" id="stop" class="stop" disabled>■ 结束陪伴</button></div>
 <div class="extras"><button type="button" id="camera" class="outline" aria-pressed="false">📷 开启摄像头</button><label class="tts-toggle"><input type="checkbox" id="tts" checked> 助手语音回答</label></div>
@@ -150,7 +140,8 @@
 <div class="info"><h3>声音识别与摄像头</h3><p>摄像头可以在你单独授权后运行 EfficientDet-Lite0 物体检测，提供猫/狗等<b>画面物体候选</b>，也可比较数帧间检测框在画面中的位置变化。但手机移动会产生类似效果，不能判断猫咪情绪、耳朵/尾巴动作、口型或行为意图。YAMNet 音频分类可单独启用，但仅给“可能是猫、人声、狗叫、闹钟”等声音候选，不能推断意图。未加载就不会显示伪造结果。</p></div>
 <div class="info"><h3>数据与安全</h3><p>本页不会把对话文字、照片或视频提交到本站后台，也不长期保存；短暂的情境线索只存在当前页面，点击清空或刷新即删除。切换到后台自动结束麦克风、摄像头和本地视觉识别。浏览器语音识别可能将声音发送给浏览器供应商的语音服务。MediaPipe 也可能处理性能/使用统计，但本站不上传摄像头帧。猫咪异常呼吸、排尿困难等应尽快联系兽医；嘶叫或躲避应停止互动。<a href="../app/">旧版观察手账 →</a></p></div>
 </section>
-</main><nav class="cat-tabs" aria-label="手机端猫猫快捷导航"><a href="#live-room"><span aria-hidden="true">🐾</span>陪伴</a><a href="#chat-room"><span aria-hidden="true">💬</span>对话</a><a href="#cat-profile"><span aria-hidden="true">🎀</span>我的猫</a><a href="#cat-senses"><span aria-hidden="true">🔎</span>研究室</a></nav><footer class="wrap footer">CAT TALES · PAW ROOM V2.4 · 免费实验体验 · 不提供猫语互译、兽医诊断或保证准确的声音识别。<br>© 2026 猫猫物语 · <a href="https://github.com/yl124915300-dot/yl124915300-dot.github.io/tree/main/cat-tales/live">查看公开代码</a></footer>
+</main>
+<div id="cat-real-peek" class="cat-photo-peek" data-visible="false" data-side="right" data-height="upper" aria-hidden="true"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/EUR_cat_transparent.png" width="557" height="824" decoding="async" loading="eager" alt=""></div><nav class="cat-tabs" aria-label="手机端猫猫快捷导航"><a href="#live-room"><span aria-hidden="true">🐾</span>陪伴</a><a href="#chat-room"><span aria-hidden="true">💬</span>对话</a><a href="#cat-profile"><span aria-hidden="true">🎀</span>我的猫</a><a href="#cat-senses"><span aria-hidden="true">🔎</span>研究室</a></nav><footer class="wrap footer">CAT TALES · CRYSTAL PAW V2.5 · 免费实验体验 · 不提供猫语互译、兽医诊断或保证准确的声音识别。<br>© 2026 猫猫物语 · <a href="https://github.com/yl124915300-dot/yl124915300-dot.github.io/tree/main/cat-tales/live">查看公开代码</a><div class="photo-credits">实拍猫咪素材：<a href="https://commons.wikimedia.org/wiki/File:Orange_and_white_tabby_kitten_(no_background).png" rel="noopener noreferrer" target="_blank">Tesseractic</a> 与 <a href="https://commons.wikimedia.org/wiki/File:EUR_cat_transparent.png" rel="noopener noreferrer" target="_blank">Heikki Siltala / YukiKoKo</a>，<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener noreferrer" target="_blank">CC BY-SA 4.0</a>；仅通过 CSS 展示位置及短暂出镜，不是猫咪实时识别。照片由 Wikimedia Commons 托管，图片加载会发起第三方网络请求。</div></footer>
 <script src="./dialogue.js?v=20261018f" defer></script>
 <script src="./sound-policy.js?v=20261018f" defer></script>
 <script src="./vision-policy.js?v=20261018f" defer></script>
@@ -158,5 +149,5 @@
 <script src="./vision.js?v=20261018f" defer></script>
 <script src="./live.js?v=20261018f" defer></script>
 <script src="./beta.js?v=20261018g" defer></script>
-<script src="./cat-ui.js?v=20261021a" defer></script>
+<script src="./cat-ui.js?v=20261021a" defer></script><script src="./crystal-cats.js?v=20261021a" defer></script>
 </body></html>

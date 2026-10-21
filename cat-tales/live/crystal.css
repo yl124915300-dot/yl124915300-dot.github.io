@@ -1,0 +1,188 @@
+/* Cat Tales V2.5 CRYSTAL PAW: translucent ice-glass surfaces, unchanged warm pink/lilac palette.
+   Images are actual photographs with transparent cutouts; there are NO looping cat animations. */
+:root{
+  --crystal-edge:rgba(255,255,255,.88);
+  --crystal-shadow:rgba(115,74,112,.16);
+  --crystal-ink:#49384c;
+}
+html{scroll-padding-top:92px}
+body.crystal-paw{
+  background:
+   radial-gradient(ellipse at 6% 8%,rgba(253,216,204,.66) 0,transparent 38%),
+   radial-gradient(ellipse at 90% 22%,rgba(222,207,245,.63) 0,transparent 42%),
+   radial-gradient(ellipse at 36% 82%,rgba(245,217,234,.38) 0,transparent 46%),
+   #fff9f3;
+  color:var(--crystal-ink);
+}
+.crystal-paw .topbar{
+  background:rgba(255,251,248,.70)!important;
+  border-bottom:1px solid rgba(255,255,255,.85);
+  box-shadow:0 5px 30px rgba(152,117,149,.12),inset 0 -1px rgba(173,139,181,.16);
+  -webkit-backdrop-filter:blur(15px) saturate(1.26);
+  backdrop-filter:blur(15px) saturate(1.26);
+}
+.crystal-paw .intro,
+.crystal-paw .hero,
+.crystal-paw .card,
+.crystal-paw .info,
+.crystal-paw .live-teaser{
+  background:linear-gradient(143deg,rgba(255,255,255,.81) 1%,rgba(255,248,245,.72) 37%,rgba(245,231,248,.69) 72%,rgba(255,255,255,.74) 100%)!important;
+  border:1px solid rgba(255,255,255,.91)!important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.94),
+    inset 0 -1px 0 rgba(200,166,192,.18),
+    0 17px 46px rgba(116,80,113,.13),
+    0 1px 0 rgba(255,255,255,.82);
+  -webkit-backdrop-filter:blur(17px) saturate(1.18);
+  backdrop-filter:blur(17px) saturate(1.18);
+}
+.crystal-paw .card{position:relative;isolation:isolate}
+.crystal-paw .intro,.crystal-paw .hero{position:relative;overflow:hidden}
+.crystal-paw .intro:before,.crystal-paw .hero:before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(126deg,rgba(255,255,255,.70) 0,rgba(255,255,255,0) 21%,rgba(255,255,255,0) 67%,rgba(255,255,255,.35) 100%);
+}
+.crystal-paw .intro>*,
+.crystal-paw .hero>*{position:relative;z-index:1}
+.crystal-paw .intro-cat,.crystal-paw .hero-art{
+  overflow:visible;
+  background:
+    radial-gradient(ellipse at 32% 21%,rgba(255,255,255,.82),transparent 49%),
+    linear-gradient(146deg,rgba(255,241,228,.56),rgba(230,202,238,.64))!important;
+  border:2px solid rgba(255,255,255,.90)!important;
+  box-shadow:inset 0 5px 18px rgba(255,255,255,.68),0 17px 35px rgba(141,96,131,.20),0 0 0 6px rgba(255,255,255,.32)!important;
+}
+.crystal-paw .intro-cat:before,
+.crystal-paw .hero-art:before{
+  content:"";position:absolute;inset:6px;border:1px solid rgba(255,255,255,.63);border-radius:inherit;pointer-events:none;
+  background:linear-gradient(138deg,rgba(255,255,255,.37),transparent 36%);
+}
+.crystal-paw .hero-cat-photo{
+  display:block;position:relative;z-index:1;
+  width:min(106%,285px);height:auto;max-height:255px;
+  object-fit:contain;filter:drop-shadow(0 12px 13px rgba(92,57,81,.23));
+  transform:translateY(13px);
+}
+.crystal-paw .hero-art .hero-cat-photo{width:105%;max-height:220px;transform:translateY(8px)}
+.crystal-paw .note,.crystal-paw .float{
+  background:rgba(255,255,255,.82)!important;
+  border:1px solid rgba(255,255,255,.95)!important;
+  -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+  color:#79556f;
+  box-shadow:0 8px 24px rgba(129,89,126,.13)!important;
+}
+.crystal-paw .orb{
+  border-color:rgba(255,255,255,.94)!important;
+  box-shadow:0 0 0 5px rgba(255,255,255,.51),inset 0 8px 17px rgba(255,255,255,.69),0 17px 33px rgba(172,117,153,.23)!important;
+  background:radial-gradient(circle at 35% 20%,rgba(255,255,255,.96),rgba(250,221,223,.85) 53%,rgba(224,186,226,.89))!important;
+  -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+}
+.crystal-paw .orb[data-mode=listen]{
+ background:radial-gradient(circle at 35% 20%,rgba(255,255,255,.97),rgba(217,241,225,.88),rgba(151,213,188,.89))!important;
+}
+.crystal-paw .orb[data-mode=talk]{
+ background:radial-gradient(circle at 35% 20%,rgba(255,255,255,.97),rgba(255,232,195,.88),rgba(234,170,159,.89))!important;
+}
+.crystal-paw .orb[data-mode=loading]{
+ background:radial-gradient(circle at 35% 20%,rgba(255,255,255,.97),rgba(240,221,252,.89),rgba(199,178,221,.88))!important;
+}
+/* Photo cameos are tap-driven, not a constantly moving animation. Keep text and controls readable. */
+.crystal-paw .cat-photo-peek{
+  position:fixed;top:32vh;right:-42px;width:155px;height:184px;
+  z-index:38;pointer-events:none;user-select:none;
+  opacity:0;transform:translateX(110%) rotate(4deg);
+  transition:transform .48s cubic-bezier(.25,.8,.2,1),opacity .35s ease;
+  contain:layout style;
+}
+.crystal-paw .cat-photo-peek img{
+  display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;
+  filter:drop-shadow(0 11px 10px rgba(81,53,73,.20));
+}
+.crystal-paw .cat-photo-peek[data-side="left"]{right:auto;left:-42px;transform:translateX(-115%) rotate(-5deg)}
+.crystal-paw .cat-photo-peek[data-visible="true"]{opacity:.9;transform:translateX(0) rotate(-3deg)}
+.crystal-paw .cat-photo-peek[data-visible="true"][data-side="left"]{transform:translateX(0) rotate(3deg)}
+.crystal-paw .cat-photo-peek[data-height="lower"]{top:50vh}
+.crystal-paw .cat-cameo-tools{display:flex;flex-wrap:wrap;gap:9px;align-items:center;justify-content:space-between;margin:9px 0 11px}
+.crystal-paw .cat-cameo-tools button{
+ border:1px solid rgba(255,255,255,.95);background:rgba(250,235,244,.80);
+ color:#80516d;border-radius:13px;min-height:39px;padding:8px 12px;font-size:12px;font-weight:800;
+ box-shadow:inset 0 1px rgba(255,255,255,.9),0 3px 9px rgba(118,83,125,.09)
+}
+.crystal-paw .cat-cameo-tools button[aria-pressed="false"]{background:rgba(244,241,245,.84);color:#776875}
+.crystal-paw .cat-cameo-tools small{font-size:11px;color:#796d78;max-width:265px}
+.crystal-paw .messages,.crystal-paw .vision-panel,.crystal-paw .lab-grid .sound-lab,
+.crystal-paw .context,.crystal-paw .keepsake,.crystal-paw .sound-card,
+.crystal-paw .motion-card,.crystal-paw .vision-evidence,.crystal-paw .blank,
+.crystal-paw .info-grid article{
+ background:linear-gradient(155deg,rgba(255,255,255,.75),rgba(255,245,245,.59) 56%,rgba(245,233,249,.63))!important;
+ border:1px solid rgba(255,255,255,.88)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.93),0 5px 17px rgba(127,99,134,.06);
+ -webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1);
+}
+.crystal-paw .bubble{
+ background:rgba(242,233,250,.82)!important;
+ border:1px solid rgba(255,255,255,.94)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.85),0 5px 13px rgba(113,82,119,.09)!important;
+ -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+.crystal-paw .bubble.user{background:rgba(255,235,218,.86)!important}
+.crystal-paw .state,.crystal-paw .tag,.crystal-paw .pill,.crystal-paw .status,
+.crystal-paw .quick-prompts button,.crystal-paw .checkchip,.crystal-paw .welcome-steps span{
+ background:rgba(252,240,247,.86)!important;
+ border:1px solid rgba(255,255,255,.86)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.85);
+}
+.crystal-paw .state.on,.crystal-paw .tag.on{background:rgba(228,244,235,.93)!important;color:#27674a}
+.crystal-paw .state.warn,.crystal-paw .tag.warn{background:rgba(255,240,218,.95)!important;color:#956132}
+.crystal-paw .primary,.crystal-paw .send{
+ background:linear-gradient(155deg,#bd7698,#a65c7f 56%,#88496a)!important;
+ border:1px solid rgba(255,255,255,.44)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.38),0 9px 18px rgba(151,82,122,.21)!important;
+}
+.crystal-paw .outline,.crystal-paw .stop,.crystal-paw .ghost,
+.crystal-paw .compose,.crystal-paw .consent,.crystal-paw .voice-options{
+ background:rgba(255,253,251,.70)!important;
+ border:1px solid rgba(255,255,255,.91)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.83),0 5px 13px rgba(131,92,127,.06);
+ -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+.crystal-paw .stop{color:#965366!important}
+.crystal-paw .notice{background:rgba(255,247,241,.85)!important;border-color:rgba(255,255,255,.89)!important}
+.crystal-paw .cat-tabs,.crystal-paw .paw-journal-tabs{
+ background:rgba(255,253,250,.81)!important;
+ border:1px solid rgba(255,255,255,.96)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 13px 35px rgba(122,83,121,.25)!important;
+ -webkit-backdrop-filter:blur(15px) saturate(1.14);backdrop-filter:blur(15px) saturate(1.14);
+}
+.crystal-paw .footer{color:#756575}
+.crystal-paw .photo-credits{font-size:11px;line-height:1.65;margin-top:10px;max-width:790px}
+.crystal-paw .photo-credits a{color:#774564;text-underline-offset:2px}
+.crystal-paw .crystal-photo-note{display:block;font-size:11px;color:#806878;font-weight:650;margin:4px 0 0}
+.crystal-paw .hero-jump{background:linear-gradient(145deg,#b77498,#925073)!important}
+.crystal-paw .intro h1,.crystal-paw .hero h1{color:#453447!important}
+.crystal-paw .intro h1 em,.crystal-paw .hero h1 span{color:#af597c!important}
+/* Existing cartoon-orb pulse is disabled: photographs react to user actions instead. */
+.crystal-paw .orb,.crystal-paw .orb-core{animation:none!important}
+@media(max-width:920px){
+ .crystal-paw .cat-photo-peek{width:122px;height:160px;top:33vh}
+ .crystal-paw .cat-photo-peek[data-height="lower"]{top:52vh}
+}
+@media(max-width:670px){
+ .crystal-paw .intro,.crystal-paw .hero,.crystal-paw .card{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+ .crystal-paw .intro-cat .hero-cat-photo{width:183px;max-height:165px;transform:translateY(8px)}
+ .crystal-paw .hero-art .hero-cat-photo{width:168px;max-height:159px;transform:translateY(6px)}
+ .crystal-paw .cat-photo-peek{width:104px;height:136px;top:32vh;right:-37px}
+ .crystal-paw .cat-photo-peek[data-side="left"]{left:-37px}
+ .crystal-paw .cat-photo-peek[data-height="lower"]{top:49vh}
+ .crystal-paw .cat-cameo-tools{flex-direction:column;align-items:flex-start}
+ .crystal-paw .cat-cameo-tools button{min-height:42px}
+ .crystal-paw .cat-cameo-tools small{font-size:11px}
+ .crystal-paw .topbar{-webkit-backdrop-filter:blur(11px);backdrop-filter:blur(11px)}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ .crystal-paw .intro,.crystal-paw .hero,.crystal-paw .card,.crystal-paw .topbar{background:rgba(255,250,248,.96)!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .crystal-paw .cat-photo-peek{display:none!important;transition:none!important}
+ .crystal-paw *{scroll-behavior:auto!important}
+}
