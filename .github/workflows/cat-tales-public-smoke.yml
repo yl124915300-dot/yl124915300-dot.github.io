@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/cat-tales-public-smoke.yml'
       - 'cat-tales/app/**'
+      - 'cat-tales/en/**'
       - 'cat-tales/live/index.html'
       - 'cat-tales/live/beta.js'
       - 'cat-tales/live/beta.e2e.cjs'
@@ -52,6 +53,23 @@ jobs:
           done
       - name: Confirm deployed observation journal feline stylesheet
         run: curl --fail --show-error --silent --location --max-time 25 -o /tmp/paw-app.css https://yl124915300-dot.github.io/cat-tales/app/paw-app.css && test -s /tmp/paw-app.css
+      - name: Confirm English page and scripts are served over public HTTPS
+        env:
+          ENGLISH_SITE: https://yl124915300-dot.github.io/cat-tales/en/
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 22); do
+            code=$(curl --silent --show-error --location --max-time 20 --output /tmp/cat-tales-english.html --write-out '%{http_code}' "$ENGLISH_SITE" || true)
+            if [ "$code" = "200" ] && grep -Fq 'lang="en"' /tmp/cat-tales-english.html && grep -Fq './app.js?v=20261021a' /tmp/cat-tales-english.html; then
+              break
+            fi
+            if [ "$attempt" -eq 22 ]; then echo "::error::English page not deployed"; exit 1; fi
+            sleep 12
+          done
+          for file in app.js dialogue.js vision.js en.css; do
+            curl --fail --silent --show-error --location --max-time 25 -o "/tmp/cat-tales-en-$file" "$ENGLISH_SITE$file"
+            test -s "/tmp/cat-tales-en-$file"
+          done
       - name: Install isolated Chromium test library
         run: npm install --prefix /tmp/cattales-public --no-save --no-package-lock playwright@1.55.1
       - name: Actual public HTTPS mobile browser feedback test
@@ -71,3 +89,9 @@ jobs:
           CAT_TALES_JOURNAL_URL: https://yl124915300-dot.github.io/cat-tales/app/
           NODE_PATH: /tmp/cattales-public/node_modules
         run: node cat-tales/live/journal-ui.e2e.cjs
+
+      - name: Public English mobile user flow
+        env:
+          CAT_TALES_EN_TEST_URL: https://yl124915300-dot.github.io/cat-tales/en/
+          NODE_PATH: /tmp/cattales-public/node_modules
+        run: node cat-tales/en/e2e.cjs
