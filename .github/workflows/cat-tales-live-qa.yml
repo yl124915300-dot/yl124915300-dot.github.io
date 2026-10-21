@@ -1,5 +1,9 @@
 name: Cat Tales Live cloud QA
 on:
+  pull_request:
+    paths:
+      - 'cat-tales/live/**'
+      - '.github/workflows/cat-tales-live-qa.yml'
   push:
     branches: [main]
     paths:
