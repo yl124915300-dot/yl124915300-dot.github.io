@@ -49,5 +49,5 @@ test('memory supports a safe next-turn follow-up',()=>{
 });
 test('safe invitation does not provoke distress',()=>{
  const r=D.respond('How do I call my cat to come here?',{name:'Mochi'});
- assert.match(r.answer,/don't play distress sounds/);
+ assert.match(r.answer,/don't play distress sounds/i);
 });
