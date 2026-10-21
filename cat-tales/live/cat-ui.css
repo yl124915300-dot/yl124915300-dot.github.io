@@ -210,3 +210,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
  .extras{align-items:flex-start}
 }
 @media(prefers-reduced-motion:reduce){.orb[data-mode=listen] .orb-core{animation:none}}
+
+/* English switch remains reachable on a phone. */
+.topbar nav a.language-switch{display:inline-flex;color:#935572;font-weight:850;border:1px solid #ead3df;background:#fff3f8;border-radius:11px;padding:7px 10px;white-space:nowrap}
+@media(max-width:670px){.topbar nav a.language-switch{display:inline-flex!important;font-size:11px}}

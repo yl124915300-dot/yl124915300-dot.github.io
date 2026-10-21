@@ -137,3 +137,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
  .hero-art{max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Keep language change discoverable on mobile. */
+.nav a.language-switch{color:#925373;border:1px solid #e8d2df;background:#fff4f7;border-radius:12px;padding:7px 10px;white-space:nowrap}
+@media(max-width:620px){.nav a.language-switch{display:inline-flex!important;font-size:12px}}
