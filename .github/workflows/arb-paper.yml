@@ -5,6 +5,11 @@ on:
     # Off-peak UTC minutes; GitHub schedules are best-effort, not real-time.
     - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'arb-paper/**'
+      - '.github/workflows/arb-paper.yml'
   push:
     branches: [main, arb-paper-v1-20261024]
     paths:
