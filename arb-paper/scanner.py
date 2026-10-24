@@ -24,10 +24,22 @@ URLS = {
     ("coinbase", "ETHUSD"): "https://api.exchange.coinbase.com/products/ETH-USD/book?level=2",
     ("coinbase", "BTCUSD"): "https://api.exchange.coinbase.com/products/BTC-USD/book?level=2",
     ("coinbase", "ETHBTC"): "https://api.exchange.coinbase.com/products/ETH-BTC/book?level=2",
+    ("kraken", "SOLUSD"): "https://api.kraken.com/0/public/Depth?pair=SOLUSD&count=100",
+    ("kraken", "SOLBTC"): "https://api.kraken.com/0/public/Depth?pair=SOLXBT&count=100",
+    ("coinbase", "SOLUSD"): "https://api.exchange.coinbase.com/products/SOL-USD/book?level=2",
+    ("coinbase", "SOLBTC"): "https://api.exchange.coinbase.com/products/SOL-BTC/book?level=2",
+    ("kraken", "ADAUSD"): "https://api.kraken.com/0/public/Depth?pair=ADAUSD&count=100",
+    ("kraken", "ADABTC"): "https://api.kraken.com/0/public/Depth?pair=ADAXBT&count=100",
+    ("coinbase", "ADAUSD"): "https://api.exchange.coinbase.com/products/ADA-USD/book?level=2",
+    ("coinbase", "ADABTC"): "https://api.exchange.coinbase.com/products/ADA-BTC/book?level=2",
 }
 TRI = {
     "USD-ETH-BTC-USD": (("ETHUSD", "buy"), ("ETHBTC", "sell"), ("BTCUSD", "sell")),
     "USD-BTC-ETH-USD": (("BTCUSD", "buy"), ("ETHBTC", "buy"), ("ETHUSD", "sell")),
+    "USD-SOL-BTC-USD": (("SOLUSD", "buy"), ("SOLBTC", "sell"), ("BTCUSD", "sell")),
+    "USD-BTC-SOL-USD": (("BTCUSD", "buy"), ("SOLBTC", "buy"), ("SOLUSD", "sell")),
+    "USD-ADA-BTC-USD": (("ADAUSD", "buy"), ("ADABTC", "sell"), ("BTCUSD", "sell")),
+    "USD-BTC-ADA-USD": (("BTCUSD", "buy"), ("ADABTC", "buy"), ("ADAUSD", "sell")),
 }
 
 def timestamp():
@@ -140,7 +152,7 @@ def score(books):
         for venue in FEES:
             for route in TRI:
                 rows.append(triangular(books, venue, route, capital))
-        for pair in ("ETHUSD", "BTCUSD"):
+        for pair in ("ETHUSD", "BTCUSD", "SOLUSD", "ADAUSD"):
             for a, z in (("kraken", "coinbase"), ("coinbase", "kraken")):
                 rows.append(across(books, a, z, pair, capital))
     return rows
@@ -226,13 +238,17 @@ def selftest():
     books = {}
     prices = {"ETHUSD": ("1999", "2001"),
               "BTCUSD": ("79999", "80001"),
-              "ETHBTC": ("0.02499", "0.02501")}
+              "ETHBTC": ("0.02499", "0.02501"),
+              "SOLUSD": ("99.9", "100.1"),
+              "SOLBTC": ("0.001249", "0.001251"),
+              "ADAUSD": ("0.1999", "0.2001"),
+              "ADABTC": ("0.00000249", "0.00000251")}
     for venue in FEES:
         for pair, (bid, ask) in prices.items():
             books[(venue, pair)] = {
-                "bids": [(D(bid), D(100))], "asks": [(D(ask), D(100))]
+                "bids": [(D(bid), D(100000))], "asks": [(D(ask), D(100000))]
             }
-    assert len(score(books)) == 16
+    assert len(score(books)) == 32
     assert not any(r.get("signal") for r in score(books))
     print("SELF_TEST_PASS")
 
