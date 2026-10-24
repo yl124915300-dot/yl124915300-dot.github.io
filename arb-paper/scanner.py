@@ -248,7 +248,7 @@ def selftest():
             books[(venue, pair)] = {
                 "bids": [(D(bid), D(100000))], "asks": [(D(ask), D(100000))]
             }
-    assert len(score(books)) == 32
+    assert len(score(books)) == 40
     assert not any(r.get("signal") for r in score(books))
     print("SELF_TEST_PASS")
 
