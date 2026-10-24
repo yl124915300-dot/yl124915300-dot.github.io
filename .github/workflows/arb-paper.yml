@@ -6,7 +6,7 @@ on:
     - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
   push:
-    branches: [arb-paper-v1-20261024]
+    branches: [main, arb-paper-v1-20261024]
     paths:
       - 'arb-paper/**'
       - '.github/workflows/arb-paper.yml'
