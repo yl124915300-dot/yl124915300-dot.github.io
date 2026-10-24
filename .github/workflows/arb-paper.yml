@@ -1,0 +1,52 @@
+name: Arbitrage paper scanner (read-only)
+
+on:
+  schedule:
+    # Off-peak UTC minutes; GitHub schedules are best-effort, not real-time.
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [arb-paper-v1-20261024]
+    paths:
+      - 'arb-paper/**'
+      - '.github/workflows/arb-paper.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: arb-paper-read-only
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Checkout read-only repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Validate fill calculations
+        run: python3 arb-paper/scanner.py --self-test
+
+      - name: Sample public order books and simulate execution
+        run: python3 arb-paper/scanner.py --out /tmp/arb-paper/latest.json --summary /tmp/arb-paper/summary.txt
+
+      - name: Show audit summary
+        if: always()
+        run: |
+          if test -f /tmp/arb-paper/summary.txt; then
+            cat /tmp/arb-paper/summary.txt >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Retain short-lived machine-readable scan evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: arb-paper-snapshot
+          path: /tmp/arb-paper/latest.json
+          if-no-files-found: warn
+          retention-days: 3
