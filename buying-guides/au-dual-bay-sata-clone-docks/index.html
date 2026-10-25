@@ -105,7 +105,7 @@
     var drive = document.getElementById('drive').value;
     var urgency = document.getElementById('urgency').value;
     if (postcode && !/^[0-9]{4}$/.test(postcode)) { status.textContent = 'Please enter a 4-digit Australian postcode, or leave it blank.'; return; }
-    if (budget && (!/^[0-9]{1,6}(\\.[0-9]{1,2})?$/.test(budget) || Number(budget) <= 0)) { status.textContent = 'Please enter a positive AUD budget, or leave it blank.'; return; }
+    if (budget && (!/^[0-9]{1,6}(\.[0-9]{1,2})?$/.test(budget) || Number(budget) <= 0)) { status.textContent = 'Please enter a positive AUD budget, or leave it blank.'; return; }
     var message = 'Please compare Australian dual-bay SATA offline clone docks (Simplecom SD312 vs SD322 and alternatives). My postcode: ' + (postcode || 'not supplied') + '. Budget: ' + (budget ? 'AUD ' + budget : 'not set') + '. Drive: ' + drive + '. Timing: ' + urgency + '. Check live stock and total delivered price; label uncertain data. Source guide: https://yl124915300-dot.github.io/buying-guides/au-dual-bay-sata-clone-docks/';
     try { await navigator.clipboard.writeText(message); status.textContent = 'Question copied. Open the Telegram assistant and paste it into the chat.'; }
     catch (error) { status.textContent = 'Clipboard is unavailable. Please copy this question manually: ' + message; }
