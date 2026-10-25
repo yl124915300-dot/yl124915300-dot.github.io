@@ -44,9 +44,11 @@ jobs:
 
           actual="$(curl -fsSL --max-time 15 "$proof")"
           [ "$actual" = "$key" ] || { echo "IndexNow ownership proof missing; aborting."; exit 1; }
-          curl -fsSL --max-time 15 "$url" | grep -q 'Get an instant buying recommendation' || {
-            echo "Updated buying guide not yet public; aborting."; exit 1;
-          }
+          page_html="$(curl -fsSL --max-time 15 "$url")"
+          if [[ "$page_html" != *'Get an instant buying recommendation'* ]]; then
+            echo "Updated buying guide not yet public; aborting."
+            exit 1
+          fi
 
           status="$(curl -sS -G --max-time 25 \
             --data-urlencode "url=$url" \
