@@ -1,0 +1,61 @@
+name: IndexNow buying guide submission
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "buying-guides/au-dual-bay-sata-clone-docks/**"
+      - ".github/workflows/buying-guide-indexnow.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  notify:
+    name: Verify Pages and notify IndexNow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Pages deployment of this exact commit
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 24); do
+            count="$(curl -fsSL --max-time 15 -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs?per_page=80" \
+              | jq -r --arg sha "$GITHUB_SHA" \
+              '[.workflow_runs[] | select(.head_sha == $sha and .name == "pages build and deployment" and .status == "completed" and .conclusion == "success")] | length')"
+            if [ "$count" -gt 0 ]; then echo "Pages deployed for the workflow commit."; exit 0; fi
+            sleep 10
+          done
+          echo "Matching Pages deployment not confirmed; no IndexNow notification."
+          exit 1
+
+      - name: Verify host key and submit this one buying guide
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://yl124915300-dot.github.io/buying-guides/au-dual-bay-sata-clone-docks/"
+          key="5b6be22d1f9d4641a83ab30909f4cb52"
+          proof="https://yl124915300-dot.github.io/5b6be22d1f9d4641a83ab30909f4cb52.txt"
+
+          actual="$(curl -fsSL --max-time 15 "$proof")"
+          [ "$actual" = "$key" ] || { echo "IndexNow ownership proof missing; aborting."; exit 1; }
+          curl -fsSL --max-time 15 "$url" | grep -q 'Get an instant buying recommendation' || {
+            echo "Updated buying guide not yet public; aborting."; exit 1;
+          }
+
+          status="$(curl -sS -G --max-time 25 \
+            --data-urlencode "url=$url" \
+            --data-urlencode "key=$key" \
+            --data-urlencode "keyLocation=$proof" \
+            -o /tmp/indexnow-body.txt -w '%{http_code}' https://api.indexnow.org/indexnow)"
+          echo "IndexNow HTTP status: $status (not proof of search indexing or traffic)."
+          if [ -s /tmp/indexnow-body.txt ]; then head -c 350 /tmp/indexnow-body.txt; echo; fi
+          case "$status" in
+            200|202) echo "Submitted one URL; indexing not guaranteed." ;;
+            *) echo "Submission not accepted."; exit 1 ;;
+          esac
