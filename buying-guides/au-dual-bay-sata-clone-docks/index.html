@@ -121,7 +121,7 @@
       caveat.textContent = 'No purchase or external request has been made.';
       return;
     }
-    if (budgetText && (!/^[0-9]{1,6}(\\.[0-9]{1,2})?$/.test(budgetText) || Number(budgetText) <= 0)) {
+    if (budgetText && (!/^[0-9]{1,6}(\.[0-9]{1,2})?$/.test(budgetText) || Number(budgetText) <= 0)) {
       heading.textContent = 'Please check the budget';
       description.textContent = 'Enter a positive amount in AUD or leave your budget unspecified.';
       caveat.textContent = 'No purchase or external request has been made.';
