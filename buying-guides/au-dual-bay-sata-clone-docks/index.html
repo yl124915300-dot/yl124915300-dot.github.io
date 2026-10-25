@@ -79,7 +79,7 @@
   </section>
   <section class="panel" aria-labelledby="ask-heading">
     <h2 id="ask-heading">Get an instant buying recommendation — no Bot required</h2>
-    <p>Choose your budget, drive type and deadline to compare the listed options immediately, without a server or account. For a live delivery-checked comparison, you can optionally copy the question to our existing Telegram assistant when available. Inputs are processed only in this browser.</p>
+    <p>Choose your budget, drive type and deadline to compare the listed options immediately, without a server or account. For a live delivery-checked comparison, you can optionally copy the question to our existing Telegram assistant when available. Inputs are processed only in this browser. If the Telegram assistant is offline, a backup email link can open a prepared message in your own email app. No message is sent unless you press Send there.</p>
     <div class="cols">
       <div><label for="postcode">Australian postcode (optional)</label><input id="postcode" autocomplete="postal-code" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="e.g. 2000"></div>
       <div><label for="budget">Maximum budget in AUD (optional)</label><input id="budget" inputmode="numeric" maxlength="8" placeholder="e.g. 75"></div>
@@ -91,7 +91,7 @@
       <p id="resultDescription"></p>
       <p class="quiet" id="resultCaveat"></p>
     </div>
-    <div class="actions"><button id="compareNow" type="button">Compare for my needs</button><button id="copyRequest" type="button">Copy buying question</button><a href="https://t.me/AIDailySavingsAssistBot" rel="noopener noreferrer" target="_blank">Open existing Telegram assistant</a><a href="https://t.me/share/url?url=https%3A%2F%2Fyl124915300-dot.github.io%2Fbuying-guides%2Fau-dual-bay-sata-clone-docks%2F&text=Australia%20dual-bay%20SATA%20dock%20comparison" rel="noopener noreferrer" target="_blank">Share this guide</a></div>
+    <div class="actions"><button id="compareNow" type="button">Compare for my needs</button><button id="copyRequest" type="button">Copy buying question</button><a id="emailRequest" href="mailto:yl124915300@gmail.com?subject=AU%20SATA%20dock%20buying%20question">Email your buying question (backup)</a><a href="https://t.me/AIDailySavingsAssistBot" rel="noopener noreferrer" target="_blank">Open existing Telegram assistant</a><a href="https://t.me/share/url?url=https%3A%2F%2Fyl124915300-dot.github.io%2Fbuying-guides%2Fau-dual-bay-sata-clone-docks%2F&text=Australia%20dual-bay%20SATA%20dock%20comparison" rel="noopener noreferrer" target="_blank">Share this guide</a></div>
     <p class="quiet" id="copyStatus" role="status" aria-live="polite">No account or payment is needed to read this guide. Telegram assistant availability may vary; replies are not guaranteed when its backend is inactive.</p>
   </section>
   <section class="panel" aria-labelledby="method-heading">
@@ -152,6 +152,35 @@
     caveat.textContent = 'Prices observed 25 Oct 2026; delivery, stock reservation and exact compatibility are not checked live.' +
       (postcode ? ' Postcode ' + postcode + ' helps you check retailer freight but no shipping quote was retrieved.' : ' Enter a postcode at seller checkout for freight.') +
       timing + ' Nothing was sent or saved.';
+  });
+  var emailLink = document.getElementById('emailRequest');
+  emailLink.addEventListener('click', function (event) {
+    var postcode = document.getElementById('postcode').value.trim();
+    var budget = document.getElementById('budget').value.trim();
+    var drive = document.getElementById('drive').value;
+    var urgency = document.getElementById('urgency').value;
+    if (postcode && !/^[0-9]{4}$/.test(postcode)) {
+      event.preventDefault();
+      status.textContent = 'Please enter a four-digit Australian postcode or leave it blank.';
+      return;
+    }
+    if (budget && (!/^[0-9]{1,6}(\.[0-9]{1,2})?$/.test(budget) || Number(budget) <= 0)) {
+      event.preventDefault();
+      status.textContent = 'Please enter a positive AUD budget or leave it blank.';
+      return;
+    }
+    var body = 'Hello, I am requesting a free Australian SATA clone dock comparison from your public buying guide.\\n\\n' +
+      'Postcode: ' + (postcode || 'not supplied') + '\\n' +
+      'Maximum budget: ' + (budget ? 'AUD ' + budget : 'not set') + '\\n' +
+      'Drive type: ' + drive + '\\n' +
+      'Desired delivery: ' + urgency + '\\n\\n' +
+      'Please check currently purchasable models, delivery charges and final cost; state uncertainties.\\n' +
+      'Guide: https://yl124915300-dot.github.io/buying-guides/au-dual-bay-sata-clone-docks/\\n\\n' +
+      'I understand this email is optional. I have not provided payment details.';
+    emailLink.href = 'mailto:yl124915300@gmail.com?subject=' +
+      encodeURIComponent('[AU-SATA-DOCK-GUIDE] Optional buying request') +
+      '&body=' + encodeURIComponent(body);
+    status.textContent = 'Your email app should open a draft. Nothing is sent until you choose Send. Please do not include financial or sensitive personal information.';
   });
   button.addEventListener('click', async function () {
     var postcode = document.getElementById('postcode').value.trim();
