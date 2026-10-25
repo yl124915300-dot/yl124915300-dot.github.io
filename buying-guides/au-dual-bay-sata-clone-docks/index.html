@@ -27,7 +27,7 @@
     .alert{background:var(--warm);border-left:4px solid #ad7d22;padding:12px 16px;border-radius:8px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     label{display:block;font-weight:700;font-size:.88rem;margin-bottom:7px}input,select{display:block;width:100%;font:inherit;border:1px solid #aebfca;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink)}
     button{font:inherit;background:var(--green);color:#fff;border:0;padding:12px 18px;border-radius:10px;cursor:pointer;font-weight:800}
-    .actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:17px}.quiet{font-size:.82rem;color:var(--muted)}
+    .actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:17px}.quickResult{margin-top:18px;padding:17px 18px;background:#ebf8f3;border:1px solid #bedecf;border-radius:12px}.quickResult[hidden]{display:none}.quickResult p{margin:8px 0 0}.quiet{font-size:.82rem;color:var(--muted)}
     footer{border-top:1px solid var(--line);background:var(--white);padding:24px 0 38px;font-size:.86rem;color:var(--sub)}
     @media(max-width:640px){.grid,.cols{grid-template-columns:1fr}.panel{padding:18px}main{padding-top:25px}}
   </style>
@@ -78,15 +78,20 @@
     <p class="quiet">Manufacturer specifications: <a href="https://www.simplecom.com.au/simplecom-sd312-dual-bay-usb-3-0-docking-station-for-2-5-and-3-5-sata-drive.html">SD312</a> · <a href="https://www.simplecom.com.au/simplecom-sd322-dual-bay-usb-3-0-aluminium-docking-station-for-2-5-and-3-5-sata-hdd.html">SD322</a>. Verify your exact drive model against the instructions.</p>
   </section>
   <section class="panel" aria-labelledby="ask-heading">
-    <h2 id="ask-heading">Want a postcode-specific comparison?</h2>
-    <p>Enter non-sensitive details and copy a prepared request to our existing Telegram buying assistant. The form runs entirely in your browser; it does not submit your information to this website.</p>
+    <h2 id="ask-heading">Get an instant buying recommendation — no Bot required</h2>
+    <p>Choose your budget, drive type and deadline to compare the listed options immediately, without a server or account. For a live delivery-checked comparison, you can optionally copy the question to our existing Telegram assistant when available. Inputs are processed only in this browser.</p>
     <div class="cols">
       <div><label for="postcode">Australian postcode (optional)</label><input id="postcode" autocomplete="postal-code" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="e.g. 2000"></div>
       <div><label for="budget">Maximum budget in AUD (optional)</label><input id="budget" inputmode="numeric" maxlength="8" placeholder="e.g. 75"></div>
       <div><label for="drive">What are you cloning?</label><select id="drive"><option value="two SATA HDD/SSDs">2.5/3.5-inch SATA HDDs or SSDs</option><option value="SATA SSD to SATA SSD">SATA SSD to SATA SSD</option><option value="an M.2 NVMe SSD">M.2 NVMe SSD (different dock needed)</option><option value="not sure of the interface">Not sure of the drive interface</option></select></div>
       <div><label for="urgency">When do you need it?</label><select id="urgency"><option value="no fixed deadline">No fixed deadline</option><option value="within three days">Within three days</option><option value="within one week">Within one week</option></select></div>
     </div>
-    <div class="actions"><button id="copyRequest" type="button">Copy buying question</button><a href="https://t.me/AIDailySavingsAssistBot" rel="noopener noreferrer" target="_blank">Open existing Telegram assistant</a><a href="https://t.me/share/url?url=https%3A%2F%2Fyl124915300-dot.github.io%2Fbuying-guides%2Fau-dual-bay-sata-clone-docks%2F&text=Australia%20dual-bay%20SATA%20dock%20comparison" rel="noopener noreferrer" target="_blank">Share this guide</a></div>
+    <div id="quickResult" class="quickResult" role="status" aria-live="polite" hidden>
+      <strong id="resultHeading">Your quick comparison</strong>
+      <p id="resultDescription"></p>
+      <p class="quiet" id="resultCaveat"></p>
+    </div>
+    <div class="actions"><button id="compareNow" type="button">Compare for my needs</button><button id="copyRequest" type="button">Copy buying question</button><a href="https://t.me/AIDailySavingsAssistBot" rel="noopener noreferrer" target="_blank">Open existing Telegram assistant</a><a href="https://t.me/share/url?url=https%3A%2F%2Fyl124915300-dot.github.io%2Fbuying-guides%2Fau-dual-bay-sata-clone-docks%2F&text=Australia%20dual-bay%20SATA%20dock%20comparison" rel="noopener noreferrer" target="_blank">Share this guide</a></div>
     <p class="quiet" id="copyStatus" role="status" aria-live="polite">No account or payment is needed to read this guide. Telegram assistant availability may vary; replies are not guaranteed when its backend is inactive.</p>
   </section>
   <section class="panel" aria-labelledby="method-heading">
@@ -99,6 +104,55 @@
 (function () {
   var button = document.getElementById('copyRequest');
   var status = document.getElementById('copyStatus');
+  var compareButton = document.getElementById('compareNow');
+  compareButton.addEventListener('click', function () {
+    var postcode = document.getElementById('postcode').value.trim();
+    var budgetText = document.getElementById('budget').value.trim();
+    var drive = document.getElementById('drive').value;
+    var urgency = document.getElementById('urgency').value;
+    var heading = document.getElementById('resultHeading');
+    var description = document.getElementById('resultDescription');
+    var caveat = document.getElementById('resultCaveat');
+    var result = document.getElementById('quickResult');
+    result.hidden = false;
+    if (postcode && !/^[0-9]{4}$/.test(postcode)) {
+      heading.textContent = 'Please check the postcode';
+      description.textContent = 'Enter a four-digit Australian postcode or leave this field empty.';
+      caveat.textContent = 'No purchase or external request has been made.';
+      return;
+    }
+    if (budgetText && (!/^[0-9]{1,6}(\\.[0-9]{1,2})?$/.test(budgetText) || Number(budgetText) <= 0)) {
+      heading.textContent = 'Please check the budget';
+      description.textContent = 'Enter a positive amount in AUD or leave your budget unspecified.';
+      caveat.textContent = 'No purchase or external request has been made.';
+      return;
+    }
+    var budget = budgetText ? Number(budgetText) : null;
+    if (drive === 'an M.2 NVMe SSD') {
+      heading.textContent = 'Neither SATA dock is compatible';
+      description.textContent = 'You selected an M.2 NVMe SSD. SD312 and SD322 are for 2.5/3.5-inch SATA drives, not M.2 NVMe. Check an NVMe-compatible dock instead.';
+    } else if (drive === 'not sure of the interface') {
+      heading.textContent = 'Confirm the drive interface first';
+      description.textContent = 'Look up the model number on your HDD or SSD. These two docks fit SATA drives; no safe purchase recommendation is possible until the interface is known.';
+    } else if (budget !== null && budget < 48) {
+      heading.textContent = 'Neither observed shelf price fits your budget';
+      description.textContent = 'The lowest checked listed price is A$48 for SD312 before delivery. Increase the budget or look for a different, verified offer.';
+    } else if (budget !== null && budget < 55) {
+      heading.textContent = 'SD312 is the only listed option within your shelf-price budget';
+      description.textContent = 'SD312: A$48 including GST. SD322: A$55 including GST. Your budget may still be insufficient once freight is calculated at checkout.';
+    } else {
+      heading.textContent = 'SD312 has the lowest observed listed price';
+      description.textContent = 'Both SD312 (A$48) and aluminium SD322 (A$55) fit the selected SATA drive category. SD322 costs A$7 more at the checked VTech listings; compare final freight and warranty terms.';
+    }
+    var timing = urgency === 'within three days'
+      ? ' A three-day delivery deadline is not verified; ask the retailer for an ETA before ordering.'
+      : urgency === 'within one week'
+      ? ' One-week delivery is not guaranteed; use retailer checkout to confirm.'
+      : '';
+    caveat.textContent = 'Prices observed 25 Oct 2026; delivery, stock reservation and exact compatibility are not checked live.' +
+      (postcode ? ' Postcode ' + postcode + ' helps you check retailer freight but no shipping quote was retrieved.' : ' Enter a postcode at seller checkout for freight.') +
+      timing + ' Nothing was sent or saved.';
+  });
   button.addEventListener('click', async function () {
     var postcode = document.getElementById('postcode').value.trim();
     var budget = document.getElementById('budget').value.trim();
