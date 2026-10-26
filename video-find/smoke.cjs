@@ -36,6 +36,13 @@ async function main(){
   await page.mouse.move(r.x+r.width*.68,r.y+r.height*.65,{steps:5});
   await page.mouse.up();
   assert.equal((await page.evaluate(()=>window.FrameFindQA.getSnapshot())).selection.origin,'manual');
+  assert.equal(await page.locator('#download-crop').isEnabled(),true);
+  const downloadEvent=page.waitForEvent('download');
+  await page.locator('#download-crop').click();
+  const saved=await downloadEvent;
+  assert.equal(saved.suggestedFilename(),'framefind-selected-item.png');
+  const bytes=await (await import('node:fs/promises')).stat(await saved.path());
+  assert.ok(bytes.size>100,'Cropped screenshot download must contain image bytes');
  });
  await test('real retailer search without prices or invented commission',async()=>{
   await page.locator('#category').fill('backpack');
