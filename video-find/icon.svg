@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<title>FrameFind</title>
+<rect width="512" height="512" rx="114" fill="#10263a"/>
+<rect x="84" y="112" width="344" height="269" rx="36" fill="none" stroke="#b8fff0" stroke-width="22"/>
+<path d="M130 186h64m-64 0v62m251-63h-64m64 0v62M130 324h64m-64 0v-62m251 63h-64m64 0v-62" fill="none" stroke="#18bf9c" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M225 202q0-15 13-8l82 55q12 8 0 16l-82 55q-13 7-13-8z" fill="#f9fbfc"/>
+<circle cx="373" cy="379" r="47" fill="#18bf9c" stroke="#10263a" stroke-width="12"/>
+<path d="m403 414 42 42" stroke="#18bf9c" stroke-width="20" stroke-linecap="round"/>
+</svg>
