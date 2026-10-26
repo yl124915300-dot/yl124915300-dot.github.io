@@ -254,7 +254,7 @@ function onPointerUp(event){
   state.selection={...box,label:'Selected region',origin:'manual'};
   const candidates=state.detections.filter(d=>intersectRatio(box,d.box)>.27);
   if(candidates.length){candidates.sort((a,b)=>intersectRatio(box,b.box)-intersectRatio(box,a.box));chooseDetection(candidates[0]);}
-  else{el('category').value='';say('recognition-status','You selected an exact region. Press AI detect objects and, if necessary, type the item's category and brand/model.');}
+  else{el('category').value='';say('recognition-status','You selected an exact region. Press AI detect objects and, if necessary, type the object category and brand/model.');}
   renderFrame();
 }
 function clearSelection(){
