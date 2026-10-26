@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="394" viewBox="0 0 700 394" role="img" aria-labelledby="t d">
+<title id="t">Original simulated video shopping frame</title>
+<desc id="d">An illustrative workspace scene containing a black backpack, cream sneaker, thermos bottle and folded sweatshirt. All shapes were created for this example; no real brand or purchased product shown.</desc>
+<defs>
+<linearGradient id="wall" x1="0" x2="1" y1="0" y2=".6"><stop stop-color="#cdd5d2"/><stop offset=".5" stop-color="#f1eee7"/><stop offset="1" stop-color="#bacacc"/></linearGradient>
+<linearGradient id="bag" x1="0" x2="1"><stop stop-color="#1b3441"/><stop offset=".45" stop-color="#3c525c"/><stop offset="1" stop-color="#172632"/></linearGradient>
+<linearGradient id="leather" x1="0" x2="1"><stop stop-color="#f9f3e3"/><stop offset="1" stop-color="#bdc6c5"/></linearGradient>
+<linearGradient id="desk" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#bda493"/><stop offset="1" stop-color="#8c6d60"/></linearGradient>
+<filter id="shadow"><feGaussianBlur stdDeviation="9"/></filter>
+</defs>
+<rect width="700" height="394" fill="url(#wall)"/>
+<path d="M0 0H700V160L0 174Z" fill="#e7ecea" opacity=".2"/>
+<rect x="490" y="0" width="210" height="210" fill="#c4dedb" opacity=".5"/>
+<path d="M520 0V220M600 0V220M690 0V220" stroke="#f5f9f5" stroke-width="8" opacity=".6"/>
+<path d="M0 279L700 257V394H0Z" fill="url(#desk)"/>
+<path d="M0 279L700 257" stroke="#dac2b2" stroke-width="9"/>
+<ellipse cx="204" cy="333" rx="145" ry="24" fill="#4f4a46" opacity=".22" filter="url(#shadow)"/>
+<ellipse cx="412" cy="348" rx="142" ry="20" fill="#554d46" opacity=".22" filter="url(#shadow)"/>
+<ellipse cx="588" cy="320" rx="42" ry="14" fill="#494744" opacity=".24" filter="url(#shadow)"/>
+<!-- original illustrated black backpack -->
+<path d="M132 172C133 101 169 73 206 74C253 74 282 110 285 171L282 299Q258 330 204 335Q144 328 123 299Z" fill="#172732" stroke="#142734" stroke-width="7"/>
+<path d="M150 156C155 99 178 67 206 67C240 69 264 99 265 156" fill="none" stroke="#283b47" stroke-width="25"/>
+<path d="M150 160C154 123 176 93 206 93C233 94 251 121 255 160" fill="none" stroke="#6c7a83" stroke-width="7" opacity=".3"/>
+<path d="M134 175C147 136 174 118 211 117C246 118 272 138 283 174L276 292C264 312 239 327 203 328C166 323 142 310 129 291Z" fill="url(#bag)" stroke="#152834" stroke-width="5"/>
+<path d="M162 237C177 222 235 219 253 236L252 303Q209 326 161 303Z" fill="#2b3d47" stroke="#596b74" stroke-width="3"/>
+<path d="M163 236Q208 226 252 235" fill="none" stroke="#b5c7c7" stroke-width="3"/>
+<rect x="191" y="192" width="28" height="9" rx="3" fill="#bacdcc" opacity=".75"/>
+<rect x="196" y="247" width="22" height="8" rx="4" fill="#1e282e" stroke="#7c999c"/>
+<path d="M135 185Q106 198 111 260L119 296M281 183Q303 199 297 259L285 296" stroke="#142b38" stroke-width="18" fill="none" stroke-linecap="round"/>
+<!-- sneaker -->
+<path d="M320 260L370 236Q383 214 394 211Q406 219 418 248L477 281Q505 298 501 314L468 326L354 320Q316 308 311 290Z" fill="url(#leather)" stroke="#8b9793" stroke-width="4"/>
+<path d="M315 291C341 309 422 305 500 300L501 322Q440 341 347 324Q315 317 311 305Z" fill="#fafcf5" stroke="#b1b9b7" stroke-width="4"/>
+<path d="M324 310L484 315" stroke="#b5b5ad" stroke-width="3"/>
+<path d="M366 239Q389 262 445 269" fill="none" stroke="#c8d5d3" stroke-width="11"/>
+<path d="M374 253L418 247M377 262L426 255M383 272L434 263" stroke="#6d8d8d" stroke-width="4" stroke-linecap="round"/>
+<path d="M319 280Q330 267 354 269" stroke="#e0e7e2" stroke-width="13" fill="none"/>
+<!-- bottle -->
+<ellipse cx="589" cy="323" rx="35" ry="10" fill="#5b676a" opacity=".7"/>
+<rect x="561" y="160" width="54" height="160" rx="18" fill="#678f98" stroke="#43626b" stroke-width="5"/>
+<rect x="560" y="151" width="56" height="34" rx="9" fill="#354e57"/>
+<rect x="569" y="144" width="37" height="19" rx="6" fill="#273944"/>
+<path d="M572 195V294" stroke="#c6ece8" stroke-width="9" stroke-linecap="round" opacity=".4"/>
+<path d="M610 198V304" stroke="#29515d" stroke-width="4" opacity=".5"/>
+<!-- minor clothing -->
+<path d="M17 330Q44 307 77 314L109 337L111 394H0V358Z" fill="#a39d8e"/>
+<path d="M20 340L72 324L100 342" fill="none" stroke="#dbd2c4" stroke-width="4"/>
+<rect x="22" y="19" rx="7" width="108" height="23" fill="#ffffff" opacity=".82"/>
+<text x="36" y="35" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#31616d">SELF-MADE DEMO</text>
+</svg>
