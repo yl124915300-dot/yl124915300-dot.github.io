@@ -239,7 +239,7 @@ footer{font-size:13px;color:#62727d;padding:20px 0 35px}footer a{color:#315965}
     }
     if(!cards.length)cards.push('<p>No matching paid products within that budget. Consider the free beach and pier instead.</p>');
     document.getElementById('cards').innerHTML=cards.join('');
-    document.getElementById('summary').textContent=party+' traveler(s) · 
+    document.getElementById('summary').textContent=[party, 'travelers; 
   }
   var params=new URLSearchParams(location.search);
   ['need','budget','party','when','seen'].forEach(function(id){
@@ -266,16 +266,16 @@ footer{font-size:13px;color:#62727d;padding:20px 0 35px}footer a{color:#315965}
   }).catch(function(){document.getElementById('data-status').textContent='Paid offer list could not load. The free pier option remains available.';render();});
 })();
 </script>
-</body></html>+budget+'/person · '+(when==='today'?'today':when==='weekend'?'this weekend':'another day')+' · '+(official.state==='fresh'?'official weather checked':'weather check incomplete');
+</body></html>+budget+'/person', when==='today'?'today':when==='weekend'?'this weekend':'another day', official.state==='fresh'?'NWS checked':'NWS check incomplete'].join(' · ');
   }
   var params=new URLSearchParams(location.search);
-  ['need','budget','party','when'].forEach(function(id){
+  ['need','budget','party','when','seen'].forEach(function(id){
     var v=params.get(id), sel=document.getElementById(id);
     if(v&&Array.from(sel.options).some(function(o){return o.value===v;}))sel.value=v;
   });
   document.getElementById('share-plan').addEventListener('click',async function(){
     var url=new URL(location.href);
-    ['need','budget','party','when'].forEach(function(id){url.searchParams.set(id,document.getElementById(id).value);});
+    ['need','budget','party','when','seen'].forEach(function(id){url.searchParams.set(id,document.getElementById(id).value);});
     var dest=url.toString(), info=document.getElementById('share-result');
     if(navigator.share){
       try{await navigator.share({title:'Santa Monica live cam and LA day plan',text:'Watch the beach live and compare ways to spend a day in LA.',url:dest});info.textContent='Share dialog opened.';return;}catch(e){if(e.name==='AbortError'){info.textContent='Share cancelled.';return;}}
@@ -284,6 +284,8 @@ footer{font-size:13px;color:#62727d;padding:20px 0 35px}footer a{color:#315965}
     catch(e){window.prompt('Copy this plan link:',dest);info.textContent='Link ready to copy.';}
   });
   document.getElementById('planner').addEventListener('submit',function(e){e.preventDefault();render();document.getElementById('cards').scrollIntoView({behavior:'smooth',block:'nearest'});});
+  refreshOfficial();
+  setInterval(refreshOfficial,15*60*1000);
   fetch('/deals.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('data unavailable');return r.json();}).then(function(data){
     products=Array.isArray(data)?data.filter(function(x){return x&&/^https:\/\/klook\.tpo\.lv\//.test(x.tracking_url||'')&&Number.isFinite(Number(x.price_usd));}):[];
     document.getElementById('data-status').textContent=products.length?'Activity list loaded from this site's existing offer file.':'No paid offers currently available.';
