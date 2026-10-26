@@ -66,13 +66,16 @@
       "source": "Walmart consumer storefront",
       "url": "https://www.walmart.com/ip/19194673110",
       "sourceInfo": "https://business.walmart.com/ip/Sunbeam-Heated-Electric-Brushed-Fleece-Throw-Blanket-Black-4-Heat-Settings-50-x-60-in/19194673110",
-      "sellerDescription": "Walmart.com sold and shipped at the time of observation; confirm at destination",
+      "sellerDescription": "Available to add to cart Oct 26 in default US region, not guaranteed for every ZIP.",
       "features": [
         "simple controls",
         "budget pick",
         "4-hour auto off"
       ],
-      "notes": "Not the same item as the 50 x 70 or wearable Sunbeam product."
+      "notes": "Not the same item as the 50 x 70 or wearable Sunbeam product.",
+      "availability": "available",
+      "variantConfidence": "50x60-listed",
+      "verificationNote": "USD 29.97, Add to cart available Oct 26 (Walmart default US); verify your ZIP and final price."
     },
     {
       "id": "bedsure-basic",
@@ -84,47 +87,55 @@
       "preheat": false,
       "material": "Flannel / sherpa",
       "claimCertification": "ETL & FCC (retailer claim)",
-      "observedPriceUSD": 29.99,
+      "observedPriceUSD": null,
       "observedOn": "2026-10-26",
       "source": "Walmart",
       "url": "https://www.walmart.com/ip/17144270780",
       "sourceInfo": "https://www.walmart.com/ip/17144270780",
-      "sellerDescription": "Seller and shipping depend on location; check at destination",
+      "sellerDescription": "Out of stock / unavailable at 2026-10-26 check.",
       "features": [
         "soft flannel / sherpa",
         "6 heat settings",
         "3-hour auto off"
       ],
-      "notes": "Three-hour auto-off is not automatically a worse/better safety rating; compare usage needs and manufacturer instructions."
+      "notes": "Do not recommend as an available product or quote USD 29.99 as today's price.",
+      "availability": "unavailable",
+      "variantConfidence": "retailer-listing",
+      "previousObservedPriceUSD": 29.99,
+      "verificationNote": "Not purchasable as of October 26; former USD 29.99 is historical only."
     },
     {
       "id": "bedsure-preheat",
       "brand": "U by Bedsure",
       "title": "Ribbed flannel heated throw with preheat, natural",
-      "size": "50 x 60 in",
+      "size": "Size/title conflict; 50×60 NOT confirmed",
       "heatLevels": 6,
       "autoOffHours": 8,
       "preheat": true,
       "material": "Ribbed flannel / sherpa",
       "claimCertification": "ETL & FCC (retailer claim)",
-      "observedPriceUSD": 42.99,
+      "observedPriceUSD": 37.94,
       "observedOn": "2026-10-26",
       "source": "Walmart",
       "url": "https://www.walmart.com/ip/19422005562",
       "sourceInfo": "https://www.walmart.com/ip/19422005562",
-      "sellerDescription": "Selected natural throw variant listed by U by Bedsure Pro Seller; final configuration/price subject to checkout",
+      "sellerDescription": "Listing size and title conflict. Not an exact 50×60 match until merchant confirms.",
       "features": [
         "preheat function",
         "6 settings",
         "8-hour default shut-off; selectable timer options"
       ],
-      "notes": "Title mentions up-to-10h configurable timer; default shutoff and user-configurable timers differ."
+      "notes": "Not eligible for product comparison while 50×60 size is unverified.",
+      "availability": "variant_uncertain",
+      "variantConfidence": "50x60-NOT-VERIFIED",
+      "previousObservedPriceUSD": 42.99,
+      "verificationNote": "USD 37.94 shown October 26, down from older USD 42.99 snapshot, but title and size taxonomy conflict. Verify exact variant before checkout."
     },
     {
       "id": "bedsure-official",
       "brand": "Bedsure",
       "title": "Ribbed heated blanket, grey throw",
-      "size": "Throw (confirm inches on checkout)",
+      "size": "Grey / Throw; confirm inches before checkout",
       "heatLevels": 6,
       "autoOffHours": 8,
       "preheat": true,
@@ -135,13 +146,16 @@
       "source": "Bedsure official storefront",
       "url": "https://bedsurehome.com/products/ribbed-flannel-heated-blanket?variant=40873183248486",
       "sourceInfo": "https://bedsurehome.com/products/ribbed-flannel-heated-blanket?variant=40873183248486",
-      "sellerDescription": "Official manufacturer website; inspect shipping, stock, size and final checkout costs",
+      "sellerDescription": "Official Grey/Throw available at check; verify selected size and final shipping.",
       "features": [
         "manufacturer-direct purchase",
         "preheat / 6 heat settings",
         "8-hour default shutoff"
       ],
-      "notes": "Official source controls multiple sizes and colors. Not asserted identical SKU to the Walmart throw."
+      "notes": "Official source controls multiple sizes and colors. Not asserted identical SKU to the Walmart throw.",
+      "availability": "available",
+      "variantConfidence": "Grey/Throw-selected-exact-inch-size-unverified",
+      "verificationNote": "Bedsure official Grey/Throw page showed USD 70.99 and in-stock October 26; dimensions and delivered price require confirmation."
     }
   ],
   "safety": {
@@ -156,5 +170,8 @@
     "merchantPurchaseAttribution": "NOT_CONFIGURED",
     "cashReceipt": "UNVERIFIED"
   },
-  "restrictions": "Do not treat merchant price snapshots or public TikTok Shop affiliate percentage as user-owned affiliate commissions. Standard merchant URLs only."
+  "restrictions": "Do not treat merchant price snapshots or public TikTok Shop affiliate percentage as user-owned affiliate commissions. Standard merchant URLs only.",
+  "purchaseEvidenceUpdated": "2026-10-26",
+  "stockScope": "Walmart/default US retail region; availability may vary by destination ZIP.",
+  "comparisonPolicy": "Out-of-stock and uncertain exact-size variants are excluded from current purchasable shortlist."
 }

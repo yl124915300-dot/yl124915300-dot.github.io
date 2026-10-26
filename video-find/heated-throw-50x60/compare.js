@@ -9,6 +9,7 @@ const allowedHosts=new Set(['www.walmart.com','walmart.com','bedsurehome.com','w
 let data=null;
 let shown=[];
 let filtered=false;
+const availableNow=s=>s.availability==='available';
 function elem(tag,text,cls){
  const e=document.createElement(tag);
  if(cls)e.className=cls;
@@ -24,9 +25,29 @@ function options(){
   long:$('needs-long').checked,official:$('official-only').checked};
 }
 function matching(s,filter){
- return s.observedPriceUSD<=filter.budget &&
+ return s.availability==='available'&&Number.isFinite(s.observedPriceUSD)&&s.observedPriceUSD<=filter.budget &&
   (!filter.preheat||s.preheat)&&(!filter.long||s.autoOffHours>=4) &&
   (!filter.official||s.source==='Bedsure official storefront');
+}
+function renderWatchlist(){
+ const target=$('pilot-watchlist');
+ if(!target||!data)return;
+ target.replaceChildren();
+ for(const s of data.sellers.filter(s=>!availableNow(s))){
+  const card=elem('article',undefined,'pilot-card');
+  card.append(elem('div',s.brand,'brand'));
+  card.append(elem('h3',s.title));
+  card.append(elem('p',s.availability==='unavailable'?'NOT CURRENTLY PURCHASABLE':'EXACT SIZE NOT VERIFIED','detail'));
+  card.append(elem('p',s.verificationNote,'small'));
+  const url=sourceUrl(s.url);
+  if(url){
+   const link=elem('a','Inspect listing — verify before ordering','outbound');
+   link.href=url;link.target='_blank';link.rel='noopener noreferrer nofollow';
+   link.dataset.status='unverified';
+   card.append(link);
+  }
+  target.append(card);
+ }
 }
 function render({userInitiated=false}={}){
  if(!data)return;
@@ -34,16 +55,17 @@ function render({userInitiated=false}={}){
  const opt=options();
  shown=data.sellers.filter(s=>matching(s,opt)&&sourceUrl(s.url)).sort((a,b)=>a.observedPriceUSD-b.observedPriceUSD);
  const target=$('pilot-results');target.replaceChildren();
- $('compare-status').textContent=shown.length+' of '+data.sellers.length+
-  ' documented offers match your filters · prices observed '+data.asOf+
-  ' · retailer checkout may differ';
+ const purchasableCount=data.sellers.filter(s=>availableNow(s)&&sourceUrl(s.url)).length;
+ $('compare-status').textContent=shown.length+' of '+purchasableCount+
+  ' available-at-check offers fit your filters; '+(data.sellers.length-purchasableCount)+
+  ' listings excluded pending revalidation · checked '+data.asOf+' · availability varies by ZIP';
  if(userInitiated&&shown.length){
    window.FrameFindFunnel?.emit('product_search',{channel:'unknown',valid:true});
  }
  if(!shown.length){
   const card=elem('article',undefined,'pilot-card');
-  card.append(elem('h3','No listed model matches all those choices.'));
-  card.append(elem('p','Try a larger budget or remove a filter. Do not assume an unavailable feature is present in another color/size.','small'));
+  card.append(elem('h3','No confirmed available-at-check offer matches all those filters.'));
+  card.append(elem('p','Try a higher budget or remove a filter. Sold-out and size-conflicted versions appear in the research-only watchlist below.','small'));
   target.append(card);return;
  }
  for(const s of shown){
@@ -59,6 +81,7 @@ function render({userInitiated=false}={}){
   card.append(elem('div','Certification listed: '+s.claimCertification,'detail'));
   card.append(elem('p',s.sellerDescription,'small'));
   card.append(elem('p',s.notes,'small'));
+  if(s.verificationNote)card.append(elem('p',s.verificationNote,'small'));
   const url=sourceUrl(s.url);
   const link=elem('a','Open '+s.source+' product page →','outbound');
   link.href=url;link.target='_blank';link.rel='noopener noreferrer nofollow';
@@ -77,9 +100,9 @@ async function load(){
   const response=await fetch(feed,{cache:'no-store'});
   if(!response.ok)throw Error('HTTP '+response.status);
   const object=await response.json();
-  if(object.schema!=='framefind-prebreakout-v1'||!Array.isArray(object.sellers)||object.sellers.length<2)
+  if(object.schema!=='framefind-prebreakout-v1'||!Array.isArray(object.sellers)||object.sellers.length<2||!object.sellers.every(s=>['available','unavailable','variant_uncertain'].includes(s.availability)))
    throw Error('Catalog unavailable or unexpected version');
-  data=object;render();
+  data=object;renderWatchlist();render();
  }catch(e){
   $('compare-status').textContent='Source catalog could not load. Do not assume any quote or availability. Please use the general finder instead.';
   const a=elem('a','Open the free FrameFind product finder');

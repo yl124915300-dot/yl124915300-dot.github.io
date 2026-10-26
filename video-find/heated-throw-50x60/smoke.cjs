@@ -21,28 +21,31 @@ async function main(){
    const d=await res.json();
    assert.equal(d.asOf,'2026-10-26');
    assert.equal(d.sellers.length,4);
-   assert.ok(d.sellers.every(x=>x.observedOn==='2026-10-26'&&x.url.startsWith('https://')&&x.observedPriceUSD>0));
+   assert.ok(d.sellers.every(x=>x.observedOn==='2026-10-26'&&x.url.startsWith('https://')&&['available','unavailable','variant_uncertain'].includes(x.availability)));
+   assert.equal(d.sellers.find(s=>s.id==='bedsure-basic').observedPriceUSD,null);
+   assert.equal(d.sellers.find(s=>s.id==='bedsure-preheat').observedPriceUSD,37.94);
    assert.equal(d.hotSignals.length,3);
    assert.match(d.predictionDisclaimer,/not a forecast/i);
-   assert.match(await page.locator('#compare-status').innerText(),/3 of 4 documented offers/);
-   assert.equal(await page.locator('a.outbound').count(),3);
+   assert.match(await page.locator('#compare-status').innerText(),/2 of 2 available-at-check offers/);
+   assert.equal(await page.locator('#pilot-results a.outbound').count(),2);
+   assert.equal(await page.locator('#pilot-watchlist a.outbound').count(),2);
    assert.match(await page.locator('main').innerText(),/not live/ig);
   });
-  await test('budget 35: only 29.97 Sunbeam and 29.99 Bedsure, no 42.99 item',async()=>{
+  await test('budget 35 excludes out-of-stock 29.99 item and ambiguous 37.94 variant',async()=>{
    await page.locator('#budget-max').selectOption('35');
-   assert.deepEqual((await page.evaluate(()=>FrameFindHotQA.getState())).shown,['sunbeam-basic','bedsure-basic']);
+   assert.deepEqual((await page.evaluate(()=>FrameFindHotQA.getState())).shown,['sunbeam-basic']);
    assert.match(await page.locator('#pilot-results').innerText(),/\$29\.97/);
-   assert.match(await page.locator('#pilot-results').innerText(),/\$29\.99/);
+   assert.doesNotMatch(await page.locator('#pilot-results').innerText(),/\$29\.99/);
    assert.doesNotMatch(await page.locator('#pilot-results').innerText(),/\$42\.99/);
   });
   await test('preheat and long auto-off limit matches different SKU',async()=>{
    await page.locator('#budget-max').selectOption('50');
    await page.locator('#needs-preheat').check();
    await page.locator('#needs-long').check();
-   assert.deepEqual((await page.evaluate(()=>FrameFindHotQA.getState())).shown,['bedsure-preheat']);
-   assert.match(await page.locator('#pilot-results').innerText(),/8h default/);
+   assert.deepEqual((await page.evaluate(()=>FrameFindHotQA.getState())).shown,[]);
+   assert.match(await page.locator('#pilot-results').innerText(),/No confirmed available-at-check/);
    await page.locator('#official-only').check();
-   assert.equal(await page.locator('a.outbound').count(),0);
+   assert.equal(await page.locator('#pilot-results a.outbound').count(),0);
    await page.locator('#budget-max').selectOption('150');
    assert.deepEqual((await page.evaluate(()=>FrameFindHotQA.getState())).shown,['bedsure-official']);
   });
@@ -51,8 +54,8 @@ async function main(){
    await page.locator('#needs-preheat').uncheck();
    await page.locator('#needs-long').uncheck();
    await page.locator('#budget-max').selectOption('150');
-   const urls=await page.locator('a.outbound').evaluateAll(as=>as.map(a=>a.href));
-   assert.equal(urls.length,4);
+   const urls=await page.locator('#pilot-results a.outbound').evaluateAll(as=>as.map(a=>a.href));
+   assert.equal(urls.length,2);
    for(const u of urls){
     const url=new URL(u);
     assert.equal(url.protocol,'https:');
@@ -63,6 +66,8 @@ async function main(){
    assert.match(await page.locator('main').innerText(),/Melinora/);
    assert.match(await page.locator('main').textContent(),/No commission program/i);
    assert.ok(await page.locator('a[href*="cpsc.gov"]').count()>=1);
+   assert.match(await page.locator('#pilot-watchlist').innerText(),/NOT CURRENTLY PURCHASABLE/);
+   assert.match(await page.locator('#pilot-watchlist').innerText(),/EXACT SIZE NOT VERIFIED/);
   });
   await test('shoppable researched video intent flows back into FrameFind without URL server upload',async()=>{
    const video='https://www.youtube.com/watch?v=jfKfPfyJRdk';
