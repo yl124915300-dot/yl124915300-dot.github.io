@@ -1,0 +1,34 @@
+{
+  "name": "FrameFind — Video to Product Finder",
+  "short_name": "FrameFind",
+  "description": "Select any permitted video frame and find the visible item's merchant results.",
+  "start_url": "/video-find/",
+  "scope": "/video-find/",
+  "id": "/video-find/",
+  "display": "standalone",
+  "background_color": "#f4f7f8",
+  "theme_color": "#10263a",
+  "orientation": "any",
+  "categories": [
+    "shopping",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "share_target": {
+    "action": "/video-find/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}
