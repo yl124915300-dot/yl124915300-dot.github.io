@@ -78,6 +78,17 @@
 <p id="search-summary" class="results-lead">No product request yet. Paste a clip, mark an object, or start with our demonstration.</p>
 <div id="retailer-results" class="retailer-grid"></div>
 <div class="disclosure"><strong>Price integrity:</strong> Without an authenticated retailer catalog API, this beta links to actual retailer search results and does <em>not</em> invent live prices, seller availability or exact SKU matches. Search results are not a guaranteed identical product. Check photos, model numbers, shipping and return terms before buying.</div>
+<details id="funnel-progress" style="margin:18px 0;border:1px solid #d1e4df;border-radius:12px;padding:14px 16px;background:#f6faf8">
+<summary style="font-weight:800;cursor:pointer">Your 5-step progress — private to this browser tab</summary>
+<ol id="funnel-stage-list" style="margin:12px 0;line-height:2">
+<li>Visit site <strong data-funnel-stage="visit">—</strong></li>
+<li>Bring a video link, clip, screenshot or allowed video tab <strong data-funnel-stage="video_submitted">—</strong></li>
+<li>Select a specific item <strong data-funnel-stage="item_selected">—</strong></li>
+<li>Run a retailer search <strong data-funnel-stage="product_search">—</strong></li>
+<li>Click a merchant search result <strong data-funnel-stage="merchant_outbound">—</strong></li>
+</ol>
+<p id="funnel-transport-status" class="help">Browser-only session stages. Owner-wide analytics not active.</p>
+</details>
 <div class="share-row"><button id="share-result" class="secondary" type="button">Share this free finder</button><span id="share-status" class="help"></span></div>
 </section>
 <section class="model-section" id="business"><div class="section-head"><div><small>MONETIZATION / TRANSPARENCY</small><h2>Free for shoppers. Revenue only when actually enabled.</h2></div></div>

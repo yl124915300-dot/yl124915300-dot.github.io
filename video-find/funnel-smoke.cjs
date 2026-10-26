@@ -55,6 +55,9 @@ async function main(){
   const opened=await pop;await opened.close();
   snapshot=await page.evaluate(()=>FrameFindFunnel.inspect());
   assert.ok(snapshot.steps.merchant_outbound);
+  assert.equal(await page.locator('#funnel-progress').count(),1);
+  assert.equal(await page.locator('#funnel-stage-list strong').count(),5);
+  assert.equal(await page.locator('#funnel-stage-list strong').evaluateAll(els=>els.filter(e=>e.textContent==='✓').length),5);
   assert.equal(snapshot.events.filter(e=>e.stage==='merchant_outbound').length,1);
   assert.equal(snapshot.events.find(e=>e.stage==='merchant_outbound').merchant,'google');
   assert.deepEqual(Object.keys(snapshot.steps).sort(),[

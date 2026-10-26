@@ -67,6 +67,17 @@ function safeSend(data){
     headers:{'Content-Type':'application/json'},body}).catch(()=>{});
  }catch(e){}
 }
+function renderStatus(){
+ const steps=(state&&state.steps)||{};
+ for(const stage of STAGES){
+  const slot=document.querySelector('[data-funnel-stage="'+stage+'"]');
+  if(slot)slot.textContent=steps[stage]?'✓':'—';
+ }
+ const indicator=document.getElementById('funnel-transport-status');
+ if(indicator)indicator.textContent=endpoint&&!noTransport?
+  'Anonymous event reporting is configured; no original media or search text is transmitted.':
+  'Only this browser tab can see these stages; owner-wide analytics is not active.';
+}
 function emit(stage,options={}){
  if(!STAGES.includes(stage))return false;
  if(!state)state=read();
@@ -87,6 +98,7 @@ function emit(stage,options={}){
  state.events.push({stage,channel,merchant:info.merchant,at:new Date().toISOString()});
  if(state.events.length>7)state.events=state.events.slice(-7);
  save();
+ renderStatus();
  safeSend(info);
  return true;
 }
@@ -95,6 +107,6 @@ function inspect(){
  return Object.freeze({day:state.day,source:state.source||attribution().source,medium:state.medium||attribution().medium,
    qa:isQA,optOut,serverConfigured:!!endpoint,steps:{...state.steps},events:state.events.slice().map(x=>({...x}))});
 }
-state=read();configure();emit('visit');
+state=read();configure();emit('visit');renderStatus();
 window.FrameFindFunnel=Object.freeze({emit,inspect,stages:STAGES.slice()});
 })();
