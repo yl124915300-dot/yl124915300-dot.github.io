@@ -4,7 +4,13 @@ on:
     branches: [main]
     paths:
       - "index.html"
-      - "video-find/**"
+      - "video-find/index.html"
+      - "video-find/app.js"
+      - "video-find/ocr.js"
+      - "video-find/pwa.js"
+      - "video-find/style.css"
+      - "video-find/manifest.webmanifest"
+      - "video-find/find-*/index.html"
       - "sitemap.xml"
       - ".github/workflows/framefind-indexnow.yml"
   workflow_dispatch:
