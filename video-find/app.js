@@ -75,6 +75,7 @@ async function loadURL(){
     const url=parsePublicUrl(el('video-url').value);
     const desc=sourceDescriptor(url);
     state.source=url.toString();state.sourceType=desc.type;
+    window.FrameFindFunnel?.emit('video_submitted',{channel:'video_link'});
     showSourceLink(url.toString(),desc.description);
     hideAllSources();
     if(desc.type==='direct'){
@@ -100,6 +101,7 @@ function fileVideo(file){
     say('source-status','Please choose an MP4, WebM or MOV file supported by your browser.');return;
   }
   state.sourceType='local';state.source='';el('source-link-wrap').hidden=true;
+  window.FrameFindFunnel?.emit('video_submitted',{channel:'local_video'});
   hideAllSources();
   const u=URL.createObjectURL(file);
   state.videoObjectURL=u;
@@ -132,6 +134,7 @@ async function share(){
     if(!navigator.mediaDevices?.getDisplayMedia)throw Error('This browser does not support tab sharing.');
     const stream=await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
     state.screen=stream;
+    window.FrameFindFunnel?.emit('video_submitted',{channel:'tab_share'});
     const v=el('shared-video');v.srcObject=stream;v.hidden=false;
     await v.play();
     stream.getTracks().forEach(t=>t.addEventListener('ended',stopSharing,{once:true}));
@@ -174,7 +177,8 @@ async function readImageFile(file){
     say('frame-help','Select a PNG/JPG/WebP screenshot under 12 MB.');return;
   }
   let bmp=null;
-  try{bmp=await createImageBitmap(file);await frameFrom(bmp,bmp.width,bmp.height,'screenshot');}
+  try{bmp=await createImageBitmap(file);await frameFrom(bmp,bmp.width,bmp.height,'screenshot');
+    window.FrameFindFunnel?.emit('video_submitted',{channel:'screenshot'});}
   catch(err){say('frame-help','Unable to read screenshot: '+logSafe(err));}
   finally{if(bmp)bmp.close();}
 }
@@ -240,7 +244,10 @@ function renderCandidates(){
     const btn=document.createElement('button');btn.type='button';
     btn.textContent=d.label+' '+Math.round(d.score*100)+'%';
     btn.className=state.selection?.origin==='model'&&state.selection?.label===d.label?'active':'';
-    btn.addEventListener('click',()=>chooseDetection(d));c.append(btn);
+    btn.addEventListener('click',()=>{
+      chooseDetection(d);
+      window.FrameFindFunnel?.emit('item_selected',{channel:state.demo?'demo':state.sourceType==='local'?'local_video':'screenshot',userChosen:true});
+    });c.append(btn);
   }
 }
 function onPointerDown(event){
@@ -257,6 +264,7 @@ function onPointerUp(event){
   const box=normalized(state.drag.start,coords(event));state.drag=null;
   if(box.width<12||box.height<12){say('frame-help','Draw a larger rectangle around the item.');renderFrame();return;}
   state.selection={...box,label:'Selected region',origin:'manual'};state.selectionNonce++;
+  window.FrameFindFunnel?.emit('item_selected',{channel:state.demo?'demo':state.sourceType==='local'?'local_video':'screenshot',userChosen:true});
   const candidates=state.detections.filter(d=>intersectRatio(box,d.box)>.27);
   if(candidates.length){candidates.sort((a,b)=>intersectRatio(box,b.box)-intersectRatio(box,a.box));chooseDetection(candidates[0]);}
   else{el('category').value='';say('recognition-status','You selected an exact region. Press AI detect objects and, if necessary, type the object category and brand/model.');}
@@ -386,9 +394,15 @@ function analyzeQuery(){
     card.append(make('p',null,store.subtitle));
     const a=make('a',null,'View current matches at '+store.brand);
     a.href=store.href;a.target='_blank';a.rel='noopener noreferrer nofollow';
+    const brand=store.brand.toLowerCase();
+    a.dataset.ffMerchant=brand.includes('google')?'google':brand.includes('amazon')?'amazon':brand.includes('ebay')?'ebay':brand.includes('walmart')?'walmart':brand.includes('john lewis')?'johnlewis':'other';
+    a.addEventListener('click',()=>{
+      window.FrameFindFunnel?.emit('merchant_outbound',{channel:state.demo?'demo':state.sourceType==='local'?'local_video':'screenshot',merchant:a.dataset.ffMerchant});
+    });
     card.append(a);out.append(card);
   }
   state.lastQuery=string;
+  window.FrameFindFunnel?.emit('product_search',{channel:state.demo?'demo':state.sourceType==='local'?'local_video':state.sourceType==='youtube'||state.sourceType==='external'?'video_link':'screenshot',valid:out.children.length>0});
   const demoNote=state.demo?'The supplied original illustration is a demonstration, not an AI-verified branded product. ':'';
   say('search-summary',demoNote+'Search phrase: "'+string+'". Compare actual listings at the retailers. No current price, stock, exact model match or commission is implied.');
   el('results').scrollIntoView({behavior:'smooth',block:'start'});

@@ -32,6 +32,7 @@
 .action-band p{margin:0;color:#536e6a}
 @media(max-width:760px){.stories{grid-template-columns:1fr}.action-band{display:block}.action-band .primary{margin-top:16px}}
 </style>
+<script src="/video-find/funnel.js" defer></script>
 </head>
 <body>
 <header class="header"><div class="wrap nav"><a class="brand" href="/"><span class="mark">◩</span> FrameFind<span class="light">AI</span></a>
@@ -101,6 +102,7 @@
     try{
       var url=new URL(input.value.trim());
       if(url.protocol!=='https:' || url.username || url.password || url.href.length>2048)throw Error('Use a public HTTPS video link without login credentials.');
+      window.FrameFindFunnel?.emit('video_submitted',{channel:'video_link'});
       var destination=new URL('/video-find/?utm_source=homepage&utm_medium=owned_site&utm_campaign=framefind_video',location.origin);
       destination.hash='shared='+encodeURIComponent(url.href);
       location.assign(destination.href);

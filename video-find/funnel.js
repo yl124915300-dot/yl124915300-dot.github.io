@@ -15,7 +15,9 @@ const PRODUCTION_HOST='yl124915300-dot.github.io';
 const allowedEndpoint=/^https:\/\/[a-z0-9.-]+\.workers\.dev\/collect$/i;
 const hostname=location.hostname.toLowerCase();
 const production=hostname===PRODUCTION_HOST;
+const optOut=!!navigator.globalPrivacyControl||navigator.doNotTrack==='1'||window.doNotTrack==='1';
 const isQA=!!navigator.webdriver||!production||new URLSearchParams(location.search).has('qa')||location.hash.includes('#qa');
+const noTransport=isQA||optOut;
 let state=null;let endpoint='';
 function day(){return new Date().toISOString().slice(0,10);}
 function uuid(){return (crypto.randomUUID?crypto.randomUUID():'qa-'+Math.random().toString(16).slice(2)+'-'+Date.now()).slice(0,70);}
@@ -25,7 +27,7 @@ function read(){
    return {day:day(),sid:uuid(),source:null,medium:null,steps:{},events:[],isQA};
  return prev;
 }
-function save(){try{sessionStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+function save(){if(optOut)return;try{sessionStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
 function clampEnum(value,set,other='other'){
  const normalized=String(value||'').toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,36);
  return set.has(normalized)?normalized:other;
@@ -57,7 +59,7 @@ function configure(){
  endpoint=allowedEndpoint.test(value)?value:'';
 }
 function safeSend(data){
- if(isQA||!endpoint)return;
+ if(noTransport||!endpoint)return;
  const body=JSON.stringify(data);
  if(body.length>700)return;
  try{
@@ -91,7 +93,7 @@ function emit(stage,options={}){
 function inspect(){
  if(!state)state=read();
  return Object.freeze({day:state.day,source:state.source||attribution().source,medium:state.medium||attribution().medium,
-   qa:isQA,serverConfigured:!!endpoint,steps:{...state.steps},events:state.events.slice().map(x=>({...x}))});
+   qa:isQA,optOut,serverConfigured:!!endpoint,steps:{...state.steps},events:state.events.slice().map(x=>({...x}))});
 }
 state=read();configure();emit('visit');
 window.FrameFindFunnel=Object.freeze({emit,inspect,stages:STAGES.slice()});
