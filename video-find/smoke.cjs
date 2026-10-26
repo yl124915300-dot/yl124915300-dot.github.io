@@ -50,7 +50,7 @@ async function main(){
     assert.match(decodeURIComponent(href),/black unbranded daypack/);
   }
   assert.match(await page.locator('#search-summary').innerText(),/not an AI-verified branded product/i);
-  assert.doesNotMatch(await cards.innerText(),/\$\d{2,}/);
+  assert.doesNotMatch(await page.locator('#retailer-results').innerText(),/\$\d{2,}/);
   assert.match(await cards.first().innerText(),/NOT AN AFFILIATE LINK/);
  });
  await test('public social URLs do not scrape protected frames',async()=>{
