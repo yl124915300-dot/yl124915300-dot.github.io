@@ -32,7 +32,7 @@ async function main(){
     assert.equal(new URL(page.url()).hash,'','Incoming video URL must be scrubbed from address bar');
     assert.equal(new URL(page.url()).searchParams.get('utm_source'),'homepage');
     assert.equal(await page.locator('#source-embed iframe').count(),0,'No automatic third-party video playback');
-    assert.ok(outgoing.filter(u=>u.startsWith(ORIGIN)).every(u=>!u.includes('jfKfPfyJRdk')),'No user's video URL in first-party request URLs');
+    assert.ok(outgoing.filter(u=>u.startsWith(ORIGIN)).every(u=>!u.includes('jfKfPfyJRdk')),"No user's video URL in first-party request URLs");
     console.log('PASS homepage direct video handoff, source campaign tag and URL fragment removal');
 
     await page.goto(ORIGIN+'/',{waitUntil:'domcontentloaded'});
