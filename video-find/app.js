@@ -205,6 +205,8 @@ function drawRectangle(box,selected,label){
   }ctx.restore();
 }
 function renderFrame(){
+  el('download-crop').disabled=!state.frame||!state.selection;
+  el('copy-crop').disabled=!state.frame||!state.selection;
   if(!state.frame)return;
   ctx.clearRect(0,0,view.width,view.height);ctx.drawImage(state.frame,0,0);
   for(const d of state.detections)drawRectangle(d.box,false,d.label+' '+Math.round(d.score*100)+'%');
@@ -258,6 +260,37 @@ function onPointerUp(event){
   if(candidates.length){candidates.sort((a,b)=>intersectRatio(box,b.box)-intersectRatio(box,a.box));chooseDetection(candidates[0]);}
   else{el('category').value='';say('recognition-status','You selected an exact region. Press AI detect objects and, if necessary, type the object category and brand/model.');}
   renderFrame();
+}
+function croppedItem(){
+  if(!state.frame||!state.selection)throw Error('Select the product rectangle first.');
+  const src=state.frame,b=state.selection;
+  const x=Math.max(0,Math.floor(b.x)),y=Math.max(0,Math.floor(b.y));
+  const w=Math.min(src.width-x,Math.max(1,Math.ceil(b.width)));
+  const h=Math.min(src.height-y,Math.max(1,Math.ceil(b.height)));
+  if(w<12||h<12)throw Error('This selection is too small. Draw a larger rectangle.');
+  const crop=document.createElement('canvas');crop.width=w;crop.height=h;
+  crop.getContext('2d').drawImage(src,x,y,w,h,0,0,w,h);
+  return crop;
+}
+function pngBlob(canvas){
+  return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('Image encoder failed')),'image/png'));
+}
+async function saveCrop(){
+  try{
+    const blob=await pngBlob(croppedItem()),href=URL.createObjectURL(blob);
+    const link=document.createElement('a');link.href=href;link.download='framefind-selected-item.png';
+    document.body.append(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(href),2500);
+    say('frame-help','Selected product image saved locally. For a harder exact match, you may choose to upload this crop to a visual-search service yourself.');
+  }catch(err){say('frame-help','Could not save selected item image: '+logSafe(err));}
+}
+async function copyCrop(){
+  try{
+    if(!window.ClipboardItem||!navigator.clipboard?.write)throw Error('Image clipboard is unavailable in this browser. Use Save selected item image instead.');
+    const blob=await pngBlob(croppedItem());
+    await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+    say('frame-help','Selected object image copied. You may paste it into a separate visual-search service; this site has not sent it anywhere.');
+  }catch(err){say('frame-help','Copy did not complete: '+logSafe(err));}
 }
 function clearSelection(){
   state.selection=null;state.drag=null;
@@ -392,6 +425,8 @@ el('try-demo').addEventListener('click',demo);
 el('try-demo-hero').addEventListener('click',demo);
 el('detect').addEventListener('click',runDetector);
 el('clear-selection').addEventListener('click',clearSelection);
+el('download-crop').addEventListener('click',saveCrop);
+el('copy-crop').addEventListener('click',copyCrop);
 el('search-products').addEventListener('click',analyzeQuery);
 el('share-result').addEventListener('click',shareResult);
 view.addEventListener('pointerdown',onPointerDown);
