@@ -11,7 +11,7 @@ permissions:
 jobs:
   browser:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 22
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -36,6 +36,10 @@ jobs:
           PY
           node --check video-find/app.js
           node --check video-find/smoke.cjs
+          node --check video-find/stage2-smoke.cjs
+          node --check video-find/ocr.js
+          node --check video-find/pwa.js
+          node --check video-find/sw.js
       - name: Fetch rights-checked public model fixture for real image and video tests
         run: |
           set -euo pipefail
@@ -55,3 +59,7 @@ jobs:
         env:
           NODE_PATH: /tmp/framefind-qa/node_modules
         run: node video-find/smoke.cjs
+      - name: Actual browser OCR and installed share-target POST regression
+        env:
+          NODE_PATH: /tmp/framefind-qa/node_modules
+        run: node video-find/stage2-smoke.cjs
