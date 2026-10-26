@@ -27,9 +27,8 @@ jobs:
           assert 'id="video-url"' in html and 'id="frame-canvas"' in html
           assert 'id="capture-tab"' in html and 'id="retailer-results"' in html
           assert 'Not monetized' in html and 'Not yet enabled' in html
-          assert 'no account' in html.lower() and 'without an authenticated retailer catalog API' in html.lower()
+          assert 'no account' in html.lower() and 'without an authenticated retailer catalog api' in html.lower()
           assert "google.com/search?tbm=shop" in code and "NOT AN AFFILIATE LINK" in code
-          assert 'No current price' not in code or True
           assert 'cat-tales/live/vision-vendor' in code
           assert Path('cat-tales/live/vision-vendor/efficientdet_lite0.tflite').stat().st_size>1000000
           assert Path('cat-tales/live/vision-vendor/vision_bundle.mjs').is_file()
