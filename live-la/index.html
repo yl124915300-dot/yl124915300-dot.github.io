@@ -6,6 +6,11 @@
 <meta name="description" content="Check the Santa Monica Beach and Pier live video, choose your LA day-trip budget and interests, then compare clearly labeled activities. Free options and affiliate booking links.">
 <link rel="canonical" href="https://yl124915300-dot.github.io/live-la/">
 <title>Santa Monica Live Beach Cam + LA Day Planner | Watch, Decide, Book</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Santa Monica Live Beach Cam + LA Day Planner">
+<meta property="og:description" content="Watch the live Santa Monica Beach view, compare a free beach visit with Los Angeles activities, and check booking prices.">
+<meta property="og:url" content="https://yl124915300-dot.github.io/live-la/">
+<meta name="twitter:card" content="summary">
 <style>
 :root{font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#17283b;background:#f3f6f6}*{box-sizing:border-box}body{margin:0}
 a{color:#06686b;text-underline-offset:3px}a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #edaa3f;outline-offset:2px}
@@ -66,7 +71,7 @@ footer{font-size:13px;color:#62727d;padding:20px 0 35px}footer a{color:#315965}
 <div>
 <section class="panel" aria-label="Personal activity finder">
 <h2>Turn the live scene into a plan</h2>
-<p class="muted">Choose the kind of outing you want. Your selections filter the activity list in this browser. No account, tracking cookies or payment here.</p>
+<p class="muted">Choose the kind of outing you want. Your selections filter the activity list in this browser. No account or payment details are requested here. The embedded video and merchant websites may use cookies under their own policies.</p>
 <form id="planner">
 <div class="demand"><label for="need">What's your goal?</label><select id="need">
 <option value="beach">Enjoy the beach and pier</option>
@@ -80,6 +85,8 @@ footer{font-size:13px;color:#62727d;padding:20px 0 35px}footer a{color:#315965}
 </div>
 <div class="demand"><label for="when">When are you planning to go?</label><select id="when"><option value="today">Today</option><option value="weekend">This weekend</option><option value="later">Another day</option></select></div>
 <button type="submit" style="width:100%;margin-top:18px">Compare my options</button>
+<button type="button" id="share-plan" style="width:100%;margin-top:10px;background:#e4f2ef;border:1px solid #b7d6ce;color:#0d574e">Share this live cam + my plan</button>
+<p id="share-result" class="muted" aria-live="polite"></p>
 </form>
 <p class="muted">These choices express your buying intent. This first version uses explainable on-page matching, not automated visual recognition.</p>
 </section>
@@ -137,6 +144,21 @@ footer{font-size:13px;color:#62727d;padding:20px 0 35px}footer a{color:#315965}
     document.getElementById('cards').innerHTML=cards.join('');
     document.getElementById('summary').textContent=party+' traveler(s) · $'+budget+'/person · '+(when==='today'?'today':when==='weekend'?'this weekend':'another day');
   }
+  var params=new URLSearchParams(location.search);
+  ['need','budget','party','when'].forEach(function(id){
+    var v=params.get(id), sel=document.getElementById(id);
+    if(v&&Array.from(sel.options).some(function(o){return o.value===v;}))sel.value=v;
+  });
+  document.getElementById('share-plan').addEventListener('click',async function(){
+    var url=new URL(location.href);
+    ['need','budget','party','when'].forEach(function(id){url.searchParams.set(id,document.getElementById(id).value);});
+    var dest=url.toString(), info=document.getElementById('share-result');
+    if(navigator.share){
+      try{await navigator.share({title:'Santa Monica live cam and LA day plan',text:'Watch the beach live and compare ways to spend a day in LA.',url:dest});info.textContent='Share dialog opened.';return;}catch(e){if(e.name==='AbortError'){info.textContent='Share cancelled.';return;}}
+    }
+    try{await navigator.clipboard.writeText(dest);info.textContent='Link copied. Send it to someone planning an LA day.';}
+    catch(e){window.prompt('Copy this plan link:',dest);info.textContent='Link ready to copy.';}
+  });
   document.getElementById('planner').addEventListener('submit',function(e){e.preventDefault();render();document.getElementById('cards').scrollIntoView({behavior:'smooth',block:'nearest'});});
   fetch('/deals.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('data unavailable');return r.json();}).then(function(data){
     products=Array.isArray(data)?data.filter(function(x){return x&&/^https:\/\/klook\.tpo\.lv\//.test(x.tracking_url||'')&&Number.isFinite(Number(x.price_usd));}):[];
