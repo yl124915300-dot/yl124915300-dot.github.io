@@ -10,6 +10,8 @@
 <meta property="og:url" content="https://yl124915300-dot.github.io/video-find/">
 <link rel="canonical" href="https://yl124915300-dot.github.io/video-find/">
 <link rel="stylesheet" href="./style.css">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"FrameFind","applicationCategory":"ShoppingApplication","operatingSystem":"Web","url":"https://yl124915300-dot.github.io/video-find/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free on-device object detection for a user-provided video frame, plus links to real retailers' item searches. Exact product identity and prices must be checked by the shopper."}
 </script>
@@ -34,9 +36,11 @@
 <section class="workbench" id="start" aria-label="Product finding workstation">
 <div class="panel source-panel">
 <div class="section-head"><div><small>STEP 01 / SOURCE</small><h2>Bring the video</h2></div><span class="mini-tag">No scraping</span></div>
+<div class="install-hint"><strong>Bring videos here faster:</strong> Install FrameFind on a supported Android browser and choose it from a video app’s Share menu. <button type="button" id="install-app" class="secondary" hidden>Install FrameFind</button><p id="install-status" class="help">No video platform account connection required. Share-to-app depends on your device/browser support.</p></div>
 <label for="video-url">Public video URL</label>
 <div class="field-row"><input id="video-url" type="url" maxlength="2048" placeholder="https://www.youtube.com/watch?v=... or a direct .mp4"><button id="load-url" type="button">Open source</button></div>
 <div class="input-line"><label class="file-cta" for="clip-file">Choose video file (local)</label><input id="clip-file" type="file" accept="video/mp4,video/webm,video/quicktime"><span>or choose a video you own / can lawfully use</span></div>
+<p class="help" id="share-intake" role="status" hidden></p>
 <p class="help" id="source-status" role="status">Paste a public video link. Direct, CORS-permitted video files can be scrubbed here; social-platform players may require a user screenshot or screen share.</p>
 <div id="source-link-wrap" hidden><a id="source-link" href="#" target="_blank" rel="noopener noreferrer">Open original video</a><span id="source-type"></span></div>
 <div id="source-embed" hidden></div>
@@ -49,9 +53,11 @@
 <div class="panel frame-panel">
 <div class="section-head"><div><small>STEP 02 / FRAME</small><h2>Pick the object</h2></div><span id="frame-state" class="mini-tag">Awaiting frame</span></div>
 <div id="drop-zone" class="drop-zone"><canvas id="frame-canvas" width="640" height="360" aria-label="Selected video frame. Drag to draw a box around the target object." tabindex="0"></canvas><div id="frame-placeholder">Drop or paste a screenshot, freeze a video frame, or try the illustrated sample.</div></div>
-<div class="frame-actions"><label for="screenshot-file" class="file-cta">Upload screenshot</label><input id="screenshot-file" type="file" accept="image/png,image/jpeg,image/webp"><button id="try-demo" type="button" class="secondary">Try demo frame</button><button id="detect" type="button" disabled>AI detect objects</button><button id="clear-selection" type="button" class="ghost">Clear selection</button><button id="download-crop" type="button" class="secondary" disabled>Save selected item image</button><button id="copy-crop" type="button" class="secondary" disabled>Copy cropped image</button></div>
+<div class="frame-actions"><label for="screenshot-file" class="file-cta">Upload screenshot</label><input id="screenshot-file" type="file" accept="image/png,image/jpeg,image/webp"><button id="try-demo" type="button" class="secondary">Try demo frame</button><button id="detect" type="button" disabled>AI detect objects</button><button id="clear-selection" type="button" class="ghost">Clear selection</button><button id="download-crop" type="button" class="secondary" disabled>Save selected item image</button><button id="copy-crop" type="button" class="secondary" disabled>Copy cropped image</button><button id="read-label" type="button" class="secondary" disabled>Read label / model (OCR)</button></div>
 <p id="frame-help" class="help" role="status">Draw a rectangle on the frame to select the exact item. On a supported object-detection result, tap its label to choose that object.</p>
 <div id="detect-candidates" class="chips" aria-live="polite"></div>
+<div id="ocr-area" class="ocr-area"><p id="ocr-status" class="help" role="status">Optional label reading: activate after selecting a frame region. Text is only a suggestion, never an automatically verified brand or model.</p><div class="capture-row"><button id="use-ocr" type="button" class="secondary" disabled>Use detected text in search</button></div></div>
+<p class="help">When you choose label reading, FrameFind downloads a pinned open-source OCR runtime and English language data into your browser. The cropped image is analyzed on your device, not uploaded to an OCR server. It may fail offline or misread logos and model numbers.</p>
 <p class="help">Our existing locally hosted EfficientDet-Lite0 model recognizes broad objects such as backpacks, bags, bottles, chairs and laptops, not exact brands or SKUs. Frames are processed in your browser. For difficult fashion items, save the selected object crop and optionally upload it at <a href="https://lens.google/" target="_blank" rel="noopener noreferrer">Google Lens</a> for a separate visual-similarity search. We do not upload your crop to Lens.</p>
 </div>
 <div class="panel intent-panel">
@@ -87,5 +93,6 @@
 </main>
 <footer><div class="wrap footer-row"><div><strong>FrameFind AI</strong> · an independent video-to-shopping research tool. Browser-local frame processing. This demo does not retain videos or images on a server.</div><div><a href="/video-find/">Finder</a><a href="/video-find/find-youtube-product/">YouTube guide</a><a href="/video-find/find-tiktok-product/">TikTok guide</a><a href="/la-tonight/">Legacy LA guide</a></div></div></footer>
 <script src="./app.js" defer></script>
+<script src="./pwa.js" defer></script>
 </body>
 </html>
