@@ -91,3 +91,15 @@ footer{border-top:1px solid #d8e1e4;background:#edf3f4;padding:20px 0;font-size:
 footer a{padding-left:15px;color:#285b5f}
 @media(max-width:980px){.hero-layout{grid-template-columns:1fr;gap:32px}.hero-copy{max-width:800px}.workbench{grid-template-columns:1fr}.source-panel,.frame-panel,.intent-panel{grid-column:1;grid-row:auto}.steps{grid-template-columns:1fr 1fr}.retailer-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:590px){.wrap{width:calc(100% - 26px)}.nav-right>a{display:none}.hero{padding:37px 0}.hero h1{font-size:37px}.demo-target{min-width:100px;min-height:65px;font-size:11px}.steps{grid-template-columns:1fr 1fr;gap:15px}.panel{padding:16px}.retailer-grid,.model-grid,.two{grid-template-columns:1fr}.field-row{align-items:stretch}.field-row button{white-space:normal}.model-card p{min-height:auto}.footer-row{display:block}.footer-row>div+div{margin-top:14px}footer a{padding:0 9px 0 0}}
+
+
+.install-hint{margin:0 0 16px;padding:12px 14px;border-radius:11px;background:#edf7f5;border:1px solid #cae4dd;font-size:13px;color:#275955}
+.install-hint strong{font-weight:850}
+.install-hint button{margin-left:8px;padding:6px 12px;font-size:12px;min-height:34px;border-radius:8px}
+.install-hint .help{margin:7px 0 0}
+#share-intake{padding:11px 13px;background:#e9f6f0;border-left:4px solid #0aa988;color:#126155;border-radius:6px}
+#share-intake[hidden],#install-app[hidden]{display:none}
+.ocr-area{border:1px solid #d1e5e0;background:#f4fbf8;border-radius:12px;padding:11px 14px;margin-top:14px}
+.ocr-area .help{margin:4px 0}
+.ocr-area button{margin:3px 0;min-height:34px;padding:8px 11px}
+.ocr-area button:disabled{opacity:.5}
