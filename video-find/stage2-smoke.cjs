@@ -20,7 +20,21 @@ async function main(){
   assert.equal(manifest.share_target.enctype,'multipart/form-data');
   assert.equal(manifest.share_target.params.text,'text');
   assert.equal(manifest.scope,'/video-find/');
-  console.log('PASS manifest exposes share-target without third-party app account');
+  assert.ok(manifest.icons.some(icon=>icon.sizes==='192x192'&&icon.type==='image/png'),'Missing 192px app icon');
+  assert.ok(manifest.icons.some(icon=>icon.sizes==='512x512'&&icon.type==='image/png'),'Missing 512px app icon');
+  for(const size of [192,512]){
+    const got=await page.evaluate(async size=>{
+      const img=new Image();
+      img.src='/video-find/icon-'+size+'.png';
+      await img.decode();
+      return {w:img.naturalWidth,h:img.naturalHeight};
+    },size);
+    assert.deepEqual(got,{w:size,h:size},'PWA icon cannot render');
+  }
+  const bookmarklet=await page.locator('#framefind-bookmarklet').getAttribute('href');
+  assert.ok(bookmarklet?.startsWith('javascript:'),'Desktop bookmarklet should be explicitly draggable');
+  assert.ok(bookmarklet.includes('#shared='),'Desktop bookmarklet must use private fragment handoff');
+  console.log('PASS manifest accepts share-target, PNG icons render and desktop shortcut targets private fragment');
   await page.waitForFunction(()=>navigator.serviceWorker?.controller!==null,null,{timeout:22000}).catch(async()=>{
     await page.reload({waitUntil:'domcontentloaded'});
     await page.waitForFunction(()=>!!navigator.serviceWorker?.controller,null,{timeout:13000});
