@@ -1,0 +1,65 @@
+name: FrameFind collector prerequisites (read-only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/framefind-collector-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      FRAMEFIND_D1_DATABASE_ID: ${{ secrets.FRAMEFIND_D1_DATABASE_ID }}
+      FRAMEFIND_HMAC_SALT: ${{ secrets.FRAMEFIND_HMAC_SALT }}
+      FRAMEFIND_STATS_TOKEN: ${{ secrets.FRAMEFIND_STATS_TOKEN }}
+    steps:
+      - name: Report presence of bounded existing credentials (never reveal values)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID FRAMEFIND_D1_DATABASE_ID FRAMEFIND_HMAC_SALT FRAMEFIND_STATS_TOKEN; do
+            if [[ -n "${!name:-}" ]]; then echo "PRESENT: $name"; else echo "MISSING: $name"; fi
+          done
+          if [[ -z "${CLOUDFLARE_API_TOKEN:-}" || -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]]; then
+            echo "NOT_READY: Cloudflare read-only account checks unavailable; no worker/resource created."
+            exit 0
+          fi
+          echo "CLOUDFLARE_AUTH_PRESENT: testing token validity read-only."
+      - name: Check Cloudflare account and existing D1 (read-only; no deployment or billing)
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        shell: bash
+        run: |
+          set -euo pipefail
+          result="$(curl -fsSL --connect-timeout 10 --max-time 20 \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+            | jq -r 'if .success == true then .result.status else "failed" end')"
+          if [[ "$result" != "active" ]]; then
+            echo "NOT_READY: Cloudflare token is not active or insufficiently scoped."
+            exit 0
+          fi
+          echo "CLOUDFLARE_TOKEN_VALID: true"
+          if [[ -z "${FRAMEFIND_D1_DATABASE_ID:-}" ]]; then
+            echo "NOT_READY: Existing FrameFind D1 database binding not configured. No new database created."
+            exit 0
+          fi
+          status="$(curl -sS --connect-timeout 10 --max-time 25 \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -o /tmp/framefind-d1-check.json -w '%{http_code}' \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/d1/database/$FRAMEFIND_D1_DATABASE_ID")"
+          if [[ "$status" != "200" ]]; then
+            echo "NOT_READY: D1 read check returned HTTP $status; no mutation attempted."
+            exit 0
+          fi
+          if jq -e '.success == true' /tmp/framefind-d1-check.json >/dev/null; then
+            echo "EXISTING_D1_READABLE: true; deployment still requires owner-approved secure bindings."
+          else
+            echo "NOT_READY: D1 account/binding credentials invalid; no mutation attempted."
+          fi
