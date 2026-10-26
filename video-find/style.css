@@ -63,6 +63,7 @@ input[type=file]{max-width:200px;font-size:12px}#clip-file,#screenshot-file{posi
 .drop-zone.dragover{border-color:#25c1ab;box-shadow:0 0 0 3px #25c1ab33}
 .drop-zone canvas{display:block;width:100%;height:auto;cursor:crosshair;touch-action:none}
 #frame-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#c5d9de;text-align:center;padding:15px;pointer-events:none;font-size:14px}
+#frame-placeholder[hidden]{display:none}
 .chips{display:flex;flex-wrap:wrap;gap:7px}
 .chips button{padding:7px 9px;border-radius:24px;background:#e7f5f2;color:#0b6c5b;font-size:12px;font-weight:800}
 .chips button.active{background:#0b6c5b;color:#fff}
