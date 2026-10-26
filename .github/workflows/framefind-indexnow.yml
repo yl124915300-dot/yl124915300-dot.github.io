@@ -70,6 +70,8 @@ jobs:
           done
           model="$(curl -fsSL --max-time 20 "https://$host/video-find/find-model-number-from-video/")"
           [[ "$model" == *'Read label/model'* && "$model" == *'/video-find/'* ]] || { echo "Model guide missing"; exit 1; }
+          price="$(curl -fsSL --max-time 18 "https://$host/video-find/pricing/")"
+          [[ "$price" == *'FrameFind costs'* && "$price" == *'$0'* ]] || { echo "Public pricing page missing"; exit 1; }
           echo "Pages and ownership proof publicly verified."
       - name: Send owned content URLs to IndexNow, without asserting indexation
         shell: bash
@@ -84,13 +86,14 @@ jobs:
           "https://$host/video-find/find-youtube-product/",
           "https://$host/video-find/find-tiktok-product/",
           "https://$host/video-find/find-product-from-screenshot/",
-          "https://$host/video-find/find-model-number-from-video/"
+          "https://$host/video-find/find-model-number-from-video/",
+          "https://$host/video-find/pricing/"
           ]}
           EOF
           status="$(curl -sS -L --max-time 40 -X POST -H 'Content-Type: application/json; charset=utf-8' \
             --data-binary @/tmp/framefind-indexnow.json \
             -o /tmp/framefind-indexnow-response.txt -w '%{http_code}' 'https://api.indexnow.org/indexnow')"
           echo "IndexNow HTTP status: $status. Acceptance is not proof of indexing, visitors, buyers or commissions."
-          case "$status" in 200|202) echo "Six owned URLs submitted."; ;; *)
+          case "$status" in 200|202) echo "Seven owned URLs submitted."; ;; *)
             head -c 300 /tmp/framefind-indexnow-response.txt || true; exit 1;;
           esac

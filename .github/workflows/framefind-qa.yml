@@ -36,6 +36,8 @@ jobs:
           PY
           node --check video-find/app.js
           node --check video-find/funnel.js
+          test -s video-find/pricing/index.html
+          grep -q 'FrameFind costs' video-find/pricing/index.html
           node --check video-find/funnel-smoke.cjs
           node --check video-find/ops/collector.mjs
           node --check video-find/ops/collector.test.cjs
