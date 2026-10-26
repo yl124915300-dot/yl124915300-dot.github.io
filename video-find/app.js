@@ -5,7 +5,7 @@
 'use strict';
 const el=id=>document.getElementById(id);
 const state={source:null,videoURL:null,videoObjectURL:null,screen:null,frame:null,selection:null,drag:null,
-  detections:[],detector:null,detectorLoading:null,demo:false,lastQuery:null,sourceType:'none'};
+  detections:[],detector:null,detectorLoading:null,demo:false,lastQuery:null,sourceType:'none',selectionNonce:0};
 const view=el('frame-canvas'),ctx=view.getContext('2d');
 const labels={
   backpack:'backpack',handbag:'handbag',suitcase:'luggage',bottle:'water bottle',
@@ -153,7 +153,7 @@ async function frameFrom(drawable,w,h,origin){
   oc.drawImage(drawable,0,0,cw,ch);
   // This immediately rejects cross-origin tainted sources rather than falsely offering frame AI.
   oc.getImageData(0,0,1,1);
-  state.frame=off;state.selection=null;state.detections=[];state.demo=origin==='demo';
+  state.frame=off;state.selection=null;state.detections=[];state.demo=origin==='demo';state.selectionNonce++;
   // A new frame must never inherit the previous item's category or brand; false matches cost trust.
   el('category').value='';el('item-description').value='';
   view.width=cw;view.height=ch;
@@ -185,7 +185,7 @@ async function demo(){
     await img.decode();
     await frameFrom(img,img.naturalWidth,img.naturalHeight,'demo');
     // This region and label are part of our ORIGINAL illustration, not an AI prediction.
-    state.selection={x:124,y:74,width:166,height:256,label:'backpack',origin:'demo-illustration'};
+    state.selection={x:124,y:74,width:166,height:256,label:'backpack',origin:'demo-illustration'};state.selectionNonce++;
     el('category').value='backpack';
     el('item-description').value='black unbranded daypack';
     say('recognition-status','Illustrated demo: “backpack” was pre-labelled by the author, NOT visually recognized by AI. Replace with your own frame for a genuine model result.');
@@ -207,6 +207,7 @@ function drawRectangle(box,selected,label){
 function renderFrame(){
   el('download-crop').disabled=!state.frame||!state.selection;
   el('copy-crop').disabled=!state.frame||!state.selection;
+  el('read-label').disabled=!state.frame||!state.selection;
   if(!state.frame)return;
   ctx.clearRect(0,0,view.width,view.height);ctx.drawImage(state.frame,0,0);
   for(const d of state.detections)drawRectangle(d.box,false,d.label+' '+Math.round(d.score*100)+'%');
@@ -226,7 +227,7 @@ function intersectRatio(a,b){
   return x*y / Math.max(1,a.width*a.height+b.width*b.height-x*y);
 }
 function chooseDetection(d){
-  state.selection={...d.box,label:d.label,score:d.score,origin:'model'};
+  state.selection={...d.box,label:d.label,score:d.score,origin:'model'};state.selectionNonce++;
   if(labels[d.label])el('category').value=labels[d.label];
   else if(!NONPRODUCT.has(d.label))el('category').value=d.label;
   else el('category').value='';
@@ -255,7 +256,7 @@ function onPointerUp(event){
   if(!state.drag?.active)return;
   const box=normalized(state.drag.start,coords(event));state.drag=null;
   if(box.width<12||box.height<12){say('frame-help','Draw a larger rectangle around the item.');renderFrame();return;}
-  state.selection={...box,label:'Selected region',origin:'manual'};
+  state.selection={...box,label:'Selected region',origin:'manual'};state.selectionNonce++;
   const candidates=state.detections.filter(d=>intersectRatio(box,d.box)>.27);
   if(candidates.length){candidates.sort((a,b)=>intersectRatio(box,b.box)-intersectRatio(box,a.box));chooseDetection(candidates[0]);}
   else{el('category').value='';say('recognition-status','You selected an exact region. Press AI detect objects and, if necessary, type the object category and brand/model.');}
@@ -293,7 +294,7 @@ async function copyCrop(){
   }catch(err){say('frame-help','Copy did not complete: '+logSafe(err));}
 }
 function clearSelection(){
-  state.selection=null;state.drag=null;
+  state.selection=null;state.drag=null;state.selectionNonce++;
   el('category').value='';renderFrame();renderCandidates();
   say('recognition-status','Selection cleared. Draw a new box or choose a detected object.');
 }
@@ -448,6 +449,7 @@ document.addEventListener('paste',e=>{
 });
 window.addEventListener('pagehide',()=>{stopSharing();hideAllSources();},{once:true});
 fromQuery();
+window.FrameFindOCRBridge=Object.freeze({crop:()=>croppedItem(),nonce:()=>state.selectionNonce});
 window.FrameFindQA=Object.freeze({getSnapshot:()=>({
   hasFrame:!!state.frame,selection:state.selection?{label:state.selection.label,origin:state.selection.origin}:null,
   detectorReady:!!state.detector,lastQuery:state.lastQuery,sourceType:state.sourceType,
