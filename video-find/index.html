@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10263a"><meta name="referrer" content="strict-origin-when-cross-origin">
+<title>FrameFind — Find Products Seen in Videos | Free Frame-to-Shop Tool</title>
+<meta name="description" content="Paste a video link, select an exact frame and object, and find matching product searches at real stores. Free AI-assisted object recognition on your device; honest merchant links and no fake prices.">
+<meta property="og:type" content="website"><meta property="og:title" content="FrameFind — See it in a video? Find where to buy it.">
+<meta property="og:description" content="Paste a video, pick a frame, select the item, and compare live retailer search results for free.">
+<meta property="og:url" content="https://yl124915300-dot.github.io/video-find/">
+<link rel="canonical" href="https://yl124915300-dot.github.io/video-find/">
+<link rel="stylesheet" href="./style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"FrameFind","applicationCategory":"ShoppingApplication","operatingSystem":"Web","url":"https://yl124915300-dot.github.io/video-find/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free on-device object detection for a user-provided video frame, plus links to real retailers' item searches. Exact product identity and prices must be checked by the shopper."}
+</script>
+</head>
+<body>
+<header class="header"><div class="wrap nav"><a class="brand" href="/"><span class="mark">◩</span> FrameFind<span class="light">AI</span></a><div class="nav-right"><span class="pill">Free beta · no account</span><a href="#how">How it works</a><a href="#business">Business model</a></div></div></header>
+<section class="hero"><div class="wrap hero-layout"><div class="hero-copy">
+<div class="kicker">VIDEO → FRAME → ITEM → SHOP</div>
+<h1>See something in a video?<span> Find it without guessing.</span></h1>
+<p>Drop a YouTube, TikTok or Instagram link, choose the exact moment and mark the item. Local AI detects common objects; the shopper confirms details before opening real retailer listings.</p>
+<a class="primary" href="#start">Find the item <span aria-hidden="true">↗</span></a><span class="hero-note">Free · no video upload to our servers · no account required</span>
+</div><div class="demo-stage" aria-label="Illustrative, self-created video shopping demo">
+<div class="demo-head"><span class="rec-dot"></span> FRAME SAMPLE <span>00:08 / 00:15 · simulated preview</span></div>
+<img src="./demo-frame.svg" alt="Original illustrated sample frame with a backpack, shoe, and insulated bottle on a table" width="700" height="394">
+<div class="demo-target"><span>01</span> Backpack <small>example target</small></div>
+<div class="demo-foot"><span>Drag to select the product</span><button type="button" id="try-demo-hero">Try this frame</button></div>
+</div></div></section>
+<section class="workflow" id="how"><div class="wrap steps">
+<div><strong>01</strong><span>Paste video URL or choose a clip</span></div><div><strong>02</strong><span>Freeze a frame and mark your item</span></div><div><strong>03</strong><span>AI object hints + your brand details</span></div><div><strong>04</strong><span>Open actual retailer results</span></div>
+</div></section>
+<main class="wrap">
+<section class="workbench" id="start" aria-label="Product finding workstation">
+<div class="panel source-panel">
+<div class="section-head"><div><small>STEP 01 / SOURCE</small><h2>Bring the video</h2></div><span class="mini-tag">No scraping</span></div>
+<label for="video-url">Public video URL</label>
+<div class="field-row"><input id="video-url" type="url" maxlength="2048" placeholder="https://www.youtube.com/watch?v=... or a direct .mp4"><button id="load-url" type="button">Open source</button></div>
+<div class="input-line"><label class="file-cta" for="clip-file">Choose video file (local)</label><input id="clip-file" type="file" accept="video/mp4,video/webm,video/quicktime"><span>or choose a video you own / can lawfully use</span></div>
+<p class="help" id="source-status" role="status">Paste a public video link. Direct, CORS-permitted video files can be scrubbed here; social-platform players may require a user screenshot or screen share.</p>
+<div id="source-link-wrap" hidden><a id="source-link" href="#" target="_blank" rel="noopener noreferrer">Open original video</a><span id="source-type"></span></div>
+<div id="source-embed" hidden></div>
+<video id="local-video" controls preload="metadata" playsinline hidden crossorigin="anonymous"></video>
+<div class="time-controls" id="time-controls" hidden><label for="frame-time">Select the exact moment <span id="time-label">0:00</span></label><input type="range" id="frame-time" min="0" max="100" step=".1" value="0"><button id="freeze" type="button" class="secondary">Use this video frame</button></div>
+<div class="capture-row"><button id="share-screen" type="button" class="secondary">Share the video tab</button><button id="capture-tab" type="button" disabled>Capture current tab frame</button><button id="stop-screen" type="button" class="ghost" disabled>Stop sharing</button></div>
+<video id="shared-video" autoplay playsinline muted hidden></video>
+<p class="help">For blocked TikTok, Reels, YouTube or Douyin playback: open the link in another tab, pause on the item, then use “Share the video tab” and “Capture current tab frame”. The browser will ask your permission. This never bypasses a source's protections.</p>
+</div>
+<div class="panel frame-panel">
+<div class="section-head"><div><small>STEP 02 / FRAME</small><h2>Pick the object</h2></div><span id="frame-state" class="mini-tag">Awaiting frame</span></div>
+<div id="drop-zone" class="drop-zone"><canvas id="frame-canvas" width="640" height="360" aria-label="Selected video frame. Drag to draw a box around the target object." tabindex="0"></canvas><div id="frame-placeholder">Drop or paste a screenshot, freeze a video frame, or try the illustrated sample.</div></div>
+<div class="frame-actions"><label for="screenshot-file" class="file-cta">Upload screenshot</label><input id="screenshot-file" type="file" accept="image/png,image/jpeg,image/webp"><button id="try-demo" type="button" class="secondary">Try demo frame</button><button id="detect" type="button" disabled>AI detect objects</button><button id="clear-selection" type="button" class="ghost">Clear selection</button></div>
+<p id="frame-help" class="help" role="status">Draw a rectangle on the frame to select the exact item. On a supported object-detection result, tap its label to choose that object.</p>
+<div id="detect-candidates" class="chips" aria-live="polite"></div>
+<p class="help">Our existing locally hosted EfficientDet-Lite0 model recognizes broad objects such as backpacks, bags, bottles, chairs and laptops, not exact brands or SKUs. Frames are processed in your browser.</p>
+</div>
+<div class="panel intent-panel">
+<div class="section-head"><div><small>STEP 03 / IDENTIFY</small><h2>What are you looking for?</h2></div><span class="mini-tag">You confirm</span></div>
+<label for="item-description">Visible brand, model, color or distinguishing details</label>
+<input id="item-description" type="text" maxlength="160" placeholder="e.g. black Nike backpack, 24L, white logo">
+<div class="input-line"><div class="input-box"><label for="category">Object type (AI suggestion, editable)</label><input id="category" type="text" maxlength="60" placeholder="e.g. backpack, lamp, handbag"></div><div class="input-box"><label for="market">Shopping region</label><select id="market"><option value="US">United States</option><option value="UK">United Kingdom</option></select></div></div>
+<button id="search-products" type="button" class="primary full">Find matching retailer listings</button>
+<p id="recognition-status" class="help" role="status">No frame selected yet. Add identifying details to reduce false matches.</p>
+</div>
+</section>
+<section class="panel results-panel" id="results" aria-live="polite">
+<div class="section-head"><div><small>STEP 04 / COMPARE</small><h2>Check real shopping results</h2></div><span class="mini-tag">Merchant checkout</span></div>
+<p id="search-summary" class="results-lead">No product request yet. Paste a clip, mark an object, or start with our demonstration.</p>
+<div id="retailer-results" class="retailer-grid"></div>
+<div class="disclosure"><strong>Price integrity:</strong> Without an authenticated retailer catalog API, this beta links to actual retailer search results and does <em>not</em> invent live prices, seller availability or exact SKU matches. Search results are not a guaranteed identical product. Check photos, model numbers, shipping and return terms before buying.</div>
+<div class="share-row"><button id="share-result" class="secondary" type="button">Share this free finder</button><span id="share-status" class="help"></span></div>
+</section>
+<section class="model-section" id="business"><div class="section-head"><div><small>MONETIZATION / TRANSPARENCY</small><h2>Free for shoppers. Revenue only when actually enabled.</h2></div></div>
+<div class="model-grid">
+<div class="model-card"><div class="model-icon">AD</div><h3>Contextual sponsorship</h3><p>Reserved for product-relevant ads, clearly separated from natural search matches. No advertiser currently active; no ad impressions or revenue claimed.</p><div class="model-status">Not monetized</div></div>
+<div class="model-card"><div class="model-icon">PRO</div><h3>Frequent-user subscription</h3><p>Future higher-volume visual searches, saved comparisons and alerts require a proper account, payment processor and server-side quotas.</p><div class="model-status">Planned · No checkout yet</div></div>
+<div class="model-card"><div class="model-icon">%</div><h3>Transaction commissions</h3><p>Only eligible, tracked retailer purchases can earn commissions after an actual agreement and attribution. The current general product links are not affiliate links.</p><div class="model-status">Not yet enabled</div></div>
+</div>
+</section>
+<section class="faq panel">
+<h2>Frequently asked questions</h2>
+<details><summary>Can FrameFind automatically read frames from any TikTok or YouTube link?</summary><p>No. The original platforms may block direct access, canvas capture or embedding. If the file is directly accessible with suitable browser permissions, you can select a time on this page. Otherwise, the user explicitly shares a video tab or supplies a screenshot. We do not circumvent access restrictions.</p></details>
+<details><summary>Does the AI recognize the exact product model?</summary><p>Not reliably yet. EfficientDet provides category and bounding-box suggestions. The shopper can add a visible brand, model, color and other clues. The resulting retailer links are searches, not verified visual-identical SKUs or live price comparisons.</p></details>
+<details><summary>Is the product search free?</summary><p>Yes, the current beta is free. No account, payment, subscription or recording of your uploaded images is required. A future high-usage paid plan would be announced separately and would require functioning server-side billing.</p></details>
+<details><summary>Can I order here? Who gets paid?</summary><p>We do not sell goods, collect card details, or take orders. Merchants handle payment and delivery on their own sites. No general retailer affiliate agreement, commission tracking or subscription payment is represented as active on this page.</p></details>
+</section>
+</main>
+<footer><div class="wrap footer-row"><div><strong>FrameFind AI</strong> · an independent video-to-shopping research tool. Browser-local frame processing. This demo does not retain videos or images on a server.</div><div><a href="/video-find/">Finder</a><a href="/video-find/find-youtube-product/">YouTube guide</a><a href="/video-find/find-tiktok-product/">TikTok guide</a><a href="/la-tonight/">Legacy LA guide</a></div></div></footer>
+<script src="./app.js" defer></script>
+</body>
+</html>
