@@ -187,7 +187,7 @@ async function demo(){
     el('category').value='backpack';
     el('item-description').value='black unbranded daypack';
     say('recognition-status','Illustrated demo: “backpack” was pre-labelled by the author, NOT visually recognized by AI. Replace with your own frame for a genuine model result.');
-    renderFrame();el('start').scrollIntoView({behavior:'smooth',block:'start'});
+    renderFrame();el('start').scrollIntoView({behavior:'auto',block:'start'});
   }catch(err){say('frame-help','Demo frame could not load: '+logSafe(err));}
 }
 function drawRectangle(box,selected,label){
