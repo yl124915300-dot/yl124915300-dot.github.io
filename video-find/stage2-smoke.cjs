@@ -56,6 +56,7 @@ async function main(){
   });
   await page.locator('#screenshot-file').setInputFiles({name:'test-label.png',mimeType:'image/png',buffer:Buffer.from(encoded,'base64')});
   await page.waitForFunction(()=>window.FrameFindQA.getSnapshot().hasFrame,null,{timeout:10000});
+  await page.locator('#frame-canvas').scrollIntoViewIfNeeded();
   const box=await page.locator('#frame-canvas').boundingBox();
   await page.mouse.move(box.x+box.width*.03,box.y+box.height*.12);
   await page.mouse.down();
