@@ -11,6 +11,8 @@ on:
       - "video-find/style.css"
       - "video-find/manifest.webmanifest"
       - "video-find/find-*/index.html"
+      - "video-find/heated-throw-50x60/**"
+      - "video-find/prebreakout/**"
       - "sitemap.xml"
       - ".github/workflows/framefind-indexnow.yml"
   workflow_dispatch:
@@ -72,6 +74,10 @@ jobs:
           [[ "$model" == *'Read label/model'* && "$model" == *'/video-find/'* ]] || { echo "Model guide missing"; exit 1; }
           price="$(curl -fsSL --max-time 18 "https://$host/video-find/pricing/")"
           [[ "$price" == *'FrameFind costs'* && "$price" == *'$0'* ]] || { echo "Public pricing page missing"; exit 1; }
+          heated="$(curl -fsSL --max-time 20 "https://$host/video-find/heated-throw-50x60/")"
+          [[ "$heated" == *'Auto shutoff'* && "$heated" == *'pilot-results'* ]] || { echo "Winter comparison not public"; exit 1; }
+          catalog="$(curl -fsSL --max-time 20 "https://$host/video-find/prebreakout/heated-throw-us-2026-10.json")"
+          [[ "$(printf '%s' "$catalog" | jq '.sellers | length')" -ge 3 ]] || { echo "Market catalog missing"; exit 1; }
           echo "Pages and ownership proof publicly verified."
       - name: Send owned content URLs to IndexNow, without asserting indexation
         shell: bash
@@ -87,13 +93,14 @@ jobs:
           "https://$host/video-find/find-tiktok-product/",
           "https://$host/video-find/find-product-from-screenshot/",
           "https://$host/video-find/find-model-number-from-video/",
-          "https://$host/video-find/pricing/"
+          "https://$host/video-find/pricing/",
+          "https://$host/video-find/heated-throw-50x60/"
           ]}
           EOF
           status="$(curl -sS -L --max-time 40 -X POST -H 'Content-Type: application/json; charset=utf-8' \
             --data-binary @/tmp/framefind-indexnow.json \
             -o /tmp/framefind-indexnow-response.txt -w '%{http_code}' 'https://api.indexnow.org/indexnow')"
           echo "IndexNow HTTP status: $status. Acceptance is not proof of indexing, visitors, buyers or commissions."
-          case "$status" in 200|202) echo "Seven owned URLs submitted."; ;; *)
+          case "$status" in 200|202) echo "Eight owned URLs submitted."; ;; *)
             head -c 300 /tmp/framefind-indexnow-response.txt || true; exit 1;;
           esac

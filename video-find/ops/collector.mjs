@@ -5,8 +5,8 @@
 const ORIGIN='https://yl124915300-dot.github.io';
 const STAGES=new Set(['visit','video_submitted','item_selected','product_search','merchant_outbound']);
 const CHANNELS=new Set(['video_link','screenshot','local_video','tab_share','unknown']);
-const MERCHANTS=new Set(['google','amazon','ebay','walmart','johnlewis','other']);
-const SOURCES=new Set(['homepage','user_share','youtube_guide','tiktok_guide','screenshot_guide','model_guide','direct','search','directory','social','referral','other']);
+const MERCHANTS=new Set(['google','amazon','ebay','walmart','johnlewis','bedsure','other']);
+const SOURCES=new Set(['homepage','user_share','youtube_guide','tiktok_guide','screenshot_guide','model_guide','heated_throw_guide','finder','direct','search','directory','social','referral','other']);
 const MEDIUMS=new Set(['owned_site','owned_guide','referral','organic','directory','social','direct','other']);
 const ENTRIES=new Set(['home','finder','guide']);
 const SAFE_KEYS=new Set(['v','day','sid','stage','source','medium','entry','channel','merchant']);

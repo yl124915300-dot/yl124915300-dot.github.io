@@ -1,0 +1,160 @@
+{
+  "schema": "framefind-prebreakout-v1",
+  "asOf": "2026-10-26",
+  "market": "US",
+  "category": "50x60 heated throw blanket",
+  "selectionStatus": "COMPARISON_PILOT_NOT_PROVEN_BREAKOUT",
+  "predictionDisclaimer": "Observations are not a forecast or proof of orders, independent traffic, current stock or our commission.",
+  "hotSignals": [
+    {
+      "source": "TokConnect",
+      "independentStream": "TikTok Shop US estimated merchant sales",
+      "sourceUrl": "https://tokconnect.com/guides/what-to-sell-on-tiktok-shop/",
+      "published": "2026-10-26",
+      "dataThrough": "2026-10-18",
+      "measure": "Median change in 30-day estimated sales versus the preceding 30 days of 29 heated-blanket keyword-matched listings",
+      "number": 106.3,
+      "unit": "percent",
+      "evidenceType": "third_party_estimate",
+      "limitations": "Small filtered sample. 50x60 electric throw subset not separately isolated. Not observed first-party sales."
+    },
+    {
+      "source": "Walmart",
+      "independentStream": "US retailer product PDP transaction badge",
+      "sourceUrl": "https://www.walmart.com/ip/19194673110",
+      "observed": "2026-10-26",
+      "measure": "Sunbeam 50 x 60 heated throw listing badge",
+      "display": "100+ bought since yesterday",
+      "evidenceType": "merchant_claim",
+      "limitations": "Retailer-owned banner, date/location dependent, not verified against transaction ledger. Do not infer site conversions."
+    },
+    {
+      "source": "DataForSEO via TokConnect",
+      "independentStream": "US keyword searches via Google Ads history",
+      "sourceUrl": "https://tokconnect.com/guides/what-to-sell-on-tiktok-shop/",
+      "snapshotDate": "2026-10-20",
+      "measure": "Broad 'heated blanket' keyword September 2026 volume and last December historical peak",
+      "septemberUS": 110000,
+      "previousDecemberPeakUS": 550000,
+      "unit": "monthly searches",
+      "evidenceType": "external_search_history",
+      "limitations": "Different category breadth from specific throw; December peak is historical, not guaranteed 2026."
+    }
+  ],
+  "shopperQuestions": [
+    "Is a heated throw 50x60 inches or a bed-size electric blanket?",
+    "How many heat settings are actually offered?",
+    "When does it automatically shut off: 3, 4 or 8 hours?",
+    "Does it have a separate preheat mode?",
+    "Can the controller be detached before laundering?",
+    "Which merchant actually sells/ships it and what is the current final delivered price?",
+    "Has the exact model been subject to CPSC safety action?"
+  ],
+  "sellers": [
+    {
+      "id": "sunbeam-basic",
+      "brand": "Sunbeam",
+      "title": "Brushed fleece heated throw, black",
+      "size": "50 x 60 in",
+      "heatLevels": 4,
+      "autoOffHours": 4,
+      "preheat": false,
+      "material": "Brushed fleece",
+      "claimCertification": "ETL (retailer claim)",
+      "observedPriceUSD": 29.97,
+      "observedOn": "2026-10-26",
+      "source": "Walmart consumer storefront",
+      "url": "https://www.walmart.com/ip/19194673110",
+      "sourceInfo": "https://business.walmart.com/ip/Sunbeam-Heated-Electric-Brushed-Fleece-Throw-Blanket-Black-4-Heat-Settings-50-x-60-in/19194673110",
+      "sellerDescription": "Walmart.com sold and shipped at the time of observation; confirm at destination",
+      "features": [
+        "simple controls",
+        "budget pick",
+        "4-hour auto off"
+      ],
+      "notes": "Not the same item as the 50 x 70 or wearable Sunbeam product."
+    },
+    {
+      "id": "bedsure-basic",
+      "brand": "U by Bedsure",
+      "title": "Soft flannel & sherpa heated throw, black",
+      "size": "50 x 60 in",
+      "heatLevels": 6,
+      "autoOffHours": 3,
+      "preheat": false,
+      "material": "Flannel / sherpa",
+      "claimCertification": "ETL & FCC (retailer claim)",
+      "observedPriceUSD": 29.99,
+      "observedOn": "2026-10-26",
+      "source": "Walmart",
+      "url": "https://www.walmart.com/ip/17144270780",
+      "sourceInfo": "https://www.walmart.com/ip/17144270780",
+      "sellerDescription": "Seller and shipping depend on location; check at destination",
+      "features": [
+        "soft flannel / sherpa",
+        "6 heat settings",
+        "3-hour auto off"
+      ],
+      "notes": "Three-hour auto-off is not automatically a worse/better safety rating; compare usage needs and manufacturer instructions."
+    },
+    {
+      "id": "bedsure-preheat",
+      "brand": "U by Bedsure",
+      "title": "Ribbed flannel heated throw with preheat, natural",
+      "size": "50 x 60 in",
+      "heatLevels": 6,
+      "autoOffHours": 8,
+      "preheat": true,
+      "material": "Ribbed flannel / sherpa",
+      "claimCertification": "ETL & FCC (retailer claim)",
+      "observedPriceUSD": 42.99,
+      "observedOn": "2026-10-26",
+      "source": "Walmart",
+      "url": "https://www.walmart.com/ip/19422005562",
+      "sourceInfo": "https://www.walmart.com/ip/19422005562",
+      "sellerDescription": "Selected natural throw variant listed by U by Bedsure Pro Seller; final configuration/price subject to checkout",
+      "features": [
+        "preheat function",
+        "6 settings",
+        "8-hour default shut-off; selectable timer options"
+      ],
+      "notes": "Title mentions up-to-10h configurable timer; default shutoff and user-configurable timers differ."
+    },
+    {
+      "id": "bedsure-official",
+      "brand": "Bedsure",
+      "title": "Ribbed heated blanket, grey throw",
+      "size": "Throw (confirm inches on checkout)",
+      "heatLevels": 6,
+      "autoOffHours": 8,
+      "preheat": true,
+      "material": "240 GSM flannel + 200 GSM sherpa",
+      "claimCertification": "ETL & FCC (manufacturer claim)",
+      "observedPriceUSD": 70.99,
+      "observedOn": "2026-10-26",
+      "source": "Bedsure official storefront",
+      "url": "https://bedsurehome.com/products/ribbed-flannel-heated-blanket?variant=40873183248486",
+      "sourceInfo": "https://bedsurehome.com/products/ribbed-flannel-heated-blanket?variant=40873183248486",
+      "sellerDescription": "Official manufacturer website; inspect shipping, stock, size and final checkout costs",
+      "features": [
+        "manufacturer-direct purchase",
+        "preheat / 6 heat settings",
+        "8-hour default shutoff"
+      ],
+      "notes": "Official source controls multiple sizes and colors. Not asserted identical SKU to the Walmart throw."
+    }
+  ],
+  "safety": {
+    "caution": "Electric heated blankets are electrical products. Match the exact model, review certification claim and manual, check CPSC recalls, and inspect cords/controller; stop use for heat damage or frayed wiring. Do not fold or cover an operating blanket against manufacturer instructions.",
+    "warningBrand": "Melinora electric heated blankets (unrelated item): CPSC urged stop use July 16, 2026 due to fire/burn hazard. Do not recommend or confuse with listed brands.",
+    "sourceUrl": "https://www.cpsc.gov/Warnings/2026/CPSC-Warns-Consumers-to-Stop-Using-Melinora-Electric-Heated-Blankets-Immediately-Due-to-Risk-of-Serious-Injury-from-Burn-and-Fire-Hazards",
+    "referenceUrl": "https://www.statefarm.com/simple-insights/residence/are-electric-blankets-safe"
+  },
+  "monetization": {
+    "advertising": "NOT_ACTIVE",
+    "productAffiliate": "NOT_APPROVED",
+    "merchantPurchaseAttribution": "NOT_CONFIGURED",
+    "cashReceipt": "UNVERIFIED"
+  },
+  "restrictions": "Do not treat merchant price snapshots or public TikTok Shop affiliate percentage as user-owned affiliate commissions. Standard merchant URLs only."
+}

@@ -35,6 +35,9 @@ jobs:
           print('Static product claims and model-file checks PASS.')
           PY
           node --check video-find/app.js
+          node --check video-find/heated-throw-50x60/compare.js
+          node --check video-find/heated-throw-50x60/smoke.cjs
+          test -s video-find/prebreakout/heated-throw-us-2026-10.json
           node --check video-find/funnel.js
           test -s video-find/pricing/index.html
           grep -q 'FrameFind costs' video-find/pricing/index.html
@@ -80,3 +83,7 @@ jobs:
         run: node video-find/funnel-smoke.cjs
       - name: Server collector D1 contract test without deployment
         run: node video-find/ops/collector.test.cjs
+      - name: Seasonal SKU filtering, source offers and video handoff
+        env:
+          NODE_PATH: /tmp/framefind-qa/node_modules
+        run: node video-find/heated-throw-50x60/smoke.cjs

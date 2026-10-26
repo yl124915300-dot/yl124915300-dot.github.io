@@ -7,10 +7,10 @@
 'use strict';
 const KEY='framefind:funnel:20261026:v1';
 const STAGES=['visit','video_submitted','item_selected','product_search','merchant_outbound'];
-const SOURCE_VALUES=new Set(['homepage','user_share','youtube_guide','tiktok_guide','screenshot_guide','model_guide','direct','search','directory','social','referral','other']);
+const SOURCE_VALUES=new Set(['homepage','user_share','youtube_guide','tiktok_guide','screenshot_guide','model_guide','heated_throw_guide','finder','direct','search','directory','social','referral','other']);
 const MEDIUM_VALUES=new Set(['owned_site','owned_guide','referral','organic','directory','social','direct','other']);
 const CHANNEL_VALUES=new Set(['video_link','screenshot','local_video','tab_share','demo','unknown']);
-const MERCHANT_VALUES=new Set(['google','amazon','ebay','walmart','johnlewis','other']);
+const MERCHANT_VALUES=new Set(['google','amazon','ebay','walmart','johnlewis','bedsure','other']);
 const PRODUCTION_HOST='yl124915300-dot.github.io';
 const allowedEndpoint=/^https:\/\/[a-z0-9.-]+\.workers\.dev\/collect$/i;
 const hostname=location.hostname.toLowerCase();
