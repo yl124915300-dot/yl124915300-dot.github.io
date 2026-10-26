@@ -61,7 +61,7 @@ async function main(){
     assert.equal(url.searchParams.has('ref'),false);
    }
    assert.match(await page.locator('main').innerText(),/Melinora/);
-   assert.match(await page.locator('main').innerText(),/No commission program/i);
+   assert.match(await page.locator('main').textContent(),/No commission program/i);
    assert.ok(await page.locator('a[href*="cpsc.gov"]').count()>=1);
   });
   await test('shoppable researched video intent flows back into FrameFind without URL server upload',async()=>{
