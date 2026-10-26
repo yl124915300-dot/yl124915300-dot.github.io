@@ -35,6 +35,13 @@ function receiveShared(){
  }
 }
 receiveShared();
+const shortcut=$('framefind-bookmarklet');
+if(shortcut){
+ // Runs only when the shopper clicks their own bookmark on an HTTPS video page.
+ // The original URL is passed in the fragment, not as a network query or scraped frame.
+ shortcut.href="javascript:(function(){var u=location.href;if(u.slice(0,6)!=='https:')return;location.assign('https://yl124915300-dot.github.io/video-find/#shared='+encodeURIComponent(u));})()";
+ shortcut.title='Drag to your bookmarks bar, then click while watching a public video';
+}
 if('serviceWorker' in navigator){
  navigator.serviceWorker.register('/video-find/sw.js',{scope:'/video-find/'})
   .then(()=>{if(!window.matchMedia('(display-mode: standalone)').matches)
