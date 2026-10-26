@@ -3,7 +3,7 @@
  * It never fetches, downloads, or stores third-party video/images.
  */
 'use strict';
-const CACHE='framefind-shell-20261026-v3';
+const CACHE='framefind-shell-20261026-v4';
 const SHELL=[
  '/video-find/',
  '/video-find/style.css',
@@ -12,6 +12,8 @@ const SHELL=[
  '/video-find/manifest.webmanifest',
  '/video-find/pwa.js',
  '/video-find/demo-frame.svg',
+ '/video-find/icon-192.png',
+ '/video-find/icon-512.png',
  '/video-find/icon.svg'
 ];
 function extractVideoUrl(parts){
