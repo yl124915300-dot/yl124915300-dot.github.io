@@ -36,17 +36,13 @@ jobs:
           PY
           node --check video-find/app.js
           node --check video-find/smoke.cjs
-      - name: Fetch rights-checked public model fixture and generate local test video
+      - name: Fetch rights-checked public model fixture for real image and video tests
         run: |
           set -euo pipefail
           curl --fail --location --retry 3 --connect-timeout 15 --max-time 85 \
             -o video-find/vision-fixture.jpg \
             https://storage.googleapis.com/mediapipe-tasks/object_detector/cat_and_dog.jpg
           test "$(stat -c%s video-find/vision-fixture.jpg)" -gt 10000
-          command -v ffmpeg
-          ffmpeg -hide_banner -loglevel error -y -loop 1 -framerate 10 \
-            -i video-find/vision-fixture.jpg -t 3 -c:v libx264 -pix_fmt yuv420p video-find/vision-fixture.mp4
-          test "$(stat -c%s video-find/vision-fixture.mp4)" -gt 10000
       - name: Install isolated Chromium test browser
         run: |
           npm install --prefix /tmp/framefind-qa --no-package-lock --no-save playwright@1.55.1
