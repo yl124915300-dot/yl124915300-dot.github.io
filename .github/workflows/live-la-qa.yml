@@ -1,0 +1,52 @@
+name: Live LA video-to-intent browser QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'live-la/**'
+      - '.github/workflows/live-la-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify exact references and JavaScript syntax
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html=Path('live-la/index.html').read_text()
+          assert 'youtube-nocookie.com/embed/qmE7U1YZPQA' in html
+          assert 'https://api.weather.gov/' in html
+          assert 'Some activity links are tracked Travelpayouts/Klook affiliate links' in html
+          assert 'This is explainable rule-based matching, not an AI vision model.' in html
+          assert 'planner' in html and 'share-plan' in html
+          scripts=re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>',html)
+          assert len(scripts)==1, 'Expected one inline JavaScript block'
+          Path('/tmp/live-la-inline.js').write_text(scripts[0])
+          print('Static asset and truthful-disclosure checks passed.')
+          PY
+          node --check /tmp/live-la-inline.js
+          node --check live-la/smoke.cjs
+      - name: Install standalone test browser
+        run: |
+          npm install --prefix /tmp/live-la-qa --no-package-lock --no-save playwright@1.55.1
+          /tmp/live-la-qa/node_modules/.bin/playwright install --with-deps chromium
+      - name: Serve original static site without additional services
+        run: |
+          nohup python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/live-la-qa-http.log 2>&1 &
+          sleep 2
+      - name: Desktop and mobile simulated intent, NWS alerts, fallback
+        env:
+          NODE_PATH: /tmp/live-la-qa/node_modules
+        run: node live-la/smoke.cjs
