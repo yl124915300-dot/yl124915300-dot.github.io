@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "live-la/index.html"
+      - "live-la/app.js"
+      - "live-la/vision.js"
       - ".github/workflows/live-la-indexnow.yml"
   workflow_dispatch:
 
@@ -42,7 +44,7 @@ jobs:
           actual="$(curl -fsSL --max-time 20 "$proof")"
           [ "$actual" = "$key" ] || { echo "Existing domain key not verified."; exit 1; }
           page="$(curl -fsSL --max-time 20 "$url")"
-          if [[ "$page" != *'Santa Monica live beach cam'* || "$page" != *'id="planner"'* ]]; then
+          if [[ "$page" != *'Open the official live camera'* || "$page" != *'id="buyer-text"'* || "$page" != *'id="planner"'* ]]; then
             echo "Expected page/intent tool not publicly readable."; exit 1
           fi
           status="$(curl -sS -G --max-time 25 \
