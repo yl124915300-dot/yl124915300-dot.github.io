@@ -10,9 +10,18 @@
 <meta property="og:title" content="FrameFind AI — See it in a video? Find it.">
 <meta property="og:description" content="Select a frame and find the object in real retailer searches. Free and honest, with a sample demonstration.">
 <meta property="og:url" content="https://yl124915300-dot.github.io/">
+<meta property="og:image" content="https://yl124915300-dot.github.io/video-find/icon-512.png">
+<meta property="og:image:alt" content="FrameFind visual video-to-product search logo">
+<meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="/video-find/style.css">
 <style>
 .start-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:13px}
+.home-intake{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin:20px 0 9px;max-width:640px}
+.home-intake input{flex:1;min-width:200px;padding:12px 15px;min-height:49px;font:inherit;border:1px solid #b4d7d2;border-radius:11px;background:#fff;color:#123344}
+.home-intake button{padding:12px 20px;border-radius:11px;font:inherit;font-weight:800;background:#14ae91;color:#fff}
+#home-video-status{font-size:12px;color:#d2ede7;margin:0 0 5px}
+.share-home{margin-top:12px;background:transparent;border:1px solid #b4e8df;color:#dff9f4;padding:9px 15px;font-size:12px;font-weight:750;border-radius:10px}
+.share-home:hover{background:#0b6a61}
 .start-links a{min-width:160px}
 .stories{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:22px}
 .story{border:1px solid #d8e3e6;background:white;border-radius:15px;padding:20px}
@@ -31,11 +40,17 @@
 <div class="kicker">VIDEO FRAME → EXACT OBJECT → RETAILER RESULTS</div>
 <h1>Spotted it on video? <span>Find where to buy it.</span></h1>
 <p>Paste a video link, freeze the moment, circle the item and let AI propose an object category. Add any visible brand or model clues. Then compare listings at real retailers, without manual searches across every store.</p>
+<form id="home-video-form" class="home-intake">
+<input id="home-video-url" type="url" maxlength="2048" autocomplete="off" required placeholder="Paste a public YouTube, TikTok or Reel link" aria-label="Video link">
+<button type="submit">Find the item</button>
+</form>
+<p id="home-video-status" role="status">Your video URL is handed to the finder in your browser; it is not downloaded or posted to our server.</p>
 <div class="start-links">
 <a class="primary" href="/video-find/">Find a product from my video ↗</a>
 <a class="primary" style="background:#dff7f0;color:#095749" href="/video-find/?demo=1">Try the free sample</a>
 </div>
 <span class="hero-note">Free to use · no registration · no payments or video stored on our servers</span>
+<button type="button" class="share-home" id="share-home">Share free video finder with someone</button>
 </div><div class="demo-stage" id="example">
 <div class="demo-head"><span class="rec-dot"></span> ORIGINAL ILLUSTRATED FRAME <span>sample frame · not a live sale</span></div>
 <img src="/video-find/demo-frame.svg" alt="Illustrated example of a backpack, sneaker and bottle on a table. The backpack is outlined as an example target." width="700" height="394">
@@ -75,4 +90,32 @@
 </div></section>
 </main>
 <footer><div class="wrap footer-row"><div><strong>FrameFind AI.</strong> Free browser-based object selection and shopping research. No brand affiliation with video services or merchants. <a href="/la-tonight/">Archived LA activity pilot</a></div><div><a href="/video-find/">Video-to-product finder</a><a href="/video-find/find-youtube-product/">YouTube guide</a><a href="/video-find/find-tiktok-product/">TikTok guide</a></div></div></footer>
+<script>
+(function(){
+  'use strict';
+  var form=document.getElementById('home-video-form'), input=document.getElementById('home-video-url');
+  var status=document.getElementById('home-video-status');
+  form.addEventListener('submit',function(event){
+    event.preventDefault();
+    try{
+      var url=new URL(input.value.trim());
+      if(url.protocol!=='https:' || url.username || url.password || url.href.length>2048)throw Error('Use a public HTTPS video link without login credentials.');
+      var destination=new URL('/video-find/?utm_source=homepage&utm_medium=owned_site&utm_campaign=framefind_video',location.origin);
+      destination.hash='shared='+encodeURIComponent(url.href);
+      location.assign(destination.href);
+    }catch(err){status.textContent=String(err.message||'Invalid video URL.');}
+  });
+  document.getElementById('share-home').addEventListener('click',async function(){
+    var dest='https://yl124915300-dot.github.io/video-find/?utm_source=user_share&utm_medium=referral&utm_campaign=framefind_video';
+    try{
+      if(navigator.share)await navigator.share({title:'FrameFind — identify products from videos',text:'Free video frame-to-product search. Pick an item and compare retailers.',url:dest});
+      else if(navigator.clipboard&&navigator.clipboard.writeText)await navigator.clipboard.writeText(dest);
+      else throw Error('Clipboard unavailable');
+      status.textContent='Share link prepared. This does not send your original video URL.';
+    }catch(err){
+      if(err.name!=='AbortError')status.textContent='Share this free tool: '+dest;
+    }
+  });
+})();
+</script>
 </body></html>
