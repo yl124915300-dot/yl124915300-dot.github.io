@@ -3,11 +3,13 @@
  * It never fetches, downloads, or stores third-party video/images.
  */
 'use strict';
-const CACHE='framefind-shell-20261026-v2';
+const CACHE='framefind-shell-20261026-v3';
 const SHELL=[
  '/video-find/',
  '/video-find/style.css',
  '/video-find/app.js',
+ '/video-find/ocr.js',
+ '/video-find/manifest.webmanifest',
  '/video-find/pwa.js',
  '/video-find/demo-frame.svg',
  '/video-find/icon.svg'
