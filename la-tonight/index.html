@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LA Tonight — Archived LA activity shortlist (September 2026)</title>
+  <style>
+    :root { --ink:#15222f; --muted:#647383; --line:#dce5ea; --green:#0b7a61; --orange:#ef8a48; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:linear-gradient(140deg,#f7f4ec 0%,#eef7f3 60%,#fff 100%); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { width:min(960px, calc(100% - 32px)); margin:0 auto; padding:42px 0 72px; }
+    .eyebrow { color:var(--green); font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:12px; }
+    h1 { font-size:clamp(38px,7vw,72px); line-height:.98; max-width:720px; margin:15px 0 20px; letter-spacing:-.055em; }
+    .lede { max-width:700px; color:#445564; font-size:18px; line-height:1.55; }
+    .panel { background:rgba(255,255,255,.84); border:1px solid rgba(220,229,234,.95); border-radius:24px; padding:22px; box-shadow:0 16px 45px rgba(40,63,71,.08); margin-top:28px; }
+    .choices { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0 20px; }
+    label { display:block; color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+    select, button { width:100%; margin-top:7px; border-radius:13px; border:1px solid var(--line); padding:13px 14px; background:#fff; color:var(--ink); font:inherit; }
+    button { cursor:pointer; font-weight:800; }
+    .primary { background:var(--green); border-color:var(--green); color:#fff; padding:15px 18px; }
+    .primary:hover { background:#09634f; }
+    .results-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin:38px 0 14px; }
+    h2 { margin:0; font-size:28px; letter-spacing:-.03em; }
+    .status { color:var(--muted); font-size:13px; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px; display:flex; flex-direction:column; min-height:360px; }
+    .rank { color:var(--orange); font-size:12px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .card h3 { margin:8px 0 8px; font-size:20px; line-height:1.12; }
+    .merchant { color:var(--muted); font-size:13px; }
+    .price { margin:16px 0 2px; font-size:28px; font-weight:900; }
+    .price small { font-size:12px; font-weight:700; color:#71808a; }
+    .meta { color:#546571; font-size:13px; line-height:1.45; }
+    .card .cta { margin-top:auto; background:#15222f; color:#fff; border-color:#15222f; }
+    .tiny { margin-top:12px; color:#71808a; font-size:11px; line-height:1.45; }
+    .disclosure { margin-top:24px; padding:18px; border:1px solid #b9ded2; border-radius:18px; background:#f1fbf7; color:#49635d; font-size:13px; line-height:1.5; }
+    .notice { margin-top:24px; padding:14px 16px; border-left:4px solid var(--orange); background:#fff8f1; color:#5f493a; font-size:13px; line-height:1.5; }
+    footer { margin-top:32px; color:#7a8790; font-size:12px; line-height:1.55; }
+    a { color:inherit; }
+    @media (max-width:720px) { .choices,.cards { grid-template-columns:1fr; } main { padding-top:28px; } .panel { padding:16px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Los Angeles · two people · under US$100 per person</div>
+    <h1>What should you do tonight?</h1>
+    <p class="lede">Three LA-area Klook activities from a 21 September 2026 research snapshot. Prices and date signals are historical, not live availability; each card links to the exact Klook product, where current prices, times and checkout must be confirmed.</p>
+
+    <section class="panel" aria-label="Live LA activity guide" style="background:#e7f6f1;border-color:#beded2">
+      <div class="eyebrow">NEW · LIVE VIDEO + ACTIVITY PLANNER</div>
+      <h2 style="font-size:25px;margin:8px 0">See Santa Monica's live beach cam, then choose what to do</h2>
+      <p class="lede" style="font-size:15px">Watch the real-world view in the official embedded player, compare free beach access with LA activities, and check current checkout prices. No login or new platform approval.</p>
+      <a href="/live-la/" style="display:inline-block;background:#0b7a61;color:white;text-decoration:none;border-radius:12px;padding:13px 20px;font-weight:800">Open live Santa Monica planner</a>
+    </section>
+
+    <section class="panel" aria-label="Your request">
+      <div class="choices">
+        <label>When
+          <select id="timeframe"><option value="tonight">Tonight</option><option value="weekend">This weekend</option></select>
+        </label>
+        <label>What sounds good?
+          <select id="intent"><option value="fun">Something fun</option><option value="date">Date idea</option><option value="adventure">Adventure</option><option value="sightseeing">See LA</option></select>
+        </label>
+        <label>Party
+          <select id="party"><option value="2">2 people</option></select>
+        </label>
+      </div>
+      <button class="primary" id="find">Show my 3 best matches</button>
+    </section>
+
+    <section aria-live="polite">
+      <div class="results-head"><h2>Your short list</h2><div class="status" id="status">Loading verified Klook offers…</div></div>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section class="panel" aria-label="Optional free purchase comparison">
+      <h2 style="font-size:23px">Want to check the total before booking?</h2>
+      <p class="lede" style="font-size:15px;margin-bottom:16px">Our free Telegram shopping assistant can help review an LA activity or another purchase against your date, group size and budget. Ask it to identify fees or terms worth checking. It does not book anything, and live prices, availability and cancellation conditions must be confirmed with the seller.</p>
+      <a class="primary" style="display:inline-block;max-width:380px;border-radius:13px;text-align:center;text-decoration:none;font-weight:800" href="https://t.me/AIDailySavingsAssistBot?start=la_activity_20261025" target="_blank" rel="noopener noreferrer">Ask for a free cost comparison in Telegram</a>
+      <p class="tiny">Optional. The link carries only a public source label, not your personal details; you choose whether to start the conversation. Existing booking links above remain independent.</p>
+    </section>
+    <section class="disclosure" aria-label="Affiliate disclosure">
+      <strong>Tracking disclosure.</strong> The three buttons below are Travelpayouts/Klook deep links with Sub IDs <code>la_router_card1</code>, <code>la_router_card2</code>, and <code>la_router_card3</code>. Prices, taxes, time slots, and availability can change on Klook. Redirect verification was performed separately and is not counted as a Real Outbound Click. No purchase or commission has occurred.
+    </section>
+
+    <div class="notice"><strong>Price scope.</strong> Prices shown are the public Klook prices captured on 2026-09-21 for one person; the two-person estimate is arithmetic only. Confirm the selected date, final total, and cancellation terms on Klook before paying.</div>
+    <footer>
+      <p>Recommendation and click events are recorded by this MVP. This page does not request payment, account creation, or purchase information.</p>
+      <p>Other free help: <a href="/flightclaim/">FlightClaim — free EU261 flight-delay and cancellation rights checker</a>. Independent self-help; no airline affiliation or claim submission.</p>
+      <p>Independent buying guide: <a href="/buying-guides/au-dual-bay-sata-clone-docks/">Australia dual-bay SATA offline clone docks — SD312 vs SD322</a>. Check retailer checkout for live prices and freight.</p>
+    </footer>
+  </main>
+  <form name="kpi-events" data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="kpi-events" />
+    <input type="hidden" name="event" />
+    <input type="hidden" name="session_id" />
+    <input type="hidden" name="deal_id" />
+    <input type="hidden" name="city" />
+    <input type="hidden" name="timeframe" />
+    <input type="hidden" name="party_size" />
+    <input type="hidden" name="budget" />
+    <input type="hidden" name="intent" />
+    <input type="hidden" name="amount_usd" />
+    <input type="hidden" name="source" />
+  </form>
+  <script>
+    const sessionId = crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+    const staticMode = !['localhost', '127.0.0.1'].includes(location.hostname);
+    const source = new URLSearchParams(location.search).get('source') || 'direct';
+    let deals = [];
+    const $ = (id) => document.getElementById(id);
+    const makeEvent = (event, extra = {}) => ({ event, session_id:sessionId, city:'Los Angeles', party_size:2, budget:100, source, ...extra });
+    const send = (event, extra = {}) => {
+      const payload = makeEvent(event, extra);
+      if (!staticMode) {
+        return fetch('/api/event', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(payload) }).catch(() => {});
+      }
+      const body = new URLSearchParams(Object.entries({ 'form-name':'kpi-events', ...payload }).map(([key, value]) => [key, value == null ? '' : String(value)]));
+      try {
+        const stored = JSON.parse(localStorage.getItem('la-tonight-router-events') || '[]');
+        stored.push(payload);
+        localStorage.setItem('la-tonight-router-events', JSON.stringify(stored.slice(-100)));
+      } catch {}
+      if (navigator.sendBeacon) {
+        const sent = navigator.sendBeacon('/', new Blob([body.toString()], { type:'application/x-www-form-urlencoded' }));
+        if (sent) return Promise.resolve();
+      }
+      return fetch('/', { method:'POST', headers:{'content-type':'application/x-www-form-urlencoded'}, body, keepalive:true }).catch(() => {});
+    };
+    function rank(intent, timeframe) {
+      return [...deals].sort((a,b) => (b.tags.includes(intent) ? 2 : 0) + (b.tags.includes(timeframe) ? 1 : 0) - ((a.tags.includes(intent) ? 2 : 0) + (a.tags.includes(timeframe) ? 1 : 0)) || a.price_usd - b.price_usd);
+    }
+    function render(track = true) {
+      const timeframe = $('timeframe').value, intent = $('intent').value;
+      if (!track) {
+        $('status').textContent = 'Choose your timing and mood, then get 3 matches.';
+        $('cards').innerHTML = '';
+        return;
+      }
+      const picks = rank(intent, timeframe).slice(0,3);
+      $('status').textContent = `${timeframe === 'tonight' ? 'Tonight' : 'This weekend'} · 2 people · US$100/person cap`;
+      $('cards').innerHTML = picks.map((deal, i) => {
+        const go = staticMode ? deal.tracking_url : `/go/${encodeURIComponent(deal.id)}?sid=${encodeURIComponent(sessionId)}&timeframe=${encodeURIComponent(timeframe)}&intent=${encodeURIComponent(intent)}&source=la-tonight-router`;
+        return `<article class="card"><div class="rank">${i === 0 ? 'Best fit' : 'Alternative ' + i}</div><h3>${deal.title}</h3><div class="merchant">${deal.merchant} · ${deal.location}</div><div class="price">US$${deal.price_usd.toFixed(2)} <small>per person</small></div><div class="meta">${deal.rating ? deal.rating + ' / 5 · ' : ''}${deal.fit_note}<br>${deal.availability_note}</div><a class="cta" style="text-decoration:none;text-align:center;padding:12px;border-radius:12px;margin-top:18px" href="${go}" data-deal-id="${deal.id}" data-sub-id="${deal.tracking_sub_id}" target="_blank" rel="sponsored nofollow">Open exact Klook product</a><div class="tiny">Two-person estimate: US$${deal.estimated_total_usd.toFixed(2)} · Snapshot ${deal.snapshot_date} · ${deal.affiliate_status}</div></article>`;
+      }).join('');
+      send('recommendation_shown', { timeframe, intent });
+    }
+    $('cards').addEventListener('click', (event) => {
+      const link = event.target.closest('a[data-deal-id]');
+      if (link) send('outbound_deal_click', { deal_id:link.dataset.dealId, tracking_sub_id:link.dataset.subId, timeframe:$('timeframe').value, intent:$('intent').value });
+    });
+    $('find').addEventListener('click', () => { const timeframe = $('timeframe').value, intent = $('intent').value; send('qualified_intent', { timeframe, intent }); render(); });
+    fetch('/api/deals').then((response) => response.ok ? response.json() : Promise.reject(new Error('api_unavailable'))).catch(() => fetch('/deals.json').then((response) => response.json())).then(data => { deals = data; send('page_view'); render(false); }).catch(() => { $('status').textContent = 'Klook offer feed unavailable'; });
+  </script>
+</body>
+</html>
