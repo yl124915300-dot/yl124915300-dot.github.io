@@ -154,6 +154,8 @@ async function frameFrom(drawable,w,h,origin){
   // This immediately rejects cross-origin tainted sources rather than falsely offering frame AI.
   oc.getImageData(0,0,1,1);
   state.frame=off;state.selection=null;state.detections=[];state.demo=origin==='demo';
+  // A new frame must never inherit the previous item's category or brand; false matches cost trust.
+  el('category').value='';el('item-description').value='';
   view.width=cw;view.height=ch;
   el('frame-placeholder').hidden=true;el('detect').disabled=false;
   say('frame-state',origin==='demo'?'Illustrated demo':origin==='video'?'Video frame selected':origin==='screen'?'User-approved tab frame':'Image selected');
@@ -293,7 +295,12 @@ async function runDetector(){
       let choice=state.detections[0];
       if(state.selection&&state.selection.origin==='manual'){
         const inBox=state.detections.filter(d=>intersectRatio(state.selection,d.box)>.2);
-        if(inBox.length)choice=inBox.sort((a,b)=>intersectRatio(state.selection,b.box)-intersectRatio(state.selection,a.box))[0];
+        if(!inBox.length){
+          renderFrame();renderCandidates();
+          say('recognition-status','The object detector found other objects, but none clearly overlaps your selected item. We kept your selection. Type the item category and visible details; do not use the unrelated AI label.');
+          return;
+        }
+        choice=inBox.sort((a,b)=>intersectRatio(state.selection,b.box)-intersectRatio(state.selection,a.box))[0];
       }
       chooseDetection(choice);
       say('frame-help','Detected '+state.detections.length+' candidate object(s). Choose the object in the chips or draw a different region. Add brand/model clues before comparing merchants.');
