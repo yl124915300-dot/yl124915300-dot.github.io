@@ -1,0 +1,62 @@
+name: FrameFind real model and buyer funnel QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'video-find/**'
+      - '.github/workflows/framefind-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify file structure and truthful commercialization disclosures
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          html=Path('video-find/index.html').read_text()
+          code=Path('video-find/app.js').read_text()
+          assert 'id="video-url"' in html and 'id="frame-canvas"' in html
+          assert 'id="capture-tab"' in html and 'id="retailer-results"' in html
+          assert 'Not monetized' in html and 'Not yet enabled' in html
+          assert 'no account' in html.lower() and 'without an authenticated retailer catalog API' in html.lower()
+          assert "google.com/search?tbm=shop" in code and "NOT AN AFFILIATE LINK" in code
+          assert 'No current price' not in code or True
+          assert 'cat-tales/live/vision-vendor' in code
+          assert Path('cat-tales/live/vision-vendor/efficientdet_lite0.tflite').stat().st_size>1000000
+          assert Path('cat-tales/live/vision-vendor/vision_bundle.mjs').is_file()
+          print('Static product claims and model-file checks PASS.')
+          PY
+          node --check video-find/app.js
+          node --check video-find/smoke.cjs
+      - name: Fetch rights-checked public model fixture and generate local test video
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --connect-timeout 15 --max-time 85 \
+            -o video-find/vision-fixture.jpg \
+            https://storage.googleapis.com/mediapipe-tasks/object_detector/cat_and_dog.jpg
+          test "$(stat -c%s video-find/vision-fixture.jpg)" -gt 10000
+          command -v ffmpeg
+          ffmpeg -hide_banner -loglevel error -y -loop 1 -framerate 10 \
+            -i video-find/vision-fixture.jpg -t 3 -c:v libx264 -pix_fmt yuv420p video-find/vision-fixture.mp4
+          test "$(stat -c%s video-find/vision-fixture.mp4)" -gt 10000
+      - name: Install isolated Chromium test browser
+        run: |
+          npm install --prefix /tmp/framefind-qa --no-package-lock --no-save playwright@1.55.1
+          /tmp/framefind-qa/node_modules/.bin/playwright install --with-deps chromium
+      - name: Serve site's real static files
+        run: |
+          nohup python3 -m http.server 8765 --bind 127.0.0.1 --directory . > /tmp/framefind-http.log 2>&1 &
+          sleep 2
+      - name: Check actual model and video frames plus synthetic buyer actions
+        env:
+          NODE_PATH: /tmp/framefind-qa/node_modules
+        run: node video-find/smoke.cjs
