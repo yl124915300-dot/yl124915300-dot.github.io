@@ -368,6 +368,8 @@ function fromQuery(){
   const p=new URLSearchParams(location.search),term=p.get('q'),market=p.get('m');
   if(term)el('item-description').value=q(term);
   if(market==='UK')el('market').value='UK';
+  // Demo is an explicitly requested, first-party illustration, not an external video.
+  if(p.get('demo')==='1')queueMicrotask(()=>{void demo();});
   // We never automatically fetch or open a video URL passed via search parameters.
 }
 el('load-url').addEventListener('click',loadURL);
