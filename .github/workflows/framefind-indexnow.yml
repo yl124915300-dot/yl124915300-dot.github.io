@@ -1,0 +1,76 @@
+name: FrameFind organic search discovery (owned pages only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "video-find/**"
+      - "sitemap.xml"
+      - ".github/workflows/framefind-indexnow.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: framefind-indexnow
+  cancel-in-progress: true
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Wait for successful Pages build of exact revision
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 24); do
+            count="$(curl -fsSL --max-time 15 -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs?per_page=100" \
+              | jq -r --arg sha "$GITHUB_SHA" \
+              '[.workflow_runs[] | select(.head_sha == $sha and .name == "pages build and deployment" and .status == "completed" and .conclusion == "success")] | length')"
+            if [ "$count" -gt 0 ]; then echo "Pages build completed for $GITHUB_SHA"; exit 0; fi
+            sleep 10
+          done
+          echo "Cannot verify this exact site's public deployment; do not submit."
+          exit 1
+      - name: Verify public funnel and retained domain ownership
+        shell: bash
+        run: |
+          set -euo pipefail
+          host="yl124915300-dot.github.io"
+          key="5b6be22d1f9d4641a83ab30909f4cb52"
+          keyloc="https://$host/$key.txt"
+          test "$(curl -fsSL --max-time 18 "$keyloc")" = "$key"
+          home="$(curl -fsSL --max-time 20 https://$host/)"
+          finder="$(curl -fsSL --max-time 20 https://$host/video-find/)"
+          [[ "$home" == *'FrameFind AI'* && "$home" == *'/video-find/?demo=1'* ]] || { echo "New homepage not public."; exit 1; }
+          [[ "$finder" == *'id="video-url"'* && "$finder" == *'id="frame-canvas"'* ]] || { echo "Finder not public."; exit 1; }
+          for route in find-youtube-product find-tiktok-product find-product-from-screenshot; do
+            response="$(curl -fsSL --max-time 20 "https://$host/video-find/$route/")"
+            [[ "$response" == *'Open free video-to-product finder'* ]] || { echo "Guide $route missing"; exit 1; }
+          done
+          echo "Pages and ownership proof publicly verified."
+      - name: Send owned content URLs to IndexNow, without asserting indexation
+        shell: bash
+        run: |
+          set -euo pipefail
+          host="yl124915300-dot.github.io"
+          key="5b6be22d1f9d4641a83ab30909f4cb52"
+          cat > /tmp/framefind-indexnow.json <<EOF
+          {"host":"$host","key":"$key","keyLocation":"https://$host/$key.txt","urlList":[
+          "https://$host/",
+          "https://$host/video-find/",
+          "https://$host/video-find/find-youtube-product/",
+          "https://$host/video-find/find-tiktok-product/",
+          "https://$host/video-find/find-product-from-screenshot/"
+          ]}
+          EOF
+          status="$(curl -sS -L --max-time 40 -X POST -H 'Content-Type: application/json; charset=utf-8' \
+            --data-binary @/tmp/framefind-indexnow.json \
+            -o /tmp/framefind-indexnow-response.txt -w '%{http_code}' 'https://api.indexnow.org/indexnow')"
+          echo "IndexNow HTTP status: $status. Acceptance is not proof of indexing, visitors, buyers or commissions."
+          case "$status" in 200|202) echo "Five owned URLs submitted."; ;; *)
+            head -c 300 /tmp/framefind-indexnow-response.txt || true; exit 1;;
+          esac
