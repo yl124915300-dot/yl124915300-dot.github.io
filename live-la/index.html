@@ -261,7 +261,7 @@ footer{font-size:13px;color:#62727d;padding:20px 0 35px}footer a{color:#315965}
   setInterval(refreshOfficial,15*60*1000);
   fetch('/deals.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('data unavailable');return r.json();}).then(function(data){
     products=Array.isArray(data)?data.filter(function(x){return x&&/^https:\/\/klook\.tpo\.lv\//.test(x.tracking_url||'')&&Number.isFinite(Number(x.price_usd));}):[];
-    document.getElementById('data-status').textContent=products.length?'Activity list loaded from this site's existing offer file.':'No paid offers currently available.';
+    document.getElementById('data-status').textContent=products.length?"Activity list loaded from this site's existing offer file.":'No paid offers currently available.';
     render();
   }).catch(function(){document.getElementById('data-status').textContent='Paid offer list could not load. The free pier option remains available.';render();});
 })();
