@@ -76,6 +76,18 @@ async function main(){
   const candidates=await page.locator('#detect-candidates button').allTextContents();
   assert.ok(candidates.some(x=>/cat|dog/i.test(x)),'Expected cat/dog candidates from actual EfficientDet inference: '+candidates);
   assert.match(await page.locator('#recognition-status').innerText(),/NOT brand or exact product identification/i);
+  // Draw a tight rectangle in a corner with no object; never replace the target with an unrelated detected animal.
+  const canvas=page.locator('#frame-canvas');
+  await canvas.scrollIntoViewIfNeeded();
+  const bounds=await canvas.boundingBox();
+  await page.mouse.move(bounds.x+bounds.width*.01,bounds.y+bounds.height*.01);
+  await page.mouse.down();
+  await page.mouse.move(bounds.x+bounds.width*.16,bounds.y+bounds.height*.16,{steps:7});
+  await page.mouse.up();
+  assert.equal((await page.evaluate(()=>window.FrameFindQA.getSnapshot())).selection.origin,'manual');
+  await page.locator('#detect').click();
+  assert.match(await page.locator('#recognition-status').innerText(),/kept your selection/i,'Manual target must not be overridden by unrelated detections.');
+  assert.equal((await page.evaluate(()=>window.FrameFindQA.getSnapshot())).selection.origin,'manual');
  });
  await test('local WebM clip upload and actual video pixel extraction',async()=>{
   const base64=await page.evaluate(async()=>{
