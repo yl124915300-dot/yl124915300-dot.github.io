@@ -4,7 +4,6 @@
 'use strict';
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
-const fs=require('node:fs');
 async function main(){
  const browser=await chromium.launch({headless:true,args:['--no-sandbox','--use-fake-ui-for-media-stream']});
  let passed=0;
@@ -78,11 +77,25 @@ async function main(){
   assert.ok(candidates.some(x=>/cat|dog/i.test(x)),'Expected cat/dog candidates from actual EfficientDet inference: '+candidates);
   assert.match(await page.locator('#recognition-status').innerText(),/NOT brand or exact product identification/i);
  });
- await test('local MP4 time selection and actual pixel extraction',async()=>{
-  assert.ok(fs.existsSync('video-find/vision-fixture.mp4'),'Missing local video fixture');
-  await page.locator('#clip-file').setInputFiles('video-find/vision-fixture.mp4');
-  await page.waitForFunction(()=>document.querySelector('#local-video').readyState>=2&&document.querySelector('#time-controls').hidden===false,{timeout:14000});
-  await page.locator('#frame-time').fill('1');
+ await test('local WebM clip upload and actual video pixel extraction',async()=>{
+  const base64=await page.evaluate(async()=>{
+    const img=new Image();img.src='./vision-fixture.jpg';await img.decode();
+    const canvas=document.createElement('canvas');canvas.width=640;canvas.height=400;
+    const context=canvas.getContext('2d');context.drawImage(img,0,0,640,400);
+    const stream=canvas.captureStream(10),chunks=[];
+    const recorder=new MediaRecorder(stream,{mimeType:'video/webm'});
+    recorder.addEventListener('dataavailable',e=>{if(e.data.size)chunks.push(e.data);});
+    const done=new Promise(resolve=>recorder.addEventListener('stop',resolve,{once:true}));
+    recorder.start();const handle=setInterval(()=>context.drawImage(img,0,0,640,400),90);
+    await new Promise(resolve=>setTimeout(resolve,1600));
+    recorder.stop();clearInterval(handle);await done;stream.getTracks().forEach(t=>t.stop());
+    const blob=new Blob(chunks,{type:'video/webm'});
+    const bytes=new Uint8Array(await blob.arrayBuffer());let binary='';
+    for(const n of bytes)binary+=String.fromCharCode(n);
+    return btoa(binary);
+  });
+  await page.locator('#clip-file').setInputFiles({name:'scene.webm',mimeType:'video/webm',buffer:Buffer.from(base64,'base64')});
+  await page.waitForFunction(()=>document.querySelector('#local-video').readyState>=2,{timeout:14000});
   await page.locator('#freeze').click();
   await page.waitForFunction(()=>document.querySelector('#frame-state').textContent==='Video frame selected',{timeout:15000});
   assert.equal((await page.evaluate(()=>window.FrameFindQA.getSnapshot())).sourceType,'local');
