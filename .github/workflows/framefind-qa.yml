@@ -37,6 +37,7 @@ jobs:
           node --check video-find/app.js
           node --check video-find/smoke.cjs
           node --check video-find/stage2-smoke.cjs
+          node --check video-find/acquisition-smoke.cjs
           node --check video-find/ocr.js
           node --check video-find/pwa.js
           node --check video-find/sw.js
@@ -63,3 +64,7 @@ jobs:
         env:
           NODE_PATH: /tmp/framefind-qa/node_modules
         run: node video-find/stage2-smoke.cjs
+      - name: Owned acquisition homepage and search-guide smoke
+        env:
+          NODE_PATH: /tmp/framefind-qa/node_modules
+        run: node video-find/acquisition-smoke.cjs

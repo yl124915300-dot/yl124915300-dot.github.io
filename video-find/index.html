@@ -8,6 +8,9 @@
 <meta property="og:type" content="website"><meta property="og:title" content="FrameFind — See it in a video? Find where to buy it.">
 <meta property="og:description" content="Paste a video, pick a frame, select the item, and compare live retailer search results for free.">
 <meta property="og:url" content="https://yl124915300-dot.github.io/video-find/">
+<meta property="og:image" content="https://yl124915300-dot.github.io/video-find/icon-512.png">
+<meta property="og:image:alt" content="FrameFind AI visual frame-to-product finder logo">
+<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://yl124915300-dot.github.io/video-find/">
 <link rel="stylesheet" href="./style.css">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -57,6 +60,7 @@
 <p id="frame-help" class="help" role="status">Draw a rectangle on the frame to select the exact item. On a supported object-detection result, tap its label to choose that object.</p>
 <div id="detect-candidates" class="chips" aria-live="polite"></div>
 <div id="ocr-area" class="ocr-area"><p id="ocr-status" class="help" role="status">Optional label reading: activate after selecting a frame region. Text is only a suggestion, never an automatically verified brand or model.</p><div class="capture-row"><button id="use-ocr" type="button" class="secondary" disabled>Use detected text in search</button></div></div>
+<p class="help">If you can see a brand or model plate, <a href="/video-find/find-model-number-from-video/">follow our step-by-step model identification guide</a>. Use OCR only on a frame region that you select.</p>
 <p class="help">When you choose label reading, FrameFind downloads a pinned open-source OCR runtime and English language data into your browser. The cropped image is analyzed on your device, not uploaded to an OCR server. It may fail offline or misread logos and model numbers.</p>
 <p class="help">Our existing locally hosted EfficientDet-Lite0 model recognizes broad objects such as backpacks, bags, bottles, chairs and laptops, not exact brands or SKUs. Frames are processed in your browser. For difficult fashion items, save the selected object crop and optionally upload it at <a href="https://lens.google/" target="_blank" rel="noopener noreferrer">Google Lens</a> for a separate visual-similarity search. We do not upload your crop to Lens.</p>
 </div>

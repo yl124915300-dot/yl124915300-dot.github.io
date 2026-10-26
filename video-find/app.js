@@ -395,6 +395,9 @@ function analyzeQuery(){
 }
 async function shareResult(){
   const url=new URL('/video-find/',location.origin);
+  url.searchParams.set('utm_source','user_share');
+  url.searchParams.set('utm_medium','referral');
+  url.searchParams.set('utm_campaign','framefind_video');
   if(state.lastQuery)url.searchParams.set('q',state.lastQuery);
   url.searchParams.set('m',el('market').value);
   // Deliberately do not embed user's potentially private original video URL or image in a share link.
