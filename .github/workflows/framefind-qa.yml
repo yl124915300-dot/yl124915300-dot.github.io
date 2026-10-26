@@ -35,6 +35,10 @@ jobs:
           print('Static product claims and model-file checks PASS.')
           PY
           node --check video-find/app.js
+          node --check video-find/funnel.js
+          node --check video-find/funnel-smoke.cjs
+          node --check video-find/ops/collector.mjs
+          node --check video-find/ops/collector.test.cjs
           node --check video-find/smoke.cjs
           node --check video-find/stage2-smoke.cjs
           node --check video-find/acquisition-smoke.cjs
@@ -68,3 +72,9 @@ jobs:
         env:
           NODE_PATH: /tmp/framefind-qa/node_modules
         run: node video-find/acquisition-smoke.cjs
+      - name: Five-stage privacy-safe browser session and merchant click validation
+        env:
+          NODE_PATH: /tmp/framefind-qa/node_modules
+        run: node video-find/funnel-smoke.cjs
+      - name: Server collector D1 contract test without deployment
+        run: node video-find/ops/collector.test.cjs
