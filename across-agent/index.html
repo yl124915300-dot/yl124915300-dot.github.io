@@ -46,6 +46,15 @@
 </div>
 <p class="small">Testnet tokens have no real-dollar value. The fee recipient is a demonstration placeholder, not a wallet you should pay. A returned quote is not proof of successful chain execution. The site does not request private keys, initiate wallet authorization, or broadcast transactions.</p>
 </section>
+<section id="owner-test">
+<h2>Owner-controlled testnet execution</h2>
+<div class="card">
+<h3>Testnet transfer & fee verification (experimental)</h3>
+<p>This separate page supports a 1 test-USDC transfer on Arbitrum Sepolia → Base Sepolia, exact-amount ERC-20 approval, owner-reviewed wallet signing, public bridge tracking, and destination fee inspection. It has <strong>not</strong> completed an end-to-end project transaction and does not support mainnet assets.</p>
+<div class="actions"><a class="button alt" href="./owner-test/">Open owner testnet validation</a></div>
+<p class="small">Use a dedicated wallet with test-only assets, and a separate fee-recipient address you control. Every transaction requires explicit wallet-owner approval. V5 production transfers remain disabled.</p>
+</div>
+</section>
 <section id="integration"><h2>Integration & safeguards</h2><div class="grid2"><div class="card"><h3>Verified technical signals</h3><ul><li>Public Across V4 quote with optional app fee</li><li>Read-only calldata generation and simulation</li><li>Historical cross-chain deposit status checks</li><li>V5 staging service health endpoint</li></ul></div><div class="card"><h3>Requirements before launch</h3><ul><li>V5 API permission/activation for issued Integrator ID <code>0x049f</code> (staging currently responds 401)</li><li>Official confirmation of whether V5 supports custom <code>appFee</code> and fee recipient configuration</li><li>Authorized testnet signature and fee receipt</li><li>Jurisdiction-specific legal/compliance assessment</li></ul></div></div>
 <p class="small">Independent proof of concept, not endorsed by or affiliated with Across Protocol. No production users, trading volume, collected revenue, implied license, or promised rate is claimed. Never send tokens to an address obtained from this webpage.</p>
 <div class="links"><a href="https://docs.across.to/introduction/api-keys" target="_blank" rel="noopener noreferrer">Official integrator documentation ↗</a><a href="https://exclusive.docs.across.to/guides/dev-guides/v5-integration" target="_blank" rel="noopener noreferrer">Across V5 integration guide ↗</a><a href="https://github.com/yl124915300-dot" target="_blank" rel="noopener noreferrer">Developer GitHub ↗</a></div></section>
