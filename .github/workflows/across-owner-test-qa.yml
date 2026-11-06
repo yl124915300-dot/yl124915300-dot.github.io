@@ -1,0 +1,44 @@
+name: Across Testnet UI Static Validation
+
+on:
+  push:
+    paths:
+      - 'across-agent/owner-test/index.html'
+      - '.github/workflows/across-owner-test-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check wallet test harness JavaScript syntax and safety invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html=Path("across-agent/owner-test/index.html").read_text(encoding="utf-8")
+          match=re.search(r'<script>\s*(.*?)\s*</script>',html,re.S)
+          assert match, "Script block missing"
+          Path("/tmp/across-owner-test.js").write_text(match.group(1),encoding="utf-8")
+          required=[
+            'eth_requestAccounts','eth_sendTransaction','eth_getTransactionReceipt',
+            '421614','84532','1000000','appFee:"0.003"',
+            '0x095ea7b3','ensureOrigin()','fees?.total?.details?.app',
+            'deposit/status','base-sepolia.blockscout.com',
+          ]
+          for marker in required:
+            assert marker in html, "Missing expected test-only invariant: "+marker
+          assert '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff' not in html.lower(), "Unlimited allowance code forbidden"
+          assert not re.search(r'acx_[A-Za-z0-9_-]{12,}',html), "Credential-like token found"
+          assert 'https://api.staging.across.to/v1/quotes' not in html, "V5 auth route must not be called"
+          print("Static safety checks passed: separate approval; restricted chains; no API credential")
+          PY
+          node --check /tmp/across-owner-test.js
+          echo "Owner testnet JavaScript syntax passed"
