@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Across Agent — Owner Testnet Validation</title>
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="User-authorized Across testnet transfer and fee validation. No mainnet funds.">
+<style>
+:root{color-scheme:dark;--bg:#0b1120;--card:#161e30;--line:#35445b;--text:#eef4ff;--dim:#aabbd2;--mint:#adf1d4;--warning:#ffd0a7}*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:900px;margin:auto;padding:32px 20px 65px}h1{font-size:clamp(28px,5vw,42px);line-height:1.1;letter-spacing:-.04em;margin:16px 0}h2{font-size:20px;margin:0 0 12px}h3{font-size:16px}a{color:var(--mint)}p,li{color:var(--dim)}strong{color:var(--text)}.caps{font-weight:750;letter-spacing:.08em;text-transform:uppercase;font-size:12px;color:var(--mint)}.warning{border:1px solid #956246;padding:14px 18px;border-radius:14px;color:var(--warning);background:#292019}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:18px}.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}label{display:block;margin:12px 0 6px;font-size:14px;font-weight:600;color:#d6e2f2}input[type=text]{width:100%;background:#0b1321;border:1px solid #60738e;padding:12px 14px;border-radius:9px;color:var(--text);font:inherit}.button{background:var(--mint);color:#132b20;border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:800;cursor:pointer;margin:7px 7px 5px 0}.button:disabled{opacity:.37;cursor:not-allowed}.outline{color:var(--text);background:#26354a}.small{font-size:13px}.row{display:flex;flex-wrap:wrap;gap:14px}.data{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.data div{background:#101929;padding:10px;border-radius:9px;overflow-wrap:anywhere}.data span{display:block;color:var(--dim);font-size:12px}.data b{font-size:15px}.mono,code{font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.stat{min-height:22px;color:var(--mint)}.foot{font-size:13px;padding-top:30px;color:var(--dim)}@media(max-width:650px){.steps,.data{grid-template-columns:1fr}}</style></head>
+<body><main>
+<a href="../">← Across Agent overview</a>
+<div class="caps" style="margin-top:28px">Independent prototype • Controlled technical test</div>
+<h1>Owner-authorized testnet fee verification</h1>
+<p>Validate one real Across testnet transfer with a disclosed 0.3% example integrator fee. This is a <strong>testnet-only</strong> execution harness, not a customer service or V5 production integration. It is experimental and has not been end-to-end transacted by the project.</p>
+<div class="warning"><strong>Test assets only.</strong> This page rejects mainnet and restricts source chain to Arbitrum Sepolia (421614), destination to Base Sepolia (84532), and transfer amount to 1.000000 test USDC. Never import or share a private key, deposit real tokens, or connect a wallet holding meaningful assets. The owner must separately confirm each wallet transaction. One testnet fee payment does not imply commercial authorization.</div>
+<div class="panel">
+<h2>1. Connect a dedicated test wallet</h2>
+<p>Use an injected EIP-1193 wallet (e.g., MetaMask or Rabby). Connect a separate test-only account. Obtain test USDC and small test ETH from official faucets if available. The wallet owner approves network switches.</p>
+<div class="row"><button class="button" id="connect">Connect test wallet</button><button class="button outline" id="switch" disabled>Switch to Arbitrum Sepolia</button></div>
+<p id="account" class="mono">Not connected</p>
+<p>Test faucets: <a href="https://faucet.circle.com/" target="_blank" rel="noopener noreferrer">Circle USDC</a> · <a href="https://faucet.quicknode.com/arbitrum/sepolia" target="_blank" rel="noopener noreferrer">QuickNode ETH</a>. Faucets can require verification or enforce limits.</p>
+</div>
+<div class="panel">
+<h2>2. Specify the fee recipient YOU control</h2>
+<p>Your connected wallet will be the destination recipient. Enter a second test-only EVM address you control to receive the optional 0.3% example fee. Neither address is supplied by this website.</p>
+<label for="feeAddr">Separate fee-recipient address (Base Sepolia)</label><input id="feeAddr" type="text" placeholder="0x… (another account that you control)" autocomplete="off" spellcheck="false">
+<p class="small">No precompiled, zero, or demo addresses. This fee recipient must differ from your connected wallet. Public addresses are sent to the Across quote API; no private keys are accessed.</p>
+<button class="button" id="quote" disabled>Get current 1 USDC testnet quote</button><div class="data">
+<div><span>Input</span><b>1.000000 test USDC</b></div><div><span>Example integrator fee</span><b>0.3%</b></div>
+<div><span>API returned fee</span><b id="fee">—</b></div><div><span>Expected destination amount</span><b id="output">—</b></div>
+<div><span>Quote expires</span><b id="expiry">—</b></div><div><span>Transaction simulation</span><b id="simulation">—</b></div>
+</div><p id="quoteStatus" class="stat" role="status" aria-live="polite">No quote requested</p>
+</div>
+<div class="steps">
+<div class="panel"><h2>3. Approve exactly 1 USDC (if needed)</h2>
+<p>Across's returned ERC-20 approval may authorize unlimited funds. This harness never submits that unlimited approval. It constructs a standard ERC-20 approval for exactly 1 USDC to the verified Across testnet spender.</p>
+<button id="approve" class="button" disabled>Approve exactly 1 test USDC</button>
+<p id="approveStatus" role="status" aria-live="polite">Requires wallet connection and a quote that reports insufficient allowance.</p>
+</div>
+<div class="panel"><h2>4. Authorize and broadcast one test transfer</h2>
+<p>This action requires a fresh quote, sufficient test balance, and successful simulation. Review all details in your wallet before approving.</p>
+<label style="font-weight:normal"><input id="ack" type="checkbox"> I understand this spends 1 test USDC plus test gas and may be delayed or fail. I confirmed the fee wallet is mine.</label>
+<label for="confirm">Type TESTNET ONLY to unlock the final action</label>
+<input id="confirm" type="text" placeholder="TESTNET ONLY" autocomplete="off">
+<button class="button" id="send" disabled>Authorize testnet transfer</button>
+<p id="sendStatus" role="status" aria-live="polite">Not ready; no funds have been sent.</p>
+</div>
+</div>
+<div class="panel">
+<h2>5. Verify bridge and fee receipt</h2>
+<p id="txInfo" class="mono">Origin transaction: none</p>
+<button id="track" class="button outline" disabled>Check Across transfer status</button>
+<p id="trackStatus" role="status" aria-live="polite">No origin transaction to track.</p>
+<p id="destInfo" class="mono"></p>
+<button id="verifyFee" class="button outline" disabled>Check destination chain fee transfer</button>
+<p id="feeStatus" role="status" aria-live="polite">A settled transfer and destination hash are required.</p>
+</div>
+<div class="foot"><strong>Security and limits:</strong> Open-source page, no backend wallet custody, no analytics collecting wallet secrets, no production API key, no unattended transactions. A transfer may fail, expire, or require a refund. Verify on block explorers before treating any payment as settled. This V4 testnet proof-of-concept does not grant permission to charge fees on production V5.</div>
+</main>
+<script>
+"use strict";
+const ORIGIN=421614,DEST=84532,USDC="0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",OUT_USDC="0x036CbD53842c5426634e7929541eC2318f3dCF7e",SPOKE="0x7E63A5f1a8F0B4d0934B2f2327DAED3F6bb2ee75",AMOUNT=1000000;
+const el=id=>document.getElementById(id);
+let account="",currentQuote=null,quotedFeeWallet="",txHash="",destinationHash="";
+const eq=(a,b)=>typeof a==="string"&&typeof b==="string"&&a.toLowerCase()===b.toLowerCase();
+const validAddress=a=>/^0x[a-fA-F0-9]{40}$/.test(a||"")&&!/^0x0{39}[0-9a-f]$/i.test(a||"");
+const usdc=n=>Number.isFinite(Number(n))?(Number(n)/1e6).toFixed(6)+" test USDC":"—";
+function state(){const wallet=el("feeAddr").value.trim();return !!account&&validAddress(wallet)&&!eq(wallet,account);}
+function resetQuote(){currentQuote=null;quotedFeeWallet="";el("fee").textContent=el("output").textContent=el("expiry").textContent=el("simulation").textContent="—";el("approve").disabled=true;el("send").disabled=true;}
+function buttons(){el("switch").disabled=!account;el("quote").disabled=!state();const q=currentQuote;if(!q){el("approve").disabled=true;el("send").disabled=true;return;}const allowance=BigInt(q?.checks?.allowance?.actual||"0"),needed=BigInt(q?.checks?.allowance?.expected||String(AMOUNT)),balance=BigInt(q?.checks?.balance?.actual||"0");
+el("approve").disabled=allowance>=needed||!state();
+el("send").disabled=!(state()&&q.swapTx?.simulationSuccess===true&&allowance>=needed&&balance>=BigInt(AMOUNT)&&Number(q.quoteExpiryTimestamp)>Date.now()/1000+20&&el("ack").checked&&el("confirm").value.trim()==="TESTNET ONLY"&&eq(quotedFeeWallet,el("feeAddr").value.trim())&&eq(q.swapTx.to,SPOKE));
+}
+function onAccountChanged(){account="";resetQuote();el("account").textContent="Wallet changed; reconnect";buttons();}
+if(window.ethereum?.on){window.ethereum.on("accountsChanged",onAccountChanged);window.ethereum.on("chainChanged",()=>{resetQuote();el("quoteStatus").textContent="Network changed; refresh your quote.";buttons();});}
+async function ensureOrigin(){if(!window.ethereum)throw Error("No injected wallet found. Install a wallet in a supported browser.");const chain=await window.ethereum.request({method:"eth_chainId"});if(Number.parseInt(chain,16)!==ORIGIN)throw Error("Switch the wallet to Arbitrum Sepolia (chain 421614) first.");const arr=await window.ethereum.request({method:"eth_accounts"});if(!account||!arr.some(a=>eq(a,account)))throw Error("Connected account changed; reconnect.");}
+function checkTxData(tx){if(!tx||Number(tx.chainId)!==ORIGIN||!eq(tx.to,SPOKE)||typeof tx.data!=="string"||!/^0x[0-9a-fA-F]+$/.test(tx.data)||tx.data.length<20)throw Error("Across quote returned an unexpected origin transaction; rejected.");if(!tx.data.toLowerCase().includes(quotedFeeWallet.toLowerCase().slice(2)))throw Error("The expected fee wallet was not found in the returned calldata; rejected.");}
+const pollReceipt=async h=>{for(let i=0;i<24;i++){await new Promise(r=>setTimeout(r,5000));const receipt=await window.ethereum.request({method:"eth_getTransactionReceipt",params:[h]});if(receipt?.blockNumber){if(receipt.status==="0x0")throw Error("Approval reverted on chain.");return receipt;}}throw Error("Transaction not confirmed yet. Inspect in the block explorer before retrying.");};
+el("connect").addEventListener("click",async()=>{try{if(!window.ethereum)throw Error("No injected wallet found.");const a=await window.ethereum.request({method:"eth_requestAccounts"});if(!a?.[0]||!validAddress(a[0]))throw Error("No valid address returned.");account=a[0];resetQuote();el("account").textContent=account;el("quoteStatus").textContent="Connected. Enter a second controlled testnet fee address and request a quote.";buttons();}catch(e){el("account").textContent="Connection failed: "+String(e.message||e).slice(0,180);}});
+el("switch").addEventListener("click",async()=>{try{await window.ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x66eee"}]});el("quoteStatus").textContent="Network switch requested. Confirm Arbitrum Sepolia in wallet.";resetQuote();buttons();}catch(e){if(e?.code===4902){try{await window.ethereum.request({method:"wallet_addEthereumChain",params:[{chainId:"0x66eee",chainName:"Arbitrum Sepolia",rpcUrls:["https://sepolia-rollup.arbitrum.io/rpc"],nativeCurrency:{name:"Ether",symbol:"ETH",decimals:18},blockExplorerUrls:["https://sepolia.arbiscan.io"]}]});}catch(ee){el("quoteStatus").textContent="Network setup failed: "+String(ee.message||ee).slice(0,160);}}else{el("quoteStatus").textContent="Network switch denied/failed: "+String(e.message||e).slice(0,160);}}});
+el("feeAddr").addEventListener("input",()=>{resetQuote();buttons();});
+el("ack").addEventListener("change",buttons);el("confirm").addEventListener("input",buttons);
+el("quote").addEventListener("click",async()=>{
+resetQuote();el("quote").disabled=true;el("quoteStatus").textContent="Requesting a fresh testnet quote…";
+try{
+await ensureOrigin();
+const feeWallet=el("feeAddr").value.trim();if(!state())throw Error("Enter a distinct, valid fee wallet you control.");
+const p=new URLSearchParams({tradeType:"exactInput",originChainId:String(ORIGIN),destinationChainId:String(DEST),inputToken:USDC,outputToken:OUT_USDC,amount:String(AMOUNT),depositor:account,recipient:account,appFee:"0.003",appFeeRecipient:feeWallet});
+const res=await fetch("https://testnet.across.to/api/swap/approval?"+p,{cache:"no-store",headers:{Accept:"application/json"}});
+if(!res.ok)throw Error("Across quote failed: HTTP "+res.status);
+const q=await res.json();quotedFeeWallet=feeWallet;
+if(!q.id||q.inputAmount!==String(AMOUNT)||Number(q.quoteExpiryTimestamp)<Date.now()/1000+20||!q.fees?.total?.details?.app?.amount||!q.swapTx)throw Error("Invalid or already expired quote; no transaction allowed.");
+checkTxData(q.swapTx);currentQuote=q;
+el("fee").textContent=usdc(q.fees.total.details.app.amount);
+el("output").textContent=usdc(q.expectedOutputAmount);
+el("expiry").textContent=new Date(Number(q.quoteExpiryTimestamp)*1000).toLocaleTimeString();
+el("simulation").textContent=q.swapTx.simulationSuccess?"PASS":"NOT READY";
+el("quoteStatus").textContent=q.swapTx.simulationSuccess?"Quote returned; owner can review and sign after confirmation.":"Quote returned; balance or allowance may be insufficient. No execution enabled.";
+}catch(e){resetQuote();el("quoteStatus").textContent="Quote blocked: "+String(e.message||e).slice(0,220);}finally{buttons();}
+});
+el("approve").addEventListener("click",async()=>{
+el("approve").disabled=true;el("approveStatus").textContent="Preparing exact 1 USDC approval; wallet confirmation required.";
+try{
+await ensureOrigin();if(!currentQuote||!state())throw Error("Refresh quote and fee address.");
+const spender=currentQuote.checks?.allowance?.spender;
+if(!eq(spender,SPOKE))throw Error("Approval spender mismatch");
+const amount=BigInt(AMOUNT).toString(16).padStart(64,"0");
+const data="0x095ea7b3"+SPOKE.toLowerCase().slice(2).padStart(64,"0")+amount;
+const h=await window.ethereum.request({method:"eth_sendTransaction",params:[{from:account,to:USDC,data,value:"0x0"}]});
+el("approveStatus").textContent="Exact allowance transaction sent: "+h+" · checking confirmation";
+await pollReceipt(h);el("approveStatus").textContent="Approval confirmed. Refresh the Across quote before transferring.";
+}catch(e){el("approveStatus").textContent="Approval not completed: "+String(e.message||e).slice(0,240);}finally{resetQuote();buttons();}
+});
+el("send").addEventListener("click",async()=>{
+el("send").disabled=true;
+try{
+await ensureOrigin();buttons();if(el("send").disabled && !(currentQuote?.swapTx?.simulationSuccess&&el("ack").checked&&el("confirm").value.trim()==="TESTNET ONLY"))throw Error("Not ready. Refresh quote and confirm testnet action.");
+const q=currentQuote;if(!q||!state()||!eq(quotedFeeWallet,el("feeAddr").value.trim()))throw Error("Quote and recipient changed");
+if(BigInt(q.checks?.allowance?.actual||"0")<BigInt(AMOUNT)||BigInt(q.checks?.balance?.actual||"0")<BigInt(AMOUNT)||!q.swapTx?.simulationSuccess||Number(q.quoteExpiryTimestamp)<=Date.now()/1000+20||!el("ack").checked||el("confirm").value.trim()!=="TESTNET ONLY")throw Error("Preflight did not pass. Refresh quote.");
+checkTxData(q.swapTx);
+el("sendStatus").textContent="Wallet approval required. Confirm ONLY this Arbitrum Sepolia testnet transaction.";
+const h=await window.ethereum.request({method:"eth_sendTransaction",params:[{from:account,to:q.swapTx.to,data:q.swapTx.data,value:"0x0"}]});
+if(!/^0x[a-fA-F0-9]{64}$/.test(h))throw Error("Wallet did not return a transaction hash.");
+txHash=h;el("txInfo").textContent="Origin transaction: "+h;
+el("track").disabled=false;el("sendStatus").textContent="Broadcast requested. Confirm on Arbitrum Sepolia explorer; refresh status below.";
+resetQuote();
+}catch(e){el("sendStatus").textContent="No confirmed broadcast: "+String(e.message||e).slice(0,220);}finally{buttons();}
+});
+el("track").addEventListener("click",async()=>{
+if(!txHash)return;el("trackStatus").textContent="Checking Across bridge status…";
+try{
+const r=await fetch("https://testnet.across.to/api/deposit/status?depositTxnRef="+encodeURIComponent(txHash),{cache:"no-store"});
+if(!r.ok)throw Error("Across status HTTP "+r.status);
+const d=await r.json();
+if(d.depositTxnRef&&!eq(d.depositTxnRef,txHash))throw Error("Origin hash mismatch");
+el("trackStatus").textContent="Across status: "+String(d.status||"unknown")+". "+(d.depositId?"Deposit #"+d.depositId+". ":"")+(d.destinationChainId?"Destination chain "+d.destinationChainId+".":"");
+if(d.status==="filled"&&/^0x[a-fA-F0-9]{64}$/.test(d.fillTxnRef||"")){destinationHash=d.fillTxnRef;el("destInfo").textContent="Destination fill: "+destinationHash;el("verifyFee").disabled=false;}else{destinationHash="";el("verifyFee").disabled=true;}
+}catch(e){el("trackStatus").textContent="Tracking unavailable: "+String(e.message||e).slice(0,200);}
+});
+el("verifyFee").addEventListener("click",async()=>{
+if(!destinationHash||!validAddress(quotedFeeWallet)){el("feeStatus").textContent="Fee recipient or fill hash is missing";return;}
+el("feeStatus").textContent="Inspecting Base Sepolia token transfer logs…";
+try{
+const r=await fetch("https://base-sepolia.blockscout.com/api/v2/transactions/"+encodeURIComponent(destinationHash)+"/token-transfers",{cache:"no-store"});
+if(!r.ok)throw Error("Blockscout HTTP "+r.status);
+const d=await r.json();const matches=(d.items||[]).filter(z=>eq(z.to?.hash,quotedFeeWallet)&&eq(z.token?.address,OUT_USDC));
+if(!matches.length){el("feeStatus").textContent="NO VERIFIED FEE PAYMENT in the direct fill logs. Inspect destination hash manually; no revenue claimed.";return;}
+const total=matches.reduce((a,z)=>a+BigInt(z.total?.value||"0"),0n);
+el("feeStatus").textContent="Destination fee-wallet transfer observed: "+usdc(total.toString())+". This is testnet token only, not commercial revenue.";
+}catch(e){el("feeStatus").textContent="Automated fee verification unavailable: "+String(e.message||e).slice(0,180)+". Inspect logs manually on Base Sepolia Blockscout.";}
+});
+buttons();
+</script></body></html>
