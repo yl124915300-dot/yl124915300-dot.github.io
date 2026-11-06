@@ -10,7 +10,7 @@
 <div class="caps" style="margin-top:28px">Independent prototype • Controlled technical test</div>
 <h1>Owner-authorized testnet fee verification</h1>
 <p>Validate one real Across testnet transfer with a disclosed 0.3% example integrator fee. This is a <strong>testnet-only</strong> execution harness, not a customer service or V5 production integration. It is experimental and has not been end-to-end transacted by the project.</p>
-<div class="warning"><strong>Test assets only.</strong> This page rejects mainnet and restricts source chain to Arbitrum Sepolia (421614), destination to Base Sepolia (84532), and transfer amount to 1.000000 test USDC. Never import or share a private key, deposit real tokens, or connect a wallet holding meaningful assets. The owner must separately confirm each wallet transaction. One testnet fee payment does not imply commercial authorization.</div>
+<div class="warning"><strong>Test assets only.</strong> This page rejects mainnet and restricts source chain to Arbitrum Sepolia (421614), destination to Base Sepolia (84532), and transfer amount to 1.000000 test USDC. Never import or share a private key, deposit real tokens, or connect a wallet holding meaningful assets. The owner must separately confirm each wallet transaction. One testnet fee payment does not imply commercial authorization. <strong>Your name (e.g. yulei) is not a wallet signature.</strong> A cryptographic signature is produced only when you review and approve a transaction inside your wallet. Never enter a seed phrase or private key in this page.</div>
 <div class="panel">
 <h2>1. Connect a dedicated test wallet</h2>
 <p>Use an injected EIP-1193 wallet (e.g., MetaMask or Rabby). Connect a separate test-only account. Obtain test USDC and small test ETH from official faucets if available. The wallet owner approves network switches.</p>
@@ -141,7 +141,7 @@ el("feeStatus").textContent="Inspecting Base Sepolia token transfer logs…";
 try{
 const r=await fetch("https://base-sepolia.blockscout.com/api/v2/transactions/"+encodeURIComponent(destinationHash)+"/token-transfers",{cache:"no-store"});
 if(!r.ok)throw Error("Blockscout HTTP "+r.status);
-const d=await r.json();const matches=(d.items||[]).filter(z=>eq(z.to?.hash,feeWalletForTransfer)&&eq(z.token?.address,OUT_USDC));
+const d=await r.json();const matches=(d.items||[]).filter(z=>eq(z.to?.hash,feeWalletForTransfer)&&eq(z.token?.address_hash,OUT_USDC));
 if(!matches.length){el("feeStatus").textContent="NO VERIFIED FEE PAYMENT in the direct fill logs. Inspect destination hash manually; no revenue claimed.";return;}
 const total=matches.reduce((a,z)=>a+BigInt(z.total?.value||"0"),0n);
 el("feeStatus").textContent="Destination fee-wallet transfer observed: "+usdc(total.toString())+". This is testnet token only, not commercial revenue.";
