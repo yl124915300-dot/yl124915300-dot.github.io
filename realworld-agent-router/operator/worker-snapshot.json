@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-06T13:57:53+00:00",
+  "checkedAt": "2026-11-06T22:59:52+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -80,16 +80,6 @@
       "profileUrl": "https://rentahuman.ai/humans/sh3bOBj5orktEp7re9M0"
     },
     {
-      "name": "Paul Dada",
-      "headline": "AI Data Annotator & Microbiology Researcher | Excel, RLHF, STEM QA",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 10,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/d2PomulOgOiIpXHLsSHE"
-    },
-    {
       "name": "Sutton Peter",
       "headline": "Egocentric Video Data Contributor | AI Field Data Collection & Video Quality Review",
       "city": "New York",
@@ -98,6 +88,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
+    },
+    {
+      "name": "Paul Dada",
+      "headline": "AI Data Annotator & Microbiology Researcher | Excel, RLHF, STEM QA",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 10,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/d2PomulOgOiIpXHLsSHE"
     },
     {
       "name": "Mofarah",
@@ -270,6 +270,16 @@
       "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
     },
     {
+      "name": "Martin Davis",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
+    },
+    {
       "name": "Edward James",
       "headline": "",
       "city": "San Francisco",
@@ -318,16 +328,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
-    },
-    {
-      "name": "Branden",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Srar7XG1Go7Qh1v814ST"
     },
     {
       "name": "Jaan Kelly",
