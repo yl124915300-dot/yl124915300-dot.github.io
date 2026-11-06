@@ -5,6 +5,7 @@ on:
     paths:
       - 'across-agent/owner-test/index.html'
       - '.github/workflows/across-owner-test-qa.yml'
+      - 'across-agent/owner-test/smoke.mjs'
   workflow_dispatch:
 
 permissions:
@@ -42,3 +43,7 @@ jobs:
           PY
           node --check /tmp/across-owner-test.js
           echo "Owner testnet JavaScript syntax passed"
+      - name: Zero-funds mock wallet test
+        run: |
+          npm install --no-save --ignore-scripts --package-lock=false jsdom@24.1.3
+          node across-agent/owner-test/smoke.mjs
