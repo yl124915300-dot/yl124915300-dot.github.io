@@ -1,0 +1,51 @@
+name: Across V5 authorization smoke test (read-only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-across-access:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      ACROSS_API_KEY: ${{ secrets.ACROSS_API_KEY }}
+    steps:
+      - name: Check V4 production key and V5 staging access without transactions
+        shell: bash
+        run: |
+          node <<'NODE'
+          const key = process.env.ACROSS_API_KEY || "";
+          if (!key) {
+            console.error("HOLD: GitHub Actions secret ACROSS_API_KEY is missing. Add a rotated key in repository Settings > Secrets and variables > Actions.");
+            process.exitCode = 1;
+          } else {
+            const tests = [
+              {name: "v4-production-key", url: "https://app.across.to/api/swap/chains?integratorId=0x049f"},
+              {name: "v5-staging-key", url: "https://api.staging.across.to/v1/capabilities?originChainId=42161&destinationChainId=8453&include=tokens"}
+            ];
+            for (const test of tests) {
+              try {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 15000);
+                let res;
+                try {
+                  res = await fetch(test.url, {
+                    headers: {Authorization: "Bearer " + key, Accept: "application/json"},
+                    redirect: "error", signal: controller.signal
+                  });
+                } finally {
+                  clearTimeout(timer);
+                }
+                // Do not log response bodies, headers, credentials, or full URLs.
+                console.log(test.name + ": HTTP " + res.status + (res.ok ? " PASS" : " HOLD"));
+                if (!res.ok) process.exitCode = 1;
+              } catch (err) {
+                console.log(test.name + ": NETWORK_ERROR (" + (err?.name || "unknown") + ")");
+                process.exitCode = 1;
+              }
+            }
+          }
+          NODE
