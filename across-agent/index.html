@@ -26,6 +26,26 @@
 <section><div class="grid2"><div class="card"><h2>Illustrative fee calculator</h2><p class="muted small">Simple 0.3% arithmetic only. NOT an Across live quote, estimated net output, or executable transaction.</p><div class="calc"><label for="amount">Illustrative transfer amount (USDC)</label><input id="amount" type="number" inputmode="decimal" min="0" max="10000000" step="0.01" value="100" aria-describedby="fee-note"/><div id="fee" class="fee" aria-live="polite">0.300000 USDC</div><p id="fee-note" class="small">Illustrative integrator fee, excluding bridge, network, spread, slippage and any other fees. Actual fees can change and must be disclosed in a live quote.</p></div></div>
 <div class="card"><h2>Initial test route</h2><p class="muted">Arbitrum → Base</p><h3>USDC → USDC</h3><div class="sep"></div><p>Across V4 public quote responses were inspected. Registration has been completed, but V5 staging access is not yet authenticated. This is not a live transfer quote.</p><div class="sep"></div><p class="small">No wallet connection, asset deposit address, transfer initiation or fee payment is available on this site.</p></div>
 </div></section>
+<section id="testnet-live">
+<h2>Live testnet quote — read-only</h2>
+<p class="muted">Query Across testnet for a real, expiring estimate of a <strong>1 test-USDC</strong> bridge from Arbitrum Sepolia to Base Sepolia with an example 0.3% integrator fee. This preview uses fixed, unowned placeholder addresses. It cannot send funds or receive a fee.</p>
+<div class="grid2">
+  <div class="card">
+    <h3>Arbitrum Sepolia → Base Sepolia</h3>
+    <p class="muted small">Source: USDC · Amount: 1.000000 · Example app fee: 0.3% · Destination: USDC</p>
+    <div class="actions"><button type="button" id="live-quote-btn" class="button" style="border:0;cursor:pointer;font:inherit">Fetch a live testnet quote</button></div>
+    <p class="small" id="live-quote-status" role="status" aria-live="polite">No live quote requested. Click to query the official testnet API.</p>
+  </div>
+  <div class="card">
+    <h3>Actual API response</h3>
+    <p class="muted small">App fee in destination USDC</p><div id="live-app-fee" class="fee">—</div>
+    <p class="muted small">Estimated destination output: <strong id="live-net-output">—</strong></p>
+    <p class="muted small">Quote reference: <code id="live-quote-ref">—</code></p>
+    <p class="muted small" id="live-quote-expiry">Quote expiry: —</p>
+  </div>
+</div>
+<p class="small">Testnet tokens have no real-dollar value. The fee recipient is a demonstration placeholder, not a wallet you should pay. A returned quote is not proof of successful chain execution. The site does not request private keys, initiate wallet authorization, or broadcast transactions.</p>
+</section>
 <section id="integration"><h2>Integration & safeguards</h2><div class="grid2"><div class="card"><h3>Verified technical signals</h3><ul><li>Public Across V4 quote with optional app fee</li><li>Read-only calldata generation and simulation</li><li>Historical cross-chain deposit status checks</li><li>V5 staging service health endpoint</li></ul></div><div class="card"><h3>Requirements before launch</h3><ul><li>V5 API permission/activation for issued Integrator ID <code>0x049f</code> (staging currently responds 401)</li><li>Official confirmation of whether V5 supports custom <code>appFee</code> and fee recipient configuration</li><li>Authorized testnet signature and fee receipt</li><li>Jurisdiction-specific legal/compliance assessment</li></ul></div></div>
 <p class="small">Independent proof of concept, not endorsed by or affiliated with Across Protocol. No production users, trading volume, collected revenue, implied license, or promised rate is claimed. Never send tokens to an address obtained from this webpage.</p>
 <div class="links"><a href="https://docs.across.to/introduction/api-keys" target="_blank" rel="noopener noreferrer">Official integrator documentation ↗</a><a href="https://exclusive.docs.across.to/guides/dev-guides/v5-integration" target="_blank" rel="noopener noreferrer">Across V5 integration guide ↗</a><a href="https://github.com/yl124915300-dot" target="_blank" rel="noopener noreferrer">Developer GitHub ↗</a></div></section>
@@ -33,5 +53,41 @@
 </div>
 <script>
 const input=document.getElementById("amount"),out=document.getElementById("fee");function update(){const amount=Number(input.value);out.textContent=Number.isFinite(amount)&&amount>=0&&amount<=10000000?(amount*0.003).toFixed(6)+" USDC":"Enter an amount from 0 to 10,000,000"}input.addEventListener("input",update);update();
+
+const liveBtn=document.getElementById("live-quote-btn");
+const liveStatus=document.getElementById("live-quote-status");
+const liveAppFee=document.getElementById("live-app-fee");
+const liveNet=document.getElementById("live-net-output");
+const liveRef=document.getElementById("live-quote-ref");
+const liveExpiry=document.getElementById("live-quote-expiry");
+const usdcUnits=(v)=>{const n=Number(v);return Number.isFinite(n)&&n>=0?(n/1e6).toFixed(6)+" test USDC":"Unavailable";};
+liveBtn.addEventListener("click",async()=>{
+  liveBtn.disabled=true;liveBtn.textContent="Querying…";
+  liveAppFee.textContent="—";liveNet.textContent="—";liveRef.textContent="—";liveExpiry.textContent="Quote expiry: —";
+  liveStatus.textContent="Reading current Across testnet quote; no transaction is being created or sent.";
+  const p=new URLSearchParams({
+    tradeType:"exactInput",originChainId:"421614",destinationChainId:"84532",
+    inputToken:"0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",
+    outputToken:"0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+    amount:"1000000",
+    depositor:"0x2222222222222222222222222222222222222222",
+    recipient:"0x3333333333333333333333333333333333333333",
+    appFee:"0.003",appFeeRecipient:"0x1111111111111111111111111111111111111111"
+  });
+  const ctrl=new AbortController();const timeout=setTimeout(()=>ctrl.abort(),12000);
+  try{
+    const res=await fetch("https://testnet.across.to/api/swap/approval?"+p.toString(),{method:"GET",signal:ctrl.signal,cache:"no-store",headers:{Accept:"application/json"}});
+    if(!res.ok) throw Error("Across returned HTTP "+res.status);
+    const j=await res.json();
+    const fee=j?.fees?.total?.details?.app?.amount;
+    if(!j?.id||fee===undefined||j?.expectedOutputAmount===undefined)throw Error("Incomplete API quote");
+    liveAppFee.textContent=usdcUnits(fee);
+    liveNet.textContent=usdcUnits(j.expectedOutputAmount);
+    liveRef.textContent=String(j.id).slice(0,72);
+    liveExpiry.textContent="Quote expiry: "+(Number.isFinite(Number(j.quoteExpiryTimestamp))?new Date(Number(j.quoteExpiryTimestamp)*1000).toLocaleString():"Not supplied");
+    liveStatus.textContent="Live testnet quote received. Transaction not signed, simulated or broadcast by this page.";
+  }catch(e){liveStatus.textContent="Live quote unavailable: "+(e?.name==="AbortError"?"request timed out":String(e.message||"network error").slice(0,160))+". Try again; no transfer was initiated.";}
+  finally{clearTimeout(timeout);liveBtn.disabled=false;liveBtn.textContent="Refresh live testnet quote";}
+});
 </script>
 </body></html>
