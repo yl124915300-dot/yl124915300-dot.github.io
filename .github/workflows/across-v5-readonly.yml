@@ -16,7 +16,7 @@ jobs:
       - name: Check V4 production key and V5 staging access without transactions
         shell: bash
         run: |
-          node <<'NODE'
+          node --input-type=module <<'NODE'
           const key = process.env.ACROSS_API_KEY || "";
           if (!key) {
             console.error("HOLD: GitHub Actions secret ACROSS_API_KEY is missing. Add a rotated key in repository Settings > Secrets and variables > Actions.");
