@@ -1,0 +1,37 @@
+name: RealWorld Operator Static Smoke
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "realworld-agent-router/operator/index.html"
+      - "realworld-agent-router/operator/worker-snapshot.json"
+      - ".github/workflows/rwr-operator-smoke.yml"
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check HTML fields and extract script
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json
+          html = Path("realworld-agent-router/operator/index.html").read_text(encoding="utf-8")
+          for token in ["id=\"taskForm\"", "id=\"searchButton\"", "id=\"workerCost\"", "id=\"queue\"", "id=\"workers\"", "id=\"exportJobs\"", "No buyer payment, task posting"]:
+              if token not in html:
+                  raise SystemExit("Missing critical UI component: " + token)
+          blocks = re.findall(r"<script>(.*?)</script>", html, re.S)
+          assert len(blocks) == 1, "Expected one inline JS controller"
+          Path("/tmp/rwr-operator-check.js").write_text(blocks[0], encoding="utf-8")
+          snapshot = Path("realworld-agent-router/operator/worker-snapshot.json")
+          if snapshot.exists():
+              data = json.loads(snapshot.read_text(encoding="utf-8"))
+              assert isinstance(data.get("workers"), list)
+              assert len(data["workers"]) <= 90
+          print("HTML, permissions copy and worker feed syntax verified")
+          PY
+      - name: Verify JavaScript syntax
+        run: node --check /tmp/rwr-operator-check.js
