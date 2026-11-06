@@ -20,12 +20,12 @@
 </div>
 <div class="panel">
 <h2>2. Specify the fee recipient YOU control</h2>
-<p>Your connected wallet will be the destination recipient. Enter a second test-only EVM address you control to receive the optional 0.3% example fee. Neither address is supplied by this website.</p>
+<p>Your connected wallet will be the destination recipient. Enter a second test-only EVM address you control to receive the optional 0.3% example fee. Neither address is supplied by this website. The fee is 0.3% of the amount available after bridge costs, rounded down to USDC precision; it is not a fixed 0.003 USDC.</p>
 <label for="feeAddr">Separate fee-recipient address (Base Sepolia)</label><input id="feeAddr" type="text" placeholder="0x… (another account that you control)" autocomplete="off" spellcheck="false">
-<p class="small">No precompiled, zero, or demo addresses. This fee recipient must differ from your connected wallet. Public addresses are sent to the Across quote API; no private keys are accessed.</p>
+<p class="small">Use a separate test account you control; reserved low addresses are rejected. This fee recipient must differ from your connected wallet. Public addresses are sent to the Across quote API; no private keys are accessed.</p>
 <button class="button" id="quote" disabled>Get current 1 USDC testnet quote</button><div class="data">
 <div><span>Input</span><b>1.000000 test USDC</b></div><div><span>Example integrator fee</span><b>0.3%</b></div>
-<div><span>API returned fee</span><b id="fee">—</b></div><div><span>Expected destination amount</span><b id="output">—</b></div>
+<div><span>API returned fee (0.3% of bridge output)</span><b id="fee">—</b></div><div><span>Expected destination amount</span><b id="output">—</b></div>
 <div><span>Quote expires</span><b id="expiry">—</b></div><div><span>Transaction simulation</span><b id="simulation">—</b></div>
 </div><p id="quoteStatus" class="stat" role="status" aria-live="polite">No quote requested</p>
 </div>
@@ -49,103 +49,122 @@
 <p id="txInfo" class="mono">Origin transaction: none</p>
 <button id="track" class="button outline" disabled>Check Across transfer status</button>
 <p id="trackStatus" role="status" aria-live="polite">No origin transaction to track.</p>
-<p id="destInfo" class="mono"></p>
+<p id="destInfo" class="mono"></p><a id="destExplorer" href="https://base-sepolia.blockscout.com/" target="_blank" rel="noopener noreferrer" hidden>View the Base Sepolia transaction receipt</a>
 <button id="verifyFee" class="button outline" disabled>Check destination chain fee transfer</button>
-<p id="feeStatus" role="status" aria-live="polite">A settled transfer and destination hash are required.</p>
+<p id="feeStatus" role="status" aria-live="polite">Matching successful receipts and exact quoted amounts are required.</p>
 </div>
 <div class="foot"><strong>Security and limits:</strong> Open-source page, no backend wallet custody, no analytics collecting wallet secrets, no production API key, no unattended transactions. A transfer may fail, expire, or require a refund. Verify on block explorers before treating any payment as settled. This V4 testnet proof-of-concept does not grant permission to charge fees on production V5.</div>
 </main>
 <script>
 "use strict";
 const ORIGIN=421614,DEST=84532,USDC="0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",OUT_USDC="0x036CbD53842c5426634e7929541eC2318f3dCF7e",SPOKE="0x7E63A5f1a8F0B4d0934B2f2327DAED3F6bb2ee75",AMOUNT=1000000;
+const RPC_ORIGIN="https://sepolia-rollup.arbitrum.io/rpc",RPC_DEST="https://sepolia.base.org";
+const HANDLER="0x0F7Ae28De1c8532170AD4eE566b5801485C13a0E",DEST_SPOKE="0x82B564983aE7274c86695917BBf8C99ECb6F0F8F";
+const DEPOSIT_TOPIC="0x32ed1a409ef04c7b0227189c3a103dc5ac10e775a15b785dcc510201f7c25ad3",FILL_TOPIC="0x44b559f101f8fbcc8a0ea43fa91a05a729a5ea6e14a7c75aa750374690137208";
+const TRANSFER_TOPIC="0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
 const el=id=>document.getElementById(id);
-let account="",currentQuote=null,quotedFeeWallet="",feeWalletForTransfer="",txHash="",destinationHash="";
+let account="",currentQuote=null,quotedFeeWallet="",quotedAccount="",quoteEpoch=0,busy=false,transfer=null,destinationHash="";
 const eq=(a,b)=>typeof a==="string"&&typeof b==="string"&&a.toLowerCase()===b.toLowerCase();
-const validAddress=a=>/^0x[a-fA-F0-9]{40}$/.test(a||"")&&!/^0x0{39}[0-9a-f]$/i.test(a||"");
-const usdc=n=>Number.isFinite(Number(n))?(Number(n)/1e6).toFixed(6)+" test USDC":"—";
+const validHash=h=>/^0x[a-fA-F0-9]{64}$/.test(h||"");
+const validAddress=a=>/^0x[a-fA-F0-9]{40}$/.test(a||"")&&BigInt(a)>65535n;
+const uint=n=>{if(!/^\d+$/.test(String(n)))throw Error("Invalid token amount");return BigInt(n);};
+const usdc=n=>{try{const v=uint(n);return (v/1000000n)+"."+(v%1000000n).toString().padStart(6,"0")+" test USDC";}catch{return "—";}};
 function state(){const wallet=el("feeAddr").value.trim();return !!account&&validAddress(wallet)&&!eq(wallet,account);}
-function resetQuote(){currentQuote=null;quotedFeeWallet="";el("fee").textContent=el("output").textContent=el("expiry").textContent=el("simulation").textContent="—";el("approve").disabled=true;el("send").disabled=true;}
-function buttons(){el("switch").disabled=!account;el("quote").disabled=!state();const q=currentQuote;if(!q){el("approve").disabled=true;el("send").disabled=true;return;}const allowance=BigInt(q?.checks?.allowance?.actual||"0"),needed=BigInt(q?.checks?.allowance?.expected||String(AMOUNT)),balance=BigInt(q?.checks?.balance?.actual||"0");
-el("approve").disabled=allowance>=needed||!state();
-el("send").disabled=!(state()&&q.swapTx?.simulationSuccess===true&&allowance>=needed&&balance>=BigInt(AMOUNT)&&Number(q.quoteExpiryTimestamp)>Date.now()/1000+20&&el("ack").checked&&el("confirm").value.trim()==="TESTNET ONLY"&&eq(quotedFeeWallet,el("feeAddr").value.trim())&&eq(q.swapTx.to,SPOKE));
-}
+function resetQuote(){quoteEpoch++;currentQuote=null;quotedFeeWallet="";quotedAccount="";el("fee").textContent=el("output").textContent=el("expiry").textContent=el("simulation").textContent="—";el("approve").disabled=true;el("send").disabled=true;}
+function quoteReady(q){return !!q&&state()&&eq(quotedAccount,account)&&eq(quotedFeeWallet,el("feeAddr").value.trim())&&Number(q.quoteExpiryTimestamp)>Date.now()/1000+20;}
+function canSend(q){try{return quoteReady(q)&&!transfer&&q.swapTx?.simulationSuccess===true&&uint(q.checks?.allowance?.actual||"0")>=BigInt(AMOUNT)&&uint(q.checks?.balance?.actual||"0")>=BigInt(AMOUNT)&&el("ack").checked&&el("confirm").value.trim()==="TESTNET ONLY"&&eq(q.swapTx.to,SPOKE);}catch{return false;}}
+function buttons(){el("connect").disabled=busy;el("switch").disabled=busy||!account;el("feeAddr").disabled=busy;el("quote").disabled=busy||!state();const q=currentQuote;
+el("approve").disabled=busy||!quoteReady(q)||uint(q?.checks?.allowance?.actual||"0")>=BigInt(AMOUNT);
+el("send").disabled=busy||!canSend(q);}
 function onAccountChanged(){account="";resetQuote();el("account").textContent="Wallet changed; reconnect";buttons();}
 if(window.ethereum?.on){window.ethereum.on("accountsChanged",onAccountChanged);window.ethereum.on("chainChanged",()=>{resetQuote();el("quoteStatus").textContent="Network changed; refresh your quote.";buttons();});}
-async function ensureOrigin(){if(!window.ethereum)throw Error("No injected wallet found. Install a wallet in a supported browser.");const chain=await window.ethereum.request({method:"eth_chainId"});if(Number.parseInt(chain,16)!==ORIGIN)throw Error("Switch the wallet to Arbitrum Sepolia (chain 421614) first.");const arr=await window.ethereum.request({method:"eth_accounts"});if(!account||!arr.some(a=>eq(a,account)))throw Error("Connected account changed; reconnect.");}
-function checkTxData(tx){if(!tx||Number(tx.chainId)!==ORIGIN||!eq(tx.to,SPOKE)||typeof tx.data!=="string"||!/^0x[0-9a-fA-F]+$/.test(tx.data)||tx.data.length<20)throw Error("Across quote returned an unexpected origin transaction; rejected.");if(!tx.data.toLowerCase().includes(quotedFeeWallet.toLowerCase().slice(2)))throw Error("The expected fee wallet was not found in the returned calldata; rejected.");}
-const pollReceipt=async h=>{for(let i=0;i<24;i++){await new Promise(r=>setTimeout(r,5000));const receipt=await window.ethereum.request({method:"eth_getTransactionReceipt",params:[h]});if(receipt?.blockNumber){if(receipt.status==="0x0")throw Error("Approval reverted on chain.");return receipt;}}throw Error("Transaction not confirmed yet. Inspect in the block explorer before retrying.");};
-el("connect").addEventListener("click",async()=>{try{if(!window.ethereum)throw Error("No injected wallet found.");const a=await window.ethereum.request({method:"eth_requestAccounts"});if(!a?.[0]||!validAddress(a[0]))throw Error("No valid address returned.");account=a[0];resetQuote();el("account").textContent=account;el("quoteStatus").textContent="Connected. Enter a second controlled testnet fee address and request a quote.";buttons();}catch(e){el("account").textContent="Connection failed: "+String(e.message||e).slice(0,180);}});
-el("switch").addEventListener("click",async()=>{try{await window.ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x66eee"}]});el("quoteStatus").textContent="Network switch requested. Confirm Arbitrum Sepolia in wallet.";resetQuote();buttons();}catch(e){if(e?.code===4902){try{await window.ethereum.request({method:"wallet_addEthereumChain",params:[{chainId:"0x66eee",chainName:"Arbitrum Sepolia",rpcUrls:["https://sepolia-rollup.arbitrum.io/rpc"],nativeCurrency:{name:"Ether",symbol:"ETH",decimals:18},blockExplorerUrls:["https://sepolia.arbiscan.io"]}]});}catch(ee){el("quoteStatus").textContent="Network setup failed: "+String(ee.message||ee).slice(0,160);}}else{el("quoteStatus").textContent="Network switch denied/failed: "+String(e.message||e).slice(0,160);}}});
+async function ensureOrigin(expectedAccount=account){if(!window.ethereum)throw Error("No injected wallet found. Install a wallet in a supported browser.");const chain=await window.ethereum.request({method:"eth_chainId"});if(Number.parseInt(chain,16)!==ORIGIN)throw Error("Switch the wallet to Arbitrum Sepolia (chain 421614) first.");const arr=await window.ethereum.request({method:"eth_accounts"});if(!expectedAccount||!eq(expectedAccount,account)||!arr.some(a=>eq(a,expectedAccount)))throw Error("Connected account changed; reconnect.");}
+const addressWord=a=>"0x"+a.toLowerCase().slice(2).padStart(64,"0");
+function word(data,index){const v=data?.slice(2+index*64,2+(index+1)*64);if(!/^[0-9a-fA-F]{64}$/.test(v||""))throw Error("Malformed Across ABI word");return "0x"+v;}
+function checkTxData(tx,feeWallet,expectedAccount,bridgeAmount,feeAmount){
+if(!validAddress(feeWallet)||!tx||Number(tx.chainId)!==ORIGIN||!eq(tx.to,SPOKE)||BigInt(tx.value||"0")!==0n||typeof tx.data!=="string"||!/^0x(?:[0-9a-fA-F]{2})+$/.test(tx.data)||!eq(tx.data.slice(0,10),"0xad5425c6"))throw Error("Unexpected Across testnet deposit transaction; rejected.");
+const args="0x"+tx.data.slice(10);
+for(const [i,address] of [[0,expectedAccount],[1,HANDLER],[2,USDC],[3,OUT_USDC]])if(!eq(word(args,i),addressWord(address)))throw Error("Deposit account, handler or token mismatch");
+if(BigInt(word(args,4))!==BigInt(AMOUNT)||BigInt(word(args,5))!==BigInt(bridgeAmount)||BigInt(word(args,6))!==BigInt(DEST)||BigInt(word(args,11))!==384n)throw Error("Deposit amount, destination or message layout mismatch");
+const feeCall="a9059cbb"+addressWord(feeWallet).slice(2)+BigInt(feeAmount).toString(16).padStart(64,"0");
+const payoutCall="ef8738d3"+addressWord(OUT_USDC).slice(2)+addressWord(expectedAccount).slice(2);
+if(!tx.data.toLowerCase().includes(feeCall)||!tx.data.toLowerCase().includes(payoutCall))throw Error("Quoted fee or destination payout instruction missing");
+}
+function validateAmounts(q){const fee=uint(q.fees?.total?.details?.app?.amount),output=uint(q.expectedOutputAmount);if(fee<=0n||output<=0n||fee+output>BigInt(AMOUNT)||fee!==(fee+output)*3n/1000n)throw Error("Quote does not match a 0.3% fee on the bridge output; rejected.");return {fee:fee.toString(),output:output.toString()};}
+async function rpc(url,method,params=[]){const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:1,method,params}),cache:"no-store"});if(!r.ok)throw Error("Testnet RPC HTTP "+r.status);const d=await r.json();if(d.error)throw Error("Testnet RPC error: "+String(d.error.message||"request failed"));return d.result;}
+async function chainRpc(url,chainId){if(Number(BigInt(await rpc(url,"eth_chainId")))!==chainId)throw Error("RPC chain mismatch; verification stopped.");}
+function successfulReceipt(r,hash){if(!r||!r.blockNumber||r.status!=="0x1"||!eq(r.transactionHash,hash))throw Error("Matching successful mined transaction receipt not available.");}
+function transferSum(receipt,token,to,from){return (receipt.logs||[]).reduce((sum,z)=>{if(!eq(z.address,token)||!eq(z.topics?.[0],TRANSFER_TOPIC)||z.removed)return sum;if(!/^0x[0-9a-fA-F]{64}$/.test(z.topics?.[1]||"")||!/^0x[0-9a-fA-F]{64}$/.test(z.topics?.[2]||""))return sum;const sender="0x"+z.topics[1].slice(-40),recipient="0x"+z.topics[2].slice(-40);if(!eq(recipient,to)||(from&&!eq(sender,from)))return sum;if(z.transactionHash&&!eq(z.transactionHash,receipt.transactionHash))throw Error("Token log transaction mismatch");if(!/^0x[0-9a-fA-F]{64}$/.test(z.data||""))throw Error("Malformed USDC transfer amount");return sum+BigInt(z.data);},0n);}
+function depositEvent(receipt,t){
+const events=(receipt.logs||[]).filter(z=>eq(z.address,t.spoke)&&eq(z.topics?.[0],DEPOSIT_TOPIC)&&!z.removed&&eq(z.topics?.[3],addressWord(t.account))&&BigInt(z.topics?.[1]||"0x0")===BigInt(t.destinationChainId));
+if(events.length!==1)throw Error("Matching FundsDeposited event not found");const event=events[0];
+for(const [i,a] of [[0,t.inputToken],[1,t.outputToken],[7,HANDLER]])if(!eq(word(event.data,i),addressWord(a)))throw Error("Deposit event token or handler mismatch");
+if(BigInt(word(event.data,2))!==BigInt(t.inputAmount)||BigInt(word(event.data,3))!==BigInt(t.bridgeAmount))throw Error("Deposit event amount mismatch");
+if(!validHash(event.topics?.[2]))throw Error("Deposit id missing");return BigInt(event.topics[2]).toString();
+}
+function verifyFill(receipt,t,depositId){
+const events=(receipt.logs||[]).filter(z=>eq(z.address,DEST_SPOKE)&&eq(z.topics?.[0],FILL_TOPIC)&&!z.removed&&BigInt(z.topics?.[1]||"0x0")===BigInt(t.originChainId)&&BigInt(z.topics?.[2]||"0x0")===BigInt(depositId));
+if(events.length!==1)throw Error("Matching FilledRelay event for the source deposit not found");const event=events[0];
+for(const [i,a] of [[0,t.inputToken],[1,t.outputToken],[8,t.account],[9,HANDLER],[11,HANDLER]])if(!eq(word(event.data,i),addressWord(a)))throw Error("Fill event token, depositor or handler mismatch");
+if(BigInt(word(event.data,2))!==BigInt(t.inputAmount)||BigInt(word(event.data,3))!==BigInt(t.bridgeAmount)||BigInt(word(event.data,13))!==BigInt(t.bridgeAmount)||BigInt(word(event.data,14))>2n)throw Error("Fill event amount or fill type mismatch");
+}
+async function verifyOrigin(t){await chainRpc(RPC_ORIGIN,t.originChainId);const receipt=await rpc(RPC_ORIGIN,"eth_getTransactionReceipt",[t.originHash]);successfulReceipt(receipt,t.originHash);if(!eq(receipt.from,t.account)||!eq(receipt.to,t.spoke))throw Error("Origin receipt sender or SpokePool mismatch");const tx=await rpc(RPC_ORIGIN,"eth_getTransactionByHash",[t.originHash]);if(!tx||!eq(tx.from,t.account)||!eq(tx.to,t.spoke)||!eq(tx.input,t.data)||BigInt(tx.value||"0")!==0n)throw Error("Mined origin transaction does not match the signed quote");if(transferSum(receipt,t.inputToken,t.spoke,t.account)!==BigInt(t.inputAmount))throw Error("Origin receipt does not show exactly 1 USDC paid to the SpokePool");return {receipt,depositId:depositEvent(receipt,t)};}
+function clearDestination(){destinationHash="";el("destExplorer").hidden=true;el("destInfo").textContent="";el("verifyFee").disabled=true;el("feeStatus").textContent="No verified destination receipt yet.";}
+const pollReceipt=async h=>{for(let i=0;i<24;i++){await new Promise(r=>setTimeout(r,5000));const receipt=await window.ethereum.request({method:"eth_getTransactionReceipt",params:[h]});if(receipt?.blockNumber){successfulReceipt(receipt,h);return receipt;}}throw Error("Transaction not confirmed yet. Inspect in the block explorer before retrying.");};
+el("connect").addEventListener("click",async()=>{if(busy)return;try{if(!window.ethereum)throw Error("No injected wallet found.");const a=await window.ethereum.request({method:"eth_requestAccounts"});if(!a?.[0]||!validAddress(a[0]))throw Error("No valid address returned.");account=a[0];resetQuote();el("account").textContent=account;el("quoteStatus").textContent="Connected. Enter a second controlled testnet fee address and request a quote.";buttons();}catch(e){el("account").textContent="Connection failed: "+String(e.message||e).slice(0,180);}});
+el("switch").addEventListener("click",async()=>{if(busy)return;try{await window.ethereum.request({method:"wallet_switchEthereumChain",params:[{chainId:"0x66eee"}]});el("quoteStatus").textContent="Network switch requested. Confirm Arbitrum Sepolia in wallet.";resetQuote();buttons();}catch(e){if(e?.code===4902){try{await window.ethereum.request({method:"wallet_addEthereumChain",params:[{chainId:"0x66eee",chainName:"Arbitrum Sepolia",rpcUrls:[RPC_ORIGIN],nativeCurrency:{name:"Ether",symbol:"ETH",decimals:18},blockExplorerUrls:["https://sepolia.arbiscan.io"]}]});}catch(ee){el("quoteStatus").textContent="Network setup failed: "+String(ee.message||ee).slice(0,160);}}else{el("quoteStatus").textContent="Network switch denied/failed: "+String(e.message||e).slice(0,160);}}});
 el("feeAddr").addEventListener("input",()=>{resetQuote();buttons();});
 el("ack").addEventListener("change",buttons);el("confirm").addEventListener("input",buttons);
 el("quote").addEventListener("click",async()=>{
-resetQuote();el("quote").disabled=true;el("quoteStatus").textContent="Requesting a fresh testnet quote…";
+if(busy)return;resetQuote();const epoch=quoteEpoch,requestAccount=account,feeWallet=el("feeAddr").value.trim();busy=true;buttons();el("quoteStatus").textContent="Requesting a fresh testnet quote…";
 try{
-await ensureOrigin();
-const feeWallet=el("feeAddr").value.trim();if(!state())throw Error("Enter a distinct, valid fee wallet you control.");
-const p=new URLSearchParams({tradeType:"exactInput",originChainId:String(ORIGIN),destinationChainId:String(DEST),inputToken:USDC,outputToken:OUT_USDC,amount:String(AMOUNT),depositor:account,recipient:account,appFee:"0.003",appFeeRecipient:feeWallet});
+await ensureOrigin();if(!eq(requestAccount,account))throw Error("Wallet changed while quoting");if(!state())throw Error("Enter a distinct, valid fee wallet you control.");
+const p=new URLSearchParams({tradeType:"exactInput",originChainId:String(ORIGIN),destinationChainId:String(DEST),inputToken:USDC,outputToken:OUT_USDC,amount:String(AMOUNT),depositor:requestAccount,recipient:requestAccount,appFee:"0.003",appFeeRecipient:feeWallet});
 const res=await fetch("https://testnet.across.to/api/swap/approval?"+p,{cache:"no-store",headers:{Accept:"application/json"}});
 if(!res.ok)throw Error("Across quote failed: HTTP "+res.status);
-const q=await res.json();quotedFeeWallet=feeWallet;
-if(!q.id||q.inputAmount!==String(AMOUNT)||Number(q.quoteExpiryTimestamp)<Date.now()/1000+20||!q.fees?.total?.details?.app?.amount||!q.swapTx)throw Error("Invalid or already expired quote; no transaction allowed.");
-checkTxData(q.swapTx);currentQuote=q;
-el("fee").textContent=usdc(q.fees.total.details.app.amount);
-el("output").textContent=usdc(q.expectedOutputAmount);
-el("expiry").textContent=new Date(Number(q.quoteExpiryTimestamp)*1000).toLocaleTimeString();
-el("simulation").textContent=q.swapTx.simulationSuccess?"PASS":"NOT READY";
+const q=await res.json();await ensureOrigin(requestAccount);
+if(epoch!==quoteEpoch||!eq(feeWallet,el("feeAddr").value.trim()))throw Error("Wallet or fee recipient changed while quoting; request a new quote.");
+if(!q.id||q.inputAmount!==String(AMOUNT)||Number(q.quoteExpiryTimestamp)<Date.now()/1000+20||!q.swapTx)throw Error("Invalid or already expired quote; no transaction allowed.");
+const amounts=validateAmounts(q);checkTxData(q.swapTx,feeWallet,requestAccount,BigInt(amounts.fee)+BigInt(amounts.output),amounts.fee);uint(q.checks?.allowance?.actual||"0");uint(q.checks?.balance?.actual||"0");quotedFeeWallet=feeWallet;quotedAccount=requestAccount;currentQuote=q;
+el("fee").textContent=usdc(q.fees.total.details.app.amount);el("output").textContent=usdc(q.expectedOutputAmount);el("expiry").textContent=new Date(Number(q.quoteExpiryTimestamp)*1000).toLocaleTimeString();el("simulation").textContent=q.swapTx.simulationSuccess?"PASS":"NOT READY";
 el("quoteStatus").textContent=q.swapTx.simulationSuccess?"Quote returned; owner can review and sign after confirmation.":"Quote returned; balance or allowance may be insufficient. No execution enabled.";
-}catch(e){resetQuote();el("quoteStatus").textContent="Quote blocked: "+String(e.message||e).slice(0,220);}finally{buttons();}
+}catch(e){resetQuote();el("quoteStatus").textContent="Quote blocked: "+String(e.message||e).slice(0,220);}finally{busy=false;buttons();}
 });
 el("approve").addEventListener("click",async()=>{
-el("approve").disabled=true;el("approveStatus").textContent="Preparing exact 1 USDC approval; wallet confirmation required.";
+if(busy)return;const q=currentQuote,signingAccount=account,feeWallet=quotedFeeWallet;if(!quoteReady(q))return;busy=true;buttons();el("approveStatus").textContent="Preparing exact 1 USDC approval; wallet confirmation required.";
 try{
-await ensureOrigin();if(!currentQuote||!state())throw Error("Refresh quote and fee address.");
-const spender=currentQuote.checks?.allowance?.spender;
-if(!eq(spender,SPOKE))throw Error("Approval spender mismatch");
-const amount=BigInt(AMOUNT).toString(16).padStart(64,"0");
-const data="0x095ea7b3"+SPOKE.toLowerCase().slice(2).padStart(64,"0")+amount;
-const h=await window.ethereum.request({method:"eth_sendTransaction",params:[{from:account,to:USDC,data,value:"0x0"}]});
-el("approveStatus").textContent="Exact allowance transaction sent: "+h+" · checking confirmation";
-await pollReceipt(h);el("approveStatus").textContent="Approval confirmed. Refresh the Across quote before transferring.";
-}catch(e){el("approveStatus").textContent="Approval not completed: "+String(e.message||e).slice(0,240);}finally{resetQuote();buttons();}
+await ensureOrigin(signingAccount);if(q!==currentQuote||!quoteReady(q)||!eq(feeWallet,quotedFeeWallet))throw Error("Refresh quote and fee address.");if(!eq(q.checks?.allowance?.spender,SPOKE))throw Error("Approval spender mismatch");
+const data="0x095ea7b3"+SPOKE.toLowerCase().slice(2).padStart(64,"0")+BigInt(AMOUNT).toString(16).padStart(64,"0");
+const h=await window.ethereum.request({method:"eth_sendTransaction",params:[{chainId:"0x66eee",from:signingAccount,to:USDC,data,value:"0x0"}]});if(!validHash(h))throw Error("Wallet did not return a transaction hash.");el("approveStatus").textContent="Exact allowance transaction sent: "+h+" · checking confirmation";await pollReceipt(h);el("approveStatus").textContent="Approval confirmed. Refresh the Across quote before transferring.";
+}catch(e){el("approveStatus").textContent="Approval not completed: "+String(e.message||e).slice(0,240);}finally{resetQuote();busy=false;buttons();}
 });
 el("send").addEventListener("click",async()=>{
-el("send").disabled=true;
+if(busy||!canSend(currentQuote))return;const q=currentQuote,signingAccount=account,feeWallet=quotedFeeWallet,epoch=quoteEpoch;busy=true;buttons();
 try{
-await ensureOrigin();buttons();if(el("send").disabled && !(currentQuote?.swapTx?.simulationSuccess&&el("ack").checked&&el("confirm").value.trim()==="TESTNET ONLY"))throw Error("Not ready. Refresh quote and confirm testnet action.");
-const q=currentQuote;if(!q||!state()||!eq(quotedFeeWallet,el("feeAddr").value.trim()))throw Error("Quote and recipient changed");
-if(BigInt(q.checks?.allowance?.actual||"0")<BigInt(AMOUNT)||BigInt(q.checks?.balance?.actual||"0")<BigInt(AMOUNT)||!q.swapTx?.simulationSuccess||Number(q.quoteExpiryTimestamp)<=Date.now()/1000+20||!el("ack").checked||el("confirm").value.trim()!=="TESTNET ONLY")throw Error("Preflight did not pass. Refresh quote.");
-checkTxData(q.swapTx);
+await ensureOrigin(signingAccount);if(epoch!==quoteEpoch||q!==currentQuote||!canSend(q))throw Error("Preflight did not pass. Refresh quote.");const amounts=validateAmounts(q);checkTxData(q.swapTx,feeWallet,signingAccount,BigInt(amounts.fee)+BigInt(amounts.output),amounts.fee);
+const pending=Object.freeze({originChainId:ORIGIN,destinationChainId:DEST,account:signingAccount,recipient:signingAccount,feeWallet,inputToken:USDC,outputToken:OUT_USDC,spoke:SPOKE,inputAmount:String(AMOUNT),feeAmount:amounts.fee,outputAmount:amounts.output,bridgeAmount:(BigInt(amounts.fee)+BigInt(amounts.output)).toString(),quoteId:q.id,data:q.swapTx.data});
 el("sendStatus").textContent="Wallet approval required. Confirm ONLY this Arbitrum Sepolia testnet transaction.";
-const h=await window.ethereum.request({method:"eth_sendTransaction",params:[{from:account,to:q.swapTx.to,data:q.swapTx.data,value:"0x0"}]});
-if(!/^0x[a-fA-F0-9]{64}$/.test(h))throw Error("Wallet did not return a transaction hash.");
-txHash=h;feeWalletForTransfer=quotedFeeWallet;el("txInfo").textContent="Origin transaction: "+h;
-el("track").disabled=false;el("sendStatus").textContent="Broadcast requested. Confirm on Arbitrum Sepolia explorer; refresh status below.";
-resetQuote();
-}catch(e){el("sendStatus").textContent="No confirmed broadcast: "+String(e.message||e).slice(0,220);}finally{buttons();}
+const h=await window.ethereum.request({method:"eth_sendTransaction",params:[{chainId:"0x66eee",from:pending.account,to:pending.spoke,data:pending.data,value:"0x0"}]});if(!validHash(h))throw Error("Wallet did not return a transaction hash.");
+transfer=Object.freeze({...pending,originHash:h});clearDestination();el("txInfo").textContent="Origin transaction: "+h;el("track").disabled=false;el("sendStatus").textContent="Broadcast requested. This session will not send another bridge transfer. Check both testnet receipts below.";resetQuote();
+}catch(e){el("sendStatus").textContent="No confirmed broadcast: "+String(e.message||e).slice(0,220);}finally{busy=false;buttons();}
 });
 el("track").addEventListener("click",async()=>{
-if(!txHash)return;el("trackStatus").textContent="Checking Across bridge status…";
+const t=transfer;if(!t)return;clearDestination();el("track").disabled=true;el("trackStatus").textContent="Verifying the source-chain receipt before checking Across status…";
 try{
-const r=await fetch("https://testnet.across.to/api/deposit/status?depositTxnRef="+encodeURIComponent(txHash),{cache:"no-store"});
-if(!r.ok)throw Error("Across status HTTP "+r.status);
-const d=await r.json();
-if(d.depositTxnRef&&!eq(d.depositTxnRef,txHash))throw Error("Origin hash mismatch");
-el("trackStatus").textContent="Across status: "+String(d.status||"unknown")+". "+(d.depositId?"Deposit #"+d.depositId+". ":"")+(d.destinationChainId?"Destination chain "+d.destinationChainId+".":"");
-if(d.status==="filled"&&/^0x[a-fA-F0-9]{64}$/.test(d.fillTxnRef||"")){destinationHash=d.fillTxnRef;el("destInfo").textContent="Destination fill: "+destinationHash;el("verifyFee").disabled=false;}else{destinationHash="";el("verifyFee").disabled=true;}
-}catch(e){el("trackStatus").textContent="Tracking unavailable: "+String(e.message||e).slice(0,200);}
+await verifyOrigin(t);const r=await fetch("https://testnet.across.to/api/deposit/status?depositTxnRef="+encodeURIComponent(t.originHash),{cache:"no-store"});if(!r.ok)throw Error("Across status HTTP "+r.status);const d=await r.json();if(t!==transfer)return;
+if(!eq(d.depositTxnRef,t.originHash))throw Error("Across did not return the matching origin hash");if(d.originChainId!=null&&Number(d.originChainId)!==t.originChainId)throw Error("Origin chain mismatch");if(d.destinationChainId!=null&&Number(d.destinationChainId)!==t.destinationChainId)throw Error("Destination chain mismatch");
+el("trackStatus").textContent="Source receipt: successful, exact 1 USDC deposit. Across status: "+String(d.status||"unknown")+". Destination receipts still require verification.";
+if(d.status==="filled"&&validHash(d.fillTxnRef)){destinationHash=d.fillTxnRef;el("destInfo").textContent="Destination fill: "+destinationHash;el("destExplorer").href="https://base-sepolia.blockscout.com/tx/"+destinationHash;el("destExplorer").hidden=false;el("verifyFee").disabled=false;}
+}catch(e){if(t===transfer){clearDestination();el("trackStatus").textContent="Tracking unverified: "+String(e.message||e).slice(0,220);}}finally{el("track").disabled=!transfer;}
 });
 el("verifyFee").addEventListener("click",async()=>{
-if(!destinationHash||!validAddress(feeWalletForTransfer)){el("feeStatus").textContent="Fee recipient or fill hash is missing";return;}
-el("feeStatus").textContent="Inspecting Base Sepolia token transfer logs…";
+const t=transfer,h=destinationHash;if(!t||!validHash(h))return;el("verifyFee").disabled=true;el("feeStatus").textContent="Checking both successful testnet receipts and exact USDC transfer amounts…";
 try{
-const r=await fetch("https://base-sepolia.blockscout.com/api/v2/transactions/"+encodeURIComponent(destinationHash)+"/token-transfers",{cache:"no-store"});
-if(!r.ok)throw Error("Blockscout HTTP "+r.status);
-const d=await r.json();const matches=(d.items||[]).filter(z=>eq(z.to?.hash,feeWalletForTransfer)&&eq(z.token?.address_hash,OUT_USDC));
-if(!matches.length){el("feeStatus").textContent="NO VERIFIED FEE PAYMENT in the direct fill logs. Inspect destination hash manually; no revenue claimed.";return;}
-const total=matches.reduce((a,z)=>a+BigInt(z.total?.value||"0"),0n);
-el("feeStatus").textContent="Destination fee-wallet transfer observed: "+usdc(total.toString())+". This is testnet token only, not commercial revenue.";
-}catch(e){el("feeStatus").textContent="Automated fee verification unavailable: "+String(e.message||e).slice(0,180)+". Inspect logs manually on Base Sepolia Blockscout.";}
+const origin=await verifyOrigin(t);await chainRpc(RPC_DEST,t.destinationChainId);const receipt=await rpc(RPC_DEST,"eth_getTransactionReceipt",[h]);successfulReceipt(receipt,h);verifyFill(receipt,t,origin.depositId);if(t!==transfer||!eq(h,destinationHash))return;
+const fee=transferSum(receipt,t.outputToken,t.feeWallet),output=transferSum(receipt,t.outputToken,t.recipient);
+if(fee!==uint(t.feeAmount)||fee<=0n)throw Error("Fee mismatch: expected "+usdc(t.feeAmount)+", observed "+usdc(fee.toString()));if(output!==uint(t.outputAmount))throw Error("Recipient amount mismatch: expected "+usdc(t.outputAmount)+", observed "+usdc(output.toString()));
+el("feeStatus").textContent="VERIFIED LINKED TESTNET RECEIPTS: 1.000000 USDC source deposit; "+usdc(output.toString())+" to the destination recipient; "+usdc(fee.toString())+" to the quoted fee wallet in the successful Base Sepolia transaction reported by Across. Test assets only; no commercial revenue.";
+}catch(e){if(t===transfer&&eq(h,destinationHash))el("feeStatus").textContent="NOT VERIFIED: "+String(e.message||e).slice(0,250)+". Check both transaction receipts manually.";}finally{el("verifyFee").disabled=!destinationHash;}
 });
 buttons();
 </script></body></html>
