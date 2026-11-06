@@ -1,0 +1,28 @@
+name: RealWorld Router Public Worker Snapshot
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 */6 * * *"
+  push:
+    paths:
+      - "realworld-agent-router/operator/sync_workers.py"
+      - ".github/workflows/rwr-public-worker-sync.yml"
+permissions:
+  contents: write
+jobs:
+  public-inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch public profile snapshots
+        run: python3 realworld-agent-router/operator/sync_workers.py
+      - name: Commit snapshot only if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add realworld-agent-router/operator/worker-snapshot.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update RealWorld Router public worker inventory"
+            git push
+          fi
