@@ -23,7 +23,7 @@ jobs:
             process.exitCode = 1;
           } else {
             const tests = [
-              {name: "v4-production-key", url: "https://app.across.to/api/swap/chains?integratorId=0x049f"},
+              {name: "v4-production-endpoint-only-not-key-proof", url: "https://app.across.to/api/swap/chains?integratorId=0x049f"},
               {name: "v5-staging-key", url: "https://api.staging.across.to/v1/capabilities?originChainId=42161&destinationChainId=8453&include=tokens"}
             ];
             for (const test of tests) {
@@ -40,7 +40,7 @@ jobs:
                   clearTimeout(timer);
                 }
                 // Do not log response bodies, headers, credentials, or full URLs.
-                console.log(test.name + ": HTTP " + res.status + (res.ok ? " PASS" : " HOLD"));
+                console.log(test.name + ": HTTP " + res.status + (res.ok ? (test.name.startsWith("v4-") ? " REACHABLE_NOT_AUTH_PROOF" : " AUTH_OK") : " HOLD"));
                 if (!res.ok) process.exitCode = 1;
               } catch (err) {
                 console.log(test.name + ": NETWORK_ERROR (" + (err?.name || "unknown") + ")");
