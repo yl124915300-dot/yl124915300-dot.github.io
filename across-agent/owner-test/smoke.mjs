@@ -61,3 +61,34 @@ assert.equal(test.transferSum({transactionHash:dest,logs:[log(dest,USDC,SPOKE,fe
 assert.throws(()=>test.validateAmounts({...quote(),fees:{total:{details:{app:{amount:"3000"}}}}}),/0.3%/);
 console.log("PASS: existing wallet/chain/funding gates; pending-signature lock; immutable transfer; exact fee/output/source amounts; wrong-token and reverted receipt rejection; stale fill cleared on chain mismatch. Mock-only: no network, real wallet, signature or blockchain broadcast.");
 dom.window.close();
+
+// Connection regressions: mocked providers only; no wallet, network, or signatures.
+function connectionFixture(request){
+ const d=new JSDOM(html,{url:"https://yl124915300-dot.github.io/across-agent/owner-test/",runScripts:"outside-only"});
+ const eventHandlers={},seen=[];
+ d.window.ethereum={on(name,fn){eventHandlers[name]=fn;},request(args){seen.push(args);return request(args);}};
+ d.window.eval(match[1]);
+ const get=id=>d.window.document.getElementById(id);
+ return {d,get,seen,eventHandlers,click:id=>get(id).click()};
+}
+let releaseConnection;
+const pending=connectionFixture(({method})=>method==="eth_requestAccounts"?new Promise(resolve=>{releaseConnection=resolve;}):Promise.resolve("0x66eee"));
+pending.click("connect");pending.click("connect");pending.click("diagnose");pending.click("switch");
+assert.equal(pending.seen.filter(x=>x.method==="eth_requestAccounts").length,1,"Repeated clicks cannot start duplicate connection requests");
+assert.ok(pending.get("connect").disabled&&pending.get("diagnose").disabled&&pending.get("switch").disabled);
+releaseConnection([account]);await next();assert.equal(pending.get("connect").disabled,false);assert.match(pending.get("networkStatus").textContent,/421614/);pending.d.window.close();
+for(const code of [4001,-32002,4900,4901]){
+ const f=connectionFixture(async()=>{throw {code,message:"fixture rejection"};});f.click("connect");await next();
+ assert.ok(f.get("account").textContent.includes(String(code)),"Error code preserved: "+code);assert.equal(f.get("connect").disabled,false);assert.ok(f.get("quote").disabled&&f.get("send").disabled);f.d.window.close();
+}
+let rejectReconnect=false;
+const reconnect=connectionFixture(async({method})=>{if(method==="eth_chainId")return "0x66eee";if(rejectReconnect)throw {code:4001};return [account];});
+reconnect.click("connect");await next();assert.equal(reconnect.get("account").textContent,account);
+rejectReconnect=true;reconnect.click("connect");await next();assert.ok(reconnect.get("quote").disabled&&reconnect.get("switch").disabled,"Failed reconnect clears old account");reconnect.d.window.close();
+const diagnostic=connectionFixture(async({method})=>{assert.ok(["eth_chainId","eth_accounts"].includes(method),"Diagnostic is read-only");return method==="eth_chainId"?"0x1":[];});
+diagnostic.click("diagnose");await next();assert.match(diagnostic.get("networkStatus").textContent,/Current chain: 1/);assert.match(diagnostic.get("walletStatus").textContent,/没有可用账户/);assert.equal(diagnostic.seen.length,2);diagnostic.d.window.close();
+const switched=[];
+const network=connectionFixture(async({method,params})=>{if(method==="eth_requestAccounts")return [account];if(method==="eth_chainId")return "0x66eee";switched.push({method,params});if(method==="wallet_switchEthereumChain")throw {code:4902};return null;});
+network.click("connect");await next();network.click("switch");await next();assert.equal(switched[0].params[0].chainId,"0x66eee");assert.equal(switched[1].method,"wallet_addEthereumChain");assert.equal(switched[1].params[0].chainId,"0x66eee");assert.equal(network.get("switch").disabled,false);
+network.eventHandlers.disconnect();assert.ok(network.get("switch").disabled&&network.get("quote").disabled);network.d.window.close();
+console.log("PASS: single pending connection; 4001/-32002/4900/4901 guidance; failed reconnect clears account; read-only diagnostic; correct-chain add fallback; disconnect invalidation. Mock-only.");
