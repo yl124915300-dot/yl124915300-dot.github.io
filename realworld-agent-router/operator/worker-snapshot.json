@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-06T22:59:52+00:00",
+  "checkedAt": "2026-11-07T05:47:50+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -78,6 +78,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/sh3bOBj5orktEp7re9M0"
+    },
+    {
+      "name": "Crystal",
+      "headline": "Administrative Assistant | Customer Service & Scheduling Specialist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/rSBRefEr8d7A26ZfbXzF"
     },
     {
       "name": "Sutton Peter",
@@ -170,16 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/tKtTTeTQwEe41da5EkUt"
     },
     {
-      "name": "Julio Vaquero",
-      "headline": "Hospitality & Food Service Professional | Cashier, Barback, Food Runner",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 12.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/t8JWJIKDfaJq879CbhqA"
-    },
-    {
       "name": "Angel Valenzuela",
       "headline": "Everything",
       "city": "San Francisco",
@@ -260,6 +260,16 @@
       "profileUrl": "https://rentahuman.ai/humans/LeslpRApFx3JrRemEXSE"
     },
     {
+      "name": "Edward James",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
+    },
+    {
       "name": "Matthew Farley",
       "headline": "People skills. Solve problems 24/7.",
       "city": "San Francisco",
@@ -280,16 +290,6 @@
       "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
-      "name": "Edward James",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
-    },
-    {
       "name": "Jeremiah Franklin",
       "headline": "EVERYTHING",
       "city": "San Francisco",
@@ -298,6 +298,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
+    },
+    {
+      "name": "Yoanna Flores",
+      "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
       "name": "Joshua Greiner",
@@ -318,16 +328,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
-    },
-    {
-      "name": "Yoanna Flores",
-      "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
       "name": "Jaan Kelly",
@@ -630,6 +630,16 @@
       "profileUrl": "https://rentahuman.ai/humans/acX6TEkN31mqgBQkpoBU"
     },
     {
+      "name": "Hamid",
+      "headline": "Operations Strategy & Sales Executive | Fleet Optimization & Revenue Growth Specialist",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/IZMCPxcLxWtZHFQSv8iX"
+    },
+    {
       "name": "Adetutu",
       "headline": "AI Data Annotator | Image & Video Annotation | Computer Vision & Data Quality",
       "city": "London",
@@ -768,16 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kRYz2oUheSi3anNR4LbT"
-    },
-    {
-      "name": "James Johnson",
-      "headline": "Reliable local assistant & on-site researcher",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/jGSxASKDNu5Rx8tNkunV"
     },
     {
       "name": "Shangwei",
