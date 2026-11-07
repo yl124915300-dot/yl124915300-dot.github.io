@@ -1,102 +1,54 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Across Agent Execution Desk: an independent non-custodial cross-chain execution agent proof of concept. API onboarding in progress. No live transactions.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Across Agent is a paused independent technical prototype. Commercial services, payments, live quotes and wallet operations are unavailable.">
 <meta name="theme-color" content="#0b1020">
-<title>Across Agent Execution Desk | Private Prototype</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; connect-src 'none'">
+<title>Across Agent | Commercial service unavailable</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1020;--panel:#151d33;--muted:#aab7ce;--line:#2a3550;--accent:#a9f1c8;--text:#f0f6ff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 86% 2%,#1b3450 0,transparent 36%),var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent)}a:hover{text-decoration:none}.wrap{width:min(1050px,calc(100% - 40px));margin:auto}header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid var(--line)}.brand{font-size:1.03rem;font-weight:800;letter-spacing:-.02em}.brand span{color:var(--accent)}.topnote{color:var(--muted);font-size:.83rem;text-align:right}.hero{padding:73px 0 48px;max-width:820px}.eyebrow{display:inline-block;border:1px solid #46775c;background:#13372a;color:#ccffdc;border-radius:99px;padding:5px 12px;font-size:.78rem;font-weight:700;letter-spacing:.02em}h1{font-size:clamp(2.3rem,6vw,4.6rem);line-height:1.08;letter-spacing:-.055em;margin:24px 0}h1 em{font-style:normal;color:var(--accent)}.lead{color:#c1cde0;font-size:1.13rem;max-width:720px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:29px}.button{background:var(--accent);color:#10251b;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:750;text-decoration:none}.button.alt{background:transparent;color:var(--text);border:1px solid #52607b}.status{border:1px solid #46644e;background:#12231e;padding:17px 20px;border-radius:14px;color:#d6fbe2;margin:17px 0 38px}.status strong{display:block;color:#a9f1c8;margin-bottom:4px}section{padding:32px 0}h2{font-size:1.65rem;letter-spacing:-.025em;margin:0 0 14px}h3{font-size:1.05rem;margin:0 0 7px}.muted,p.small{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:var(--panel);border:1px solid var(--line);padding:24px;border-radius:16px}.card p{color:var(--muted);margin:0}.num{color:var(--accent);font-size:1.1rem;font-weight:800;margin-bottom:14px}.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.calc label{display:block;margin-bottom:8px;color:var(--muted)}.calc input{width:100%;background:#0a1224;color:white;border:1px solid #4b5e7c;border-radius:9px;padding:12px;font-size:1.15rem}.fee{font-size:2rem;font-weight:800;margin-top:12px;color:var(--accent)}.sep{height:1px;background:var(--line);margin:20px 0}ul{padding-left:20px}.links{display:flex;gap:20px;flex-wrap:wrap;margin-top:15px}footer{border-top:1px solid var(--line);margin-top:50px;padding:27px 0 45px;color:var(--muted);font-size:.87rem}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}@media(max-width:750px){.cards,.grid2{grid-template-columns:1fr}.hero{padding-top:48px}.topnote{display:none}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+:root{color-scheme:dark;--bg:#0b1020;--panel:#151d33;--muted:#aab7ce;--line:#2a3550;--text:#f0f6ff;--notice:#f5d18a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{width:min(920px,calc(100% - 40px));margin:auto}header{display:flex;justify-content:space-between;gap:20px;padding:27px 0;border-bottom:1px solid var(--line)}.brand{font-weight:800;letter-spacing:-.02em}.date,.small{color:var(--muted);font-size:.88rem}.hero{padding:64px 0 28px}.label{display:inline-block;border:1px solid #79623a;color:var(--notice);border-radius:99px;padding:5px 12px;font-size:.78rem;font-weight:750;letter-spacing:.03em}h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.1;letter-spacing:-.045em;margin:23px 0}h2{font-size:1.2rem;margin:0 0 12px}p{margin:0 0 16px}.lead{font-size:1.15rem;color:#c1cde0;max-width:760px}.notice{border:1px solid #79623a;background:#292214;color:#f5dfb5;padding:20px 24px;border-radius:14px;margin:10px 0 28px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:var(--panel);border:1px solid var(--line);padding:24px;border-radius:16px}ul{padding-left:20px;margin:0}li{margin-bottom:10px}a{color:#c7d7f7;text-underline-offset:3px}a:focus-visible{outline:2px solid var(--notice);outline-offset:4px}.sources{padding:28px 0}footer{border-top:1px solid var(--line);margin-top:28px;padding:24px 0 40px;color:var(--muted);font-size:.87rem}@media(max-width:650px){.grid{grid-template-columns:1fr}header{display:block}.date{display:block;margin-top:5px}.hero{padding-top:43px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><div class="brand">ACROSS <span>AGENT</span> / EXECUTION DESK</div><div class="topnote">Independent developer prototype · Nov 2026</div></header>
+<header><div class="brand">ACROSS AGENT / PROJECT STATUS</div><span class="date">Updated 7 November 2026 · Asia/Shanghai</span></header>
 <main>
-<div class="hero"><span class="eyebrow">PROTOTYPE · NOT ACCEPTING TRANSFERS</span><h1>Cross-chain execution,<br><em>designed for autonomous workflows.</em></h1>
-<p class="lead">A proposed, non-custodial AI-agent integration for transparent cross-chain USDC execution. The intended flow combines live quotes, user-authorized signatures, transaction monitoring, and a disclosed integrator fee.</p>
-<div class="actions"><a class="button" href="#how">View execution design →</a><a class="button alt" href="#integration">Integration status</a></div></div>
-<div class="status" role="status"><strong>Integrator registration complete · V5 activation pending</strong>The Across registration form issued Integrator ID <code>0x049f</code> and an API key. An authenticated V5 staging capabilities request returned HTTP 401 <code>unauthenticated</code>; separate V5 activation/permission remains unverified. Public API quotation, fee-breakdown, transaction construction, simulated execution and historical status tracking have been tested. No customer transaction or service-fee payout has occurred. Execution remains disabled.</div>
-<section id="how"><h2>Designed workflow</h2><div class="cards">
-<article class="card"><div class="num">01 / QUOTE</div><h3>Inspect route and costs</h3><p>Determine available networks and token routes, exact recipient output, and the full proposed fee before any wallet action.</p></article>
-<article class="card"><div class="num">02 / AUTHORIZE</div><h3>Wallet-owner signature</h3><p>Non-custodial design. A wallet owner reviews and signs each authorized transaction. The agent never receives private keys.</p></article>
-<article class="card"><div class="num">03 / VERIFY</div><h3>Track to settlement</h3><p>Observe origin transaction, Across deposit status, destination fill, expiry/refund, and fee-recipient evidence.</p></article>
-</div></section>
-<section><div class="grid2"><div class="card"><h2>Illustrative fee calculator</h2><p class="muted small">Simple 0.3% arithmetic only. NOT an Across live quote, estimated net output, or executable transaction.</p><div class="calc"><label for="amount">Illustrative transfer amount (USDC)</label><input id="amount" type="number" inputmode="decimal" min="0" max="10000000" step="0.01" value="100" aria-describedby="fee-note"/><div id="fee" class="fee" aria-live="polite">0.300000 USDC</div><p id="fee-note" class="small">Illustrative integrator fee, excluding bridge, network, spread, slippage and any other fees. Actual fees can change and must be disclosed in a live quote.</p></div></div>
-<div class="card"><h2>Initial test route</h2><p class="muted">Arbitrum → Base</p><h3>USDC → USDC</h3><div class="sep"></div><p>Across V4 public quote responses were inspected. Registration has been completed, but V5 staging access is not yet authenticated. This is not a live transfer quote.</p><div class="sep"></div><p class="small">No wallet connection, asset deposit address, transfer initiation or fee payment is available on this site.</p></div>
-</div></section>
-<section id="testnet-live">
-<h2>Live testnet quote — read-only</h2>
-<p class="muted">Query Across testnet for a real, expiring estimate of a <strong>1 test-USDC</strong> bridge from Arbitrum Sepolia to Base Sepolia with an example 0.3% integrator fee. This preview uses fixed, unowned placeholder addresses. It cannot send funds or receive a fee.</p>
-<div class="grid2">
-  <div class="card">
-    <h3>Arbitrum Sepolia → Base Sepolia</h3>
-    <p class="muted small">Source: USDC · Amount: 1.000000 · Example app fee: 0.3% · Destination: USDC</p>
-    <div class="actions"><button type="button" id="live-quote-btn" class="button" style="border:0;cursor:pointer;font:inherit">Fetch a live testnet quote</button></div>
-    <p class="small" id="live-quote-status" role="status" aria-live="polite">No live quote requested. Click to query the official testnet API.</p>
-  </div>
-  <div class="card">
-    <h3>Actual API response</h3>
-    <p class="muted small">App fee in destination USDC</p><div id="live-app-fee" class="fee">—</div>
-    <p class="muted small">Estimated destination output: <strong id="live-net-output">—</strong></p>
-    <p class="muted small">Quote reference: <code id="live-quote-ref">—</code></p>
-    <p class="muted small" id="live-quote-expiry">Quote expiry: —</p>
-  </div>
-</div>
-<p class="small">Testnet tokens have no real-dollar value. The fee recipient is a demonstration placeholder, not a wallet you should pay. A returned quote is not proof of successful chain execution. The site does not request private keys, initiate wallet authorization, or broadcast transactions.</p>
+<section class="hero" aria-labelledby="status-title">
+<span class="label">PAUSED · NO ORDERS OR PAYMENTS</span>
+<h1 id="status-title">Commercial service unavailable.</h1>
+<p class="lead">This independent technical prototype is paused. No integration service, live quote, wallet connection, token approval or transfer is available from this page.</p>
 </section>
-<section id="owner-test">
-<h2>Owner-controlled testnet execution</h2>
-<div class="card">
-<h3>Testnet transfer & fee verification (experimental)</h3>
-<p>This separate page supports a 1 test-USDC transfer on Arbitrum Sepolia → Base Sepolia, exact-amount ERC-20 approval, owner-reviewed wallet signing, public bridge tracking, and destination fee inspection. It has <strong>not</strong> completed an end-to-end project transaction and does not support mainnet assets.</p>
-<div class="actions"><a class="button alt" href="./owner-test/">Open owner testnet validation</a></div>
-<p class="small">Use a dedicated wallet with test-only assets, and a separate fee-recipient address you control. Every transaction requires explicit wallet-owner approval. V5 production transfers remain disabled.</p>
-</div>
+<div class="notice" role="status"><strong>Commercial decision: NO-GO.</strong> A lawful operating scope, an eligible payment route and a current buyer for a defined service have not been established. Calling a service “read-only” does not establish legal permission to sell it.</div>
+<div class="grid">
+<section class="card" aria-labelledby="operations-title">
+<h2 id="operations-title">Operations remain stopped</h2>
+<ul>
+<li>No customer onboarding, orders, invoices or payment collection are offered.</li>
+<li>The former fee calculator and testnet quote interface have been removed.</li>
+<li>The experimental transfer page remains under its existing security hold.</li>
+<li>No new development or outreach is underway for this commercial launch.</li>
+</ul>
 </section>
-<section id="integration"><h2>Integration & safeguards</h2><div class="grid2"><div class="card"><h3>Verified technical signals</h3><ul><li>Public Across V4 quote with optional app fee</li><li>Read-only calldata generation and simulation</li><li>Historical cross-chain deposit status checks</li><li>V5 staging service health endpoint</li></ul></div><div class="card"><h3>Requirements before launch</h3><ul><li>V5 API permission/activation for issued Integrator ID <code>0x049f</code> (staging currently responds 401)</li><li>Official confirmation of whether V5 supports custom <code>appFee</code> and fee recipient configuration</li><li>Authorized testnet signature and fee receipt</li><li>Jurisdiction-specific legal/compliance assessment</li></ul></div></div>
-<p class="small">Independent proof of concept, not endorsed by or affiliated with Across Protocol. No production users, trading volume, collected revenue, implied license, or promised rate is claimed. Never send tokens to an address obtained from this webpage.</p>
-<div class="links"><a href="https://docs.across.to/introduction/api-keys" target="_blank" rel="noopener noreferrer">Official integrator documentation ↗</a><a href="https://exclusive.docs.across.to/guides/dev-guides/v5-integration" target="_blank" rel="noopener noreferrer">Across V5 integration guide ↗</a><a href="https://github.com/yl124915300-dot" target="_blank" rel="noopener noreferrer">Developer GitHub ↗</a></div></section>
-</main><footer><div class="foot"><span>Across Agent Execution Desk · Prototype</span><span>No real-asset execution enabled · © 2026</span></div></footer>
+<section class="card" aria-labelledby="review-title">
+<h2 id="review-title">Unresolved items</h2>
+<ul>
+<li>MetaMask review #310042 was open with no comments at the last check on 7 November 2026. No clearance was observed.</li>
+<li>Across V5 access and app-fee permissions remain unconfirmed. No substantive official reply was found at the last check.</li>
+<li>No customer payment or completed paid engagement has been verified.</li>
+</ul>
+</section>
 </div>
-<script>
-const input=document.getElementById("amount"),out=document.getElementById("fee");function update(){const amount=Number(input.value);out.textContent=Number.isFinite(amount)&&amount>=0&&amount<=10000000?(amount*0.003).toFixed(6)+" USDC":"Enter an amount from 0 to 10,000,000"}input.addEventListener("input",update);update();
-
-const liveBtn=document.getElementById("live-quote-btn");
-const liveStatus=document.getElementById("live-quote-status");
-const liveAppFee=document.getElementById("live-app-fee");
-const liveNet=document.getElementById("live-net-output");
-const liveRef=document.getElementById("live-quote-ref");
-const liveExpiry=document.getElementById("live-quote-expiry");
-const usdcUnits=(v)=>{const n=Number(v);return Number.isFinite(n)&&n>=0?(n/1e6).toFixed(6)+" test USDC":"Unavailable";};
-liveBtn.addEventListener("click",async()=>{
-  liveBtn.disabled=true;liveBtn.textContent="Querying…";
-  liveAppFee.textContent="—";liveNet.textContent="—";liveRef.textContent="—";liveExpiry.textContent="Quote expiry: —";
-  liveStatus.textContent="Reading current Across testnet quote; no transaction is being created or sent.";
-  const p=new URLSearchParams({
-    tradeType:"exactInput",originChainId:"421614",destinationChainId:"84532",
-    inputToken:"0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",
-    outputToken:"0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-    amount:"1000000",
-    depositor:"0x2222222222222222222222222222222222222222",
-    recipient:"0x3333333333333333333333333333333333333333",
-    appFee:"0.003",appFeeRecipient:"0x1111111111111111111111111111111111111111"
-  });
-  const ctrl=new AbortController();const timeout=setTimeout(()=>ctrl.abort(),12000);
-  try{
-    const res=await fetch("https://testnet.across.to/api/swap/approval?"+p.toString(),{method:"GET",signal:ctrl.signal,cache:"no-store",headers:{Accept:"application/json"}});
-    if(!res.ok) throw Error("Across returned HTTP "+res.status);
-    const j=await res.json();
-    const fee=j?.fees?.total?.details?.app?.amount;
-    if(!j?.id||fee===undefined||j?.expectedOutputAmount===undefined)throw Error("Incomplete API quote");
-    liveAppFee.textContent=usdcUnits(fee);
-    liveNet.textContent=usdcUnits(j.expectedOutputAmount);
-    liveRef.textContent=String(j.id).slice(0,72);
-    liveExpiry.textContent="Quote expiry: "+(Number.isFinite(Number(j.quoteExpiryTimestamp))?new Date(Number(j.quoteExpiryTimestamp)*1000).toLocaleString():"Not supplied");
-    liveStatus.textContent="Live testnet quote received. Transaction not signed, simulated or broadcast by this page.";
-  }catch(e){liveStatus.textContent="Live quote unavailable: "+(e?.name==="AbortError"?"request timed out":String(e.message||"network error").slice(0,160))+". Try again; no transfer was initiated.";}
-  finally{clearTimeout(timeout);liveBtn.disabled=false;liveBtn.textContent="Refresh live testnet quote";}
-});
-</script>
-</body></html>
+<section class="sources" aria-labelledby="records-title">
+<h2 id="records-title">Public records</h2>
+<p><a href="https://github.com/MetaMask/eth-phishing-detect/issues/310042" rel="noopener noreferrer">MetaMask review record</a> · <a href="https://www.across.to/terms-of-service" rel="noopener noreferrer">Across terms</a> · <a href="https://github.com/yl124915300-dot/yl124915300-dot.github.io" rel="noopener noreferrer">Project source</a></p>
+<p class="small">The project is independent and is not an official Across or MetaMask product. Code changes or a successful deployment do not constitute official clearance, a commercial license or proof of revenue.</p>
+<p class="small">Do not send funds, API keys, private keys or recovery phrases. This page provides no payment address, checkout, upload form or wallet controls.</p>
+</section>
+</main>
+<footer>Across Agent · Paused technical prototype · No commercial service offered</footer>
+</div>
+</body>
+</html>
