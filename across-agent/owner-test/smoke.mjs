@@ -19,6 +19,9 @@ if(html.includes("const SECURITY_HOLD=true;")){
  const payout="ef8738d3"+slot("0x036CbD53842c5426634e7929541eC2318f3dCF7e");
  const data=captured.slice(0,10)+slot(owner)+captured.slice(74).replaceAll(payout+slot(1),payout+slot(owner)).replace("a9059cbb"+slot(2)+slot(2989),"a9059cbb"+slot(fee)+slot(2989));
  const tx={chainId:421614,to:"0x7E63A5f1a8F0B4d0934B2f2327DAED3F6bb2ee75",value:"0x0",data};
+ // The captured quote is historical. Freeze only this offline test's clock.
+ const fixtureNow=Number(BigInt("0x"+data.slice(10+8*64,10+9*64)))+60;
+ window.Date.now=()=>fixtureNow*1000;
  const validate=t=>api.checkTxData(t,fee,owner,996367,2989);
  validate(tx);
  const expectedFee="a9059cbb"+slot(fee)+slot(2989),redirectedFee="a9059cbb"+slot(attacker)+slot(996367);
@@ -26,6 +29,17 @@ if(html.includes("const SECURITY_HOLD=true;")){
  // Legacy includes() checks accepted this redirection because the expected bytes were appended.
  assert.throws(()=>validate(poisoned),/instructions|trailing/);
  const mutateWord=(index,value)=>data.slice(0,10+index*64)+slot(value)+data.slice(10+(index+1)*64);
+ // A hostile response can keep the JSON expiry fresh while altering these
+ // on-chain fields. Reject exclusive filling and unsafe deposit timing locally.
+ for(const [index,value] of [[7,attacker],[10,1],[10,4294967295],[8,0],[8,fixtureNow+1],[8,fixtureNow-3580],[8,4294967296],[9,0],[9,fixtureNow+20],[9,fixtureNow+7200],[9,4294967296]]){
+  assert.throws(()=>validate({...tx,data:mutateWord(index,value)}),/relayer|exclusivity|timestamp|deadline/,"Reject unsafe deposit header word "+index);
+ }
+ validate({...tx,data:mutateWord(9,fixtureNow+21)});
+ const nearExpiry=mutateWord(8,fixtureNow-3579);
+ validate({...tx,data:nearExpiry.slice(0,10+9*64)+slot(fixtureNow+21)+nearExpiry.slice(10+10*64)});
+ const expiredData=mutateWord(9,fixtureNow-1);
+ const exclusiveExpired=expiredData.slice(0,10+7*64)+slot(attacker)+expiredData.slice(10+8*64,10+10*64)+slot(4294967295)+expiredData.slice(10+11*64);
+ assert.throws(()=>validate({...tx,data:exclusiveExpired}),/relayer|exclusivity/);
  for(const [index,value] of [[12,864],[15,attacker],[16,4],[17,128],[20,attacker],[22,1],[23,64],[27,attacker],[34,attacker]]){
   assert.throws(()=>validate({...tx,data:mutateWord(index,value)}),undefined,"Reject mutated message word "+index);
  }
@@ -41,7 +55,7 @@ if(html.includes("const SECURITY_HOLD=true;")){
  }
  await new Promise(resolve=>setTimeout(resolve,0));assert.deepEqual(seen,[]);
  assert.equal(document.querySelectorAll("script[src]").length,0);
- console.log("PASS: canonical captured calldata; malicious recipient with decoy bytes; target/value/fallback/offset/count/length/padding/trailer/chain mutations rejected; hold blocks all handlers and provider subscriptions. Zero wallet/RPC/network calls; no cross-chain simulation.");
+ console.log("PASS: canonical captured calldata; malicious recipient with decoy bytes; target/value/fallback/offset/count/length/padding/trailer/chain mutations rejected; exclusive-relayer and unsafe timestamp/deadline cases rejected; hold blocks all handlers and provider subscriptions. Zero wallet/RPC/network calls; no cross-chain simulation.");
  dom.window.close();process.exit(0);
 }
 

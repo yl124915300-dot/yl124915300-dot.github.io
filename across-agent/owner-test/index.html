@@ -104,6 +104,13 @@ if(!validAddress(feeWallet)||!tx||Number(tx.chainId)!==ORIGIN||!eq(tx.to,SPOKE)|
 const args="0x"+tx.data.slice(10);
 for(const [i,address] of [[0,expectedAccount],[1,HANDLER],[2,USDC],[3,OUT_USDC]])if(!eq(word(args,i),addressWord(address)))throw Error("Deposit account, handler or token mismatch");
 if(BigInt(word(args,4))!==BigInt(AMOUNT)||BigInt(word(args,5))!==BigInt(bridgeAmount)||BigInt(word(args,6))!==BigInt(DEST)||BigInt(word(args,11))!==384n)throw Error("Deposit amount, destination or message layout mismatch");
+// This narrow harness accepts open relaying only. Do not allow a quote to lock
+// filling to an undisclosed relayer, or accept an already expired fill deadline.
+if(BigInt(word(args,7))!==0n||BigInt(word(args,10))!==0n)throw Error("Exclusive relayer or exclusivity period not allowed in this test harness");
+const quoteTime=BigInt(word(args,8)),fillDeadline=BigInt(word(args,9)),now=BigInt(Math.floor(Date.now()/1000));
+// Local harness policy: uint32 timestamps, quote younger than one hour with
+// 20 seconds left, and filling within two hours of that quote. Fail closed.
+if(quoteTime>4294967295n||fillDeadline>4294967295n||quoteTime>now||quoteTime+3600n<=now+20n||fillDeadline<=now+20n||fillDeadline>quoteTime+7200n)throw Error("Deposit quote timestamp or fill deadline outside the test harness safety window");
 // Validate the complete ABI Instructions payload, including every call target/value,
 // offsets, fallback recipient, padding and length. Byte substrings are not execution checks.
 const expected=expectedMessage(feeWallet,expectedAccount,feeAmount);
