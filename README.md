@@ -41,3 +41,7 @@ First-party organic discovery is limited to helpful source guides, [sitemap.xml]
 - [Find products from screenshots](https://yl124915300-dot.github.io/video-find/find-product-from-screenshot/)
 
 This repository contains other historical experiments. FrameFind is the consumer-facing homepage, not a claim that the other projects are operating profitable businesses.
+
+### Independent experimental project: Claim Evidence Desk
+
+[Claim Evidence Desk's current scope and voluntary enquiry route](claim-evidence-desk/README.md) describes the existing **free Kia record checklist** and links to a [fictional refund-evidence indexing demonstration](claim-evidence-desk/SYNTHETIC_SAMPLE.md) for organizations to assess. This is not an active paid service, no customer records are accepted here, and no affiliation with a settlement administrator is claimed.
