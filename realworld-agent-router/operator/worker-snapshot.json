@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-07T21:42:58+00:00",
+  "checkedAt": "2026-11-08T05:50:27+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -78,6 +78,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/sh3bOBj5orktEp7re9M0"
+    },
+    {
+      "name": "Ying Zhang",
+      "headline": "IP Professional | Patent Drafting, Patent Searches & Trademark Research | Electrical Engineering Background",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/DpC8RF4lhr3D2RldgLdp"
+    },
+    {
+      "name": "James Cleary",
+      "headline": "Mathematics Researcher & Educator | Python & Maple | SOA Exams P and FM Passed",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/XJlEF6X9jrMbdDjH5rX9"
     },
     {
       "name": "Crystal",
@@ -158,26 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/pX4usme18mDWAYee6qDY"
-    },
-    {
-      "name": "Fathur Romadlan",
-      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 13,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
-    },
-    {
-      "name": "Roger Gutierrez",
-      "headline": "",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/CHNkqRNprl7L9lfpnCVd"
     },
     {
       "name": "Angel Valenzuela",
@@ -630,6 +630,16 @@
       "profileUrl": "https://rentahuman.ai/humans/acX6TEkN31mqgBQkpoBU"
     },
     {
+      "name": "samuel lin",
+      "headline": "Property Investment & Development Professional | Asset Repositioning & Commercial Leasing",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Pp7RKTDoKy6d239n5DPr"
+    },
+    {
       "name": "Hamid",
       "headline": "Operations Strategy & Sales Executive | Fleet Optimization & Revenue Growth Specialist",
       "city": "London",
@@ -770,14 +780,14 @@
       "profileUrl": "https://rentahuman.ai/humans/Bg4TNKqZHD5lWhcKZC4I"
     },
     {
-      "name": "Alex Harris",
-      "headline": "Fast, punctual & communicative personal assistant",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 33,
+      "name": "식신胖妹-Sophia",
+      "headline": "L2-Certified Mandarin Educator | Early Childhood Curriculum & Primary 1 Readiness",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/kRYz2oUheSi3anNR4LbT"
+      "profileUrl": "https://rentahuman.ai/humans/9GlyS3aRQY7y203bB0et"
     },
     {
       "name": "Shangwei",
@@ -918,16 +928,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/wiJeiUlf8Ggdh9Frbc6N"
-    },
-    {
-      "name": "c li",
-      "headline": "",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/RZVzS27HqASbK6DIaifz"
     }
   ],
   "errors": []
