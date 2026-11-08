@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-08T13:13:17+00:00",
+  "checkedAt": "2026-11-08T21:57:01+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -80,6 +80,16 @@
       "profileUrl": "https://rentahuman.ai/humans/sh3bOBj5orktEp7re9M0"
     },
     {
+      "name": "Crystal",
+      "headline": "Administrative & Client Support Professional | Scheduling, Records Management & Customer Service",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/rSBRefEr8d7A26ZfbXzF"
+    },
+    {
       "name": "Ikechukwu",
       "headline": "Business Leader | Statistics Graduate | Web Design & Solar Energy Training",
       "city": "New York",
@@ -108,16 +118,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/XJlEF6X9jrMbdDjH5rX9"
-    },
-    {
-      "name": "Crystal",
-      "headline": "Administrative Assistant | Customer Service & Scheduling Specialist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/rSBRefEr8d7A26ZfbXzF"
     },
     {
       "name": "Sutton Peter",
