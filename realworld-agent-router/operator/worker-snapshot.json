@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-08T05:50:27+00:00",
+  "checkedAt": "2026-11-08T13:13:17+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -80,6 +80,16 @@
       "profileUrl": "https://rentahuman.ai/humans/sh3bOBj5orktEp7re9M0"
     },
     {
+      "name": "Ikechukwu",
+      "headline": "Business Leader | Statistics Graduate | Web Design & Solar Energy Training",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Wyk3XxAmvmpKcKhX5R4N"
+    },
+    {
       "name": "Ying Zhang",
       "headline": "IP Professional | Patent Drafting, Patent Searches & Trademark Research | Electrical Engineering Background",
       "city": "New York",
@@ -108,16 +118,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/rSBRefEr8d7A26ZfbXzF"
-    },
-    {
-      "name": "Ikechukwu",
-      "headline": "Business Leader | Statistics Graduate | Web Design & Solar Energy Training",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Wyk3XxAmvmpKcKhX5R4N"
     },
     {
       "name": "Sutton Peter",
@@ -300,6 +300,16 @@
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
     },
     {
+      "name": "Michael Patterson",
+      "headline": "Administrative & Office Support Professional | 20+ Years in Hospitality and Events",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
+    },
+    {
       "name": "Yoanna Flores",
       "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
       "city": "San Francisco",
@@ -318,16 +328,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/I26j5ZS1L5FBkYHMcUtI"
-    },
-    {
-      "name": "Jessica  Potter",
-      "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
     },
     {
       "name": "Jaan Kelly",
@@ -490,6 +490,16 @@
       "profileUrl": "https://rentahuman.ai/humans/qUdKhOA4FefvvUgmV2tw"
     },
     {
+      "name": "Keith Byers",
+      "headline": "Hydrovac Lead Operator | CDL Class A | 4+ Years in Underground Utilities & Safety",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/4zMI8WHI1ieM5VaSXb6O"
+    },
+    {
       "name": "Enjoy the Music Russell",
       "headline": "Do it right for you",
       "city": "Austin",
@@ -618,16 +628,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/KDaDoveCUvsLWtEAnGxF"
-    },
-    {
-      "name": "Connor Rice",
-      "headline": "",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/acX6TEkN31mqgBQkpoBU"
     },
     {
       "name": "samuel lin",
@@ -780,6 +780,16 @@
       "profileUrl": "https://rentahuman.ai/humans/Bg4TNKqZHD5lWhcKZC4I"
     },
     {
+      "name": "Zen Khor",
+      "headline": "Capital Markets Consulting Analyst | Financial Due Diligence, Valuation & Avaloq Implementation",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0rWCat8GZYWNykZqrtAI"
+    },
+    {
       "name": "식신胖妹-Sophia",
       "headline": "L2-Certified Mandarin Educator | Early Childhood Curriculum & Primary 1 Readiness",
       "city": "Singapore",
@@ -918,16 +928,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kKyAFAF1QR5M7pqbjCq7"
-    },
-    {
-      "name": "Catherine",
-      "headline": "QA & Performance Test Engineer | 7+ Years | LoadRunner, Mobile & Telecom Testing",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/wiJeiUlf8Ggdh9Frbc6N"
     }
   ],
   "errors": []
