@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-08T21:57:01+00:00",
+  "checkedAt": "2026-11-09T06:02:25+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -180,16 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/pX4usme18mDWAYee6qDY"
     },
     {
-      "name": "Angel Valenzuela",
-      "headline": "Everything",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": true,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/1UKIjsQftRJt6d5dEuXz"
-    },
-    {
       "name": "Clifford Peek",
       "headline": "Person of many talents, simply ask.",
       "city": "San Francisco",
@@ -298,6 +288,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
+    },
+    {
+      "name": "Jessica  Potter",
+      "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
     },
     {
       "name": "Michael Patterson",
@@ -630,6 +630,16 @@
       "profileUrl": "https://rentahuman.ai/humans/KDaDoveCUvsLWtEAnGxF"
     },
     {
+      "name": "dan epan",
+      "headline": "",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 4.96,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/yoK7MkjlhKVDAhNdNrAG"
+    },
+    {
       "name": "samuel lin",
       "headline": "Property Investment & Development Professional | Asset Repositioning & Commercial Leasing",
       "city": "London",
@@ -768,16 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/aus4Hv9cs8w048xk2y5q"
-    },
-    {
-      "name": "Ade",
-      "headline": "AI Content Evaluation & Prompt Assessment | Freelance Designer | Detail-Oriented Remote Professional",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Bg4TNKqZHD5lWhcKZC4I"
     },
     {
       "name": "Zen Khor",
