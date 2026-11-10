@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-09T16:00:25+00:00",
+  "checkedAt": "2026-11-10T01:26:45+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -58,6 +58,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+    },
+    {
+      "name": "Venita Johnson",
+      "headline": "Editor & AI Trainer | Prompt Engineering, LLM Evaluation, Copyediting & Fact-Checking",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/3yKgScrxX7OquedHfDM0"
     },
     {
       "name": "Dwayne Johnson",
@@ -170,16 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/i29Ko9rQrDlLz6XcdXaw"
     },
     {
-      "name": "Ian Ngeno",
-      "headline": "Remote IT Specialist | Software Testing, Technical Writing, Research & Data Support",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/raTzhEqfchhdwmye05uz"
-    },
-    {
       "name": "Clifford Peek",
       "headline": "Person of many talents, simply ask.",
       "city": "San Francisco",
@@ -260,16 +260,6 @@
       "profileUrl": "https://rentahuman.ai/humans/LeslpRApFx3JrRemEXSE"
     },
     {
-      "name": "Edward James",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
-    },
-    {
       "name": "Matthew Farley",
       "headline": "People skills. Solve problems 24/7.",
       "city": "San Francisco",
@@ -278,6 +268,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
+    },
+    {
+      "name": "Edward James",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
     },
     {
       "name": "Martin Davis",
@@ -338,6 +338,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/KimyeoakzUvQQ7aAIPn8"
+    },
+    {
+      "name": "Crissthel Panuncio",
+      "headline": "",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/5EISF29pJ29sqH7DDkSH"
     },
     {
       "name": "Isaiah Adegbola",
@@ -468,16 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/KSFhael55mEdZNBXAleZ"
-    },
-    {
-      "name": "Kevin M",
-      "headline": "Full-Stack Web Developer | 10+ Years in PHP, Laravel, MySQL & API Integrations",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Fe6Z9TZyJXulOB3tsNtd"
     },
     {
       "name": "Marvin Risco",
@@ -630,6 +630,16 @@
       "profileUrl": "https://rentahuman.ai/humans/KDaDoveCUvsLWtEAnGxF"
     },
     {
+      "name": "Olowofela Merrygold",
+      "headline": "Data Annotator | AI Content Evaluator | Quality Assurance Specialist | Freelance Writer",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/XPaBMAQ3FGmj1qgEIW4v"
+    },
+    {
       "name": "Kay",
       "headline": "Networking engineer, researcher.",
       "city": "London",
@@ -768,16 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/qaJ0F31dRcLgjo8PT4gT"
-    },
-    {
-      "name": "Ridwan Tijani",
-      "headline": "Product Designer | Web & Mobile UI/UX | Figma, Prototyping & Design Systems",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/f5SaM87rVXY24Iw3oXeN"
     },
     {
       "name": "Zen Khor",
