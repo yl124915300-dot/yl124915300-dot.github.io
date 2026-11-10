@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-10T01:26:45+00:00",
+  "checkedAt": "2026-11-10T14:45:18+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -60,14 +60,24 @@
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
     },
     {
-      "name": "Venita Johnson",
-      "headline": "Editor & AI Trainer | Prompt Engineering, LLM Evaluation, Copyediting & Fact-Checking",
+      "name": "Sadiq Isa",
+      "headline": "Medical Student | AI Content Evaluation, Research & Prompting",
       "city": "New York",
       "country": "US",
       "hourlyRate": 7.25,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/3yKgScrxX7OquedHfDM0"
+      "profileUrl": "https://rentahuman.ai/humans/HbXZ6JQiX7WKV0nYv8ih"
+    },
+    {
+      "name": "Tee",
+      "headline": "Marketing, Editing & More!",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 30,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/z5Ztt7xzHwc5xA1qqGj8"
     },
     {
       "name": "Dwayne Johnson",
@@ -78,6 +88,36 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/ubzX4sUn7p0yfyVtW5Ky"
+    },
+    {
+      "name": "Fathur Romadlan",
+      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 13,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
+    },
+    {
+      "name": "MURANO GIUSEPPE",
+      "headline": "AI Training Specialist | Swahili Language Evaluator | Translator & Transcriptionist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 6.99,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/8EUgDZuPRGI9A2ichj1T"
+    },
+    {
+      "name": "Venita Johnson",
+      "headline": "Editor & AI Trainer | Prompt Engineering, LLM Evaluation, Copyediting & Fact-Checking",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/3yKgScrxX7OquedHfDM0"
     },
     {
       "name": "Mr Realest",
@@ -110,16 +150,6 @@
       "profileUrl": "https://rentahuman.ai/humans/cYjRpJ8qErP1lBJNO3Mv"
     },
     {
-      "name": "Fathur Romadlan",
-      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 13,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
-    },
-    {
       "name": "Crystal",
       "headline": "Administrative & Client Support Professional | Scheduling, Records Management & Customer Service",
       "city": "New York",
@@ -148,36 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/DpC8RF4lhr3D2RldgLdp"
-    },
-    {
-      "name": "James Cleary",
-      "headline": "Mathematics Researcher & Educator | Python & Maple | SOA Exams P and FM Passed",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/XJlEF6X9jrMbdDjH5rX9"
-    },
-    {
-      "name": "Paul Dada",
-      "headline": "AI Data Annotator & Microbiology Researcher | Excel, RLHF, STEM QA",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 10,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/d2PomulOgOiIpXHLsSHE"
-    },
-    {
-      "name": "Mofarah",
-      "headline": "",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 5,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/i29Ko9rQrDlLz6XcdXaw"
     },
     {
       "name": "Clifford Peek",
@@ -260,6 +260,16 @@
       "profileUrl": "https://rentahuman.ai/humans/LeslpRApFx3JrRemEXSE"
     },
     {
+      "name": "Martin Davis",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
+    },
+    {
       "name": "Matthew Farley",
       "headline": "People skills. Solve problems 24/7.",
       "city": "San Francisco",
@@ -278,16 +288,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
-    },
-    {
-      "name": "Martin Davis",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
       "name": "Jeremiah Franklin",
@@ -338,6 +338,36 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/KimyeoakzUvQQ7aAIPn8"
+    },
+    {
+      "name": "Eric",
+      "headline": "Full-Stack Software Developer & Systems Architect | React, Supabase, PHP & Azure",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/pTmbsCa6LSdZpE65VUO7"
+    },
+    {
+      "name": "Jared",
+      "headline": "Designer, Software Developer & Local Travel Companion",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/bTtbAHl4XkARZXE7w5rt"
+    },
+    {
+      "name": "Ai Nathan",
+      "headline": "Online Research & Data Verification Analyst | Python, AI Fundamentals",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/xMOfuDqpWlY1FrAaTkVb"
     },
     {
       "name": "Crissthel Panuncio",
@@ -450,36 +480,6 @@
       "profileUrl": "https://rentahuman.ai/humans/f6zIXWYUyaIyJivVqXpG"
     },
     {
-      "name": "Brown Obiero",
-      "headline": "AI Data Associate & Transcription Specialist | Nursing and Public Health Student",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/8IXYBVeqkk9ORj0SsERS"
-    },
-    {
-      "name": "Jared",
-      "headline": "Designer, Software Developer & Local Travel Companion",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/bTtbAHl4XkARZXE7w5rt"
-    },
-    {
-      "name": "EMMANUEL ISOH",
-      "headline": "Data Analyst & Machine Learning Developer | Python, SQL, Excel & Streamlit",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/KSFhael55mEdZNBXAleZ"
-    },
-    {
       "name": "Marvin Risco",
       "headline": "Operating & Investment Executive | 30+ Years in International Operations, M&A & Board Advisory",
       "city": "Austin",
@@ -498,6 +498,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/4zMI8WHI1ieM5VaSXb6O"
+    },
+    {
+      "name": "Matthew Brice",
+      "headline": "Music Producer & Marketer",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/8AJkAVvCGnHECXEpF2Sh"
+    },
+    {
+      "name": "Brandon Little",
+      "headline": "",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0lZTUvefL00cUCUCLi3X"
     },
     {
       "name": "Enjoy the Music Russell",
@@ -580,16 +600,6 @@
       "profileUrl": "https://rentahuman.ai/humans/mg0XFndbZbOxRb5A9Fzt"
     },
     {
-      "name": "Brandon Little",
-      "headline": "",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0lZTUvefL00cUCUCLi3X"
-    },
-    {
       "name": "Kitty Darling",
       "headline": "Loan Processing & Office Administration Professional | Banking, Mortgage & Business Operations",
       "city": "Austin",
@@ -620,14 +630,34 @@
       "profileUrl": "https://rentahuman.ai/humans/Zkq2eyghKWCMCTcztPMO"
     },
     {
-      "name": "Abdussalam Adamu",
-      "headline": "Web Designer | Photo & Video Editor",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 7.25,
+      "name": "Bernard Hope",
+      "headline": "AI Data Annotator & Quality Reviewer | Data Analysis and Technical Support",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 0.26,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/KDaDoveCUvsLWtEAnGxF"
+      "profileUrl": "https://rentahuman.ai/humans/YgRWyRYTf5NI8limvwKG"
+    },
+    {
+      "name": "Dave",
+      "headline": "Computer Science Student | Graphic Design & Remote Digital Tasks",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/z0QEYF29GiVQanIT5eKW"
+    },
+    {
+      "name": "Adetutu",
+      "headline": "AI Data Annotator | Image & Video Annotation | Computer Vision & Data Quality",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/84og5LEylzQ2KEIikkt4"
     },
     {
       "name": "Olowofela Merrygold",
@@ -660,16 +690,6 @@
       "profileUrl": "https://rentahuman.ai/humans/FwnCIRPasYh5cMaIqENg"
     },
     {
-      "name": "Adetutu",
-      "headline": "AI Data Annotator | Image & Video Annotation | Computer Vision & Data Quality",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/84og5LEylzQ2KEIikkt4"
-    },
-    {
       "name": "IKENNA PETER IFEANACHO",
       "headline": "Fashion Designer | Custom Garments, Pattern Drafting & Alterations",
       "city": "London",
@@ -688,16 +708,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/sdECAkTdf0hXfbq1fD23"
-    },
-    {
-      "name": "Bernard Hope",
-      "headline": "AI Data Annotator & Quality Reviewer | Data Analysis and Technical Support",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 0.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/YgRWyRYTf5NI8limvwKG"
     },
     {
       "name": "dan epan",
@@ -768,16 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/cCZ73jgy6ipwL13TQN0m"
-    },
-    {
-      "name": "darian nelson",
-      "headline": "Retail Shift Manager | Team Leadership, Customer Service & Operations",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/qaJ0F31dRcLgjo8PT4gT"
     },
     {
       "name": "Zen Khor",
