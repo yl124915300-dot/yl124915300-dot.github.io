@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-10T14:45:18+00:00",
+  "checkedAt": "2026-11-10T23:10:16+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -58,6 +58,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+    },
+    {
+      "name": "DCZ",
+      "headline": "Startup Operator & AI Founder | Strategic Partnerships, Go-to-Market & Operations",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/UE2LF6uAcpiIzEQP3QTG"
     },
     {
       "name": "Sadiq Isa",
@@ -170,16 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/Wyk3XxAmvmpKcKhX5R4N"
     },
     {
-      "name": "Ying Zhang",
-      "headline": "IP Professional | Patent Drafting, Patent Searches & Trademark Research | Electrical Engineering Background",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/DpC8RF4lhr3D2RldgLdp"
-    },
-    {
       "name": "Clifford Peek",
       "headline": "Person of many talents, simply ask.",
       "city": "San Francisco",
@@ -260,16 +260,6 @@
       "profileUrl": "https://rentahuman.ai/humans/LeslpRApFx3JrRemEXSE"
     },
     {
-      "name": "Martin Davis",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
-    },
-    {
       "name": "Matthew Farley",
       "headline": "People skills. Solve problems 24/7.",
       "city": "San Francisco",
@@ -278,6 +268,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
+    },
+    {
+      "name": "Martin Davis",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
       "name": "Edward James",
@@ -300,6 +300,16 @@
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
     },
     {
+      "name": "Yoanna Flores",
+      "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
+    },
+    {
       "name": "Jessica  Potter",
       "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
       "city": "San Francisco",
@@ -318,16 +328,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
-    },
-    {
-      "name": "Yoanna Flores",
-      "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
       "name": "Jaan Kelly",
@@ -630,6 +630,16 @@
       "profileUrl": "https://rentahuman.ai/humans/Zkq2eyghKWCMCTcztPMO"
     },
     {
+      "name": "JOSHUA EGBUJOR",
+      "headline": "AI Data Annotation Specialist | AI Response Evaluation | Igbo Translation QA",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/cNaNjYF0mx89ZKWRHz4Q"
+    },
+    {
       "name": "Bernard Hope",
       "headline": "AI Data Annotator & Quality Reviewer | Data Analysis and Technical Support",
       "city": "London",
@@ -770,14 +780,14 @@
       "profileUrl": "https://rentahuman.ai/humans/d0xz2GCJoltmIz6WsmAE"
     },
     {
-      "name": "Cecile Baninla",
-      "headline": "AI Training & Data Annotation Specialist | AI Response Evaluation, Search Relevance & Quality Assurance",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
+      "name": "ei e",
+      "headline": "",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/cCZ73jgy6ipwL13TQN0m"
+      "profileUrl": "https://rentahuman.ai/humans/1SplP6ftEYXWnMDobf8P"
     },
     {
       "name": "Zen Khor",
@@ -918,16 +928,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/OImbki8QucLethze1nrm"
-    },
-    {
-      "name": "Avery Liu",
-      "headline": "Bilingual Private Executive Assistant | UHNW Family Support, Global Travel & Cross-Border Coordination",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/kKyAFAF1QR5M7pqbjCq7"
     }
   ],
   "errors": []
