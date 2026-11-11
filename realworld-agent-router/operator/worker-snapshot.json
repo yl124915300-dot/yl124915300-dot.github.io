@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-11T05:57:16+00:00",
+  "checkedAt": "2026-11-11T14:02:23+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -340,6 +340,26 @@
       "profileUrl": "https://rentahuman.ai/humans/KimyeoakzUvQQ7aAIPn8"
     },
     {
+      "name": "Olivia Taylor",
+      "headline": "On-demand IRL tasks, pickups and site inspections",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/4iq4ZnrR4ttYsNVkn3Za"
+    },
+    {
+      "name": "Emma Smith",
+      "headline": "Fast, punctual & communicative personal assistant",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 29,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/3Eb4DxHZklMLT1a0xSfi"
+    },
+    {
       "name": "Emma Taylor",
       "headline": "Hardware setup, line waiting and local errands specialist",
       "city": "Los Angeles",
@@ -458,26 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/b9re24I7hQPjTxHPJv1i"
-    },
-    {
-      "name": "Alma Reyna",
-      "headline": "Food Service & Packaging Worker | Food Safety, Quality Control & Customer Service",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/HG6wEof8MyLsm8Us30z8"
-    },
-    {
-      "name": "Joshua Hope",
-      "headline": "Customer Service & General Task Support | Remote and In-Person Assistance",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/5iIl1J4gPIGmJdQzL1IM"
     },
     {
       "name": "Marvin Risco",
