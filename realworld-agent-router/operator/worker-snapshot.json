@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-12T15:02:17+00:00",
+  "checkedAt": "2026-11-12T23:29:42+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -50,6 +50,16 @@
       "profileUrl": "https://rentahuman.ai/humans/0zbuFFVgpmtum7cIysVk"
     },
     {
+      "name": "Kelly",
+      "headline": "Petroleum Engineering Student | Excel, Technical Reports & Document Formatting",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 30,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
+    },
+    {
       "name": "ARUBI UGBEM",
       "headline": "Project Manager | Agile & Waterfall | Planning, Delivery & Cross-Functional Team Leadership",
       "city": "New York",
@@ -58,6 +68,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+    },
+    {
+      "name": "SAMUEL AKINTOLA",
+      "headline": "AI Data Annotator & Evaluation Contributor | Voice, Video & Egocentric Data Collection",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/SjrG6R5FNotV9cwSYrM8"
+    },
+    {
+      "name": "Erica Low",
+      "headline": "IT Support & Automation Specialist | Python, SQL, Google Workspace & Hardware Testing",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/1LsehpBIeAnx43swmAmW"
     },
     {
       "name": "David Brown",
@@ -150,36 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/ubzX4sUn7p0yfyVtW5Ky"
     },
     {
-      "name": "Fathur Romadlan",
-      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 13,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
-    },
-    {
-      "name": "MURANO GIUSEPPE",
-      "headline": "AI Training Specialist | Swahili Language Evaluator | Translator & Transcriptionist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 6.99,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/8EUgDZuPRGI9A2ichj1T"
-    },
-    {
-      "name": "Venita Johnson",
-      "headline": "Editor & AI Trainer | Prompt Engineering, LLM Evaluation, Copyediting & Fact-Checking",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/3yKgScrxX7OquedHfDM0"
-    },
-    {
       "name": "Pat Santiago",
       "headline": "Founder of ACCELR8",
       "city": "San Francisco",
@@ -270,14 +270,14 @@
       "profileUrl": "https://rentahuman.ai/humans/LeslpRApFx3JrRemEXSE"
     },
     {
-      "name": "Edward James",
+      "name": "Martin Davis",
       "headline": "",
       "city": "San Francisco",
       "country": "US",
-      "hourlyRate": 20,
+      "hourlyRate": 7.25,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
+      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
       "name": "Matthew Farley",
@@ -290,14 +290,14 @@
       "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
     },
     {
-      "name": "Martin Davis",
+      "name": "Edward James",
       "headline": "",
       "city": "San Francisco",
       "country": "US",
-      "hourlyRate": 7.25,
+      "hourlyRate": 20,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
+      "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
     },
     {
       "name": "Jeremiah Franklin",
@@ -320,24 +320,24 @@
       "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
     },
     {
-      "name": "Yoanna Flores",
-      "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
+      "name": "Joshua Greiner",
+      "headline": "Sign Holder | Experience with RentAHuman Gigs",
       "city": "San Francisco",
       "country": "US",
       "hourlyRate": 7.25,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
+      "profileUrl": "https://rentahuman.ai/humans/I26j5ZS1L5FBkYHMcUtI"
     },
     {
-      "name": "Jaan Kelly",
-      "headline": "CEO & CMO | Digital Growth, Brand Development, and Innovation Leader",
+      "name": "Emma Thomas",
+      "headline": "Fast, punctual & communicative personal assistant",
       "city": "Los Angeles",
       "country": "US",
-      "hourlyRate": 8,
+      "hourlyRate": 35,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/KimyeoakzUvQQ7aAIPn8"
+      "profileUrl": "https://rentahuman.ai/humans/tQHHcMzD12Vc4Ahq5x3t"
     },
     {
       "name": "Sophia Johnson",
@@ -490,26 +490,6 @@
       "profileUrl": "https://rentahuman.ai/humans/qUdKhOA4FefvvUgmV2tw"
     },
     {
-      "name": "Marco Barr",
-      "headline": "Project Coordinator | QA, Sales & Marketing Professional",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/UEzwGGroXTVl90DD9Y1Y"
-    },
-    {
-      "name": "Keith Byers",
-      "headline": "Hydrovac Lead Operator | CDL Class A | 4+ Years in Underground Utilities & Safety",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/4zMI8WHI1ieM5VaSXb6O"
-    },
-    {
       "name": "Matthew Brice",
       "headline": "Music Producer & Marketer",
       "city": "Austin",
@@ -528,6 +508,36 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/0lZTUvefL00cUCUCLi3X"
+    },
+    {
+      "name": "TC2001",
+      "headline": "Professional, Efficient, Accurate, & Reliable",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 15,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/ixCWIetRRwIZSdFggcy9"
+    },
+    {
+      "name": "Marco Barr",
+      "headline": "Project Coordinator | QA, Sales & Marketing Professional",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/UEzwGGroXTVl90DD9Y1Y"
+    },
+    {
+      "name": "Keith Byers",
+      "headline": "Hydrovac Lead Operator | CDL Class A | 4+ Years in Underground Utilities & Safety",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/4zMI8WHI1ieM5VaSXb6O"
     },
     {
       "name": "Enjoy the Music Russell",
@@ -620,14 +630,24 @@
       "profileUrl": "https://rentahuman.ai/humans/2klmttBqAt5wW1YjKK0U"
     },
     {
-      "name": "Julia Lenci",
-      "headline": "Experienced Professional | Customer Service & Team Leadership",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 20,
+      "name": "Olivia Taylor",
+      "headline": "Reliable local assistant & on-site researcher",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 36,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Jyihac6xD3FWSU3sfQUD"
+      "profileUrl": "https://rentahuman.ai/humans/gkoHNqOo9OwQwJz7IRAM"
+    },
+    {
+      "name": "Himanshu Oriya1198",
+      "headline": "",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/coKG4PmycxydgR1WnMzl"
     },
     {
       "name": "Soumyajeet",
@@ -760,24 +780,14 @@
       "profileUrl": "https://rentahuman.ai/humans/wct6wiZj8PD1oQQcWMPR"
     },
     {
-      "name": "Emmanuel",
-      "headline": "Backend Engineer | Node.js, APIs, GraphQL, AWS & Real-Time Systems",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 10,
+      "name": "Ken Xu",
+      "headline": "Research & Data Operations Specialist | Excel, Rule-Based QA & E-commerce Analytics",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/FwnCIRPasYh5cMaIqENg"
-    },
-    {
-      "name": "IKENNA PETER IFEANACHO",
-      "headline": "Fashion Designer | Custom Garments, Pattern Drafting & Alterations",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/EBPgRc73QcDaoua72tnB"
+      "profileUrl": "https://rentahuman.ai/humans/mzh0c4E4Bj5O9sOIzHKH"
     },
     {
       "name": "ei e",
@@ -918,16 +928,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/wO2U5S8jQdv0UwDunvxg"
-    },
-    {
-      "name": "Limdx",
-      "headline": "Python Developer | Django & FastAPI | Web Applications, Desktop Tools & Machine Learning",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/OImbki8QucLethze1nrm"
     }
   ],
   "errors": []
