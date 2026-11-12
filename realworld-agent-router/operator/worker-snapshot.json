@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-11T14:02:23+00:00",
+  "checkedAt": "2026-11-12T00:31:05+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -58,6 +58,36 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+    },
+    {
+      "name": "Jennifer Jaja",
+      "headline": "Data Entry & Customer Support Specialist | Online Research & Administrative Assistance",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/sWwgh37ydW5eXthOgQq7"
+    },
+    {
+      "name": "Crystal",
+      "headline": "Administrative & Client Support Professional | Scheduling, Records Management & Customer Service",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/rSBRefEr8d7A26ZfbXzF"
+    },
+    {
+      "name": "JAJA WISDOM",
+      "headline": "Data Entry & Customer Support Specialist | Research, Content Review & Virtual Assistance",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/pcw4zvFXGh2Y88Qa3M07"
     },
     {
       "name": "DCZ",
@@ -150,36 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
     },
     {
-      "name": "Sky Strom",
-      "headline": "AI Product Builder | Founder of PocketBuddy | Rapid MVP Prototyping",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/cYjRpJ8qErP1lBJNO3Mv"
-    },
-    {
-      "name": "Crystal",
-      "headline": "Administrative & Client Support Professional | Scheduling, Records Management & Customer Service",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/rSBRefEr8d7A26ZfbXzF"
-    },
-    {
-      "name": "Ikechukwu",
-      "headline": "Business Leader | Statistics Graduate | Web Design & Solar Energy Training",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Wyk3XxAmvmpKcKhX5R4N"
-    },
-    {
       "name": "Clifford Peek",
       "headline": "Person of many talents, simply ask.",
       "city": "San Francisco",
@@ -260,6 +260,16 @@
       "profileUrl": "https://rentahuman.ai/humans/LeslpRApFx3JrRemEXSE"
     },
     {
+      "name": "Edward James",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
+    },
+    {
       "name": "Matthew Farley",
       "headline": "People skills. Solve problems 24/7.",
       "city": "San Francisco",
@@ -280,16 +290,6 @@
       "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
-      "name": "Edward James",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
-    },
-    {
       "name": "Jeremiah Franklin",
       "headline": "EVERYTHING",
       "city": "San Francisco",
@@ -300,16 +300,6 @@
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
     },
     {
-      "name": "Yoanna Flores",
-      "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
-    },
-    {
       "name": "Jessica  Potter",
       "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
       "city": "San Francisco",
@@ -318,6 +308,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
+    },
+    {
+      "name": "Yoanna Flores",
+      "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
       "name": "Michael Patterson",
@@ -338,6 +338,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/KimyeoakzUvQQ7aAIPn8"
+    },
+    {
+      "name": "Emma Brown",
+      "headline": "Personal courier, errands & physical task solver",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/zAfDRkNtMIUf2PIylIUD"
+    },
+    {
+      "name": "Daniel Johnson",
+      "headline": "On-demand IRL tasks, pickups and site inspections",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 39,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/sqQ7Z5XNk7qOv5OWDciU"
     },
     {
       "name": "Olivia Taylor",
@@ -458,26 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/r5IhrasVXzmbQjm3jXoH"
-    },
-    {
-      "name": "Cristy Joy",
-      "headline": "Creative Strategist & Video Producer | Digital Marketing, UGC & Live Streaming",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/MDwNKugMuokYfO2Wwtrc"
-    },
-    {
-      "name": "Kikki",
-      "headline": "AI Trainer & Audio Data Annotator | Quality Assurance, Field Inspections & Photography",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/b9re24I7hQPjTxHPJv1i"
     },
     {
       "name": "Marvin Risco",
@@ -630,6 +630,16 @@
       "profileUrl": "https://rentahuman.ai/humans/Jyihac6xD3FWSU3sfQUD"
     },
     {
+      "name": "Michael Smith",
+      "headline": "Hardware setup, line waiting and local errands specialist",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/kjvHX5CmyoDf9QenssT2"
+    },
+    {
       "name": "David Taylor",
       "headline": "Reliable local assistant & on-site researcher",
       "city": "London",
@@ -768,16 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/YvylRseaHQRzid9BjdwC"
-    },
-    {
-      "name": "Ashley Jenkins",
-      "headline": "Data Annotator | Text, Image & Audio Annotation | AI Training Data",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/yNtMrvzgvRoFAFrbLbXt"
     },
     {
       "name": "ei e",
