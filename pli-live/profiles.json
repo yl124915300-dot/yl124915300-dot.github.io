@@ -1,0 +1,104 @@
+[
+  {
+    "id": "S1",
+    "classification": "SYNTHETIC",
+    "label": "纽约通勤者",
+    "lat": 40.75,
+    "lon": -73.99,
+    "county": "NYC061",
+    "goal": "按时通勤",
+    "budget_cents": 10000,
+    "spare_minutes": 20,
+    "exposures": [
+      "land"
+    ],
+    "permissions": [
+      "read_only_proposal"
+    ]
+  },
+  {
+    "id": "S2",
+    "classification": "SYNTHETIC",
+    "label": "西雅图配送员",
+    "lat": 47.61,
+    "lon": -122.33,
+    "county": "WAC033",
+    "goal": "安全规划配送",
+    "budget_cents": 10000,
+    "spare_minutes": 15,
+    "exposures": [
+      "land"
+    ],
+    "permissions": [
+      "read_only_proposal"
+    ]
+  },
+  {
+    "id": "S3",
+    "classification": "SYNTHETIC",
+    "label": "洛杉矶旅客",
+    "lat": 34.05,
+    "lon": -118.24,
+    "county": "CAC037",
+    "goal": "核验出行条件",
+    "budget_cents": 10000,
+    "spare_minutes": 30,
+    "exposures": [
+      "land"
+    ],
+    "permissions": [
+      "read_only_proposal"
+    ]
+  },
+  {
+    "id": "S4",
+    "classification": "SYNTHETIC",
+    "label": "旧金山家庭",
+    "lat": 37.77,
+    "lon": -122.42,
+    "county": "CAC075",
+    "goal": "协调家庭安排",
+    "budget_cents": 10000,
+    "spare_minutes": 10,
+    "exposures": [
+      "land"
+    ],
+    "permissions": [
+      "read_only_proposal"
+    ]
+  },
+  {
+    "id": "S5",
+    "classification": "SYNTHETIC",
+    "label": "迈阿密店主",
+    "lat": 25.77,
+    "lon": -80.19,
+    "county": "FLC086",
+    "goal": "检查营业影响",
+    "budget_cents": 10000,
+    "spare_minutes": 5,
+    "exposures": [
+      "land"
+    ],
+    "permissions": [
+      "read_only_proposal"
+    ]
+  },
+  {
+    "id": "S6",
+    "classification": "SYNTHETIC",
+    "label": "芝加哥学生",
+    "lat": 41.88,
+    "lon": -87.63,
+    "county": "ILC031",
+    "goal": "协调上课出行",
+    "budget_cents": 10000,
+    "spare_minutes": 0,
+    "exposures": [
+      "land"
+    ],
+    "permissions": [
+      "read_only_proposal"
+    ]
+  }
+]
