@@ -1,0 +1,1471 @@
+{
+  "kind": "SEPARATE_CLOUD_RAW_OUTPUT_REPLAY_NOT_SEMANTIC_REVIEW",
+  "passed": 366,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "baseline: thirty actual model attempts",
+      "pass": true
+    },
+    {
+      "name": "baseline:b01: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b01: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b01: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b01: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b02: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b02: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b02: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b02: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b03: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b03: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b03: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b03: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b04: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b04: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b04: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b04: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b05: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b05: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b05: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b05: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b06: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b06: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b06: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b06: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b07: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b07: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b07: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b07: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b08: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b08: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b08: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b08: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b09: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b09: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b09: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b09: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b10: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b10: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b10: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b10: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b11: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b11: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b11: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b11: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b12: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b12: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b12: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b12: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b13: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b13: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b13: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b13: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b14: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b14: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b14: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b14: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b15: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b15: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b15: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b15: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b16: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b16: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b16: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b16: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b17: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b17: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b17: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b17: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b18: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b18: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b18: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b18: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b19: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b19: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b19: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b19: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b20: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b20: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b20: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b20: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b21: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b21: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b21: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b21: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b22: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b22: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b22: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b22: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b23: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b23: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b23: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b23: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b24: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b24: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b24: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b24: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b25: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b25: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b25: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b25: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b26: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b26: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b26: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b26: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b27: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b27: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b27: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b27: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b28: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b28: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b28: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b28: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b29: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b29: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b29: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b29: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline:b30: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "baseline:b30: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "baseline:b30: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "baseline:b30: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "baseline: final checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling: thirty actual model attempts",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b01: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b01: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b01: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b01: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b02: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b02: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b02: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b02: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b03: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b03: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b03: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b03: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b04: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b04: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b04: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b04: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b05: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b05: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b05: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b05: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b06: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b06: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b06: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b06: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b07: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b07: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b07: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b07: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b08: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b08: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b08: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b08: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b09: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b09: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b09: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b09: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b10: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b10: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b10: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b10: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b11: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b11: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b11: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b11: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b12: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b12: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b12: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b12: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b13: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b13: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b13: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b13: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b14: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b14: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b14: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b14: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b15: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b15: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b15: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b15: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b16: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b16: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b16: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b16: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b17: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b17: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b17: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b17: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b18: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b18: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b18: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b18: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b19: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b19: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b19: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b19: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b20: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b20: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b20: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b20: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b21: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b21: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b21: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b21: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b22: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b22: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b22: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b22: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b23: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b23: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b23: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b23: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b24: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b24: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b24: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b24: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b25: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b25: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b25: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b25: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b26: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b26: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b26: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b26: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b27: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b27: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b27: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b27: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b28: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b28: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b28: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b28: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b29: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b29: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b29: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b29: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b30: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b30: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b30: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling:b30: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-sampling: final checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy: thirty actual model attempts",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b01: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b01: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b01: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b01: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b02: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b02: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b02: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b02: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b03: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b03: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b03: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b03: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b04: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b04: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b04: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b04: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b05: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b05: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b05: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b05: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b06: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b06: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b06: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b06: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b07: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b07: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b07: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b07: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b08: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b08: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b08: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b08: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b09: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b09: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b09: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b09: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b10: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b10: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b10: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b10: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b11: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b11: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b11: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b11: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b12: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b12: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b12: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b12: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b13: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b13: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b13: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b13: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b14: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b14: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b14: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b14: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b15: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b15: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b15: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b15: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b16: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b16: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b16: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b16: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b17: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b17: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b17: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b17: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b18: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b18: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b18: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b18: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b19: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b19: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b19: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b19: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b20: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b20: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b20: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b20: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b21: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b21: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b21: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b21: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b22: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b22: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b22: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b22: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b23: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b23: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b23: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b23: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b24: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b24: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b24: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b24: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b25: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b25: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b25: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b25: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b26: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b26: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b26: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b26: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b27: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b27: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b27: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b27: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b28: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b28: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b28: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b28: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b29: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b29: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b29: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b29: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b30: continuous checkpoint",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b30: continuous projection",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b30: raw output deterministically restored",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy:b30: no external actions or cash",
+      "pass": true
+    },
+    {
+      "name": "fixed-greedy: final checkpoint",
+      "pass": true
+    }
+  ]
+}

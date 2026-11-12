@@ -1,0 +1,47 @@
+{
+  "assessment": "IMPLEMENTER_INSPECTION_NOT_THIRD_PARTY_BLIND_REVIEW",
+  "arm": "fixed-greedy",
+  "sourceCommit": "61fa8f93bac054c003783c9887f669e1bb3d57fa",
+  "observations": [
+    {
+      "ids": [
+        "b07",
+        "b25"
+      ],
+      "type": "MODEL_SEMANTIC_FAILURE",
+      "description": "Model proposes simulate_plan at available 8475 cents for a 9000-cent coach, and at zero available cents for a 100-cent laundry service. Gate blocks both without state mutation."
+    },
+    {
+      "ids": [
+        "b22"
+      ],
+      "type": "MODEL_SEMANTIC_FAILURE",
+      "description": "Model selects revocation for S3 even while rationale identifies the plan as belonging to S2; category is also study rather than work. Gate rejects the absent current-profile target."
+    },
+    {
+      "ids": [
+        "b18"
+      ],
+      "type": "MODEL_CATEGORY_FAILURE",
+      "description": "The travel outing is classified as study while the action correctly asks for safety evidence."
+    },
+    {
+      "ids": [
+        "b05"
+      ],
+      "type": "CONSERVATIVE_PARSER_LIMITATION",
+      "description": "Parser accepts 'costs' and 'is free' but not plural 'notes cost $18'; entire composite quote forces HOLD although the chosen free lesson is correct. This remains a failed held-out event; no retroactive repair or relabeling."
+    },
+    {
+      "ids": [
+        "b15",
+        "b16",
+        "b17"
+      ],
+      "type": "HARNESS_EMPTY_SOURCE_HANDLING_AND_MODEL_OUTPUT_FAILURE",
+      "description": "With no valid known current-person/current-event source, the per-case grammar permits empty-string placeholder items. The model emits facts/sourceIds containing empty strings instead of empty arrays. The boundary rejects them as ungrounded. This is not evidence that the invalid source was accepted."
+    }
+  ],
+  "unscored": "Free-text implications and incomplete rationale strings remain unreviewed; automatic field results cannot establish 90% complete semantic accuracy.",
+  "verdict": "NO_GO"
+}

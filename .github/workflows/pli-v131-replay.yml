@@ -1,0 +1,70 @@
+name: PLI V1.3.1 separate cloud replay and anonymous acceptance
+on:
+  push:
+    branches: [pli-v131-semantic-20261019]
+    paths: ['pli-v131/VERIFY.json', 'pli-v131/PUBLIC_CHECK.json']
+permissions:
+  contents: read
+concurrency:
+  group: pli-v131-replay
+  cancel-in-progress: false
+jobs:
+  replay:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Verify frozen implementation and all pre-existing file blobs
+        run: |
+          git diff --exit-code aa54815a05ead5a9b2b9b20e1295cc6e4ddf565b HEAD -- pli-v131/gate.mjs pli-v131/grade.py pli-v131/prompt.txt pli-v131/schema.json pli-v131/run.py pli-v131/POLICY.md .github/workflows/pli-v131-semantic.yml
+          python3 - <<'PY'
+          import subprocess,json
+          def tree(ref):
+              return {s.split('\t',1)[1]:s.split('\t')[0].split()[2] for s in subprocess.check_output(['git','ls-tree','-r',ref],text=True).splitlines()}
+          a,b=tree('578a1c9761faef7f3c16c23ffbd5e30458dc7b14'),tree('HEAD')
+          changed=[p for p,s in a.items() if b.get(p)!=s]
+          assert not changed,changed
+          report={'originalFiles':len(a),'originalChanged':changed,'frozenCommit':'aa54815a05ead5a9b2b9b20e1295cc6e4ddf565b'}
+          open('pli-v131/evidence/scope.json','w').write(json.dumps(report,indent=2))
+          print(json.dumps(report))
+          PY
+      - name: Recompute all ninety model gates and continuous checkpoints in a separate job
+        run: node pli-v131/verify.mjs
+      - name: Summarize automatic fields and read-only real schedule audit
+        run: python3 pli-v131/summarize.py
+      - name: Anonymous cloud browser prerequisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          npm install --prefix /tmp/pli-v131-qa --no-package-lock --no-save playwright@1.55.1
+          /tmp/pli-v131-qa/node_modules/.bin/playwright install chromium
+          if [ -f pli-v131/PUBLIC_CHECK.json ]; then echo "PLI_PUBLIC=1" >> "$GITHUB_ENV"; else echo "PLI_PUBLIC=0" >> "$GITHUB_ENV"; fi
+      - name: Preserve the exact previously published summary and replay for byte verification
+        if: env.PLI_PUBLIC == '1'
+        run: |
+          git show HEAD:pli-v131/summary.json > pli-v131/summary.json
+          git show HEAD:pli-v131/replay.json > pli-v131/replay.json
+          python3 pli-v131/public.py
+      - name: Actual anonymous desktop and mobile browser checks
+        env:
+          NODE_PATH: /tmp/pli-v131-qa/node_modules
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/pli-v131-viewer.log 2>&1 &
+          node pli-v131/browser.cjs
+      - name: Persist bounded replay and acceptance evidence
+        if: always()
+        run: |
+          git config user.name 'PLI V1.3.1 separate cloud replay'
+          git config user.email 'pli-v131@users.noreply.github.com'
+          git add pli-v131/evidence/ pli-v131/summary.json pli-v131/replay.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'PLI V1.3.1: record independent restoration and actual anonymous viewer checks'
+            git fetch origin pli-v131-semantic-20261019
+            git rebase origin/pli-v131-semantic-20261019
+            git push origin HEAD:pli-v131-semantic-20261019
+          fi

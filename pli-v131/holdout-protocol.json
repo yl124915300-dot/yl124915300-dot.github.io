@@ -1,0 +1,11 @@
+{
+  "freezeCommit": "aa54815a05ead5a9b2b9b20e1295cc6e4ddf565b",
+  "holdoutAuthor": "Implementing assistant after freeze; not an independent human author",
+  "thirdPartyBlindReview": false,
+  "labelsHiddenFromInference": true,
+  "sequence": "Three independent continuous simulator trajectories; same ordered raw events",
+  "confirmatoryClaim": "NO_GO until genuinely independent full semantic review",
+  "caseCount": 30,
+  "realTransactions": 0,
+  "netReceiptsUSD": 0
+}

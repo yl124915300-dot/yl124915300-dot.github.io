@@ -1,0 +1,12 @@
+{
+  "checkedAtBeijing": "2026-10-19T16:27:11+08:00",
+  "query": "https://api.github.com/repos/yl124915300-dot/yl124915300-dot.github.io/actions/runs?event=schedule&per_page=100",
+  "response": {
+    "total_count": 0,
+    "workflow_runs": []
+  },
+  "eventFilter": "schedule",
+  "pushIsCron": false,
+  "result": "BLOCKED_NO_TRUE_SCHEDULE_RUN",
+  "readOnly": true
+}
