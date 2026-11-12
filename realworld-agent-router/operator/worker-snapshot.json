@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-12T00:31:05+00:00",
+  "checkedAt": "2026-11-12T15:02:17+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -58,6 +58,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+    },
+    {
+      "name": "David Brown",
+      "headline": "Hardware setup, line waiting and local errands specialist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 23,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/JcDATABsqP4ST9kAont0"
+    },
+    {
+      "name": "Abhishek Singh",
+      "headline": "AI Automation Engineer | Voice Agents, RAG Apps & Python Workflows",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 10,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/xa78N1Ewarr0RWqoTuXE"
     },
     {
       "name": "Jennifer Jaja",
@@ -160,24 +180,14 @@
       "profileUrl": "https://rentahuman.ai/humans/3yKgScrxX7OquedHfDM0"
     },
     {
-      "name": "Mr Realest",
-      "headline": "Online Research Urdu Communication Social Media Basic Handling English Communication Data Entry Virtual Assistance Chat Support Basic Tech Help English Communic",
-      "city": "New York",
+      "name": "Pat Santiago",
+      "headline": "Founder of ACCELR8",
+      "city": "San Francisco",
       "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
+      "hourlyRate": 10000,
+      "verified": true,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/mCV9jg5IpQrk5t1W5dce"
-    },
-    {
-      "name": "Sutton Peter",
-      "headline": "Egocentric Video Data Contributor | AI Field Data Collection & Video Quality Review",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
+      "profileUrl": "https://rentahuman.ai/humans/csXyZ25RZ6gfkf0NwFGh"
     },
     {
       "name": "Clifford Peek",
@@ -320,16 +330,6 @@
       "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
-      "name": "Michael Patterson",
-      "headline": "Administrative & Office Support Professional | 20+ Years in Hospitality and Events",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
-    },
-    {
       "name": "Jaan Kelly",
       "headline": "CEO & CMO | Digital Growth, Brand Development, and Innovation Leader",
       "city": "Los Angeles",
@@ -338,6 +338,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/KimyeoakzUvQQ7aAIPn8"
+    },
+    {
+      "name": "Sophia Johnson",
+      "headline": "Personal courier, errands & physical task solver",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 16,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/s60kpZes5Lo0REyZFArL"
     },
     {
       "name": "Emma Brown",
@@ -468,16 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/3TmG8k6LOwlZOoGVhjrb"
-    },
-    {
-      "name": "Anh Binh Huynh",
-      "headline": "TCM Wholesale Business Developer | Taoist Cultural Consultant & TikTok Creator",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/r5IhrasVXzmbQjm3jXoH"
     },
     {
       "name": "Marvin Risco",
@@ -630,6 +630,56 @@
       "profileUrl": "https://rentahuman.ai/humans/Jyihac6xD3FWSU3sfQUD"
     },
     {
+      "name": "Soumyajeet",
+      "headline": "Data Scientist & Python Developer | 8+ Years in IT | Computer Vision, NLP & Automation",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/fgQhy3bmsj3MGtTjFLA1"
+    },
+    {
+      "name": "Daniel Smith",
+      "headline": "Reliable local assistant & on-site researcher",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 30,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/GFrWUv6wusHJ2hjLqqFU"
+    },
+    {
+      "name": "James Harris",
+      "headline": "Reliable local assistant & on-site researcher",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 38,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/H67wSETxNlXM1qHJFBGX"
+    },
+    {
+      "name": "Alex Taylor",
+      "headline": "Fast, punctual & communicative personal assistant",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 15,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Z6x9yHNofvMIbCOG7L8z"
+    },
+    {
+      "name": "Emma Wilson",
+      "headline": "Hardware setup, line waiting and local errands specialist",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 36,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/J0RgZ7iWfX0WHhpk3kzG"
+    },
+    {
       "name": "Michael Smith",
       "headline": "Hardware setup, line waiting and local errands specialist",
       "city": "London",
@@ -728,56 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/EBPgRc73QcDaoua72tnB"
-    },
-    {
-      "name": "Abdulrasaq Majolagbe",
-      "headline": "AI Data Annotator | Computer Vision, Image & Audio Labeling",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 15,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/sdECAkTdf0hXfbq1fD23"
-    },
-    {
-      "name": "dan epan",
-      "headline": "",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 4.96,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/yoK7MkjlhKVDAhNdNrAG"
-    },
-    {
-      "name": "samuel lin",
-      "headline": "Property Investment & Development Professional | Asset Repositioning & Commercial Leasing",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Pp7RKTDoKy6d239n5DPr"
-    },
-    {
-      "name": "Hamid",
-      "headline": "Operations Strategy & Sales Executive | Fleet Optimization & Revenue Growth Specialist",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/IZMCPxcLxWtZHFQSv8iX"
-    },
-    {
-      "name": "Max Waycott",
-      "headline": "Everything",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 10,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/YvylRseaHQRzid9BjdwC"
     },
     {
       "name": "ei e",
