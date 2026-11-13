@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-12T23:29:42+00:00",
+  "checkedAt": "2026-11-13T06:25:15+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -270,16 +270,6 @@
       "profileUrl": "https://rentahuman.ai/humans/LeslpRApFx3JrRemEXSE"
     },
     {
-      "name": "Martin Davis",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
-    },
-    {
       "name": "Matthew Farley",
       "headline": "People skills. Solve problems 24/7.",
       "city": "San Francisco",
@@ -288,6 +278,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
+    },
+    {
+      "name": "Martin Davis",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
       "name": "Edward James",
@@ -310,6 +310,16 @@
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
     },
     {
+      "name": "Joshua Greiner",
+      "headline": "Sign Holder | Experience with RentAHuman Gigs",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/I26j5ZS1L5FBkYHMcUtI"
+    },
+    {
       "name": "Jessica  Potter",
       "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
       "city": "San Francisco",
@@ -320,14 +330,24 @@
       "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
     },
     {
-      "name": "Joshua Greiner",
-      "headline": "Sign Holder | Experience with RentAHuman Gigs",
-      "city": "San Francisco",
+      "name": "Alex Wilson",
+      "headline": "Fast, punctual & communicative personal assistant",
+      "city": "Los Angeles",
       "country": "US",
-      "hourlyRate": 7.25,
+      "hourlyRate": 26,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/I26j5ZS1L5FBkYHMcUtI"
+      "profileUrl": "https://rentahuman.ai/humans/GI7zX3wSfgcguSai6lwl"
+    },
+    {
+      "name": "Daniel Johnson",
+      "headline": "Hardware setup, line waiting and local errands specialist",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 15,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/rkeEBhVsWQRtaER9QTPr"
     },
     {
       "name": "Emma Thomas",
@@ -460,26 +480,6 @@
       "profileUrl": "https://rentahuman.ai/humans/6g6Kj5PjulMnSmXI9loY"
     },
     {
-      "name": "Justine",
-      "headline": "Web Developer | Mathematics & Computer Science Undergraduate | Text & Visual Analysis",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/FqS1lDRzQUtJefCAXZZb"
-    },
-    {
-      "name": "Daniel Cherogony",
-      "headline": "Data Analytics & Digital Marketing Assistant | Python, Excel, Tableau",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 15,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/3TmG8k6LOwlZOoGVhjrb"
-    },
-    {
       "name": "Marvin Risco",
       "headline": "Operating & Investment Executive | 30+ Years in International Operations, M&A & Board Advisory",
       "city": "Austin",
@@ -488,6 +488,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/qUdKhOA4FefvvUgmV2tw"
+    },
+    {
+      "name": "Marco Barr",
+      "headline": "Project Coordinator | QA, Sales & Marketing Professional",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/UEzwGGroXTVl90DD9Y1Y"
     },
     {
       "name": "Matthew Brice",
@@ -518,16 +528,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/ixCWIetRRwIZSdFggcy9"
-    },
-    {
-      "name": "Marco Barr",
-      "headline": "Project Coordinator | QA, Sales & Marketing Professional",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/UEzwGGroXTVl90DD9Y1Y"
     },
     {
       "name": "Keith Byers",
@@ -628,6 +628,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/2klmttBqAt5wW1YjKK0U"
+    },
+    {
+      "name": "Michael Smith",
+      "headline": "On-demand IRL tasks, pickups and site inspections",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/UgMJCURIaksCEg0ylyJO"
+    },
+    {
+      "name": "Michael Miller",
+      "headline": "Personal courier, errands & physical task solver",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 21,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/EHQSXKIWH9vVc5OIKpx1"
     },
     {
       "name": "Olivia Taylor",
@@ -758,26 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/84og5LEylzQ2KEIikkt4"
-    },
-    {
-      "name": "Olowofela Merrygold",
-      "headline": "Data Annotator | AI Content Evaluator | Quality Assurance Specialist | Freelance Writer",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/XPaBMAQ3FGmj1qgEIW4v"
-    },
-    {
-      "name": "Kay",
-      "headline": "Networking engineer, researcher.",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/wct6wiZj8PD1oQQcWMPR"
     },
     {
       "name": "Ken Xu",
