@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-14T13:24:58+00:00",
+  "checkedAt": "2026-11-14T22:15:32+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -70,6 +70,46 @@
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
     },
     {
+      "name": "Jessie Roeder",
+      "headline": "Technology Educator & Engineer | Robotics, VR & Software Development Specialist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 15,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/IeHmBKfKZpRmo2HNgHoK"
+    },
+    {
+      "name": "Stan N.",
+      "headline": "",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/iR4U9a8xC9WjdWACCkpj"
+    },
+    {
+      "name": "Raul Taveras",
+      "headline": "",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/zQaUAdNvTid71da05ENT"
+    },
+    {
+      "name": "K Julian",
+      "headline": "Creative Consultant, Writing and in-Person Event Professional",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/ElZxZy6kYyLyu4X7xwzk"
+    },
+    {
       "name": "Oluwaseyi Ogunbiyi",
       "headline": "Entry-Level Communications & Administrative Support | Content Writing & Social Media",
       "city": "New York",
@@ -98,16 +138,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/vLiEvuTbRaSf5SqnH51a"
-    },
-    {
-      "name": "Jessie Roeder",
-      "headline": "Technology Educator & Engineer | Robotics, VR & Software Development Specialist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 15,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/IeHmBKfKZpRmo2HNgHoK"
     },
     {
       "name": "Lucas Brown",
@@ -148,36 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/1LsehpBIeAnx43swmAmW"
-    },
-    {
-      "name": "David Brown",
-      "headline": "Hardware setup, line waiting and local errands specialist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 23,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/JcDATABsqP4ST9kAont0"
-    },
-    {
-      "name": "Abhishek Singh",
-      "headline": "AI Automation Engineer | Voice Agents, RAG Apps & Python Workflows",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 10,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/xa78N1Ewarr0RWqoTuXE"
-    },
-    {
-      "name": "Jennifer Jaja",
-      "headline": "Data Entry & Customer Support Specialist | Online Research & Administrative Assistance",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/sWwgh37ydW5eXthOgQq7"
     },
     {
       "name": "Pat Santiago",
@@ -330,6 +330,36 @@
       "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
     },
     {
+      "name": "Daniel Smith",
+      "headline": "Detail-oriented field verification & photography specialist",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 38,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/ssXJUYoprC0dFcxP25Yv"
+    },
+    {
+      "name": "Lucas Miller",
+      "headline": "On-demand IRL tasks, pickups and site inspections",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 19,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/lDl5k8Gbcloy08lo3010"
+    },
+    {
+      "name": "Michael Anderson",
+      "headline": "Detail-oriented field verification & photography specialist",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 29,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/ugjicBBRBdn5uFwDFElX"
+    },
+    {
       "name": "David Anderson",
       "headline": "Fast, punctual & communicative personal assistant",
       "city": "Los Angeles",
@@ -448,36 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/sqQ7Z5XNk7qOv5OWDciU"
-    },
-    {
-      "name": "Olivia Taylor",
-      "headline": "On-demand IRL tasks, pickups and site inspections",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/4iq4ZnrR4ttYsNVkn3Za"
-    },
-    {
-      "name": "Emma Smith",
-      "headline": "Fast, punctual & communicative personal assistant",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 29,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/3Eb4DxHZklMLT1a0xSfi"
-    },
-    {
-      "name": "Emma Taylor",
-      "headline": "Hardware setup, line waiting and local errands specialist",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/xdEivXvs5cTjBLPfrYDv"
     },
     {
       "name": "Marvin Risco",
@@ -630,6 +630,16 @@
       "profileUrl": "https://rentahuman.ai/humans/2klmttBqAt5wW1YjKK0U"
     },
     {
+      "name": "David Thomas",
+      "headline": "Fast, punctual & communicative personal assistant",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 35,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/lQkJB6WbYcsFQc4Wt2Ne"
+    },
+    {
       "name": "Olivia Harris",
       "headline": "Detail-oriented field verification & photography specialist",
       "city": "London",
@@ -768,16 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/Z6x9yHNofvMIbCOG7L8z"
-    },
-    {
-      "name": "Emma Wilson",
-      "headline": "Hardware setup, line waiting and local errands specialist",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 36,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/J0RgZ7iWfX0WHhpk3kzG"
     },
     {
       "name": "Ken Xu",
