@@ -1,0 +1,83 @@
+name: MATCH OS read-only live offer click E2E
+on:
+  push:
+    paths:
+      - '.github/workflows/match-os-live-offer-e2e.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Check Chrome runtime and install Selenium
+        run: |
+          command -v google-chrome || true
+          command -v chromedriver || true
+          google-chrome --version || true
+          python3 -m pip install --quiet --user selenium
+      - name: Exercise public MATCH OS live offer search without purchases
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python3 - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import WebDriverWait
+          from selenium.webdriver.support import expected_conditions as EC
+          from selenium.common.exceptions import TimeoutException
+          import sys
+
+          options=Options()
+          for arg in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1280,900'):
+            options.add_argument(arg)
+          browser=webdriver.Chrome(options=options)
+          try:
+            wait=WebDriverWait(browser,35)
+            browser.get('https://yl124915300-dot.github.io/match-os/')
+            wait.until(EC.element_to_be_clickable((By.ID,'message')))
+            browser.find_element(By.ID,'message').send_keys('Help me find massage in Austin, United States under USD 100 by Friday.')
+            browser.find_element(By.ID,'send').click()
+            def found_review(driver):
+              return not driver.find_element(By.ID,'review').get_attribute('hidden')
+            # Fill missing details, if any, without disclosing a real person's data.
+            for _ in range(5):
+              if browser.find_element(By.ID,'review').is_displayed(): break
+              text=browser.find_element(By.ID,'message')
+              if not text.is_displayed(): break
+              if browser.find_element(By.ID,'quick-actions').is_displayed():
+                browser.find_element(By.ID,'skip').click()
+              else:
+                text.send_keys('No preference')
+                browser.find_element(By.ID,'send').click()
+            wait.until(lambda d:d.find_element(By.ID,'review').is_displayed())
+            print('CHAT_REVIEW_OK',flush=True)
+            link=browser.find_element(By.ID,'google-search').get_attribute('href')
+            print('OTHER_SOURCE_LINK_OK', 'massage' in link.lower(),flush=True)
+            browser.find_element(By.ID,'live-search').click()
+            try:
+              wait.until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#live-results .offer-card'))>=2 or
+                         'unavailable' in d.find_element(By.ID,'live-status').text.lower() or
+                         'timed out' in d.find_element(By.ID,'live-status').text.lower())
+            except TimeoutException:
+              print('LIVE_FETCH_TIMEOUT',browser.find_element(By.ID,'live-status').text[:150],flush=True)
+              raise
+            cards=browser.find_elements(By.CSS_SELECTOR,'#live-results .offer-card')
+            print('LIVE_OFFER_CARD_COUNT',len(cards),flush=True)
+            if len(cards)<2:
+              raise AssertionError('Fewer than 2 real public offer cards; status='+browser.find_element(By.ID,'live-status').text)
+            for card in cards[:2]:
+              assert 'From USD' in card.find_element(By.CLASS_NAME,'offer-price').text
+              href=card.find_element(By.CSS_SELECTOR,'a.offer-link').get_attribute('href')
+              assert href.startswith('https://') and ('groupon.com/' in href or 'livingsocial.com/' in href)
+            print('LIVE_OFFER_PRICE_AND_OFFICIAL_LINKS_OK',flush=True)
+            browser.find_element(By.ID,'close').click()
+            browser.find_element(By.ID,'cancel').click()
+            assert len(browser.find_elements(By.CSS_SELECTOR,'#live-results .offer-card'))==0
+            assert not browser.find_element(By.ID,'reference').is_displayed()
+            print('SESSION_CANCEL_CLEARS_OFFERS_OK',flush=True)
+          finally:
+            browser.quit()
+          PY
