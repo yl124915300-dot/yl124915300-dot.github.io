@@ -1,4 +1,4 @@
-import { constraint, count, deliveryCheck, extract, includes, key, loaded, minimum, number, stable, text } from './shared.js?v=5';
+import { constraint, count, deliveryCheck, extract, includes, key, loaded, minimum, number, stable, text, yesNo } from './shared.js?v=7';
 
 const aliases = { 苹果: 'apple', 三星: 'samsung', 索尼: 'sony', 谷歌: 'google', 联想: 'lenovo' };
 const brand = value => aliases[key(value)] || key(value);
@@ -6,7 +6,7 @@ const condition = value => ({ 'brand new': 'new', sealed: 'new', 全新: 'new', 
   翻新: 'refurbished', 'open-box': 'open box' })[key(value)] || key(value);
 const region = value => ({ usa: 'us', 'united states': 'us', 美版: 'us', 国行: 'cn',
   日版: 'jp', 欧版: 'eu', 'china mainland': 'cn' })[key(value)] || key(value);
-const connector = value => key(value).replace(/^usb[ -]?c$/u, 'usb-c');
+const connector = value => key(value).replace(/^usb[ -]?c$/u, 'usb-c').replace(/^3[.]5\s*mm$/u, '3.5 mm');
 const list = (value, normalize) => [...new Set(text(value).split(/[,，/]+/u).map(normalize).filter(Boolean))].sort();
 const storage = gb => number(gb, 1);
 const productKinds = [
@@ -43,7 +43,7 @@ const schema = [
   ['storageGB', 'Storage in GB'], ['configuration', 'Configuration (chip, RAM, connectivity)'],
   ['region', 'Region version (US, CN, JP…)'], ['condition', 'Condition (new, used, refurbished, open box)'],
   ['warrantyMonths', 'Warranty months'], ['connector', 'Connector or charging standard (USB-C, Lightning…)'],
-  ['compatibleWith', 'Compatible models, comma separated'], ['deliveryDate', 'Arrival date (YYYY-MM-DD)'],
+  ['wiredAnc', 'Active noise cancellation works with cable (yes or no)'], ['compatibleWith', 'Compatible models, comma separated'], ['deliveryDate', 'Arrival date (YYYY-MM-DD)'],
 ];
 
 export const electronics = {
@@ -57,19 +57,20 @@ export const electronics = {
       family: reference?.family || key(raw.family),
       generation: reference?.generation || count(raw.generation), storageGB: storage(raw.storageGB),
       configuration: key(raw.configuration), region: region(raw.region), condition: condition(raw.condition),
-      warrantyMonths: number(raw.warrantyMonths), connector: connector(raw.connector),
+      warrantyMonths: number(raw.warrantyMonths), connector: connector(raw.connector), wiredAnc: yesNo(raw.wiredAnc),
       compatibleWith: list(raw.compatibleWith, value => modelReference(value)?.model || key(value)),
     };
   },
   requirements(brief, item) {
     const ram = /(?:\bRAM\s*[:=]?\s*(\d+)\s*GB|(\d+)\s*GB\s*RAM\b)/iu;
     const withoutRam = item.replace(ram, ' ');
-    const found = extract(brief, withoutRam, [
+    const found = extract({ ...brief, details: brief.details.replace(/\binclude delivery\b/giu, '') }, withoutRam, [
       ['ram', ram, m => Number(m[1] || m[2])],
       ['storageGB', storagePattern, fromStorage],
       ['region', /\b(?:(US|USA|JP|CN|EU|UK|global)\s+(?:version|model))\b|美版|国行|日版|欧版/iu, m => region(m[1] || m[0])],
       ['condition', /\b(?:brand new|new only|sealed|refurbished|used only|open[- ]box)\b|全新|二手|翻新/iu, m => condition(m[0].replace(/ only$/iu, ''))],
-      ['connector', /\b(?:usb[- ]?c|lightning|micro[- ]?usb|qi2?)\b/iu, m => connector(m[0])],
+      ['wiredAnc', /\b(?:wired\s+(?:anc|active noise cancellation)|(?:anc|active noise cancellation)\s+(?:in wired mode|while wired|with (?:a |the )?cable))\b/iu, () => true],
+      ['connector', /\b(?:usb[- ]?c|lightning|micro[- ]?usb|qi2?|3[.]5\s*mm)\b/iu, m => connector(m[0])],
       ['warrantyMonths', /(?:(\d{1,3})\s*months?[ -]+warranty|\bwarranty\s*[:=]?\s*(\d{1,3})\s*months?|(\d{1,3})\s*个月保修)/iu,
         m => Number(m[1] || m[2] || m[3])],
     ]);
@@ -100,7 +101,7 @@ export const electronics = {
         const match = /(?:(\d+)\s*gb\s*ram|ram\s*[:=]?\s*(\d+)\s*gb)/iu.exec(a.configuration);
         return constraint('RAM in GB', match ? Number(match[1] || match[2]) : null, value);
       }
-      return constraint({ storageGB: 'Storage in GB', model: 'Exact model', region: 'Region version', productKind: 'Product type' }[field] || field, a[field], value);
+      return constraint({ storageGB: 'Storage in GB', model: 'Exact model', region: 'Region version', wiredAnc: 'Active noise cancellation with cable', productKind: 'Product type' }[field] || field, a[field], value);
     });
     const checks = [...rules(hard), ...deliveryCheck(offer, intent)];
     const relatedModel = !accessory && reference && a.family === reference.family && a.model !== reference.model;
@@ -115,6 +116,7 @@ export const electronics = {
     return { checks, soft: rules(soft), relation, match, alternative: Boolean(relatedModel || relation === 'Same model, different capacity'),
       facts: [loaded(a.brand), loaded(a.model), a.modelCode, loaded(a.storageGB, ' GB'), a.configuration, a.region,
         a.condition, loaded(a.warrantyMonths, ' months warranty'), a.connector,
+        a.wiredAnc === null ? null : a.wiredAnc ? 'Wired ANC reported' : 'No wired ANC reported',
         a.compatibleWith.length ? 'Compatible with ' + a.compatibleWith.join(', ') : null] };
   },
 };

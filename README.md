@@ -51,3 +51,7 @@ This repository contains other historical experiments. FrameFind is the consumer
 ### Independent experimental project: Claim Evidence Desk
 
 [Claim Evidence Desk's current scope and voluntary enquiry route](claim-evidence-desk/README.md) describes the existing **free Kia record checklist** and links to a [fictional refund-evidence indexing demonstration](claim-evidence-desk/SYNTHETIC_SAMPLE.md) for organizations to assess. This is not an active paid service, no customer records are accepted here, and no affiliation with a settlement administrator is claimed.
+
+### MATCH OS buying guides
+
+Use the [buying guide index](https://yl124915300-dot.github.io/match-os/demand/) for wired ANC headphones, oat milk multipacks, Austin massage options and LEGO Batman PC editions. Each guide explains what to verify, then opens a draft in the same [purchase chat](https://yl124915300-dot.github.io/match-os/). Review provider access before searching and pay any merchant directly. Optional feedback can be copied from the chat; it is not collected automatically.

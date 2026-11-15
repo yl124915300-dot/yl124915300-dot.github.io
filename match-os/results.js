@@ -1,7 +1,7 @@
-import { profiles } from './decision.js?v=5';
-import { catalogDocs, catalogNames } from './catalogs.js?v=5';
+import { profiles } from './decision.js?v=7';
+import { catalogDocs, catalogNames } from './catalogs.js?v=7';
 
-import { evidenceLabels } from './evidence.js?v=5';
+import { evidenceLabels } from './evidence.js?v=7';
 
 const statusLabels = {
   confirmed: 'Confirmed match', candidate: 'Candidate · verify before buying', conflict: 'Conflicts with must-haves',

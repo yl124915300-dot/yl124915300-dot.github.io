@@ -7,15 +7,17 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api-core.livingsocial.com https://www.cheapshark.com https://www.gamerpower.com https://prices.openfoodfacts.org; form-action 'self' https://formsubmit.co; base-uri 'none'">
   <meta name="description" content="Describe a purchase in MATCH OS. Review a short-lived buying request and review prices with their source evidence.">
   <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://yl124915300-dot.github.io/match-os/">
   <title>MATCH OS — Purchase chat</title>
-  <link rel="stylesheet" href="chat.css?v=6">
-  <script type="module" src="chat.js?v=6"></script>
+  <link rel="stylesheet" href="chat.css?v=7">
+  <script type="module" src="chat.js?v=7"></script>
 </head>
 <body>
   <main class="shell">
     <header class="top">
       <div class="brand"><span class="mark" aria-hidden="true"></span>MATCH OS</div>
       <div class="top-actions">
+        <a href="/match-os/demand/">Buying guides</a>
         <a href="/video-find/">FrameFind</a>
         <button id="close" class="quiet" type="button" hidden>Close session</button>
       </div>
@@ -53,7 +55,10 @@
             <h3 id="live-compare-title">Compare your options</h3>
             <div id="route-preview" class="muted"></div>
             <p class="muted" id="catalog-consent"></p>
-            <button type="button" class="secondary" id="live-search">Authorize catalog search</button>
+            <div class="actions">
+              <button type="button" class="secondary" id="live-search">Authorize catalog search</button>
+              <button type="button" class="quiet" id="revoke-search" hidden>Revoke source access</button>
+            </div>
             <p id="live-status" class="muted" role="status" aria-live="polite">No external search has run.</p>
             <div id="ranking-tools" class="catalog-controls" hidden>
               <label for="rank-profile">Prioritize</label>
@@ -89,6 +94,29 @@
             </div>
             <p class="muted offer-note">Verify final price, availability and eligibility with the merchant. MATCH OS leaves checkout and payment to the merchant.</p>
           </section>
+          <details id="funnel" class="other-sources">
+            <summary>Purchase progress &amp; optional feedback</summary>
+            <p class="muted">Progress stays in this tab. A listing click only records the outbound action. MATCH OS cannot see merchant checkout, and PayPal is closed.</p>
+            <ol id="funnel-steps" class="muted funnel-steps"></ol>
+            <label class="label" for="outcome">What happened? (optional)</label>
+            <select id="outcome">
+              <option value="">Choose an outcome</option>
+              <option value="bought" disabled>I bought from a merchant (self-reported)</option>
+              <option value="not_bought" disabled>I did not buy</option>
+              <option value="still_comparing" disabled>I’m still comparing</option>
+              <option value="no_match">No matching option</option>
+              <option value="missing_terms">Could not verify the terms</option>
+              <option value="budget">Over budget</option>
+              <option value="changed_mind">Decided to stop</option>
+            </select>
+            <p class="muted">If you choose to share, the summary contains only progress flags, a public guide tag, categories and the selected outcome. Leave out order numbers, contact details and receipts.</p>
+            <button id="prepare-feedback" class="secondary" type="button">Prepare feedback summary</button>
+            <div id="feedback-export" hidden>
+              <label for="feedback-text" class="label">Feedback summary (copy to share yourself)</label>
+              <textarea id="feedback-text" readonly rows="5" spellcheck="false"></textarea>
+              <p class="muted">Nothing has been sent. You can stop here or copy the summary to share through a channel you choose.</p>
+            </div>
+          </details>
           <p class="muted">Send your reviewed request for a manual check of matching listings, delivered totals and alternatives. We flag terms the merchant has yet to confirm. You choose and pay the merchant directly.</p>
           <div class="actions">
             <button class="primary" id="handoff" type="button">Review what to share</button>

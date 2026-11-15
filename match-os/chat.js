@@ -1,9 +1,12 @@
-import { profiles, readPreference } from './decision.js?v=5';
-import { catalogNames, searchCatalogs } from './catalogs.js?v=5';
-import { renderIntent } from './results.js?v=5';
-import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=5';
+import { profiles, readPreference } from './decision.js?v=7';
+import { catalogNames, catalogScope, searchCatalogs } from './catalogs.js?v=7';
+import { renderIntent } from './results.js?v=7';
+import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=7';
 
-import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
+import { entryContext, topics } from './demand/topics.js?v=7';
+import { createMatchingSession } from './matching.js?v=7';
+import { createFunnel, steps as funnelSteps } from './funnel.js?v=7';
+import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
 
 (() => {
   'use strict';
@@ -42,10 +45,10 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   const messages = byId('messages');
   const scroll = byId('scroll');
   const website = 'https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new';
-  const entry = new URLSearchParams(location.hash.slice(1)).get('entry');
-  const legacyEntry = !location.hash && new URLSearchParams(location.search).get('utm_source');
-  const acquisition = entry === 'github_guide' ? 'github_guide' :
-    (entry === 'framefind_results' || legacyEntry === 'framefind_results') ? 'framefind_results' : 'direct';
+  const context = entryContext(location.hash, location.search);
+  const acquisition = context.source;
+  const qa = navigator.webdriver || location.hostname !== 'yl124915300-dot.github.io' ||
+    new URLSearchParams(location.search).has('qa');
 
   const fields = [
     ['item', 'Item / service', 'What products or services should we look for? Include a product type, model or service name.'],
@@ -79,6 +82,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   let session = null;
   let liveSequence = 0;
   let timer;
+  let freshnessTimer;
   let draft;
   let draftTimer;
   let closing = false;
@@ -177,6 +181,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
 
   function finish(reason, focus = true, keepReceipt = false) {
     clearLive();
+    session?.matching.dispose();
+    clearFunnel();
     clearDraft();
     session = null;
     closing = false;
@@ -193,6 +199,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     byId('chat-form').reset();
     setFeedback('');
     if (!keepReceipt) takeStoredValue(receiptKey);
+    for (const id of ['google-search', 'ebay-search']) byId(id).href = id === 'google-search'
+      ? 'https://www.google.com/' : 'https://www.ebay.com/';
     for (const id of ['reference', 'review', 'sharing', 'quick-actions', 'close', 'close-confirm']) {
       byId(id).hidden = true;
     }
@@ -229,7 +237,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     const entropy = crypto.getRandomValues(new Uint8Array(10));
     const ref = 'MO-' + Array.from(entropy, (byte) => byte.toString(16).padStart(2, '0')).join('').toUpperCase();
     const expires = Date.now() + lifetime;
-    session = { ref, expires, brief, source, field: null, submitting: false, quotes: new Map(), nextQuote: 0 };
+    session = { ref, expires, brief, source, field: null, submitting: false, quotes: new Map(), nextQuote: 0,
+      matching: createMatchingSession(), approved: new Set(), autoRenewed: new Set(), funnel: createFunnel(context, qa) };
     byId('welcome').hidden = true;
     byId('reference').hidden = false;
     byId('close').hidden = false;
@@ -270,8 +279,14 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
       session.clarifiedItem = brief.item;
       appendMessage('assistant', 'What kind of product or service is the unclear item? Use Edit item / service to add a category or model.');
     }
+    const currentScopes = new Set(catalogScopes());
+    session.approved = new Set([...session.approved].filter(scope => currentScopes.has(scope)));
+    session.funnel.mark('complete');
+    if (session.approved.size) session.funnel.mark('authorized');
+    renderFunnel();
     updateSearchConsent();
     showComparison();
+    if (session.approved.size) void searchLiveOffers('edit');
     const values = [
       brief.item,
       brief.budget.currency + ' ' + brief.budget.amount,
@@ -293,6 +308,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
       edit.addEventListener('click', () => {
         if (!remaining() || closing || session.submitting) return;
         clearLive();
+        resetFeedbackExport();
         if (key === 'item' || key === 'place') session.quotes.clear();
         resetQuoteEntry();
         form.reset();
@@ -383,8 +399,14 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     }
     setFeedback('');
     appendMessage('buyer', value);
-    session.brief[session.field] = reply;
-    if (session.field === 'details') byId('rank-profile').value = readPreference(reply) || 'balanced';
+    const field = session.field;
+    if (['item', 'place'].includes(field) && Object.hasOwn(session.brief, field) &&
+        JSON.stringify(session.brief[field]) !== JSON.stringify(reply)) {
+      session.funnel = createFunnel(context, qa);
+      clearFunnel();
+    }
+    session.brief[field] = reply;
+    if (field === 'details') byId('rank-profile').value = readPreference(reply) || 'balanced';
     ask();
   }
 
@@ -393,6 +415,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     return {
       source,
       acquisition_source: acquisition,
+      ...(context.topic ? { acquisition_topic: context.topic } : {}),
       region: brief.place.code,
       market_country: brief.place.region,
       city: brief.place.city,
@@ -406,6 +429,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   }
 
   function clearLive() {
+    clearTimeout(freshnessTimer);
     liveSequence += 1;
     session?.liveController?.abort();
     if (session) {
@@ -418,6 +442,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     byId('ranking-tools').hidden = true;
     byId('live-status').textContent = 'No external search has run.';
     byId('live-search').disabled = false;
+    byId('revoke-search').hidden = true;
   }
 
   function resetQuoteEntry() {
@@ -484,9 +509,38 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
       prepareQuoteFields();
       feedback.textContent = previous < 0 ? 'Quote added to this tab’s comparison.' : 'Existing quote updated with the new observation.';
       showComparison();
+      scheduleFreshness();
     } catch (error) {
       feedback.textContent = error.message;
     }
+  }
+
+  function catalogScopes(intents = session.intents) {
+    return intents.flatMap(intent => intent.providers.map(provider => catalogScope(provider, intent, session.brief)));
+  }
+
+  function resetFeedbackExport() {
+    byId('feedback-export').hidden = true;
+    byId('feedback-text').value = '';
+  }
+
+  function clearFunnel() {
+    resetFeedbackExport();
+    byId('funnel').open = false;
+    byId('funnel-steps').replaceChildren();
+    byId('outcome').value = '';
+    for (const option of Array.from(byId('outcome').options).slice(1, 4)) option.disabled = true;
+  }
+
+  function renderFunnel() {
+    const { funnel } = session;
+    byId('funnel-steps').replaceChildren(...Object.entries(funnelSteps).map(([step, label]) => {
+      const item = document.createElement('li');
+      item.dataset.step = step;
+      item.textContent = label + ' — ' + (step === 'fee' ? 'unavailable' : funnel.has(step) ? 'recorded' : 'not recorded');
+      return item;
+    }));
+    for (const option of Array.from(byId('outcome').options).slice(1, 4)) option.disabled = !funnel.has('outbound');
   }
 
   function updateSearchConsent() {
@@ -522,9 +576,12 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
       }
     }
     byId('live-search').hidden = !requests.length;
-    byId('live-search').disabled = !requests.length;
+    const pending = catalogScopes().some(scope => !session.approved.has(scope));
+    byId('live-search').disabled = !requests.length || Boolean(session.liveController);
+    byId('live-search').textContent = pending ? 'Authorize catalog search' : 'Refresh public sources';
+    byId('revoke-search').hidden = !session.approved.size;
     byId('catalog-consent').textContent = requests.length ? requests.join(' ') +
-      ' Budget, timing, private details and entered quotes stay in this tab.' : '';
+      ' Approved queries may be reused on edits or rechecked once when a listing ages in this open tab. A changed query needs fresh approval. Budget, timing, private details and entered quotes stay in this tab.' : '';
   }
 
   function showComparison() {
@@ -533,6 +590,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     const { intents, catalogResults, quotes } = session;
     output.replaceChildren();
     let candidates = 0;
+    let merchantCandidates = 0;
     const comparisons = [];
     for (const intent of intents) {
       const results = catalogResults?.get(intent.id) || [];
@@ -540,7 +598,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
       const offers = results.flatMap(result => result.offers.map(offer => liveOffer(intent, offer)));
       const comparison = evaluateIntent(intent, [...offers, ...(quotes.get(intent.id) || [])], preference);
       comparisons.push(comparison);
-      candidates += comparison.rows.filter(row => !row.problems.length).length;
+      const options = comparison.rows.filter(row => !row.problems.length);
+      candidates += options.length;
+      merchantCandidates += options.filter(row => row.provenance.tier !== 'observation').length;
       renderIntent(output, intent, comparison, preference);
     }
     if (intents.length > 1 && comparisons.length === intents.length) {
@@ -552,10 +612,15 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
         (combined.status === 'pass' ? ' · within the shared budget.' : ' · above the shared budget.');
       output.prepend(summary);
     }
+    if (merchantCandidates) {
+      session.funnel.mark('candidates');
+      renderFunnel();
+    }
     const coverage = catalogResults && [...catalogResults].flatMap(([id, results]) => results.map(result => {
       const status = result.status === 'ok' ? result.offers.length +
         (result.provider === 'openprices' ? ' dated observations in this country' : ' listings') : result.status;
-      return intents.find(item => item.id === id).item + ' · ' + catalogNames[result.provider] + ' ' + status;
+      const readAt = result.checkedAt ? ' · read ' + new Date(result.checkedAt).toLocaleTimeString() : '';
+      return intents.find(item => item.id === id).item + ' · ' + catalogNames[result.provider] + ' ' + status + readAt;
     }));
     const status = byId('live-status');
     if (coverage?.length) status.textContent = coverage.join(' · ') + '. ' +
@@ -566,31 +631,76 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     byId('ranking-tools').hidden = candidates === 0;
   }
 
-  async function searchLiveOffers() {
+  function scheduleFreshness() {
+    clearTimeout(freshnessTimer);
+    if (!session || document.hidden || closing || byId('review').hidden) return;
+    const now = Date.now();
+    const boundary = [...(session.catalogResults?.values() || [])].flat().flatMap(result =>
+      result.offers.flatMap(offer => [offer.provenance?.cacheValidUntil,
+        Date.parse(offer.provenance?.priceValidUntil), Date.parse(offer.expires)]))
+      .filter(time => Number.isFinite(time) && time > now);
+    if (session.quotes.size) boundary.push(now - now % 86_400_000 + 86_400_000);
+    if (boundary.length) freshnessTimer = setTimeout(recheckFreshness, Math.min(...boundary) - now + 5);
+  }
+
+  function recheckFreshness() {
+    if (!remaining() || closing || document.hidden || byId('review').hidden) return;
+    const now = Date.now();
+    showComparison();
+    scheduleFreshness();
+    if (!navigator.onLine || session.liveController) return;
+    const expired = new Set([...(session.catalogResults?.values() || [])].flat()
+      .filter(result => Number.isFinite(result.refreshAt) && result.refreshAt <= now &&
+        session.approved.has(result.scope) && !session.autoRenewed.has(result.scope)).map(result => result.scope));
+    if (expired.size) {
+      for (const scope of expired) session.autoRenewed.add(scope);
+      void searchLiveOffers('expiry', expired);
+    }
+  }
+
+  async function searchLiveOffers(trigger, forced = new Set()) {
     if (!remaining() || closing || session.submitting || byId('review').hidden || session.field) return;
     const { intents, brief, ref } = session;
-    const live = intents.filter(intent => intent.providers.length);
-    if (!live.length || session.liveController) return;
+    if (!intents.some(intent => intent.providers.length) || session.liveController) return;
     const status = byId('live-status');
     if (!navigator.onLine) {
-      status.textContent = 'Offline. Reconnect to search public catalogs.';
+      showComparison();
+      status.textContent = 'Offline. Reconnect to search public catalogs. Prior observations keep their original time.';
       return;
     }
-    if ([...live.map(intent => intent.title), brief.place.city, brief.place.region].some(value => sensitive.test(value))) {
+    const scopes = catalogScopes();
+    const publicText = intents.flatMap(intent => [
+      ...(intent.providers.includes('cheapshark') && !intent.browseFreeGames ? [intent.title] : []),
+      ...(intent.providers.includes('openprices') && !intent.barcode ? [intent.title] : []),
+      ...(intent.providers.includes('livingsocial') ? [intent.title, brief.place.city, brief.place.region] : []),
+    ]);
+    if (publicText.some(value => sensitive.test(value))) {
       status.textContent = 'Edit the request to remove private or invalid text before searching.';
       return;
     }
+    if (trigger === 'manual') {
+      const missing = scopes.filter(scope => !session.approved.has(scope));
+      if (missing.length) {
+        for (const scope of missing) session.approved.add(scope);
+        session.funnel.mark('authorized');
+        renderFunnel();
+      } else {
+        forced = new Set(scopes);
+      }
+    }
+    if (!session.approved.size) return;
     const controller = new AbortController();
     session.liveController = controller;
     const seq = ++liveSequence;
-    byId('live-search').disabled = true;
-    status.textContent = 'Searching the authorized catalogs…';
+    updateSearchConsent();
+    if (trigger !== 'edit' || !session.catalogResults) status.textContent = 'Searching the authorized catalogs…';
     try {
-      const results = await Promise.all(live.map(async intent =>
-        [intent.id, await searchCatalogs(intent, brief, controller.signal)]));
+      const results = await Promise.all(intents.filter(intent => intent.providers.length).map(async intent =>
+        [intent.id, await searchCatalogs(intent, brief, controller.signal, session.matching, session.approved, forced)]));
       if (seq !== liveSequence || session?.ref !== ref || !remaining()) return;
       session.catalogResults = new Map(results);
       showComparison();
+      scheduleFreshness();
       byId('stage-build').removeAttribute('aria-current');
       byId('stage-compare').setAttribute('aria-current', 'step');
     } catch {
@@ -633,7 +743,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
       'Maximum budget: ' + data.currency + ' ' + data.budget,
       'Timing: ' + data.when,
       'Must-haves: ' + (data.details || 'None'),
-      'Entry: ' + data.acquisition_source,
+      'Entry: ' + data.acquisition_source + (context.topic ? ' · ' + context.topic : ''),
       '',
       'Self-reported request for manual review. No purchase or merchant quote has been verified.',
     ].join('\n');
@@ -656,8 +766,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   byId('start-chat').addEventListener('click', () => {
     if (session) return;
     if (draft && Date.now() < draft.expires) {
-      const { item } = draft;
-      start({ item }, 'ecommerce');
+      const { item, ...prefill } = draft.brief;
+      start({ item, ...prefill }, 'ecommerce');
       appendMessage('buyer', item);
       ask();
     } else {
@@ -670,7 +780,41 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     input.focus();
   });
   byId('handoff').addEventListener('click', showSharing);
-  byId('live-search').addEventListener('click', searchLiveOffers);
+  byId('live-search').addEventListener('click', () => void searchLiveOffers('manual'));
+  byId('revoke-search').addEventListener('click', () => {
+    if (!remaining() || closing) return;
+    clearLive();
+    session.matching.dispose();
+    session.matching = createMatchingSession();
+    session.approved.clear();
+    session.autoRenewed.clear();
+    updateSearchConsent();
+    showComparison();
+    byId('live-status').textContent = 'Source access revoked. Catalog results were cleared from this tab.';
+  });
+  function listingClick(event) {
+    if (!event.isTrusted || !remaining() || closing || byId('review').hidden) return;
+    const link = event.target.closest('a.offer-link');
+    const card = link?.closest('.offer-card');
+    if (!card || card.dataset.provider === 'openprices' || card.dataset.status === 'conflict') return;
+    session.funnel.mark('outbound');
+    renderFunnel();
+  }
+  byId('live-results').addEventListener('click', listingClick);
+  byId('live-results').addEventListener('auxclick', event => { if (event.button === 1) listingClick(event); });
+  byId('outcome').addEventListener('change', event => {
+    if (!remaining() || closing) return;
+    session.funnel.report(event.target.value);
+    resetFeedbackExport();
+    renderFunnel();
+  });
+  byId('prepare-feedback').addEventListener('click', () => {
+    if (!remaining() || closing || session.field) return;
+    byId('feedback-text').value = JSON.stringify(session.funnel.export(session.intents.map(intent => intent.category)), null, 2);
+    byId('feedback-export').hidden = false;
+    byId('feedback-text').focus();
+    byId('feedback-text').select();
+  });
   quoteForm.addEventListener('submit', saveQuote);
   byId('quote-target').addEventListener('change', prepareQuoteFields);
   byId('rank-profile').addEventListener('change', () => {
@@ -697,6 +841,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   byId('keep').addEventListener('click', () => {
     closing = false;
     byId('close-confirm').hidden = true;
+    recheckFreshness();
     (byId('chat-form').hidden ? byId('close') : input).focus();
   });
   byId('cancel').addEventListener('click', () => finish('Session closed'));
@@ -730,7 +875,18 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     takeStoredValue(receiptKey);
   });
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) remaining();
+    if (!document.hidden) recheckFreshness();
+  });
+
+  window.addEventListener('online', () => { if (session) recheckFreshness(); });
+  window.addEventListener('offline', () => {
+    if (!remaining() || byId('review').hidden) return;
+    const running = session.liveController;
+    session.liveController = null;
+    if (running) { liveSequence++; running.abort(); }
+    updateSearchConsent();
+    showComparison();
+    byId('live-status').textContent = 'Offline. Reconnect to search public catalogs. Prior observations keep their original time.';
   });
 
   if (!window.isSecureContext || !window.crypto?.getRandomValues) {
@@ -751,10 +907,15 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   } else if (acquisition === 'github_guide') {
     item = 'Over-ear headphones with active noise cancellation in wired mode';
   }
+  const topic = context.topic && topics[context.topic];
+  if (topic) item = topic.item;
   if (item) {
     const ttl = acquisition === 'framefind_results' ? draftLifetime - stagedAge : draftLifetime;
-    draft = { item, expires: Date.now() + ttl };
-    byId('entry-preview').textContent = 'Suggested item: ' + item + '. Use this item to start, or type your own below.';
+    const prefill = topic ? { details: topic.details, ...(topic.place ? { place: { ...topic.place } } : {}) } : {};
+    draft = { brief: { item, ...prefill }, expires: Date.now() + ttl };
+    byId('entry-preview').textContent = 'Suggested item: ' + item +
+      (topic ? ' · ' + topic.details + (topic.place ? ' · ' + topic.place.city : '') + '. Review or edit all fields in the chat.' : '') +
+      ' Use this item to start, or type your own below.';
     byId('entry-preview').hidden = false;
     byId('start-chat').textContent = 'Use this item and start chat';
     draftTimer = setTimeout(clearDraft, ttl);

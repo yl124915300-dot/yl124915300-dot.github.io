@@ -1,4 +1,4 @@
-import { key } from './modules/shared.js?v=5';
+import { key } from './modules/shared.js?v=7';
 
 const minute = 60_000;
 
@@ -31,7 +31,11 @@ export function assessEvidence(offer, intent, now) {
   const source = offer.provenance || { tier: 'link' };
   const age = now - Date.parse(source.retrievedAt);
   const observedAge = now - Date.parse(source.observedAt);
-  const stale = source.tier === 'api' && (!Number.isFinite(age) || age < 0 || age >= 15 * minute ||
+  const priceEnd = Date.parse(source.priceValidUntil);
+  const offerEnd = Date.parse(offer.expires);
+  const stale = source.tier === 'stale' || source.tier === 'api' && (!Number.isFinite(age) || age < 0 || age >= 15 * minute ||
+    (Number.isFinite(source.cacheValidUntil) && source.cacheValidUntil <= now) ||
+    (Number.isFinite(priceEnd) && priceEnd <= now) || (Number.isFinite(offerEnd) && offerEnd <= now) ||
     Boolean(source.observedAt && (!Number.isFinite(observedAge) || observedAge < 0 || observedAge > 24 * 60 * minute)));
   const tier = stale ? 'stale' : source.tier;
   const pending = [];

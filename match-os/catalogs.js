@@ -1,8 +1,8 @@
-import { normalize, relevance } from './decision.js?v=5';
-import { consumables } from './modules/consumables.js?v=5';
-import { date, key } from './modules/shared.js?v=5';
+import { normalize, relevance } from './decision.js?v=7';
+import { consumables } from './modules/consumables.js?v=7';
+import { date, key } from './modules/shared.js?v=7';
 
-import { validBarcode } from './evidence.js?v=5';
+import { validBarcode } from './evidence.js?v=7';
 
 const cheapshark = 'https://www.cheapshark.com';
 const gamerpower = 'https://www.gamerpower.com';
@@ -56,7 +56,7 @@ function sourcePrice(raw) {
 
 function provenance(tier, read, fields = {}) {
   return {
-    tier, retrievedAt: read.checkedAt, observedAt: null, source: read.source,
+    tier, retrievedAt: read.checkedAt, cacheValidUntil: read.until, observedAt: null, source: read.source,
     identity: null, scope: null, availability: null, fulfillment: null, ...fields,
   };
 }
@@ -70,18 +70,6 @@ function entry(fields) {
     serviceOptions: null, rating: null, history: null, tco: null, confidence: 0,
     ...fields,
   };
-}
-
-async function getJSON(url, params, signal) {
-  const endpoint = new URL(url);
-  if (params) endpoint.search = new URLSearchParams(params);
-  const response = await fetch(endpoint, {
-    mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'error',
-    headers: { Accept: 'application/json' }, signal, cache: 'no-store',
-  });
-  if (!response.ok) throw new Error('HTTP ' + response.status);
-  // The upstream URL is retained as evidence. It is session-local and never logged.
-  return { data: await response.json(), source: endpoint.href, checkedAt: new Date().toISOString() };
 }
 
 export function localEntries(read, brief) {
@@ -161,7 +149,7 @@ export function gameEntry(raw, game, stores, read, history = null) {
   });
 }
 
-async function cheapSharkEntries(plan, signal) {
+async function cheapSharkEntries(plan, signal, getJSON) {
   const base = cheapshark + '/api/1.0/';
   const [read, storeRead] = await Promise.all([
     getJSON(base + (plan.browseFreeGames ? 'deals' : 'games'), plan.browseFreeGames
@@ -273,7 +261,7 @@ export function openPriceEntries(read, plan, barcodes = [plan.barcode]) {
   return offers.slice(0, 8);
 }
 
-async function openPriceSearch(plan, signal) {
+async function openPriceSearch(plan, signal, getJSON) {
   let codes = [plan.barcode];
   if (!plan.barcode) {
     const { data } = await getJSON(openPrices + '/products', {
@@ -291,28 +279,53 @@ async function openPriceSearch(plan, signal) {
 }
 
 const adapters = {
-  openprices: (plan, brief, signal) => openPriceSearch(plan, signal),
-  cheapshark: (plan, brief, signal) => cheapSharkEntries(plan, signal),
-  gamerpower: async (plan, brief, signal) =>
-    giveawayEntries(await getJSON(gamerpower + '/api/giveaways', { type: 'game' }, signal), plan),
-  livingsocial: async (plan, brief, signal) => localEntries(await getJSON(livingSocial, {
+  openprices: (plan, brief, signal, read) => openPriceSearch(plan, signal, read),
+  cheapshark: (plan, brief, signal, read) => cheapSharkEntries(plan, signal, read),
+  gamerpower: async (plan, brief, signal, read) =>
+    giveawayEntries(await read(gamerpower + '/api/giveaways', { type: 'game' }, signal), plan),
+  livingsocial: async (plan, brief, signal, read) => localEntries(await read(livingSocial, {
     q: (plan.title + ' in ' + brief.place.city + ', ' + brief.place.region).slice(0, 200),
     country: plan.market,
     limit: '12',
   }, signal), brief),
 };
 
-export async function searchCatalogs(plan, brief, signal) {
-  const results = await Promise.all(plan.providers.map(async provider => {
+// A permission is scoped to exactly the information sent to a provider.
+export function catalogScope(provider, plan, brief) {
+  const query = provider === 'openprices' ? [plan.barcode ? 'barcode' : 'title', plan.barcode || plan.title] :
+    provider === 'cheapshark' ? [plan.browseFreeGames ? 'free' : 'title', plan.browseFreeGames ? '' : plan.title] :
+    provider === 'livingsocial' ? [plan.title, brief.place.city, brief.place.region, plan.market] : ['game giveaways'];
+  return JSON.stringify([provider, ...query]);
+}
+
+export async function searchCatalogs(plan, brief, signal, matching, authorized, forced) {
+  return Promise.all(plan.providers.map(async provider => {
+    const scope = catalogScope(provider, plan, brief);
+    if (!authorized.has(scope)) return { provider, status: 'needs approval', offers: [] };
+    // Country and game relevance are local filters; they still distinguish fallback snapshots.
+    const key = JSON.stringify([scope, plan.market, plan.title, plan.browseFreeGames]);
+    const previous = matching.previous(key);
+    const reads = [];
     try {
-      const offers = await adapters[provider](plan, brief, AbortSignal.any([signal, AbortSignal.timeout(9500)]));
-      return { provider, status: 'ok', offers };
+      const offers = await adapters[provider](plan, brief, signal, async (url, query, innerSignal) => {
+        const read = await matching.read(url, query, innerSignal, forced.has(scope));
+        reads.push(read);
+        return read;
+      });
+      signal.throwIfAborted();
+      const stamps = offers.filter(offer => offer.provenance?.tier === 'api').flatMap(offer =>
+        [offer.provenance.cacheValidUntil, Date.parse(offer.provenance.priceValidUntil), Date.parse(offer.expires)]
+          .filter(deadline => Number.isFinite(deadline)));
+      const checkedAt = reads.map(read => read.checkedAt).sort().at(-1);
+      const result = { provider, scope, status: 'ok', offers, checkedAt,
+        refreshAt: stamps.length ? Math.min(...stamps) : null };
+      matching.remember(key, result);
+      return result;
     } catch (error) {
-      if (signal.aborted) throw error;
-      const status = error.name === 'TimeoutError' ? 'timed out' :
-        error.message === 'HTTP 429' ? 'rate limited' : 'unavailable';
-      return { provider, status, offers: [] };
+      signal.throwIfAborted();
+      return { provider, scope, status: error.status || 'unavailable', checkedAt: previous?.checkedAt,
+        offers: (previous?.offers || []).map(offer => offer.provenance?.tier !== 'api' ? offer :
+          { ...offer, provenance: { ...offer.provenance, tier: 'stale' } }) };
     }
   }));
-  return results;
 }

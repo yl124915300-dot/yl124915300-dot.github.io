@@ -1,6 +1,6 @@
-import { compareGroups, rank, readGameQuery } from '../decision.js?v=5';
+import { compareGroups, rank, readGameQuery } from '../decision.js?v=7';
 
-import { quoteStatus } from '../evidence.js?v=5';
+import { quoteStatus } from '../evidence.js?v=7';
 
 export const games = {
   id: 'games', label: 'Digital PC games',

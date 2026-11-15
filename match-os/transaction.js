@@ -1,11 +1,11 @@
-import { profiles } from './decision.js?v=5';
-import { electronics, modelReference } from './modules/electronics.js?v=5';
-import { consumables, productType } from './modules/consumables.js?v=5';
-import { services, serviceDefinition } from './modules/services.js?v=5';
-import { games } from './modules/games.js?v=5';
-import { clamp, constraint, date, key, number, quoteCost, text } from './modules/shared.js?v=5';
+import { profiles } from './decision.js?v=7';
+import { electronics, modelReference } from './modules/electronics.js?v=7';
+import { consumables, productType } from './modules/consumables.js?v=7';
+import { services, serviceDefinition } from './modules/services.js?v=7';
+import { games } from './modules/games.js?v=7';
+import { clamp, constraint, date, key, number, quoteCost, text } from './modules/shared.js?v=7';
 
-import { assessEvidence, publicBarcodes, quoteStatus, withoutBarcodes } from './evidence.js?v=5';
+import { assessEvidence, publicBarcodes, quoteStatus, withoutBarcodes } from './evidence.js?v=7';
 
 export const modules = Object.freeze({ electronics, consumables, services, games });
 export const providers = Object.freeze({

@@ -6,6 +6,8 @@ from urllib.parse import parse_qs, urljoin, urlparse
 
 from playwright.sync_api import expect, sync_playwright
 
+import demand_browser
+
 SITE = os.getenv("MATCH_OS_URL", "https://yl124915300-dot.github.io/match-os/")
 SOURCE_HOSTS = {
     "www.cheapshark.com", "www.gamerpower.com", "api-core.livingsocial.com", "prices.openfoodfacts.org",
@@ -375,6 +377,9 @@ def unlisted_entry(page):
     print("UNLISTED_ENTRY_DROPPED_OK")
 
 
+if not os.getenv("MATCH_OS_URL") and not os.getenv("MATCH_OS_CASE"):
+    demand_browser.verify_discovery(SITE)
+
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(channel="chrome", args=["--no-sandbox"])
     failures = []
@@ -385,9 +390,13 @@ with sync_playwright() as playwright:
              ("manual-expiry", manual_and_expiry), ("pending-cancel", pending_cancel),
              ("intake-desktop", lambda page: intake(page, "github_guide")),
              ("intake-mobile", lambda page: intake(page, "framefind_results")),
-             ("intake-unlisted-entry", unlisted_entry)]
+             ("intake-unlisted-entry", unlisted_entry),
+             ("demand-games-desktop", lambda page: demand_browser.games(page, SITE)),
+             ("demand-services-mobile", lambda page: demand_browser.services(page, SITE)),
+             ("demand-goods-mobile", lambda page: demand_browser.goods(page, SITE)),
+             ("demand-electronics-desktop", lambda page: demand_browser.electronics(page, SITE))]
     for name, case in cases:
-        if os.getenv("MATCH_OS_CASE") not in (None, name):
+        if os.getenv("MATCH_OS_CASE") and not name.startswith(os.environ["MATCH_OS_CASE"]):
             continue
         options = playwright.devices["iPhone 13"] if "mobile" in name else {"viewport": {"width": 1280, "height": 900}}
         if "mobile" in name:

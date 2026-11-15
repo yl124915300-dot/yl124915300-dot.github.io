@@ -184,3 +184,10 @@ summary { cursor: pointer; color: var(--accent); }
 .quote-fields label { min-width: 0; display: grid; gap: .25rem; }
 .quote-fields input { width: 100%; min-width: 0; }
 #route-preview p { margin: .35rem 0; }
+
+/* Session-local feedback */
+#funnel select { max-width: 100%; }
+.funnel-steps { padding-left: 1.45rem; margin-block: .65rem; }
+.funnel-steps li { margin-bottom: .35rem; }
+#feedback-text { width: 100%; }
+#feedback-export { margin-top: .7rem; }

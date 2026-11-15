@@ -1,4 +1,4 @@
-import { assessEvidence } from './evidence.js?v=5';
+import { assessEvidence } from './evidence.js?v=7';
 
 const ignored = new Set(['a', 'an', 'the', 'of', 'for', 'in', 'to', 'and', 'or', 'on', 'with']);
 const editions = /\b(?:complete|ultimate|deluxe|premium|gold|definitive|goty|game of the year|collector'?s|remaster(?:ed)?|remake|dlc|expansion|bundle)\b|完整版|豪华版|重制版|资料片/iu;
@@ -119,11 +119,11 @@ export function totalCost(offer) {
 function assessment(offer, brief, plan, now, requirementChecks, provenance) {
   const { listed, total } = totalCost(offer);
   const comparable = offer.price?.currency === brief.budget.currency;
-  const stale = provenance?.stale ||
-    Boolean(offer.priceTimestamp && now - Date.parse(offer.priceTimestamp) > 24 * 60 * 60 * 1000);
+  const olderThanDay = Boolean(offer.priceTimestamp && now - Date.parse(offer.priceTimestamp) > 24 * 60 * 60 * 1000);
+  const stale = provenance?.stale || olderThanDay;
   const problems = [];
   const pending = [];
-  if (stale) pending.push('Catalog price is older than 24 hours');
+  if (stale) pending.push(olderThanDay ? 'Catalog price is older than 24 hours' : 'Catalog price has expired or needs refresh');
   if (listed === null || !comparable || stale) pending.push(comparable || listed === null ? 'Current budget fit unverified' : 'Budget currency differs');
   else if (listed > brief.budget.amount) problems.push('Known price alone exceeds budget');
   else if (total === null) pending.push('Final budget fit unverified');

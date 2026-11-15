@@ -1,3 +1,5 @@
+import { createMatchingSession } from '../match-os/matching.js';
+import { catalogScope } from '../match-os/catalogs.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { openPriceEntries, searchCatalogs } from '../match-os/catalogs.js';
@@ -109,19 +111,23 @@ test('synthetic: Open Prices joins matching barcode, country and dated proof; ob
   assert.equal(format([{ ...observation, proof: { ...observation.proof, draft: true } }]).length, 0);
 });
 
-test('synthetic integration: source failure yields no prices and cancelling propagates the abort', async t => {
-  t.mock.method(globalThis, 'fetch', async (_url, { signal }) => {
+test('synthetic integration: source failure yields no prices and cancelling propagates the abort', async () => {
+  const limited = createMatchingSession({ online: () => true, fetcher: async (_url, { signal }) => {
     signal.throwIfAborted();
     return new Response('', { status: 429 });
-  });
+  } });
   const signal = new AbortController();
-  assert.deepEqual(await searchCatalogs(pantry, pantry.brief, signal.signal),
-    [{ provider: 'openprices', status: 'rate limited', offers: [] }]);
-  t.mock.restoreAll();
-  t.mock.method(globalThis, 'fetch', (_url, { signal: request }) => new Promise((_, reject) => {
-    request.addEventListener('abort', () => reject(request.reason), { once: true });
-  }));
-  const pending = searchCatalogs(pantry, pantry.brief, signal.signal);
+  const scope = catalogScope('openprices', pantry, pantry.brief);
+  const approved = new Set([scope]);
+  const run = matching => searchCatalogs(pantry, pantry.brief, signal.signal, matching, approved, new Set());
+  const [result] = await run(limited);
+  assert.equal(result.status, 'rate limited');
+  assert.deepEqual(result.offers, []);
+  limited.dispose();
+  const stalled = createMatchingSession({ online: () => true, fetcher: (_url, { signal: request }) =>
+    new Promise((_, reject) => request.addEventListener('abort', () => reject(request.reason), { once: true })) });
+  const pending = run(stalled);
   signal.abort();
   await assert.rejects(pending, { name: 'AbortError' });
+  stalled.dispose();
 });

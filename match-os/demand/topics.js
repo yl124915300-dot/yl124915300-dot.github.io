@@ -1,0 +1,78 @@
+// Public editorial presets: only these topic IDs may be read from a URL.
+export const topics = Object.freeze({
+  'wired-anc-headphones': {
+    category: 'electronics', label: 'Electronics', item: 'Over-ear headphones',
+    title: 'Headphones that keep noise cancellation on with a 3.5 mm cable',
+    description: 'Check wired ANC, connector and battery behavior before comparing headphone listings.',
+    details: '3.5 mm wired ANC required; brand new; include delivery',
+    problem: 'A listing can say “wired and wireless” and “noise cancelling” without saying whether both work at once. This matters on a plane seat jack or a work computer where Bluetooth is disabled.',
+    checks: [
+      ['Exact connection', 'Find the manufacturer manual for the exact model number. Check 3.5 mm analogue audio; USB-C charging by itself does not indicate USB-C audio.'],
+      ['Active cancellation on cable', 'Look for an explicit wired-mode ANC statement and whether the headset has to be switched on. Treat passive sound isolation and Bluetooth-only ANC as separate features.'],
+      ['What you actually pay', 'Match model, condition and region; compare the included cable, shipping, tax and return window. Ask whether the mic or controls work in wired mode if you need them.'],
+    ],
+    gap: 'This route has no approved live electronics retailer feed. Bring a public listing or a quote; stock, delivery, total and wired ANC remain pending until the listing and manual support them.',
+    output: 'A side-by-side comparison of model, connector, wired ANC, condition and total when supplied, with conflicts and missing evidence marked.',
+    sources: [['Sony WH-1000XM4 manufacturer help guide (see “Using the supplied headphone cable”)', 'https://helpguide.sony.net/mdr/wh1000xm4/v1/en/index.html']],
+  },
+  'oat-milk-pack-price': {
+    category: 'consumables', label: 'Everyday goods', item: 'Grocery: oat milk',
+    title: 'Compare oat milk multipacks by actual price per litre',
+    description: 'Compare the same oat milk variant and package, separate dated shelf prices from delivered totals, and account for minimum packs.',
+    details: '6 pieces; include delivery',
+    problem: 'A six-pack of one-litre cartons and six 946 mL cartons can look equivalent in a price list. A minimum order, delivery fee or substitution can erase a lower unit price.',
+    checks: [
+      ['Match the product', 'Enter the exact shelf name or printed package barcode. Barista, unsweetened and ordinary variants should stay separate. Check whether the barcode identifies a single carton or the whole case.'],
+      ['Use a common unit', 'Divide the total attributable cost by the total litres you must buy. Six 946 mL cartons contain 5.676 L; six one-litre cartons contain 6 L. Keep a minimum order of two cases in the calculation.'],
+      ['Check the observation', 'Compare the date, currency and store on the shelf record. Check the current seller basket for delivery, minimums, and substitution rules. Do not turn a dated receipt into a quote.'],
+    ],
+    gap: 'Open Prices may have dated observations for an exact name or barcode in your market. Coverage can be empty; current stock, order minimums, tax and delivery are not verified by the history.',
+    output: 'A separate history table and, if you add current quotes, comparable pack quantities, unit costs and delivered totals where the terms are known.',
+    sources: [['Open Prices: records and data model', 'https://openfoodfacts.github.io/open-prices/guides/data/']],
+  },
+  'austin-60-minute-massage': {
+    category: 'services', label: 'Local services', item: 'Local service: massage',
+    title: 'Find a 60-minute solo massage in Austin without relying on “from” prices',
+    description: 'Compare Austin massage options by treatment duration, party size, final cost, actual slot and cancellation rules.',
+    place: { city: 'Austin', region: 'United States', code: 'US' }, details: '60 minutes; for one person',
+    problem: 'Discount catalog cards often show the lowest option. It might cover 30 minutes, a different location or a weekday-only voucher, even when the title mentions 60 minutes.',
+    checks: [
+      ['Match the option', 'Open the offer menu and select 60 minutes for one person. Check whether the time means hands-on treatment or includes intake and changing. Do not compare a couple’s package with a solo price.'],
+      ['Check the actual appointment', 'Confirm the Austin location and available slot before buying a voucher. Check first-visit limits, blackout dates, booking lead time, and whether the voucher expires before your visit.'],
+      ['Get the complete price', 'Check taxes, mandatory charges and cancellation rules in the booking flow. A starting price is a lead; it does not establish the full cost or book a slot.'],
+    ],
+    gap: 'LivingSocial / Groupon can supply public listing links and starting prices. Exact option prices, open slots and cancellation terms need merchant evidence.',
+    output: 'Austin listings with visible duration and party evidence, unknown option or booking terms marked, and a place to compare a quote from the provider.',
+    sources: [['LivingSocial public catalog for agents', 'https://agent.livingsocial.com/for-agents']],
+  },
+  'lego-batman-pc-editions': {
+    category: 'games', label: 'PC games', item: 'PC game: LEGO Batman',
+    title: 'Compare LEGO Batman PC editions and activation before buying a key',
+    description: 'Separate the original LEGO Batman PC game from sequels and bundles, compare same-edition listings, and check activation.',
+    details: 'Steam only',
+    problem: 'Retailer search results can mix LEGO Batman: The Videogame, LEGO Batman 2 and LEGO Batman 3 with bundles. A lower price is only useful if it unlocks the right title on the right account.',
+    checks: [
+      ['Match game identity', 'Confirm title, edition and platform on the store page. Compare base-game offers in one group; keep sequels, DLC and bundles separate rather than treating them as cheaper copies.'],
+      ['Check your account', 'Check PC platform, key redemption rules and regional restrictions before purchase. A giveaway may grant a temporary claim or require a different launcher.'],
+      ['Distinguish price evidence', 'Use a dated historical low to decide whether to wait. Measure today’s value with only same-currency listings for the same edition, then check the store’s tax, fees and refund conditions.'],
+    ],
+    gap: 'CheapShark shows catalog prices for eligible US queries; GamerPower lists possible free claims. Neither verifies redemption for your account, final checkout cost or stock.',
+    output: 'Same-edition options across stores, other editions and bundles separately, and any documented historical low or claim separated from purchase quotes.',
+    sources: [['CheapShark developer documentation', 'https://apidocs.cheapshark.com/'], ['GamerPower API', 'https://www.gamerpower.com/api-read']],
+  },
+});
+
+export function entryContext(hash, search) {
+  const params = new URLSearchParams(hash.replace(/^#/, ''));
+  const entry = params.get('entry');
+  const topic = params.get('topic');
+  if (entry === 'demand_page' && Object.hasOwn(topics, topic)) return { source: 'demand_page', topic };
+  if (entry === 'github_guide') return { source: 'github_guide', topic: null };
+  if (entry === 'framefind_results' || (!hash && new URLSearchParams(search).get('utm_source') === 'framefind_results')) {
+    return { source: 'framefind_results', topic: null };
+  }
+  return { source: 'direct', topic: null };
+}
+
+export const demandURL = topic => '/match-os/demand/' + (topic ? topic + '/' : '');
+export const BASE = 'https://yl124915300-dot.github.io';

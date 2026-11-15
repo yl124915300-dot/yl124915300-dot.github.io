@@ -1,4 +1,4 @@
-import { constraint, count, date, deliveryCheck, extract, key, loaded, maximum, minimum, number, quoteCost, stable, text, yesNo } from './shared.js?v=5';
+import { constraint, count, date, deliveryCheck, extract, key, loaded, maximum, minimum, number, quoteCost, stable, text, yesNo } from './shared.js?v=7';
 
 const units = {
   mg: ['mass', 0.001], g: ['mass', 1], kg: ['mass', 1000], oz: ['mass', 28.349523125],
@@ -68,7 +68,7 @@ export const consumables = {
       ['expiry', /\b(?:expires? after|expiry after|best before after)\s+(\d{4}-\d{2}-\d{2})\b|有效期晚于\s*(\d{4}-\d{2}-\d{2})/iu, m => date(m[1] || m[2])],
     ];
     const use = /(?<!\d)(\d+(?:\.\d+)?)\s*(kg|g|ml|l|ct|千克|克|毫升|升|件)\s*(?:per\s+(week|month)|\/\s*(week|month)|每(周|月))/iu;
-    const details = text(brief.details);
+    const details = text(brief.details).replace(/\binclude delivery\b/giu, '');
     const consumption = use.exec(details);
     const usage = consumption ? measurement(consumption[1], consumption[2]) : null;
     const cadence = consumption ? (/^month$|^月$/iu.test(consumption[3] || consumption[4] || consumption[5]) ? 'month' : 'week') : null;
