@@ -63,6 +63,7 @@
   const sensitive = /@|https?:\/\/|www\.|(?:\+?[0-9][\s().-]*){10,}|\b\d{3}-\d{2}-\d{4}\b|\b\d{1,6}\s+[\p{L}][\p{L}\s.]{1,32}\s+(?:street|st\.?|road|rd\.?|avenue|ave\.?|lane|ln\.?|drive|dr\.?|boulevard|blvd\.?)\b|(?:路|街|巷)\s*[0-9]+号/iu;
   const clean = (value) => value.trim().replace(/^[\s,;:，。；：]+|[\s,;:，。；：!?！？]+$/gu, '').trim();
   let session = null;
+  let liveSequence = 0;
   let timer;
   let closing = false;
   let leaving = false;
@@ -144,6 +145,7 @@
   }
 
   function finish(reason, focus = true, keepReceipt = false) {
+    clearLive();
     session = null;
     closing = false;
     clearInterval(timer);
@@ -228,6 +230,7 @@
       edit.setAttribute('aria-label', 'Edit ' + label.toLowerCase());
       edit.addEventListener('click', () => {
         if (!remaining() || closing || session.submitting) return;
+        clearLive();
         form.reset();
         byId('public-option').open = false;
         byId('payload').replaceChildren();
@@ -327,6 +330,161 @@
     };
   }
 
+  // Read-only public offer search. Never submit a cart, send the raw transcript,
+  // or assume that a merchant payment occurred from an outbound link.
+  function clearLive() {
+    liveSequence += 1;
+    if (session?.liveController) {
+      session.liveController.abort();
+      session.liveController = null;
+    }
+    byId('live-results').replaceChildren();
+    byId('live-status').textContent = 'No external search has run.';
+    byId('live-search').disabled = false;
+  }
+
+  function officialOfferLink(raw) {
+    if (typeof raw !== 'string' || raw.length > 2000) return null;
+    try {
+      const link = new URL(raw);
+      const host = link.hostname.toLowerCase();
+      if (link.protocol !== 'https:' ||
+          !(host === 'groupon.com' || host.endsWith('.groupon.com') ||
+            host === 'livingsocial.com' || host.endsWith('.livingsocial.com'))) return null;
+      return raw;
+    } catch {
+      return null;
+    }
+  }
+
+  function offerPrice(raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    const minor = raw.fromMinor ?? raw.amountMinor;
+    const unit = String(raw.currency || '').toUpperCase();
+    if (!Number.isSafeInteger(minor) || minor < 0 || !/^[A-Z]{3}$/.test(unit)) return null;
+    const precision = Number.isInteger(raw.currencyPrecision) && raw.currencyPrecision >= 0 &&
+      raw.currencyPrecision <= 3 ? raw.currencyPrecision : 2;
+    return { amount: minor / 10 ** precision, unit };
+  }
+
+  function renderOffers(raw, brief) {
+    const list = byId('live-results');
+    list.replaceChildren();
+    const offers = Array.isArray(raw?.offers) ? raw.offers.slice(0, 5) : [];
+    let shown = 0;
+    for (const offer of offers) {
+      if (!offer || typeof offer !== 'object' || offer.status !== 'active') continue;
+      const link = officialOfferLink(offer.buyUrl) ||
+        officialOfferLink(offer.bookingUrl) || officialOfferLink(offer.offerUrl);
+      if (!link) continue;
+      const card = document.createElement('article');
+      card.className = 'offer-card';
+      const title = document.createElement('h4');
+      title.textContent = String(offer.title || 'Unnamed public offer').slice(0, 170);
+      card.append(title);
+      const merchantName = typeof offer.merchant === 'string' ? offer.merchant :
+        (offer.merchant && typeof offer.merchant.name === 'string' ? offer.merchant.name : '');
+      const meta = document.createElement('p');
+      meta.className = 'offer-meta';
+      meta.textContent = [merchantName.slice(0, 90), String(offer.city || '').slice(0, 65)]
+        .filter(Boolean).join(' · ') || 'LivingSocial/Groupon public catalog';
+      card.append(meta);
+      const price = offerPrice(offer.price);
+      const priceLabel = document.createElement('p');
+      priceLabel.className = 'offer-price';
+      if (price) {
+        priceLabel.textContent = 'From ' + price.unit + ' ' + price.amount.toFixed(2);
+        if (price.unit === brief.budget.currency) {
+          priceLabel.textContent += price.amount <= brief.budget.amount ?
+            ' · starting price within budget' : ' · starting price above budget';
+        } else {
+          priceLabel.textContent += ' · no currency conversion';
+        }
+      } else {
+        priceLabel.textContent = 'Price not supplied — check merchant';
+      }
+      card.append(priceLabel);
+      const outgoing = document.createElement('a');
+      outgoing.className = 'secondary offer-link';
+      outgoing.href = link; // Source link, including provider attribution, is unchanged.
+      outgoing.target = '_blank';
+      outgoing.rel = 'noopener noreferrer';
+      outgoing.textContent = offer.buyUrl && link === offer.buyUrl ?
+        'Review official buy page ↗' : 'Review official offer page ↗';
+      outgoing.setAttribute('aria-label', 'Open third-party offer: ' + title.textContent);
+      card.append(outgoing);
+      list.append(card);
+      shown += 1;
+    }
+    return shown;
+  }
+
+  async function searchLiveOffers() {
+    if (!session || !remaining() || closing || session.submitting ||
+        byId('review').hidden || session.field) return;
+    const brief = session.brief;
+    const status = byId('live-status');
+    const button = byId('live-search');
+    const market = brief.place.code;
+    byId('live-results').replaceChildren();
+
+    if (market !== 'US' && market !== 'CA') {
+      status.textContent = 'Live public offers from this source are currently limited to the US and Canada. You may still request manual comparison.';
+      return;
+    }
+    if (!navigator.onLine) {
+      status.textContent = 'Offline. No external catalog search was made.';
+      return;
+    }
+    // The button is an explicit opt-in: only reviewed item and market are shared.
+    const words = (brief.item + ' in ' + brief.place.city + ', ' + brief.place.region).slice(0, 200);
+    if (sensitive.test(words) || words.length < 3) {
+      status.textContent = 'The reviewed search contains private or invalid text. Edit your request first.';
+      return;
+    }
+    session.liveController?.abort();
+    const controller = new AbortController();
+    session.liveController = controller;
+    const ref = session.ref;
+    const seq = ++liveSequence;
+    button.disabled = true;
+    status.textContent = 'Requesting public offers from LivingSocial/Groupon…';
+    let timedOut = false;
+    const timeout = setTimeout(() => { timedOut = true; controller.abort(); }, 12000);
+    try {
+      const params = new URLSearchParams({ q: words, country: market, limit: '5' });
+      const response = await fetch('https://api-core.livingsocial.com/ls_agent_api/offers/search?' + params, {
+        method: 'GET', mode: 'cors', credentials: 'omit',
+        headers: { Accept: 'application/json' }, signal: controller.signal,
+        cache: 'no-store', redirect: 'error'
+      });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const payload = await response.json();
+      if (seq !== liveSequence || session?.ref !== ref || !remaining()) return;
+      const count = renderOffers(payload, brief);
+      const asOf = typeof payload?.asOf === 'string' ? Date.parse(payload.asOf) : NaN;
+      const sourceStamp = Number.isFinite(asOf) ?
+        ' Catalog as of ' + new Date(asOf).toLocaleString() + '.' : '';
+      status.textContent = count ?
+        count + ' active public offers found.' + sourceStamp +
+          ' These are not confirmed final prices, availability or verified matches.' :
+        'No buyable active offers were returned for this search. Try a different request or use manual comparison.';
+      byId('stage-build').removeAttribute('aria-current');
+      byId('stage-compare').setAttribute('aria-current', 'step');
+    } catch (error) {
+      if (seq !== liveSequence || session?.ref !== ref) return;
+      status.textContent = timedOut ?
+        'Public catalog timed out. No offer was selected or purchased.' :
+        'Public catalog unavailable. No external purchase was attempted; manual comparison remains available.';
+    } finally {
+      clearTimeout(timeout);
+      if (session?.ref === ref && seq === liveSequence) {
+        session.liveController = null;
+        button.disabled = false;
+      }
+    }
+  }
+
   function showSharing() {
     if (!remaining() || closing || session.field) return;
     byId('stage-build').removeAttribute('aria-current');
@@ -379,6 +537,7 @@
     input.focus();
   });
   byId('handoff').addEventListener('click', showSharing);
+  byId('live-search').addEventListener('click', searchLiveOffers);
   byId('github').addEventListener('click', openPublicEditor);
   byId('close').addEventListener('click', () => {
     if (!remaining() || session.submitting) return;
