@@ -31,7 +31,7 @@ jobs:
       - name: Prepare cloud Chrome
         run: |
           google-chrome --version
-          python3 -m pip install --quiet --user playwright==1.55.1
+          python3 -m pip install --quiet --user playwright==1.63.0
       - name: Wait for the same revision on the original HTTPS site
         env:
           REVISION: ${{ github.sha }}
