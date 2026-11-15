@@ -2,7 +2,7 @@
 import json
 import os
 import re
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, urljoin, urlparse
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -279,6 +279,102 @@ def pending_cancel(page):
     print("PENDING_REQUEST_CANCEL_CLEARED_OK")
 
 
+def intake(page, channel):
+    site_host = urlparse(SITE).hostname
+    external = []
+    page.on("request", lambda request: external.append(request.url)
+            if urlparse(request.url).hostname not in (site_host, None) else None)
+    if channel == "framefind_results":
+        page.goto(urljoin(SITE, "/video-find/"), wait_until="domcontentloaded")
+        expect(page.locator("#match-intent-cta")).to_be_hidden()
+        page.locator("#item-description").fill("Sony WH-1000XM5 headphones")
+        page.locator("#search-products").click()
+        page.locator("#match-intent-link").focus()
+        page.keyboard.press("Enter")
+        expect(page).to_have_url(SITE + "#entry=framefind_results")
+        item = "Sony WH-1000XM5 headphones"
+    else:
+        page.goto(SITE + "#entry=github_guide&ignore=discarded", wait_until="domcontentloaded")
+        item = "Over-ear headphones with active noise cancellation in wired mode"
+
+    expect(page.locator("#reference")).to_be_hidden()
+    expect(page.locator("#entry-preview")).to_contain_text(item)
+    assert page.evaluate("sessionStorage.getItem('matchos:framefind_interest_v1')") is None
+    page.get_by_role("button", name="Use this item and start chat").click()
+    expect(page.locator("#entry-preview")).to_be_hidden()
+    expect(page.locator("#message")).to_be_focused()
+    expect(page.locator("#ref")).to_have_text(re.compile(r"^MO-[A-F0-9]{20}$"))
+    ref = page.locator("#ref").inner_text()
+    for reply in ("USD 180", "Austin, United States", "within 7 days"):
+        page.locator("#message").fill(reply)
+        page.locator("#send").click()
+    expect(page.locator("#messages")).to_contain_text("active noise cancellation work while wired")
+    page.locator("#message").fill("3.5 mm wired ANC and returns")
+    page.locator("#send").click()
+    expect(page.locator("#summary")).to_contain_text(item)
+    page.locator("#handoff").click()
+    expect(page.locator("[name=acquisition_source]")).to_have_value(channel)
+    assert page.locator("[name=acquisition_campaign], [name=acquisition_medium]").count() == 0
+    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+
+    page.locator("#email").fill("intake-qa@example.test")
+    page.locator("#request-submit").click()
+    page.locator("[name=fee_acknowledged]").check()
+    page.locator("#request-submit").click()
+    assert not external, "External traffic before the buyer chose to share"
+    page.locator("#public-option summary").click()
+    expect(page.locator("#github")).to_be_disabled()
+    page.evaluate("window.open = (url) => { window.qaDraft = url; }")
+    page.locator("#public-consent").check()
+    page.locator("#github").click()
+    draft = urlparse(page.evaluate("window.qaDraft"))
+    draft_body = parse_qs(draft.query)["body"][0]
+    assert draft.hostname == "github.com" and f"Entry: {channel}" in draft_body
+    assert ref not in draft_body and "example.test" not in draft_body and "discarded" not in draft_body
+    assert not external, "No public draft or catalog search should leave this test"
+
+    if channel == "github_guide":
+        page.locator("[name=research_consent]").check()
+        page.route("https://formsubmit.co/**", lambda route: route.fulfill(
+            status=200, content_type="text/html", body="<p>QA intercepted. No request delivered.</p>"))
+        with page.expect_request(lambda request: urlparse(request.url).hostname == "formsubmit.co") as post:
+            page.locator("#request-submit").click()
+        assert post.value.method == "POST"
+        payload = parse_qs(post.value.post_data)
+        assert payload["transaction_reference"] == [ref] and payload["acquisition_source"] == [channel]
+        assert payload["fee_acknowledged"] == ["yes"] and payload["research_consent"] == ["yes"]
+        assert payload["item"] == [item] and "discarded" not in post.value.post_data
+        page.goto(urljoin(SITE, "received.html"))
+        expect(page.locator("#request-code")).to_have_text(ref)
+        page.reload()
+        expect(page.locator("#request-ref")).to_be_hidden()
+    else:
+        cleared(page)
+        expect(page.locator("#payload")).to_be_empty()
+        expect(page.locator("#email")).to_have_value("")
+        expect(page.locator("#public-consent")).not_to_be_checked()
+        expect(page.locator("#entry-preview")).to_be_empty()
+        page.locator("#restart").click()
+        expect(page.locator("#start-chat")).to_have_text("Start purchase chat")
+        assert not external
+
+    print("OPT_IN_INTAKE_OK", channel)
+
+
+def unlisted_entry(page):
+    page.goto(SITE + "?utm_campaign=arbitrary-tag#entry=unknown")
+    expect(page.locator("#entry-preview")).to_be_hidden()
+    page.locator("#start-chat").click()
+    expect(page.locator("#message")).to_be_focused()
+    page.locator("#message").fill("Find a laptop in Austin, United States under USD 800 by Friday.")
+    page.locator("#send").click()
+    page.locator("#skip").click()
+    page.locator("#handoff").click()
+    expect(page.locator("[name=acquisition_source]")).to_have_value("direct")
+    assert "arbitrary-tag" not in page.locator("#payload").inner_html()
+    print("UNLISTED_ENTRY_DROPPED_OK")
+
+
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(channel="chrome", args=["--no-sandbox"])
     failures = []
@@ -286,7 +382,10 @@ with sync_playwright() as playwright:
              ("goods-desktop", goods_and_edit), ("goods-mobile", goods_and_edit), ("mixed-mobile", mixed_live),
              ("observations-desktop", lambda page: observations(page, False)),
              ("observations-mobile", lambda page: observations(page, True)),
-             ("manual-expiry", manual_and_expiry), ("pending-cancel", pending_cancel)]
+             ("manual-expiry", manual_and_expiry), ("pending-cancel", pending_cancel),
+             ("intake-desktop", lambda page: intake(page, "github_guide")),
+             ("intake-mobile", lambda page: intake(page, "framefind_results")),
+             ("intake-unlisted-entry", unlisted_entry)]
     for name, case in cases:
         if os.getenv("MATCH_OS_CASE") not in (None, name):
             continue

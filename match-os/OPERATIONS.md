@@ -4,7 +4,7 @@
 
 ## 当前开发优先级
 
-先在原站验证跨平台检索和决策质量，再做获客。以下历史阶段的商业试运行条件继续适用于真实订单和收款；当前无需等待真人需求才修正产品。冷邮件和主动获客暂停。
+从买家已在比较商品的场景引导自愿会话。首批发行入口和核查口径见下方「需求流动性试点」。真实交易需要独立的商家成交证据。PayPal 服务费入口关闭，新增冷邮件额度为 0。
 
 ## 唯一北极星
 
@@ -204,3 +204,21 @@
 - 原有 30 分钟本地会话、取消/离页清理、FrameFind、FormSubmit 和 GitHub Issue 备选保持可用。查询只在明确授权后发起。FormSubmit 和 GitHub 分别披露接收方及分享内容；HTTPS 用于传输，接收方控制自身数据保留。
 - 复现命令：`node --test match-os-probe/*.test.mjs` 和 `python3 match-os-probe/browser_compare.py`。规则测试数据为合成测试用例，浏览器用公开查询验证真实目录并验证授权、失败和清理。[Pages 源码一致性检查](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-intake-smoke.yml) · [云端 Chrome 验收](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-live-offer-e2e.yml)。
 - 下一道阻碍是取得一个明确允许 MATCH OS 消费者比价用途的生产商品目录访问权限，并在私有服务端管理凭据，从允许的消费市场验证一条完整、仍可购买的真实报价。公开 Pages 不存放商家凭据。
+
+## 2026-11-15 需求流动性试点 v1
+
+- [FrameFind 商品检索结果](https://yl124915300-dot.github.io/video-find/#results)在用户生成零售搜索链接后显示「Compare this item in MATCH OS」。同标签页点击才暂存商品词和时间。MATCH OS 一次性读取并清除暂存，先显示可核对草稿，用户可以确认草稿或输入自己的需求。草稿最多保留 10 分钟。原视频地址、图像、商品词和身份都不进入来源参数。
+- [自有仓库说明](https://github.com/yl124915300-dot/yl124915300-dot.github.io#match-os-comparison-pilot-for-wired-noise-cancelling-headphones)上线有线降噪购买检查，链接带固定来源并预填通用需求。11 月公开求购中出现了 [预算低于 US$100、接 AUX 时仍要降噪](https://www.reddit.com/r/HeadphoneAdvice/comments/1xkqqjh/affordable_noise_canceling_headphones_with_aux/)以及[有线工作时要保留 ANC](https://www.reddit.com/r/HeadphoneAdvice/comments/1xw9tra/headphones_with_optional_wired_connection/)的约束。它们只用于选择入口和设计问题。首轮人工比较核对具体型号、接线模式、到手总价、预计交付及替代品，缺少商家证据的字段列为待核验。
+- [原 MATCH OS](https://yl124915300-dot.github.io/match-os/)加了键盘可达的聊天入口。用户首次发送有效需求或确认预填才生成 `MO-` 本机编号。取消、离页或 30 分钟到期清除本机聊天和授权，无法清除已交接的邮件或公开内容。原四类路由和报价证据层不变。买家自行去商家完成结账。收费条件已告知，当前免费试用，未开启 PayPal。
+- 仅在用户选择分享后才传递固定来源 `framefind_results`、`github_guide` 或 `direct`。提交内容由买家自报，来源表示入口标签，不能证明访客身份或独立买家来源。FormSubmit 需要邮箱、收费条款确认及单独的发送授权，交接后仍需通过原服务确认或 CAPTCHA。公开 GitHub 编辑器也需要另行同意，内容不含邮箱、会话号和原聊天。只有用户自行发布才形成公开 issue。收集者可在接收渠道统计用户主动完成的请求，页面无新增统计上报、跨会话标识或跟踪像素。
+- 使用 [GitHub 可接受使用政策](https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies) 和 [Pages 使用限制](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)核对范围。本次在自有项目内容发布免费比较功能，站内无商家付款或服务费支付。社媒账号权限及可发布范围未核实，无社媒发布、邀约或新增冷邮件。公开求购帖未被回复或导入会话。
+
+| 来源 | 真人访问 | 真人开聊 | 完整真人意图 | 已收到真人请求 | 已核验商家成交 | 已核验 PayPal 净到账 |
+| --- | --- | --- | --- | ---: | ---: | ---: |
+| FrameFind 检索结果 | 未观测 | 未观测 | 未观测 | 0 | 0 | US$0 |
+| GitHub 自有说明 | 未观测 | 未观测 | 未观测 | 0 | 0 | US$0 |
+| 原站直接及其他 | 未观测 | 未观测 | 未观测 | 0 | 0 | US$0 |
+
+- 证据口径：Gmail `in:anywhere` 查询品牌、买家主题、FormSubmit 与会话字段，找到历史 QA 投递、激活信、合作往来与不相关线索，未见自愿买家请求。自有仓库搜索 `MATCH OS BUYER` 为 0，[FrameFind 自愿反馈 #41](https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/41)评论为 0。邮件投递、公开兴趣、QA 访问、商家链接点击与购买分别核对。匿名访问、开聊与未提交的完整草稿没有可见总量。
+- 发布前验收：25 项比较规则测试通过。Chrome 桌面与 iPhone 13 尺寸共 7 个本地场景通过，覆盖两条入口、未知参数回退、外发授权、编辑、取消、到期和一次性回执。FormSubmit 使用浏览器拦截，不投递测试邮件。公开 issue 使用编辑器请求模拟，不公开发布 QA。
+- 唯一下一步：用第一条自愿且可跟进的采购请求，在承诺的预算和到货要求内交付一份有商家原始证据的实际比较，并核对买家是否在商家完成结账。

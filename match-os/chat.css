@@ -75,7 +75,7 @@ code, #expiry { font-variant-numeric: tabular-nums; }
   gap: 15px;
 }
 .welcome h1 { font-size: clamp(2rem, 6vw, 4.1rem); }
-.welcome p { color: var(--muted); max-width: 460px; }
+.welcome p { color: var(--muted); max-width: min(460px, 100%); overflow-wrap: anywhere; }
 .example { color: var(--accent); text-decoration: underline; text-underline-offset: .23em; }
 
 .messages { display: grid; gap: 10px; }

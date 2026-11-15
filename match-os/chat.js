@@ -11,6 +11,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   const lifetime = 30 * 60 * 1000;
   const receiptKey = 'matchos:last_request_reference';
   const frameFindKey = 'matchos:framefind_interest_v1';
+  const draftLifetime = 10 * 60 * 1000;
   const byId = (id) => document.getElementById(id);
 
   function takeStoredValue(key) {
@@ -41,6 +42,10 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   const messages = byId('messages');
   const scroll = byId('scroll');
   const website = 'https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new';
+  const entry = new URLSearchParams(location.hash.slice(1)).get('entry');
+  const legacyEntry = !location.hash && new URLSearchParams(location.search).get('utm_source');
+  const acquisition = entry === 'github_guide' ? 'github_guide' :
+    (entry === 'framefind_results' || legacyEntry === 'framefind_results') ? 'framefind_results' : 'direct';
 
   const fields = [
     ['item', 'Item / service', 'What products or services should we look for? Include a product type, model or service name.'],
@@ -74,6 +79,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   let session = null;
   let liveSequence = 0;
   let timer;
+  let draft;
+  let draftTimer;
   let closing = false;
   let leaving = false;
 
@@ -154,15 +161,30 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     feedback.textContent = text;
   }
 
+  function clearDraft() {
+    clearTimeout(draftTimer);
+    draft = null;
+    byId('entry-preview').hidden = true;
+    byId('entry-preview').textContent = '';
+    byId('start-chat').textContent = 'Start purchase chat';
+  }
+
+  function resetPublicSharing() {
+    byId('public-option').open = false;
+    byId('public-consent').checked = false;
+    byId('github').disabled = true;
+  }
+
   function finish(reason, focus = true, keepReceipt = false) {
     clearLive();
+    clearDraft();
     session = null;
     closing = false;
     clearInterval(timer);
     messages.replaceChildren();
     byId('summary').replaceChildren();
     byId('payload').replaceChildren();
-    byId('public-option').open = false;
+    resetPublicSharing();
     byId('ref').textContent = '';
     byId('expiry').textContent = '';
     byId('expiry-label').textContent = '';
@@ -202,6 +224,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   }
 
   function start(brief, source) {
+    clearDraft();
     takeStoredValue(receiptKey);
     const entropy = crypto.getRandomValues(new Uint8Array(10));
     const ref = 'MO-' + Array.from(entropy, (byte) => byte.toString(16).padStart(2, '0')).join('').toUpperCase();
@@ -273,7 +296,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
         if (key === 'item' || key === 'place') session.quotes.clear();
         resetQuoteEntry();
         form.reset();
-        byId('public-option').open = false;
+        resetPublicSharing();
         byId('payload').replaceChildren();
         byId('request-submit').disabled = true;
         byId('sharing').hidden = true;
@@ -298,7 +321,10 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     }
     byId('chat-form').hidden = false;
     input.placeholder = 'Type your reply…';
-    appendMessage('assistant', fields.find(([field]) => field === session.field)[2]);
+    const question = session.field === 'details' && /\bheadphones?\b/i.test(session.brief.item) ?
+      'Which input do you need, 3.5 mm or USB-C? Should active noise cancellation work while wired? Add any must-haves for delivery or returns.' :
+      fields.find(([field]) => field === session.field)[2];
+    appendMessage('assistant', question);
     scroll.scrollTop = scroll.scrollHeight;
   }
 
@@ -364,14 +390,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
 
   function requestFields() {
     const { brief, ref, source } = session;
-    const campaign = new URLSearchParams(window.location.search);
-    const labels = [
-      ['utm_source', 'acquisition_source', 'direct'],
-      ['utm_medium', 'acquisition_medium', 'unknown'],
-      ['utm_campaign', 'acquisition_campaign', 'none'],
-    ];
     return {
       source,
+      acquisition_source: acquisition,
       region: brief.place.code,
       market_country: brief.place.region,
       city: brief.place.city,
@@ -381,10 +402,6 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
       currency: brief.budget.currency,
       details: brief.details,
       transaction_reference: ref,
-      ...Object.fromEntries(labels.map(([parameter, name, fallback]) => {
-        const value = campaign.get(parameter) || fallback;
-        return [name, /^[a-zA-Z0-9._-]{1,60}$/.test(value) && !sensitive.test(value) ? value : 'unclassified'];
-      })),
     };
   }
 
@@ -606,7 +623,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   }
 
   function openPublicEditor() {
-    if (!remaining() || closing || byId('sharing').hidden || session.submitting) return;
+    if (!remaining() || closing || byId('sharing').hidden || session.submitting || !byId('public-consent').checked) return;
     const data = requestFields();
     const body = [
       '## Voluntary buyer request',
@@ -616,6 +633,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
       'Maximum budget: ' + data.currency + ' ' + data.budget,
       'Timing: ' + data.when,
       'Must-haves: ' + (data.details || 'None'),
+      'Entry: ' + data.acquisition_source,
       '',
       'Self-reported request for manual review. No purchase or merchant quote has been verified.',
     ].join('\n');
@@ -635,6 +653,18 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     byId('chat-form').requestSubmit();
   });
   byId('skip').addEventListener('click', () => send('No preference'));
+  byId('start-chat').addEventListener('click', () => {
+    if (session) return;
+    if (draft && Date.now() < draft.expires) {
+      const { item } = draft;
+      start({ item }, 'ecommerce');
+      appendMessage('buyer', item);
+      ask();
+    } else {
+      clearDraft();
+    }
+    input.focus();
+  });
   byId('example').addEventListener('click', () => {
     input.value = 'Find iPhone 15 128 GB + USB-C charger in Seattle, United States under USD 800, just comparing.';
     input.focus();
@@ -655,6 +685,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
     input.focus();
   });
   byId('github').addEventListener('click', openPublicEditor);
+  byId('public-consent').addEventListener('change', (event) => {
+    byId('github').disabled = !event.target.checked;
+  });
   byId('close').addEventListener('click', () => {
     if (!remaining() || session.submitting) return;
     closing = true;
@@ -707,15 +740,23 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
   }
   input.disabled = false;
   byId('send').disabled = false;
+  byId('start-chat').disabled = false;
   takeStoredValue(receiptKey);
   const staged = takeStoredValue(frameFindKey);
   const stagedAge = Date.now() - staged?.at;
-  if (typeof staged?.item === 'string' && stagedAge > -60000 && stagedAge < 600000 && !sensitive.test(staged.item)) {
-    const item = readItem(staged.item.trim().slice(0, 120));
-    if (item) {
-      start({ item }, 'ecommerce');
-      appendMessage('assistant', 'FrameFind passed this item to your local chat: ' + item + '. You can edit it before sharing.');
-      ask();
-    }
+  let item;
+  if (acquisition === 'framefind_results' && typeof staged?.item === 'string' && stagedAge >= 0 &&
+      stagedAge < draftLifetime && !sensitive.test(staged.item)) {
+    item = readItem(staged.item.trim().slice(0, 120));
+  } else if (acquisition === 'github_guide') {
+    item = 'Over-ear headphones with active noise cancellation in wired mode';
+  }
+  if (item) {
+    const ttl = acquisition === 'framefind_results' ? draftLifetime - stagedAge : draftLifetime;
+    draft = { item, expires: Date.now() + ttl };
+    byId('entry-preview').textContent = 'Suggested item: ' + item + '. Use this item to start, or type your own below.';
+    byId('entry-preview').hidden = false;
+    byId('start-chat').textContent = 'Use this item and start chat';
+    draftTimer = setTimeout(clearDraft, ttl);
   }
 })();

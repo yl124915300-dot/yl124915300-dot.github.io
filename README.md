@@ -40,6 +40,12 @@ First-party organic discovery is limited to helpful source guides, [sitemap.xml]
 - [TikTok frame shopping](https://yl124915300-dot.github.io/video-find/find-tiktok-product/)
 - [Find products from screenshots](https://yl124915300-dot.github.io/video-find/find-product-from-screenshot/)
 
+## MATCH OS comparison pilot for wired noise-cancelling headphones
+
+If you're buying headphones for a wired source, check the manual for **active noise cancellation while the cable is plugged in**. A headphone jack or USB-C port can support audio, charging, or both, and passive wired playback may work with the headphones turned off while ANC requires power. Confirm the connector, whether the cable is included, and the delivered total and return terms for your region before ordering.
+
+[Open a free purchase comparison with the headphone requirement filled in](https://yl124915300-dot.github.io/match-os/#entry=github_guide). Confirm or edit it and add your budget, market and deadline. You can compare listings in your browser or opt in to a manual review of the model, wired ANC, delivery, total cost and alternatives. Any purchase happens on the merchant's site. The pilot collects no fee.
+
 This repository contains other historical experiments. FrameFind is the consumer-facing homepage, not a claim that the other projects are operating profitable businesses.
 
 ### Independent experimental project: Claim Evidence Desk

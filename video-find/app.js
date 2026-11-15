@@ -452,10 +452,10 @@ el('download-crop').addEventListener('click',saveCrop);
 el('copy-crop').addEventListener('click',copyCrop);
 el('search-products').addEventListener('click',analyzeQuery);
 const matchLink=el('match-intent-link');
-if(matchLink)matchLink.addEventListener('click',()=>{
-  if(!state.lastQuery)return;
+if(matchLink)matchLink.addEventListener('click',event=>{
+  if(!state.lastQuery||event.defaultPrevented||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   try{sessionStorage.setItem('matchos:framefind_interest_v1',
-    JSON.stringify({item:state.lastQuery,market:el('market').value,at:Date.now()}));}
+    JSON.stringify({item:state.lastQuery,at:Date.now()}));}
   catch(err){/* Navigation is still available without browser storage. */}
 });
 el('share-result').addEventListener('click',shareResult);
