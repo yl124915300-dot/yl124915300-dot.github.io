@@ -10,10 +10,12 @@ export const topics = Object.freeze({
       ['Exact connection', 'Find the manufacturer manual for the exact model number. Check 3.5 mm analogue audio; USB-C charging by itself does not indicate USB-C audio.'],
       ['Active cancellation on cable', 'Look for an explicit wired-mode ANC statement and whether the headset has to be switched on. Treat passive sound isolation and Bluetooth-only ANC as separate features.'],
       ['What you actually pay', 'Match model, condition and region; compare the included cable, shipping, tax and return window. Ask whether the mic or controls work in wired mode if you need them.'],
+      ['Sony WH-1000XM4 (manual-verified)', 'Sony explicitly permits noise cancelling through its supplied 3.5 mm headphone cable while the headset is powered on. If powered off, wired audio can still work but ANC cannot. This is evidence for the WH-1000XM4 model only.'],
+      ['soundcore Space Q45 (FAQ-verified)', 'soundcore says the Space Q45 can activate noise cancelling by pressing the NC button after its AUX cable is connected. This confirms the wired ANC behavior for the Q45, not a current price, bundled cable, stock or delivery promise.'],
     ],
     gap: 'This route has no approved live electronics retailer feed. Bring a public listing or a quote; stock, delivery, total and wired ANC remain pending until the listing and manual support them.',
     output: 'A side-by-side comparison of model, connector, wired ANC, condition and total when supplied, with conflicts and missing evidence marked.',
-    sources: [['Sony WH-1000XM4 manufacturer help guide (see “Using the supplied headphone cable”)', 'https://helpguide.sony.net/mdr/wh1000xm4/v1/en/index.html']],
+    sources: [['Sony WH-1000XM4 official manual: headphone cable and powered ANC', 'https://helpguide.sony.net/mdr/wh1000xm4/v1/en/contents/TP0002752734.html'], ['soundcore Space Q45 official FAQ: ANC with AUX cable', 'https://service.soundcore.com/article-description/soundcore-Space-Q45-Headphones-FAQ']],
   },
   'oat-milk-pack-price': {
     category: 'consumables', label: 'Everyday goods', item: 'Grocery: oat milk',
