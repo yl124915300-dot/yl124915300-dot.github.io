@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-15T06:12:24+00:00",
+  "checkedAt": "2026-11-15T18:45:03+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -68,6 +68,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+    },
+    {
+      "name": "Lucas Thomas",
+      "headline": "Detail-oriented field verification & photography specialist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 37,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/c8MULNfFAH8oQR2ZTjcT"
     },
     {
       "name": "Jamie Garcia",
@@ -170,16 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/NE8dhWeo6d8tf1TyCQBL"
     },
     {
-      "name": "Fathur Romadlan",
-      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 13,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
-    },
-    {
       "name": "Pat Santiago",
       "headline": "Founder of ACCELR8",
       "city": "San Francisco",
@@ -250,16 +250,6 @@
       "profileUrl": "https://rentahuman.ai/humans/OUrdNrSqYAiwOqVeBz4Z"
     },
     {
-      "name": "Amanda Freidell",
-      "headline": "Reliable San Francisco Local | Resourceful, Professional & Ready to Get Things Done!",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Mzb2C5QzJY39zJ136dqP"
-    },
-    {
       "name": "Kaliegh Thompson",
       "headline": "",
       "city": "San Francisco",
@@ -268,6 +258,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/LeslpRApFx3JrRemEXSE"
+    },
+    {
+      "name": "Amanda Freidell",
+      "headline": "Reliable San Francisco Local | Resourceful, Professional & Ready to Get Things Done!",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Mzb2C5QzJY39zJ136dqP"
     },
     {
       "name": "Matthew Farley",
@@ -280,16 +280,6 @@
       "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
     },
     {
-      "name": "Martin Davis",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
-    },
-    {
       "name": "Edward James",
       "headline": "",
       "city": "San Francisco",
@@ -298,6 +288,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/Jc0Zdf3mCCpi8y7fcWnf"
+    },
+    {
+      "name": "Martin Davis",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
       "name": "Jeremiah Franklin",
@@ -630,6 +630,26 @@
       "profileUrl": "https://rentahuman.ai/humans/2klmttBqAt5wW1YjKK0U"
     },
     {
+      "name": "Olivia Johnson",
+      "headline": "Detail-oriented field verification & photography specialist",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 36,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0kRca5jWwOQHuwHG4wJn"
+    },
+    {
+      "name": "Naveed Ullah",
+      "headline": "Accounting & Finance Graduate | Bookkeeping, Financial Reporting & Excel",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/BomcjZe6FT10XvxLX2YO"
+    },
+    {
       "name": "James Harris",
       "headline": "On-demand IRL tasks, pickups and site inspections",
       "city": "London",
@@ -758,26 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/fgQhy3bmsj3MGtTjFLA1"
-    },
-    {
-      "name": "Daniel Smith",
-      "headline": "Reliable local assistant & on-site researcher",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 30,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/GFrWUv6wusHJ2hjLqqFU"
-    },
-    {
-      "name": "James Harris",
-      "headline": "Reliable local assistant & on-site researcher",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 38,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/H67wSETxNlXM1qHJFBGX"
     },
     {
       "name": "Ken Xu",
