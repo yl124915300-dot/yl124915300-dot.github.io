@@ -162,3 +162,10 @@
 - **候选接口核验**：Google/eBay 只提供用户自行打开的搜索链接，不参与排名。[eBay Browse](https://developer.ebay.com/develop/api/buy/browse_api) 需要应用 OAuth，未验证本项目生产权限。[Best Buy](https://developers.bestbuy.com/) 需 API key，未验证本项目可用的授权 key。[Google Merchant](https://developers.google.com/merchant/api/guides/products/overview) 管理账号自身目录，不提供整个 Google Shopping 的搜索。[Shopify Storefront](https://shopify.dev/docs/storefronts/headless/building-with-the-storefront-api) 可按店提供搜索，未核验本项目可使用的具体店铺与数据授权。
 - **发布前真实样例**：本地桌面 Chrome 在合成需求中收到 LEGO Batman 同一目录游戏的 Fanatical USD 2.59、GameBillet USD 16.54、WinGameStore USD 19.99，历史低价 USD 2.28（2025-09-29 UTC），三条最终总价均未知。手机尺寸 Chrome 接收 CheapShark 和 GamerPower 的真实响应并显示免费领取卡，取消后清空。自动用例覆盖版本误合并、型号混淆、预算冲突、跨币种、历史快照、假链接与过期领取。报价是采样，之后会随目录变化。
 - **商业状态**：已知真实买家 0、商家核验成交 0、付费会话 0、PayPal 服务费净到账 USD 0。MATCH OS 专用 PayPal US$1 正式链接未核验，付款入口关闭。未执行获客、购买、表单发送或付款。
+
+### 原站发布与云端验收
+
+- [产品代码提交 `c09681c`](https://github.com/yl124915300-dot/yl124915300-dot.github.io/commit/c09681c6eacaa7744bb10c852e3cb0bccfd9f47e) 已合入原仓库 main。[Pages 部署 43700143972](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43700143972) 成功；[线上验收 43700144663](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43700144663) 在访问前核对原站可执行文件与受测提交 `740c7fe` 的字节内容。
+- **云端桌面 Chrome**：8 项自动规则测试通过。浏览器从 CheapShark 显示 LEGO Batman 同一目录版本的 Fanatical USD 2.59、GameBillet USD 16.54、WinGameStore USD 19.99，历史低价 USD 2.28。切换匹配优先后权重和排序分变化，无第二次目录请求。Austin 按摩由 LivingSocial/Groupon 返回 11 条可用的目录记录，筛选出 10 个候选并显示 5 张卡，首张起价 USD 56.70，最终总价、服务选项的价格和预约时段待核验。FormSubmit 只打开分享审核。
+- **云端手机尺寸 Chrome**：iPhone 13 屏幕与触控模拟，CheapShark 和 GamerPower 均返回 HTTP 200，显示 4 张 GamerPower 免费领取卡；取消后对话、结果和会话编号清空。本地 Chrome 另验证取消挂起请求、30 分钟到期、FrameFind 交接和一次性表单回执。未进行实体手机测试。
+- **兼容性**：较早的云端 Chromium 请求曾收到 CheapShark HTTP 400 且响应缺少 CORS 许可。验收客户端按 CheapShark 公开文档使用明确标识自动化 Chrome 的应用 User-Agent 后通过。普通本机 Chrome 在原站也已直连读到实时报价；网页没有修改买家的浏览器标识。测试未提交购买、表单、订单或付款。
