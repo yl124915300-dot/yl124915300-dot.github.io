@@ -1,0 +1,18 @@
+name: MATCH OS live Groupon offer read-only probe
+on:
+  push:
+    paths:
+      - 'match-os-probe/agent_offer_probe.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-offer-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read public LivingSocial Agent catalog without credentials
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python3 match-os-probe/agent_offer_probe.py
