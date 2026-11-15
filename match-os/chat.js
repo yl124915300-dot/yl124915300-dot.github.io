@@ -206,10 +206,27 @@
     remaining();
   }
 
+  function prepareOtherSources(brief) {
+    // These are user-clicked searches only; no product price or seller availability is asserted.
+    const item = String(brief.item || '').slice(0, 120);
+    const market = String(brief.place?.city || '').slice(0, 60) + ' ' +
+      String(brief.place?.region || '').slice(0, 60);
+    const google = new URL('https://www.google.com/search');
+    google.searchParams.set('q', (item + ' ' + market).trim().slice(0, 200));
+    const ebay = new URL('https://www.ebay.com/sch/i.html');
+    ebay.searchParams.set('_nkw', item);
+    for (const [id, url] of [['google-search', google.href], ['ebay-search', ebay.href]]) {
+      const link = byId(id);
+      link.href = !sensitive.test(item) && !sensitive.test(market) ?
+        url : (id === 'google-search' ? 'https://www.google.com/' : 'https://www.ebay.com/');
+    }
+  }
+
   function summarize() {
     byId('chat-form').hidden = true;
     byId('review').hidden = false;
     const { brief } = session;
+    prepareOtherSources(brief);
     const values = [
       brief.item,
       brief.budget.currency + ' ' + brief.budget.amount,
