@@ -69,6 +69,10 @@ export function entryContext(hash, search) {
   const entry = params.get('entry');
   const topic = params.get('topic');
   if (entry === 'demand_page' && Object.hasOwn(topics, topic)) return { source: 'demand_page', topic };
+  // Fixed, non-identifying social entry labels. Unknown topics/params are ignored;
+  // these are self-reported entry routes, not verified traffic analytics.
+  const socialSources = new Set(['pinterest_pin', 'youtube_profile', 'instagram_profile', 'tiktok_profile']);
+  if (socialSources.has(entry) && Object.hasOwn(topics, topic)) return { source: entry, topic };
   if (entry === 'github_guide') return { source: 'github_guide', topic: null };
   if (entry === 'framefind_results' || (!hash && new URLSearchParams(search).get('utm_source') === 'framefind_results')) {
     return { source: 'framefind_results', topic: null };
