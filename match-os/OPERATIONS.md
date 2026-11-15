@@ -250,3 +250,16 @@
 - **PayPal闸门**：本次只读浏览器会话不可用（\`Browser access requires the originating browser context\`）；未取得任何账户级Live权限、MATCH OS专用USD1官方服务费链接或回款记录。2026-11-11客服历史操作说明不是实际建链证据；按钮保持关闭，禁止创建未验证PAYMENT链接或自动扣款。
 - **下一步唯一动作**：在具有明确、已核实允许商业参与和合法登录权限的真实采购频道，把一份附可核验商家来源的跨商家比较提供给自愿用户，观察其是否主动提交可回访MATCH OS请求。禁止把公开评论或外站点击记为已授权买家；未取得渠道规则、发布权限前不在Reddit直接引流。
 
+
+
+## 2026-11-16 社媒引流纠偏（非社区接触）
+
+- **用户最新方向**：停止Reddit/论坛/社区逐条求购者触达，不把公开评论当潜在付费用户；改用面向社媒算法流量的原创短内容，围绕不同消费品类的可验证购买判断，让真人主动点击进入同一个MATCH OS会话。流量渠道优先Pinterest直接目的地Pin，其次YouTube Shorts频道主页链接；TikTok/Instagram由账号实际网站栏权限和定位决定，不未经额外授权使用BLACK SAIL影视账号或其他项目已有受众。
+- **已完成源码改动（还不是已发帖）**：`match-os/demand/topics.js`在`entryContext`加入固定、白名单来源`pinterest_pin`、`youtube_profile`、`instagram_profile`、`tiktok_profile`，且只接受原有已审核的公开topic，忽略多余用户或跟踪字段。真实访客仍要自行确认预填、开启会话和授权外部查源；仅在主动提交时记录固定来源，不存原始聊天。`match-os-probe/matching.test.mjs`新增未知topic和未知来源回退测试。云端GitHub Actions MATCH OS live decision comparison [43733413776](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43733413776)通过，Pages [43733412692](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43733412692)成功。
+- **首批不含任何个人信息的社媒入口样例**：
+  - `https://yl124915300-dot.github.io/match-os/#entry=pinterest_pin&topic=wired-anc-headphones`
+  - `https://yl124915300-dot.github.io/match-os/#entry=pinterest_pin&topic=oat-milk-pack-price`
+  - `https://yl124915300-dot.github.io/match-os/#entry=youtube_profile&topic=wired-anc-headphones`
+- **可依据的内容素材**：自有Sony WH-1000XM4与soundcore Space Q45官方有线ANC厂商说明、燕麦奶不同包装的可核算单位体积，或本地按摩起价与选项价不能混淆的逻辑。不得在社媒图文声称实时价格、库存、已成交、节省金额，除非有确切当前证据。
+- **渠道事实**：Pinterest官方帮助说明Pin可包含网页目的地链接并在商务账户查看出站行为；YouTube官方说明Shorts描述和评论中的普通URL不可点击，但频道主页链接可点击；TikTok普通个人账户网站栏有门槛，商务账号能力另有政策。需以实际账号状态为准。
+- **结果与阻碍**：本轮无法在已登录并确认用途匹配的社媒账号上实际发布；**已发布社媒内容0、社媒曝光及出站点击未知、合格真人买家0、商家已核验成交0、PayPal净服务费USD0**。有引用号不等于有独立浏览量，社媒来源标签只在用户主动提交时供归因，不能冒充实际访客分析。现有自动运营任务已经转为社媒渠道优先；用户登录/授权后可在合适账号发布原创内容，禁止批量私信和刷评论。
