@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; form-action 'self' https://formsubmit.co; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api-core.livingsocial.com; form-action 'self' https://formsubmit.co; base-uri 'none'">
   <meta name="description" content="Describe a purchase in MATCH OS. Review a short-lived buying request and choose whether to send it for manual comparison.">
   <meta name="color-scheme" content="dark">
   <title>MATCH OS — Purchase chat</title>
-  <link rel="stylesheet" href="chat.css?v=1">
-  <script src="chat.js?v=1" defer></script>
+  <link rel="stylesheet" href="chat.css?v=2">
+  <script src="chat.js?v=2" defer></script>
 </head>
 <body>
   <main class="shell">
@@ -46,7 +46,15 @@
         <section id="review" class="review" hidden aria-labelledby="review-title">
           <h2 id="review-title" tabindex="-1">Review your request</h2>
           <dl id="summary"></dl>
-          <p class="muted">Comparison is manual after you send. There are no quotes yet. You choose and pay the merchant directly if you decide to buy.</p>
+          <section id="live-compare" class="live-compare" aria-labelledby="live-compare-title">
+            <h3 id="live-compare-title">Browse live public offers</h3>
+            <p class="muted">Optional. When you click Search, only your reviewed item and city/country are sent to the LivingSocial/Groupon public catalog. Your raw chat, email and request ID are not sent. Currently covers US and Canadian offers only.</p>
+            <button type="button" class="secondary" id="live-search">Search public offers (share item + location)</button>
+            <p id="live-status" class="muted" role="status" aria-live="polite">No external search has run.</p>
+            <div id="live-results" class="offer-list" aria-label="Live public offers"></div>
+            <p class="muted offer-note">Results are third-party listings, not a MATCH OS price or inventory guarantee. Recheck price, eligibility and availability at the merchant before paying. MATCH OS does not process merchant payments or confirm purchases.</p>
+          </section>
+          <p class="muted">If public offers do not fit, you can still send this reviewed request for manual comparison. You choose and pay the merchant directly.</p>
           <div class="actions">
             <button class="primary" id="handoff" type="button">Review what to share</button>
           </div>
@@ -103,7 +111,7 @@
             <button type="submit" id="send" class="primary" disabled>Send <span aria-hidden="true">↑</span></button>
           </div>
         </form>
-        <p id="privacy-note" class="muted note">Rules-based chat in this tab · No AI or live checkout · Keep passwords, addresses and payment details out of the chat.</p>
+        <p id="privacy-note" class="muted note">Rules-based chat · Optional live public catalog search after you consent · No AI or in-app checkout · Never enter passwords, addresses or payment details.</p>
         <noscript><p>Enable JavaScript to start a purchase chat. <a href="/video-find/">Open FrameFind</a>.</p></noscript>
       </div>
     </section>
