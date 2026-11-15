@@ -1,4 +1,4 @@
-import { normalize, relevance } from './decision.js?v=3';
+import { normalize, relevance } from './decision.js?v=4';
 
 const cheapshark = 'https://www.cheapshark.com';
 const gamerpower = 'https://www.gamerpower.com';

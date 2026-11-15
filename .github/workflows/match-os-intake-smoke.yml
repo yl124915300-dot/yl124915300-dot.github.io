@@ -2,13 +2,9 @@ name: MATCH OS intake deployment smoke
 on:
   push:
     paths:
-      - 'match-os/index.html'
-      - 'match-os/received.html'
-      - 'match-os/chat.css'
-      - 'match-os/chat.js'
-      - 'match-os/catalogs.js'
-      - 'match-os/decision.js'
-      - 'match-os/results.js'
+      - 'match-os/*.html'
+      - 'match-os/*.css'
+      - 'match-os/**/*.js'
       - '.github/workflows/match-os-intake-smoke.yml'
   workflow_dispatch:
 permissions:
@@ -20,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check chat JavaScript
-        run: for file in match-os/*.js; do node --experimental-default-type=module --check "$file"; done
+        run: for file in match-os/*.js match-os/modules/*.js; do node --experimental-default-type=module --check "$file"; done
       - name: Verify the deployed chat and receipt against source
         env:
           REVISION: ${{ github.sha }}
@@ -32,15 +28,8 @@ jobs:
           import time
 
           base = "https://yl124915300-dot.github.io/match-os/"
-          pages = {
-              "": "index.html",
-              "received.html": "received.html",
-              "chat.css": "chat.css",
-              "chat.js": "chat.js",
-              "catalogs.js": "catalogs.js",
-              "decision.js": "decision.js",
-              "results.js": "results.js",
-          }
+          names = [file.relative_to('match-os').as_posix() for glob in ('*.html', '*.css', '**/*.js') for file in Path('match-os').glob(glob)]
+          pages = {('' if name == 'index.html' else name): name for name in names}
           expected = {url: Path("match-os", file).read_bytes() for url, file in pages.items()}
           pending = set(pages)
           for attempt in range(20):

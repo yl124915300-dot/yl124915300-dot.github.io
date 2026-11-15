@@ -8,8 +8,8 @@
   <meta name="description" content="Describe a purchase in MATCH OS. Review a short-lived buying request and compare live catalog listings.">
   <meta name="color-scheme" content="dark">
   <title>MATCH OS — Purchase chat</title>
-  <link rel="stylesheet" href="chat.css?v=3">
-  <script type="module" src="chat.js?v=3"></script>
+  <link rel="stylesheet" href="chat.css?v=4">
+  <script type="module" src="chat.js?v=4"></script>
 </head>
 <body>
   <main class="shell">
@@ -36,7 +36,7 @@
       <div class="scroll" id="scroll" tabindex="0" aria-label="Conversation and request details">
         <div id="welcome" class="welcome">
           <h1>What are you<br class="wide"> looking to buy?</h1>
-          <p>Describe one purchase to compare available listings against your budget, timing and must-haves.</p>
+          <p>Describe what you need. You can include products, services and accessories in the same request.</p>
           <button class="example quiet" id="example" type="button">Try an example</button>
         </div>
         <div id="messages" class="messages" role="log" aria-label="Chat messages"></div>
@@ -47,15 +47,8 @@
           <h2 id="review-title" tabindex="-1">Review your request</h2>
           <dl id="summary"></dl>
           <section id="live-compare" class="live-compare" aria-labelledby="live-compare-title">
-            <h3 id="live-compare-title">Compare live catalogs</h3>
-            <div class="catalog-controls">
-              <label for="catalog-route">Category</label>
-              <select id="catalog-route">
-                <option value="auto">Detect from request</option>
-                <option value="games">Digital PC games</option>
-                <option value="general">Local offers and general deals</option>
-              </select>
-            </div>
+            <h3 id="live-compare-title">Compare your options</h3>
+            <div id="route-preview" class="muted"></div>
             <p class="muted" id="catalog-consent"></p>
             <button type="button" class="secondary" id="live-search">Authorize catalog search</button>
             <p id="live-status" class="muted" role="status" aria-live="polite">No external search has run.</p>
@@ -72,7 +65,18 @@
               </select>
               <button type="button" class="quiet" id="refine">Change in chat</button>
             </div>
-            <div id="live-results" class="offer-list" aria-label="Live catalog comparison"></div>
+            <div id="live-results" class="offer-list" aria-label="Catalog and local quote comparison"></div>
+            <details id="quote-entry" class="other-sources" hidden>
+              <summary>Compare a merchant quote you found</summary>
+              <p class="muted">Enter only listing details. Quotes stay in this tab. Leave unlisted terms blank.</p>
+              <form id="quote-form" autocomplete="off">
+                <label for="quote-target">Requested item</label>
+                <select id="quote-target"></select>
+                <div id="quote-fields" class="quote-fields"></div>
+                <button type="submit" class="secondary">Add quote to comparison</button>
+                <p id="quote-feedback" class="muted" role="status"></p>
+              </form>
+            </details>
             <div id="other-sources" class="other-sources">
               <p class="muted">Open a separate search on Google or eBay. Clicking shares the item query with that site.</p>
               <div class="actions">
@@ -144,7 +148,7 @@
       </div>
     </section>
     <footer class="foot">
-      <span>Live catalog comparison</span>
+      <span>Transaction comparison</span>
       <details>
         <summary>Session &amp; privacy</summary>
         <p>Chats expire after 30 minutes and clear on cancel, reload or page exit. Only a short-lived reference is kept in this tab for the return from FormSubmit.</p>

@@ -53,6 +53,8 @@ def cleared(page):
     expect(page.locator("#reference")).to_be_hidden()
     expect(page.locator("#live-results .offer-card")).to_have_count(0)
     expect(page.locator("#messages")).to_be_empty()
+    expect(page.locator("#route-preview")).to_be_empty()
+    expect(page.locator("#quote-entry")).to_be_hidden()
     expect(page.locator("#ranking-tools")).to_be_hidden()
 
 
@@ -105,9 +107,14 @@ def claim_games(page):
     brief(page, "Find free PC games in Seattle, United States under USD 1 just comparing.")
     search(page, traffic)
     claims = page.locator(".offer-card[data-provider=gamerpower]")
-    assert claims.count() >= 1
-    expect(claims.first.locator(".offer-price")).to_contain_text("Free claim listed")
-    assert urlparse(claims.first.locator("a.offer-link").get_attribute("href")).hostname == "www.gamerpower.com"
+    if claims.count():
+        expect(page.get_by_role("heading", name="Free claims", exact=True)).to_be_visible()
+        expect(claims.first.locator(".offer-price")).to_contain_text("Free claim listed")
+        assert urlparse(claims.first.locator("a.offer-link").get_attribute("href")).hostname == "www.gamerpower.com"
+    else:
+        # Provider activity changes. Successful zero-claim samples still prove the browser read.
+        replies = [request.response() for request in traffic if urlparse(request.url).hostname == "www.gamerpower.com"]
+        assert any(reply and reply.status in (200, 201) and isinstance(reply.json(), list) for reply in replies)
     expect(page.locator("#live-status")).to_contain_text("CheapShark ")
     expect(page.locator("#live-status")).to_contain_text("GamerPower ")
     print("GIVEAWAY_CARDS", claims.count())
@@ -127,7 +134,7 @@ def local_services(page):
     cards = page.locator(".offer-card[data-provider=livingsocial]")
     assert cards.count() >= 2
     expect(cards.first.locator(".offer-price")).to_contain_text("From USD")
-    expect(cards.first).to_contain_text("deadline unverified")
+    expect(cards.first).to_contain_text("Unknown — Appointment deadline")
     print("LOCAL_CARDS", cards.count(), cards.first.locator(".offer-price").inner_text())
     page.locator("#handoff").click()
     expect(page.locator("#sharing")).to_be_visible()
@@ -136,20 +143,69 @@ def local_services(page):
     print("LOCAL_AND_MANUAL_HANDOFF_OK")
 
 
+def goods_and_edit(page):
+    traffic = source_requests(page)
+    brief(page, "Find iPhone 15 128 GB + USB-C charger + oat milk with delivery in Austin, United States under USD 800 just comparing.")
+    route = page.locator("#route-preview")
+    expect(route).to_contain_text("Electronics · iPhone 15 128 GB")
+    expect(route).to_contain_text("Verify compatibility with iphone 15")
+    expect(route).to_contain_text("Everyday essentials · oat milk")
+    expect(route).to_contain_text("Delivery required")
+    expect(page.locator("#live-search")).to_be_hidden()
+    expect(page.locator("#live-status")).to_contain_text("No sufficient live quotes")
+    expect(page.locator("#live-results .offer-card")).to_have_count(0)
+    page.locator("#quote-entry summary").click()
+    quote_form = page.locator("#quote-form")
+    expect(quote_form.get_by_text("Manufacturer model number", exact=False)).to_be_visible()
+    page.locator("#quote-target").select_option("2")
+    expect(quote_form.get_by_text("Net content per piece", exact=True)).to_be_visible()
+    page.get_by_role("button", name="Edit maximum budget").click()
+    page.locator("#message").fill("USD 700")
+    page.locator("#send").click()
+    expect(page.locator("#summary")).to_contain_text("USD 700")
+    page.get_by_role("button", name="Edit item / service").click()
+    page.locator("#message").fill("Oat milk + delivery")
+    page.locator("#send").click()
+    expect(route).not_to_contain_text("Electronics")
+    expect(route).to_contain_text("Everyday essentials")
+    expect(page.locator("#live-search")).to_be_hidden()
+    assert not traffic, "Blocked modules sent a provider request"
+    assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+    cleared(page)
+    print("GOODS_ROUTE_OPTIONS_EDIT_NO_NETWORK_AND_CLEAR_OK")
+
+
+def mixed_live(page):
+    traffic = source_requests(page)
+    brief(page, "Find oat milk + massage in Austin, United States under USD 180 just comparing.")
+    expect(page.locator("#route-preview")).to_contain_text("Everyday essentials")
+    expect(page.locator("#route-preview")).to_contain_text("Local services")
+    search(page, traffic)
+    expect(page.locator('[data-module="consumables"]')).to_contain_text("No sufficient live quotes")
+    expect(page.locator('[data-module="services"] .offer-card').first).to_be_visible()
+    expect(page.locator("#live-results")).to_contain_text("Combined budget fit is unverified")
+    assert len(traffic) == 1 and "oat" not in traffic[0].url
+    cleared(page)
+    print("MIXED_ROUTE_ISOLATION_OK")
+
+
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(channel="chrome", args=["--no-sandbox"])
     failures = []
-    for name, case in [("desktop", paid_games), ("mobile", claim_games), ("local", local_services)]:
+    cases = [("desktop", paid_games), ("mobile", claim_games), ("local", local_services),
+             ("goods-desktop", goods_and_edit), ("goods-mobile", goods_and_edit), ("mixed-mobile", mixed_live)]
+    for name, case in cases:
         if os.getenv("MATCH_OS_CASE") not in (None, name):
             continue
-        options = playwright.devices["iPhone 13"] if name == "mobile" else {"viewport": {"width": 1280, "height": 900}}
-        if name == "mobile":
+        options = playwright.devices["iPhone 13"] if "mobile" in name else {"viewport": {"width": 1280, "height": 900}}
+        if "mobile" in name:
             options = {key: value for key, value in options.items() if key not in ("default_browser_type", "user_agent")}
         # Use the descriptive User-Agent documented by CheapShark, with automation identified.
         options["user_agent"] = "MATCH-OS-Catalog-QA/3.0 (automated Chrome; https://yl124915300-dot.github.io/match-os/)"
         context = browser.new_context(**options)
         page = context.new_page()
-        page.on("pageerror", lambda error: print("PAGE_ERROR", error))
+        page_errors = []
+        page.on("pageerror", lambda error: page_errors.append(str(error)))
         page.on("response", lambda response: print("SOURCE_HTTP", urlparse(response.url).hostname, response.status)
                 if urlparse(response.url).hostname in SOURCE_HOSTS else None)
         page.on("requestfailed", lambda request: print("SOURCE_FAILED", urlparse(request.url).hostname, request.failure)
@@ -174,6 +230,7 @@ with sync_playwright() as playwright:
         cdp.send("Network.enable")
         try:
             case(page)
+            assert not page_errors, page_errors
         except Exception as error:
             print("CASE_FAILED", name, error)
             if name == "desktop":

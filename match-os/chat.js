@@ -1,6 +1,7 @@
-import { compareGroups, profiles, rank, readPreference, searchPlan } from './decision.js?v=3';
-import { catalogNames, searchCatalogs } from './catalogs.js?v=3';
-import { renderComparison } from './results.js?v=3';
+import { profiles, readPreference } from './decision.js?v=4';
+import { catalogNames, searchCatalogs } from './catalogs.js?v=4';
+import { renderIntent } from './results.js?v=4';
+import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=4';
 
 (() => {
   'use strict';
@@ -32,6 +33,7 @@ import { renderComparison } from './results.js?v=3';
   }
 
   const form = byId('demand');
+  const quoteForm = byId('quote-form');
   const input = byId('message');
   const feedback = byId('feedback');
   const messages = byId('messages');
@@ -39,7 +41,7 @@ import { renderComparison } from './results.js?v=3';
   const website = 'https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new';
 
   const fields = [
-    ['item', 'Item / service', 'What product or service should we look for? Include the model or size if you know it.'],
+    ['item', 'Item / service', 'What products or services should we look for? Include a product type, model or service name.'],
     ['budget', 'Maximum budget', 'What is the most you want to spend? Include the currency, for example “USD 800”.'],
     ['place', 'Market', 'Which city and country or region should we look in? For example, “Austin, United States”.'],
     ['when', 'Timing', 'When do you need it? For example, “by Friday”, “within a week” or “just comparing”.'],
@@ -63,6 +65,7 @@ import { renderComparison } from './results.js?v=3';
     canada: 'CA', australia: 'AU', singapore: 'SG', germany: 'DE', france: 'FR',
     india: 'IN', 'hong kong': 'HK', 'south korea': 'KR', 'new zealand': 'NZ',
   };
+  const appointmentTime = /\b\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:\d{2})(?![\d:])/iu;
   const timePattern = /\b(?:by\s+|on\s+|within\s+|in\s+)?(?:today|tomorrow|tonight|asap|(?:this|next)\s+(?:week(?:end)?|month|monday|tuesday|wednesday|thursday|friday|saturday|sunday)|monday|tuesday|wednesday|thursday|friday|saturday|sunday|(?:\d{1,3}|a|one|two|three|four|five|six|seven)\s+(?:business\s+)?(?:hours?|days?|weeks?|months?)|[0-9]{4}-[0-9]{2}-[0-9]{2}|just comparing|recurring)\b|(?:在)?(?:今天|明天|今晚|本周|下周|尽快|先比较|[0-9一二三四五六七八九十]+(?:天|周|个月)内)(?:前|送到|到货)?/iu;
   const sensitive = /@|https?:\/\/|www\.|(?:\+?[0-9][\s().-]*){10,}|\b\d{3}-\d{2}-\d{4}\b|\b\d{1,6}\s+[\p{L}][\p{L}\s.]{1,32}\s+(?:street|st\.?|road|rd\.?|avenue|ave\.?|lane|ln\.?|drive|dr\.?|boulevard|blvd\.?)\b|(?:路|街|巷)\s*[0-9]+号/iu;
   const clean = (value) => value.trim().replace(/^[\s,;:，。；：]+|[\s,;:，。；：!?！？]+$/gu, '').trim();
@@ -114,8 +117,8 @@ import { renderComparison } from './results.js?v=3';
       remainder = remainder.replace(budget.match[0], ' ');
     }
 
-    const time = timePattern.exec(remainder);
-    if (time) {
+    const time = appointmentTime.exec(remainder) || timePattern.exec(remainder);
+    if (time && !/^(?:\d+|one|two|three|four)\s+hours?$/iu.test(time[0])) {
       brief.when = clean(time[0]);
       remainder = remainder.replace(time[0], ' ');
     }
@@ -129,7 +132,8 @@ import { renderComparison } from './results.js?v=3';
       }
     }
 
-    const item = readItem(clean(remainder).replace(/\s+(?:delivered|delivery|shipped|shipping|available)\s*$/iu, ''));
+    const itemText = clean(remainder).replace(/\s+available\s*$/iu, '');
+    const item = readItem(itemText.replace(/\s+(?:delivered|shipped)\s*$/iu, ' with delivery'));
     if (item) brief.item = item;
     return brief;
   }
@@ -170,7 +174,8 @@ import { renderComparison } from './results.js?v=3';
     }
     byId('stage-compare').removeAttribute('aria-current');
     byId('stage-build').setAttribute('aria-current', 'step');
-    byId('catalog-route').value = 'auto';
+    byId('route-preview').replaceChildren();
+    resetQuoteEntry();
     byId('rank-profile').value = 'balanced';
     byId('catalog-consent').textContent = '';
     byId('welcome').hidden = Boolean(reason);
@@ -199,7 +204,7 @@ import { renderComparison } from './results.js?v=3';
     const entropy = crypto.getRandomValues(new Uint8Array(10));
     const ref = 'MO-' + Array.from(entropy, (byte) => byte.toString(16).padStart(2, '0')).join('').toUpperCase();
     const expires = Date.now() + lifetime;
-    session = { ref, expires, brief, source, field: null, submitting: false };
+    session = { ref, expires, brief, source, field: null, submitting: false, quotes: new Map(), nextQuote: 0 };
     byId('welcome').hidden = true;
     byId('reference').hidden = false;
     byId('close').hidden = false;
@@ -234,7 +239,14 @@ import { renderComparison } from './results.js?v=3';
     byId('review').hidden = false;
     const { brief } = session;
     prepareOtherSources(brief);
+    session.intents = routeRequest(brief);
+    prepareQuoteEntry();
+    if (session.intents.some(intent => !intent.module) && session.clarifiedItem !== brief.item) {
+      session.clarifiedItem = brief.item;
+      appendMessage('assistant', 'What kind of product or service is the unclear item? Use Edit item / service to add a category or model.');
+    }
     updateSearchConsent();
+    showComparison();
     const values = [
       brief.item,
       brief.budget.currency + ' ' + brief.budget.amount,
@@ -256,6 +268,8 @@ import { renderComparison } from './results.js?v=3';
       edit.addEventListener('click', () => {
         if (!remaining() || closing || session.submitting) return;
         clearLive();
+        if (key === 'item' || key === 'place') session.quotes.clear();
+        resetQuoteEntry();
         form.reset();
         byId('public-option').open = false;
         byId('payload').replaceChildren();
@@ -342,6 +356,7 @@ import { renderComparison } from './results.js?v=3';
     setFeedback('');
     appendMessage('buyer', value);
     session.brief[session.field] = reply;
+    if (session.field === 'details') byId('rank-profile').value = readPreference(reply) || 'balanced';
     ask();
   }
 
@@ -376,7 +391,7 @@ import { renderComparison } from './results.js?v=3';
     session?.liveController?.abort();
     if (session) {
       session.liveController = null;
-      session.comparison = null;
+      session.catalogResults = null;
       if (session.refining) byId('chat-form').hidden = true;
       session.refining = false;
     }
@@ -386,52 +401,153 @@ import { renderComparison } from './results.js?v=3';
     byId('live-search').disabled = false;
   }
 
-  function updateSearchConsent() {
-    const plan = searchPlan(session.brief, byId('catalog-route').value);
-    const button = byId('live-search');
-    button.disabled = !plan.providers.length;
-    const notice = byId('catalog-consent');
-    if (plan.category === 'games' && plan.providers.length) {
-      notice.textContent = (plan.browseFreeGames ? 'CheapShark receives a general free PC game query.' :
-        'CheapShark receives this title: “' + plan.title + '”.') +
-        ' GamerPower receives a general giveaway request. Budget, city, timing and must-haves stay in this tab.';
-    } else if (plan.providers.length) {
-      const place = session.brief.place;
-      notice.textContent = 'LivingSocial / Groupon receives “' + plan.title + '” and “' + place.city + ', ' +
-        place.region + '” for catalog matching. Budget, timing and must-haves stay in this tab.';
-    } else {
-      notice.textContent = plan.category === 'games' ? 'Digital PC games currently use the US catalog only.' :
-        'Public local catalogs are available in the US and Canada. Manual comparison is available below.';
+  function resetQuoteEntry() {
+    quoteForm.reset();
+    byId('quote-target').replaceChildren();
+    byId('quote-fields').replaceChildren();
+    byId('quote-entry').open = false;
+    byId('quote-entry').hidden = true;
+    byId('quote-feedback').textContent = '';
+  }
+
+  function prepareQuoteEntry() {
+    const applicable = session.intents.filter(intent => intent.module && intent.category !== 'games');
+    resetQuoteEntry();
+    const select = byId('quote-target');
+    for (const intent of applicable) {
+      select.add(new Option(intent.item, intent.id));
+    }
+    byId('quote-entry').hidden = !applicable.length;
+    if (applicable.length) prepareQuoteFields();
+  }
+
+  function prepareQuoteFields() {
+    const intent = session.intents.find(item => item.id === byId('quote-target').value);
+    const labels = [...quoteFields, ...intent.module.schema].map(([name, label, placeholder]) => {
+      const field = document.createElement('input');
+      field.name = name;
+      field.maxLength = name === 'url' ? 450 : 160;
+      field.placeholder = placeholder || '';
+      const wrapper = document.createElement('label');
+      wrapper.append(label, field);
+      return wrapper;
+    });
+    byId('quote-fields').replaceChildren(...labels);
+    byId('quote-feedback').textContent = '';
+  }
+
+  function saveQuote(event) {
+    event.preventDefault();
+    if (!remaining() || closing || session.field || session.submitting) return;
+    const intent = session.intents.find(item => item.id === byId('quote-target').value);
+    if (!intent) return;
+    const raw = Object.fromEntries(new FormData(quoteForm));
+    const feedback = byId('quote-feedback');
+    if (Object.entries(raw).some(([name, value]) => name !== 'url' && sensitive.test(value))) {
+      feedback.textContent = 'Use public listing details without contact information.';
+      return;
+    }
+    try {
+      const quote = localQuote(intent, raw, session.nextQuote++);
+      const current = session.quotes.get(intent.id) || [];
+      const previous = current.findIndex(row => row.merchant === quote.merchant && row.title === quote.title &&
+        row.sourceUrl === quote.sourceUrl && row.price.currency === quote.price.currency);
+      if (current.length >= 12 && previous < 0) {
+        feedback.textContent = 'This item has 12 quotes. Edit the item or start another comparison to clear them.';
+        return;
+      }
+      const updated = [...current];
+      if (previous < 0) updated.push(quote);
+      else updated[previous] = quote;
+      session.quotes.set(intent.id, updated);
+      prepareQuoteFields();
+      feedback.textContent = previous < 0 ? 'Quote added to this tab’s comparison.' : 'Existing quote updated with the new observation.';
+      showComparison();
+    } catch (error) {
+      feedback.textContent = error.message;
     }
   }
 
+  function updateSearchConsent() {
+    const { intents, brief } = session;
+    const preview = byId('route-preview');
+    preview.replaceChildren();
+    const requests = [];
+    for (const intent of intents) {
+      const line = document.createElement('p');
+      const heading = (intent.module?.label || 'Category unclear') + ' · ' + intent.item;
+      const limitations = Object.values(providers).filter(provider => provider.mode && provider.module === intent.category)
+        .map(provider => provider.label + ' (' + provider.capability + ')');
+      const coverage = intent.providers.length ? intent.providers.map(provider => catalogNames[provider]).join(' and ') :
+        intent.module ? 'No eligible live source in this market' : 'Edit the item and give its category or service type.';
+      line.textContent = heading + ' — ' + coverage + (limitations.length ? '. ' + limitations.join(' · ') : '') +
+        (intent.dependency ? '. ' + intent.dependency : '') + (intent.requiresDelivery ? '. Delivery required.' : '');
+      preview.append(line);
+      if (intent.providers.includes('cheapshark')) {
+        requests.push(intent.browseFreeGames ? 'CheapShark receives a general free PC game query.' :
+          'CheapShark receives this title: “' + intent.title + '”.');
+        requests.push('GamerPower receives a general giveaway query.');
+      }
+      if (intent.providers.includes('livingsocial')) {
+        requests.push('LivingSocial / Groupon receives “' + intent.title + '” and “' + brief.place.city + ', ' +
+          brief.place.region + '”.');
+      }
+    }
+    byId('live-search').hidden = !requests.length;
+    byId('live-search').disabled = !requests.length;
+    byId('catalog-consent').textContent = requests.length ? requests.join(' ') +
+      ' Budget, timing, private details and entered quotes stay in this tab.' : '';
+  }
+
   function showComparison() {
-    const { plan, results } = session.comparison;
+    const output = byId('live-results');
     const preference = byId('rank-profile').value;
-    const rows = rank(results.flatMap(result => result.offers), session.brief, plan, preference);
-    const groups = compareGroups(rows, plan);
-    renderComparison(byId('live-results'), groups, rows, preference);
-    const coverage = results.map(result => catalogNames[result.provider] + ' ' +
-      (result.status === 'ok' ? result.offers.length + ' listings' : result.status)).join(' · ');
-    const shown = rows.filter(row => !row.problems.length).length;
+    const { intents, catalogResults, quotes } = session;
+    output.replaceChildren();
+    let candidates = 0;
+    const comparisons = [];
+    for (const intent of intents) {
+      const results = catalogResults?.get(intent.id) || [];
+      if (intent.providers.length && !catalogResults && !quotes.has(intent.id)) continue;
+      const offers = results.flatMap(result => result.offers.map(offer => liveOffer(intent, offer)));
+      const comparison = evaluateIntent(intent, [...offers, ...(quotes.get(intent.id) || [])], preference);
+      comparisons.push(comparison);
+      candidates += comparison.rows.filter(row => !row.problems.length).length;
+      renderIntent(output, intent, comparison, preference);
+    }
+    if (intents.length > 1 && comparisons.length === intents.length) {
+      const combined = combinedCost(comparisons, session.brief.budget);
+      const summary = document.createElement('p');
+      summary.className = 'muted';
+      summary.textContent = combined.status === 'unknown' ? 'Combined budget fit is unverified. Each item needs an eligible final total in the budget currency.' :
+        'Combined cost of the lowest complete quotes: ' + combined.currency + ' ' + combined.sum +
+        (combined.status === 'pass' ? ' · within the shared budget.' : ' · above the shared budget.');
+      output.prepend(summary);
+    }
+    const coverage = catalogResults && [...catalogResults].flatMap(([id, results]) => results.map(result => {
+      const status = result.status === 'ok' ? result.offers.length + ' listings' : result.status;
+      return intents.find(item => item.id === id).item + ' · ' + catalogNames[result.provider] + ' ' + status;
+    }));
     const status = byId('live-status');
-    status.textContent = coverage + '. ' + (shown ? shown + ' relevant candidates before the display limit.' :
-      'No eligible candidates in the available catalog results. You can revise the request or use manual comparison.');
-    byId('ranking-tools').hidden = shown === 0;
+    if (coverage?.length) status.textContent = coverage.join(' · ') + '. ' +
+      (candidates ? candidates + ' candidates before the display limit.' : 'No eligible candidates. Manual comparison is available below.');
+    else if (quotes.size) status.textContent = 'Comparing quotes entered in this tab.';
+    else if (intents.every(intent => !intent.providers.length)) status.textContent = 'No sufficient live quotes. Manual comparison is available below.';
+    else status.textContent = 'No external search has run.';
+    byId('ranking-tools').hidden = candidates === 0;
   }
 
   async function searchLiveOffers() {
     if (!remaining() || closing || session.submitting || byId('review').hidden || session.field) return;
-    const { brief, ref } = session;
-    const plan = searchPlan(brief, byId('catalog-route').value);
-    if (!plan.providers.length) return;
-    clearLive();
+    const { intents, brief, ref } = session;
+    const live = intents.filter(intent => intent.providers.length);
+    if (!live.length || session.liveController) return;
     const status = byId('live-status');
     if (!navigator.onLine) {
       status.textContent = 'Offline. Reconnect to search public catalogs.';
       return;
     }
-    if ([plan.title, brief.place.city, brief.place.region].some(value => sensitive.test(value))) {
+    if ([...live.map(intent => intent.title), brief.place.city, brief.place.region].some(value => sensitive.test(value))) {
       status.textContent = 'Edit the request to remove private or invalid text before searching.';
       return;
     }
@@ -439,12 +555,12 @@ import { renderComparison } from './results.js?v=3';
     session.liveController = controller;
     const seq = ++liveSequence;
     byId('live-search').disabled = true;
-    byId('rank-profile').value = readPreference(brief.details) || 'balanced';
-    status.textContent = 'Searching ' + plan.providers.map(provider => catalogNames[provider]).join(' and ') + '…';
+    status.textContent = 'Searching the authorized catalogs…';
     try {
-      const results = await searchCatalogs(plan, brief, controller.signal);
+      const results = await Promise.all(live.map(async intent =>
+        [intent.id, await searchCatalogs(intent, brief, controller.signal)]));
       if (seq !== liveSequence || session?.ref !== ref || !remaining()) return;
-      session.comparison = { plan, results };
+      session.catalogResults = new Map(results);
       showComparison();
       byId('stage-build').removeAttribute('aria-current');
       byId('stage-compare').setAttribute('aria-current', 'step');
@@ -508,21 +624,18 @@ import { renderComparison } from './results.js?v=3';
   });
   byId('skip').addEventListener('click', () => send('No preference'));
   byId('example').addEventListener('click', () => {
-    input.value = 'Find PC game: LEGO Batman in Seattle, United States under USD 30, just comparing.';
+    input.value = 'Find iPhone 15 128 GB + USB-C charger in Seattle, United States under USD 800, just comparing.';
     input.focus();
   });
   byId('handoff').addEventListener('click', showSharing);
   byId('live-search').addEventListener('click', searchLiveOffers);
-  byId('catalog-route').addEventListener('change', () => {
-    if (!remaining() || closing || session.submitting) return;
-    clearLive();
-    updateSearchConsent();
-  });
+  quoteForm.addEventListener('submit', saveQuote);
+  byId('quote-target').addEventListener('change', prepareQuoteFields);
   byId('rank-profile').addEventListener('change', () => {
-    if (remaining() && !closing && session.comparison) showComparison();
+    if (remaining() && !closing && (session.catalogResults || session.quotes.size)) showComparison();
   });
   byId('refine').addEventListener('click', () => {
-    if (!remaining() || closing || !session.comparison || session.refining || session.submitting) return;
+    if (!remaining() || closing || !(session.catalogResults || session.quotes.size) || session.refining || session.submitting) return;
     session.refining = true;
     appendMessage('assistant', 'What matters more: price, exact match, evidence, reviews, speed or returns?');
     byId('chat-form').hidden = false;

@@ -3,6 +3,7 @@ import test from 'node:test';
 import { compareGroups, rank, searchPlan, totalCost } from '../match-os/decision.js';
 import { gameEntry, giveawayEntries, localEntries } from '../match-os/catalogs.js';
 
+// Synthetic provider payloads exercise parsing and ranking only.
 const checkedAt = '2026-11-15T08:00:00.000Z';
 const now = Date.parse(checkedAt);
 const evidence = { checkedAt, source: 'https://www.cheapshark.com/api/1.0/games?id=42' };

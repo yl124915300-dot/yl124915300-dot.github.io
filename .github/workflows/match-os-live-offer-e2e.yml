@@ -5,7 +5,8 @@ on:
       - 'match-os/*.html'
       - 'match-os/*.js'
       - 'match-os/*.css'
-      - 'match-os-probe/decision.test.mjs'
+      - 'match-os/modules/*.js'
+      - 'match-os-probe/*.test.mjs'
       - 'match-os-probe/browser_compare.py'
       - '.github/workflows/match-os-live-offer-e2e.yml'
   workflow_dispatch:
@@ -21,7 +22,7 @@ jobs:
         with:
           node-version: '24'
       - name: Check deterministic comparison rules
-        run: node --test match-os-probe/decision.test.mjs
+        run: node --test match-os-probe/*.test.mjs
   browser:
     needs: engine
     runs-on: ubuntu-24.04
@@ -42,7 +43,7 @@ jobs:
           from pathlib import Path
           from urllib.request import urlopen
 
-          names = ['index.html', 'received.html', 'chat.js', 'chat.css', 'catalogs.js', 'decision.js', 'results.js']
+          names = [file.relative_to('match-os').as_posix() for glob in ('*.html', '*.css', '**/*.js') for file in Path('match-os').glob(glob)]
           expected = {name: Path('match-os', name).read_bytes() for name in names}
           base = 'https://yl124915300-dot.github.io/match-os/'
           for attempt in range(26):
@@ -61,7 +62,7 @@ jobs:
           else:
               raise SystemExit('Published Pages revision did not match this checkout')
           PY
-      - name: Verify real catalog comparisons on desktop and mobile-sized Chrome
+      - name: Verify all four routes and real catalog reads in desktop and mobile-sized Chrome
         env:
           PYTHONUNBUFFERED: '1'
         run: python3 match-os-probe/browser_compare.py

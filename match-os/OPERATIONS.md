@@ -152,7 +152,7 @@
 - E2E 输出依次为 `CHAT_REVIEW_OK`、`OTHER_SOURCE_LINK_OK True`、`LIVE_OFFER_CARD_COUNT 5`、`LIVE_OFFER_PRICE_AND_OFFICIAL_LINKS_OK`、`SESSION_CANCEL_CLEARS_OFFERS_OK`。这是云端Chrome桌面环境的读目录功能通过，非真实消费者试用；移动端本次没有重复实际触控验证。
 - **严格商业口径**：已完成一个可用的跨平台交易前查询动作，但没有实现实时AI自主代理、跨平台统一下单、商家订单核实、PayPal服务费自动扣款、端到端加密或服务器侧数据TTL销毁。真人可联络买家0、商家实际成交0、PayPal净服务费到账USD0仍是已知基线。下个开发动作须由真实用户成功/失败反馈或可核验订单证据驱动。
 
-## 2026-11-15 跨平台决策引擎
+## 2026-11-15 跨平台决策引擎（历史）
 
 - **试点范围**：同一个聊天入口运行两个路由。美国 PC 数字游戏由 [CheapShark](https://apidocs.cheapshark.com/) 提供多商家美元标价，由 [GamerPower](https://www.gamerpower.com/api-read) 提供免费领取候选。LivingSocial/Groupon 是已有的一个目录，保留美国、加拿大入口，当前重测美国 Austin。非覆盖地区回落到人工比较。报价目录可访问并不证明买家账户的地区资格、库存、预约名额或履约。
 - **接口权限**：CheapShark 公开文档许可网站使用价格，要求报价链接经 CheapShark 跳转并禁止另挂自己的联属链接；浏览器直连，限制单次查找数量，不自动打开跳转地址。GamerPower 明示可免费商用并要求可点击归属，结果链接到 GamerPower 原始记录，`worth` 不用作价格。LivingSocial/Groupon 仅使用已经过浏览器 CORS 验证的公开 GET，无 Partner key、购物车或 CJ 归因。这三个公开端点的只读探测均返回 200 并允许原站跨域。各目录可独立超时、限流或失败。
@@ -169,3 +169,20 @@
 - **云端桌面 Chrome**：8 项自动规则测试通过。浏览器从 CheapShark 显示 LEGO Batman 同一目录版本的 Fanatical USD 2.59、GameBillet USD 16.54、WinGameStore USD 19.99，历史低价 USD 2.28。切换匹配优先后权重和排序分变化，无第二次目录请求。Austin 按摩由 LivingSocial/Groupon 返回 11 条可用的目录记录，筛选出 10 个候选并显示 5 张卡，首张起价 USD 56.70，最终总价、服务选项的价格和预约时段待核验。FormSubmit 只打开分享审核。
 - **云端手机尺寸 Chrome**：iPhone 13 屏幕与触控模拟，CheapShark 和 GamerPower 均返回 HTTP 200，显示 4 张 GamerPower 免费领取卡；取消后对话、结果和会话编号清空。本地 Chrome 另验证取消挂起请求、30 分钟到期、FrameFind 交接和一次性表单回执。未进行实体手机测试。
 - **兼容性**：较早的云端 Chromium 请求曾收到 CheapShark HTTP 400 且响应缺少 CORS 许可。验收客户端按 CheapShark 公开文档使用明确标识自动化 Chrome 的应用 User-Agent 后通过。普通本机 Chrome 在原站也已直连读到实时报价；网页没有修改买家的浏览器标识。测试未提交购买、表单、订单或付款。
+
+## 2026-11-15 多品类交易决策
+
+本节覆盖上方历史章节中的开发顺序与功能范围。原 GitHub Pages 入口、30 分钟本地会话、FormSubmit 授权交接和 FrameFind 入口继续使用。开发优先验证多品类交易决策，商业试运行沿用独立的成交与收款证据。已核验真人买家 0、成交 0、PayPal 服务费净到账 USD 0。MATCH OS 专属 PayPal Live USD 1 成功服务费入口关闭。获客、冷邮件、重复支持工单暂停。
+
+| 模块 | 横向比较 | 纵向比较 | 已启用来源 |
+| --- | --- | --- | --- |
+| 数码电子 | 品牌、精确型号、型号编号（披露时）、配置、容量、地区版、成色与充电规格能对齐时分组。单独核对保修、到货日期、税运费。 | 同系列代际、配置与容量。组合请求的充电器、配件同时检查目标型号兼容性。硬冲突单列。 | 用户在当前标签页录入的带出处报价。暂无经核验可调用的商家实时目录。 |
+| 日用品与复购 | 同品牌、品类、配方、件数、包装和换算后的单件净含量。重量、体积、件数分别处理。 | 同品类不同包装显示每公斤、升或件标价。按用量估算周期支出、起订花费和补货间隔，价格优先时参考同口径单位成本；检查订阅、效期及配送门槛。税费、配送或起订数量缺失时保留未知。 | 用户录入。暂无经核验可调用的实时多商家报价。 |
+| 本地服务 | 同项目、市场与城市、覆盖范围、时长、人数及选项内容。只有具体选项有固定价才可分组。 | 相邻服务、不同人数、时长和套餐，支持比较取消、距离和有证据的预约时间。公开目录常仅披露起价和多个选项，预约与选项最终价待确认。 | [LivingSocial / Groupon 公共 Agent 目录](https://agent.livingsocial.com/for-agents) 是同一来源；当前路由只在美国和加拿大启用，浏览器验收样例为美国。也可录入自有报价。 |
+| 数字 PC 游戏 | 保留 CheapShark 游戏 ID 与版本、跨商家组及活跃商家跳转。 | 保留同商家、同币种不同版本的价差和可用历史低价；免费领取单独显示。 | 美国 [CheapShark](https://apidocs.cheapshark.com/) 多商家标价、[GamerPower](https://www.gamerpower.com/api-read) 免费领取。 |
+
+- `transaction.js` 登记模块和提供商能力，并按每个意图区分预算上限、硬约束、软约束、证据和来源包。单条请求可组合多项，配送可作为商品要求；组合预算只有各项在预算币种内、硬约束已验证且有完整价格时才计算。无法安全归属给某项的共用附加条件保持待核实。自然语言采用可审查的规则，未覆盖的品类或条件在聊天中提示补充。
+- 按钮先列出接收方及将发送的字段，点击后才向已启用来源发出 GET。游戏标题只发给 CheapShark；GamerPower 收到通用领取查询；服务目录收到项目、城市和国家。预算、预约日期、录入报价、邮箱、会话号和原始聊天不随目录请求发送。更改权重在本地重排。编辑商品或市场会清除与旧需求关联的本地报价；取消、离页或超时会中止目录请求并清空页面内存。
+- 价格展示区分商家标价、起价、已知收费、最终价和缺失数据。用户录入内容标识来源级证据，保留采样日期，不视为系统核验的库存或新报价。币种独立展示。优先级由规则权重计算，缺证扣分，不能当成交概率。第三方接收方自行管理保留；HTTPS 用于传输，当前没有服务端会话删除或端到端加密。
+- 待接来源：[Best Buy](https://bestbuyapis.github.io/api-documentation/) 需要 API key 和安全的接入方式；[eBay Browse](https://developer.ebay.com/api-docs/buy/static/buy-requirements.html) 需要应用 OAuth 与生产权限；[Kroger Developer](https://developer.kroger.com/) 仍待验证项目凭证、店点和可用价格权限；[Open Prices](https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/tutorials/product-prices/) 收集标有日期的价签及小票，暂未接入，无法据此确认实时结账价。Google/eBay 出站搜索链接不参与实时排名。未启用旅行实时查询。
+- 验收入口：[MATCH OS 发布前后一致性检查](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-intake-smoke.yml)、[云端 Chrome 和规则测试](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-live-offer-e2e.yml)。`node --test match-os-probe/*.test.mjs` 只使用明确标记的合成单元数据；本地 Chrome 已通过六条桌面和 iPhone 13 尺寸流程，三个目录实际返回 HTTP 200。发布工作流再次对公开域名核对源码并复测。测试不提交人工表单、创建预约、订单或支付。
