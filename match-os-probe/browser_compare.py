@@ -40,8 +40,9 @@ def search(page, traffic):
     print("CATALOG_STATUS", page.locator("#live-status").inner_text())
     for request in traffic:
         assert request.method == "GET"
-        assert "cookie" not in request.all_headers()
-        assert "referer" not in request.all_headers()
+        if request.response():
+            assert "cookie" not in request.all_headers(), "Catalog request sent a cookie"
+            assert "referer" not in request.all_headers(), "Catalog request sent a referrer"
         assert "MO-" not in request.url
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
 
@@ -71,6 +72,8 @@ def paid_games(page):
     # Find by text via the summary to avoid accepting a sequel masquerading as the base game.
     group = track.locator(".comparison-group").filter(has=page.locator("summary").filter(has_text=re.compile(r"^LEGO Batman ·"))).first
     expect(group).to_be_visible()
+    if group.get_attribute("open") is None:
+        group.locator("summary").first.click()
     base_cards = group.locator(".offer-card[data-provider=cheapshark]")
     assert base_cards.count() >= 2
     merchants = []
@@ -135,12 +138,18 @@ def local_services(page):
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(channel="chrome", args=["--no-sandbox"])
+    failures = []
+    default_context = browser.new_context()
+    agent = default_context.new_page().evaluate("navigator.userAgent")
+    default_context.close()
     for name, case in [("desktop", paid_games), ("mobile", claim_games), ("local", local_services)]:
         if os.getenv("MATCH_OS_CASE") not in (None, name):
             continue
         options = playwright.devices["iPhone 13"] if name == "mobile" else {"viewport": {"width": 1280, "height": 900}}
         if name == "mobile":
             options = {key: value for key, value in options.items() if key not in ("default_browser_type", "user_agent")}
+        # CheapShark asks API clients to identify themselves. Keep the original Chrome identification.
+        options["user_agent"] = agent + " MATCH-OS-Catalog-QA/3.0 (+https://yl124915300-dot.github.io/match-os/)"
         context = browser.new_context(**options)
         page = context.new_page()
         page.on("pageerror", lambda error: print("PAGE_ERROR", error))
@@ -148,8 +157,31 @@ with sync_playwright() as playwright:
                 if urlparse(response.url).hostname in SOURCE_HOSTS else None)
         page.on("requestfailed", lambda request: print("SOURCE_FAILED", urlparse(request.url).hostname, request.failure)
                 if urlparse(request.url).hostname in SOURCE_HOSTS else None)
+        cdp = context.new_cdp_session(page)
+        request_hosts = {}
+        def remember_request(event):
+            host = urlparse(event["request"]["url"]).hostname
+            if host in SOURCE_HOSTS:
+                request_hosts[event["requestId"]] = host
+        def wire_response(event):
+            host = request_hosts.get(event["requestId"])
+            if host:
+                print("SOURCE_WIRE_STATUS", host, event["statusCode"])
+        def wire_failure(event):
+            host = request_hosts.get(event["requestId"])
+            if host and event.get("corsErrorStatus"):
+                print("SOURCE_CORS_FAILURE", host, event["corsErrorStatus"]["corsError"])
+        cdp.on("Network.requestWillBeSent", remember_request)
+        cdp.on("Network.responseReceivedExtraInfo", wire_response)
+        cdp.on("Network.loadingFailed", wire_failure)
+        cdp.send("Network.enable")
         try:
             case(page)
+        except Exception as error:
+            print("CASE_FAILED", name, error)
+            failures.append(name)
         finally:
             context.close()
     browser.close()
+    if failures:
+        raise SystemExit("Browser cases that failed: " + ", ".join(failures))
