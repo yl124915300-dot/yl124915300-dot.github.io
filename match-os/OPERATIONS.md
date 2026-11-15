@@ -100,3 +100,15 @@
 - **云端实际发布证据**：[GitHub Actions 公开站点 Smoke 43685130992](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43685130992) 已从互联网核验公开 `/match-os/` 和 `/match-os/received.html` HTTP 200；两段 JS 语法检查通过，预期业务披露和表单字段存在。
 - **保持支付关闭**：未公开 PayPal 付款按钮、未创建 MATCH OS 专用官方 PayPal Live 服务费支付链接；浏览器随机引用号不受服务器签名，不能独立验证成功交易。已知 PayPal 客服确认现有个人卖家账户可接收一般境外款，但未证明 `session_id → PayPal capture_id` 的自动归因；当前仅是低摩擦人工核对的准备阶段。
 - **后续仅一个关键门槛**：在 PayPal 官方已登录收款后台，核实并创建单独的 MATCH OS 服务费商品/服务收款链接（固定 US$1、明确适用条件），保密任何 API 凭证，不复用影视或其他业务收款二维码；获得真实买家的自愿交易和正式 PayPal 交易凭证后，再考虑私有 HTTPS Live Orders/Webhook 自动化。未验证的服务费回执与实际净到账一律记为 0。
+
+## 2026-11-15 PayPal 高交易频率收款闸门：授权与扣款
+
+**已验证官方能力和账户级阻碍（不可将功能存在等同于此账户已开通）：**
+
+1. PayPal Orders v2 提供 `intent=AUTHORIZE`：用户先同意保留 US$1 授权，不立即转出钱；收到可独立核验的商家成交回执后由 MATCH OS 的**私有服务端**调用授权捕获；若会话失败则及时 void 授权。官方说明授权通常建议3天内捕获，最多29天，不能视为永续押金。参见 https://developer.paypal.com/checkout/delay-capture/ 、https://developer.paypal.com/checkout/void-authorized-payment/ 。
+2. PayPal Orders API 的 `AUTH_CAPTURE_NOT_ENABLED` 错误说明：相关商户功能可能未开通，官方要求收款人使用已经验证的商业账户。现有 PayPal 中国个人卖家收到客服一般跨境收款确认，**并不能证明 AUTHORIZE/CAPTURE Live 权限已开通**，不可直接上线自动扣款。参见 https://developer.paypal.com/serversdk/php/api-endpoints/orders/errors 。
+3. 即使授权与扣款已开通，也必须有可信商家成功事件（获授权支付/订单接口或其他独立验证），否则任何客户端“成交成功”按钮均不能触发收取 US$1；成功订单、授权订单、捕获回执、费率及实际入账均按不同事件记录，幂等防重。
+4. **最少的首次商业验证（不等待 AUTHORIZE）**：通过用户已登录 PayPal 官方后台实际创建 MATCH OS 专属、固定 US$1、商品与服务类别的收款链接；与真实买家先明确费率和成功条件，买家在已核实交易完成后**自行**支付服务费，再在 PayPal 私密交易详情按金额、状态、交易ID核验。该方式有买家成交后不再付款的商业风险；只能当首次支付需求验证，不能宣称可规模化高频自动收费。
+5. **正式高频模式门槛**：确认账户支持 Live Orders v2 授权/捕获；私有后端凭据与验证过的 Webhook；独立可信成交证据与每笔 session_id → PayPal order_id → authorization_id → capture_id；重复回调不重复扣费；取消/超时及时释放授权。若账户不支持，不能暗示已解决高频收单。
+6. **支付入口状态**：未核验到 MATCH OS 专属 Live US$1 PayPal 付款链接；尚无一位真实用户主动交易、授权、捕获或实际服务费净到账。与 Stripe 无关，且任何冷邮件、旧短剧支付链接、Groupon 分佣不构成此项目支付能力。
+
