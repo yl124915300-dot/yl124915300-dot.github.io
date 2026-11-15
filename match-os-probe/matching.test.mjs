@@ -23,6 +23,12 @@ test('social content routes use fixed topic and source without user identifiers'
   for (const entry of ['pinterest_pin', 'youtube_profile', 'instagram_profile', 'tiktok_profile']) {
     assert.deepEqual(entryContext('#entry=' + entry + '&topic=oat-milk-pack-price&user=secret&item=ignored', ''),
       { source: entry, topic: 'oat-milk-pack-price' });
+    assert.deepEqual(entryContext('', '?entry=' + entry + '&topic=oat-milk-pack-price&utm_source=ignored&user=secret'),
+      { source: entry, topic: 'oat-milk-pack-price' });
+    assert.deepEqual(entryContext('', '?entry=' + entry + '&topic=constructor&user=secret'),
+      { source: 'direct', topic: null });
+    assert.deepEqual(entryContext('#entry=unapproved&topic=oat-milk-pack-price',
+      '?entry=' + entry + '&topic=oat-milk-pack-price'), { source: 'direct', topic: null });
     assert.deepEqual(entryContext('#entry=' + entry + '&topic=unapproved&user=secret', ''),
       { source: 'direct', topic: null });
   }
