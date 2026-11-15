@@ -72,7 +72,11 @@ export function entryContext(hash, search) {
   // Fixed, non-identifying social entry labels. Unknown topics/params are ignored;
   // these are self-reported entry routes, not verified traffic analytics.
   const socialSources = new Set(['pinterest_pin', 'youtube_profile', 'instagram_profile', 'tiktok_profile']);
-  if (socialSources.has(entry) && Object.hasOwn(topics, topic)) return { source: entry, topic };
+  // Accept either a hash or a query string: some social platforms rewrite or discard fragments.
+  const query = new URLSearchParams(search);
+  const socialEntry = socialSources.has(entry) ? entry : (!hash && socialSources.has(query.get('entry')) ? query.get('entry') : null);
+  const socialTopic = socialSources.has(entry) ? topic : (!hash ? query.get('topic') : null);
+  if (socialEntry && Object.hasOwn(topics, socialTopic)) return { source: socialEntry, topic: socialTopic };
   if (entry === 'github_guide') return { source: 'github_guide', topic: null };
   if (entry === 'framefind_results' || (!hash && new URLSearchParams(search).get('utm_source') === 'framefind_results')) {
     return { source: 'framefind_results', topic: null };
