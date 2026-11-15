@@ -1,3 +1,7 @@
+import { compareGroups, profiles, rank, readPreference, searchPlan } from './decision.js?v=3';
+import { catalogNames, searchCatalogs } from './catalogs.js?v=3';
+import { renderComparison } from './results.js?v=3';
+
 (() => {
   'use strict';
 
@@ -166,6 +170,9 @@
     }
     byId('stage-compare').removeAttribute('aria-current');
     byId('stage-build').setAttribute('aria-current', 'step');
+    byId('catalog-route').value = 'auto';
+    byId('rank-profile').value = 'balanced';
+    byId('catalog-consent').textContent = '';
     byId('welcome').hidden = Boolean(reason);
     byId('ended').hidden = !reason;
     byId('chat-form').hidden = Boolean(reason);
@@ -227,6 +234,7 @@
     byId('review').hidden = false;
     const { brief } = session;
     prepareOtherSources(brief);
+    updateSearchConsent();
     const values = [
       brief.item,
       brief.budget.currency + ' ' + brief.budget.amount,
@@ -291,7 +299,7 @@
 
   function send(value) {
     setFeedback('');
-    if (closing || (session && (!remaining() || !session.field))) return;
+    if (closing || (session && (!remaining() || (!session.field && !session.refining)))) return;
     if (!value) {
       setFeedback('Enter a purchase request or reply first.');
       return;
@@ -307,6 +315,22 @@
       start(parseOpening(value), 'other');
       appendMessage('buyer', value);
       ask();
+      return;
+    }
+
+    if (session.refining) {
+      const preference = readPreference(value);
+      if (!preference) {
+        setFeedback('Choose price, exact match, evidence, review quality, speed, returns or balanced.');
+        return;
+      }
+      session.refining = false;
+      byId('chat-form').hidden = true;
+      appendMessage('buyer', value);
+      appendMessage('assistant', 'Comparison updated: ' + profiles[preference].label + '.');
+      byId('rank-profile').value = preference;
+      showComparison();
+      byId('rank-profile').focus();
       return;
     }
 
@@ -347,157 +371,91 @@
     };
   }
 
-  // Read-only public offer search. Never submit a cart, send the raw transcript,
-  // or assume that a merchant payment occurred from an outbound link.
   function clearLive() {
     liveSequence += 1;
-    if (session?.liveController) {
-      session.liveController.abort();
+    session?.liveController?.abort();
+    if (session) {
       session.liveController = null;
+      session.comparison = null;
+      if (session.refining) byId('chat-form').hidden = true;
+      session.refining = false;
     }
     byId('live-results').replaceChildren();
+    byId('ranking-tools').hidden = true;
     byId('live-status').textContent = 'No external search has run.';
     byId('live-search').disabled = false;
   }
 
-  function officialOfferLink(raw) {
-    if (typeof raw !== 'string' || raw.length > 2000) return null;
-    try {
-      const link = new URL(raw);
-      const host = link.hostname.toLowerCase();
-      if (link.protocol !== 'https:' ||
-          !(host === 'groupon.com' || host.endsWith('.groupon.com') ||
-            host === 'livingsocial.com' || host.endsWith('.livingsocial.com'))) return null;
-      return raw;
-    } catch {
-      return null;
+  function updateSearchConsent() {
+    const plan = searchPlan(session.brief, byId('catalog-route').value);
+    const button = byId('live-search');
+    button.disabled = !plan.providers.length;
+    const notice = byId('catalog-consent');
+    if (plan.category === 'games' && plan.providers.length) {
+      notice.textContent = (plan.browseFreeGames ? 'CheapShark receives a general free PC game query.' :
+        'CheapShark receives this title: “' + plan.title + '”.') +
+        ' GamerPower receives a general giveaway request. Budget, city, timing and must-haves stay in this tab.';
+    } else if (plan.providers.length) {
+      const place = session.brief.place;
+      notice.textContent = 'LivingSocial / Groupon receives “' + plan.title + '” and “' + place.city + ', ' +
+        place.region + '” for catalog matching. Budget, timing and must-haves stay in this tab.';
+    } else {
+      notice.textContent = plan.category === 'games' ? 'Digital PC games currently use the US catalog only.' :
+        'Public local catalogs are available in the US and Canada. Manual comparison is available below.';
     }
   }
 
-  function offerPrice(raw) {
-    if (!raw || typeof raw !== 'object') return null;
-    const minor = raw.fromMinor ?? raw.amountMinor;
-    const unit = String(raw.currency || '').toUpperCase();
-    if (!Number.isSafeInteger(minor) || minor < 0 || !/^[A-Z]{3}$/.test(unit)) return null;
-    const precision = Number.isInteger(raw.currencyPrecision) && raw.currencyPrecision >= 0 &&
-      raw.currencyPrecision <= 3 ? raw.currencyPrecision : 2;
-    return { amount: minor / 10 ** precision, unit };
-  }
-
-  function renderOffers(raw, brief) {
-    const list = byId('live-results');
-    list.replaceChildren();
-    const offers = Array.isArray(raw?.offers) ? raw.offers.slice(0, 5) : [];
-    let shown = 0;
-    for (const offer of offers) {
-      if (!offer || typeof offer !== 'object' || offer.status !== 'active') continue;
-      const link = officialOfferLink(offer.buyUrl) ||
-        officialOfferLink(offer.bookingUrl) || officialOfferLink(offer.offerUrl);
-      if (!link) continue;
-      const card = document.createElement('article');
-      card.className = 'offer-card';
-      const title = document.createElement('h4');
-      title.textContent = String(offer.title || 'Unnamed public offer').slice(0, 170);
-      card.append(title);
-      const merchantName = typeof offer.merchant === 'string' ? offer.merchant :
-        (offer.merchant && typeof offer.merchant.name === 'string' ? offer.merchant.name : '');
-      const meta = document.createElement('p');
-      meta.className = 'offer-meta';
-      meta.textContent = [merchantName.slice(0, 90), String(offer.city || '').slice(0, 65)]
-        .filter(Boolean).join(' · ') || 'LivingSocial/Groupon public catalog';
-      card.append(meta);
-      const price = offerPrice(offer.price);
-      const priceLabel = document.createElement('p');
-      priceLabel.className = 'offer-price';
-      if (price) {
-        priceLabel.textContent = 'From ' + price.unit + ' ' + price.amount.toFixed(2);
-        if (price.unit === brief.budget.currency) {
-          priceLabel.textContent += price.amount <= brief.budget.amount ?
-            ' · starting price within budget' : ' · starting price above budget';
-        } else {
-          priceLabel.textContent += ' · no currency conversion';
-        }
-      } else {
-        priceLabel.textContent = 'Price not supplied — check merchant';
-      }
-      card.append(priceLabel);
-      const outgoing = document.createElement('a');
-      outgoing.className = 'secondary offer-link';
-      outgoing.href = link; // Source link, including provider attribution, is unchanged.
-      outgoing.target = '_blank';
-      outgoing.rel = 'noopener noreferrer';
-      outgoing.textContent = offer.buyUrl && link === offer.buyUrl ?
-        'Review official buy page ↗' : 'Review official offer page ↗';
-      outgoing.setAttribute('aria-label', 'Open third-party offer: ' + title.textContent);
-      card.append(outgoing);
-      list.append(card);
-      shown += 1;
-    }
-    return shown;
+  function showComparison() {
+    const { plan, results } = session.comparison;
+    const preference = byId('rank-profile').value;
+    const rows = rank(results.flatMap(result => result.offers), session.brief, plan, preference);
+    const groups = compareGroups(rows, plan);
+    renderComparison(byId('live-results'), groups, rows, preference);
+    const coverage = results.map(result => catalogNames[result.provider] + ' ' +
+      (result.status === 'ok' ? result.offers.length + ' listings' : result.status)).join(' · ');
+    const shown = rows.filter(row => !row.problems.length).length;
+    const status = byId('live-status');
+    status.textContent = coverage + '. ' + (shown ? shown + ' relevant candidates before the display limit.' :
+      'No eligible candidates in the available catalog results. You can revise the request or use manual comparison.');
+    byId('ranking-tools').hidden = shown === 0;
   }
 
   async function searchLiveOffers() {
-    if (!session || !remaining() || closing || session.submitting ||
-        byId('review').hidden || session.field) return;
-    const brief = session.brief;
+    if (!remaining() || closing || session.submitting || byId('review').hidden || session.field) return;
+    const { brief, ref } = session;
+    const plan = searchPlan(brief, byId('catalog-route').value);
+    if (!plan.providers.length) return;
+    clearLive();
     const status = byId('live-status');
-    const button = byId('live-search');
-    const market = brief.place.code;
-    byId('live-results').replaceChildren();
-
-    if (market !== 'US' && market !== 'CA') {
-      status.textContent = 'Live public offers from this source are currently limited to the US and Canada. You may still request manual comparison.';
-      return;
-    }
     if (!navigator.onLine) {
-      status.textContent = 'Offline. No external catalog search was made.';
+      status.textContent = 'Offline. Reconnect to search public catalogs.';
       return;
     }
-    // The button is an explicit opt-in: only reviewed item and market are shared.
-    const words = (brief.item + ' in ' + brief.place.city + ', ' + brief.place.region).slice(0, 200);
-    if (sensitive.test(words) || words.length < 3) {
-      status.textContent = 'The reviewed search contains private or invalid text. Edit your request first.';
+    if ([plan.title, brief.place.city, brief.place.region].some(value => sensitive.test(value))) {
+      status.textContent = 'Edit the request to remove private or invalid text before searching.';
       return;
     }
-    session.liveController?.abort();
     const controller = new AbortController();
     session.liveController = controller;
-    const ref = session.ref;
     const seq = ++liveSequence;
-    button.disabled = true;
-    status.textContent = 'Requesting public offers from LivingSocial/Groupon…';
-    let timedOut = false;
-    const timeout = setTimeout(() => { timedOut = true; controller.abort(); }, 12000);
+    byId('live-search').disabled = true;
+    byId('rank-profile').value = readPreference(brief.details) || 'balanced';
+    status.textContent = 'Searching ' + plan.providers.map(provider => catalogNames[provider]).join(' and ') + '…';
     try {
-      const params = new URLSearchParams({ q: words, country: market, limit: '5' });
-      const response = await fetch('https://api-core.livingsocial.com/ls_agent_api/offers/search?' + params, {
-        method: 'GET', mode: 'cors', credentials: 'omit',
-        headers: { Accept: 'application/json' }, signal: controller.signal,
-        cache: 'no-store', redirect: 'error'
-      });
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      const payload = await response.json();
+      const results = await searchCatalogs(plan, brief, controller.signal);
       if (seq !== liveSequence || session?.ref !== ref || !remaining()) return;
-      const count = renderOffers(payload, brief);
-      const asOf = typeof payload?.asOf === 'string' ? Date.parse(payload.asOf) : NaN;
-      const sourceStamp = Number.isFinite(asOf) ?
-        ' Catalog as of ' + new Date(asOf).toLocaleString() + '.' : '';
-      status.textContent = count ?
-        count + ' active public offers found.' + sourceStamp +
-          ' These are not confirmed final prices, availability or verified matches.' :
-        'No buyable active offers were returned for this search. Try a different request or use manual comparison.';
+      session.comparison = { plan, results };
+      showComparison();
       byId('stage-build').removeAttribute('aria-current');
       byId('stage-compare').setAttribute('aria-current', 'step');
-    } catch (error) {
-      if (seq !== liveSequence || session?.ref !== ref) return;
-      status.textContent = timedOut ?
-        'Public catalog timed out. No offer was selected or purchased.' :
-        'Public catalog unavailable. No external purchase was attempted; manual comparison remains available.';
+    } catch {
+      if (seq === liveSequence && session?.ref === ref) {
+        status.textContent = 'Comparison unavailable. Manual comparison is available below.';
+      }
     } finally {
-      clearTimeout(timeout);
-      if (session?.ref === ref && seq === liveSequence) {
+      if (seq === liveSequence && session?.ref === ref) {
         session.liveController = null;
-        button.disabled = false;
+        updateSearchConsent();
       }
     }
   }
@@ -550,11 +508,27 @@
   });
   byId('skip').addEventListener('click', () => send('No preference'));
   byId('example').addEventListener('click', () => {
-    input.value = 'Help me find a 16 GB laptop in Austin, United States under USD 800 by Friday.';
+    input.value = 'Find PC game: LEGO Batman in Seattle, United States under USD 30, just comparing.';
     input.focus();
   });
   byId('handoff').addEventListener('click', showSharing);
   byId('live-search').addEventListener('click', searchLiveOffers);
+  byId('catalog-route').addEventListener('change', () => {
+    if (!remaining() || closing || session.submitting) return;
+    clearLive();
+    updateSearchConsent();
+  });
+  byId('rank-profile').addEventListener('change', () => {
+    if (remaining() && !closing && session.comparison) showComparison();
+  });
+  byId('refine').addEventListener('click', () => {
+    if (!remaining() || closing || !session.comparison || session.refining || session.submitting) return;
+    session.refining = true;
+    appendMessage('assistant', 'What matters more: price, exact match, evidence, reviews, speed or returns?');
+    byId('chat-form').hidden = false;
+    input.placeholder = 'Type your ranking preference…';
+    input.focus();
+  });
   byId('github').addEventListener('click', openPublicEditor);
   byId('close').addEventListener('click', () => {
     if (!remaining() || session.submitting) return;

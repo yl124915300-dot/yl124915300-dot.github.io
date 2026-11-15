@@ -2,6 +2,10 @@
 
 **更新：2026-11-15。** 这是执行检查点，不是推广文案；零订单或未知状态不能改写为成功。
 
+## 当前开发优先级
+
+先在原站验证跨平台检索和决策质量，再做获客。以下历史阶段的商业试运行条件继续适用于真实订单和收款；当前无需等待真人需求才修正产品。冷邮件和主动获客暂停。
+
 ## 唯一北极星
 
 由本人主动、明确授权的真实购买需求创建一次性交易会话；会话在最小权限下调用外部可用资源推进一笔交易，用户明确同意服务费，成功且可核验时收取按单服务费。完成后销毁会话的临时上下文和权限，保留合规所需最少结算/退款凭证。高频来自重复、低摩擦的成交会话，而不是平台佣金或商家网络数量。场景可包括电商、社媒、线下；Groupon/CJ仅是可选资源，不是前置条件。
@@ -147,3 +151,14 @@
 - [Live offer E2E 43697021010](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43697021010) 已由GitHub Actions Ubuntu Chrome无头浏览器实际访问原站，输入合成公开需求（Austin, US, massage, USD100）、进入会话审核、点击外部公开目录搜索，获得 **5 条真实公开结果卡**；前两条均含USD起始价格和经域名校验的Groupon/LivingSocial HTTPS官方跳转。Google备用搜索链接包含准确测试商品词；取消会话后，DOM结果卡清空、浏览器本地会话引用隐藏。此测试没有打开商家付款页、没有向FormSubmit提交需求、没有支付或构造订单。
 - E2E 输出依次为 `CHAT_REVIEW_OK`、`OTHER_SOURCE_LINK_OK True`、`LIVE_OFFER_CARD_COUNT 5`、`LIVE_OFFER_PRICE_AND_OFFICIAL_LINKS_OK`、`SESSION_CANCEL_CLEARS_OFFERS_OK`。这是云端Chrome桌面环境的读目录功能通过，非真实消费者试用；移动端本次没有重复实际触控验证。
 - **严格商业口径**：已完成一个可用的跨平台交易前查询动作，但没有实现实时AI自主代理、跨平台统一下单、商家订单核实、PayPal服务费自动扣款、端到端加密或服务器侧数据TTL销毁。真人可联络买家0、商家实际成交0、PayPal净服务费到账USD0仍是已知基线。下个开发动作须由真实用户成功/失败反馈或可核验订单证据驱动。
+
+## 2026-11-15 跨平台决策引擎
+
+- **试点范围**：同一个聊天入口运行两个路由。美国 PC 数字游戏由 [CheapShark](https://apidocs.cheapshark.com/) 提供多商家美元标价，由 [GamerPower](https://www.gamerpower.com/api-read) 提供免费领取候选。LivingSocial/Groupon 是已有的一个目录，保留美国、加拿大入口，当前重测美国 Austin。非覆盖地区回落到人工比较。报价目录可访问并不证明买家账户的地区资格、库存、预约名额或履约。
+- **接口权限**：CheapShark 公开文档许可网站使用价格，要求报价链接经 CheapShark 跳转并禁止另挂自己的联属链接；浏览器直连，限制单次查找数量，不自动打开跳转地址。GamerPower 明示可免费商用并要求可点击归属，结果链接到 GamerPower 原始记录，`worth` 不用作价格。LivingSocial/Groupon 仅使用已经过浏览器 CORS 验证的公开 GET，无 Partner key、购物车或 CJ 归因。这三个公开端点的只读探测均返回 200 并允许原站跨域。各目录可独立超时、限流或失败。
+- **候选与排名**：`catalogs.js` 标准化平台、商家、目录 ID、标题/版本、币种、报价类型与时间、核查时间、运费/税/费、条件、可用性、履约、退货和原始来源字段。按 CheapShark 游戏 ID 和版本标题做同游戏横向比较。版本、不同游戏、可领取替代单列；若同一商家同时报两个版本且币种相同，展示标价差。GamerPower 领取链接不合并为购买 SKU。综合排序考虑词项匹配、同币种已知成本、证据与履约/退货/评价；硬冲突移出推荐、缺证单独列出并扣分。点击或在聊天调整侧重点会本地重排。
+- **证据缺口**：供应商价格时间与本次浏览器读取时间分开展示。游戏暂缺商家逐笔税费、完整授权/地区资格、退款政策和长期拥有成本。Buyable 是目录状态；按摩等服务的起价不对应已核验的时段或具体服务选项。带日期的同游戏历史低价只在接口真实返回时显示。没有汇率源，跨币种预算不判定，也不按金额直接比较。
+- **最少字段**：再次编辑条件或切换路由需再次点击授权。CheapShark 发送游戏标题或通用免费查询；GamerPower 发送通用类别，游戏标题在本地筛选；LivingSocial/Groupon 发送审阅后的项目、城市和国家。预算、时间、补充需求、邮箱、会话编号以及聊天记录不随查询发送。原 FormSubmit、FrameFind、GitHub 工单入口保留。取消/到期/离页会中止请求并清除本机状态。第三方保留规则由接收方决定。
+- **候选接口核验**：Google/eBay 只提供用户自行打开的搜索链接，不参与排名。[eBay Browse](https://developer.ebay.com/develop/api/buy/browse_api) 需要应用 OAuth，未验证本项目生产权限。[Best Buy](https://developers.bestbuy.com/) 需 API key，未验证本项目可用的授权 key。[Google Merchant](https://developers.google.com/merchant/api/guides/products/overview) 管理账号自身目录，不提供整个 Google Shopping 的搜索。[Shopify Storefront](https://shopify.dev/docs/storefronts/headless/building-with-the-storefront-api) 可按店提供搜索，未核验本项目可使用的具体店铺与数据授权。
+- **发布前真实样例**：本地桌面 Chrome 在合成需求中收到 LEGO Batman 同一目录游戏的 Fanatical USD 2.59、GameBillet USD 16.54、WinGameStore USD 19.99，历史低价 USD 2.28（2025-09-29 UTC），三条最终总价均未知。手机尺寸 Chrome 接收 CheapShark 和 GamerPower 的真实响应并显示免费领取卡，取消后清空。自动用例覆盖版本误合并、型号混淆、预算冲突、跨币种、历史快照、假链接与过期领取。报价是采样，之后会随目录变化。
+- **商业状态**：已知真实买家 0、商家核验成交 0、付费会话 0、PayPal 服务费净到账 USD 0。MATCH OS 专用 PayPal US$1 正式链接未核验，付款入口关闭。未执行获客、购买、表单发送或付款。

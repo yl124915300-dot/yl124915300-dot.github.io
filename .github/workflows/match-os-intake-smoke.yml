@@ -6,6 +6,9 @@ on:
       - 'match-os/received.html'
       - 'match-os/chat.css'
       - 'match-os/chat.js'
+      - 'match-os/catalogs.js'
+      - 'match-os/decision.js'
+      - 'match-os/results.js'
       - '.github/workflows/match-os-intake-smoke.yml'
   workflow_dispatch:
 permissions:
@@ -17,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check chat JavaScript
-        run: node --check match-os/chat.js
+        run: for file in match-os/*.js; do node --experimental-default-type=module --check "$file"; done
       - name: Verify the deployed chat and receipt against source
         env:
           REVISION: ${{ github.sha }}
@@ -34,6 +37,9 @@ jobs:
               "received.html": "received.html",
               "chat.css": "chat.css",
               "chat.js": "chat.js",
+              "catalogs.js": "catalogs.js",
+              "decision.js": "decision.js",
+              "results.js": "results.js",
           }
           expected = {url: Path("match-os", file).read_bytes() for url, file in pages.items()}
           pending = set(pages)

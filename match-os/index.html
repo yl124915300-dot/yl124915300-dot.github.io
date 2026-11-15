@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api-core.livingsocial.com; form-action 'self' https://formsubmit.co; base-uri 'none'">
-  <meta name="description" content="Describe a purchase in MATCH OS. Review a short-lived buying request and choose whether to send it for manual comparison.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api-core.livingsocial.com https://www.cheapshark.com https://www.gamerpower.com; form-action 'self' https://formsubmit.co; base-uri 'none'">
+  <meta name="description" content="Describe a purchase in MATCH OS. Review a short-lived buying request and compare live catalog listings.">
   <meta name="color-scheme" content="dark">
   <title>MATCH OS — Purchase chat</title>
-  <link rel="stylesheet" href="chat.css?v=2">
-  <script src="chat.js?v=2" defer></script>
+  <link rel="stylesheet" href="chat.css?v=3">
+  <script type="module" src="chat.js?v=3"></script>
 </head>
 <body>
   <main class="shell">
@@ -36,7 +36,7 @@
       <div class="scroll" id="scroll" tabindex="0" aria-label="Conversation and request details">
         <div id="welcome" class="welcome">
           <h1>What are you<br class="wide"> looking to buy?</h1>
-          <p>Describe one purchase. We’ll help you specify it and decide whether to request a manual comparison.</p>
+          <p>Describe one purchase to compare available listings against your budget, timing and must-haves.</p>
           <button class="example quiet" id="example" type="button">Try an example</button>
         </div>
         <div id="messages" class="messages" role="log" aria-label="Chat messages"></div>
@@ -47,19 +47,40 @@
           <h2 id="review-title" tabindex="-1">Review your request</h2>
           <dl id="summary"></dl>
           <section id="live-compare" class="live-compare" aria-labelledby="live-compare-title">
-            <h3 id="live-compare-title">Browse live public offers</h3>
-            <p class="muted">Optional. When you click Search, only your reviewed item and city/country are sent to the LivingSocial/Groupon public catalog. Your raw chat, email and request ID are not sent. Currently covers US and Canadian offers only.</p>
-            <button type="button" class="secondary" id="live-search">Search public offers (share item + location)</button>
+            <h3 id="live-compare-title">Compare live catalogs</h3>
+            <div class="catalog-controls">
+              <label for="catalog-route">Category</label>
+              <select id="catalog-route">
+                <option value="auto">Detect from request</option>
+                <option value="games">Digital PC games</option>
+                <option value="general">Local offers and general deals</option>
+              </select>
+            </div>
+            <p class="muted" id="catalog-consent"></p>
+            <button type="button" class="secondary" id="live-search">Authorize catalog search</button>
             <p id="live-status" class="muted" role="status" aria-live="polite">No external search has run.</p>
-            <div id="live-results" class="offer-list" aria-label="Live public offers"></div>
+            <div id="ranking-tools" class="catalog-controls" hidden>
+              <label for="rank-profile">Prioritize</label>
+              <select id="rank-profile">
+                <option value="balanced">Balanced</option>
+                <option value="price">Lower known cost</option>
+                <option value="fit">Closest match</option>
+                <option value="evidence">Better evidence</option>
+                <option value="quality">Better review evidence</option>
+                <option value="speed">Faster fulfillment</option>
+                <option value="returns">Clearer returns</option>
+              </select>
+              <button type="button" class="quiet" id="refine">Change in chat</button>
+            </div>
+            <div id="live-results" class="offer-list" aria-label="Live catalog comparison"></div>
             <div id="other-sources" class="other-sources">
-              <p class="muted">Compare across other platforms (search links only, not verified prices). Clicking shares your item query with that site.</p>
+              <p class="muted">Open a separate search on Google or eBay. Clicking shares the item query with that site.</p>
               <div class="actions">
                 <a id="google-search" class="secondary" target="_blank" rel="noopener noreferrer" href="https://www.google.com/">Google search ↗</a>
                 <a id="ebay-search" class="secondary" target="_blank" rel="noopener noreferrer" href="https://www.ebay.com/">eBay search ↗</a>
               </div>
             </div>
-            <p class="muted offer-note">Results are third-party listings, not a MATCH OS price or inventory guarantee. Recheck price, eligibility and availability at the merchant before paying. MATCH OS does not process merchant payments or confirm purchases.</p>
+            <p class="muted offer-note">Verify final price, availability and eligibility with the merchant. MATCH OS leaves checkout and payment to the merchant.</p>
           </section>
           <p class="muted">If public offers do not fit, you can still send this reviewed request for manual comparison. You choose and pay the merchant directly.</p>
           <div class="actions">
@@ -123,7 +144,7 @@
       </div>
     </section>
     <footer class="foot">
-      <span>Manual comparison pilot</span>
+      <span>Live catalog comparison</span>
       <details>
         <summary>Session &amp; privacy</summary>
         <p>Chats expire after 30 minutes and clear on cancel, reload or page exit. Only a short-lived reference is kept in this tab for the return from FormSubmit.</p>

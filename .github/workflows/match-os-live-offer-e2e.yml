@@ -1,83 +1,67 @@
-name: MATCH OS read-only live offer click E2E
+name: MATCH OS live decision comparison
 on:
   push:
     paths:
+      - 'match-os/*.html'
+      - 'match-os/*.js'
+      - 'match-os/*.css'
+      - 'match-os-probe/decision.test.mjs'
+      - 'match-os-probe/browser_compare.py'
       - '.github/workflows/match-os-live-offer-e2e.yml'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  browser:
+  engine:
     runs-on: ubuntu-24.04
-    timeout-minutes: 6
+    timeout-minutes: 4
     steps:
-      - name: Check Chrome runtime and install Selenium
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check deterministic comparison rules
+        run: node --test match-os-probe/decision.test.mjs
+  browser:
+    needs: engine
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare cloud Chrome
         run: |
-          command -v google-chrome || true
-          command -v chromedriver || true
-          google-chrome --version || true
-          python3 -m pip install --quiet --user selenium
-      - name: Exercise public MATCH OS live offer search without purchases
+          google-chrome --version
+          python3 -m pip install --quiet --user playwright==1.55.1
+      - name: Wait for the same revision on the original HTTPS site
         env:
-          PYTHONUNBUFFERED: '1'
+          REVISION: ${{ github.sha }}
         run: |
           python3 - <<'PY'
-          from selenium import webdriver
-          from selenium.webdriver.chrome.options import Options
-          from selenium.webdriver.common.by import By
-          from selenium.webdriver.support.ui import WebDriverWait
-          from selenium.webdriver.support import expected_conditions as EC
-          from selenium.common.exceptions import TimeoutException
-          import sys
+          import os
+          import time
+          from pathlib import Path
+          from urllib.request import urlopen
 
-          options=Options()
-          for arg in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--window-size=1280,900'):
-            options.add_argument(arg)
-          browser=webdriver.Chrome(options=options)
-          try:
-            wait=WebDriverWait(browser,35)
-            browser.get('https://yl124915300-dot.github.io/match-os/')
-            wait.until(EC.element_to_be_clickable((By.ID,'message')))
-            browser.find_element(By.ID,'message').send_keys('Help me find massage in Austin, United States under USD 100 by Friday.')
-            browser.find_element(By.ID,'send').click()
-            def found_review(driver):
-              return not driver.find_element(By.ID,'review').get_attribute('hidden')
-            # Fill missing details, if any, without disclosing a real person's data.
-            for _ in range(5):
-              if browser.find_element(By.ID,'review').is_displayed(): break
-              text=browser.find_element(By.ID,'message')
-              if not text.is_displayed(): break
-              if browser.find_element(By.ID,'quick-actions').is_displayed():
-                browser.find_element(By.ID,'skip').click()
-              else:
-                text.send_keys('No preference')
-                browser.find_element(By.ID,'send').click()
-            wait.until(lambda d:d.find_element(By.ID,'review').is_displayed())
-            print('CHAT_REVIEW_OK',flush=True)
-            link=browser.find_element(By.ID,'google-search').get_attribute('href')
-            print('OTHER_SOURCE_LINK_OK', 'massage' in link.lower(),flush=True)
-            browser.find_element(By.ID,'live-search').click()
-            try:
-              wait.until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#live-results .offer-card'))>=2 or
-                         'unavailable' in d.find_element(By.ID,'live-status').text.lower() or
-                         'timed out' in d.find_element(By.ID,'live-status').text.lower())
-            except TimeoutException:
-              print('LIVE_FETCH_TIMEOUT',browser.find_element(By.ID,'live-status').text[:150],flush=True)
-              raise
-            cards=browser.find_elements(By.CSS_SELECTOR,'#live-results .offer-card')
-            print('LIVE_OFFER_CARD_COUNT',len(cards),flush=True)
-            if len(cards)<2:
-              raise AssertionError('Fewer than 2 real public offer cards; status='+browser.find_element(By.ID,'live-status').text)
-            for card in cards[:2]:
-              assert 'From USD' in card.find_element(By.CLASS_NAME,'offer-price').text
-              href=card.find_element(By.CSS_SELECTOR,'a.offer-link').get_attribute('href')
-              assert href.startswith('https://') and ('groupon.com/' in href or 'livingsocial.com/' in href)
-            print('LIVE_OFFER_PRICE_AND_OFFICIAL_LINKS_OK',flush=True)
-            browser.find_element(By.ID,'close').click()
-            browser.find_element(By.ID,'cancel').click()
-            assert len(browser.find_elements(By.CSS_SELECTOR,'#live-results .offer-card'))==0
-            assert not browser.find_element(By.ID,'reference').is_displayed()
-            print('SESSION_CANCEL_CLEARS_OFFERS_OK',flush=True)
-          finally:
-            browser.quit()
+          names = ['index.html', 'received.html', 'chat.js', 'chat.css', 'catalogs.js', 'decision.js', 'results.js']
+          expected = {name: Path('match-os', name).read_bytes() for name in names}
+          base = 'https://yl124915300-dot.github.io/match-os/'
+          for attempt in range(26):
+              try:
+                  for name, source in expected.items():
+                      url = base + ('' if name == 'index.html' else name) + '?qa=' + os.environ['REVISION'] + '-' + str(attempt)
+                      with urlopen(url, timeout=8) as reply:
+                          if reply.read() != source:
+                              break
+                  else:
+                      print('PAGES_REVISION_CONFIRMED', os.environ['REVISION'])
+                      break
+              except OSError:
+                  pass
+              time.sleep(8)
+          else:
+              raise SystemExit('Published Pages revision did not match this checkout')
           PY
+      - name: Verify real catalog comparisons on desktop and mobile-sized Chrome
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python3 match-os-probe/browser_compare.py
