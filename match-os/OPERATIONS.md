@@ -1,10 +1,48 @@
 # MATCH OS — 交易优先运营状态
 
-**更新：2026-11-15。** 这是执行检查点，不是推广文案；零订单或未知状态不能改写为成功。
+**更新日期：2026-11-16（北京时间）。以下为当前运行口径。后续章节为历史记录。**
 
-## 当前开发优先级
+## 海外社媒购买需求试点
 
-从买家已在比较商品的场景引导自愿会话。首批分发入口和核查口径见下方「需求流动性试点」。真实交易需要独立的商家成交证据。PayPal 服务费入口关闭，新增冷邮件额度为 0。
+北极星按真实链路核算。海外社媒内容解决一个具体购买判断 → 买家自愿进入原 MATCH OS 临时交易对话 → 四类模块按授权和事件重匹配 → 核对候选、费用和商家路径 → 买家在商家结账 → 独立核验商家成交 → 按约由买家通过 PayPal 单独确认 US$1 成功服务费 → 清理临时会话。高频以可重复处理真实请求和独立核验的订单衡量。PayPal 专用正式链接仍待验收，收费入口关闭。禁止冷邮件、私信群发、评论外联、社区一对一接触、买量和商家佣金。
+
+### 已执行
+
+- 通过已登录且有购物比较内容的自有 Pinterest 账号，在独立公开图板 **MATCH OS | Buying Comparisons** 发布一条燕麦奶包装单位价比较。Pin 显示可点击的原站目标链接，平台追加的普通 UTM 不改变 MATCH OS 的固定标签。首次后台读数为展示 0、出站点击 0。刚发布的官方读数可能延迟。[公开 Pin](https://www.pinterest.com/pin/1121396376006729430/)
+- Chrome 可见的 YouTube、Instagram、TikTok 和 X 创作会话属于 BLACK SAIL。YouTube 切换列表只列出该频道，X 菜单无其他活跃账号。vidIQ 发布账号列表为空。其余平台未确认可用于 MATCH OS 的独立账号和有效外链，因此发布数各为 0。已有项目密码、简介、外链和内容均未用于本项目。
+- 原仓库 `cb85a6d` 的社媒标签可以预填，原先本地进度摘要会把社媒标签归为 `direct`。本轮统一了入口与反馈白名单，增加 `x_post`、`instagram_story`，并以原购买指南目录接住只支持一个资料页链接的渠道。四个主题可直达或在目录选择，旧查询串、片段和 FrameFind 入口仍可用。只读取固定 entry/topic，无点击 ID、访客 ID、浏览器指纹或用户内容归因。重复 entry/topic 回落到直接访问。链接可被转发，来源只表示入口标签。
+- 保留四类模块、报价缓存和事件触发刷新。用户点开聊后只补预算、市场、日期及所需约束。原始对话在标签页内，公开查源需先确认披露字段。会话把主题的官方参考和商家检查步骤放在比较区。商家报价、目录跳转、免费领取、历史观察和用户自带链接分别标注。数码依赖用户带入商家报价；日用品历史记录与现价分开；本地服务的起价、预约和最终总价需要商家核实；游戏目录的激活、税费和区域资格需要商家核实。取消和 30 分钟到期清理本机临时状态。已明确授权发出的资料由接收方处理。
+- 源码 [79fd00b](https://github.com/yl124915300-dot/yl124915300-dot.github.io/commit/79fd00b51d8da4d34082f914c23beb3f73c72f10)、[Pages 部署 43735711741](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43735711741)、[原站字节一致性 43735712514](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43735712514)、[云端规则与 Chrome 43735712517](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43735712517) 均成功。32 项规则、19 个桌面或手机尺寸模拟用例。Chrome 手动验收公开 Pin 目标地址的预填、主动开聊与清理；未实测实体手机。反馈 POST 在浏览器测试中拦截，实际第三方投递尚未验收。前版 [Pages 43733766439](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43733766439) 和 [Chrome 43733766776](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43733766776) 亦均成功。
+
+### 内容复用和路由
+
+每条内容复用同一结构：一个临近付款的选择 → 一个可核查的不同点 → 一步实际计算或检查 → 自愿进入购买比较。沿用四个已有需求页。数码用厂商说明演示有线 ANC；日用品用两组净含量演示到手单位成本；本地服务检查 Austin 60 分钟单人选项、真实档期和总价；游戏检查 LEGO Batman PC 版、Steam 激活和账号地区。实际用户需要或证据有变化再制作下一项。禁止使用其他项目账号、商标图、虚构优惠或库存。
+
+| 平台 | 发布载体 | 可点击目的地 |
+| --- | --- | --- |
+| Pinterest | 原创比较图卡，Pin 链接字段 | `/match-os/?entry=pinterest_pin&topic=<固定主题>`。[官方 Pin 统计](https://help.pinterest.com/en/business/article/pin-stats) |
+| YouTube Shorts | 竖版对比，口播或画面邀请访问频道资料页 | `/match-os/demand/?entry=youtube_profile`，资料页设 Buying Guides。Shorts 描述和评论网址不可点击。[YouTube 链接说明](https://support.google.com/youtube/answer/13748639) |
+| Instagram Reels / Story | Reel 指向资料页。Story 用链接贴纸 | `/match-os/demand/?entry=instagram_profile` 或 `/match-os/?entry=instagram_story&topic=<固定主题>`。从访客视图确认链接可用。[Meta 链接贴纸](https://about.fb.com/ja/news/2021/10/linkaccessstickers/) |
+| TikTok | 竖版检查过程，前提是该账号确有可点击 Website 字段 | `/match-os/demand/?entry=tiktok_profile`。先验证账号权限及访客外链。[TikTok 账号说明](https://support.tiktok.com/en/using-tiktok/growing-your-audience/switching-to-a-creator-or-business-account) |
+| X | 一条短文配原始证据及可点击链接 | `/match-os/?entry=x_post&topic=<固定主题>`。[X 链接说明](https://help.x.com/en/using-x/how-to-post-a-link) |
+
+主题固定为 `wired-anc-headphones`、`oat-milk-pack-price`、`austin-60-minute-massage`、`lego-batman-pc-editions`。跨平台均使用同一个原站会话。单一资料页归因到平台与买家所选主题，同主题多帖子以平台永久链接分辨平台侧数据。
+
+### 测量、第一处卡点与跟进
+
+| 阶段 | 可观测证据 | 本次基线 |
+| --- | --- | --- |
+| 平台曝光、出站点击 | 每帖官方后台，按永久链接和 UTC 窗口 | Pinterest 新 Pin 0 / 0 初值，其余平台未发 |
+| 到站独立访问 | 当前 GitHub Pages 没有已接入的独立访客计数 | 未知 |
+| 主动开聊、完成购买条件、查源、候选展示 | 浏览器内阶段。买家预览后可自愿发送无聊天、联系方式、订单号或会话号的固定字段报告到现有 FormSubmit | 全量未知，无已收真人报告 |
+| 同意人工交接、点击商家 | 已送达的主动请求可查 Gmail 或 GitHub；浏览器报告中的交接授权及外链点击只提供志愿样本 | 两封已知 QA 排除，GitHub 买家工单检索 0；全量授权、商家点击未知 |
+| 商家订单 | 在已授权跟进的私密渠道核对商家凭证、成交状态、金额、币种及适用的退款状态 | 已核验 0 |
+| PayPal 净到账 | 独立核对 MATCH OS 专用付款记录与实际手续费或退款 | 已核验 US$0，入口关闭 |
+
+志愿报告在独立的新标签页提交，可有 CAPTCHA，运营按来源、主题和阶段聚合收到的报告，排除 QA 及可识别的重复投递。样本无法按人可靠去重，选择性参与，不能外推全站转化或连接平台与商家身份。收到报告不等于买家请求送达。订单与退款证明单独私密保留最小字段，账号、回执、快照和联系方式不写入本公开记录。
+
+第一道已见卡点是内容尚未产生后台可见曝光或出站点击。发布后约 24 小时与 72 小时按同一 Pin 读取官方数据，观察统计延迟。若曝光仍为 0，先查 Pin 公开可见性、图板与选题词，再选择有发布权限的另一承载位做一次对照；若有曝光而出站仍为 0，只调整内容里的购买比较承诺或 CTA；若已有出站却无报告或主动请求，先核对手机上目标、开聊按钮、预填和首轮门槛，再决定是否扩大发布。真正收到主动请求后，用对应品类交付可核查的商家路径和总价证据。已核验商家成交且买家接受独立服务费后，才进入经批准的 PayPal 收款步骤。
+
 
 ## 唯一北极星
 
