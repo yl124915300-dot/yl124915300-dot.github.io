@@ -139,17 +139,14 @@ def local_services(page):
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(channel="chrome", args=["--no-sandbox"])
     failures = []
-    default_context = browser.new_context()
-    agent = default_context.new_page().evaluate("navigator.userAgent")
-    default_context.close()
     for name, case in [("desktop", paid_games), ("mobile", claim_games), ("local", local_services)]:
         if os.getenv("MATCH_OS_CASE") not in (None, name):
             continue
         options = playwright.devices["iPhone 13"] if name == "mobile" else {"viewport": {"width": 1280, "height": 900}}
         if name == "mobile":
             options = {key: value for key, value in options.items() if key not in ("default_browser_type", "user_agent")}
-        # CheapShark asks API clients to identify themselves. Keep the original Chrome identification.
-        options["user_agent"] = agent + " MATCH-OS-Catalog-QA/3.0 (+https://yl124915300-dot.github.io/match-os/)"
+        # Use the descriptive User-Agent documented by CheapShark, with automation identified.
+        options["user_agent"] = "MATCH-OS-Catalog-QA/3.0 (automated Chrome; https://yl124915300-dot.github.io/match-os/)"
         context = browser.new_context(**options)
         page = context.new_page()
         page.on("pageerror", lambda error: print("PAGE_ERROR", error))
@@ -179,6 +176,14 @@ with sync_playwright() as playwright:
             case(page)
         except Exception as error:
             print("CASE_FAILED", name, error)
+            if name == "desktop":
+                diagnostic = context.request.get("https://www.cheapshark.com/api/1.0/stores", timeout=8_000)
+                print("DOCUMENTED_API_CLIENT_STATUS", diagnostic.status)
+                if diagnostic.status == 400:
+                    try:
+                        print("DOCUMENTED_API_CLIENT_MESSAGE", str(diagnostic.json().get("error", ""))[:230])
+                    except (ValueError, AttributeError):
+                        pass
             failures.append(name)
         finally:
             context.close()
