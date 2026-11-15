@@ -237,3 +237,16 @@
 - 下一轮只验证一个阻碍：没有可跟进的真实购买请求。选择一个明确允许分享指南的耳机求购渠道，以有线降噪一页做一次小规模自愿比较实验；目标是一位允许后续核对商家结账的真实买家。没有这条证据前不增加主题、不启用服务费。
 
 本轮发布实证：[程序提交 `5660135`](https://github.com/yl124915300-dot/yl124915300-dot.github.io/commit/566013560420cd763901eb3a8cd0675897653804)的[原站部署](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43728801547)、[部署检查](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43728801922)、[云端 Chrome 与规则检查](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43728801934)和 [FrameFind 回归](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43728801943)通过。31 项规则测试、17 个云端 Chrome 场景通过。从原域名独立比对 25 个公开文件，全部字节一致。生活服务在本机回归曾出现一次真实来源超时，页面保留人工比较；最终配置的同一只读查询和云端工作流通过。报价、记录和测试导航均不计作订单；QA 商家跳转、FormSubmit 及公开编辑器在测试中被拦截。
+
+
+## 2026-11-16 00:53 JST 真实买家例行查核
+
+- **原项目状态未提升**：Gmail \`in:anywhere subject:"MATCH OS Buyer Interest"\` 无结果；\`in:anywhere after:2026/11/14 "formsubmit" "item"\` 只有两封2026-11-15的QA，\`"fee_acknowledged" / "transaction_reference" / "Buyer Interest"\` 新投递无结果。GitHub仓库 \`MATCH OS BUYER\` issue 0，2026-11-14以来的新issue 0，FrameFind自愿反馈 #41 新评论 0。**真人已授权有效请求0、独立商家成交0、PayPal净到账USD0**；全站真人访问/开聊仍不可观测。没有外发邮件、社区帖、支付测试。
+- **非授权的公开购买意图（均不算MATCH OS买家）**：
+  1. [r/HeadphoneAdvice / 2026-11-15，UK三款耳机比较](https://www.reddit.com/r/HeadphoneAdvice/comments/1xwhkv6/momentum_4_wireless_xm4c_or_bw_px7_s3/)：列出M4约£200、Sony XM4C约£180、B&W PX7 S3约£250供选择；价签为发帖者描述，非商家报价。潜在可服务：同日可买的确切SKU、到手价、退货与使用适配对比。并非要求3.5mm有线ANC，不应错误地自动导入原wired-ANC预填。
+  2. [r/GiftofGames / 2026-11-15，PC游戏预算US$20–28](https://www.reddit.com/r/GiftofGames/comments/1xwq1pe/discussion_best_game_in_steam_for_20_dollars/)：列愿望单和笔记本CPU/GPU/RAM，适合游戏版次、历史价/实际售价与设备能否运行的交叉核验。但[社区规则](https://www.reddit.com/r/GiftofGames/about/)限制外站引流和让社区成员获利，不得以MATCH OS推广或发布服务费入口。
+  3. [r/WinCo / 2026-11-14，节日买菜满额赠品门槛](https://www.reddit.com/r/WinCo/comments/1xw77i0/thanksgiving/)：提问有无买菜达门槛赠火鸡及起止日期。评论声称$125门槛、11月18日开始；仅社区自述，店面实际活动、门店、条款未核验。发帖具体时刻和该社区推广规则未取得，不作为严格48小时合格线索，也不发布链接。
+- **参与规则实际核验**：[r/HeadphoneAdvice](https://www.reddit.com/r/HeadphoneAdvice/about/)的Only Shopping Advice允许采购建议，但No Affiliate/Selling禁止联盟/卖货，外链谨慎；在无当前账号发帖资格及商业推广许可的情况下仅可研究、不能贴MATCH OS收费入口。[r/GiftofGames](https://www.reddit.com/r/GiftofGames/about/)禁止利用赠送获得利益及要求去第三方站点，排除推广。[r/BuyItForLife](https://www.reddit.com/r/BuyItForLife/about/)明确No Advertising，排除商用引流。
+- **PayPal闸门**：本次只读浏览器会话不可用（\`Browser access requires the originating browser context\`）；未取得任何账户级Live权限、MATCH OS专用USD1官方服务费链接或回款记录。2026-11-11客服历史操作说明不是实际建链证据；按钮保持关闭，禁止创建未验证PAYMENT链接或自动扣款。
+- **下一步唯一动作**：在具有明确、已核实允许商业参与和合法登录权限的真实采购频道，把一份附可核验商家来源的跨商家比较提供给自愿用户，观察其是否主动提交可回访MATCH OS请求。禁止把公开评论或外站点击记为已授权买家；未取得渠道规则、发布权限前不在Reddit直接引流。
+
