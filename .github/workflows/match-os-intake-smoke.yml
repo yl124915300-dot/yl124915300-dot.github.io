@@ -45,7 +45,7 @@ jobs:
           import urllib.request, time, sys
           base="https://yl124915300-dot.github.io"
           tests=[
-            ("/match-os/", ["One request. One transaction.", 'name="transaction_reference"', 'name="fee_acknowledged"', 'MATCH_OS_SUCCESS_ONLY_USD_1_V1', "crypto.randomUUID", "No checkout is available."]),
+            ("/match-os/", ["One request. One transaction.", 'name="transaction_reference"', 'name="fee_acknowledged"', 'MATCH_OS_SUCCESS_ONLY_USD_1_V1', "crypto.randomUUID", "no active agent, checkout or payment collection"]),
             ("/match-os/received.html", ["Provisional request reference", "no payment now", "No PayPal payment link is active yet."]),
           ]
           for path,checks in tests:
