@@ -10,7 +10,7 @@
   <link rel="canonical" href="https://yl124915300-dot.github.io/match-os/">
   <title>MATCH OS — Purchase chat</title>
   <link rel="stylesheet" href="chat.css?v=7">
-  <script type="module" src="chat.js?v=7"></script>
+  <script type="module" src="chat.js?v=8"></script>
 </head>
 <body>
   <main class="shell">
@@ -54,6 +54,7 @@
           <section id="live-compare" class="live-compare" aria-labelledby="live-compare-title">
             <h3 id="live-compare-title">Compare your options</h3>
             <div id="route-preview" class="muted"></div>
+            <div id="topic-evidence" class="other-sources" hidden></div>
             <p class="muted" id="catalog-consent"></p>
             <div class="actions">
               <button type="button" class="secondary" id="live-search">Authorize catalog search</button>
@@ -96,7 +97,7 @@
           </section>
           <details id="funnel" class="other-sources">
             <summary>Purchase progress &amp; optional feedback</summary>
-            <p class="muted">Progress stays in this tab. A listing click only records the outbound action. MATCH OS cannot see merchant checkout, and PayPal is closed.</p>
+            <p class="muted">Progress stays in this tab. MATCH OS can record a listing click in this tab. The merchant handles orders and payments. PayPal service fees are disabled.</p>
             <ol id="funnel-steps" class="muted funnel-steps"></ol>
             <label class="label" for="outcome">What happened? (optional)</label>
             <select id="outcome">
@@ -109,12 +110,18 @@
               <option value="budget">Over budget</option>
               <option value="changed_mind">Decided to stop</option>
             </select>
-            <p class="muted">If you choose to share, the summary contains only progress flags, a public guide tag, categories and the selected outcome. Leave out order numbers, contact details and receipts.</p>
+            <p class="muted">Review the summary before sharing. It includes progress, the public entry and topic, categories and any outcome you select.</p>
             <button id="prepare-feedback" class="secondary" type="button">Prepare feedback summary</button>
             <div id="feedback-export" hidden>
-              <label for="feedback-text" class="label">Feedback summary (copy to share yourself)</label>
+              <label for="feedback-text" class="label">Feedback summary</label>
               <textarea id="feedback-text" readonly rows="5" spellcheck="false"></textarea>
-              <p class="muted">Nothing has been sent. You can stop here or copy the summary to share through a channel you choose.</p>
+              <p class="muted">You can copy the summary or choose to send it to MATCH OS for pilot totals. Sending opens FormSubmit in a new tab and may require a CAPTCHA. The summary omits your chat, email and order details. <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit privacy terms</a>.</p>
+              <form id="feedback-form" method="post" target="_blank" rel="noopener noreferrer">
+                <input type="hidden" name="_subject" value="MATCH OS Pilot Feedback — voluntary report">
+                <input id="feedback-payload" type="hidden" name="pilot_feedback">
+                <button class="secondary" type="submit">Send this summary via FormSubmit</button>
+                <p id="feedback-sent" class="muted" role="status"></p>
+              </form>
             </div>
           </details>
           <p class="muted">Send your reviewed request for a manual check of matching listings, delivered totals and alternatives. We flag terms the merchant has yet to confirm. You choose and pay the merchant directly.</p>

@@ -394,7 +394,9 @@ with sync_playwright() as playwright:
              ("demand-games-desktop", lambda page: demand_browser.games(page, SITE)),
              ("demand-services-mobile", lambda page: demand_browser.services(page, SITE)),
              ("demand-goods-mobile", lambda page: demand_browser.goods(page, SITE)),
-             ("demand-electronics-desktop", lambda page: demand_browser.electronics(page, SITE))]
+             ("demand-electronics-desktop", lambda page: demand_browser.electronics(page, SITE)),
+             ("social-post-desktop", lambda page: demand_browser.social(page, SITE, "x_post", False)),
+             ("social-profile-mobile", lambda page: demand_browser.social(page, SITE, "youtube_profile", True))]
     for name, case in cases:
         if os.getenv("MATCH_OS_CASE") and not name.startswith(os.environ["MATCH_OS_CASE"]):
             continue

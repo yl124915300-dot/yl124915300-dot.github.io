@@ -5,18 +5,19 @@ import { BASE, demandURL, topics } from '../match-os/demand/topics.js';
 const e = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const list = Object.entries(topics);
 const links = (except) => '<ul class="guides">' + list.filter(([id]) => id !== except).map(([id, p]) =>
-  '<li><a href="' + demandURL(id) + '">' + e(p.title) + '</a><span>' + e(p.label) + ' · ' + e(p.description) + '</span></li>').join('\n') + '</ul>';
+  '<li><a href="' + demandURL(id) + '" data-guide="' + id + '">' + e(p.title) + '</a><span>' + e(p.label) + ' · ' + e(p.description) + '</span></li>').join('\n') + '</ul>';
 
 const layout = (path, title, description, body) => `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
 <title>${e(title)} | MATCH OS</title>
 <meta name="description" content="${e(description)}">
 <link rel="canonical" href="${BASE}${path}">
 <link rel="stylesheet" href="/match-os/demand/guide.css">
+<script type="module" src="/match-os/demand/guide.js?v=1"></script>
 </head><body><main>
 <header><a href="/match-os/">MATCH OS</a><a href="/match-os/demand/">Buying guides</a><a href="/video-find/">FrameFind</a></header>
 ${body}
@@ -52,7 +53,7 @@ ${p.checks.map(([label, value]) => '<li><strong>' + e(label) + '.</strong> ' + e
 </ol></section>
 <section aria-labelledby="compare"><h2 id="compare">What MATCH OS can compare</h2>
 <p>${e(p.output)}</p><p>${e(p.gap)}</p>
-<a id="open-chat" class="cta" href="/match-os/#entry=demand_page&amp;topic=${id}">Open this request in MATCH OS</a>
+<a id="open-chat" class="cta" data-topic="${id}" href="/match-os/#entry=demand_page&amp;topic=${id}">Open this request in MATCH OS</a>
 <p class="small">Review or change the draft before starting. The link contains only this guide’s public topic. External lookups require your approval.</p></section>
 <section aria-labelledby="refs"><h2 id="refs">Source references</h2><ul>
 ${p.sources.map(([label, url]) => '<li><a href="' + e(url) + '" rel="noreferrer">' + e(label) + '</a></li>').join('\n')}
@@ -63,7 +64,10 @@ ${p.sources.map(([label, url]) => '<li><a href="' + e(url) + '" rel="noreferrer"
 const hub = demandURL();
 const intro = 'Buying guides for exact products, package sizes, local service options and PC game editions. Each guide opens a draft in the same purchase chat.';
 file(hub.slice(1) + 'index.html', layout(hub, 'Buying guides', intro,
-  '<p class="eyebrow">MATCH OS · Buying guides</p><h1>Know what to compare before you pay</h1><p class="lead">' + intro + '</p>' + links()));
+  '<p class="eyebrow">MATCH OS · Buying guides</p><h1>Know what to compare before you pay</h1><p class="lead">' + intro + '</p><ul class="guides">' + list.map(([id, p]) =>
+    '<li><a href="' + demandURL(id) + '" data-guide="' + id + '">' + e(p.title) +
+    '</a><span>' + e(p.label) + ' · ' + e(p.description) + '</span><a class="cta" data-topic="' + id +
+    '" href="/match-os/#entry=demand_page&amp;topic=' + id + '">Start a ' + e(p.label.toLowerCase()) + ' chat</a></li>').join('\n') + '</ul>'));
 const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 assert(sitemap.includes('</urlset>'), 'Expected the existing root sitemap');
 const missing = [hub, ...list.map(([id]) => demandURL(id))].filter(url => !sitemap.includes('<loc>' + BASE + url + '</loc>'));

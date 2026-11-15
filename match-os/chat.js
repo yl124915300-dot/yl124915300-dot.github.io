@@ -1,11 +1,11 @@
 import { profiles, readPreference } from './decision.js?v=7';
 import { catalogNames, catalogScope, searchCatalogs } from './catalogs.js?v=7';
-import { renderIntent } from './results.js?v=7';
+import { renderIntent } from './results.js?v=8';
 import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=7';
 
-import { entryContext, topics } from './demand/topics.js?v=7';
+import { entryContext, topics } from './demand/topics.js?v=8';
 import { createMatchingSession } from './matching.js?v=7';
-import { createFunnel, steps as funnelSteps } from './funnel.js?v=7';
+import { createFunnel, steps as funnelSteps } from './funnel.js?v=8';
 import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
 
 (() => {
@@ -39,6 +39,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   }
 
   const form = byId('demand');
+  const feedbackForm = byId('feedback-form');
+  feedbackForm.action = form.action;
   const quoteForm = byId('quote-form');
   const input = byId('message');
   const feedback = byId('feedback');
@@ -207,6 +209,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     byId('stage-compare').removeAttribute('aria-current');
     byId('stage-build').setAttribute('aria-current', 'step');
     byId('route-preview').replaceChildren();
+    byId('topic-evidence').replaceChildren();
+    byId('topic-evidence').hidden = true;
     resetQuoteEntry();
     byId('rank-profile').value = 'balanced';
     byId('catalog-consent').textContent = '';
@@ -268,12 +272,36 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     }
   }
 
+  function renderTopicEvidence() {
+    const panel = byId('topic-evidence');
+    panel.replaceChildren();
+    panel.hidden = true;
+    const topic = topics[context.topic];
+    if (!topic || session.brief.item !== topic.item || !session.intents.some(intent => intent.category === topic.category)) return;
+    const action = document.createElement('p');
+    action.textContent = topic.next;
+    const links = document.createElement('ul');
+    for (const [text, url] of topic.sources) {
+      const link = document.createElement('a');
+      link.textContent = text;
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      const item = document.createElement('li');
+      item.append(link);
+      links.append(item);
+    }
+    panel.append(action, links);
+    panel.hidden = false;
+  }
+
   function summarize() {
     byId('chat-form').hidden = true;
     byId('review').hidden = false;
     const { brief } = session;
     prepareOtherSources(brief);
     session.intents = routeRequest(brief);
+    renderTopicEvidence();
     prepareQuoteEntry();
     if (session.intents.some(intent => !intent.module) && session.clarifiedItem !== brief.item) {
       session.clarifiedItem = brief.item;
@@ -522,6 +550,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   function resetFeedbackExport() {
     byId('feedback-export').hidden = true;
     byId('feedback-text').value = '';
+    byId('feedback-payload').value = '';
+    byId('feedback-sent').textContent = '';
   }
 
   function clearFunnel() {
@@ -537,7 +567,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     byId('funnel-steps').replaceChildren(...Object.entries(funnelSteps).map(([step, label]) => {
       const item = document.createElement('li');
       item.dataset.step = step;
-      item.textContent = label + ' — ' + (step === 'fee' ? 'unavailable' : funnel.has(step) ? 'recorded' : 'not recorded');
+      item.textContent = label + ' — ' + (['merchant', 'fee'].includes(step) ? 'unavailable' : funnel.has(step) ? 'recorded' : 'not recorded');
       return item;
     }));
     for (const option of Array.from(byId('outcome').options).slice(1, 4)) option.disabled = !funnel.has('outbound');
@@ -750,6 +780,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     const query = new URLSearchParams({
       title: '[MATCH OS BUYER] ' + data.item.slice(0, 75) + ' / ' + data.city.slice(0, 35), body
     });
+    session.funnel.mark('handoff');
+    resetFeedbackExport();
+    renderFunnel();
     window.open(website + '?' + query, '_blank', 'noopener,noreferrer');
   }
 
@@ -795,9 +828,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   function listingClick(event) {
     if (!event.isTrusted || !remaining() || closing || byId('review').hidden) return;
     const link = event.target.closest('a.offer-link');
-    const card = link?.closest('.offer-card');
-    if (!card || card.dataset.provider === 'openprices' || card.dataset.status === 'conflict') return;
+    if (!link?.hasAttribute('data-purchase-path')) return;
     session.funnel.mark('outbound');
+    resetFeedbackExport();
     renderFunnel();
   }
   byId('live-results').addEventListener('click', listingClick);
@@ -810,10 +843,20 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   });
   byId('prepare-feedback').addEventListener('click', () => {
     if (!remaining() || closing || session.field) return;
-    byId('feedback-text').value = JSON.stringify(session.funnel.export(session.intents.map(intent => intent.category)), null, 2);
+    const summary = session.funnel.export(session.intents.map(intent => intent.category));
+    byId('feedback-text').value = JSON.stringify(summary, null, 2);
+    byId('feedback-payload').value = JSON.stringify(summary);
     byId('feedback-export').hidden = false;
     byId('feedback-text').focus();
     byId('feedback-text').select();
+  });
+  feedbackForm.addEventListener('submit', event => {
+    if (!remaining() || closing || byId('feedback-export').hidden || !byId('feedback-payload').value || !navigator.onLine) {
+      event.preventDefault();
+      if (session && !navigator.onLine) byId('feedback-sent').textContent = 'Offline. The summary was not sent.';
+      return;
+    }
+    byId('feedback-sent').textContent = 'Continue in the new tab. Delivery is pending.';
   });
   quoteForm.addEventListener('submit', saveQuote);
   byId('quote-target').addEventListener('change', prepareQuoteFields);
@@ -862,6 +905,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     } catch {
       // The handoff is still usable if browser storage is unavailable.
     }
+    session.funnel.mark('handoff');
     session.submitting = true;
     leaving = true;
     byId('request-submit').disabled = true;

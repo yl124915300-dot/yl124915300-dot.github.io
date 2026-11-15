@@ -54,7 +54,7 @@ def open_demand(page, site, slug, item, replies):
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
 
 
-def feedback(page, kind=None):
+def feedback(page, kind=None, source="demand_page"):
     if not page.locator("#funnel").evaluate("(node) => node.open"):
         page.locator("#funnel summary").click()
     if kind:
@@ -65,7 +65,7 @@ def feedback(page, kind=None):
     assert set(data) == {"format", "sample", "source", "topic", "categories", "steps",
                          "outcome_self_reported", "blocker_self_reported", "merchant_purchase_verified",
                          "paypal_service_fee"}
-    assert data["sample"] == "qa" and data["source"] == "demand_page"
+    assert data["sample"] == "qa" and data["source"] == source
     assert data["merchant_purchase_verified"] is False and data["paypal_service_fee"] == "closed"
     assert "fee" not in data["steps"]
     return data
@@ -220,3 +220,46 @@ def electronics(page, site):
     assert "candidates" in data["steps"] and "authorized" not in data["steps"]
     cancel(page)
     print("DEMAND_QA_ELECTRONICS_NO_LIVE_SOURCE_MANUAL_AND_CLEAR_OK")
+
+def social(page, site, source, use_profile):
+    traffic = []
+    page.on("request", lambda request: traffic.append(request.url)
+            if urlparse(request.url).netloc != urlparse(site).netloc else None)
+    topic = "oat-milk-pack-price" if use_profile else "lego-batman-pc-editions"
+    if use_profile:
+        page.goto(urljoin(site, "demand/?entry=" + source + "&click_id=qa_untrusted"))
+        guide = page.locator(f'[data-guide="{topic}"]')
+        guide.click()
+        expect(page.locator("#open-chat")).to_have_attribute(
+            "href", "/match-os/?entry=" + source + "&topic=" + topic)
+        page.locator("#open-chat").click()
+    else:
+        page.goto(site + "?entry=" + source + "&topic=" + topic + "&click_id=qa_untrusted")
+    expect(page.locator("#reference")).to_be_hidden()
+    expect(page.locator("#entry-preview")).to_contain_text("oat milk" if use_profile else "LEGO Batman")
+    expect(page.locator("#entry-preview")).not_to_contain_text("qa_untrusted")
+    page.locator("#start-chat").click()
+    for answer in ("USD 70", "Seattle, United States", "this week"):
+        reply(page, answer)
+    expect(page.locator("#review")).to_be_visible()
+    expect(page.locator("#topic-evidence a").first).to_be_visible()
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    data = feedback(page, "missing_terms", source)
+    assert data["topic"] == topic
+    assert set(data["steps"]) == {"entry", "chat", "complete", "outcome"}
+    assert not traffic, "Loading, opening and previewing a social request must stay local"
+    submissions = []
+    def receive(route):
+        submissions.append(parse_qs(route.request.post_data))
+        route.fulfill(status=200, content_type="text/html", body="<p>QA interception</p>")
+    page.context.route("https://formsubmit.co/**", receive)
+    with page.expect_popup() as popup:
+        page.get_by_role("button", name="Send this summary via FormSubmit").click()
+    popup.value.wait_for_load_state()
+    assert len(submissions) == 1 and set(submissions[0]) == {"_subject", "pilot_feedback"}
+    assert json.loads(submissions[0]["pilot_feedback"][0]) == data
+    assert "Seattle" not in json.dumps(submissions) and "qa_untrusted" not in json.dumps(submissions)
+    popup.value.close()
+    cancel(page)
+    expect(page.locator("#feedback-payload")).to_have_value("")
+    print("SOCIAL_ROUTE_AND_VOLUNTARY_FUNNEL_OK", source, topic, flush=True)

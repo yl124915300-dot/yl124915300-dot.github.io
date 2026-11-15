@@ -20,11 +20,18 @@ test('fixed entry allowlist routes four published briefs and ignores arbitrary t
 });
 
 test('social content routes use fixed topic and source without user identifiers', () => {
-  for (const entry of ['pinterest_pin', 'youtube_profile', 'instagram_profile', 'tiktok_profile']) {
+  for (const entry of ['pinterest_pin', 'youtube_profile', 'instagram_profile', 'instagram_story', 'tiktok_profile', 'x_post']) {
     assert.deepEqual(entryContext('#entry=' + entry + '&topic=oat-milk-pack-price&user=secret&item=ignored', ''),
       { source: entry, topic: 'oat-milk-pack-price' });
     assert.deepEqual(entryContext('', '?entry=' + entry + '&topic=oat-milk-pack-price&utm_source=ignored&user=secret'),
       { source: entry, topic: 'oat-milk-pack-price' });
+    const context = entryContext('', '?entry=' + entry + '&topic=oat-milk-pack-price&click_id=ignore-me');
+    const aggregate = createFunnel(context, false).export(['consumables']);
+    assert.equal(aggregate.source, entry);
+    assert.equal(aggregate.topic, 'oat-milk-pack-price');
+    assert.doesNotMatch(JSON.stringify(aggregate), /ignore-me/);
+    assert.deepEqual(entryContext('', '?entry=' + entry + '&entry=' + entry + '&topic=oat-milk-pack-price'),
+      { source: 'direct', topic: null });
     assert.deepEqual(entryContext('', '?entry=' + entry + '&topic=constructor&user=secret'),
       { source: 'direct', topic: null });
     assert.deepEqual(entryContext('#entry=unapproved&topic=oat-milk-pack-price',
@@ -122,7 +129,11 @@ test('funnel orders observations and cannot verify a purchase or a fee', () => {
   const funnel = createFunnel({ source: 'demand_page', topic: 'lego-batman-pc-editions' }, true);
   funnel.mark('outbound');
   funnel.mark('fee');
+  funnel.mark('merchant');
+  funnel.mark('handoff');
   funnel.mark('complete');
+  assert.equal(funnel.has('handoff'), false);
+  funnel.mark('handoff');
   funnel.report('bought');
   assert.equal(funnel.export([]).outcome_self_reported, null);
   funnel.mark('authorized');
@@ -131,7 +142,7 @@ test('funnel orders observations and cannot verify a purchase or a fee', () => {
   funnel.report('bought');
   assert.deepEqual(funnel.export(['games', 'arbitrary text']), {
     format: 'match_os_feedback_v1', sample: 'qa', source: 'demand_page', topic: 'lego-batman-pc-editions',
-    categories: ['games'], steps: ['entry', 'chat', 'complete', 'authorized', 'candidates', 'outbound', 'outcome'],
+    categories: ['games'], steps: ['entry', 'chat', 'complete', 'authorized', 'candidates', 'handoff', 'outbound', 'outcome'],
     outcome_self_reported: 'bought', blocker_self_reported: null, merchant_purchase_verified: false, paypal_service_fee: 'closed',
   });
 });

@@ -22,6 +22,22 @@ function sourceLink(label, href, className) {
   return link;
 }
 
+function listingLink(row) {
+  const { offer } = row;
+  const labels = {
+    livingsocial: 'Open official offer ↗',
+    cheapshark: 'Continue to store via CheapShark ↗',
+    gamerpower: 'Check claim requirements ↗',
+    openprices: 'Review dated record ↗',
+    user: 'Open the listing you added ↗',
+  };
+  const link = sourceLink(labels[offer.provider] || 'Review source ↗', offer.sourceUrl, 'secondary offer-link');
+  if (row.status !== 'conflict' && !['gamerpower', 'openprices'].includes(offer.provider)) {
+    link.setAttribute('data-purchase-path', '');
+  }
+  return link;
+}
+
 function amount(value, currency) {
   return new Intl.NumberFormat(undefined, { style: 'currency', currencyDisplay: 'code', currency }).format(value);
 }
@@ -116,7 +132,7 @@ function renderOffer(row, title) {
       ' on ' + shortDate(historic.at) + ' · ' + difference, 'offer-meta offer-history'));
     extra.append(sourceLink('Historical price record', historic.source));
   }
-  card.append(extra, sourceLink('Review source ↗', offer.sourceUrl, 'secondary offer-link'));
+  card.append(extra, listingLink(row));
   return card;
 }
 
@@ -332,7 +348,6 @@ function renderCategoryOffer(row) {
     ' (' + offer.rating.count + ')', 'offer-meta'));
   if (offer.restrictions) evidence.append(element('p', offer.restrictions, 'offer-meta'));
   if (offer.expires) evidence.append(element('p', 'Listing expires ' + shortDate(offer.expires), 'offer-meta'));
-  card.append(evidence, sourceLink(isHistory ? 'Review dated record ↗' : 'Review source ↗',
-    offer.sourceUrl, 'secondary offer-link'));
+  card.append(evidence, listingLink(row));
   return card;
 }

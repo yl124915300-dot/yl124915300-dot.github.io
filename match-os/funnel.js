@@ -1,31 +1,31 @@
-import { topics } from './demand/topics.js?v=7';
+import { normalizeEntry } from './demand/topics.js?v=8';
 
 export const steps = Object.freeze({
-  entry: 'Tagged guide or tool entry',
+  entry: 'Opened a tagged entry',
   chat: 'Opened purchase chat',
   complete: 'Completed request',
   authorized: 'Approved a public catalog query',
   candidates: 'Saw at least one candidate',
-  outbound: 'Clicked a listing or catalog redirect',
+  handoff: 'Approved a request handoff',
+  outbound: 'Opened a purchase listing or store redirect',
   outcome: 'Chose a purchase outcome',
+  merchant: 'Merchant order independently verified',
   fee: 'PayPal service fee verified (closed)',
 });
 
 const outcomes = new Set(['bought', 'not_bought', 'still_comparing']);
 const blockers = new Set(['no_match', 'missing_terms', 'budget', 'changed_mind']);
-const sources = new Set(['direct', 'framefind_results', 'github_guide', 'demand_page']);
 const categories = new Set(['electronics', 'consumables', 'services', 'games']);
 
 export function createFunnel(context, qa) {
-  const source = sources.has(context.source) ? context.source : 'direct';
-  const topic = source === 'demand_page' && Object.hasOwn(topics, context.topic) ? context.topic : null;
+  const { source, topic } = normalizeEntry(context.source, context.topic);
   const seen = new Set(source === 'direct' ? ['chat'] : ['entry', 'chat']);
   let outcome = null;
   let blocker = null;
   return {
     has: step => seen.has(step),
     mark(step) {
-      const dependency = { complete: 'chat', authorized: 'complete', candidates: 'complete', outbound: 'candidates' }[step];
+      const dependency = { complete: 'chat', authorized: 'complete', candidates: 'complete', handoff: 'complete', outbound: 'candidates' }[step];
       if (dependency && seen.has(dependency)) seen.add(step);
     },
     report(value) {
