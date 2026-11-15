@@ -402,6 +402,11 @@ function analyzeQuery(){
     card.append(a);out.append(card);
   }
   state.lastQuery=string;
+  // Offer an optional, user-initiated buyer-intent path only after a real search.
+  // Store only the product phrase and market in this browser tab; no video URL,
+  // image, merchant, identity, or search contents are sent to MATCH OS here.
+  const matchCTA=el('match-intent-cta');
+  if(matchCTA)matchCTA.hidden=false;
   window.FrameFindFunnel?.emit('product_search',{channel:state.demo?'demo':state.sourceType==='local'?'local_video':state.sourceType==='youtube'||state.sourceType==='external'?'video_link':'screenshot',valid:out.children.length>0});
   const demoNote=state.demo?'The supplied original illustration is a demonstration, not an AI-verified branded product. ':'';
   say('search-summary',demoNote+'Search phrase: "'+string+'". Compare actual listings at the retailers. No current price, stock, exact model match or commission is implied.');
@@ -446,6 +451,13 @@ el('clear-selection').addEventListener('click',clearSelection);
 el('download-crop').addEventListener('click',saveCrop);
 el('copy-crop').addEventListener('click',copyCrop);
 el('search-products').addEventListener('click',analyzeQuery);
+const matchLink=el('match-intent-link');
+if(matchLink)matchLink.addEventListener('click',()=>{
+  if(!state.lastQuery)return;
+  try{sessionStorage.setItem('matchos:framefind_interest_v1',
+    JSON.stringify({item:state.lastQuery,market:el('market').value,at:Date.now()}));}
+  catch(err){/* Navigation is still available without browser storage. */}
+});
 el('share-result').addEventListener('click',shareResult);
 view.addEventListener('pointerdown',onPointerDown);
 view.addEventListener('pointermove',onPointerMove);
