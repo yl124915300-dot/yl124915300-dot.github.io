@@ -77,6 +77,22 @@ var query=new URLSearchParams(window.location.search);
  if(!/^[a-zA-Z0-9._-]{1,60}$/.test(value)) value='unclassified';
  document.getElementById(row[1]).value=value;
 });
+// Consume a same-tab product-search handoff only when the buyer opens this page.
+// Nothing is posted or emailed merely because the fields are prefilled.
+try{
+ var staged=JSON.parse(sessionStorage.getItem('matchos:framefind_interest_v1')||'null');
+ sessionStorage.removeItem('matchos:framefind_interest_v1');
+ if(staged && typeof staged.item==='string' &&
+    Date.now()-Number(staged.at)>-60000 && Date.now()-Number(staged.at)<600000){
+  var safeItem=staged.item.trim().slice(0,120);
+  if(safeItem.length>=3){
+    document.getElementById('item').value=safeItem;
+    document.getElementById('source').value='ecommerce';
+    document.getElementById('region').value=staged.market==='US'?'US':'Other';
+    status.textContent='Your searched product has been prefilled. Review it and enter your budget and city. Nothing is submitted until you consent and send.';
+  }
+ }
+}catch(err){/* Browser storage unavailable; ordinary form still works. */}
 document.getElementById('github').addEventListener('click',function(){
  var ids=['source','region','city','when','item','budget','currency'];
  for(var i=0;i<ids.length;i++){var f=document.getElementById(ids[i]);if(!f.reportValidity())return;}
