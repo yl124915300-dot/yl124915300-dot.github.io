@@ -91,6 +91,20 @@ dt { color: var(--muted); font-size: .82rem; }
 dd { margin: 0; overflow-wrap: anywhere; font-size: .92rem; }
 .edit { color: var(--accent); font-size: .82rem; padding-inline: 8px; }
 
+
+.live-compare { border: 1px solid #355467; background: #13232e; border-radius: 12px; padding: 14px; margin: 16px 0; }
+.live-compare h3 { font-size: 1rem; margin: 0 0 8px; }
+.live-compare > p { margin: 0 0 10px; }
+#live-search { margin: 0 0 10px; }
+#live-status { margin: 0 0 12px; }
+.offer-list { display: grid; gap: 10px; }
+.offer-card { padding: 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); display: grid; gap: 7px; }
+.offer-card h4 { font-size: .94rem; line-height: 1.3; font-weight: 660; margin: 0; overflow-wrap: anywhere; }
+.offer-card .offer-meta { font-size: .83rem; color: var(--muted); }
+.offer-card .offer-price { font-weight: 760; color: var(--accent); }
+.offer-card .offer-link { justify-self: start; margin-top: 3px; }
+.offer-note { margin-top: 10px !important; font-size: .76rem; }
+
 .composer { padding: 10px clamp(12px, 3vw, 26px); border-top: 1px solid var(--line); }
 .compose-row { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: 7px; }
 .compose-row:focus-within { border-color: #81cbbb; }
