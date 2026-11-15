@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-14T22:15:32+00:00",
+  "checkedAt": "2026-11-15T06:12:24+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -68,6 +68,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+    },
+    {
+      "name": "Jamie Garcia",
+      "headline": "Licensed Residential Leasing Specialist | Luxury Multifamily & Resident Experience",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/4gTyRWcGjg9l3pAHCcqs"
+    },
+    {
+      "name": "Alexander Ortiz (Mr. Crafty)",
+      "headline": "Mixologist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 25.5,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
     },
     {
       "name": "Jessie Roeder",
@@ -158,26 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
-    },
-    {
-      "name": "SAMUEL AKINTOLA",
-      "headline": "AI Data Annotator & Evaluation Contributor | Voice, Video & Egocentric Data Collection",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/SjrG6R5FNotV9cwSYrM8"
-    },
-    {
-      "name": "Erica Low",
-      "headline": "IT Support & Automation Specialist | Python, SQL, Google Workspace & Hardware Testing",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/1LsehpBIeAnx43swmAmW"
     },
     {
       "name": "Pat Santiago",
@@ -330,6 +330,16 @@
       "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
     },
     {
+      "name": "Daniel Wilson",
+      "headline": "Fast, punctual & communicative personal assistant",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 37,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/mQJ075wcSTVvehlO5yHU"
+    },
+    {
       "name": "Daniel Smith",
       "headline": "Detail-oriented field verification & photography specialist",
       "city": "Los Angeles",
@@ -470,16 +480,6 @@
       "profileUrl": "https://rentahuman.ai/humans/zAfDRkNtMIUf2PIylIUD"
     },
     {
-      "name": "Daniel Johnson",
-      "headline": "On-demand IRL tasks, pickups and site inspections",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 39,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/sqQ7Z5XNk7qOv5OWDciU"
-    },
-    {
       "name": "Marvin Risco",
       "headline": "Operating & Investment Executive | 30+ Years in International Operations, M&A & Board Advisory",
       "city": "Austin",
@@ -488,6 +488,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/qUdKhOA4FefvvUgmV2tw"
+    },
+    {
+      "name": "Brandon Little",
+      "headline": "",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0lZTUvefL00cUCUCLi3X"
     },
     {
       "name": "Marco Barr",
@@ -508,16 +518,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/8AJkAVvCGnHECXEpF2Sh"
-    },
-    {
-      "name": "Brandon Little",
-      "headline": "",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0lZTUvefL00cUCUCLi3X"
     },
     {
       "name": "TC2001",
@@ -628,6 +628,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/2klmttBqAt5wW1YjKK0U"
+    },
+    {
+      "name": "James Harris",
+      "headline": "On-demand IRL tasks, pickups and site inspections",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 36,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/oNazmolnEx92j7hHPhPS"
     },
     {
       "name": "David Thomas",
@@ -768,16 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/H67wSETxNlXM1qHJFBGX"
-    },
-    {
-      "name": "Alex Taylor",
-      "headline": "Fast, punctual & communicative personal assistant",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 15,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Z6x9yHNofvMIbCOG7L8z"
     },
     {
       "name": "Ken Xu",
