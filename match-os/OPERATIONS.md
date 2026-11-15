@@ -92,3 +92,11 @@
 - **高频自动化的最短路径**：只有在 PayPal 官方账户的 Live API/REST app 权限核验后，才能使用 Orders v2 的每笔 `purchase_units[].custom_id = MATCH_OS_SESSION_ID`，并在私有 HTTPS 后端验证 PayPal 的 `PAYMENT.CAPTURE.COMPLETED` Webhook 与 PayPal 官方订单/捕获状态（`COMPLETED`、金额、币种、收款人、回执ID）。回调可能重试，必须幂等；支付失败、待结算或退款不能计有效收入。仅收到浏览器 success URL 不能当到账。官方依据：https://developer.paypal.com/api/orders/v2/definitions/purchase_unit 、https://developer.paypal.com/api/rest/webhooks/rest/ 。
 - **用户体验**：先完成买家的外部商家交易确认，再展示独立 PayPal 服务费结账；这会有收款流失风险，必须用真实数据验证。若改为前置收费，则需在明确告知、退款规则和履约可核验条件下重新设计，不能暗中扣款。
 - **商业指标**：真实已成功会话 0、成功收取服务费会话 0、可核验 PayPal 服务费净到账 USD 0。未经实际登录、建立 MATCH OS 专用 Live 收款链接并支付验证前，不可公开启用收款按钮。
+
+## 2026-11-15 PayPal 收费前会话入口升级验收
+
+- **已有网页升级，不新建平台**：`match-os/index.html` 已增加浏览器安全随机生成的 `MO-` 前缀一次性请求引用号（20位随机十六进制字符，30分钟有效；每次页面加载生成）。表单提交时附 `transaction_reference`、`fee_policy=MATCH_OS_SUCCESS_ONLY_USD_1_V1` 和 `fee_acknowledged=yes`；买家必须知情确认“只有可核验交易成功后，另行明确同意支付 USD1 服务费”，本次提交不收费。页面明确披露该编号仅是自报需求引用号，不是后台认证的订单或 PayPal 单号。
+- `match-os/received.html` 在 FormSubmit 返回后可尝试在同一浏览器会话显示引用号；仅当用户确实经过表单服务成功转发时，收件邮箱才可能收到申请。FormSubmit CAPTCHA 不能跳过。任何 email 或用户伪造字段都不能直接提升为真实订单或获得支付权限。
+- **云端实际发布证据**：[GitHub Actions 公开站点 Smoke 43685130992](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43685130992) 已从互联网核验公开 `/match-os/` 和 `/match-os/received.html` HTTP 200；两段 JS 语法检查通过，预期业务披露和表单字段存在。
+- **保持支付关闭**：未公开 PayPal 付款按钮、未创建 MATCH OS 专用官方 PayPal Live 服务费支付链接；浏览器随机引用号不受服务器签名，不能独立验证成功交易。已知 PayPal 客服确认现有个人卖家账户可接收一般境外款，但未证明 `session_id → PayPal capture_id` 的自动归因；当前仅是低摩擦人工核对的准备阶段。
+- **后续仅一个关键门槛**：在 PayPal 官方已登录收款后台，核实并创建单独的 MATCH OS 服务费商品/服务收款链接（固定 US$1、明确适用条件），保密任何 API 凭证，不复用影视或其他业务收款二维码；获得真实买家的自愿交易和正式 PayPal 交易凭证后，再考虑私有 HTTPS Live Orders/Webhook 自动化。未验证的服务费回执与实际净到账一律记为 0。
