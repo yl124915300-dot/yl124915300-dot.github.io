@@ -1,159 +1,120 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="index,follow">
-<meta name="description" content="MATCH OS pilot: voluntarily describe what you want to buy. No payments, orders or merchant guarantees.">
-<title>MATCH OS — One-time Transaction Request Pilot</title>
-<style>
-:root{color-scheme:dark;--bg:#0c1118;--panel:#161e28;--border:#2b3a49;--text:#eef4fc;--muted:#a8b7c8;--blue:#77d0ef;--focus:#9cf3ff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#182e42,transparent 56%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:880px;margin:0 auto;padding:48px 20px 80px}
-.eyebrow{text-transform:uppercase;letter-spacing:.18em;color:var(--blue);font-size:.79rem;font-weight:700}
-h1{font-size:clamp(2rem,6vw,3.8rem);line-height:1.08;letter-spacing:-.04em;margin:12px 0 18px}
-p{color:var(--muted);max-width:65ch}.intro{font-size:1.1rem}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:clamp(18px,5vw,34px);margin-top:26px;box-shadow:0 24px 50px #0003}
-.notice{border-left:3px solid var(--blue);padding:10px 16px;background:#193046;border-radius:5px;font-size:.95rem}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.field{margin-top:18px}label{display:block;font-weight:650;margin-bottom:8px}small{color:var(--muted)}input,select,textarea{background:#0d151f;color:var(--text);border:1px solid #476072;border-radius:10px;padding:12px;font:inherit;width:100%;min-height:48px}textarea{min-height:110px;resize:vertical}
-input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-.check{display:flex;align-items:flex-start;gap:12px;font-weight:450}.trap{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}.secondary{background:transparent;color:var(--blue);border:1px solid #476072;margin-top:10px}.privacy{font-size:.91rem;line-height:1.55}.check input{width:20px;min-height:20px;height:20px;margin-top:3px;flex-shrink:0}
-button{border:0;border-radius:12px;background:#93e5f5;color:#07131b;padding:14px 20px;font-size:1rem;font-weight:800;cursor:pointer;margin-top:20px;width:100%}
-footer{margin-top:28px;color:var(--muted);font-size:.88rem}
-a{color:var(--blue)}.status{font-size:.89rem;color:#bdd1e1;margin:18px 0}.reference{background:#101a26;border:1px solid #496274;border-radius:12px;padding:14px 18px;display:grid;gap:6px;margin:18px 0}.reference code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:.97rem;color:#93e5f5;overflow-wrap:anywhere}.reference small{font-size:.8rem}
-@media(max-width:650px){.grid{grid-template-columns:1fr}main{padding-top:28px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; form-action 'self' https://formsubmit.co; base-uri 'none'">
+  <meta name="description" content="Describe a purchase in MATCH OS. Review a short-lived buying request and choose whether to send it for manual comparison.">
+  <meta name="color-scheme" content="dark">
+  <title>MATCH OS — Purchase chat</title>
+  <link rel="stylesheet" href="chat.css?v=1">
+  <script src="chat.js?v=1" defer></script>
 </head>
 <body>
-<main>
-<div class="eyebrow">MATCH OS / Research pilot / Pre-launch</div>
-<h1>One request. One transaction.</h1>
-<p class="intro">Describe one purchase you want help completing. MATCH OS is testing short-lived transaction requests across online shops, local services and social channels, with a proposed <strong>US$1 service fee only after a separately verified successful transaction</strong>.</p>
-<div class="card">
-<p class="notice"><strong>One-time request pilot — human reviewed; no active checkout or payment collection.</strong> We cannot guarantee a match, seller, delivery, or transaction. No fee is charged when requesting help; merchant purchases remain directly between you and the seller.</p>
-<div class="reference" aria-live="polite"><strong>One-time request reference</strong><code id="session-visible">Preparing secure reference…</code><small>This is a browser-generated reference included in your submitted request. It is <strong>not</strong> an authenticated order, an active payment session, or proof of a successful transaction.</small></div>
-<form id="demand" action="https://formsubmit.co/296eed7e458ed66fc7e10100fcdae788" method="POST">
-<input type="hidden" name="_next" value="https://yl124915300-dot.github.io/match-os/received.html">
-<input type="hidden" name="_subject" value="MATCH OS Buyer Interest — self reported, not yet verified">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_url" value="https://yl124915300-dot.github.io/match-os/">
-<input type="hidden" name="acquisition_source" id="acquisition_source" value="direct">
-<input type="hidden" name="acquisition_medium" id="acquisition_medium" value="unknown">
-<input type="hidden" name="acquisition_campaign" id="acquisition_campaign" value="none">
-<input type="hidden" name="transaction_reference" id="transaction_reference" value="">
-<input type="hidden" name="fee_policy" value="MATCH_OS_SUCCESS_ONLY_USD_1_V1">
-<input type="hidden" name="transaction_state" value="SELF_REPORTED_REQUEST_NOT_ORDER">
-<div class="trap" aria-hidden="true"><label for="honeypot">Leave blank</label><input id="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
-<div class="grid">
-<div class="field"><label for="source">Where did your need start?</label><select id="source" name="source" required><option value="">Choose a channel</option><option value="social">Social video / chat</option><option value="ecommerce">Online shopping</option><option value="physical">Physical store / QR</option><option value="other">Other</option></select></div>
-<div class="field"><label for="region">Country or region</label><select id="region" name="region" required><option value="">Choose a region</option><option value="US">United States</option><option value="UZ">Uzbekistan</option><option value="AE">United Arab Emirates</option><option value="JP">Japan</option><option value="Other">Other</option></select></div>
-</div>
-<div class="grid">
-<div class="field"><label for="city">City (not your address)</label><input id="city" name="city" autocomplete="off" maxlength="60" placeholder="e.g. Tashkent" required></div>
-<div class="field"><label for="when">When would you want it?</label><select id="when" name="when" required><option value="">Choose a timeframe</option><option value="Today">Today</option><option value="Within 3 days">Within 3 days</option><option value="Within 1 week">Within 1 week</option><option value="Recurring">Repeated/recurring</option><option value="Just comparing">Just comparing</option></select></div>
-</div>
-<div class="field"><label for="item">What would you like to buy?</label><input id="item" name="item" maxlength="120" placeholder="Product, brand/model/size, or local service" required></div>
-<div class="grid">
-<div class="field"><label for="budget">Maximum budget</label><input id="budget" name="budget" type="number" min="1" max="1000000" step="0.01" placeholder="100" required></div>
-<div class="field"><label for="currency">Currency</label><select id="currency" name="currency" required><option value="USD">USD</option><option value="UZS">UZS</option><option value="AED">AED</option><option value="JPY">JPY</option><option value="CNY">CNY</option></select></div>
-</div>
-<div class="field"><label for="details">Useful constraints (optional)</label><textarea id="details" name="details" maxlength="400" placeholder="For example: must be new, self-pickup is fine, or delivery in 3 days. No names, contact details or street addresses."></textarea></div>
-<div class="field"><label for="email">Reply email (required for private request follow-up)</label><input id="email" name="email" type="email" autocomplete="email" maxlength="120" placeholder="you@example.com" required>
-<small>A reply email is needed to send you a request-specific response; we do not use it for mass marketing. You may instead use the public GitHub issue alternative, which does not share your email. Do not enter a street address, phone number, account number or payment information. We also include the campaign labels from the link that brought you here, if present.</small></div>
-<div class="field"><label class="check"><input id="fee_acknowledged" name="fee_acknowledged" value="yes" type="checkbox" required><span>I understand the proposed MATCH OS fee is <strong>US$1 only if a real transaction is successfully completed and independently verified</strong>. This is separate from the seller&#39;s charge. Nothing is charged now; I must explicitly approve the PayPal payment later, and unsuccessful or cancelled requests are not billed.</span></label></div>
-<div class="field"><label class="check"><input id="consent" name="research_consent" value="yes" type="checkbox" required><span>I agree to share this voluntary buying interest with MATCH OS through <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit.co</a>, a third-party form delivery service, and understand it will be emailed to the operator for research and possible request-specific follow-up. This is <strong>not a purchase or merchant quote</strong>.</span></label>
-<p class="privacy">FormSubmit states it retains submissions for 30 days; email copies received by MATCH OS may be kept for follow-up. <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">Form service privacy terms</a>. Do not submit sensitive personal information.</p></div>
-<button id="request-submit" type="submit">Submit one-time request — no payment now</button>
-<p class="status" role="status" id="status" aria-live="polite">Submissions are forwarded by FormSubmit's service and may require CAPTCHA. You will see a confirmation page after a successful submission. No order will be placed.</p>
-<button id="github" type="button" class="secondary">Alternative: review a public GitHub issue</button>
-<p class="status">The GitHub alternative requires GitHub sign-in and posts your product request publicly. Your optional email address is <strong>never</strong> included in the issue.</p>
-</form>
-</div>
-<footer>Research pilot only. Request references are not merchant orders or proofs of payment. There is no working PayPal checkout on this page. No account needed for this form; no payment is accepted here. Form data goes to a third-party provider and then to the operator by email; GitHub requests are public only if you choose that alternative and confirm there. <a href="https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues?q=%22MATCH+OS+BUYER%22">View public requests</a>.</footer>
-</main>
-<script>
-(function(){
-'use strict';
-var form=document.getElementById('demand');
-var status=document.getElementById('status');
-// This reference only helps the operator correlate a voluntarily submitted request.
-// It is not an authenticated server transaction or a PayPal payment identifier.
-var refInput=document.getElementById('transaction_reference');
-var refDisplay=document.getElementById('session-visible');
-var refCreatedAt=0;
-function mintRequestReference(){
-  if(!window.crypto || typeof crypto.randomUUID!=='function'){
-    refDisplay.textContent='Secure reference unavailable; please use a modern HTTPS browser.';
-    document.getElementById('request-submit').disabled=true;
-    return false;
-  }
-  var ref='MO-'+crypto.randomUUID().replace(/-/g,'').slice(0,20).toUpperCase();
-  refInput.value=ref;
-  refCreatedAt=Date.now();
-  refDisplay.textContent=ref;
-  try{sessionStorage.setItem('matchos:last_request_reference',JSON.stringify({ref:ref,at:refCreatedAt}));}catch(err){/* optional, no account data */}
-  return true;
-}
-mintRequestReference();
-form.addEventListener('submit',function(ev){
-  if(!refInput.value || (Date.now()-refCreatedAt)>1800000){
-    if(!mintRequestReference()){
-      ev.preventDefault();
-      status.textContent='Cannot create a secure reference; request not submitted.';
-      return;
-    }
-    status.textContent='A new request reference was generated because the previous one expired. Review and submit again.';
-    ev.preventDefault();
-    return;
-  }
-  // The actual submission goes to FormSubmit; this page cannot verify its delivery.
-  // The resulting email must be handled as SELF_REPORTED_UNVERIFIED.
-  status.textContent='Opening the form delivery service. No purchase or service-fee payment has occurred.';
-});
-var query=new URLSearchParams(window.location.search);
-[['utm_source','acquisition_source','direct'],['utm_medium','acquisition_medium','unknown'],['utm_campaign','acquisition_campaign','none']].forEach(function(row){
- var value=query.get(row[0])||row[2];
- if(!/^[a-zA-Z0-9._-]{1,60}$/.test(value)) value='unclassified';
- document.getElementById(row[1]).value=value;
-});
-// Consume a same-tab product-search handoff only when the buyer opens this page.
-// Nothing is posted or emailed merely because the fields are prefilled.
-try{
- var staged=JSON.parse(sessionStorage.getItem('matchos:framefind_interest_v1')||'null');
- sessionStorage.removeItem('matchos:framefind_interest_v1');
- if(staged && typeof staged.item==='string' &&
-    Date.now()-Number(staged.at)>-60000 && Date.now()-Number(staged.at)<600000){
-  var safeItem=staged.item.trim().slice(0,120);
-  if(safeItem.length>=3){
-    document.getElementById('item').value=safeItem;
-    document.getElementById('source').value='ecommerce';
-    document.getElementById('region').value=staged.market==='US'?'US':'Other';
-    status.textContent='Your searched product has been prefilled. Review it and enter your budget and city. Nothing is submitted until you consent and send.';
-  }
- }
-}catch(err){/* Browser storage unavailable; ordinary form still works. */}
-document.getElementById('github').addEventListener('click',function(){
- var ids=['source','region','city','when','item','budget','currency'];
- for(var i=0;i<ids.length;i++){var f=document.getElementById(ids[i]);if(!f.reportValidity())return;}
- if(!window.confirm('This alternative will publish your product, city, budget and timing as a PUBLIC GitHub issue after you sign in and submit. No email is included. Continue?'))return;
- var d=new FormData(form);
- var item=String(d.get('item')||'').trim();
- var city=String(d.get('city')||'').trim();
- if(!item||!city)return;
- var title='[MATCH OS BUYER] '+item.substring(0,75)+' / '+city.substring(0,35);
- var body=[
-  '## Voluntary, self-reported buyer request',
-  '', '**Source channel:** '+d.get('source'), '**Region:** '+d.get('region'),
-  '**City:** '+city, '**Item / service:** '+item,
-  '**Maximum budget:** '+d.get('budget')+' '+d.get('currency'),
-  '**Desired timeframe:** '+d.get('when'),
-  '**Constraints:** '+String(d.get('details')||'None').trim(),
-  '', '**Public posting consent:** Given through the separate confirmation.',
-  '**Verification status:** SELF_REPORTED_UNVERIFIED (not a paid order or merchant quote)'
- ].join('\n');
- status.textContent='Opening the public GitHub issue editor for your review. Your email address has not been included.';
- window.location.assign('https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new?'+new URLSearchParams({title:title,body:body}).toString());
-});
-})();
-</script>
+  <main class="shell">
+    <header class="top">
+      <div class="brand"><span class="mark" aria-hidden="true"></span>MATCH OS</div>
+      <div class="top-actions">
+        <a href="/video-find/">FrameFind</a>
+        <button id="close" class="quiet" type="button" hidden>Close session</button>
+      </div>
+    </header>
+    <section class="chat" aria-label="Purchase chat">
+      <header class="session">
+        <ol class="stages" aria-label="Request progress">
+          <li id="stage-build" aria-current="step">Request</li>
+          <li id="stage-compare">Compare</li>
+          <li id="stage-confirm">Confirm</li>
+        </ol>
+        <div class="reference" id="reference" hidden>
+          <code id="ref"></code>
+          <span id="expiry" aria-hidden="true"></span>
+          <span id="expiry-label" class="sr-only"></span>
+        </div>
+      </header>
+      <div class="scroll" id="scroll" tabindex="0" aria-label="Conversation and request details">
+        <div id="welcome" class="welcome">
+          <h1>What are you<br class="wide"> looking to buy?</h1>
+          <p>Describe one purchase. We’ll help you specify it and decide whether to request a manual comparison.</p>
+          <button class="example quiet" id="example" type="button">Try an example</button>
+        </div>
+        <div id="messages" class="messages" role="log" aria-label="Chat messages"></div>
+        <div id="quick-actions" class="actions" hidden>
+          <button class="secondary" id="skip" type="button">No preference</button>
+        </div>
+        <section id="review" class="review" hidden aria-labelledby="review-title">
+          <h2 id="review-title" tabindex="-1">Review your request</h2>
+          <dl id="summary"></dl>
+          <p class="muted">Comparison is manual after you send. There are no quotes yet. You choose and pay the merchant directly if you decide to buy.</p>
+          <div class="actions">
+            <button class="primary" id="handoff" type="button">Review what to share</button>
+          </div>
+        </section>
+        <section id="sharing" class="review" hidden aria-labelledby="sharing-title">
+          <h2 id="sharing-title" tabindex="-1">Share for manual comparison</h2>
+          <p class="muted">Only the reviewed details above, your browser reference, reply email, consent and any valid campaign labels go to FormSubmit. Your chat transcript stays in this tab.</p>
+          <form id="demand" action="https://formsubmit.co/296eed7e458ed66fc7e10100fcdae788" method="post" autocomplete="off">
+            <input type="hidden" name="_next" value="https://yl124915300-dot.github.io/match-os/received.html">
+            <input type="hidden" name="_subject" value="MATCH OS Buyer Interest — self reported, not yet verified">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_url" value="https://yl124915300-dot.github.io/match-os/">
+            <input type="hidden" name="fee_policy" value="MATCH_OS_SUCCESS_ONLY_USD_1_V1">
+            <input type="hidden" name="transaction_state" value="SELF_REPORTED_REQUEST_NOT_ORDER">
+            <div id="payload" hidden></div>
+            <div class="trap" aria-hidden="true"><label>Leave blank <input name="_honey" tabindex="-1" autocomplete="off"></label></div>
+
+            <label for="email" class="label">Reply email</label>
+            <input id="email" type="email" name="email" autocomplete="off" maxlength="120" required aria-describedby="email-use">
+            <p id="email-use" class="muted">Used for follow-up on this request.</p>
+
+            <label class="check"><input name="fee_acknowledged" value="yes" type="checkbox" required><span>I agree to the proposed <strong>US$1 MATCH OS service fee only after a purchase is independently verified as successful.</strong> I would separately approve a PayPal payment. No fee is charged now, and PayPal checkout is currently unavailable.</span></label>
+            <label class="check"><input name="research_consent" value="yes" type="checkbox" required><span>I authorize <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a> to email these details to MATCH OS for manual comparison and request-specific follow-up.</span></label>
+            <p class="muted">FormSubmit says it keeps submissions for 30 days. The operator may keep the email for follow-up. Closing this tab only clears the local chat. <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit privacy terms</a>.</p>
+            <button class="primary" id="request-submit" type="submit" disabled>Continue to FormSubmit</button>
+            <p class="muted">FormSubmit may ask for a CAPTCHA. If you see an error or leave before it confirms, delivery is unknown.</p>
+          </form>
+          <details id="public-option">
+            <summary>Use a public GitHub issue instead</summary>
+            <p class="muted">GitHub receives the reviewed purchase details in the editor link. Your reply email and chat transcript are excluded. Sign in, review the issue and choose whether to publish it publicly.</p>
+            <button class="secondary" id="github" type="button">Share with GitHub issue editor</button>
+          </details>
+        </section>
+        <section id="ended" class="welcome" hidden>
+          <h1 id="end-title" tabindex="-1"></h1>
+          <p id="end-copy"></p>
+          <button id="restart" class="secondary" type="button">Start new session</button>
+        </section>
+      </div>
+
+      <div class="composer">
+        <div id="close-confirm" class="close-confirm" hidden>
+          <p>Close this local session and clear the chat?</p>
+          <div class="actions">
+            <button class="secondary" id="keep" type="button">Keep chatting</button>
+            <button class="primary" id="cancel" type="button">Cancel and clear</button>
+          </div>
+        </div>
+        <p id="feedback" class="feedback" role="alert"></p>
+        <form id="chat-form" autocomplete="off">
+          <div class="compose-row">
+            <label class="sr-only" for="message">Message</label>
+            <textarea id="message" rows="2" maxlength="400" autocomplete="off" spellcheck="false" aria-describedby="privacy-note" placeholder="Describe what you want to buy…" disabled></textarea>
+            <button type="submit" id="send" class="primary" disabled>Send <span aria-hidden="true">↑</span></button>
+          </div>
+        </form>
+        <p id="privacy-note" class="muted note">Rules-based chat in this tab · No AI or live checkout · Keep passwords, addresses and payment details out of the chat.</p>
+        <noscript><p>Enable JavaScript to start a purchase chat. <a href="/video-find/">Open FrameFind</a>.</p></noscript>
+      </div>
+    </section>
+    <footer class="foot">
+      <span>Manual comparison pilot</span>
+      <details>
+        <summary>Session &amp; privacy</summary>
+        <p>Chats expire after 30 minutes and clear on cancel, reload or page exit. Only a short-lived reference is kept in this tab for the return from FormSubmit.</p>
+        <p>The site uses HTTPS. Messages stay in this tab until you choose what to share. End-to-end encryption and server-side deletion are unavailable. Any details you send may be retained by the recipient.</p>
+      </details>
+    </footer>
+  </main>
+</body>
 </html>

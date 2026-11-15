@@ -1,21 +1,29 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex"><title>MATCH OS — Submission received</title>
-<style>body{background:#0c1118;color:#eef4fc;font:17px/1.6 system-ui,sans-serif;max-width:680px;padding:60px 20px;margin:auto}a{color:#93e5f5}h1{font-size:2.2rem;line-height:1.2}p{color:#b9ccdf}.box{background:#152536;border:1px solid #2e4459;padding:24px;border-radius:16px}</style></head>
-<body><p>MATCH OS / Buyer research pilot</p><div class="box"><h1>Thanks for sharing your purchase interest.</h1>
-<p>If you arrived here after the form service confirmed your submission, it has been sent for review. No purchase or reservation has been made. No seller offer, price, response time or matching outcome is guaranteed.</p>
-<p id="request-ref" hidden><strong>Provisional request reference:</strong> <code id="request-code"></code></p>
-<p>There is <strong>no payment now</strong>. The proposed MATCH OS service fee is US$1 only if a completed transaction is independently verified, and a separate PayPal payment would require your explicit approval. No PayPal payment link is active yet.</p>
-<p>If you provided an email address, we may contact you solely about that request. You can submit another distinct request at any time.</p>
-<p><a href="/match-os/">Submit another interest</a> · <a href="/video-find/">Return to product finder</a></p></div><script>
-(function(){
- try{
-  var value=JSON.parse(sessionStorage.getItem('matchos:last_request_reference')||'null');
-  sessionStorage.removeItem('matchos:last_request_reference');
-  if(!value || typeof value.ref!=='string' || !/^MO-[A-F0-9]{20}$/.test(value.ref))return;
-  if(Date.now()-Number(value.at)>1800000)return;
-  document.getElementById('request-code').textContent=value.ref;
-  document.getElementById('request-ref').hidden=false;
- }catch(err){}
-})();
-</script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'">
+  <title>MATCH OS — Request status</title>
+  <link rel="stylesheet" href="chat.css?v=1">
+  <script src="chat.js?v=1" defer></script>
+</head>
+<body>
+  <main class="receipt">
+    <div class="brand"><span class="mark" aria-hidden="true"></span>MATCH OS</div>
+    <section class="review">
+      <h1>Request status</h1>
+      <p>If FormSubmit confirmed your submission, it forwarded the request for manual review. This page cannot verify delivery to the operator’s inbox.</p>
+      <p id="request-ref" hidden>Local reference <code id="request-code"></code></p>
+      <p>The operator may reply with listings for you to compare. You decide whether to buy and pay the merchant directly. This page confirms no quote, purchase or payment.</p>
+      <p>The proposed MATCH OS fee is US$1 after an independently verified successful purchase and separate PayPal approval. PayPal checkout is currently unavailable.</p>
+      <div class="actions">
+        <a class="button primary" href="/match-os/">Start a new chat</a>
+        <a class="button secondary" href="/video-find/">Return to FrameFind</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
