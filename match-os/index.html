@@ -91,6 +91,7 @@ function mintRequestReference(){
   refInput.value=ref;
   refCreatedAt=Date.now();
   refDisplay.textContent=ref;
+  try{sessionStorage.setItem('matchos:last_request_reference',JSON.stringify({ref:ref,at:refCreatedAt}));}catch(err){/* optional, no account data */}
   return true;
 }
 mintRequestReference();
