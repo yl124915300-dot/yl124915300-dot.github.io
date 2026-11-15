@@ -1,5 +1,11 @@
-import { profiles } from './decision.js?v=4';
-import { catalogDocs, catalogNames } from './catalogs.js?v=4';
+import { profiles } from './decision.js?v=5';
+import { catalogDocs, catalogNames } from './catalogs.js?v=5';
+
+import { evidenceLabels } from './evidence.js?v=5';
+
+const statusLabels = {
+  confirmed: 'Confirmed match', candidate: 'Candidate · verify before buying', conflict: 'Conflicts with must-haves',
+};
 
 function element(tag, text, className) {
   const node = document.createElement(tag);
@@ -28,15 +34,45 @@ function moneyFields(row) {
   const { offer, total, listed } = row;
   const currency = offer.price?.currency;
   let price = 'Listed price unknown';
-  if (listed !== null) {
+  if (offer.price?.kind === 'observation') price = 'Observed ' + amount(offer.price.amount, currency);
+  else if (listed !== null) {
     price = offer.price.kind === 'giveaway' ? 'Free claim listed' :
       (offer.price.kind === 'from' ? 'From ' : '') + amount(offer.price.amount, currency);
   }
   const part = (name, value) => name + ' ' + (Number.isFinite(value) ? amount(value, currency) : 'unknown');
   return [
-    price + ' · ' + (total === null ? 'Final total unknown' : 'Total ' + amount(total, currency)),
+    price + ' · ' + (total === null ? 'Final total unknown' : (row.status === 'confirmed' ? 'Total ' : 'Reported total ') + amount(total, currency)),
     [part('Shipping', offer.shipping), part('Tax', offer.tax), part('Fees', offer.fees)].join(' · '),
   ];
+}
+
+function sourceEvidence(card, row) {
+  const source = row.provenance;
+  card.dataset.evidence = source.tier;
+  card.dataset.status = row.status;
+  card.append(element('p', evidenceLabels[source.tier], 'row-priority'));
+}
+
+function explainEvidence(extra, row) {
+  const source = row.provenance;
+  const observation = source.observedAt
+    ? 'Source date ' + (source.tier === 'observation' || source.tier === 'manual'
+      ? source.observedAt.slice(0, 10) : shortDate(source.observedAt))
+    : 'Source price date unknown';
+  const read = source.retrievedAt ? (source.tier === 'link' || source.tier === 'manual' ? 'Added ' : 'Retrieved ') +
+    shortDate(source.retrievedAt) : null;
+  extra.append(element('p', [observation, read].filter(Boolean).join(' · '), 'offer-meta'));
+  const identity = source.identity;
+  const fields = [
+    identity?.identifier && identity.type + ' ' + identity.identifier,
+    identity?.specification,
+    source.priceValidUntil && 'Price valid through ' + shortDate(source.priceValidUntil),
+    source.proof && source.proof.type + ' evidence record ' + source.proof.id,
+    source.scope?.city && [source.scope.city, source.scope.market].filter(Boolean).join(', '),
+  ].filter(Boolean);
+  if (fields.length) extra.append(element('p', fields.join(' · '), 'offer-meta'));
+  if (catalogDocs[row.offer.provider]) extra.append(sourceLink(
+    row.offer.provider === 'openprices' ? 'Open Prices · Open Database License' : 'Catalog source', catalogDocs[row.offer.provider]));
 }
 
 function renderOffer(row, title) {
@@ -49,8 +85,8 @@ function renderOffer(row, title) {
   const [price, components] = moneyFields(row);
   card.append(element('p', price, 'offer-price'));
   card.append(element('p', components, 'offer-meta'));
-  const note = row.pending.length ? 'Needs verification' : 'Known constraints met';
-  card.append(element('p', note + ' · ' + row.score + '/100 priority · ' +
+  sourceEvidence(card, row);
+  card.append(element('p', statusLabels[row.status] + ' · ' + row.score + '/100 priority · ' +
     Math.round(row.match * 100) + '% term match · ' + Math.round(row.evidence * 100) + '/100 evidence', 'row-priority'));
   if (row.pending.length) card.append(element('p', row.pending.join(' · '), 'offer-meta'));
   const fulfillment = [offer.city, offer.availability, offer.activation && 'Activation: ' + offer.activation,
@@ -60,8 +96,7 @@ function renderOffer(row, title) {
   card.append(element('p', fulfillment.join(' · '), 'offer-meta'));
   const extra = element('details', '', 'offer-details');
   extra.append(element('summary', 'Terms and evidence'));
-  extra.append(element('p', 'Checked ' + shortDate(offer.checkedAt) + (offer.priceTimestamp ?
-    ' · Catalog dated ' + shortDate(offer.priceTimestamp) : ' · Price timestamp unknown') + ' · Source evidence ' + Math.round(offer.confidence * 100) + '/100', 'offer-meta'));
+  explainEvidence(extra, row);
   extra.append(element('p', [
     'Seller region ' + (offer.sellerRegion || 'unknown'), 'Condition ' + (offer.condition || 'unknown'),
     offer.delivery?.label || 'Delivery / booking time unknown',
@@ -71,7 +106,7 @@ function renderOffer(row, title) {
   if (offer.raw?.priceChangedAt) {
     extra.append(element('p', 'Source last changed this price ' + shortDate(offer.raw.priceChangedAt), 'offer-meta'));
   }
-  if (offer.history) {
+  if (offer.history && offer.history.currency === offer.price?.currency) {
     const historic = offer.history;
     const gap = offer.price.amount - historic.amount;
     const difference = gap >= 0
@@ -79,8 +114,8 @@ function renderOffer(row, title) {
       : 'current listing is below the recorded low';
     extra.append(element('p', 'Catalog historical low ' + amount(historic.amount, historic.currency) +
       ' on ' + shortDate(historic.at) + ' · ' + difference, 'offer-meta offer-history'));
+    extra.append(sourceLink('Historical price record', historic.source));
   }
-  extra.append(sourceLink('Catalog API', catalogDocs[offer.provider]));
   card.append(extra, sourceLink('Review source ↗', offer.sourceUrl, 'secondary offer-link'));
   return card;
 }
@@ -88,14 +123,16 @@ function renderOffer(row, title) {
 function editionDelta(group, baseline) {
   if (!baseline || group === baseline || group.type !== 'pc_game') return null;
   for (const candidate of group.rows) {
-    const sameStore = baseline.rows.find(row => row.offer.storeId &&
+    if (candidate.provenance?.tier !== 'api') continue;
+    const sameStore = baseline.rows.find(row => row.provenance?.tier === 'api' && row.offer.storeId &&
       row.offer.storeId === candidate.offer.storeId && row.offer.price?.currency === candidate.offer.price?.currency &&
       row.offer.price?.kind === 'fixed');
     if (!sameStore || candidate.offer.price?.kind !== 'fixed') continue;
     const difference = candidate.offer.price.amount - sameStore.offer.price.amount;
     const comparison = difference === 0 ? 'same listed price' :
       amount(Math.abs(difference), candidate.offer.price.currency) + (difference > 0 ? ' more' : ' less');
-    return candidate.offer.merchant + ' · ' + comparison + ' than ' + baseline.title + ' before taxes and fees.';
+    return candidate.offer.merchant + ' · ' + comparison + ' than ' + baseline.title + ' before taxes and fees · CheapShark, retrieved ' +
+      shortDate(candidate.provenance.retrievedAt) + '.';
   }
   return null;
 }
@@ -110,7 +147,7 @@ export function renderComparison(container, groups, evaluated, preference) {
 
   const first = evaluated.find(row => !row.problems.length && row.offer.price?.kind !== 'giveaway');
   if (first) {
-    const label = first.pending.length ? 'Top candidate to verify' : 'Top ranked';
+    const label = first.status === 'confirmed' ? 'Highest priority confirmed match' : 'Highest priority candidate';
     container.append(element('p', label + ' · ' + first.offer.title +
       (first.offer.merchant ? ' · ' + first.offer.merchant : '') + ' · ' + first.score + '/100 priority', 'top-candidate'));
   }
@@ -128,7 +165,7 @@ export function renderComparison(container, groups, evaluated, preference) {
     const section = element('section', '', 'comparison-track');
     section.append(element('h4', heading));
     if (heading === 'Same game across stores') {
-      section.append(element('p', 'Grouped by CheapShark game ID and edition title. Activation, region and license terms can vary.', 'muted'));
+      section.append(element('p', 'Catalog records share the same game ID, edition title and currency. Confirm activation and regional terms before comparing checkout totals.', 'muted'));
     }
     if (heading === 'Other titles and editions') {
       section.append(element('p', 'Related titles can differ in content and activation. Compare release and license details at the source.', 'muted'));
@@ -187,11 +224,23 @@ export function renderIntent(container, intent, comparison, preference) {
     ' ' + weights[3] + '%.', 'score-guide muted'));
   if (intent.sharedBudget) section.append(element('p', 'Budget is shared. Individual prices do not establish the combined cost.', 'muted'));
   if (intent.requiresDelivery) section.append(element('p', 'Delivery is part of this request.', 'muted'));
-  const currencies = [...new Set(rows.map(row => row.offer.price?.currency || ''))];
+  const observations = rows.filter(row => row.provenance.tier === 'observation')
+    .sort((a, b) => b.provenance.observedAt.localeCompare(a.provenance.observedAt));
+  if (observations.length) {
+    const history = element('section', '', 'comparison-track');
+    history.append(element('h5', 'Dated observations from Open Prices'));
+    history.append(element('p', 'Shelf tags and receipts from the requested country. Local stock, current price and delivery remain unknown.', 'muted'));
+    const list = element('div', '', 'comparison-cards');
+    for (const row of observations) list.append(renderCategoryOffer(row));
+    history.append(list);
+    section.append(history);
+  }
+  const quotes = rows.filter(row => row.provenance.tier !== 'observation');
+  const currencies = [...new Set(quotes.map(row => row.offer.price?.currency || ''))];
   if (currencies.length > 1) section.append(element('p', 'Prices are grouped by currency. No exchange rate was applied.', 'muted'));
   for (const currency of currencies) {
     const currencyGroups = groups.filter(group => group.currency === currency);
-    const groupRows = rows.filter(row => (row.offer.price?.currency || '') === currency);
+    const groupRows = quotes.filter(row => (row.offer.price?.currency || '') === currency);
     const currencySection = element('section', '', 'comparison-track');
     if (currencies.length > 1) currencySection.append(element('h5', currency || 'Currency unknown'));
     const tracks = [
@@ -205,8 +254,9 @@ export function renderIntent(container, intent, comparison, preference) {
         const drawer = element('details', '', 'comparison-group');
         drawer.open = index === 0;
         drawer.append(element('summary', group.title + ' · ' + group.rows.length + (group.rows.length === 1 ? ' listing' : ' listings')));
-        drawer.append(element('p', group.horizontal ? intent.module.horizontal :
-          group.rows[0].identity ? 'Exact identity available for this listing' : 'Insufficient evidence of exact equivalence', 'muted'));
+        drawer.append(element('p', group.horizontal
+          ? (group.rows[0].provenance.tier === 'manual' ? 'Reported terms align · ' : '') + intent.module.horizontal
+          : 'Review this listing on its own', 'muted'));
         const list = element('div', '', 'comparison-cards');
         group.rows.slice(0, 6).forEach(row => list.append(renderCategoryOffer(row)));
         drawer.append(list);
@@ -229,24 +279,32 @@ export function renderIntent(container, intent, comparison, preference) {
 function renderCategoryOffer(row) {
   const { offer, priceBasis, runRate } = row;
   const manual = offer.provider === 'user';
+  const isHistory = row.provenance.tier === 'observation';
   const card = element('article', '', 'offer-card');
   card.dataset.provider = offer.provider;
   card.dataset.score = row.score;
   card.append(element('h5', [offer.merchant, manual ? 'Entered by you' : catalogNames[offer.provider]].filter(Boolean).join(' · ') ||
     offer.title));
   if (offer.merchant) card.append(element('p', offer.title, 'offer-meta'));
+  sourceEvidence(card, row);
   const [price, components] = moneyFields(row);
   card.append(element('p', price, 'offer-price'));
   card.append(element('p', components, 'offer-meta'));
   if (row.quantity > 1 && row.listed !== null) card.append(element('p',
     'Minimum order ' + row.quantity + ' packs · known subtotal and charges ' + amount(row.listed, offer.price.currency), 'offer-meta'));
-  card.append(element('p', row.relation, 'offer-meta'));
-  const status = row.problems.length ? 'Conflict with must-haves' : row.pending.length ? 'Needs verification' : 'Known constraints met';
-  card.append(element('p', status + (row.problems.length ? '' : ' · ' + row.score + '/100 priority'), 'row-priority'));
-  card.append(element('p', row.checks.map(check => ({ pass: 'Met', unknown: 'Unknown', conflict: 'Conflict' })[check.status] +
-    ' — ' + check.label).join(' · '), 'offer-meta'));
-  const facts = [...row.facts.filter(Boolean), offer.delivery?.label].filter(Boolean);
-  if (facts.length) card.append(element('p', facts.join(' · '), 'offer-meta'));
+  card.append(element('p', statusLabels[row.status] + (row.problems.length || isHistory || !offer.price
+    ? '' : ' · ' + row.score + '/100 priority'), 'row-priority'));
+  if (isHistory) {
+    card.append(element('p', [row.provenance.observedAt.slice(0, 10), row.provenance.scope.city,
+      row.provenance.identity.specification].filter(Boolean).join(' · '), 'offer-meta'));
+  } else {
+    card.append(element('p', row.relation, 'offer-meta'));
+    card.append(element('p', row.checks.map(check => ({
+      pass: manual ? 'Reported fit' : 'Met', unknown: 'Unknown', conflict: 'Conflict',
+    })[check.status] + ' — ' + check.label).join(' · '), 'offer-meta'));
+    const facts = [...row.facts.filter(Boolean), offer.delivery?.label].filter(Boolean);
+    if (facts.length) card.append(element('p', facts.join(' · '), 'offer-meta'));
+  }
   if (priceBasis) {
     card.append(element('p', amount(priceBasis.amount, offer.price.currency) + ' per ' + priceBasis.unit + ' at listed price' +
       (priceBasis.total === null ? ' · delivered unit cost unknown' :
@@ -261,21 +319,20 @@ function renderCategoryOffer(row) {
   }
   const evidence = element('details', '', 'offer-details');
   evidence.append(element('summary', 'Terms and evidence'));
-  evidence.append(element('p',
-    (manual ? 'Entered ' : 'Catalog read ') + shortDate(offer.checkedAt) +
-    (offer.priceTimestamp ? (manual ? ' · Observed ' : ' · Catalog updated ') + shortDate(offer.priceTimestamp) : ' · Price timestamp unknown') +
-    ' · Source evidence ' + Math.round(offer.confidence * 100) + '/100' +
-    ' · Listing evidence after gaps ' + Math.round(row.evidence * 100) + '/100', 'offer-meta'));
+  explainEvidence(evidence, row);
+  if (row.pending.length) evidence.append(element('p', row.pending.join(' · '), 'offer-meta'));
   if (row.unitPriority) evidence.append(element('p', 'Cost priority includes comparable unit cost.', 'offer-meta'));
-  const [fit, cost, , fulfillment] = row.components.map(component => Math.round(component * 100));
-  evidence.append(element('p', 'Fit ' + fit + '/100 · Cost ' + cost + '/100 · Review, timing or policy evidence ' +
-    fulfillment + '/100', 'offer-meta'));
-  if (manual) evidence.append(element('p', 'User-entered observation. Merchant terms and availability remain unverified.', 'offer-meta'));
+  if (offer.price && !isHistory) {
+    const [fit, cost, , fulfillment] = row.components.map(component => Math.round(component * 100));
+    evidence.append(element('p', 'Fit ' + fit + '/100 · Cost ' + cost + '/100 · Review, timing or policy evidence ' +
+      fulfillment + '/100', 'offer-meta'));
+  }
+  if (offer.returns?.label) evidence.append(element('p', offer.returns.label, 'offer-meta'));
   if (offer.rating) evidence.append(element('p', 'Merchant reviews ' + offer.rating.value + '/' + offer.rating.scale +
     ' (' + offer.rating.count + ')', 'offer-meta'));
   if (offer.restrictions) evidence.append(element('p', offer.restrictions, 'offer-meta'));
   if (offer.expires) evidence.append(element('p', 'Listing expires ' + shortDate(offer.expires), 'offer-meta'));
-  if (catalogDocs[offer.provider]) evidence.append(sourceLink('Catalog API', catalogDocs[offer.provider]));
-  card.append(evidence, sourceLink('Review source ↗', offer.sourceUrl, 'secondary offer-link'));
+  card.append(evidence, sourceLink(isHistory ? 'Review dated record ↗' : 'Review source ↗',
+    offer.sourceUrl, 'secondary offer-link'));
   return card;
 }

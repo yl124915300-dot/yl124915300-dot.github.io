@@ -8,7 +8,7 @@ from playwright.sync_api import expect, sync_playwright
 
 SITE = os.getenv("MATCH_OS_URL", "https://yl124915300-dot.github.io/match-os/")
 SOURCE_HOSTS = {
-    "www.cheapshark.com", "www.gamerpower.com", "api-core.livingsocial.com",
+    "www.cheapshark.com", "www.gamerpower.com", "api-core.livingsocial.com", "prices.openfoodfacts.org",
 }
 
 
@@ -80,6 +80,8 @@ def paid_games(page):
     assert base_cards.count() >= 2
     merchants = []
     for card in base_cards.all():
+        expect(card).to_have_attribute("data-evidence", "api")
+        expect(card).to_have_attribute("data-status", "candidate")
         expect(card.locator(".offer-price")).to_contain_text("Final total unknown")
         link = card.locator("a.offer-link").get_attribute("href")
         assert urlparse(link).hostname == "www.cheapshark.com" and urlparse(link).path == "/redirect"
@@ -133,6 +135,8 @@ def local_services(page):
     assert "Austin" in args["q"][0] and "minutes" not in args["q"][0]
     cards = page.locator(".offer-card[data-provider=livingsocial]")
     assert cards.count() >= 2
+    expect(cards.first).to_have_attribute("data-evidence", "api")
+    expect(cards.first).to_have_attribute("data-status", "candidate")
     expect(cards.first.locator(".offer-price")).to_contain_text("From USD")
     expect(cards.first).to_contain_text("Unknown — Appointment deadline")
     print("LOCAL_CARDS", cards.count(), cards.first.locator(".offer-price").inner_text())
@@ -151,8 +155,9 @@ def goods_and_edit(page):
     expect(route).to_contain_text("Verify compatibility with iphone 15")
     expect(route).to_contain_text("Everyday essentials · oat milk")
     expect(route).to_contain_text("Delivery required")
-    expect(page.locator("#live-search")).to_be_hidden()
-    expect(page.locator("#live-status")).to_contain_text("No sufficient live quotes")
+    expect(page.locator("#live-search")).to_be_enabled()
+    expect(page.locator("#catalog-consent")).to_contain_text("Open Prices receives the product name")
+    expect(page.locator("#live-status")).to_contain_text("No external search has run")
     expect(page.locator("#live-results .offer-card")).to_have_count(0)
     page.locator("#quote-entry summary").click()
     quote_form = page.locator("#quote-form")
@@ -168,8 +173,8 @@ def goods_and_edit(page):
     page.locator("#send").click()
     expect(route).not_to_contain_text("Electronics")
     expect(route).to_contain_text("Everyday essentials")
-    expect(page.locator("#live-search")).to_be_hidden()
-    assert not traffic, "Blocked modules sent a provider request"
+    expect(page.locator("#live-search")).to_be_enabled()
+    assert not traffic, "A source received a query before consent"
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
     cleared(page)
     print("GOODS_ROUTE_OPTIONS_EDIT_NO_NETWORK_AND_CLEAR_OK")
@@ -181,19 +186,107 @@ def mixed_live(page):
     expect(page.locator("#route-preview")).to_contain_text("Everyday essentials")
     expect(page.locator("#route-preview")).to_contain_text("Local services")
     search(page, traffic)
-    expect(page.locator('[data-module="consumables"]')).to_contain_text("No sufficient live quotes")
+    expect(page.locator("#live-status")).to_contain_text("Open Prices")
     expect(page.locator('[data-module="services"] .offer-card').first).to_be_visible()
     expect(page.locator("#live-results")).to_contain_text("Combined budget fit is unverified")
-    assert len(traffic) == 1 and "oat" not in traffic[0].url
+    services = [request for request in traffic if urlparse(request.url).hostname == 'api-core.livingsocial.com']
+    assert len(services) == 1 and "oat" not in services[0].url
+    products = [request for request in traffic if urlparse(request.url).hostname == 'prices.openfoodfacts.org']
+    assert products and all("Austin" not in request.url and "massage" not in request.url for request in products)
     cleared(page)
     print("MIXED_ROUTE_ISOLATION_OK")
+
+
+def observations(page, with_barcode):
+    # Public product query for QA. The observed prices come from the real public API.
+    traffic = source_requests(page)
+    item = "grocery: Nutella barcode 3017620422003" if with_barcode else "grocery: Nutella"
+    brief(page, f"Find iPhone 15 128 GB + {item} in Grenoble, France under EUR 800 just comparing.")
+    consent = page.locator("#catalog-consent")
+    expect(consent).to_contain_text("only public barcode 3017620422003" if with_barcode else "the product name “Nutella”")
+    search(page, traffic)
+    paths = [urlparse(request.url) for request in traffic]
+    assert [url.path for url in paths] == (["/api/v1/prices"] if with_barcode else ["/api/v1/products", "/api/v1/prices"])
+    assert all(request.response() and request.response().status == 200 for request in traffic)
+    for url in paths:
+        params = parse_qs(url.query)
+        assert params.keys() <= {"product_code", "product_code__in", "product_name__like", "price_count__gte",
+                                 "order_by", "size", "proof__type"}
+        assert all(term not in url.query for term in ("Grenoble", "iPhone", "France", "EUR"))
+    cards = page.locator(".offer-card[data-evidence=observation]")
+    expect(cards.first).to_be_visible()
+    expect(cards.first).to_contain_text("Dated price observation")
+    expect(cards.first).to_have_attribute("data-status", "candidate")
+    expect(cards.first.locator(".offer-price")).to_contain_text("Observed EUR")
+    expect(cards.first.locator(".offer-price")).to_contain_text("Final total unknown")
+    url = urlparse(cards.first.locator("a.offer-link").get_attribute("href"))
+    assert url.hostname == "prices.openfoodfacts.org" and re.fullmatch(r"/api/v1/prices/\d+", url.path)
+    expect(page.locator('[data-module="electronics"]')).to_contain_text("No sufficient live quotes")
+    expect(page.locator("#live-results")).to_contain_text("Combined budget fit is unverified")
+    expect(page.locator(".offer-card[data-status=confirmed]")).to_have_count(0)
+    cards.first.get_by_text("Terms and evidence", exact=True).click()
+    expect(cards.first).to_contain_text("Source date")
+    expect(cards.first).to_contain_text("Retrieved")
+    print("OPEN_PRICES_OBSERVATIONS", cards.count(), "barcode" if with_barcode else "name")
+    cleared(page)
+
+
+def manual_and_expiry(page):
+    # Synthetic URL and amounts are used only to test local behavior.
+    traffic = source_requests(page)
+    page.clock.install()
+    brief(page, "Find iPhone 15 in Austin, United States under USD 100 just comparing.")
+    expect(page.locator("#live-search")).to_be_hidden()
+    page.locator("#quote-entry summary").click()
+    form = page.locator("#quote-form")
+    form.locator('[name=url]').fill("https://api.bestbuy.com/v1/products/TEST-ONLY")
+    form.get_by_role("button", name="Add to comparison").click()
+    link = page.locator(".offer-card[data-evidence=link]")
+    expect(link).to_have_count(1)
+    expect(link).to_contain_text("Listed price unknown")
+    for name, value in {"title": "Synthetic QA only", "merchant": "Synthetic",
+                        "url": "https://example.test/qa-only", "merchantSku": "TEST-ONLY", "amount": "40",
+                        "currency": "USD", "observedAt": page.evaluate("new Date().toISOString().slice(0, 10)")}.items():
+        form.locator(f"[name={name}]").fill(value)
+    form.get_by_role("button", name="Add to comparison").click()
+    quote = page.locator(".offer-card[data-evidence=manual]")
+    expect(quote).to_have_count(1)
+    expect(quote).to_have_attribute("data-status", "candidate")
+    expect(page.locator(".offer-card[data-status=confirmed]")).to_have_count(0)
+    assert not traffic
+    page.clock.fast_forward(30 * 60_000)
+    expect(page.locator("#end-title")).to_have_text("Session expired")
+    expect(page.locator("#live-results .offer-card")).to_have_count(0)
+    expect(page.locator("#messages")).to_be_empty()
+    expect(page.locator("#reference")).to_be_hidden()
+    print("MANUAL_LINK_TIERS_AND_TTL_OK")
+
+
+def pending_cancel(page):
+    traffic = source_requests(page)
+    brief(page, "Find grocery: Nutella in Grenoble, France under EUR 80 just comparing.")
+    # Synthetic network failure after cancellation. No product response is injected.
+    pending = []
+    page.route("https://prices.openfoodfacts.org/**", lambda route: pending.append(route))
+    with page.expect_request(lambda request: urlparse(request.url).hostname == "prices.openfoodfacts.org"):
+        page.locator("#live-search").click()
+    expect(page.locator("#live-status")).to_contain_text("Searching the authorized catalogs")
+    cleared(page)
+    assert len(traffic) == 1
+    for route in pending:
+        route.abort()
+    expect(page.locator("#live-results")).to_be_empty()
+    print("PENDING_REQUEST_CANCEL_CLEARED_OK")
 
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(channel="chrome", args=["--no-sandbox"])
     failures = []
     cases = [("desktop", paid_games), ("mobile", claim_games), ("local", local_services),
-             ("goods-desktop", goods_and_edit), ("goods-mobile", goods_and_edit), ("mixed-mobile", mixed_live)]
+             ("goods-desktop", goods_and_edit), ("goods-mobile", goods_and_edit), ("mixed-mobile", mixed_live),
+             ("observations-desktop", lambda page: observations(page, False)),
+             ("observations-mobile", lambda page: observations(page, True)),
+             ("manual-expiry", manual_and_expiry), ("pending-cancel", pending_cancel)]
     for name, case in cases:
         if os.getenv("MATCH_OS_CASE") not in (None, name):
             continue

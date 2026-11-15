@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api-core.livingsocial.com https://www.cheapshark.com https://www.gamerpower.com; form-action 'self' https://formsubmit.co; base-uri 'none'">
-  <meta name="description" content="Describe a purchase in MATCH OS. Review a short-lived buying request and compare live catalog listings.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api-core.livingsocial.com https://www.cheapshark.com https://www.gamerpower.com https://prices.openfoodfacts.org; form-action 'self' https://formsubmit.co; base-uri 'none'">
+  <meta name="description" content="Describe a purchase in MATCH OS. Review a short-lived buying request and review prices with their source evidence.">
   <meta name="color-scheme" content="dark">
   <title>MATCH OS — Purchase chat</title>
-  <link rel="stylesheet" href="chat.css?v=4">
-  <script type="module" src="chat.js?v=4"></script>
+  <link rel="stylesheet" href="chat.css?v=5">
+  <script type="module" src="chat.js?v=5"></script>
 </head>
 <body>
   <main class="shell">
@@ -68,12 +68,12 @@
             <div id="live-results" class="offer-list" aria-label="Catalog and local quote comparison"></div>
             <details id="quote-entry" class="other-sources" hidden>
               <summary>Compare a merchant quote you found</summary>
-              <p class="muted">Enter only listing details. Quotes stay in this tab. Leave unlisted terms blank.</p>
+              <p class="muted">Add a listing URL on its own, or enter a price with its observation date and known terms. Entries stay in this tab.</p>
               <form id="quote-form" autocomplete="off">
                 <label for="quote-target">Requested item</label>
                 <select id="quote-target"></select>
                 <div id="quote-fields" class="quote-fields"></div>
-                <button type="submit" class="secondary">Add quote to comparison</button>
+                <button type="submit" class="secondary">Add to comparison</button>
                 <p id="quote-feedback" class="muted" role="status"></p>
               </form>
             </details>
@@ -143,7 +143,7 @@
             <button type="submit" id="send" class="primary" disabled>Send <span aria-hidden="true">↑</span></button>
           </div>
         </form>
-        <p id="privacy-note" class="muted note">Rules-based chat · Optional live public catalog search after you consent · No AI or in-app checkout · Never enter passwords, addresses or payment details.</p>
+        <p id="privacy-note" class="muted note">Rules-based chat · Optional public source search after you consent · No AI or in-app checkout · Never enter passwords, addresses or payment details.</p>
         <noscript><p>Enable JavaScript to start a purchase chat. <a href="/video-find/">Open FrameFind</a>.</p></noscript>
       </div>
     </section>

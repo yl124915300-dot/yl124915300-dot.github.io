@@ -186,3 +186,21 @@
 - 价格展示区分商家标价、起价、已知收费、最终价和缺失数据。用户录入内容标识来源级证据，保留采样日期，不视为系统核验的库存或新报价。币种独立展示。优先级由规则权重计算，缺证扣分，不能当成交概率。第三方接收方自行管理保留；HTTPS 用于传输，当前没有服务端会话删除或端到端加密。
 - 待接来源：[Best Buy](https://bestbuyapis.github.io/api-documentation/) 需要 API key 和安全的接入方式；[eBay Browse](https://developer.ebay.com/api-docs/buy/static/buy-requirements.html) 需要应用 OAuth 与生产权限；[Kroger Developer](https://developer.kroger.com/) 仍待验证项目凭证、店点和可用价格权限；[Open Prices](https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/tutorials/product-prices/) 收集标有日期的价签及小票，暂未接入，无法据此确认实时结账价。Google/eBay 出站搜索链接不参与实时排名。未启用旅行实时查询。
 - 验收入口：[MATCH OS 发布前后一致性检查](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-intake-smoke.yml)、[云端 Chrome 和规则测试](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-live-offer-e2e.yml)。`node --test match-os-probe/*.test.mjs` 只使用明确标记的合成单元数据；本地 Chrome 已通过六条桌面和 iPhone 13 尺寸流程，三个目录实际返回 HTTP 200。发布工作流再次对公开域名核对源码并复测。测试不提交人工表单、创建预约、订单或支付。
+
+## 2026-11-15 商品来源与报价证据
+
+本轮开发以商品数据和验证为优先。四个现有品类及原 GitHub Pages 入口继续使用。公开试运营保持暂停，MATCH OS 专用 PayPal USD 1 成功服务费入口关闭。账面沿用已核验真人买家 0、商家成交 0、PayPal 服务费净到账 USD 0。
+
+| 数据源 | 项目权限及匿名 HTTP 实测 | 可用字段、地理范围与使用条件 |
+| --- | --- | --- |
+| [eBay Browse](https://developer.ebay.com/develop/api/buy/browse_api) | **阻塞。** 匿名 Browse 搜索返回 403（HTML，无法进一步归因），无 CORS 允许头。生产应用 OAuth、审批及授权请求的 CORS 均未验证。 | 搜索与详情按 [支持的市场](https://developer.ebay.com/api-docs/buy/static/ref-marketplace-supported.html) 运行。应用 OAuth client credentials 可用于目录读操作；生产访问需 [eBay 审核及协议](https://developer.ebay.com/api-docs/buy/static/buy-requirements.html)。可见刊登价、币种、刊登 ID、卖家、成色、类目规格、预计可用性、配送与退货。刊登价与预计库存不能确认具体买家的结账条件。 |
+| [Best Buy Products](https://bestbuyapis.github.io/api-documentation/) | **阻塞。** 美国官方 Products 端点匿名 GET 返回 403，响应明确缺少 API key。项目 key 和带鉴权的 CORS 未验证。 | 有 SKU、UPC、型号、规格、标价与促销价、线上可用性与门店数据；通用店内标记不代表特定门店现货。网站使用受 [API 条款、品牌展示及授权范围](https://developers.bestbuy.com/legal) 约束，Commerce API 单独预批。 |
+| [Kroger Public Products](https://www.postman.com/kroger/the-kroger-co-s-public-workspace/documentation/ki6utqb/kroger-public-apis) | **阻塞。** 匿名 GET 返回 401（Bearer invalid_token），无 CORS 允许头，项目 OAuth 权限、带鉴权的 CORS 和本项目商用许可未核验。 | 注册开发者应用并用 client credentials 取得产品读取权限。适用于有覆盖的美国 Kroger 旗下门店。产品 ID/UPC、包装规格及配送方式可查询；门店价和可用性需带 locationId 核实，不能以通用商品记录证明库存、区域配送或结账总价。 |
+| [Open Prices](https://openfoodfacts.github.io/documentation/docs/Open-prices/prices/prices_list/) | **匿名只读可用，接入历史观测。** 产品列表、按条码取商店原价签以及按 ID 查看价格记录均返回 200，允许原 GitHub Pages Origin；浏览器调用省略凭据。 | 国际社区数据，覆盖由记录决定。本轮用法国 Nutella 条码 3017620422003 核验真实价签观察记录。保留原币种、条码、规格、商店、国家/城市、观察日、采集时间和票据/价签记录 ID。遵循 [ODbL、来源署名及再使用条件](https://openfoodfacts.github.io/open-prices/guides/data/)。页面只临时读取和署名展示，不存储或再发布合并后的数据库，也不复制票据照片或贡献者字段。提供的是历史记录，当前价、库存、送达资格及结账总价未知。 |
+
+- Open Prices 先由聊天识别日用品。用户授权后，直接发送明确标出的有效商品条码，或发送经审阅的商品名称并从返回的完全同名商品中限定最多三个条码。对单次有限查询中的公开、日期一致且有价签或小票记录的商品，在本机按国家筛选。只显示观察记录，规格不明时留空；同名不同条码分别留证。城市、预算、收件信息和聊天原文不发送。没有命中时保留人工报价及链接入口。
+- 报价卡显示最新或较旧的 API 列表、带日期的观测、用户录入或未验证链接。API 读取时间与上游日期分列。读取后 15 分钟或来源时间超过 24 小时的 API 记录重新评估时降级。只有真实 API 确认固定总价、有效期限、精确身份、区域资格、库存或预约条件、退款/取消及其他硬约束时才进入可确认匹配与组合金额。用户录入的网址只供点击核对，历史观察和自行录入不确认预算；手填总额仅显示为所填条款的合计。API 显示的起价、游戏商店挂牌价和领取状态仍是候选。
+- 购买横向比较用同身份、同币种及同类价格与可比条款。游戏相同目录 ID 的记录可按目录展示，激活、购买地区和结账条件仍待核实。日用品按重量、体积或件数比较同口径单位成本，订阅、起订和配送门槛单独检查；观察记录不进入现价或预算排序。规则分用于排序，证据及缺口在卡中可展开。没有汇率转换。
+- 原有 30 分钟本地会话、取消/离页清理、FrameFind、FormSubmit 和 GitHub Issue 备选保持可用。查询只在明确授权后发起。FormSubmit 和 GitHub 分别披露接收方及分享内容；HTTPS 用于传输，接收方控制自身数据保留。
+- 复现命令：`node --test match-os-probe/*.test.mjs` 和 `python3 match-os-probe/browser_compare.py`。规则测试数据为合成测试用例，浏览器用公开查询验证真实目录并验证授权、失败和清理。[Pages 源码一致性检查](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-intake-smoke.yml) · [云端 Chrome 验收](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-live-offer-e2e.yml)。
+- 下一道阻碍是取得一个明确允许 MATCH OS 消费者比价用途的生产商品目录访问权限，并在私有服务端管理凭据，从允许的消费市场验证一条完整、仍可购买的真实报价。公开 Pages 不存放商家凭据。

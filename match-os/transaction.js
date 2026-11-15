@@ -1,9 +1,11 @@
-import { profiles } from './decision.js?v=4';
-import { electronics, modelReference } from './modules/electronics.js?v=4';
-import { consumables, productType } from './modules/consumables.js?v=4';
-import { services, serviceDefinition } from './modules/services.js?v=4';
-import { games } from './modules/games.js?v=4';
-import { clamp, constraint, date, key, number, quoteCost, text } from './modules/shared.js?v=4';
+import { profiles } from './decision.js?v=5';
+import { electronics, modelReference } from './modules/electronics.js?v=5';
+import { consumables, productType } from './modules/consumables.js?v=5';
+import { services, serviceDefinition } from './modules/services.js?v=5';
+import { games } from './modules/games.js?v=5';
+import { clamp, constraint, date, key, number, quoteCost, text } from './modules/shared.js?v=5';
+
+import { assessEvidence, publicBarcodes, quoteStatus, withoutBarcodes } from './evidence.js?v=5';
 
 export const modules = Object.freeze({ electronics, consumables, services, games });
 export const providers = Object.freeze({
@@ -13,7 +15,7 @@ export const providers = Object.freeze({
   bestbuy: { label: 'Best Buy', module: 'electronics', mode: 'blocked', capability: 'Project API key and private connection needed' },
   ebay: { label: 'eBay Browse', module: 'electronics', mode: 'blocked', capability: 'OAuth and production approval needed' },
   kroger: { label: 'Kroger', module: 'consumables', mode: 'blocked', capability: 'OAuth and location-specific product access needed' },
-  openprices: { label: 'Open Prices', module: 'consumables', mode: 'observations', capability: 'Dated receipt and shelf observations, live checkout unverified' },
+  openprices: { label: 'Open Prices', module: 'consumables', mode: 'observations', capability: 'Dated receipt and shelf records by exact product name or public barcode' },
 });
 
 const gameWords = /\b(?:(?:pc|windows|digital|steam|video)\s+games?|games?\s*[:：]|(?:free\s+)?games?\s*$|for pc|on steam|lego batman|baldur['’]s gate|cyberpunk 2077)\b|电脑游戏|PC游戏|数字游戏/iu;
@@ -59,22 +61,27 @@ export function routeRequest(brief) {
   });
   const intents = parts.map(({ module, item, delivery }, index) => {
     const category = module?.id ?? 'unclassified';
+    const codes = [...new Set(publicBarcodes(item + (parts.length === 1 ? ' ' + brief.details : '')).map(([, code]) => code))];
+    const barcode = module === consumables && codes.length === 1 && brief.place.code !== 'Other' ? codes[0] : null;
+    const cleanItem = withoutBarcodes(item).replace(/[\s,;，；]+$/u, '');
     // Shared details can contain different requirements for different items. Unassigned details stay pending.
-    const intentBrief = parts.length === 1 ? brief : { ...brief, item, details: '' };
-    const requirements = module?.requirements(intentBrief, item);
+    const canReadObservations = module === consumables && brief.place.code !== 'Other' &&
+      codes.length < 2 && (barcode || (cleanItem.length >= 2 && cleanItem.length <= 100));
+    const intentBrief = { ...brief, item: cleanItem, details: parts.length === 1 ? withoutBarcodes(brief.details) : '' };
+    const requirements = module?.requirements(intentBrief, cleanItem);
     let dependency = null;
     if (module === electronics && requirements.accessory && targets.length === 1 && !requirements.hard.compatibleWith) {
       requirements.hard.compatibleWith = targets[0];
       dependency = 'Verify compatibility with ' + targets[0];
     }
     const title = module === games ? requirements.title : module === services
-      ? serviceDefinition(item) || item : item;
+      ? serviceDefinition(cleanItem) || cleanItem : cleanItem;
     const supported = Object.entries(providers).filter(([, provider]) =>
       provider.module === category && !provider.mode && provider.markets.includes(brief.place.code));
     return {
-      id: String(index), module, item, title, category, brief: intentBrief,
+      id: String(index), module, item: cleanItem, title, barcode, category, brief: intentBrief,
       market: brief.place.code, when: brief.when, requirements, dependency,
-      providers: supported.map(([provider]) => provider),
+      providers: [...supported.map(([provider]) => provider), ...(canReadObservations ? ['openprices'] : [])],
       browseFreeGames: requirements?.browseFreeGames || false,
       requiresDelivery: (sharedDelivery || delivery) && (module === electronics || module === consumables),
       sharedBudget: parts.length > 1,
@@ -86,9 +93,10 @@ export function routeRequest(brief) {
 
 export const quoteFields = [
   ['title', 'Listing title'], ['merchant', 'Merchant'], ['url', 'Source URL (HTTPS)'],
+  ['merchantSku', 'Merchant SKU or option ID'], ['returnTerms', 'Return or cancellation terms'],
   ['amount', 'Merchant price'], ['currency', 'Currency code', 'USD'],
   ['priceKind', 'Price type (fixed or from)', 'fixed'],
-  ['shipping', 'Shipping'], ['tax', 'Tax'], ['fees', 'Other fees'],
+  ['shipping', 'Shipping for this order'], ['tax', 'Tax for this order'], ['fees', 'Other fees for this order'],
   ['observedAt', 'Date observed or published (YYYY-MM-DD)'],
 ];
 
@@ -106,6 +114,14 @@ export function localQuote(intent, raw, id, now = new Date().toISOString()) {
   } catch {
     throw new Error('Enter a valid HTTPS listing URL.');
   }
+  const recorded = {
+    id: String(id), provider: 'user', category: intent.category,
+    title: text(raw.title) || new URL(sourceUrl).hostname, merchant: text(raw.merchant),
+    sourceUrl, checkedAt: now, attrs: intent.module.normalize(raw),
+  };
+  if (!text(raw.amount)) {
+    return { ...recorded, price: null, confidence: 0, provenance: { tier: 'link', retrievedAt: now, source: sourceUrl } };
+  }
   if (!text(raw.title) || !text(raw.merchant) || !observedAt || Date.parse(observedAt) > Date.parse(now) ||
       amount === null || !/^[A-Z]{3}$/u.test(currency) || !['fixed', 'from'].includes(priceKind)) {
     throw new Error('Enter a listing title, merchant, price, three-letter currency and a valid observation date.');
@@ -114,11 +130,12 @@ export function localQuote(intent, raw, id, now = new Date().toISOString()) {
     if (text(raw[field]) && number(raw[field]) === null) throw new Error('Enter non-negative numbers for known charges.');
   }
   return {
-    id: String(id), provider: 'user', category: intent.category, title: text(raw.title), merchant: text(raw.merchant),
-    sourceUrl, price: { amount, currency, kind: priceKind }, priceTimestamp: observedAt, checkedAt: now,
+    ...recorded, price: { amount, currency, kind: priceKind }, priceTimestamp: observedAt,
+    provenance: { tier: 'manual', observedAt, retrievedAt: now, source: sourceUrl,
+      identity: { type: 'Reported merchant SKU or option ID', identifier: text(raw.merchantSku) } },
+    returns: text(raw.returnTerms) ? { label: text(raw.returnTerms), verified: false } : null,
     shipping: number(raw.shipping), tax: number(raw.tax), fees: number(raw.fees), confidence: 0.47,
     deliveryDate: date(raw.deliveryDate), delivery: date(raw.deliveryDate) ? { label: 'Arrival ' + raw.deliveryDate } : null,
-    attrs: intent.module.normalize(raw),
   };
 }
 
@@ -149,23 +166,25 @@ function comparisonCost(intent, offer, quantity) {
 function evaluatedOffer(offer, intent, weights, preference, now) {
   const result = intent.module.assess(offer.attrs, intent, offer, now);
   if (result.relevant === false) return null;
-  const { listed, total, uncertainQuantity } = comparisonCost(intent, offer, result.quantity);
+  const provenance = assessEvidence(offer, intent, now);
+  const { listed, total, uncertainQuantity } = provenance.tier === 'observation'
+    ? { listed: null, total: null } : comparisonCost(intent, offer, result.quantity);
   const checks = [...result.checks];
   const stale = offer.provider === 'user' ?
     !offer.priceTimestamp || new Date(now).toISOString().slice(0, 10) > offer.priceTimestamp.slice(0, 10) :
-    Boolean(offer.priceTimestamp && now - Date.parse(offer.priceTimestamp) > 24 * 60 * 60 * 1000);
+    provenance.stale || provenance.tier === 'observation';
   const sameCurrency = offer.price?.currency === intent.brief.budget.currency;
   const amount = intent.brief.budget.amount;
   if (offer.expires) checks.push(constraint('Listing validity', Date.parse(offer.expires), now, (end, current) => end >= current));
-  if (stale) checks.push(constraint('Current price (older observation)', null, true));
-  const priceForBudget = sameCurrency && !stale ? total ?? (listed > amount ? listed : null) : null;
+  if (stale && provenance.tier === 'manual') checks.push(constraint('Current price (older observation)', null, true));
+  const priceForBudget = sameCurrency && !stale ? total ?? (listed !== null && listed > amount ? listed : null) : null;
   checks.push(constraint(sameCurrency ? (intent.sharedBudget ? 'Individual listing fits the shared budget ceiling' : 'Final cost fits budget') :
     'Budget currency or price unavailable', priceForBudget, amount, (a, b) => a <= b));
   if (intent.sharedDetails || intent.requirements.unmatched?.length) checks.push(constraint('Other must-haves need evidence or clarification', null, true));
   let costFit = sameCurrency && listed !== null && !stale ? clamp(1 - listed / amount) * (total === null ? 0.6 : 1) : 0;
   if (uncertainQuantity) costFit = Math.min(0.25, costFit);
   const problems = checks.filter(check => check.status === 'conflict').map(check => check.label);
-  const pending = checks.filter(check => check.status === 'unknown').map(check => check.label);
+  const pending = [...checks.filter(check => check.status === 'unknown').map(check => check.label), ...provenance.pending];
   const evidence = clamp(offer.confidence * (stale ? 0.45 : 1) - Math.min(0.4, pending.length * 0.05));
   const rating = offer.rating ? offer.rating.value / offer.rating.scale * offer.rating.count / (offer.rating.count + 25) : 0;
   const softFit = result.soft.length ? result.soft.filter(check => check.status === 'pass').length / result.soft.length : null;
@@ -175,7 +194,8 @@ function evaluatedOffer(offer, intent, weights, preference, now) {
   const components = [fit, costFit, evidence, quality];
   const score = Math.round(components.reduce((sum, part, index) => sum + part * weights[index], 0));
   const identity = intent.module.identity(offer.attrs, offer);
-  return { ...result, offer, listed, total, score, problems, pending, evidence, match: fit, identity, checks, stale, components };
+  const row = { ...result, offer, provenance, listed, total, score, problems, pending, evidence, match: fit, identity, checks, stale, components };
+  return { ...row, status: quoteStatus(row) };
 }
 
 export function evaluateIntent(intent, offers, preference = 'balanced', now = Date.now()) {
@@ -194,16 +214,19 @@ export function evaluateIntent(intent, offers, preference = 'balanced', now = Da
     a.offer.title.localeCompare(b.offer.title));
   const groups = new Map();
   for (const row of rows) {
-    if (row.problems.length) continue;
+    if (row.problems.length || row.provenance.tier === 'observation') continue;
     const currency = row.offer.price?.currency || '';
-    const basis = row.identity && row.equivalenceTerms !== null &&
-      JSON.stringify([row.identity, currency, row.offer.price?.kind, row.equivalenceTerms]);
+    const a = row.offer.attrs;
+    const terms = [row.quantity, a.deliveryThreshold, a.subscription, a.warrantyMonths, a.cancelable,
+      a.cancelTerms, a.minimumCharge, a.slot, row.offer.deliveryDate, row.offer.returns?.label, row.total !== null];
+    const basis = row.identity && row.offer.price?.kind === 'fixed' && row.equivalenceTerms !== null &&
+      JSON.stringify([row.identity, currency, row.provenance.tier, row.stale, terms]);
     const groupKey = basis || JSON.stringify([row.offer.provider, row.offer.id, currency]);
-    if (!groups.has(groupKey)) groups.set(groupKey, { title: row.offer.title, rows: [], alternative: row.alternative, currency });
+    if (!groups.has(groupKey)) groups.set(groupKey, { title: row.offer.title, rows: [], comparable: Boolean(basis), currency });
     groups.get(groupKey).rows.push(row);
   }
   for (const group of groups.values()) {
-    group.horizontal = Boolean(group.rows[0].identity && group.rows[0].equivalenceTerms !== null && new Set(group.rows.map(row => key(row.offer.merchant) || row.offer.provider)).size > 1);
+    group.horizontal = Boolean(group.comparable && new Set(group.rows.map(row => key(row.offer.merchant) || row.offer.provider)).size > 1);
   }
   labelAlternatives(intent, rows);
   return { rows, groups: [...groups.values()] };
@@ -241,7 +264,8 @@ function labelAlternatives(intent, rows) {
 function applyUnitPricePreference(rows, intent, weights) {
   const comparable = rows.filter(row => row.priceBasis?.product && !row.stale && !row.problems.length &&
     row.offer.price.currency === intent.brief.budget.currency);
-  const basis = row => JSON.stringify([row.priceBasis.product, row.priceBasis.unit, row.priceBasis.total === null]);
+  const basis = row => JSON.stringify([row.priceBasis.product, row.offer.attrs.brand, row.offer.attrs.variant,
+    row.priceBasis.unit, row.priceBasis.total === null, row.provenance.tier, row.offer.attrs.subscription]);
   const minima = new Map();
   for (const row of comparable) {
     const amount = row.priceBasis.total ?? row.priceBasis.amount;
@@ -262,7 +286,7 @@ function applyUnitPricePreference(rows, intent, weights) {
 export function combinedCost(comparisons, budget) {
   if (comparisons.length < 2) return null;
   const picks = comparisons.map(({ rows }) => rows.filter(row => {
-    return row.total !== null && row.offer.price?.currency === budget.currency && !row.problems.length && !row.pending.length;
+    return row.status === 'confirmed' && row.offer.price?.currency === budget.currency;
   }).sort((a, b) => a.total - b.total)[0]);
   if (picks.some(row => !row)) return { status: 'unknown' };
   const sum = Math.round(picks.reduce((total, row) => total + row.total, 0) * 1000) / 1000;

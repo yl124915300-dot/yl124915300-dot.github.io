@@ -20,7 +20,7 @@ const evaluate = (intent, offers, preference = 'balanced') => evaluateIntent(int
 test('synthetic: routing covers four categories, unsupported markets and ambiguous requests', () => {
   assert.deepEqual(plan('iPhone 15 + laundry detergent + 60 minute massage + PC game: LEGO Batman')
     .map(i => [i.category, i.providers]), [
-    ['electronics', []], ['consumables', []], ['services', ['livingsocial']], ['games', ['cheapshark', 'gamerpower']],
+    ['electronics', []], ['consumables', ['openprices']], ['services', ['livingsocial']], ['games', ['cheapshark', 'gamerpower']],
   ]);
   assert.equal(plan('something useful')[0].category, 'unclassified');
   assert.equal(plan('PC game: Tunic', '', { place: { ...market, code: 'CA' } })[0].providers.length, 0);
@@ -38,8 +38,8 @@ test('synthetic: accessory compatibility is an independent required fact and com
   const wrongCable = synthetic(accessory, { model: 'Wall charger', connector: 'USB-C', compatibleWith: 'iPhone 14' });
   assert.match(evaluate(accessory, [wrongCable]).rows[0].problems.join(), /Compatible with/);
   const joined = [evaluate(phone, [device]), evaluate(accessory, [cable])];
-  assert.equal(combinedCost(joined, phone.brief.budget).status, 'conflict');
-  assert.equal(combinedCost(joined, { currency: 'USD', amount: 106 }).sum, 105);
+  assert.equal(combinedCost(joined, phone.brief.budget).status, 'unknown');
+  assert.equal(combinedCost(joined, { currency: 'USD', amount: 106 }).status, 'unknown');
   assert.equal(combinedCost([joined[0], { rows: [] }], phone.brief.budget).status, 'unknown');
 });
 

@@ -1,4 +1,4 @@
-import { constraint, count, date, deliveryCheck, extract, key, loaded, maximum, minimum, number, quoteCost, stable, text, yesNo } from './shared.js?v=4';
+import { constraint, count, date, deliveryCheck, extract, key, loaded, maximum, minimum, number, quoteCost, stable, text, yesNo } from './shared.js?v=5';
 
 const units = {
   mg: ['mass', 0.001], g: ['mass', 1], kg: ['mass', 1000], oz: ['mass', 28.349523125],

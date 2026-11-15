@@ -1,17 +1,24 @@
-import { normalize, relevance } from './decision.js?v=4';
+import { normalize, relevance } from './decision.js?v=5';
+import { consumables } from './modules/consumables.js?v=5';
+import { date, key } from './modules/shared.js?v=5';
+
+import { validBarcode } from './evidence.js?v=5';
 
 const cheapshark = 'https://www.cheapshark.com';
 const gamerpower = 'https://www.gamerpower.com';
 const livingSocial = 'https://api-core.livingsocial.com/ls_agent_api/offers/search';
+const openPrices = 'https://prices.openfoodfacts.org/api/v1';
 export const catalogNames = {
   cheapshark: 'CheapShark',
   gamerpower: 'GamerPower',
   livingsocial: 'LivingSocial / Groupon',
+  openprices: 'Open Prices',
 };
 export const catalogDocs = {
   cheapshark: 'https://apidocs.cheapshark.com/',
   gamerpower,
   livingsocial: 'https://agent.livingsocial.com/for-agents',
+  openprices: 'https://openfoodfacts.github.io/open-prices/guides/data/',
 };
 
 const label = (value, limit = 180) => typeof value === 'string' ? value.trim().slice(0, limit) : '';
@@ -45,6 +52,13 @@ function sourcePrice(raw) {
   const exponent = Number.isInteger(digits) && digits >= 0 && digits <= 3 ? digits : ({ USD: 2, CAD: 2 })[currency];
   if (exponent === undefined) return null;
   return { amount: minor / 10 ** exponent, currency, kind: 'from' };
+}
+
+function provenance(tier, read, fields = {}) {
+  return {
+    tier, retrievedAt: read.checkedAt, observedAt: null, source: read.source,
+    identity: null, scope: null, availability: null, fulfillment: null, ...fields,
+  };
 }
 
 function entry(fields) {
@@ -91,6 +105,8 @@ export function localEntries(read, brief) {
       Number.isSafeInteger(review.count) && review.count > 0 ? { value: review.average, count: review.count, scale: 5 } : null;
     return [entry({
       id, title, provider: 'livingsocial', sourceUrl, checkedAt, priceTimestamp: asOf,
+      provenance: provenance('api', read, { observedAt: asOf, recordId: id,
+        identity: { identifier: id, type: 'Catalog listing ID' } }),
       category: 'local_catalog', city: label(raw.city, 80) || null,
       market: brief.place.code, merchant: label(typeof raw.merchant === 'string' ? raw.merchant : raw.merchant?.name, 90),
       price: sourcePrice(raw.price), availability: raw.buyable ? 'Catalog lists purchase option' : 'Active catalog listing',
@@ -135,6 +151,8 @@ export function gameEntry(raw, game, stores, read, history = null) {
     sourceUrl, provider: 'cheapshark', storeId: 'cheapshark:' + storeId, merchant, checkedAt: read.checkedAt,
     identity: { key: 'cheapshark:' + gameId + ':' + normalize(title), kind: 'catalog-game', steamAppId: appId || null },
     price: { amount, currency: 'USD', kind: 'fixed' }, shipping: 0,
+    provenance: provenance('api', read, { recordId: raw.dealID,
+      identity: { identifier: gameId, type: 'Catalog game ID', specification: title } }),
     activation: storeId === '1' && appId ? 'steam' : null,
     availability: 'Catalog listing; merchant availability unverified',
     // lastChange is a price-change date rather than confirmation that the listing is stale.
@@ -203,6 +221,8 @@ export function giveawayEntries(read, plan) {
       category: 'pc_game', variant: 'Digital PC giveaway',
       market: 'US', merchant: platform || null, activation: platform || (platforms.includes('drm free') ? 'drm free' : null),
       price: { amount: 0, currency: 'USD', kind: 'giveaway' }, shipping: 0,
+      provenance: provenance('api', read, { recordId: id,
+        identity: { identifier: id, type: 'Giveaway ID', specification: title } }),
       availability: 'Catalog marks claim active', confidence: 0.62,
       restrictions: claimEnd && claimEnd !== 'N/A'
         ? 'Claim end shown by GamerPower: ' + claimEnd + ' (timezone unspecified)' : null,
@@ -211,7 +231,67 @@ export function giveawayEntries(read, plan) {
   }).slice(0, 12);
 }
 
+export function openPriceEntries(read, plan, barcodes = [plan.barcode]) {
+  if (!Array.isArray(read.data?.items)) throw new Error('Unexpected Open Prices response');
+  const offers = [];
+  for (const raw of read.data.items) {
+    const id = integerId(raw?.id);
+    const proofId = integerId(raw?.proof_id);
+    const proof = raw?.proof;
+    const place = raw?.location;
+    const product = raw?.product;
+    const observedAt = date(raw?.date);
+    const currency = raw?.currency;
+    if (!id || !proofId || proofId !== integerId(proof?.id) || proof.draft !== false ||
+        !['PRICE_TAG', 'RECEIPT'].includes(proof.type) || raw.type !== 'PRODUCT' ||
+        !barcodes.includes(raw.product_code) || (product?.code && product.code !== raw.product_code) || !observedAt || date(proof.date) !== observedAt ||
+        Date.parse(observedAt) > Date.parse(read.checkedAt) || !/^[A-Z]{3}$/u.test(currency || '') ||
+        (proof.currency && proof.currency !== currency) || !Number.isFinite(raw.price) || raw.price < 0 ||
+        place?.osm_address_country_code !== plan.market) continue;
+
+    const code = raw.product_code;
+    const title = label(product?.product_name) || label(raw.product_name) || 'Barcode ' + code;
+    const merchant = label(place.osm_name) || label(place.osm_brand);
+    const specification = label(product?.quantity);
+    const attrs = consumables.normalize({ product: title, brand: product?.brands, variant: title });
+    const sourceUrl = openPrices + '/prices/' + id;
+    offers.push(entry({
+      provider: 'openprices', id, title, merchant, sourceUrl, category: 'consumables', attrs,
+      city: label(place.osm_address_city), market: plan.market, checkedAt: read.checkedAt,
+      priceTimestamp: observedAt, price: { amount: raw.price, currency, kind: 'observation' }, confidence: 0.52,
+      provenance: provenance('observation', read, { observedAt, recordId: id,
+        proof: { id: proofId, type: proof.type === 'PRICE_TAG' ? 'Shelf tag' : 'Receipt' },
+        identity: { identifier: code, type: 'Product barcode', specification },
+        scope: { market: plan.market, city: label(place.osm_address_city), verified: false } }),
+      restrictions: [
+        raw.price_per === 'KILOGRAM' ? 'Reported price per kilogram' :
+          raw.price_per === 'UNIT' ? 'Reported price per unit' : 'Observed price as recorded',
+        raw.price_is_discounted ? 'Discount observed; eligibility unknown' : '',
+      ].filter(Boolean).join(' · '),
+    }));
+  }
+  return offers.slice(0, 8);
+}
+
+async function openPriceSearch(plan, signal) {
+  let codes = [plan.barcode];
+  if (!plan.barcode) {
+    const { data } = await getJSON(openPrices + '/products', {
+      product_name__like: plan.title, price_count__gte: '1', order_by: '-price_count', size: '12',
+    }, signal);
+    if (!Array.isArray(data?.items)) throw new Error('Unexpected Open Prices product response');
+    codes = [...new Set(data.items.filter(product => validBarcode(product?.code) &&
+      key(product.product_name) === key(plan.title)).map(product => product.code))].slice(0, 3);
+    if (!codes.length) return [];
+  }
+  const barcodeFilter = codes.length === 1 ? ['product_code', codes[0]] : ['product_code__in', codes.join(',')];
+  const params = [barcodeFilter, ['order_by', '-date'], ['size', '50'],
+    ['proof__type', 'PRICE_TAG'], ['proof__type', 'RECEIPT']];
+  return openPriceEntries(await getJSON(openPrices + '/prices', params, signal), plan, codes);
+}
+
 const adapters = {
+  openprices: (plan, brief, signal) => openPriceSearch(plan, signal),
   cheapshark: (plan, brief, signal) => cheapSharkEntries(plan, signal),
   gamerpower: async (plan, brief, signal) =>
     giveawayEntries(await getJSON(gamerpower + '/api/giveaways', { type: 'game' }, signal), plan),

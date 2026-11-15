@@ -1,3 +1,5 @@
+import { assessEvidence } from './evidence.js?v=5';
+
 const ignored = new Set(['a', 'an', 'the', 'of', 'for', 'in', 'to', 'and', 'or', 'on', 'with']);
 const editions = /\b(?:complete|ultimate|deluxe|premium|gold|definitive|goty|game of the year|collector'?s|remaster(?:ed)?|remake|dlc|expansion|bundle)\b|完整版|豪华版|重制版|资料片/iu;
 
@@ -114,10 +116,11 @@ export function totalCost(offer) {
   return { listed, total: complete ? listed : null };
 }
 
-function assessment(offer, brief, plan, now, requirementChecks) {
+function assessment(offer, brief, plan, now, requirementChecks, provenance) {
   const { listed, total } = totalCost(offer);
   const comparable = offer.price?.currency === brief.budget.currency;
-  const stale = offer.priceTimestamp && now - Date.parse(offer.priceTimestamp) > 24 * 60 * 60 * 1000;
+  const stale = provenance?.stale ||
+    Boolean(offer.priceTimestamp && now - Date.parse(offer.priceTimestamp) > 24 * 60 * 60 * 1000);
   const problems = [];
   const pending = [];
   if (stale) pending.push('Catalog price is older than 24 hours');
@@ -168,7 +171,8 @@ export function rank(offers, brief, plan, preference = 'balanced', now = Date.no
     const match = plan.browseFreeGames ? 1 : Math.max(relevance(plan.title, offer.title), relevance(plan.title, text));
     if (match < 0.60) return [];
     const { listed, total } = totalCost(offer);
-    const { problems, pending, comparable, stale } = assessment(offer, brief, plan, now, requirements);
+    const provenance = plan.module ? assessEvidence(offer, plan, now) : null;
+    const { problems, pending, comparable, stale } = assessment(offer, brief, plan, now, requirements, provenance);
     const affordability = comparable && listed !== null && !stale
       ? Math.max(0, 1 - (total ?? listed) / brief.budget.amount) * (total === null ? 0.68 : 1) : 0;
     const evidence = Math.max(0, (stale ? offer.confidence * 0.3 : offer.confidence) - Math.min(0.4, pending.length * 0.055));
@@ -178,7 +182,7 @@ export function rank(offers, brief, plan, preference = 'balanced', now = Date.no
       preference === 'speed' ? Number(offer.delivery?.verified === true) : rating;
     const components = [match, affordability, evidence, service];
     const score = Math.round(components.reduce((sum, part, index) => sum + part * profile.weights[index], 0));
-    return [{ offer, score, match, evidence, problems, pending, listed, total }];
+    return [{ offer, score, match, evidence, problems, pending, listed, total, provenance }];
   }).sort((a, b) => a.problems.length - b.problems.length || b.score - a.score || b.match - a.match ||
     a.offer.title.localeCompare(b.offer.title) || a.offer.id.localeCompare(b.offer.id));
 }
@@ -188,7 +192,8 @@ export function compareGroups(rows, plan) {
   for (const row of rows) {
     if (row.problems.length) continue;
     const { offer } = row;
-    const key = offer.identity?.key ?? offer.provider + ':' + offer.id;
+    const key = JSON.stringify([offer.identity?.key ?? offer.provider + ':' + offer.id,
+      offer.price?.currency, offer.price?.kind, row.provenance?.tier]);
     if (!groups.has(key)) groups.set(key, { title: offer.title, rows: [], alternative: false, type: offer.category });
     groups.get(key).rows.push(row);
   }

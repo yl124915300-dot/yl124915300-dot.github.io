@@ -1,4 +1,4 @@
-import { constraint, count, deliveryCheck, extract, includes, key, loaded, minimum, number, stable, text } from './shared.js?v=4';
+import { constraint, count, deliveryCheck, extract, includes, key, loaded, minimum, number, stable, text } from './shared.js?v=5';
 
 const aliases = { 苹果: 'apple', 三星: 'samsung', 索尼: 'sony', 谷歌: 'google', 联想: 'lenovo' };
 const brand = value => aliases[key(value)] || key(value);

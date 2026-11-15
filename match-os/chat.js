@@ -1,7 +1,9 @@
-import { profiles, readPreference } from './decision.js?v=4';
-import { catalogNames, searchCatalogs } from './catalogs.js?v=4';
-import { renderIntent } from './results.js?v=4';
-import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=4';
+import { profiles, readPreference } from './decision.js?v=5';
+import { catalogNames, searchCatalogs } from './catalogs.js?v=5';
+import { renderIntent } from './results.js?v=5';
+import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=5';
+
+import { validBarcode, withoutBarcodes } from './evidence.js?v=5';
 
 (() => {
   'use strict';
@@ -45,7 +47,7 @@ import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFi
     ['budget', 'Maximum budget', 'What is the most you want to spend? Include the currency, for example “USD 800”.'],
     ['place', 'Market', 'Which city and country or region should we look in? For example, “Austin, United States”.'],
     ['when', 'Timing', 'When do you need it? For example, “by Friday”, “within a week” or “just comparing”.'],
-    ['details', 'Must-haves', 'Any other must-haves, such as condition, size or pickup? Choose “No preference” if there are none.'],
+    ['details', 'Must-haves', 'Any other must-haves, such as condition, size or pickup? For a grocery price history, you can add a public barcode. Choose “No preference” to skip.'],
   ];
   const currencies = 'USD|UZS|AED|JPY|CNY|EUR|GBP|CAD|AUD|SGD|HKD|INR|KRW|CHF|TWD|NZD|MXN';
   const symbolCurrency = { '$': 'USD', 'US$': 'USD', '€': 'EUR', '£': 'GBP', '元': 'CNY', '人民币': 'CNY' };
@@ -318,7 +320,7 @@ import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFi
       setFeedback('Enter a purchase request or reply first.');
       return;
     }
-    if (sensitive.test(value)) {
+    if (sensitive.test(!session || ['item', 'details'].includes(session.field) ? withoutBarcodes(value) : value)) {
       input.value = '';
       setFeedback('That looks like contact information, a link or account details. Try again using only purchase details.');
       return;
@@ -443,15 +445,17 @@ import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFi
     if (!intent) return;
     const raw = Object.fromEntries(new FormData(quoteForm));
     const feedback = byId('quote-feedback');
-    if (Object.entries(raw).some(([name, value]) => name !== 'url' && sensitive.test(value))) {
+    if (Object.entries(raw).some(([name, value]) => name !== 'url' &&
+      !(name === 'merchantSku' && validBarcode(value.trim())) && sensitive.test(value))) {
       feedback.textContent = 'Use public listing details without contact information.';
       return;
     }
     try {
       const quote = localQuote(intent, raw, session.nextQuote++);
       const current = session.quotes.get(intent.id) || [];
-      const previous = current.findIndex(row => row.merchant === quote.merchant && row.title === quote.title &&
-        row.sourceUrl === quote.sourceUrl && row.price.currency === quote.price.currency);
+      const facts = row => JSON.stringify([row.sourceUrl, row.merchant, row.title, row.price?.currency,
+        row.provenance.identity?.identifier, row.attrs]);
+      const previous = current.findIndex(row => facts(row) === facts(quote));
       if (current.length >= 12 && previous < 0) {
         feedback.textContent = 'This item has 12 quotes. Edit the item or start another comparison to clear them.';
         return;
@@ -476,13 +480,20 @@ import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFi
     for (const intent of intents) {
       const line = document.createElement('p');
       const heading = (intent.module?.label || 'Category unclear') + ' · ' + intent.item;
-      const limitations = Object.values(providers).filter(provider => provider.mode && provider.module === intent.category)
+      const limitations = Object.entries(providers).filter(([id, provider]) =>
+        provider.mode && provider.module === intent.category && !intent.providers.includes(id)).map(([, provider]) => provider)
         .map(provider => provider.label + ' (' + provider.capability + ')');
-      const coverage = intent.providers.length ? intent.providers.map(provider => catalogNames[provider]).join(' and ') :
-        intent.module ? 'No eligible live source in this market' : 'Edit the item and give its category or service type.';
+      const coverage = intent.providers.length ? intent.providers.map(provider => catalogNames[provider] +
+        (provider === 'openprices' ? ' (dated observations only)' : '')).join(' and ') :
+        intent.module ? 'No eligible live source for this item' : 'Edit the item and give its category or service type.';
       line.textContent = heading + ' — ' + coverage + (limitations.length ? '. ' + limitations.join(' · ') : '') +
         (intent.dependency ? '. ' + intent.dependency : '') + (intent.requiresDelivery ? '. Delivery required.' : '');
       preview.append(line);
+      if (intent.providers.includes('openprices')) {
+        requests.push('Open Prices receives ' + (intent.barcode ? 'only public barcode ' + intent.barcode :
+          'the product name “' + intent.title + '”; returned product barcodes may be used to look up dated observations') +
+          '. Country filtering happens in this tab.');
+      }
       if (intent.providers.includes('cheapshark')) {
         requests.push(intent.browseFreeGames ? 'CheapShark receives a general free PC game query.' :
           'CheapShark receives this title: “' + intent.title + '”.');
@@ -520,12 +531,13 @@ import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFi
       const summary = document.createElement('p');
       summary.className = 'muted';
       summary.textContent = combined.status === 'unknown' ? 'Combined budget fit is unverified. Each item needs an eligible final total in the budget currency.' :
-        'Combined cost of the lowest complete quotes: ' + combined.currency + ' ' + combined.sum +
+        'Sum of the lowest confirmed totals when purchased separately · ' + combined.currency + ' ' + combined.sum +
         (combined.status === 'pass' ? ' · within the shared budget.' : ' · above the shared budget.');
       output.prepend(summary);
     }
     const coverage = catalogResults && [...catalogResults].flatMap(([id, results]) => results.map(result => {
-      const status = result.status === 'ok' ? result.offers.length + ' listings' : result.status;
+      const status = result.status === 'ok' ? result.offers.length +
+        (result.provider === 'openprices' ? ' dated observations in this country' : ' listings') : result.status;
       return intents.find(item => item.id === id).item + ' · ' + catalogNames[result.provider] + ' ' + status;
     }));
     const status = byId('live-status');
