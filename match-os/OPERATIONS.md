@@ -141,3 +141,9 @@
 - **安全与失败处理**：页面CSP仅为公开目录增加 `connect-src https://api-core.livingsocial.com`；GET不附带凭证，失败、超时、离线、无结果、非美国加拿大地区会降级为搜索链接或人工比较；请求使用AbortController，在30分钟到期、编辑原条件、取消或离开时停止挂起请求并清空当前页列表。不宣称端到端加密或真实服务端自动销毁；FormSubmit人工授权交接与原FrameFind入口保留。
 - **上线验收**：原GitHub Pages持续部署与源码一致性Smoke用于确认 `index.html`、`chat.css`、`chat.js`，其中JS经Node语法检查；网络CORS已单独验证，但尚未取得真实消费者在手机/桌面进行第三方目录点击的独立反馈。本次技术接入不等于真人商机、商家成交或成功服务费。
 - **账面**：仍未取得真实可核验买家、对应商家已确认报价、商家付款或MATCH OS专属PayPal US$1真实净到账证据；上述商业指标仍为0/0/0/USD0。PayPal专用链接与授权捕获资格未完成，不公开启用付款按钮。
+
+### 云端浏览器实际点击验收（只读、不付款）
+
+- [Live offer E2E 43697021010](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43697021010) 已由GitHub Actions Ubuntu Chrome无头浏览器实际访问原站，输入合成公开需求（Austin, US, massage, USD100）、进入会话审核、点击外部公开目录搜索，获得 **5 条真实公开结果卡**；前两条均含USD起始价格和经域名校验的Groupon/LivingSocial HTTPS官方跳转。Google备用搜索链接包含准确测试商品词；取消会话后，DOM结果卡清空、浏览器本地会话引用隐藏。此测试没有打开商家付款页、没有向FormSubmit提交需求、没有支付或构造订单。
+- E2E 输出依次为 `CHAT_REVIEW_OK`、`OTHER_SOURCE_LINK_OK True`、`LIVE_OFFER_CARD_COUNT 5`、`LIVE_OFFER_PRICE_AND_OFFICIAL_LINKS_OK`、`SESSION_CANCEL_CLEARS_OFFERS_OK`。这是云端Chrome桌面环境的读目录功能通过，非真实消费者试用；移动端本次没有重复实际触控验证。
+- **严格商业口径**：已完成一个可用的跨平台交易前查询动作，但没有实现实时AI自主代理、跨平台统一下单、商家订单核实、PayPal服务费自动扣款、端到端加密或服务器侧数据TTL销毁。真人可联络买家0、商家实际成交0、PayPal净服务费到账USD0仍是已知基线。下个开发动作须由真实用户成功/失败反馈或可核验订单证据驱动。
