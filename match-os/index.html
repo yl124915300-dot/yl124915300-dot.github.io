@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="description" content="MATCH OS pilot: voluntarily describe what you want to buy. No payments, orders or merchant guarantees.">
+<title>MATCH OS — Buyer Demand Pilot</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1118;--panel:#161e28;--border:#2b3a49;--text:#eef4fc;--muted:#a8b7c8;--blue:#77d0ef;--focus:#9cf3ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#182e42,transparent 56%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:880px;margin:0 auto;padding:48px 20px 80px}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;color:var(--blue);font-size:.79rem;font-weight:700}
+h1{font-size:clamp(2rem,6vw,3.8rem);line-height:1.08;letter-spacing:-.04em;margin:12px 0 18px}
+p{color:var(--muted);max-width:65ch}.intro{font-size:1.1rem}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:clamp(18px,5vw,34px);margin-top:26px;box-shadow:0 24px 50px #0003}
+.notice{border-left:3px solid var(--blue);padding:10px 16px;background:#193046;border-radius:5px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.field{margin-top:18px}label{display:block;font-weight:650;margin-bottom:8px}small{color:var(--muted)}input,select,textarea{background:#0d151f;color:var(--text);border:1px solid #476072;border-radius:10px;padding:12px;font:inherit;width:100%;min-height:48px}textarea{min-height:110px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.check{display:flex;align-items:flex-start;gap:12px;font-weight:450}.check input{width:20px;min-height:20px;height:20px;margin-top:3px;flex-shrink:0}
+button{border:0;border-radius:12px;background:#93e5f5;color:#07131b;padding:14px 20px;font-size:1rem;font-weight:800;cursor:pointer;margin-top:20px;width:100%}
+footer{margin-top:28px;color:var(--muted);font-size:.88rem}
+a{color:var(--blue)}.status{font-size:.89rem;color:#bdd1e1;margin:18px 0}
+@media(max-width:650px){.grid{grid-template-columns:1fr}main{padding-top:28px}}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">MATCH OS / Research pilot / Pre-launch</div>
+<h1>Tell us what you actually want to buy.</h1>
+<p class="intro">We are testing whether a buyer-first matching network can help people compare online shops, physical stores and social-commerce sellers. Start with a real purchase intention—not a fake order.</p>
+<div class="card">
+<p class="notice"><strong>No checkout is available.</strong> No participating sellers, prices, discounts or order fulfillment are guaranteed. This is a public demand-research form, not a marketplace purchase.</p>
+<form id="demand">
+<div class="grid">
+<div class="field"><label for="source">Where did your need start?</label><select id="source" name="source" required><option value="">Choose a channel</option><option value="social">Social video / chat</option><option value="ecommerce">Online shopping</option><option value="physical">Physical store / QR</option><option value="other">Other</option></select></div>
+<div class="field"><label for="region">Country or region</label><select id="region" name="region" required><option value="">Choose a region</option><option value="US">United States</option><option value="UZ">Uzbekistan</option><option value="AE">United Arab Emirates</option><option value="JP">Japan</option><option value="Other">Other</option></select></div>
+</div>
+<div class="grid">
+<div class="field"><label for="city">City (not your address)</label><input id="city" name="city" autocomplete="off" maxlength="60" placeholder="e.g. Tashkent" required></div>
+<div class="field"><label for="when">When would you want it?</label><select id="when" name="when" required><option value="">Choose a timeframe</option><option value="Today">Today</option><option value="Within 3 days">Within 3 days</option><option value="Within 1 week">Within 1 week</option><option value="Recurring">Repeated/recurring</option><option value="Just comparing">Just comparing</option></select></div>
+</div>
+<div class="field"><label for="item">What would you like to buy?</label><input id="item" name="item" maxlength="120" placeholder="Product, brand/model/size, or local service" required></div>
+<div class="grid">
+<div class="field"><label for="budget">Maximum budget</label><input id="budget" name="budget" type="number" min="1" max="1000000" step="0.01" placeholder="100" required></div>
+<div class="field"><label for="currency">Currency</label><select id="currency" name="currency" required><option value="USD">USD</option><option value="UZS">UZS</option><option value="AED">AED</option><option value="JPY">JPY</option><option value="CNY">CNY</option></select></div>
+</div>
+<div class="field"><label for="details">Useful constraints (optional)</label><textarea id="details" name="details" maxlength="400" placeholder="For example: must be new, self-pickup is fine, or delivery in 3 days. No names, contact details or street addresses."></textarea></div>
+<div class="field"><label class="check"><input id="consent" type="checkbox" required><span>I understand the next page is a <strong>public GitHub issue</strong>. My purchase description will be visible to anyone. I will not include my name, phone number, address or payment data. I am only expressing interest; I am <strong>not</strong> placing an order.</span></label></div>
+<button type="submit">Review my request on GitHub</button>
+<p class="status" role="status" id="status" aria-live="polite">Submitting requires a GitHub account. You can review or edit the public issue before sending it. Nothing is posted until you confirm on GitHub.</p>
+</form>
+</div>
+<footer>Research only. No account, browser analytics, tracking scripts, payment form or email collection on this page. Requests become public only after you submit them on GitHub. <a href="https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues?q=%22MATCH+OS+BUYER%22">View public buyer requests</a>.</footer>
+</main>
+<script>
+(function(){
+'use strict';
+var form=document.getElementById('demand');
+var status=document.getElementById('status');
+form.addEventListener('submit',function(ev){
+ ev.preventDefault();
+ if(!form.reportValidity())return;
+ var d=new FormData(form);
+ var item=String(d.get('item')||'').trim();
+ var city=String(d.get('city')||'').trim();
+ if(!item||!city)return;
+ var title='[MATCH OS BUYER] '+item.substring(0,75)+' / '+city.substring(0,35);
+ var body=[
+  '## Voluntary, self-reported buyer request',
+  '',
+  '**Source channel:** '+d.get('source'),
+  '**Region:** '+d.get('region'),
+  '**City:** '+city,
+  '**Item / service:** '+item,
+  '**Maximum budget:** '+d.get('budget')+' '+d.get('currency'),
+  '**Desired timeframe:** '+d.get('when'),
+  '**Constraints:** '+String(d.get('details')||'None').trim(),
+  '',
+  '**Consent:** I have read that this public issue is for buyer-demand research only, contains no contact/address/payment information, and does not place an order.',
+  '',
+  '**Verification status:** SELF_REPORTED_UNVERIFIED (not a paid order or confirmed merchant quote)'
+ ].join('\n');
+ var url='https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new?'+new URLSearchParams({title:title,body:body}).toString();
+ status.textContent='Opening GitHub for review. You must sign in and submit the issue yourself; this page has not recorded an order.';
+ window.location.assign(url);
+});
+})();
+</script>
+</body>
+</html>
