@@ -1,0 +1,48 @@
+name: MATCH OS public offer browser compatibility
+on:
+  push:
+    paths: ['.github/workflows/match-os-live-source-cors.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  catalog-cors:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Read-only CORS and catalog shape probe
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.parse, json
+          url='https://api-core.livingsocial.com/ls_agent_api/offers/search?'+urllib.parse.urlencode({'q':'spa in Austin, TX','limit':3})
+          origin='https://yl124915300-dot.github.io'
+          req=urllib.request.Request(url,headers={'Origin':origin,'Accept':'application/json','User-Agent':'MATCH-OS-Public-Catalog-Compatibility/1.0'},method='GET')
+          try:
+            with urllib.request.urlopen(req,timeout=18) as r:
+              raw=r.read(300001)
+              if len(raw)>300000: raise ValueError('Response too large')
+              p=json.loads(raw)
+              print('GET_HTTP',r.status)
+              print('GET_ACAO',r.headers.get('Access-Control-Allow-Origin','MISSING'))
+              print('GET_ACAC',r.headers.get('Access-Control-Allow-Credentials','MISSING'))
+              print('JSON_TYPE',type(p).__name__)
+              if isinstance(p,dict):
+                print('JSON_KEYS',','.join(sorted(p.keys())[:24]))
+                for k,v in p.items():
+                  if isinstance(v,list) and v:
+                    print('ARRAY_KEY',k,'COUNT',len(v),'ITEM_KEYS',','.join(sorted(v[0])[:32]) if isinstance(v[0],dict) else '-')
+                  if isinstance(v,dict):
+                    for j,w in v.items():
+                      if isinstance(w,list) and w:
+                        print('NESTED_ARRAY_KEY',k+'.'+j,'COUNT',len(w),'ITEM_KEYS',','.join(sorted(w[0])[:32]) if isinstance(w[0],dict) else '-')
+          except Exception as e:
+            print('GET_ERROR',type(e).__name__,str(e)[:190])
+          req=urllib.request.Request(url,headers={'Origin':origin,'Access-Control-Request-Method':'GET'},method='OPTIONS')
+          try:
+            with urllib.request.urlopen(req,timeout=12) as r:
+              print('OPTIONS_HTTP',r.status)
+              print('OPTIONS_ACAO',r.headers.get('Access-Control-Allow-Origin','MISSING'))
+              print('OPTIONS_ALLOW_METHODS',r.headers.get('Access-Control-Allow-Methods','MISSING'))
+          except Exception as e:
+            print('OPTIONS_ERROR',type(e).__name__,str(e)[:180])
+          PY
