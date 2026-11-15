@@ -19,6 +19,17 @@ test('fixed entry allowlist routes four published briefs and ignores arbitrary t
   assert.deepEqual(entryContext('#entry=demand_page&topic=constructor', ''), { source: 'direct', topic: null });
 });
 
+test('social content routes use fixed topic and source without user identifiers', () => {
+  for (const entry of ['pinterest_pin', 'youtube_profile', 'instagram_profile', 'tiktok_profile']) {
+    assert.deepEqual(entryContext('#entry=' + entry + '&topic=oat-milk-pack-price&user=secret&item=ignored', ''),
+      { source: entry, topic: 'oat-milk-pack-price' });
+    assert.deepEqual(entryContext('#entry=' + entry + '&topic=unapproved&user=secret', ''),
+      { source: 'direct', topic: null });
+  }
+  assert.deepEqual(entryContext('#entry=unknown_source&topic=wired-anc-headphones', ''),
+    { source: 'direct', topic: null });
+});
+
 test('wired ANC and audio connector distinguish reported evidence, conflict and unknown', () => {
   const intent = route(topics['wired-anc-headphones'].item, { details: topics['wired-anc-headphones'].details });
   function status(wiredAnc, connector) {
