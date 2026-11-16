@@ -34,6 +34,12 @@ Browser checks are in [video-find/smoke.cjs](video-find/smoke.cjs) and [video-fi
 
 First-party organic discovery is limited to helpful source guides, [sitemap.xml](sitemap.xml) and an IndexNow workflow. URL submission is not evidence of search indexing, web traffic or customers. No automated mass-commenting, scraped video reposts, or paid acquisition.
 
+## Independent merchant utility: Catalog Check
+
+[**Use the free Shopify product CSV audit**](https://yl124915300-dot.github.io/shopify-csv-audit/) — a browser-only review of potentially risky product CSV fields: variant option dependencies, duplicate option combinations, invalid numeric prices, missing product descriptions and apparent image URL errors. The tool does not upload the CSV or change the merchant's store, and reports are user-downloadable. This is a limited rules-based audit, **not** a guarantee that an import will succeed or preserve inventory. Read the [variant overwrite risk guide](https://yl124915300-dot.github.io/shopify-csv-audit/variant-deletion-risk/) or [common Shopify CSV import errors](https://yl124915300-dot.github.io/shopify-csv-audit/import-errors/).
+
+The prospective US$129 assisted repair pilot is enquiry-only. No merchant sales, checkout verification, revenue, or independent search traffic have been established. Catalog Check is not affiliated with Shopify or OpenAI.
+
 ## Further independent information
 
 - [YouTube product finding](https://yl124915300-dot.github.io/video-find/find-youtube-product/)
