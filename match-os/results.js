@@ -1,5 +1,5 @@
 import { profiles } from './decision.js?v=7';
-import { catalogDocs, catalogNames } from './catalogs.js?v=7';
+import { catalogDocs, catalogNames } from './catalogs.js?v=8';
 
 import { evidenceLabels } from './evidence.js?v=7';
 
