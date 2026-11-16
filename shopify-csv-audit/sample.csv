@@ -1,0 +1,4 @@
+Handle,Title,Body (HTML),Variant SKU,Variant Price,Variant Compare At Price,Image Src
+trail-bag,Trail Bag,Verified 25L pack,TB-1,29,39,https://example.com/trail.jpg
+trail-bag,,,TB-2,30,,
+travel-mug,Travel Mug,,TB-1,not-a-price,20,
