@@ -1,7 +1,7 @@
 // MATCH OS · one-market, one-decision Partner checkout gateway (Cloudflare Worker).
 // NOT deployed by this source file. Fail-closed until all private bindings are configured.
 // Shopper chooses and pays on Groupon; this gateway NEVER requests a charge.
-import { createPartnerClient, PartnerFailure, selectOfferOption, validateReadyCart, verifyOrderAgainstCart } from './core.mjs';
+import { createPartnerClient, PartnerFailure, selectOfferOption, validateReadyCart, verifyOrderAgainstCart, hasConfirmedCJ } from './core.mjs';
 
 const SITE = 'https://yl124915300-dot.github.io';
 const encoder = new TextEncoder();
@@ -131,6 +131,10 @@ async function execute(req, env, pathname, origin, data) {
       fail('DECISION_ALREADY_IN_PROGRESS_OR_BLOCKED', 409);
     }
     try {
+      // Never create a non-attributable cart when the business promise is a
+      // commission-funded service. The confirmed PID comes from Groupon,
+      // not a user-supplied flag or the existence of an API key.
+      if (!hasConfirmedCJ(await partner.me())) fail('CJ_COMMISSION_NOT_CONFIRMED', 409);
       const product = await partner.product(v.productId);
       const selected = selectOfferOption(product, {
         optionId: v.optionId, quantity: v.quantity, agreedPrice: v.agreedPrice,
