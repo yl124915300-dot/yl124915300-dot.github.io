@@ -177,3 +177,30 @@ test('synthetic: game registry preserves catalog game identities, version separa
   assert.equal(result.rows[0].total, null);
   assert.deepEqual(evaluate(intent, []), { rows: [], groups: [] });
 });
+
+
+test('synthetic: LivingSocial purchase links need active US offers, explicit buyability and trusted URLs', () => {
+  const offerUrl = 'https://www.groupon.com/deals/synthetic-qa';
+  const buyUrl = 'https://www.groupon.com/checkout/synthetic-qa';
+  const bookingUrl = 'https://www.groupon.com/book/synthetic-qa';
+  const base = { id: 'synthetic-qa', title: '60-minute massage for one', status: 'active',
+    city: 'Austin', offerUrl, buyUrl, buyable: true, price: { fromMinor: 4000, currency: 'USD' } };
+  const input = offers => ({ source: 'https://example.test/qa-catalog',
+    checkedAt: now, data: { asOf: now, offers } });
+  const brief = { place: market };
+  const available = localEntries(input([base]), brief)[0];
+  assert.equal(available.sourceUrl, offerUrl);
+  assert.equal(available.purchaseUrl, buyUrl);
+  assert.equal(available.purchaseKind, 'cheapest-option');
+  assert.equal(available.price.kind, 'from');
+  assert.equal(available.shipping, null);
+  assert.equal(available.tax, null);
+  assert.equal(localEntries(input([{ ...base, buyable: false }]), brief)[0].purchaseUrl, null);
+  assert.equal(localEntries(input([{ ...base, buyUrl: 'https://evil.example/redirect' }]), brief)[0].purchaseUrl, null);
+  assert.equal(localEntries(input([{ ...base, buyUrl: 'http://www.groupon.com/checkout/' }]), brief)[0].purchaseUrl, null);
+  assert.equal(localEntries(input([{ ...base, bookingKind: 'bookable_with_live_times', bookingUrl }]), brief)[0].purchaseUrl, bookingUrl);
+  assert.equal(localEntries(input([{ ...base, bookingKind: 'bookable_with_live_times' }]), brief)[0].purchaseUrl, null);
+  assert.equal(localEntries(input([{ ...base, status: 'expired' }]), brief).length, 0);
+  assert.equal(localEntries(input([base]), { place: { ...market, code: 'CA' } }).length, 0);
+  assert.deepEqual(plan('Swedish massage', '', { place: { ...market, code: 'CA' } })[0].providers, []);
+});
