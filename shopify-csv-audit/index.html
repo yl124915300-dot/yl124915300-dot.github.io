@@ -112,7 +112,9 @@ a{color:#00745e}
 </section>
 <section class="dark">
   <h2>Want a complete repair review?</h2>
-  <p>A US$129, 20-product assisted remediation pilot is being evaluated. Paid orders are <strong>not open</strong> until verified checkout, order tracking, and delivery are available. You can use the free findings report today; no payment is requested.</p>
+  <p>A US$129, 20-product assisted remediation pilot is being evaluated. Paid orders are <strong>not open</strong> until verified checkout, order tracking, and delivery are available. You can request a pilot review directly, with no obligation and no payment requested.</p>
+  <a class="btn" id="contact" href="mailto:yl124915300@gmail.com?subject=Catalog%20Check%20-%20merchant%20pilot%20enquiry" style="background:#ecf7ef;color:#165d4b;text-decoration:none">Ask about the $129 pilot</a>
+  <p class="note" style="color:#d6e5df">An email enquiry does not create a paid order. Do not send private customer data, admin credentials, full product CSVs or payment details by email.</p>
 </section>
 </main>
 <footer><div class="wrap">Catalog Check is an independent prototype, not affiliated with Shopify, OpenAI, or ChatGPT. No network requests are made by the CSV scanner; do not paste private customer information into public issues. For CSV format requirements, see <a href="https://help.shopify.com/en/manual/products/import-export/using-csv" rel="noopener noreferrer">Shopify's official guidance</a>. <span id="stamp">Updated Nov 2026.</span></div></footer>
@@ -140,9 +142,15 @@ function run(text){
      tbody.append(tr);
    }
    $("result-title").textContent="Prioritized findings"+(last.issues.length>350?" (first 350 shown; download all)":"");
-   $("results").hidden=false;$("status").textContent="Scan finished locally. Original CSV not changed.";
+   $("results").hidden=false;$("status").textContent="Scan finished locally. Original CSV not changed."; $("contact").href=emailFor(s.products+" product handles; "+s.findings+" potential findings; "+(s.critical+s.high)+" higher-priority");
  }catch(e){last=null;err(e.message||"Could not read this CSV.");}
 }
+const emailFor = summary => {
+ const subject = "Catalog Check - merchant pilot enquiry";
+ const body = "I am interested in a possible US$129 pilot for up to 20 Shopify products.\nStore website (public URL only): \nI am the store owner or authorized representative: \nOptional local scan summary: " + summary + "\nPlease confirm scope, timing and checkout eligibility before any payment.\nNo private CSV, login details or customer data are included.";
+ return "mailto:yl124915300@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+};
+$("contact").href = emailFor("(not provided)");
 $("demo").addEventListener("click",()=>run(demoCSV));
 $("input").addEventListener("change",async ev=>{
   const f=ev.target.files?.[0]; if(!f)return;
