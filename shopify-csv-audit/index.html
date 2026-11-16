@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Free private Shopify product CSV audit. Find missing product descriptions, invalid prices, duplicate SKUs, and image gaps directly in your browser. No upload required.">
 <title>Catalog Check — Free Shopify CSV Product Audit</title>
+<link rel="canonical" href="https://yl124915300-dot.github.io/shopify-csv-audit/">
 <style>
 :root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172d31;background:#f5f6f1;font-synthesis:none}
 *{box-sizing:border-box}
@@ -103,6 +104,7 @@ a{color:#00745e}
   <div class="scroller"><table><thead><tr><th>Priority</th><th>CSV record</th><th>Handle</th><th>Field / observed</th><th>Suggested action</th></tr></thead><tbody id="issue-list"></tbody></table></div>
   <div class="actions" style="margin-top:20px"><button class="btn" id="download" type="button">Download findings CSV</button><button class="btn secondary" id="copy" type="button">Copy audit summary</button></div>
   <p class="note" role="status" id="status"></p>
+  <p class="note"><a id="results-enquiry" href="mailto:yl124915300@gmail.com?subject=Catalog%20Check%20-%20merchant%20pilot%20enquiry">Need help reviewing these findings?</a> Send only your summary and public store URL; do not email the full catalog.</p>
 </div>
 </section>
 <section class="three" id="how">
@@ -110,6 +112,7 @@ a{color:#00745e}
 <article><h3>2 · Review</h3><p>Inspect each line-level finding. Missing SEO title values may be normal: Shopify can generate defaults, so they are not flagged.</p></article>
 <article><h3>3 · Fix carefully</h3><p>Use the findings as a review checklist. This tool does not silently rewrite original rows or push changes to Shopify.</p></article>
 </section>
+<section class="panel" aria-labelledby="guides-title"><h2 id="guides-title">Fix the errors that matter</h2><p class="muted">A missed variant dependency can be more serious than a missing product description. Use Shopify’s official documentation alongside this free check.</p><ul><li><a href="./variant-deletion-risk/">Shopify CSV variant deletion risk: Option1 name / value dependencies</a></li><li><a href="./import-errors/">Common Shopify CSV import errors: quotes, options, prices and image links</a></li></ul></section>
 <section class="dark">
   <h2>Want a complete repair review?</h2>
   <p>A US$129, 20-product assisted remediation pilot is being evaluated. Paid orders are <strong>not open</strong> until verified checkout, order tracking, and delivery are available. You can request a pilot review directly, with no obligation and no payment requested.</p>
@@ -142,7 +145,7 @@ function run(text){
      tbody.append(tr);
    }
    $("result-title").textContent="Prioritized findings"+(last.issues.length>350?" (first 350 shown; download all)":"");
-   $("results").hidden=false;$("status").textContent="Scan finished locally. Original CSV not changed."; $("contact").href=emailFor(s.products+" product handles; "+s.findings+" potential findings; "+(s.critical+s.high)+" higher-priority");
+   $("results").hidden=false;$("status").textContent="Scan finished locally. Original CSV not changed."; $("contact").href=emailFor(s.products+" product handles; "+s.findings+" potential findings; "+(s.critical+s.high)+" higher-priority"); $("results-enquiry").href=$("contact").href;
  }catch(e){last=null;err(e.message||"Could not read this CSV.");}
 }
 const emailFor = summary => {
@@ -151,6 +154,7 @@ const emailFor = summary => {
  return "mailto:yl124915300@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
 };
 $("contact").href = emailFor("(not provided)");
+$("results-enquiry").href = emailFor("(not provided)");
 $("demo").addEventListener("click",()=>run(demoCSV));
 $("input").addEventListener("change",async ev=>{
   const f=ev.target.files?.[0]; if(!f)return;
