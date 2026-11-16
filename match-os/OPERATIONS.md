@@ -1,5 +1,13 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 23:37（北京时间）｜Storefront 准入、CJ 审批与授权买家核验
+
+- **账户接管受阻：** 本次桌面会话未提供 Work 云端浏览器或其原生安全接管入口，未发起原生接管、未进入登录后的 LivingSocial 后台。**IntentLocal / Intent Transaction Router 是否已注册、已有 Partner API key 的状态、Groupon 是否确认网站 PID 均未知。** 未注册或修改店铺，未生成、读取或配置密钥。
+- **Groupon 与 CJ：** 复读已有官方 Gmail 线程及其他近期 Groupon/CJ 来信：11/16 17:07 Tomas 的答复确认技术上可自助开通 Partner API、CJ 状态由 Kate 负责；同日 20:47 的审批追问在已发送记录中，未见 Kate 回复或 Groupon 计划获批证据。本轮未补发邮件。CJ 支持历史邮件确认过发布者账户有效；该证据不能证明当前 Groupon 计划批准、网站 PID 已绑定或归因可用。官方以 `GET /partner_storefront/me` 的 `cjPublisherId` 非空反映 Groupon 已确认网站 PID，计划批准仍须独立核对。
+- **真实授权入站：** Gmail 精确授权表单主题 0；较宽的 FormSubmit 核对发现 2 条历史 QA（无请求级回复许可、无会话引用）和 2 封激活通知，真人获准入站 0。原仓库不限定开闭状态查询 `MATCH OS BUYER` 0。未向任何买家发信或评论。
+- **生产预检与结果：** 复核 [前次 GitHub Actions 只读 Job](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43865643430/job/133293434550)，日志明确当时未配置 `MATCH_OS_GROUPON_API_KEY`。本轮未读取当前 Secret 元数据或重跑凭据预检。现有预检仅执行 `GET /partner_storefront/me` 和美国目录 GET 搜索；须在持有人确认权限并安全配置后才能实测。原 Partner 网关仍未部署，也未改交易代码。新增 Partner 购物车、回读确认订单均 0；项目可核验净佣金到账 **US$0**（无新增到账证据），CJ/PayPal 实时全量流水未核验。
+- **下一步：** 持有人在 Work 原生接管中自行登录 [LivingSocial Storefronts](https://agent.livingsocial.com/account/storefronts) 并完成必要的 MFA，先检查两个既有名称以防重复。只确认已有密钥状态及 Groupon 网站 PID 确认状态，另查 CJ Groupon 计划批准。权限明确后，由持有人在 GitHub Actions 私有 Secret 中配置 `MATCH_OS_GROUPON_API_KEY`；再手动运行 [MATCH OS Partner transaction readiness](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/workflows/match-os-partner-readiness.yml) 的只读验收。不得提交凭据到聊天；本轮不创建购物车、订单或付款，不部署公开后端。
+
 ## 2026-11-16 商业准入推进：Groupon CJ 明确审批请求已发送
 
 - **官方协议复核：** LivingSocial 15 Nov [Managing the cart](https://agent.livingsocial.com/docs/for-builders/managing-the-cart) 明确 `Idempotency-Key` (8–200 chars) 强制语义针对**向既有购物车追加商品** `POST /partner_storefront/carts/{cartId}/items`；原 MATCH OS 当前仅使用 `POST /partner_storefront/carts` 同时创建购物车与首行，没有后续追加接口。因此缺少额外 `Idempotency-Key` **不是当前实现的已证实缺陷**，无需胡乱修改；`x-request-id` 仅是诊断追踪，不能拿来冒充幂等。服务端现有“一次决策只请求一次创建购物车、超时停止”规则保持。官方指出如重试创建，会得到不同的购物车。
