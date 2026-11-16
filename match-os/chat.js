@@ -8,7 +8,7 @@ import { createMatchingSession } from './matching.js?v=7';
 import { createFunnel, steps as funnelSteps } from './funnel.js?v=8';
 import { compareHeadphones, headphoneIntent, headphoneMarkets, headphoneModels, headphoneNeeds, headphoneTopic } from './modules/headphones.js?v=12';
 import { HEADPHONE_LISTINGS } from './modules/headphone-listings.js?v=12';
-import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=12';
+import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=13';
 import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
 
 (() => {
@@ -212,6 +212,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     clearHeadphoneControls();
     byId('summary').replaceChildren();
     byId('payload').replaceChildren();
+    byId('sharing-focus').replaceChildren();
     resetPublicSharing();
     byId('ref').textContent = '';
     byId('expiry').textContent = '';
@@ -703,11 +704,10 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
         const eligible = comparison.rows.filter(row => !row.problems.length && !row.stale && row.offer.snapshotAvailable !== false);
         candidates += eligible.length;
         merchantCandidates += eligible.length;
-        const fits = comparison.models.filter(model => !model.conflicts.length && !model.unknown.length).length;
         const priced = eligible.filter(row => row.offer.price && row.offer.price.currency === intent.brief.budget.currency &&
-          row.provenance.identity?.verified).length;
-        const summary = (change ? change + ' ' : '') + fits + ' models clear the checked requirements so far. ' +
-          priced + ' matching-SKU price observations within the listed-price budget in ' + intent.brief.budget.currency + '. ' +
+          row.provenance.identity?.verified && row.offer.attrs.condition === 'new').length;
+        const summary = (change ? change + ' ' : '') +
+          priced + (priced === 1 ? ' matching-SKU listing' : ' matching-SKU listings') + ' with a listed price within budget. ' +
           (!leading.conflicts.length && !leading.unknown.length
             ? (leading.best ? leading.model.name + ' leads on the available evidence. ' : 'No priced lead can be ranked in this market. ')
             : 'No model clears all checked requirements. ') +
@@ -840,11 +840,15 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     }
   }
 
-  function showSharing() {
+  function showSharing(focusModel) {
     if (!remaining() || closing || session.field) return;
     byId('stage-build').removeAttribute('aria-current');
     byId('stage-compare').setAttribute('aria-current', 'step');
     const data = requestFields();
+    const focus = focusModel ? focusModel.name + ' (' + focusModel.sku + ')' : '';
+    if (focus) data.details = [data.details, 'Store comparison focus: ' + focus].filter(Boolean).join('; ');
+    byId('sharing-focus').textContent = focus ? 'Manual check for ' + focus : '';
+    byId('sharing-focus').hidden = !focus;
     byId('payload').replaceChildren(...Object.entries(data).map(([name, value]) => {
       const field = document.createElement('input');
       field.type = 'hidden';
@@ -860,6 +864,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   function openPublicEditor() {
     if (!remaining() || closing || byId('sharing').hidden || session.submitting || !byId('public-consent').checked) return;
     const data = requestFields();
+    data.details = byId('payload').querySelector('[name=details]').value;
     const body = [
       '## Voluntary buyer request',
       '',
@@ -974,14 +979,18 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
       'Budget updated to ' + currency.value + ' ' + budget.valueAsNumber + '.');
     scheduleFreshness();
   }
-  hpControls.addEventListener('change', applyHeadphoneEdit);
+  hpControls.addEventListener('change', event => {
+    // The budget input already updates as it changes. A second render on blur can replace the next click target.
+    if (event.target.id !== 'hp-budget') applyHeadphoneEdit(event);
+  });
   byId('hp-budget').addEventListener('input', event => {
     if (event.target.validity.valid && event.target.value) applyHeadphoneEdit(event);
   });
 
   byId('live-results').addEventListener('click', event => {
-    if (event.target.closest('button[data-headphone-handoff]')) {
-      showSharing();
+    const handoff = event.target.closest('button[data-headphone-handoff]');
+    if (handoff) {
+      showSharing(headphoneModels.find(model => model.id === handoff.dataset.headphoneHandoff));
       return;
     }
     const button = event.target.closest('button[data-headphone-select]');
@@ -1022,7 +1031,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     input.value = 'Find iPhone 15 128 GB + USB-C charger in Seattle, United States under USD 800, just comparing.';
     input.focus();
   });
-  byId('handoff').addEventListener('click', showSharing);
+  byId('handoff').addEventListener('click', () => showSharing());
   byId('live-search').addEventListener('click', () => void searchLiveOffers('manual'));
   byId('revoke-search').addEventListener('click', () => {
     if (!remaining() || closing) return;

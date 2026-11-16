@@ -193,7 +193,7 @@ export function renderHeadphones(container, comparison, selected, market, curren
   }
   const help = node('button', 'Ask for a manual price and delivery check', 'secondary');
   help.type = 'button';
-  help.setAttribute('data-headphone-handoff', '');
+  help.dataset.headphoneHandoff = entry.model.id;
   stores.append(help);
   section.append(cards, stores, matrix(comparison.models));
   container.append(section);

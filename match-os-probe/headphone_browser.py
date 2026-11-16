@@ -63,6 +63,10 @@ def headphone_session(page, site, touch=False):
     action(stores.locator("button[data-headphone-handoff]"))
     expect(page.locator("#sharing")).to_be_visible()
     expect(page.locator('#payload input[name="when"]')).to_have_value("2026-11-18")
+    expect(page.locator("#sharing-focus")).to_contain_text("WH1000XM5/B")
+    expect(page.locator('#payload input[name="details"]')).to_have_value(
+        "3.5 mm wired ANC required; Store comparison focus: Sony WH-1000XM5 (WH1000XM5/B)"
+    )
 
     action(page.locator("#hp-controls label").filter(has_text="Built-in mic over cable"))
     expect(page.locator(".hp-model-card[data-model=xm5]")).to_contain_text("Excluded: Built-in microphone over cable")
