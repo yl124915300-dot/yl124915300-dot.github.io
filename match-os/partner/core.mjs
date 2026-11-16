@@ -2,6 +2,15 @@
 // SERVER-ONLY. No credentials or order IDs in public pages, client logs or URLs.
 // This file does not deploy a checkout, create a cart or call the network on import.
 export const PARTNER_ORIGIN = 'https://api-core.livingsocial.com';
+
+// GET /partner_storefront/me returns cjPublisherId ONLY after Groupon confirms
+// the publisher for this storefront. Never mistake a CJ account or submitted PID
+// for approval. Do not expose the PID to the buyer or public logs.
+export function hasConfirmedCJ(registration) {
+  const pid = registration?.cjPublisherId ?? registration?.data?.cjPublisherId;
+  return typeof pid === 'string' ? /^[0-9]{1,20}$/.test(pid) :
+    Number.isSafeInteger(pid) && pid > 0;
+}
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const PURCHASED = new Set(['CONFIRMED', 'REDEEMED']);
 const NOT_PAID = new Set(['REJECTED', 'EXPIRED', 'CANCELLED']);
