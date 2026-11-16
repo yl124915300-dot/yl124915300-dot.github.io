@@ -6,9 +6,9 @@ import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFi
 import { entryContext, topics } from './demand/topics.js?v=9';
 import { createMatchingSession } from './matching.js?v=7';
 import { createFunnel, steps as funnelSteps } from './funnel.js?v=8';
-import { compareHeadphones, headphoneIntent, headphoneMarkets, headphoneModels, headphoneNeeds, headphoneTopic } from './modules/headphones.js?v=12';
+import { compareHeadphones, headphoneGoal, headphoneGoals, headphoneIntent, headphoneMarkets, headphoneModels, headphoneNeeds, headphoneTopic } from './modules/headphones.js?v=14';
 import { HEADPHONE_LISTINGS } from './modules/headphone-listings.js?v=12';
-import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=13';
+import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=14';
 import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
 
 (() => {
@@ -181,6 +181,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     draft = null;
     hpSetup.reset();
     hpSetup.hidden = true;
+    byId('hp-market-coverage').hidden = true;
     byId('hp-preview').replaceChildren();
     byId('hp-preview').hidden = true;
     byId('hp-preview-note').hidden = true;
@@ -897,6 +898,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   });
   byId('skip').addEventListener('click', () => send('No preference'));
   const marketChoices = Object.entries(headphoneMarkets).map(([code, [name]]) => [code, name]);
+  for (const goal of headphoneGoals) byId('hp-start-goal').add(new Option(goal.label, goal.id));
   for (const id of ['hp-market', 'hp-start-market']) {
     const select = byId(id);
     if (id === 'hp-start-market') select.add(new Option('Choose market', ''));
@@ -912,8 +914,27 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   function marketPlace(market) {
     return { code: market, city: '', region: headphoneMarkets[market]?.[0] || 'Other' };
   }
-  byId('hp-start-market').addEventListener('change', event =>
-    updateCurrency(event.target.value, byId('hp-start-currency')));
+  function updateStartCoverage() {
+    if (!headphoneEntry) return;
+    const market = byId('hp-start-market').value;
+    const description = market === 'US'
+      ? 'US: dated public retailer observations may be available; local stock, shipping, tax and final total still need checking.'
+      : market
+        ? 'No verified local retailer prices for this market yet. Manufacturer feature checks are available; add your own seller link for comparison.'
+        : 'Choose your shopping market. We do not assume US prices apply worldwide.';
+    byId('hp-market-coverage').textContent = description;
+    byId('hp-market-coverage').hidden = false;
+  }
+  byId('hp-start-market').addEventListener('change', event => {
+    updateCurrency(event.target.value, byId('hp-start-currency'));
+    updateStartCoverage();
+  });
+  byId('hp-start-goal').addEventListener('change', event => {
+    if (!headphoneEntry || session) return;
+    const goal = headphoneGoal(event.target.value);
+    renderHeadphonePreview(byId('hp-preview'), goal.id);
+    byId('welcome-copy').textContent = goal.copy;
+  });
   hpSetup.addEventListener('submit', event => {
     event.preventDefault();
     byId('start-chat').click();
@@ -1009,8 +1030,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
         if (!hpSetup.reportValidity()) return;
         const budget = { amount: byId('hp-start-budget').valueAsNumber, currency: byId('hp-start-currency').value };
         const place = marketPlace(byId('hp-start-market').value);
-        start({ item, ...prefill, budget, place, when: 'just comparing' }, 'ecommerce');
-        appendMessage('buyer', item);
+        const goal = headphoneGoal(byId('hp-start-goal').value);
+        start({ item, ...prefill, details: goal.details, budget, place, when: 'just comparing' }, 'ecommerce');
+        appendMessage('buyer', item + ' · Goal: ' + goal.label);
         summarize();
         return;
       }
@@ -1190,10 +1212,11 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     byId('start-chat').textContent = 'Use this item and start chat';
     if (headphoneEntry) {
       byId('welcome').classList.add('hp-welcome');
-      byId('welcome-title').textContent = 'Wired ANC headphones';
-      byId('welcome-copy').textContent = 'Two verified options for a plane seat or a device without Bluetooth.';
+      byId('welcome-title').textContent = 'Find headphones that fit your needs';
+      byId('welcome-copy').textContent = headphoneGoal(byId('hp-start-goal').value).copy;
       byId('entry-preview').classList.add('sr-only');
-      renderHeadphonePreview(byId('hp-preview'));
+      renderHeadphonePreview(byId('hp-preview'), byId('hp-start-goal').value);
+      updateStartCoverage();
       byId('hp-preview').hidden = false;
       byId('hp-preview-note').hidden = false;
       byId('example').textContent = 'Compare something else';
