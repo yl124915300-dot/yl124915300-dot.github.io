@@ -1,5 +1,20 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 高频交易主链：Partner 安全网关及账号实测（尚未投入真实运行）
+
+**目标口径：**真实已授权买家 → 单市场实时准确套餐 → Partner 购物车 `buyLink` → 买家自行在 Groupon 支付 → 订单/退款回读 → CJ 独立核验净佣金。此为真实世界消费交易而非证券交易。
+
+**本轮证据与实际完成：**
+- 已读现行 [Partner API](https://agent.livingsocial.com/docs/for-builders/how-it-works)、[实时商品搜索](https://agent.livingsocial.com/docs/for-builders/searching-the-catalog)、[购物车规则](https://agent.livingsocial.com/docs/for-builders/managing-the-cart)、[订单核验](https://agent.livingsocial.com/docs/for-builders/checkout-and-order-confirmation)；仅 US 库存，服务器端 Bearer key，`expectedPrice` 为精确选项美元分，Groupon 收银链接不得改写，实际结账税费不可由公开商品卡推算。
+- 在**原 MATCH OS 仓库**新增 `match-os/partner/core.mjs`：严格校验店铺凭据格式、产品/套餐/数量、用户同意的当前价格；单次创建购物车返回的原生 `buyLink` 必须来自匹配且可买的商品明细；订单必须同时匹配商品 ID、套餐 ID、数量及匿名 `clientReference`。待处理、取消、拒绝、过期或退款不算已支付订单；订单成立也不等于佣金到账。
+- 新增同项目的 **`gateway-worker.mjs` 与 `schema.sql`（代码已入库，未部署为活跃服务）**：服务端密钥、Turnstile、HMAC 签名买家选择、D1 唯一决策 ID 防重复创建购物车；网络超时 `UNCERTAIN_STOP` 禁止重试制造重复购物车；订单只读核验不泄露敏感 UUID。默认关闭，必须有 Partner key、私有数据库、反滥用配置和明确启用开关才允许请求。当前 Github Pages 不连接这个未上线网关，未创建真实购物车/付款。
+- 新增 `match-os-probe/partner-contract.test.mjs`，含完整**模拟**“选项报价→创建唯一购物车→重复请求不新增购物车→匹配订单 CONFIRMED”的 Node 测试及恶意链接、错误市场、涨价、退款、错误买家归因反例。原 MATCH OS 节点与浏览器测试保持不变。最新 [Partner 合约验证](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43866584032) **contract SUCCESS**，生产凭据检查按设计 SKIPPED（仅人工调度时执行）。
+- **真实账户准入实测失败：** [Partner read-only preflight](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43865643430) 的授权登录/商品检索 Job 输出 `PARTNER_BLOCKED: MATCH_OS_GROUPON_API_KEY is not configured in the private environment.`；明确无法读取店铺 `/me` 或 Partner 商品端点，更不能生成正式 cartId 和归因 `buyLink`。这只证明指定 GitHub Secret 缺失，**不**证明账户从未注册店铺；必须由持有人在官方已登录后台核实。已改为手动执行生产凭据检查，避免每次代码提交发失败 CI 邮件。
+- 当前 Gmail 检索 MATCH OS 真实主动买家 0，原仓库 `MATCH OS BUYER` 真实入站 issue 0；当前新增实付 Groupon 订单 0、已核验 CJ/PayPal 净收入 US$0，实时全量 PayPal/CJ 流水未知。本轮未发真实私信、邮件、商户 API 写操作，未下单或付款。
+- 交接位置：`match-os/partner/README.md`（仅安全环境配置步骤）。正式 Partner 密钥只允许放私有 Secret，不发到聊天或静态网页；需 Cloudflare/其他可控服务端部署及连接原网站，再取得**真人主动选择的套餐**，才具备执行第一笔真实购物车的条件。CJ Program 批准与发布者 PID 是独立条件，不能因有 API key 就宣称每笔会盈利。
+
+**停止扩建条件：**在 Partner key / 后端服务部署和真实主动买家流量没有共同成立之前，不再增加空白机器人、搜索推广页面、SKU 或模拟订单；下一轮优先核验账户权限与真实买家准入，而非再叠工程量。第一笔订单及退款状态、第一笔实际分佣支付需逐项独立验收。
+
 ## 2026-11-16 获客基础修复：主入口 Sitemap + IndexNow 受理
 
 **性质：合法自有页面搜索发现能力验证，不是获客或成交验收。** 本轮 GitHub + Gmail 核查仍未发现可确认的非 QA 买家请求、非运营者新建的 MATCH OS 买家 issue 或新商家佣金授权。原真人买家 0、真实发信 0、订单 0、已核验净收入 US$0；全量独立访客与实时支付流水 UNKNOWN。
