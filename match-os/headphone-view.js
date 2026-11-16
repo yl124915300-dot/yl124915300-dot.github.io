@@ -1,4 +1,4 @@
-import { headphoneModels } from './modules/headphones.js?v=12';
+import { headphoneGoal, headphoneGoalFit, headphoneModels } from './modules/headphones.js?v=14';
 
 const node = (tag, text, className) => {
   const element = document.createElement(tag);
@@ -28,12 +28,22 @@ function icon(model) {
   return svg;
 }
 
-export function renderHeadphonePreview(container) {
+export function renderHeadphonePreview(container, selectedGoal = 'wired-anc') {
+  const goal = headphoneGoal(selectedGoal);
   const list = node('div', '', 'hp-card-grid');
-  for (const model of headphoneModels.slice(0, 2)) {
+  const priority = { verified: 0, pending: 1, conflict: 2 };
+  const models = [...headphoneModels].sort((a, b) =>
+    priority[headphoneGoalFit(a, goal.id).status] - priority[headphoneGoalFit(b, goal.id).status]);
+  for (const model of models.slice(0, 2)) {
+    const fit = headphoneGoalFit(model, goal.id);
     const card = node('article', '', 'hp-card hp-preview-card');
+    card.dataset.fit = fit.status;
+    const status = fit.status === 'verified' ? 'Known feature fit' :
+      fit.status === 'pending' ? 'Feature needs checking' : 'Fails chosen requirement';
+    const evidence = goal.id === 'wired-mic' ? model.mic :
+      goal.id === 'no-battery' ? model.passive : model.anc;
     card.append(icon(model), node('h2', model.name), node('p', model.sku, 'hp-sku'),
-      node('p', model.anc), link('Manufacturer evidence', model.sources[0][1]));
+      badge(status, fit.status), node('p', evidence), link('Manufacturer evidence', model.sources[0][1]));
     list.append(card);
   }
   container.replaceChildren(list);
