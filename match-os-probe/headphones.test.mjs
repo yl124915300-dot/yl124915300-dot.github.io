@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { routeRequest, localQuote } from '../match-os/transaction.js';
-import { compareHeadphones, headphoneIntent, selectedManufacturerModel } from '../match-os/modules/headphones.js';
+import { compareHeadphones, headphoneGoal, headphoneGoalFit, headphoneGoals, headphoneIntent, headphoneModels, selectedManufacturerModel } from '../match-os/modules/headphones.js';
 
 const start = '2026-11-18T10:00:00Z';
 const end = '2026-11-19T10:00:00Z';
@@ -19,6 +19,24 @@ const snapshots = [
   merchant('qa-4', 'q45', 'A3040011', 155),
   merchant('qa-5', 'q45', 'A3040011', 105, { stock: 'unavailable' }),
 ];
+
+test('buyer-selected goals apply exact, evidenced constraints without assuming a seller or budget', () => {
+  assert.deepEqual(headphoneGoals.map(goal => goal.id), ['wired-anc', 'wired-mic', 'no-battery', 'explore']);
+  assert.equal(headphoneGoal('invalid').id, 'wired-anc');
+  const sony = headphoneModels.find(model => model.id === 'xm5');
+  const soundcore = headphoneModels.find(model => model.id === 'q45');
+  assert.equal(headphoneGoalFit(sony, 'wired-anc').status, 'verified');
+  assert.equal(headphoneGoalFit(sony, 'wired-mic').status, 'conflict');
+  assert.equal(headphoneGoalFit(soundcore, 'wired-mic').status, 'pending');
+  assert.equal(headphoneGoalFit(sony, 'no-battery').status, 'verified');
+  assert.equal(headphoneGoalFit(soundcore, 'no-battery').status, 'pending');
+  assert.equal(headphoneGoalFit(soundcore, 'explore').status, 'verified');
+  const mic = intent('Over-ear headphones', headphoneGoal('wired-mic').details, 100, 'GB');
+  const comparison = compareHeadphones(mic, [], 'balanced', testNow, []);
+  assert.ok(comparison.models.find(x => x.model.id === 'xm5').conflicts.includes('Built-in microphone over cable'));
+  assert.ok(comparison.models.find(x => x.model.id === 'q45').unknown.includes('Built-in microphone over cable'));
+  assert.equal(comparison.rows.length, 0, 'do not invent local UK retailer offers');
+});
 
 test('headphone feature checks keep wired mic, power-off playback and model revision distinct', () => {
   const check = intent('Over-ear headphones', '3.5 mm wired ANC required; wired mic required');
