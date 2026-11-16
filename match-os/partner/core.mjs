@@ -105,6 +105,9 @@ export function verifyOrderAgainstCart(order, expected) {
     return { status: 'UNKNOWN', merchantOrderVerified: false, commissionVerified: false };
   }
   // A redirect order UUID or the first order on a cart is NEVER enough.
+  if (expected.clientReference && order.clientReference !== expected.clientReference) {
+    return { status: 'ITEM_MISMATCH', merchantOrderVerified: false, commissionVerified: false };
+  }
   const matching = order.items.find(x =>
     x.productId === expected.productId && x.optionId === expected.optionId &&
     x.quantity === expected.quantity);
