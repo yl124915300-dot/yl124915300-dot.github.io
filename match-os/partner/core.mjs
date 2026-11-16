@@ -86,11 +86,20 @@ export function validateReadyCart(cart, expected) {
   if (!validUuid(cart?.id) || cart.status !== 'ACTIVE' || !publicLink(cart.buyLink)) {
     fail('CART_NOT_READY', 'No active authenticated Groupon checkout link.');
   }
-  const matching = Array.isArray(cart.items) ? cart.items.find(line =>
-    line.productId === expected.productId && line.optionId === expected.optionId &&
-    line.quantity === expected.quantity) : null;
-  if (!matching || matching.available !== true) {
-    fail('CART_ITEM_UNVERIFIED', 'Groupon has not confirmed the selected option is available.');
+  // This gateway creates ONE line per explicitly approved decision.
+  // If Groupon returned another line, fail closed instead of showing a link
+  // that could charge for items the shopper did not select.
+  if (!Array.isArray(cart.items) || cart.items.length !== 1) {
+    fail('CART_LINES_UNVERIFIED', 'Cart has unexpected items.');
+  }
+  if (expected.clientReference && cart.clientReference !== expected.clientReference) {
+    fail('CART_REFERENCE_MISMATCH', 'Cart is not bound to this purchase decision.');
+  }
+  const matching = cart.items[0];
+  if (matching.productId !== expected.productId ||
+      matching.optionId !== expected.optionId ||
+      matching.quantity !== expected.quantity || matching.available !== true) {
+    fail('CART_ITEM_UNVERIFIED', 'Groupon has not confirmed this exact option and quantity.');
   }
   if (Array.isArray(cart.messages) && cart.messages.some(m =>
     ['item_declined', 'price_unavailable'].includes(typeof m === 'string' ? m : m?.code))) {
@@ -108,17 +117,25 @@ export function verifyOrderAgainstCart(order, expected) {
   if (expected.clientReference && order.clientReference !== expected.clientReference) {
     return { status: 'ITEM_MISMATCH', merchantOrderVerified: false, commissionVerified: false };
   }
-  const matching = order.items.find(x =>
-    x.productId === expected.productId && x.optionId === expected.optionId &&
-    x.quantity === expected.quantity);
-  if (!matching || (status === 'CONFIRMED' || status === 'REDEEMED') &&
-      !PURCHASED.has(matching.status)) {
+  // One decision authorizes one cart line, never a subset of a larger order.
+  const matching = order.items.length === 1 ? order.items[0] : null;
+  if (!matching || matching.productId !== expected.productId ||
+      matching.optionId !== expected.optionId ||
+      matching.quantity !== expected.quantity) {
     return { status: 'ITEM_MISMATCH', merchantOrderVerified: false, commissionVerified: false };
   }
-  if (status === 'REFUNDED' || matching.status === 'REFUNDED') {
+  const units = matching.unitItems;
+  if (status === 'REFUNDED' || matching.status === 'REFUNDED' ||
+      Array.isArray(units) && units.some(unit => unit.status === 'REFUNDED')) {
     return { status: 'REFUNDED', merchantOrderVerified: false, commissionVerified: false };
   }
-  if (PURCHASED.has(status) && PURCHASED.has(matching.status)) {
+  // Missing, partial or unknown voucher-level evidence cannot be treated as a purchase.
+  if (PURCHASED.has(status)) {
+    if (!PURCHASED.has(matching.status) || !Array.isArray(units) ||
+        units.length !== expected.quantity ||
+        units.some(unit => !PURCHASED.has(unit?.status))) {
+      return { status: 'ITEM_MISMATCH', merchantOrderVerified: false, commissionVerified: false };
+    }
     return { status, merchantOrderVerified: true, commissionVerified: false };
   }
   if (NOT_PAID.has(status)) return { status, merchantOrderVerified: false, commissionVerified: false };
