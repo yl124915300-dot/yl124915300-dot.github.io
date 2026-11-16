@@ -1,0 +1,39 @@
+name: MATCH OS Partner transaction readiness
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'match-os/partner/**'
+      - 'match-os-probe/partner-contract.test.mjs'
+      - '.github/workflows/match-os-partner-readiness.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    name: Exact-option and order-evidence contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test match-os-probe/partner-contract.test.mjs
+  partner-live-readonly:
+    name: Partner key / storefront / catalog (read only)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    needs: contract
+    env:
+      MATCH_OS_GROUPON_API_KEY: ${{ secrets.MATCH_OS_GROUPON_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Read existing registration and US search; never create a cart
+        run: node match-os/partner/preflight.mjs
