@@ -72,6 +72,10 @@ test('order UUID alone is not purchase; exact product, option, quantity and stat
     assert.equal(result.commissionVerified, false);
   }
   assert.equal(verifyOrderAgainstCart({ ...ok, status: 'REFUNDED' }, decision).status, 'REFUNDED');
+  assert.equal(verifyOrderAgainstCart({ ...ok, clientReference: DECISION },
+    { ...decision, clientReference: DECISION }).merchantOrderVerified, true);
+  assert.equal(verifyOrderAgainstCart({ ...ok, clientReference: CART },
+    { ...decision, clientReference: DECISION }).status, 'ITEM_MISMATCH');
   assert.equal(verifyOrderAgainstCart({ ...ok, status: 'DOES_NOT_EXIST' }, decision).status, 'UNKNOWN');
 });
 
