@@ -63,6 +63,18 @@ def headphone_session(page, site, touch=False):
     expect(page.locator("#hp-changes")).to_contain_text("Deadline changed")
     action(stores.locator("button[data-headphone-handoff]"))
     expect(page.locator("#sharing")).to_be_visible()
+    # This is a free, permissioned inbound request: no advance agreement to a future fee.
+    assert page.locator('input[name="fee_acknowledged"]').count() == 0
+    expect(page.locator('input[name="reply_scope"]')).to_have_value("ONE_REQUEST_SPECIFIC_REPLY_NO_MARKETING_V1")
+    expect(page.locator('input[name="research_consent"]')).not_to_be_checked()
+    assert not page.evaluate("document.querySelector('#demand').checkValidity()")
+    page.locator("#email").fill("buyer@example.test")
+    assert not page.evaluate("document.querySelector('#demand').checkValidity()")
+    page.locator('input[name="research_consent"]').check()
+    assert page.evaluate("document.querySelector('#demand').checkValidity()")
+    # QA deliberately never submits, so no email, platform reply or lead is generated.
+    page.locator('input[name="research_consent"]').uncheck()
+    page.locator("#email").fill("")
     expect(page.locator('#payload input[name="when"]')).to_have_value("2026-11-18")
     expect(page.locator("#sharing-focus")).to_contain_text("WH1000XM5/B")
     expect(page.locator('#payload input[name="details"]')).to_have_value(
