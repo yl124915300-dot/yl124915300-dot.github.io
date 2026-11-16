@@ -52,6 +52,38 @@ export const headphoneModels = [
   },
 ];
 
+
+/**
+ * Buyer-led starting intents, not seller recommendations or harvested profiles.
+ * Every option only sets requirements we can check against the named models.
+ * A missing capability must remain unknown, never silently pass.
+ */
+export const headphoneGoals = Object.freeze([
+  { id: 'wired-anc', label: 'Noise cancellation through an AUX cable',
+    details: '3.5 mm wired ANC required', checks: ['wiredAnc', 'analogAudio'],
+    copy: 'For flights and other devices where Bluetooth is unavailable.' },
+  { id: 'wired-mic', label: 'Use a headset microphone with a cable',
+    details: '3.5 mm audio required; wired mic required', checks: ['analogAudio', 'wiredMic'],
+    copy: 'Do not assume a Bluetooth microphone also works over a 3.5 mm cable.' },
+  { id: 'no-battery', label: 'Listen through a cable with power off',
+    details: '3.5 mm audio required; passive wired audio required', checks: ['analogAudio', 'passiveAudio'],
+    copy: 'Passive wired listening and powered noise cancellation are not equivalent.' },
+  { id: 'explore', label: 'Compare headphones without extra restrictions',
+    details: '', checks: [], copy: 'Start broadly, then add must-haves and a deadline in the chat.' },
+]);
+
+export function headphoneGoal(id) {
+  return headphoneGoals.find(goal => goal.id === id) || headphoneGoals[0];
+}
+
+export function headphoneGoalFit(model, goalId) {
+  const goal = headphoneGoal(goalId);
+  const failed = goal.checks.filter(feature => model.facts[feature] === false);
+  const unknown = goal.checks.filter(feature => model.facts[feature] !== true && model.facts[feature] !== false);
+  return { status: failed.length ? 'conflict' : unknown.length ? 'pending' : 'verified',
+    failed, unknown, goal };
+}
+
 export const headphoneNeeds = [
   ['wiredAnc', 'ANC over the cable', 'wired ANC required'],
   ['analogAudio', '3.5 mm audio', '3.5 mm audio required'],
