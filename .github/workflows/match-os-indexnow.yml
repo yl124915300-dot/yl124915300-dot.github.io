@@ -6,6 +6,7 @@ on:
       - 'sitemap.xml'
       - 'match-os/index.html'
       - 'match-os/demand/**'
+      - '.github/workflows/match-os-intake-smoke.yml'
       - '.github/workflows/match-os-indexnow.yml'
   workflow_dispatch:
 permissions:
