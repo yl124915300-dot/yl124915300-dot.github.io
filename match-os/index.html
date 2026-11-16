@@ -50,7 +50,7 @@
           <button class="primary" id="start-chat" type="button" disabled>Start purchase chat</button>
           <p id="hp-market-coverage" class="hp-coverage" aria-live="polite" hidden></p>
           <p class="hp-preview-copy" id="hp-preview-note" hidden>Sony documents audio with the power off. Q45’s built-in mic over AUX is unverified. Store prices and stock are checked separately.</p>
-          <p class="muted">Free pilot. You pay the merchant directly. A future US$1 service fee requires a verified purchase and your separate PayPal approval. PayPal checkout is currently closed.</p>
+          <p class="muted">Free pilot: compare first and pay the merchant directly if you choose. A possible future US$1 success-only service requires a separately approved payment after independent order verification. PayPal checkout is closed.</p>
           <button class="example quiet" id="example" type="button">Try an example</button>
         </div>
         <div id="messages" class="messages" role="log" aria-label="Chat messages"></div>
@@ -152,39 +152,40 @@
               </form>
             </div>
           </details>
-          <p class="muted">Send your reviewed request for a manual check of matching listings, delivered totals and alternatives. We flag terms the merchant has yet to confirm. You choose and pay the merchant directly.</p>
+          <p class="muted">Request a free, request-specific comparison by email. Automated or manual review will flag any missing merchant terms, including final delivered cost. You choose and pay the merchant directly.</p>
           <div class="actions">
             <button class="primary" id="handoff" type="button">Review what to share</button>
           </div>
         </section>
         <section id="sharing" class="review" hidden aria-labelledby="sharing-title">
-          <h2 id="sharing-title" tabindex="-1">Share for manual comparison</h2>
+          <h2 id="sharing-title" tabindex="-1">Request a free comparison by email</h2>
           <p class="muted" id="sharing-focus" hidden></p>
-          <p class="muted">FormSubmit receives the reviewed details, your browser reference, reply email, consent and a fixed label for the entry you used. Your chat transcript stays in this tab.</p>
+          <p class="muted">FormSubmit forwards your reviewed request, browser reference, reply email and consent to MATCH OS. A request-specific reply may be prepared automatically or manually. Your chat transcript stays in this tab.</p>
           <form id="demand" action="https://formsubmit.co/296eed7e458ed66fc7e10100fcdae788" method="post" autocomplete="off">
             <input type="hidden" name="_next" value="https://yl124915300-dot.github.io/match-os/received.html">
-            <input type="hidden" name="_subject" value="MATCH OS Buyer Interest — self reported, not yet verified">
+            <input type="hidden" name="_subject" value="MATCH OS Buyer Request - opted-in reply (unverified)">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_url" value="https://yl124915300-dot.github.io/match-os/">
-            <input type="hidden" name="fee_policy" value="MATCH_OS_SUCCESS_ONLY_USD_1_V1">
+            <input type="hidden" name="fee_policy" value="OPTIONAL_FUTURE_USD1_AFTER_VERIFIED_PURCHASE_SEPARATE_APPROVAL">
             <input type="hidden" name="transaction_state" value="SELF_REPORTED_REQUEST_NOT_ORDER">
+            <input type="hidden" name="reply_scope" value="ONE_REQUEST_SPECIFIC_REPLY_NO_MARKETING_V1">
             <div id="payload" hidden></div>
             <div class="trap" aria-hidden="true"><label>Leave blank <input name="_honey" tabindex="-1" autocomplete="off"></label></div>
 
             <label for="email" class="label">Reply email</label>
             <input id="email" type="email" name="email" autocomplete="off" maxlength="120" required aria-describedby="email-use">
-            <p id="email-use" class="muted">Used for follow-up on this request.</p>
+            <p id="email-use" class="muted">Used only to reply to this purchase request. No marketing subscription.</p>
 
-            <label class="check"><input name="fee_acknowledged" value="yes" type="checkbox" required><span>I agree to the proposed <strong>US$1 MATCH OS service fee only after a purchase is independently verified as successful.</strong> I would separately approve a PayPal payment. No fee is charged now, and PayPal checkout is currently unavailable.</span></label>
-            <label class="check"><input name="research_consent" value="yes" type="checkbox" required><span>I authorize <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a> to email these details to MATCH OS for manual comparison and request-specific follow-up.</span></label>
-            <p class="muted">FormSubmit says it keeps submissions for 30 days. The operator may keep the email for follow-up. Closing this tab only clears the local chat. <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit privacy terms</a>.</p>
-            <button class="primary" id="request-submit" type="submit" disabled>Continue to FormSubmit</button>
+            <p class="muted">This request is free, with no payment obligation. Any future US$1 success fee would require a verified purchase and your separate approval; the payment link is currently unavailable.</p>
+            <label class="check"><input name="research_consent" value="yes" type="checkbox" required><span>I authorize <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a> to forward these details to MATCH OS, and MATCH OS to send me one automated or manually prepared email reply about this buying request. This is not a marketing subscription.</span></label>
+            <p class="muted">FormSubmit says it keeps submissions for 30 days. MATCH OS may retain this request and email to respond; further replies occur only if you contact us again. Closing this tab clears local chat, not emails already sent. <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit privacy terms</a>.</p>
+            <button class="primary" id="request-submit" type="submit" disabled>Send my free comparison request</button>
             <p class="muted">FormSubmit may ask for a CAPTCHA. If you see an error or leave before it confirms, delivery is unknown.</p>
           </form>
           <details id="public-option">
             <summary>Use a public GitHub issue instead</summary>
             <p class="muted">GitHub receives only the reviewed purchase details and entry label when you open its issue editor. Sign in and review the draft before deciding whether to publish it publicly.</p>
-            <label class="check"><input id="public-consent" type="checkbox" autocomplete="off"><span>I agree to share these purchase details with GitHub and understand that publishing makes them public. I accept the proposed US$1 fee terms above. PayPal checkout is closed.</span></label>
+            <label class="check"><input id="public-consent" type="checkbox" autocomplete="off"><span>I agree to share these purchase details publicly on GitHub. This is a free request, not an order or payment agreement. Do not include private contact or payment details.</span></label>
             <button class="secondary" id="github" type="button" disabled>Open GitHub issue draft</button>
           </details>
         </section>
