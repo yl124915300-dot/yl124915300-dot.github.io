@@ -398,6 +398,7 @@ with sync_playwright() as playwright:
              ("demand-electronics-desktop", lambda page: demand_browser.electronics(page, SITE)),
              ("headphones-desktop", lambda page: headphone_browser.headphone_session(page, SITE)),
              ("headphones-mobile", lambda page: headphone_browser.headphone_session(page, SITE, touch=True)),
+             ("headphones-goal-mobile", lambda page: headphone_browser.headphone_buyer_goal(page, SITE)),
              ("headphones-ttl", lambda page: headphone_browser.headphone_ttl(page, SITE)),
              ("social-post-desktop", lambda page: demand_browser.social(page, SITE, "x_post", False)),
              ("social-profile-mobile", lambda page: demand_browser.social(page, SITE, "youtube_profile", True))]
