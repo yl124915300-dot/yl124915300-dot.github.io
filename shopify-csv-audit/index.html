@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free private Shopify product CSV audit. Find missing product descriptions, invalid prices, duplicate SKUs, and image gaps directly in your browser. No upload required.">
+<title>Catalog Check — Free Shopify CSV Product Audit</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172d31;background:#f5f6f1;font-synthesis:none}
+*{box-sizing:border-box}
+body{margin:0}.wrap{max-width:1100px;margin:auto;padding:0 22px}
+header{border-bottom:1px solid #dae1dd;background:#fffdf9}
+nav{height:68px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.logo{font-size:17px;font-weight:850;letter-spacing:-.06em}.logo span{color:#008d73}
+nav a{color:#3e6565;font-weight:650;text-decoration:none;font-size:13px}
+.hero{padding:60px 0 36px;display:grid;grid-template-columns:1.5fr 1fr;gap:52px;align-items:center}
+.kicker{color:#00745e;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+h1{font-size:clamp(36px,5vw,64px);letter-spacing:-.065em;line-height:1.08;margin:12px 0 17px;max-width:750px}
+.lead{font-size:18px;color:#547075;line-height:1.62;margin-bottom:18px}
+.pill{display:inline-flex;background:#e1eee8;color:#15634c;padding:8px 12px;border-radius:100px;font-size:12px;font-weight:750}
+.side{background:#143e36;border-radius:18px;color:#f1fdf7;padding:25px 28px;box-shadow:0 18px 34px #193b3515}
+.side h2{font-size:21px;letter-spacing:-.035em;margin:0 0 9px}
+.side p,.side li{color:#c6dfd6;font-size:14px;line-height:1.6}
+.side ul{padding-left:20px}
+.panel{background:white;border:1px solid #e3e7e0;box-shadow:0 12px 40px #0f303008;border-radius:18px;padding:26px;margin:18px 0 28px}
+.panel h2{font-size:24px;letter-spacing:-.04em;margin:0 0 10px}
+.muted{color:#597073;font-size:14px;line-height:1.55}
+.upload{display:grid;place-items:center;text-align:center;border:2px dashed #a0c5b4;background:#f7fbf8;border-radius:14px;min-height:174px;margin-top:18px;outline-offset:5px;padding:20px}
+.upload:focus-within,.upload.drag{border-color:#09775f;background:#e3f4ec}
+.upload strong{font-size:18px}.upload p{margin:8px 0 14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;background:#087759;color:white;padding:12px 18px;font-weight:750;border-radius:10px;cursor:pointer;font-size:14px}
+.btn:hover{background:#045942}.btn:disabled{cursor:not-allowed;opacity:.55}
+.btn.secondary{background:#e8f0ec;color:#1e594e}
+.btn.secondary:hover{background:#dbece2}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#input{position:absolute;width:1px;height:1px;opacity:0}
+.note{font-size:12px;color:#5b7470}
+.error{color:#a23131;background:#ffeaea;padding:12px;border-radius:8px;display:none}
+#results[hidden],#error[hidden]{display:none}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+.metric{border-radius:12px;border:1px solid #dce6df;background:#f7faf7;padding:15px}
+.metric strong{display:block;font-size:26px;margin-top:4px;letter-spacing:-.04em}
+.metric span{font-size:12px;color:#506a65}
+.scroller{overflow:auto;max-height:540px;border:1px solid #dce6e2;border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:740px;text-align:left}
+th{background:#edf4f0;position:sticky;top:0;color:#416056}
+td,th{padding:12px;border-bottom:1px solid #e6eee9;vertical-align:top;font-size:13px;overflow-wrap:anywhere}
+td{max-width:245px;line-height:1.5}
+.severity{font-weight:800;text-transform:uppercase;font-size:11px}
+.severity.critical{color:#a52929}.severity.high{color:#b25f18}.severity.medium{color:#4b6881}
+.mini{font-size:12px;color:#637976}
+section.three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0}
+.three article{padding:20px;background:#fff;border-radius:14px;border:1px solid #e0e9e4}
+.three h3{margin:0 0 8px;font-size:16px}
+.three p{color:#5c7270;font-size:14px;line-height:1.55;margin:0}
+.dark{background:#173f3b;color:white;padding:30px;border-radius:15px;margin:24px 0}
+.dark h2{margin-top:0}.dark p{max-width:780px;color:#d4e5de;line-height:1.65}
+footer{padding:35px 0;border-top:1px solid #dae1dd;font-size:12px;color:#59736f}
+a{color:#00745e}
+@media(max-width:800px){.hero{grid-template-columns:1fr;gap:18px;padding:36px 0 14px}.cards{grid-template-columns:repeat(2,1fr)}section.three{grid-template-columns:1fr}.side{padding:20px}}
+</style>
+</head>
+<body>
+<header><nav class="wrap">
+<div class="logo">catalog<span>check</span> <span class="mini">/ independent tool</span></div>
+<a href="#how">How it works</a>
+</nav></header>
+<main class="wrap">
+<section class="hero">
+<div><div class="kicker">Shopify product data • private browser audit</div>
+<h1>Check your product CSV before a costly mistake.</h1>
+<p class="lead">Identify inconsistent prices, duplicate cross-product SKUs, empty descriptions and missing images in minutes. No account, app install, store access or file upload.</p>
+<span class="pill">Free preview • Your catalog stays on your device</span></div>
+<aside class="side">
+<h2>Know what needs attention.</h2>
+<p>Export your product CSV from Shopify. This independent rules-based scan produces a downloadable, line-by-line findings report.</p>
+<ul><li>Original CSV is never edited</li><li>Blank fields on variant rows are not automatically treated as errors</li><li>No claims about ChatGPT ranking or Business Agent eligibility</li></ul>
+</aside></section>
+<section id="audit" class="panel">
+<h2>Scan a product CSV</h2>
+<p class="muted">Compatible with common recent and legacy Shopify product export column names. Limited to 2 MB and 5,000 records. Only the report is exported; your catalog stays local.</p>
+<div class="upload" id="drop" tabindex="0">
+  <div><strong>Choose a Shopify product CSV</strong>
+  <p class="muted">or drop a file here • no upload to a server</p>
+  <label class="btn" for="input">Choose CSV</label>
+  <input id="input" type="file" accept=".csv,text/csv">
+  </div>
+</div>
+<div class="actions" style="margin-top:15px">
+<button class="btn secondary" id="demo" type="button">Try a sample catalog</button>
+<a href="./sample.csv" download>Download sample CSV</a>
+</div>
+<p role="alert" class="error" id="error" hidden></p>
+<div id="results" hidden>
+  <div class="cards" aria-label="Audit summary">
+    <div class="metric"><span>Product handles</span><strong id="products">0</strong></div>
+    <div class="metric"><span>Data records</span><strong id="records">0</strong></div>
+    <div class="metric"><span>Findings</span><strong id="findings">0</strong></div>
+    <div class="metric"><span>Critical / high</span><strong id="priority">0</strong></div>
+  </div>
+  <h3 id="result-title">Prioritized findings</h3>
+  <p class="muted">These are potential data issues, not confirmed listing errors or lost sales. Verify all suggestions before changing Shopify data.</p>
+  <div class="scroller"><table><thead><tr><th>Priority</th><th>CSV record</th><th>Handle</th><th>Field / observed</th><th>Suggested action</th></tr></thead><tbody id="issue-list"></tbody></table></div>
+  <div class="actions" style="margin-top:20px"><button class="btn" id="download" type="button">Download findings CSV</button><button class="btn secondary" id="copy" type="button">Copy audit summary</button></div>
+  <p class="note" role="status" id="status"></p>
+</div>
+</section>
+<section class="three" id="how">
+<article><h3>1 · Export</h3><p>Shopify Admin → Products → Export. Keep the original file backed up; never reorder variants before reimporting.</p></article>
+<article><h3>2 · Review</h3><p>Inspect each line-level finding. Missing SEO title values may be normal: Shopify can generate defaults, so they are not flagged.</p></article>
+<article><h3>3 · Fix carefully</h3><p>Use the findings as a review checklist. This tool does not silently rewrite original rows or push changes to Shopify.</p></article>
+</section>
+<section class="dark">
+  <h2>Want a complete repair review?</h2>
+  <p>A US$129, 20-product assisted remediation pilot is being evaluated. Paid orders are <strong>not open</strong> until verified checkout, order tracking, and delivery are available. You can use the free findings report today; no payment is requested.</p>
+</section>
+</main>
+<footer><div class="wrap">Catalog Check is an independent prototype, not affiliated with Shopify, OpenAI, or ChatGPT. No network requests are made by the CSV scanner; do not paste private customer information into public issues. For CSV format requirements, see <a href="https://help.shopify.com/en/manual/products/import-export/using-csv" rel="noopener noreferrer">Shopify's official guidance</a>. <span id="stamp">Updated Nov 2026.</span></div></footer>
+<script type="module">
+import {parseCSV,inspectShopifyCSV,exportFindings} from "./audit.mjs";
+const $=id=>document.getElementById(id);
+const demoCSV='Handle,Title,Body (HTML),Variant SKU,Variant Price,Variant Compare At Price,Image Src\ntrail-bag,Trail Bag,Verified 25L pack,TB-1,29,39,https://example.com/trail.jpg\ntrail-bag,,,TB-2,30,,\ntravel-mug,Travel Mug,,TB-1,not-a-price,20,\n';
+let last=null;
+function err(message){$("error").hidden=false;$("error").style.display="block";$("error").textContent=message;$("results").hidden=true;}
+function clearErr(){ $("error").hidden=true;$("error").style.display="none";$("error").textContent="";}
+function td(text,className){ const e=document.createElement("td");e.textContent=String(text ?? "");if(className)e.className=className;return e;}
+function run(text){
+ clearErr();
+ try{
+   const data=parseCSV(text);
+   last=inspectShopifyCSV(data);
+   const s=last.summary;
+   $("products").textContent=s.products;$("records").textContent=s.records;$("findings").textContent=s.findings;
+   $("priority").textContent=s.critical+s.high;
+   const tbody=$("issue-list");tbody.replaceChildren();
+   if(!last.issues.length){const tr=document.createElement("tr");const cell=td("No flagged issues under the current checks. This does not prove your catalog is complete.");cell.colSpan=5;tr.append(cell);tbody.append(tr);}
+   for(const f of last.issues.slice(0,350)){
+     const tr=document.createElement("tr");
+     tr.append(td(f.severity,f.severity+" severity"),td(f.line),td(f.product),td(f.field+": "+f.observed),td(f.advice));
+     tbody.append(tr);
+   }
+   $("result-title").textContent="Prioritized findings"+(last.issues.length>350?" (first 350 shown; download all)":"");
+   $("results").hidden=false;$("status").textContent="Scan finished locally. Original CSV not changed.";
+ }catch(e){last=null;err(e.message||"Could not read this CSV.");}
+}
+$("demo").addEventListener("click",()=>run(demoCSV));
+$("input").addEventListener("change",async ev=>{
+  const f=ev.target.files?.[0]; if(!f)return;
+  if(f.size>2*1024*1024){err("File too large. Use a product CSV under 2 MB.");return;}
+  if(!/\.csv$/i.test(f.name)){err("Choose a .csv file.");return;}
+  try{run(await f.text());}catch(e){err("Unable to read this file.");}
+});
+const drop=$("drop");
+drop.addEventListener("dragover",ev=>{ev.preventDefault();drop.classList.add("drag");});
+drop.addEventListener("dragleave",()=>drop.classList.remove("drag"));
+drop.addEventListener("drop",async ev=>{
+ ev.preventDefault();drop.classList.remove("drag");const f=ev.dataTransfer.files?.[0]; if(!f)return;
+ if(f.size>2*1024*1024||!/\.csv$/i.test(f.name)){err("Choose a .csv file under 2 MB.");return;}
+ try{run(await f.text());}catch(e){err("Unable to read this file.");}
+});
+$("download").addEventListener("click",()=>{
+ if(!last)return;const url=URL.createObjectURL(new Blob([exportFindings(last.issues)],{type:"text/csv;charset=utf-8"}));
+ const a=document.createElement("a");a.href=url;a.download="catalog-check-findings.csv";document.body.append(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+$("copy").addEventListener("click",async()=>{
+ if(!last)return;const s=last.summary;
+ const brief="Catalog Check: "+s.products+" products, "+s.records+" CSV records, "+s.findings+" potential findings ("+(s.critical+s.high)+" higher-priority). Local rules-based scan; verify before updating Shopify.";
+ try{await navigator.clipboard.writeText(brief);$("status").textContent="Summary copied.";}catch(e){$("status").textContent=brief;}
+});
+</script>
+</body>
+</html>
