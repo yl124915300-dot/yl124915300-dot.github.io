@@ -70,5 +70,5 @@ file(hub.slice(1) + 'index.html', layout(hub, 'Buying guides', intro,
     '" href="/match-os/#entry=demand_page&amp;topic=' + id + '">Start a ' + e(p.label.toLowerCase()) + ' chat</a></li>').join('\n') + '</ul>'));
 const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
 assert(sitemap.includes('</urlset>'), 'Expected the existing root sitemap');
-const missing = [hub, ...list.map(([id]) => demandURL(id))].filter(url => !sitemap.includes('<loc>' + BASE + url + '</loc>'));
+const missing = ['/match-os/', hub, ...list.map(([id]) => demandURL(id))].filter(url => !sitemap.includes('<loc>' + BASE + url + '</loc>'));
 file('sitemap.xml', sitemap.replace('</urlset>', missing.map(url => '  <url><loc>' + BASE + url + '</loc><lastmod>2026-11-15</lastmod></url>\n').join('') + '</urlset>'));
