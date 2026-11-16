@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - business-hub-selfserve-mvp-20261116
+      - catalog-check-conversion-20261116
       - main
     paths:
       - 'shopify-csv-audit/**'
