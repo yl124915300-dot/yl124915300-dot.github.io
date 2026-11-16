@@ -122,7 +122,8 @@ async function execute(req, env, pathname, origin, data) {
       const previous = await findDecision(env, v.decision);
       if (previous?.status === 'READY' && isUuid(previous.cart_id)) {
         const cart = await partner.cart(previous.cart_id);
-        const selected = { productId: previous.product_id, optionId: previous.option_id, quantity: previous.quantity };
+        const selected = { productId: previous.product_id, optionId: previous.option_id,
+          quantity: previous.quantity, clientReference: v.decision };
         const checked = validateReadyCart(cart, selected);
         const statusToken = await tokenSign(env, { purpose: 'status', decision: v.decision, expires: now() + 31 * 86400 });
         return reply({ buyLink: checked.buyLink, statusToken, status: 'READY', finalTotal: 'UNKNOWN' }, 200, origin);
@@ -135,7 +136,7 @@ async function execute(req, env, pathname, origin, data) {
         optionId: v.optionId, quantity: v.quantity, agreedPrice: v.agreedPrice,
       });
       const cart = await partner.createCart(selected, v.decision);
-      const checked = validateReadyCart(cart, selected);
+      const checked = validateReadyCart(cart, { ...selected, clientReference: v.decision });
       await mark(env, v.decision, 'READY', checked.cartId);
       const statusToken = await tokenSign(env, { purpose: 'status', decision: v.decision, expires: now() + 31 * 86400 });
       return reply({ buyLink: checked.buyLink, statusToken, status: 'READY',
@@ -151,7 +152,10 @@ async function execute(req, env, pathname, origin, data) {
     const record = await findDecision(env, v.decision);
     if (!record || record.status === 'CREATING' || !isUuid(record.cart_id)) fail('ORDER_SESSION_NOT_READY', 409);
     const cart = await partner.cart(record.cart_id);
-    if (!isUuid(cart.grouponOrderUuid)) {
+    if (cart.id !== record.cart_id || cart.clientReference !== v.decision) {
+      fail('CART_REFERENCE_MISMATCH', 409);
+    }
+    if (cart.status !== 'CHECKED_OUT' || !isUuid(cart.grouponOrderUuid)) {
       return reply({ status: 'UNCONFIRMED', merchantOrderVerified: false, commissionVerified: false }, 200, origin);
     }
     const order = await partner.order(cart.grouponOrderUuid);
