@@ -1,5 +1,15 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 获客基础修复：主入口 Sitemap + IndexNow 受理
+
+**性质：合法自有页面搜索发现能力验证，不是获客或成交验收。** 本轮 GitHub + Gmail 核查仍未发现可确认的非 QA 买家请求、非运营者新建的 MATCH OS 买家 issue 或新商家佣金授权。原真人买家 0、真实发信 0、订单 0、已核验净收入 US$0；全量独立访客与实时支付流水 UNKNOWN。
+
+- **检查到的漏项：** 原 GitHub Pages 站点 `robots.txt` 已允许抓取且含网站地图，4 个原购买指南及指南首页也在 `sitemap.xml` 内，但核心会话 `https://yl124915300-dot.github.io/match-os/` 不在 sitemap。没有证据证明这导致搜索流量为零，不能从索引缺口倒推获客量。
+- **已修复：** 将原站核心购买入口列入 `sitemap.xml`，在 `match-os-probe/build-demand.mjs` 加入生成器的缺失链接检查；更新 `.github/workflows/match-os-intake-smoke.yml`，确保 sitemap 和 IndexNow 工作流改动都触发原生成与 HTTPS 页面检查。没有新增 SKU、目标国家、产品列表、匿名用户标识或购买指南页面。
+- **IndexNow 实际受理：** 新增 `.github/workflows/match-os-indexnow.yml`，只针对用户自有且在 sitemap 的 6 条 canonical URL：原核心买家入口、指南首页与原 4 个指南。执行前检查 Pages 同一提交部署、公开主机所有权文件、每个实际 HTTPS 页面和 canonical URL，不发送隐私或买家数据。首轮 [GitHub Action 43858265653](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43858265653) 日志记录 `INDEXNOW_HTTP_STATUS 200`、`INDEXNOW_SUBMITTED_URLS 6`。最终最新版 [Pages 43858534948](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43858534948)、[MATCH OS smoke 43858536082](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43858536082)、[IndexNow 43858535931](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43858535931) 均 SUCCESS。HTTP 200 仅说明提交请求获受理，**不等于搜索引擎收录、展现、点击、真人咨询，更不等于成交**。
+- **商业约束再核实：** LivingSocial 官方 11/15 文档要求 Partner storefront + server-side API key + 经 Groupon 确认的 CJ publisher PID，Partner API 的原始 `buyLink` 才能参与可归因佣金。当前原站走匿名开放 Agent API 的 6 条官方购买链接没有佣金承诺；不应计为盈利。Partner API 店铺注册/密钥必须在持有人安全账户中处理，当前浏览器连接器无法读取已登录页面。未创建私有密钥、购物车、订单或新收费入口。
+- **下次优先级：** ① 账户持有人在 LivingSocial 正式后台安全完成 Partner storefront / key 并确认 Groupon 对 CJ PID 的资格；② 有现存买家需求且明确授权的分发入口；③ 取得真实买家订单状态、退款和佣金可核对回执，确认净收益后复制渠道。自动邮件轮检保留，但不得用其小时频率冒充高频匹配。
+
 ## 2026-11-16 高频交易实作：真实官方购买链接接入（已通过生产浏览器测试）
 
 **状态：供给侧交接增强，真实买家与订单闭环仍未成立。** 当轮目标不是扩大公开社媒抓取，而是缩短已经主动进入会话的买家从比较到真实商家付款页面的距离。对原 `match-os/` 实施更新，未新建独立项目、未新建机器人、未建立未获许可的联系名单，未发商家或买家消息，未发起订单/支付/商家账户 API 密钥创建。
