@@ -1,0 +1,20 @@
+name: PLI live isolated engineering checks
+on:
+  push:
+    branches: [pli-autonomous-real-loop-20261019]
+    paths: ['pli-live/**', '.github/workflows/pli-live-ci.yml']
+permissions:
+  contents: read
+jobs:
+  safety:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile and run bounded adversarial lifecycle
+        run: |
+          python3 -m py_compile pli-live/engine.py pli-live/cloud.py pli-live/test_engine.py
+          python3 pli-live/test_engine.py
+          node --check pli-live/app.js
+          node --check pli-live/browser.cjs
