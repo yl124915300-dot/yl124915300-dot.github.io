@@ -108,6 +108,31 @@ def headphone_session(page, site, touch=False):
     print("HEADPHONES_SOCIAL_COMPARISON_BUDGET_MARKET_FEATURES_OFFLINE_EXPIRY_OUTBOUND_CANCEL_OK", flush=True)
 
 
+
+def headphone_buyer_goal(page, site):
+    """Switch from a broad social topic to the buyer's own requirements; no fake offers."""
+    page.clock.install(time=TEST_TIME)
+    page.goto(site + ENTRY)
+    page.locator("#hp-start-goal").select_option("wired-mic")
+    expect(page.locator("#hp-preview")).to_contain_text("Feature needs checking")
+    expect(page.locator("#hp-preview")).to_contain_text("Fails chosen requirement")
+    page.locator("#hp-start-market").select_option("JP")
+    expect(page.locator("#hp-market-coverage")).to_contain_text("No verified local retailer prices")
+    page.locator("#hp-start-budget").fill("12000")
+    page.locator("#start-chat").click()
+    expect(page.locator("#hp-market")).to_have_value("JP")
+    expect(page.locator("#hp-currency")).to_have_value("JPY")
+    expect(page.locator("#summary")).to_contain_text("wired mic required")
+    expect(page.locator(".hp-model-card[data-model=xm4]")).to_have_attribute("data-fit", "conflict")
+    expect(page.locator(".hp-model-card[data-model=q45]")).to_have_attribute("data-fit", "pending")
+    expect(page.locator(".hp-stores .hp-store-card")).to_have_count(0)
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    page.locator("#close").click()
+    page.locator("#cancel").click()
+    expect(page.locator("#end-title")).to_have_text("Session closed")
+    print("HEADPHONES_BUYER_DRIVEN_GLOBAL_GOAL_NO_FAKE_MARKET_PRICES_OK", flush=True)
+
+
 def headphone_ttl(page, site):
     page.clock.install(time=TEST_TIME)
     page.goto(site + ENTRY)
