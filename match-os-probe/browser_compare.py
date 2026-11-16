@@ -321,8 +321,9 @@ def intake(page, channel):
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
 
     page.locator("#email").fill("intake-qa@example.test")
-    page.locator("#request-submit").click()
-    page.locator("[name=fee_acknowledged]").check()
+    assert page.locator("[name=fee_acknowledged]").count() == 0
+    expect(page.locator("[name=reply_scope]")).to_have_value("ONE_REQUEST_SPECIFIC_REPLY_NO_MARKETING_V1")
+    assert not page.evaluate("document.querySelector('#demand').checkValidity()")
     page.locator("#request-submit").click()
     assert not external, "External traffic before the buyer chose to share"
     page.locator("#public-option summary").click()
@@ -345,7 +346,9 @@ def intake(page, channel):
         assert post.value.method == "POST"
         payload = parse_qs(post.value.post_data)
         assert payload["transaction_reference"] == [ref] and payload["acquisition_source"] == [channel]
-        assert payload["fee_acknowledged"] == ["yes"] and payload["research_consent"] == ["yes"]
+        assert "fee_acknowledged" not in payload and payload["research_consent"] == ["yes"]
+        assert payload["reply_scope"] == ["ONE_REQUEST_SPECIFIC_REPLY_NO_MARKETING_V1"]
+        assert payload["_subject"] == ["MATCH OS Buyer Request - opted-in reply (unverified)"]
         assert payload["item"] == [item] and "discarded" not in post.value.post_data
         page.goto(urljoin(SITE, "received.html"))
         expect(page.locator("#request-code")).to_have_text(ref)
