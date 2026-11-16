@@ -1,5 +1,12 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 商业准入推进：Groupon CJ 明确审批请求已发送
+
+- **官方协议复核：** LivingSocial 15 Nov [Managing the cart](https://agent.livingsocial.com/docs/for-builders/managing-the-cart) 明确 `Idempotency-Key` (8–200 chars) 强制语义针对**向既有购物车追加商品** `POST /partner_storefront/carts/{cartId}/items`；原 MATCH OS 当前仅使用 `POST /partner_storefront/carts` 同时创建购物车与首行，没有后续追加接口。因此缺少额外 `Idempotency-Key` **不是当前实现的已证实缺陷**，无需胡乱修改；`x-request-id` 仅是诊断追踪，不能拿来冒充幂等。服务端现有“一次决策只请求一次创建购物车、超时停止”规则保持。官方指出如重试创建，会得到不同的购物车。
+- **实际外部动作：** 在已有 Groupon 技术/商务往来邮件线程 `1a1dd94d06c50a50` 中，**向原已知 CJ 负责人发送 1 封精准追问**，同时保留原技术联系人抄送；请求确认 Groupon CJ advertiserId 5840172 对 MATCH OS 买家自愿进入的官网自然流量/社媒个人简介/已授权本地 QR 适用性，是否存在额外审查、以及网站 PID 必须在哪一步确认。Gmail 返回真实 Sent messageId 前缀 `1a1e4661`；这只证明邮件发送接口受理，不证明对方收到、已读或批准。未发送陌生人冷邮件、商家促销、付款请求或账户凭据。无第二封重复催询。
+- **进度状态：** Groupon 工程人员先前确认店铺可自助注册/生成 API key、正式 Partner API 可创建原样 `buyLink`；但当前项目私有运行环境 `MATCH_OS_GROUPON_API_KEY` 未配置，CJ Groupon 计划与 PID 尚未获可核验批准，真实 Partner cart、真实买家咨询、商家确认订单与净佣金均仍 0/UNKNOWN。未以官网搜索页面或公开 Agent API 代替正式佣金链路。
+- **下一动作的明确触发：** 收到 Kate 的真实批准/驳回与准入指引，或账户持有人在官方安全后台完成 Partner storefront 及密钥配置后，先执行只读 `/partner_storefront/me` 与商品搜索；未获准入前不启动任何真实收费、代买或不可归因的购物车。高频化仍以真实买家来源、有效订单/日和净到账为验收标准。
+
 ## 2026-11-16 主线回归：精确购物车、CJ 资格与真实订单的双重校验
 
 **执行结论：本轮完成源代码的交易安全修正和官方协议复核；未接通生产 API、未发现新的真实买家、未成交。** 只继续原 `yl124915300-dot/yl124915300-dot.github.io/match-os/`；不新增机器人、SKU、广告、冷私信或索引页。GitHub Actions 成功是合成测试通过，不代表上线或盈利。
