@@ -65,4 +65,12 @@ test("findings CSV escapes spreadsheet formulas", () => {
   assert.ok(data.includes("'=HYPERLINK(1)"));
   assert.ok(data.includes("'+cmd"));
 });
+test("current inventory-only header warns about missing option identity", () => {
+  const v=audit("URL handle,Title,Inventory quantity\nshirt,Shirt,5\n");
+  assert.ok(v.issues.some(x=>x.severity==="critical" && x.field.includes("Option1 name")));
+});
+test("legacy quantity column warns about missing option identity", () => {
+  const v=audit("Handle,Title,Variant Inventory Qty\nshirt,Shirt,5\n");
+  assert.ok(v.issues.some(x=>x.severity==="critical" && x.field.includes("Option1 name")));
+});
 console.log("Tests passed:", passed);
