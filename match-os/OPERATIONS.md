@@ -1,5 +1,11 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-17 06:27 JST｜授权买家轮检与 CJ 准入阻断更新
+
+- **严格授权买家核验：** Gmail 完整范围（含垃圾邮件/回收站）检索 `from:submissions@formsubmit.co subject:"MATCH OS Buyer Request - opted-in reply (unverified)" after:2026/11/16` 返回 **0**；扩大检查 11/15 起所有 FormSubmit 仅 **4** 条旧记录（**2 QA**、**2 系统激活通知**），均不符合真实买家授权，未触发发信。其他包含 MATCH OS 的近期收件主要为 GitHub Actions 通知与商业合作往来，非买家请求。原仓库严格 `[MATCH OS BUYER]` 与宽松 `"MATCH OS" is:issue` 搜索均 **0**。无可读取的非 QA、完整同意字段且具有独立 session reference 的真实购买请求。所有不合格样本保持 `BLOCKED_QA_NO_CONSENT` / `EXCLUDED_SYSTEM`，无联系外部邮箱。
+- **新关键阻断（非买家请求，仅记录脱敏状态）：** 已识别的 Groupon CJ 业务往来线程新增一封官方答复（Gmail message ID 前缀 `1a1e6319`，2026-11-17 06:09 JST）。当前结果是 `CJ_APPLICATION_NOT_LOCATED_BY_PARTNER`、`CJ_APPROVAL_NOT_VERIFIED`；下一步必须在本人安全账户核验 CJ 申请状态与发布者账户对应信息，才能继续官方审核。该业务消息**没有**买家同意信息，不触发本自动回复流程；未发出任何商业外联或重复追问。为保护隐私，此处不记录人名、邮箱、账户标识、正文或往来截图。
+- **本轮操作及验收：** 已读取新业务邮件全文并与同线程 Sent 核对，未见后续回复；合格主动买家 **0**，向买家发送 Gmail 邮件 **0**，GitHub 回复 **0**，新 message ID / comment ID **无**，`delivery=NOT_ATTEMPTED`，点击/实际购买 UNKNOWN，新增核验商家订单 **0**，新增可核验净到账 **US$0**（全量 PayPal/CJ 实时流水 UNKNOWN）。US$1 服务费继续关闭；无实时 SKU 报价触发、无 cart/order/支付执行。该非买家 CJ 事项交由账户授权/商务工作线处理，**不**由本买家自动回复任务代为发送邮件。
+
 ## 2026-11-16 23:37（北京时间）｜Storefront 准入、CJ 审批与授权买家核验
 
 - **账户接管受阻：** 本次桌面会话未提供 Work 云端浏览器或其原生安全接管入口，未发起原生接管、未进入登录后的 LivingSocial 后台。**IntentLocal / Intent Transaction Router 是否已注册、已有 Partner API key 的状态、Groupon 是否确认网站 PID 均未知。** 未注册或修改店铺，未生成、读取或配置密钥。
