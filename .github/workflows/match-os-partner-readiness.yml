@@ -25,6 +25,9 @@ jobs:
       - run: node --test match-os-probe/partner-contract.test.mjs
   partner-live-readonly:
     name: Partner key / storefront / catalog (read only)
+    # Avoid repeated failed CI / email noise while no production secret is configured.
+    # After secure setup, run this workflow manually for a genuine read-only check.
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 4
     needs: contract
