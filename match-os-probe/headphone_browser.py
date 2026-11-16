@@ -1,5 +1,6 @@
 """Headphone social landing and local session acceptance; no real buyer or order."""
 from datetime import datetime, timezone
+import json
 from urllib.parse import urljoin, urlparse
 
 from playwright.sync_api import expect
@@ -165,3 +166,87 @@ def headphone_ttl(page, site):
     expect(page.locator("#ref")).to_be_empty()
     assert page.evaluate("Object.keys(sessionStorage).filter(key => key.startsWith('matchos:')).length === 0")
     print("HEADPHONES_MANUAL_PRICE_CHANGED_AND_30_MINUTE_CLEAR_OK", flush=True)
+
+
+def agent_link(page, site, touch):
+    page.clock.install(time=TEST_TIME)
+    until = int(TEST_TIME.timestamp() // 60) + 15
+    link = site + f"#compare=1&topic=wireless-over-ear-headphones&market=FR&until={until}"
+    action = lambda locator: locator.tap() if touch else locator.click()
+    external = []
+    page.on("request", lambda request: external.append(urlparse(request.url).hostname)
+            if urlparse(request.url).netloc != urlparse(site).netloc else None)
+    page.goto(link)
+    expect(page).to_have_url(site)
+    expect(page.locator("#welcome-title")).to_have_text("Compare wireless over-ear headphones")
+    expect(page.locator("#hp-preview .hp-preview-card")).to_have_count(2)
+    expect(page.locator("#hp-start-market")).to_have_value("FR")
+    expect(page.locator("#hp-start-currency")).to_have_value("EUR")
+    expect(page.locator("#hp-start-budget")).to_be_empty()
+    expect(page.locator("#hp-start-goal")).to_have_value("explore")
+    expect(page.locator("#hp-market-coverage")).to_contain_text("No verified local retailer prices")
+    expect(page.locator("#reference")).to_be_hidden()
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+
+    page.locator("#hp-start-budget").fill("100")
+    action(page.locator("#start-chat"))
+    expect(page.locator(".hp-model-card")).to_have_count(4)
+    expect(page.locator(".hp-store-card")).to_have_count(0)
+    expect(page.locator("#hp-market")).to_have_value("FR")
+    ref = page.locator("#ref").text_content()
+    page.locator("#hp-deadline").fill("2026-11-25")
+    expect(page.locator("#hp-changes")).to_contain_text("Deadline changed")
+    page.locator("#hp-market").select_option("US")
+    page.locator("#hp-budget").fill("420")
+    action(page.locator("[data-headphone-select=xm5]"))
+    expect(page.locator(".hp-store-card")).to_have_count(2)
+    expect(page.locator("#ref")).to_have_text(ref)
+    assert not external, external
+    page.context.route(XM5_URL, lambda route: route.fulfill(status=200, body="QA only"))
+    with page.expect_popup() as popup:
+        action(page.locator(f'.hp-stores a[href="{XM5_URL}"]'))
+    expect(popup.value).to_have_url(XM5_URL)
+    popup.value.close()
+    action(page.locator("#funnel summary"))
+    page.locator("#outcome").select_option("still_comparing")
+    action(page.locator("#prepare-feedback"))
+    data = json.loads(page.locator("#feedback-text").input_value())
+    assert data["sample"] == "qa" and data["source"] == "agent_link"
+    assert "outbound" in data["steps"] and not data["merchant_purchase_verified"]
+    assert data["paypal_service_fee"] == "closed" and ref not in json.dumps(data)
+
+    if touch:
+        page.clock.fast_forward(30 * 60_000)
+        expect(page.locator("#end-title")).to_have_text("Session expired")
+    else:
+        action(page.locator("#close"))
+        action(page.locator("#cancel"))
+        expect(page.locator("#end-title")).to_have_text("Session closed")
+    expect(page.locator("#live-results")).to_be_empty()
+    expect(page.locator("#feedback-text")).to_be_empty()
+    assert page.evaluate("Object.keys(sessionStorage).filter(key => key.startsWith('matchos:')).length === 0")
+
+    page.goto(link + "&buyer=private%40example.test")
+    expect(page.locator("#hp-preview")).to_be_hidden()
+    expect(page.locator("#feedback")).to_contain_text("could not be opened")
+    expect(page).to_have_url(site)
+    page.goto(link.replace(f"until={until}", f"until={int(TEST_TIME.timestamp() // 60) - 1}"))
+    expect(page.locator("#hp-preview")).to_be_hidden()
+    expect(page.locator("#feedback")).to_contain_text("expired")
+
+    fresh_until = page.evaluate("Math.floor(Date.now() / 60_000) + 14")
+    for topic, title in [
+        ("oat-milk-pack-price", "oat milk"),
+        ("austin-60-minute-massage", "Austin"),
+        ("lego-batman-pc-editions", "LEGO Batman"),
+    ]:
+        page.goto(site + f"#compare=1&topic={topic}&until={fresh_until}")
+        expect(page.locator("#welcome-title")).to_contain_text(title)
+        expect(page.locator("#reference")).to_be_hidden()
+        action(page.locator("#start-chat"))
+        expect(page.locator("#messages")).to_contain_text("What is the most you want to spend?")
+        action(page.locator("#close"))
+        action(page.locator("#cancel"))
+    assert all(host not in external for host in ["www.cheapshark.com", "www.gamerpower.com",
+                                                 "api-core.livingsocial.com", "prices.openfoodfacts.org"])
+    print("AGENT_LINK_PREVIEW_MARKET_STORE_QA_FEEDBACK_AND_CLEANUP_OK", flush=True)

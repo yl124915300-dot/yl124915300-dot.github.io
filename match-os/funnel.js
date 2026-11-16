@@ -1,4 +1,4 @@
-import { normalizeEntry } from './demand/topics.js?v=8';
+import { normalizeEntry } from './demand/topics.js?v=10';
 
 export const steps = Object.freeze({
   entry: 'Opened a tagged entry',

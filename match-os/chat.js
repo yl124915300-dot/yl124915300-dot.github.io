@@ -3,9 +3,10 @@ import { catalogNames, catalogScope, searchCatalogs } from './catalogs.js?v=7';
 import { renderIntent } from './results.js?v=8';
 import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=12';
 
-import { entryContext, topics } from './demand/topics.js?v=9';
+import { entryContext, topics } from './demand/topics.js?v=10';
+import { agentTemplate, isAgentFragment, isHeadphoneTemplate, readAgentLink, wirelessHeadphoneTopic } from './intake.js?v=1';
 import { createMatchingSession } from './matching.js?v=7';
-import { createFunnel, steps as funnelSteps } from './funnel.js?v=8';
+import { createFunnel, steps as funnelSteps } from './funnel.js?v=9';
 import { compareHeadphones, headphoneGoal, headphoneGoals, headphoneIntent, headphoneMarkets, headphoneModels, headphoneNeeds, headphoneTopic } from './modules/headphones.js?v=14';
 import { HEADPHONE_LISTINGS } from './modules/headphone-listings.js?v=12';
 import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=14';
@@ -50,9 +51,13 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   const messages = byId('messages');
   const scroll = byId('scroll');
   const website = 'https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new';
-  const context = entryContext(location.hash, location.search);
+  const agentFragment = isAgentFragment(location.hash);
+  let agentLanding = agentFragment ? readAgentLink(location.hash) : null;
+  const directEntry = { source: 'direct', topic: null };
+  const originalEntry = agentFragment ? directEntry : entryContext(location.hash, location.search);
+  let context = originalEntry;
   const acquisition = context.source;
-  const headphoneEntry = context.topic === headphoneTopic;
+  const headphoneEntry = context.topic === headphoneTopic || isHeadphoneTemplate(agentLanding?.topic);
   const hpSetup = byId('hp-setup');
   const hpControls = byId('hp-controls');
   const supportedCurrencies = 'USD GBP CAD AUD EUR JPY CNY HKD SGD INR NZD KRW TWD CHF AED UZS MXN BRL ZAR SEK NOK DKK PLN THB PHP MYR IDR VND SAR TRY'.split(' ');
@@ -60,6 +65,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   const initialWelcomeCopy = byId('welcome-copy').textContent;
   const qa = navigator.webdriver || location.hostname !== 'yl124915300-dot.github.io' ||
     new URLSearchParams(location.search).has('qa');
+  if (agentFragment) history.replaceState(history.state, '', location.pathname);
 
   const fields = [
     ['item', 'Item / service', 'What products or services should we look for? Include a product type, model or service name.'],
@@ -207,6 +213,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     clearFunnel();
     clearDraft();
     session = null;
+    context = originalEntry;
     closing = false;
     clearInterval(timer);
     messages.replaceChildren();
@@ -257,8 +264,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     return true;
   }
 
-  function start(brief, source) {
+  function start(brief, source, landing) {
     clearDraft();
+    context = landing ? { source: 'agent_link', topic: landing.topic } : originalEntry;
     takeStoredValue(receiptKey);
     const entropy = crypto.getRandomValues(new Uint8Array(10));
     const ref = 'MO-' + Array.from(entropy, (byte) => byte.toString(16).padStart(2, '0')).join('').toUpperCase();
@@ -1025,18 +1033,18 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   byId('start-chat').addEventListener('click', () => {
     if (session) return;
     if (draft && Date.now() < draft.expires) {
-      const { item, ...prefill } = draft.brief;
+      const { brief: { item, ...prefill }, landing } = draft;
       if (headphoneEntry) {
         if (!hpSetup.reportValidity()) return;
         const budget = { amount: byId('hp-start-budget').valueAsNumber, currency: byId('hp-start-currency').value };
         const place = marketPlace(byId('hp-start-market').value);
         const goal = headphoneGoal(byId('hp-start-goal').value);
-        start({ item, ...prefill, details: goal.details, budget, place, when: 'just comparing' }, 'ecommerce');
+        start({ item, ...prefill, details: goal.details, budget, place, when: 'just comparing' }, 'ecommerce', landing);
         appendMessage('buyer', item + ' · Goal: ' + goal.label);
         summarize();
         return;
       }
-      start({ item, ...prefill }, 'ecommerce');
+      start({ item, ...prefill }, 'ecommerce', landing);
       appendMessage('buyer', item);
       ask();
     } else {
@@ -1161,6 +1169,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   });
 
   window.addEventListener('pagehide', () => finish(null, false, leaving));
+  window.addEventListener('hashchange', () => {
+    if (isAgentFragment(location.hash)) location.reload();
+  });
   window.addEventListener('pageshow', (event) => {
     if (!event.persisted) return;
     leaving = false;
@@ -1199,20 +1210,38 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   } else if (acquisition === 'github_guide') {
     item = 'Over-ear headphones with active noise cancellation in wired mode';
   }
-  const topic = context.topic && topics[context.topic];
+  const landing = agentLanding;
+  agentLanding = null;
+  const topic = landing ? agentTemplate(landing.topic) : context.topic && topics[context.topic];
   if (topic) item = topic.item;
+  if (agentFragment && !landing) setFeedback('This comparison link expired or could not be opened. Start a new purchase chat below.');
   if (item) {
-    const ttl = acquisition === 'framefind_results' ? draftLifetime - stagedAge : draftLifetime;
-    const prefill = topic ? { details: topic.details, ...(topic.place ? { place: { ...topic.place } } : {}) } : {};
-    draft = { brief: { item, ...prefill }, expires: Date.now() + ttl };
+    const ttl = landing ? landing.expires - Date.now() :
+      acquisition === 'framefind_results' ? draftLifetime - stagedAge : draftLifetime;
+    const place = topic?.place || (landing?.market ? marketPlace(landing.market) : null);
+    const prefill = { ...(topic?.details !== undefined ? { details: topic.details } : {}),
+      ...(place ? { place: { ...place } } : {}) };
+    draft = { brief: { item, ...prefill }, expires: Date.now() + ttl, landing };
     byId('entry-preview').textContent = 'Suggested item: ' + item +
       (topic ? ' · ' + topic.details + (topic.place ? ' · ' + topic.place.city : '') + '. Review or edit all fields in the chat.' : '') +
       ' Use this item to start, or type your own below.';
     byId('entry-preview').hidden = false;
     byId('start-chat').textContent = 'Use this item and start chat';
+    if (landing && !headphoneEntry) {
+      byId('welcome-title').textContent = topic.title;
+      byId('welcome-copy').textContent = topic.description;
+      byId('entry-preview').textContent = [topic.details, place?.city || place?.region,
+        'Confirm the remaining purchase details before comparing sellers.'].filter(Boolean).join(' · ');
+    }
     if (headphoneEntry) {
       byId('welcome').classList.add('hp-welcome');
-      byId('welcome-title').textContent = 'Find headphones that fit your needs';
+      byId('welcome-title').textContent = landing?.topic === wirelessHeadphoneTopic
+        ? 'Compare wireless over-ear headphones' : 'Find headphones that fit your needs';
+      if (landing?.goal) byId('hp-start-goal').value = landing.goal;
+      if (landing?.market) {
+        byId('hp-start-market').value = landing.market;
+        updateCurrency(landing.market, byId('hp-start-currency'));
+      }
       byId('welcome-copy').textContent = headphoneGoal(byId('hp-start-goal').value).copy;
       byId('entry-preview').classList.add('sr-only');
       renderHeadphonePreview(byId('hp-preview'), byId('hp-start-goal').value);

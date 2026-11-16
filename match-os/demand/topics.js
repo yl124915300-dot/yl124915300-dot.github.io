@@ -1,4 +1,6 @@
 // Public editorial presets: only these topic IDs may be read from a URL.
+export const wirelessHeadphoneTopic = 'wireless-over-ear-headphones';
+
 export const topics = Object.freeze({
   'wired-anc-headphones': {
     category: 'electronics', label: 'Electronics', item: 'Over-ear headphones',
@@ -85,6 +87,9 @@ export function socialSource(search) {
 }
 
 export function normalizeEntry(source, topic) {
+  if (source === 'agent_link' && (topic === wirelessHeadphoneTopic || Object.hasOwn(topics, topic))) {
+    return { source, topic };
+  }
   const canCarryTopic = source === 'demand_page' || socialSources.has(source);
   if (canCarryTopic && Object.hasOwn(topics, topic)) return { source, topic };
   if (!canCarryTopic && ownedSources.has(source)) return { source, topic: null };
@@ -100,6 +105,7 @@ export function entryContext(hash, search) {
   const selectedTopics = params.getAll('topic');
   if (entries.length > 1 || selectedTopics.length > 1) return normalizeEntry();
   const source = entries[0];
+  if (source === 'agent_link') return normalizeEntry();
   if (hash || socialSources.has(source)) return normalizeEntry(source, selectedTopics[0]);
   if (!source && query.get('utm_source') === 'framefind_results') return normalizeEntry('framefind_results');
   return normalizeEntry();

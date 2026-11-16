@@ -400,6 +400,8 @@ with sync_playwright() as playwright:
              ("headphones-mobile", lambda page: headphone_browser.headphone_session(page, SITE, touch=True)),
              ("headphones-goal-mobile", lambda page: headphone_browser.headphone_buyer_goal(page, SITE)),
              ("headphones-ttl", lambda page: headphone_browser.headphone_ttl(page, SITE)),
+             ("agent-link-desktop", lambda page: headphone_browser.agent_link(page, SITE, False)),
+             ("agent-link-mobile", lambda page: headphone_browser.agent_link(page, SITE, True)),
              ("social-post-desktop", lambda page: demand_browser.social(page, SITE, "x_post", False)),
              ("social-profile-mobile", lambda page: demand_browser.social(page, SITE, "youtube_profile", True))]
     for name, case in cases:
