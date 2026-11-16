@@ -112,6 +112,9 @@ async function execute(req, env, pathname, origin, data) {
   if (pathname === '/v1/cart') {
     const v = await tokenRead(env, data.decisionToken, 'decision');
     await verifyTurnstile(env, data.turnstileToken);
+    // Reject before creating a decision record: an unconfirmed storefront
+    // cannot issue a commission-eligible cart, and no token is consumed.
+    if (!hasConfirmedCJ(await partner.me())) fail('CJ_COMMISSION_NOT_CONFIRMED', 409);
     if (!isUuid(v.productId) || !isUuid(v.optionId) || !Number.isSafeInteger(v.agreedPrice) ||
         !Number.isInteger(v.quantity) || v.quantity < 1 || v.quantity > 100) fail('DECISION_INVALID');
     // Atomic D1 uniqueness: only ONE request may issue a create-cart POST for a decision.
@@ -131,10 +134,6 @@ async function execute(req, env, pathname, origin, data) {
       fail('DECISION_ALREADY_IN_PROGRESS_OR_BLOCKED', 409);
     }
     try {
-      // Never create a non-attributable cart when the business promise is a
-      // commission-funded service. The confirmed PID comes from Groupon,
-      // not a user-supplied flag or the existence of an API key.
-      if (!hasConfirmedCJ(await partner.me())) fail('CJ_COMMISSION_NOT_CONFIRMED', 409);
       const product = await partner.product(v.productId);
       const selected = selectOfferOption(product, {
         optionId: v.optionId, quantity: v.quantity, agreedPrice: v.agreedPrice,
