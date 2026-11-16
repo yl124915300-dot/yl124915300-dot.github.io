@@ -3,7 +3,7 @@ import { catalogNames, catalogScope, searchCatalogs } from './catalogs.js?v=7';
 import { renderIntent } from './results.js?v=8';
 import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=7';
 
-import { entryContext, topics } from './demand/topics.js?v=8';
+import { entryContext, topics } from './demand/topics.js?v=9';
 import { createMatchingSession } from './matching.js?v=7';
 import { createFunnel, steps as funnelSteps } from './funnel.js?v=8';
 import { validBarcode, withoutBarcodes } from './evidence.js?v=7';

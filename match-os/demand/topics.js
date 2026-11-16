@@ -61,10 +61,16 @@ export const topics = Object.freeze({
       ['Check your account', 'Check PC platform, key redemption rules and regional restrictions before purchase. A giveaway may grant a temporary claim or require a different launcher.'],
       ['Distinguish price evidence', 'Use a dated historical low to decide whether to wait. Measure today’s value with only same-currency listings for the same edition, then check the store’s tax, fees and refund conditions.'],
     ],
-    next: 'Compare the same title and edition across stores. Before paying, verify the Steam key, your account region, the final total and the store’s refund terms.',
-    gap: 'CheapShark shows catalog prices for eligible US queries; GamerPower lists possible free claims. Neither verifies redemption for your account, final checkout cost or stock.',
+    next: 'Open the exact edition on Steam to check its official store page, including when catalog search is unavailable. Compare the same edition across stores and verify activation, region, final total and refunds before paying.',
+    gap: 'CheapShark shows catalog prices for eligible US queries; GamerPower lists possible free claims. The Steam links are direct storefront references. Check the price and eligibility for your own account at the store.',
     output: 'Same-edition options across stores, other editions and bundles separately, and any documented historical low or claim separated from purchase quotes.',
-    sources: [['CheapShark developer documentation', 'https://apidocs.cheapshark.com/'], ['GamerPower API', 'https://www.gamerpower.com/api-read']],
+    sources: [
+      ['Steam store — LEGO Batman: The Videogame', 'https://store.steampowered.com/app/21000/LEGO_Batman_The_Videogame/'],
+      ['Steam store — LEGO Batman 2: DC Super Heroes', 'https://store.steampowered.com/app/213330/LEGO_Batman_2_DC_Super_Heroes/'],
+      ['Steam store — LEGO Batman 3: Beyond Gotham', 'https://store.steampowered.com/app/313690/LEGO_Batman_3_Beyond_Gotham/'],
+      ['CheapShark developer documentation', 'https://apidocs.cheapshark.com/'],
+      ['GamerPower API', 'https://www.gamerpower.com/api-read'],
+    ],
   },
 });
 
