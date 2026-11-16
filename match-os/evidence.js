@@ -6,6 +6,7 @@ export const evidenceLabels = Object.freeze({
   api: 'Latest API listing',
   stale: 'Older API listing',
   observation: 'Dated price observation',
+  snapshot: 'Public merchant page snapshot',
   manual: 'User-entered quote',
   link: 'Unverified link',
 });
@@ -33,13 +34,15 @@ export function assessEvidence(offer, intent, now) {
   const observedAge = now - Date.parse(source.observedAt);
   const priceEnd = Date.parse(source.priceValidUntil);
   const offerEnd = Date.parse(offer.expires);
-  const stale = source.tier === 'stale' || source.tier === 'api' && (!Number.isFinite(age) || age < 0 || age >= 15 * minute ||
+  const snapshotExpired = source.tier === 'snapshot' && (!Number.isFinite(age) || age < 0 || !(priceEnd > now));
+  const stale = snapshotExpired || source.tier === 'stale' || source.tier === 'api' && (!Number.isFinite(age) || age < 0 || age >= 15 * minute ||
     (Number.isFinite(source.cacheValidUntil) && source.cacheValidUntil <= now) ||
     (Number.isFinite(priceEnd) && priceEnd <= now) || (Number.isFinite(offerEnd) && offerEnd <= now) ||
     Boolean(source.observedAt && (!Number.isFinite(observedAge) || observedAge < 0 || observedAge > 24 * 60 * minute)));
   const tier = stale ? 'stale' : source.tier;
   const pending = [];
-  if (tier === 'observation') pending.push('Historical observation; current price and terms unverified');
+  if (source.tier === 'snapshot') pending.push(snapshotExpired ? 'Merchant snapshot expired; recheck the store' : 'Dated public page; confirm the offer in the merchant’s checkout');
+  else if (tier === 'observation') pending.push('Historical observation; current price and terms unverified');
   else if (tier === 'manual') pending.push('User-entered terms require independent verification');
   else if (tier === 'link') pending.push('Listing link and price unverified');
   else if (tier === 'stale') pending.push('Refresh the older API listing');

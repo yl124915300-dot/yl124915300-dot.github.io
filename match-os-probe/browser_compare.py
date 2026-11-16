@@ -7,6 +7,7 @@ from urllib.parse import parse_qs, urljoin, urlparse
 from playwright.sync_api import expect, sync_playwright
 
 import demand_browser
+import headphone_browser
 
 SITE = os.getenv("MATCH_OS_URL", "https://yl124915300-dot.github.io/match-os/")
 SOURCE_HOSTS = {
@@ -395,6 +396,9 @@ with sync_playwright() as playwright:
              ("demand-services-mobile", lambda page: demand_browser.services(page, SITE)),
              ("demand-goods-mobile", lambda page: demand_browser.goods(page, SITE)),
              ("demand-electronics-desktop", lambda page: demand_browser.electronics(page, SITE)),
+             ("headphones-desktop", lambda page: headphone_browser.headphone_session(page, SITE)),
+             ("headphones-mobile", lambda page: headphone_browser.headphone_session(page, SITE, touch=True)),
+             ("headphones-ttl", lambda page: headphone_browser.headphone_ttl(page, SITE)),
              ("social-post-desktop", lambda page: demand_browser.social(page, SITE, "x_post", False)),
              ("social-profile-mobile", lambda page: demand_browser.social(page, SITE, "youtube_profile", True))]
     for name, case in cases:

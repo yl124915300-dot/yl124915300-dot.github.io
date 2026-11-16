@@ -1,11 +1,11 @@
 import { profiles } from './decision.js?v=7';
-import { electronics, modelReference } from './modules/electronics.js?v=7';
+import { electronics, modelReference } from './modules/electronics.js?v=10';
 import { consumables, productType } from './modules/consumables.js?v=7';
 import { services, serviceDefinition } from './modules/services.js?v=7';
 import { games } from './modules/games.js?v=7';
 import { clamp, constraint, date, key, number, quoteCost, text } from './modules/shared.js?v=7';
 
-import { assessEvidence, publicBarcodes, quoteStatus, withoutBarcodes } from './evidence.js?v=7';
+import { assessEvidence, publicBarcodes, quoteStatus, withoutBarcodes } from './evidence.js?v=10';
 
 export const modules = Object.freeze({ electronics, consumables, services, games });
 export const providers = Object.freeze({
@@ -175,6 +175,7 @@ function evaluatedOffer(offer, intent, weights, preference, now) {
     provenance.stale || provenance.tier === 'observation';
   const sameCurrency = offer.price?.currency === intent.brief.budget.currency;
   const amount = intent.brief.budget.amount;
+  if (offer.snapshotAvailable === false && !stale) checks.push(constraint('Merchant reports unavailable', false, true));
   if (offer.expires) checks.push(constraint('Listing validity', Date.parse(offer.expires), now, (end, current) => end >= current));
   if (stale && provenance.tier === 'manual') checks.push(constraint('Current price (older observation)', null, true));
   const priceForBudget = sameCurrency && !stale ? total ?? (listed !== null && listed > amount ? listed : null) : null;
@@ -189,7 +190,8 @@ function evaluatedOffer(offer, intent, weights, preference, now) {
   const rating = offer.rating ? offer.rating.value / offer.rating.scale * offer.rating.count / (offer.rating.count + 25) : 0;
   const softFit = result.soft.length ? result.soft.filter(check => check.status === 'pass').length / result.soft.length : null;
   const quality = preference === 'speed' ? Number(Boolean(offer.deliveryDate || offer.attrs.slot)) :
-    preference === 'returns' ? Number(offer.attrs.cancelable === true || offer.returns?.eligible === true) : rating;
+    preference === 'returns' ? Number(offer.attrs.cancelable === true || offer.returns?.eligible === true ||
+      (offer.provider === 'merchant-page' && !stale && Boolean(offer.returns?.label))) : rating;
   const fit = clamp(result.match * (softFit === null ? 1 : 0.75 + 0.25 * softFit));
   const components = [fit, costFit, evidence, quality];
   const score = Math.round(components.reduce((sum, part, index) => sum + part * weights[index], 0));

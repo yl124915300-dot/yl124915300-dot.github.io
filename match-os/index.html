@@ -9,8 +9,8 @@
   <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://yl124915300-dot.github.io/match-os/">
   <title>MATCH OS — Purchase chat</title>
-  <link rel="stylesheet" href="chat.css?v=7">
-  <script type="module" src="chat.js?v=9"></script>
+  <link rel="stylesheet" href="chat.css?v=10">
+  <script type="module" src="chat.js?v=10"></script>
 </head>
 <body>
   <main class="shell">
@@ -37,9 +37,15 @@
       </header>
       <div class="scroll" id="scroll" tabindex="0" aria-label="Conversation and request details">
         <div id="welcome" class="welcome">
-          <h1>What are you<br class="wide"> looking to buy?</h1>
-          <p>Compare exact models, check delivery and total cost when the seller provides it, and see which alternatives meet your requirements.</p>
+          <h1 id="welcome-title">What are you<br class="wide"> looking to buy?</h1>
+          <p id="welcome-copy">Compare exact models, check delivery and total cost when the seller provides it, and see which alternatives meet your requirements.</p>
           <p id="entry-preview" hidden></p>
+          <div id="hp-preview" hidden></div>
+          <form id="hp-setup" class="hp-controls" autocomplete="off" hidden>
+            <label>Shopping country / region<select id="hp-start-market" required></select></label>
+            <label>Budget limit<input id="hp-start-budget" type="number" inputmode="decimal" min="1" max="1000000" step="0.01" placeholder="Enter amount" required></label>
+            <label>Currency<select id="hp-start-currency" required></select></label>
+          </form>
           <button class="primary" id="start-chat" type="button" disabled>Start purchase chat</button>
           <p class="muted">Free pilot. You pay the merchant directly. A future US$1 service fee requires a verified purchase and your separate PayPal approval. PayPal checkout is currently closed.</p>
           <button class="example quiet" id="example" type="button">Try an example</button>
@@ -53,6 +59,23 @@
           <dl id="summary"></dl>
           <section id="live-compare" class="live-compare" aria-labelledby="live-compare-title">
             <h3 id="live-compare-title">Compare your options</h3>
+            <div id="hp-tools" hidden>
+              <p id="hp-intro" class="muted">Compare the models, choose one to see its stores, and verify your final total with the seller.</p>
+              <form id="hp-controls" class="hp-controls" autocomplete="off">
+                <label>Shopping country / region<select id="hp-market" required></select></label>
+                <label>Budget limit<input id="hp-budget" type="number" inputmode="decimal" min="1" max="1000000" step="0.01" required></label>
+                <label>Currency<select id="hp-currency" required></select></label>
+                <label>Need by (optional)<input id="hp-deadline" type="date"></label>
+                <fieldset class="hp-needs">
+                  <legend>What must work?</legend>
+                  <label><input type="checkbox" value="wiredAnc"> ANC over the cable</label>
+                  <label><input type="checkbox" value="analogAudio"> 3.5 mm audio</label>
+                  <label><input type="checkbox" value="wiredMic"> Built-in mic over cable</label>
+                  <label><input type="checkbox" value="passiveAudio"> Audio with power off</label>
+                </fieldset>
+              </form>
+              <p id="hp-changes" class="hp-changes" role="status" aria-live="polite"></p>
+            </div>
             <div id="route-preview" class="muted"></div>
             <div id="topic-evidence" class="other-sources" hidden></div>
             <p class="muted" id="catalog-consent"></p>
@@ -77,12 +100,14 @@
             <div id="live-results" class="offer-list" aria-label="Catalog and local quote comparison"></div>
             <details id="quote-entry" class="other-sources" hidden>
               <summary>Compare a merchant quote you found</summary>
+              <p id="hp-manual-help" class="muted" hidden>For a quick comparison, paste the listing link. To check its price against the budget, add the displayed price, currency, title, merchant and date. The listing stays unverified.</p>
               <p class="muted">Add a listing URL on its own, or enter a price with its observation date and known terms. Entries stay in this tab.</p>
               <form id="quote-form" autocomplete="off">
                 <label for="quote-target">Requested item</label>
                 <select id="quote-target"></select>
                 <div id="quote-fields" class="quote-fields"></div>
                 <button type="submit" class="secondary">Add to comparison</button>
+                <button id="hp-clear-quote" type="button" class="quiet" hidden>Clear fields for another listing</button>
                 <p id="quote-feedback" class="muted" role="status"></p>
               </form>
             </details>

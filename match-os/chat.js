@@ -1,11 +1,14 @@
 import { profiles, readPreference } from './decision.js?v=7';
 import { catalogNames, catalogScope, searchCatalogs } from './catalogs.js?v=7';
 import { renderIntent } from './results.js?v=8';
-import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=7';
+import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=10';
 
 import { entryContext, topics } from './demand/topics.js?v=9';
 import { createMatchingSession } from './matching.js?v=7';
 import { createFunnel, steps as funnelSteps } from './funnel.js?v=8';
+import { compareHeadphones, headphoneIntent, headphoneMarkets, headphoneModels, headphoneNeeds, headphoneTopic } from './modules/headphones.js?v=10';
+import { HEADPHONE_LISTINGS } from './modules/headphone-listings.js?v=10';
+import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=10';
 import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
 
 (() => {
@@ -49,6 +52,12 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   const website = 'https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/new';
   const context = entryContext(location.hash, location.search);
   const acquisition = context.source;
+  const headphoneEntry = context.topic === headphoneTopic;
+  const hpSetup = byId('hp-setup');
+  const hpControls = byId('hp-controls');
+  const supportedCurrencies = 'USD GBP CAD AUD EUR JPY CNY HKD SGD INR NZD KRW TWD CHF AED UZS MXN BRL ZAR SEK NOK DKK PLN THB PHP MYR IDR VND SAR TRY'.split(' ');
+  const initialWelcome = byId('welcome-title').innerHTML;
+  const initialWelcomeCopy = byId('welcome-copy').textContent;
   const qa = navigator.webdriver || location.hostname !== 'yl124915300-dot.github.io' ||
     new URLSearchParams(location.search).has('qa');
 
@@ -170,8 +179,16 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   function clearDraft() {
     clearTimeout(draftTimer);
     draft = null;
+    hpSetup.reset();
+    hpSetup.hidden = true;
+    byId('hp-preview').replaceChildren();
+    byId('hp-preview').hidden = true;
+    byId('welcome').classList.remove('hp-welcome');
+    byId('welcome-title').innerHTML = initialWelcome;
+    byId('welcome-copy').textContent = initialWelcomeCopy;
     byId('entry-preview').hidden = true;
     byId('entry-preview').textContent = '';
+    byId('entry-preview').classList.remove('sr-only');
     byId('start-chat').textContent = 'Start purchase chat';
   }
 
@@ -190,6 +207,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     closing = false;
     clearInterval(timer);
     messages.replaceChildren();
+    clearHeadphoneControls();
     byId('summary').replaceChildren();
     byId('payload').replaceChildren();
     resetPublicSharing();
@@ -277,6 +295,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     panel.replaceChildren();
     panel.hidden = true;
     const topic = topics[context.topic];
+    if (session.intents.some(headphoneIntent)) return;
     if (!topic || session.brief.item !== topic.item || !session.intents.some(intent => intent.category === topic.category)) return;
     const action = document.createElement('p');
     action.textContent = topic.next;
@@ -293,6 +312,86 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     }
     panel.append(action, links);
     panel.hidden = false;
+  }
+
+  function clearHeadphoneControls() {
+    hpControls.reset();
+    byId('hp-tools').hidden = true;
+    byId('hp-manual-help').hidden = true;
+    byId('hp-clear-quote').hidden = true;
+    byId('hp-changes').textContent = '';
+    byId('hp-market').querySelector('[value=Other]').textContent = 'Another market';
+    byId('review').classList.remove('hp-review');
+    byId('review-title').textContent = 'Review your request';
+  }
+
+  function prepareHeadphoneControls() {
+    const intent = session.intents.find(headphoneIntent);
+    if (!intent) { clearHeadphoneControls(); return; }
+    const { brief } = intent;
+    const market = Object.hasOwn(headphoneMarkets, brief.place.code) ? brief.place.code : 'Other';
+    byId('hp-market').value = market;
+    if (market === 'Other') byId('hp-market').selectedOptions[0].textContent =
+      brief.place.code === 'Other' && brief.place.region === 'Other' ? 'Another market' : brief.place.region + ' · other market';
+    byId('hp-budget').value = brief.budget.amount;
+    const currency = byId('hp-currency');
+    if (![...currency.options].some(option => option.value === brief.budget.currency)) currency.add(new Option(brief.budget.currency, brief.budget.currency));
+    currency.value = brief.budget.currency;
+    byId('hp-deadline').value = /^\d{4}-\d{2}-\d{2}$/u.test(brief.when) ? brief.when : '';
+    for (const box of hpControls.querySelectorAll('input[type=checkbox]')) box.checked = intent.requirements.hard[box.value] === true;
+    byId('hp-tools').hidden = false;
+    byId('hp-manual-help').hidden = false;
+    byId('hp-clear-quote').hidden = false;
+    byId('review-title').textContent = 'Find your wired headphones';
+    byId('review').classList.add('hp-review');
+    byId('stage-build').removeAttribute('aria-current');
+    byId('stage-compare').setAttribute('aria-current', 'step');
+  }
+
+  function updateSummary() {
+    const { brief } = session;
+    const values = [
+      brief.item,
+      brief.budget.currency + ' ' + brief.budget.amount,
+      [brief.place.city, brief.place.region].filter(Boolean).join(', '),
+      brief.when,
+      brief.details || 'No preference'
+    ];
+    byId('summary').replaceChildren(...fields.map(([key, label], index) => {
+      const row = document.createElement('div');
+      const name = document.createElement('dt');
+      const value = document.createElement('dd');
+      const edit = document.createElement('button');
+      name.textContent = label;
+      value.textContent = values[index];
+      edit.type = 'button';
+      edit.className = 'quiet edit';
+      edit.textContent = 'Edit';
+      edit.setAttribute('aria-label', 'Edit ' + label.toLowerCase());
+      edit.addEventListener('click', () => {
+        if (!remaining() || closing || session.submitting) return;
+        clearLive();
+        resetFeedbackExport();
+        if (key === 'item' || key === 'place') {
+          session.quotes.clear();
+          session.headphoneQuoteBooks?.clear();
+          session.headphoneSelected = null;
+        }
+        resetQuoteEntry();
+        form.reset();
+        resetPublicSharing();
+        byId('payload').replaceChildren();
+        byId('request-submit').disabled = true;
+        byId('sharing').hidden = true;
+        byId('review').hidden = true;
+        byId('stage-compare').removeAttribute('aria-current');
+        byId('stage-build').setAttribute('aria-current', 'step');
+        ask(key);
+        input.focus();
+      });
+      row.append(name, value, edit);
+      return row;
+    }));
   }
 
   function summarize() {
@@ -313,46 +412,11 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     if (session.approved.size) session.funnel.mark('authorized');
     renderFunnel();
     updateSearchConsent();
+    prepareHeadphoneControls();
     showComparison();
     if (session.approved.size) void searchLiveOffers('edit');
-    const values = [
-      brief.item,
-      brief.budget.currency + ' ' + brief.budget.amount,
-      brief.place.city + ', ' + brief.place.region,
-      brief.when,
-      brief.details || 'No preference'
-    ];
-    byId('summary').replaceChildren(...fields.map(([key, label], index) => {
-      const row = document.createElement('div');
-      const name = document.createElement('dt');
-      const value = document.createElement('dd');
-      const edit = document.createElement('button');
-      name.textContent = label;
-      value.textContent = values[index];
-      edit.type = 'button';
-      edit.className = 'quiet edit';
-      edit.textContent = 'Edit';
-      edit.setAttribute('aria-label', 'Edit ' + label.toLowerCase());
-      edit.addEventListener('click', () => {
-        if (!remaining() || closing || session.submitting) return;
-        clearLive();
-        resetFeedbackExport();
-        if (key === 'item' || key === 'place') session.quotes.clear();
-        resetQuoteEntry();
-        form.reset();
-        resetPublicSharing();
-        byId('payload').replaceChildren();
-        byId('request-submit').disabled = true;
-        byId('sharing').hidden = true;
-        byId('review').hidden = true;
-        byId('stage-compare').removeAttribute('aria-current');
-        byId('stage-build').setAttribute('aria-current', 'step');
-        ask(key);
-        input.focus();
-      });
-      row.append(name, value, edit);
-      return row;
-    }));
+    scheduleFreshness();
+    updateSummary();
     byId('review-title').focus();
   }
 
@@ -534,9 +598,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
       if (previous < 0) updated.push(quote);
       else updated[previous] = quote;
       session.quotes.set(intent.id, updated);
-      prepareQuoteFields();
+      if (!headphoneIntent(intent)) prepareQuoteFields();
       feedback.textContent = previous < 0 ? 'Quote added to this tab’s comparison.' : 'Existing quote updated with the new observation.';
-      showComparison();
+      showComparison('Listing evidence updated.');
       scheduleFreshness();
     } catch (error) {
       feedback.textContent = error.message;
@@ -614,7 +678,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
       ' Approved queries may be reused on edits or rechecked once when a listing ages in this open tab. A changed query needs fresh approval. Budget, timing, private details and entered quotes stay in this tab.' : '';
   }
 
-  function showComparison() {
+  function showComparison(change = '') {
     const output = byId('live-results');
     const preference = byId('rank-profile').value;
     const { intents, catalogResults, quotes } = session;
@@ -622,11 +686,34 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     let candidates = 0;
     let merchantCandidates = 0;
     const comparisons = [];
+    let headphones = false;
     for (const intent of intents) {
       const results = catalogResults?.get(intent.id) || [];
       if (intent.providers.length && !catalogResults && !quotes.has(intent.id)) continue;
       const offers = results.flatMap(result => result.offers.map(offer => liveOffer(intent, offer)));
-      const comparison = evaluateIntent(intent, [...offers, ...(quotes.get(intent.id) || [])], preference);
+      const available = [...offers, ...(quotes.get(intent.id) || [])];
+      if (headphoneIntent(intent)) {
+        headphones = true;
+        const comparison = compareHeadphones(intent, available, preference);
+        const leading = comparison.models[0];
+        const selected = session.headphoneSelected || leading.model.id;
+        renderHeadphones(output, comparison, selected, intent.brief.place.region, intent.brief.budget.currency);
+        const eligible = comparison.rows.filter(row => !row.problems.length && !row.stale);
+        candidates += eligible.length;
+        merchantCandidates += eligible.length;
+        const fits = comparison.models.filter(model => !model.conflicts.length && !model.unknown.length).length;
+        const priced = eligible.filter(row => row.offer.price && row.offer.price.currency === intent.brief.budget.currency &&
+          row.provenance.identity?.verified).length;
+        const summary = (change ? change + ' ' : '') + fits + ' models meet the checked feature and price constraints so far. ' +
+          priced + ' matching-SKU price observations in ' + intent.brief.budget.currency + '. ' +
+          (!leading.conflicts.length && !leading.unknown.length
+            ? (leading.best ? leading.model.name + ' leads on the available evidence. ' : 'No priced lead can be ranked in this market. ')
+            : 'No model clears all checked requirements. ') +
+          'Confirm stock and final total with the seller.';
+        if (byId('hp-changes').textContent !== summary) byId('hp-changes').textContent = summary;
+        continue;
+      }
+      const comparison = evaluateIntent(intent, available, preference);
       comparisons.push(comparison);
       const options = comparison.rows.filter(row => !row.problems.length);
       candidates += options.length;
@@ -653,12 +740,15 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
       return intents.find(item => item.id === id).item + ' · ' + catalogNames[result.provider] + ' ' + status + readAt;
     }));
     const status = byId('live-status');
-    if (coverage?.length) status.textContent = coverage.join(' · ') + '. ' +
+    if (headphones) status.textContent = navigator.onLine ?
+      'Manufacturer references and dated store evidence. No live merchant lookup.' :
+      'Offline. Saved evidence and filters still work. Reconnect to open stores.';
+    else if (coverage?.length) status.textContent = coverage.join(' · ') + '. ' +
       (candidates ? candidates + ' candidates before the display limit.' : 'No eligible candidates. Manual comparison is available below.');
     else if (quotes.size) status.textContent = 'Comparing quotes entered in this tab.';
     else if (intents.every(intent => !intent.providers.length)) status.textContent = 'No sufficient live quotes. Manual comparison is available below.';
     else status.textContent = 'No external search has run.';
-    byId('ranking-tools').hidden = candidates === 0;
+    byId('ranking-tools').hidden = !headphones && candidates === 0;
   }
 
   function scheduleFreshness() {
@@ -669,6 +759,9 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
       result.offers.flatMap(offer => [offer.provenance?.cacheValidUntil,
         Date.parse(offer.provenance?.priceValidUntil), Date.parse(offer.expires)]))
       .filter(time => Number.isFinite(time) && time > now);
+    if (session.intents?.some(headphoneIntent)) {
+      boundary.push(...HEADPHONE_LISTINGS.map(row => Date.parse(row.validUntil)).filter(time => time > now));
+    }
     if (session.quotes.size) boundary.push(now - now % 86_400_000 + 86_400_000);
     if (boundary.length) freshnessTimer = setTimeout(recheckFreshness, Math.min(...boundary) - now + 5);
   }
@@ -796,10 +889,116 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     byId('chat-form').requestSubmit();
   });
   byId('skip').addEventListener('click', () => send('No preference'));
+  const marketChoices = Object.entries(headphoneMarkets).map(([code, [name]]) => [code, name]);
+  for (const id of ['hp-market', 'hp-start-market']) {
+    const select = byId(id);
+    if (id === 'hp-start-market') select.add(new Option('Choose market', ''));
+    for (const [code, name] of marketChoices) select.add(new Option(name, code));
+    select.add(new Option('Another market', 'Other'));
+  }
+  for (const id of ['hp-currency', 'hp-start-currency']) {
+    for (const currency of supportedCurrencies) byId(id).add(new Option(currency, currency));
+  }
+  function updateCurrency(market, currency) {
+    if (Object.hasOwn(headphoneMarkets, market)) currency.value = headphoneMarkets[market][1];
+  }
+  function marketPlace(market) {
+    return { code: market, city: '', region: headphoneMarkets[market]?.[0] || 'Other' };
+  }
+  byId('hp-start-market').addEventListener('change', event =>
+    updateCurrency(event.target.value, byId('hp-start-currency')));
+  hpSetup.addEventListener('submit', event => {
+    event.preventDefault();
+    byId('start-chat').click();
+  });
+  hpControls.addEventListener('submit', event => event.preventDefault());
+  function applyHeadphoneEdit(event) {
+    if (!remaining() || closing || session.submitting || session.field || !session.intents.some(headphoneIntent)) return;
+    const budget = byId('hp-budget');
+    if (!budget.reportValidity()) return;
+    const market = byId('hp-market').value;
+    const currency = byId('hp-currency');
+    const old = session.brief.place;
+    const oldMarket = Object.hasOwn(headphoneMarkets, old.code) ? old.code : 'Other';
+    const changedMarket = event.target.id === 'hp-market' && oldMarket !== market;
+    if (changedMarket) {
+      updateCurrency(market, currency);
+      session.headphoneQuoteBooks ??= new Map();
+      session.headphoneQuoteBooks.set(old.code, session.quotes);
+      session.quotes = session.headphoneQuoteBooks.get(market) || new Map();
+      session.brief.place = marketPlace(market);
+      prepareOtherSources(session.brief);
+      quoteForm.reset();
+      byId('quote-feedback').textContent = '';
+      byId('hp-market').querySelector('[value=Other]').textContent = 'Another market';
+      session.funnel = createFunnel(context, qa);
+      session.funnel.mark('complete');
+      clearFunnel();
+      renderFunnel();
+    }
+    if (event.target.type === 'checkbox') {
+      const need = headphoneNeeds.find(([key]) => key === event.target.value);
+      if (need) {
+        const clauses = session.brief.details.split(/[;；,，\n]+/u).map(text => text.trim()).filter(Boolean);
+        const filtered = clauses.filter(text => {
+          const basic = routeRequest({ ...session.brief, item: 'Over-ear headphones', details: text })[0]?.requirements;
+          return !basic?.hard[need[0]];
+        });
+        // The social preset combines both requirements in one clause.
+        if (clauses.includes('3.5 mm wired ANC required')) {
+          for (const [key, , phrase] of headphoneNeeds) {
+            if (key !== need[0] && ['wiredAnc', 'analogAudio'].includes(key) && !filtered.includes(phrase)) filtered.push(phrase);
+          }
+        }
+        if (event.target.checked) filtered.push(need[2]);
+        session.brief.details = filtered.join('; ');
+      }
+    }
+    if (event.target.id === 'hp-deadline') session.brief.when = event.target.value || 'just comparing';
+    session.brief.budget = { currency: currency.value, amount: budget.valueAsNumber };
+    session.intents = routeRequest(session.brief);
+    resetFeedbackExport();
+    if (!byId('sharing').hidden) {
+      byId('sharing').hidden = true;
+      byId('payload').replaceChildren();
+      form.reset();
+      resetPublicSharing();
+      byId('request-submit').disabled = true;
+    }
+    updateSummary();
+    showComparison(changedMarket ? 'Market changed; only evidence for this market is shown.' :
+      event.target.type === 'checkbox' ? 'Must-have changed; model checks updated.' :
+      event.target.id === 'hp-deadline' ? 'Deadline changed; check seller delivery.' :
+      'Budget updated to ' + currency.value + ' ' + budget.valueAsNumber + '.');
+    scheduleFreshness();
+  }
+  hpControls.addEventListener('change', applyHeadphoneEdit);
+  byId('hp-budget').addEventListener('input', event => {
+    if (event.target.validity.valid && event.target.value) applyHeadphoneEdit(event);
+  });
+
+  byId('live-results').addEventListener('click', event => {
+    const button = event.target.closest('button[data-headphone-select]');
+    if (!button || !remaining() || closing || session.submitting) return;
+    session.headphoneSelected = button.dataset.headphoneSelect;
+    showComparison('Store comparison changed.');
+    byId('hp-store-title').focus({ preventScroll: true });
+    byId('hp-store-title').scrollIntoView({ block: 'nearest' });
+  });
+
   byId('start-chat').addEventListener('click', () => {
     if (session) return;
     if (draft && Date.now() < draft.expires) {
       const { item, ...prefill } = draft.brief;
+      if (headphoneEntry) {
+        if (!hpSetup.reportValidity()) return;
+        const budget = { amount: byId('hp-start-budget').valueAsNumber, currency: byId('hp-start-currency').value };
+        const place = marketPlace(byId('hp-start-market').value);
+        start({ item, ...prefill, budget, place, when: 'just comparing' }, 'ecommerce');
+        appendMessage('buyer', item);
+        summarize();
+        return;
+      }
       start({ item, ...prefill }, 'ecommerce');
       appendMessage('buyer', item);
       ask();
@@ -859,12 +1058,19 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     byId('feedback-sent').textContent = 'Continue in the new tab. Delivery is pending.';
   });
   quoteForm.addEventListener('submit', saveQuote);
+  byId('hp-clear-quote').addEventListener('click', () => {
+    if (!remaining() || closing) return;
+    prepareQuoteFields();
+    quoteForm.querySelector('[name=url]')?.focus();
+  });
   byId('quote-target').addEventListener('change', prepareQuoteFields);
   byId('rank-profile').addEventListener('change', () => {
-    if (remaining() && !closing && (session.catalogResults || session.quotes.size)) showComparison();
+    if (remaining() && !closing && (session.catalogResults || session.quotes.size || session.intents?.some(headphoneIntent))) {
+      showComparison('Ranking updated: ' + profiles[byId('rank-profile').value].label + '.');
+    }
   });
   byId('refine').addEventListener('click', () => {
-    if (!remaining() || closing || !(session.catalogResults || session.quotes.size) || session.refining || session.submitting) return;
+    if (!remaining() || closing || !(session.catalogResults || session.quotes.size || session.intents?.some(headphoneIntent)) || session.refining || session.submitting) return;
     session.refining = true;
     appendMessage('assistant', 'What matters more: price, exact match, evidence, reviews, speed or returns?');
     byId('chat-form').hidden = false;
@@ -962,6 +1168,16 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
       ' Use this item to start, or type your own below.';
     byId('entry-preview').hidden = false;
     byId('start-chat').textContent = 'Use this item and start chat';
+    if (headphoneEntry) {
+      byId('welcome').classList.add('hp-welcome');
+      byId('welcome-title').textContent = 'Noise cancelling, even on a cable';
+      byId('welcome-copy').textContent = 'For a plane seat or a device without Bluetooth. See what actually works before you choose a store.';
+      byId('entry-preview').classList.add('sr-only');
+      renderHeadphonePreview(byId('hp-preview'));
+      byId('hp-preview').hidden = false;
+      hpSetup.hidden = false;
+      byId('start-chat').textContent = 'Start my comparison';
+    }
     draftTimer = setTimeout(clearDraft, ttl);
   }
 })();

@@ -8,6 +8,8 @@ on:
       - 'match-os/modules/*.js'
       - 'match-os-probe/*.test.mjs'
       - 'match-os-probe/browser_compare.py'
+      - 'match-os-probe/demand_browser.py'
+      - 'match-os-probe/headphone_browser.py'
       - '.github/workflows/match-os-live-offer-e2e.yml'
   workflow_dispatch:
 permissions:

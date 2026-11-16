@@ -14,7 +14,7 @@ const productKinds = [
   [/\b(?:phone|smartphone|iphone|pixel|galaxy [sz])\b|手机/iu, 'phone'],
   [/\b(?:laptop|notebook|macbook|thinkpad)\b|笔记本/iu, 'laptop'],
   [/\b(?:tablet|ipad)\b|平板/iu, 'tablet'],
-  [/\b(?:headphones?|earbuds?|airpods|wh[- ]?1000xm\d+)\b|耳机/iu, 'audio'],
+  [/\b(?:headphones?|earbuds?|airpods|wh[- ]?1000xm\d+|space q45)\b|耳机/iu, 'audio'],
   [/\b(?:monitor|display)\b|显示器/iu, 'monitor'],
   [/\b(?:camera)\b|相机/iu, 'camera'],
 ];
@@ -24,7 +24,8 @@ const fromStorage = m => Number(m[1]) * (m[2].toLowerCase() === 'tb' ? 1000 : 1)
 const familyPatterns = [
   [/\b(iphone|ipad|macbook(?: air| pro)?|pixel|galaxy [asz]|thinkpad [a-z]|playstation|airpods(?: pro)?|switch)\s*(\d{1,4})?(?:\s*(pro max|pro|plus|mini|ultra|air|fold|flip))?(?!\w)/iu,
     m => [key(m[1]), m[2] ? Number(m[2]) : null, key(m[3])]],
-  [/\b(?:sony\s+)?(wh[- ]?1000xm)(\d{1,2})\b/iu, m => ['wh-1000xm', Number(m[2]), '']],
+  [/\b(?:sony\s+)?(wh[- ]?1000xm)(\d{1,2})(c)?\b/iu, m => ['wh-1000xm', Number(m[2]), key(m[3])]],
+  [/\b(space q45)\b/iu, () => ['space q45', null, '']],
 ];
 export function modelReference(value) {
   const name = text(value);
@@ -43,7 +44,8 @@ const schema = [
   ['storageGB', 'Storage in GB'], ['configuration', 'Configuration (chip, RAM, connectivity)'],
   ['region', 'Region version (US, CN, JP…)'], ['condition', 'Condition (new, used, refurbished, open box)'],
   ['warrantyMonths', 'Warranty months'], ['connector', 'Connector or charging standard (USB-C, Lightning…)'],
-  ['wiredAnc', 'Active noise cancellation works with cable (yes or no)'], ['compatibleWith', 'Compatible models, comma separated'], ['deliveryDate', 'Arrival date (YYYY-MM-DD)'],
+  ['analogAudio', '3.5 mm audio (yes or no)'], ['wiredMic', 'Built-in microphone works over AUX (yes or no)'],
+  ['passiveAudio', 'Wired audio with power off (yes or no)'], ['wiredAnc', 'Active noise cancellation works with cable (yes or no)'], ['compatibleWith', 'Compatible models, comma separated'], ['deliveryDate', 'Arrival date (YYYY-MM-DD)'],
 ];
 
 export const electronics = {
@@ -58,6 +60,8 @@ export const electronics = {
       generation: reference?.generation || count(raw.generation), storageGB: storage(raw.storageGB),
       configuration: key(raw.configuration), region: region(raw.region), condition: condition(raw.condition),
       warrantyMonths: number(raw.warrantyMonths), connector: connector(raw.connector), wiredAnc: yesNo(raw.wiredAnc),
+      analogAudio: yesNo(raw.analogAudio) ?? (connector(raw.connector) ? connector(raw.connector) === '3.5 mm' : null),
+      wiredMic: yesNo(raw.wiredMic), passiveAudio: yesNo(raw.passiveAudio),
       compatibleWith: list(raw.compatibleWith, value => modelReference(value)?.model || key(value)),
     };
   },
@@ -70,7 +74,10 @@ export const electronics = {
       ['region', /\b(?:(US|USA|JP|CN|EU|UK|global)\s+(?:version|model))\b|美版|国行|日版|欧版/iu, m => region(m[1] || m[0])],
       ['condition', /\b(?:brand new|new only|sealed|refurbished|used only|open[- ]box)\b|全新|二手|翻新/iu, m => condition(m[0].replace(/ only$/iu, ''))],
       ['wiredAnc', /\b(?:wired\s+(?:anc|active noise cancellation)|(?:anc|active noise cancellation)\s+(?:in wired mode|while wired|with (?:a |the )?cable))\b/iu, () => true],
-      ['connector', /\b(?:usb[- ]?c|lightning|micro[- ]?usb|qi2?|3[.]5\s*mm)\b/iu, m => connector(m[0])],
+      ['analogAudio', /(?<!\d)3[.]5\s*mm\s*(?:audio|aux)?/iu, () => true],
+      ['wiredMic', /\b(?:wired|aux)\s+mic(?:rophone)?\b/iu, () => true],
+      ['passiveAudio', /\b(?:passive wired audio|audio with power off)\b/iu, () => true],
+      ['connector', /\b(?:usb[- ]?c|lightning|micro[- ]?usb|qi2?)\b/iu, m => connector(m[0])],
       ['warrantyMonths', /(?:(\d{1,3})\s*months?[ -]+warranty|\bwarranty\s*[:=]?\s*(\d{1,3})\s*months?|(\d{1,3})\s*个月保修)/iu,
         m => Number(m[1] || m[2] || m[3])],
     ]);
@@ -101,7 +108,7 @@ export const electronics = {
         const match = /(?:(\d+)\s*gb\s*ram|ram\s*[:=]?\s*(\d+)\s*gb)/iu.exec(a.configuration);
         return constraint('RAM in GB', match ? Number(match[1] || match[2]) : null, value);
       }
-      return constraint({ storageGB: 'Storage in GB', model: 'Exact model', region: 'Region version', wiredAnc: 'Active noise cancellation with cable', productKind: 'Product type' }[field] || field, a[field], value);
+      return constraint({ storageGB: 'Storage in GB', model: 'Exact model', region: 'Region version', wiredAnc: 'Active noise cancellation with cable', analogAudio: '3.5 mm audio', wiredMic: 'Built-in microphone over cable', passiveAudio: 'Audio with power off', productKind: 'Product type' }[field] || field, a[field], value);
     });
     const checks = [...rules(hard), ...deliveryCheck(offer, intent)];
     const relatedModel = !accessory && reference && a.family === reference.family && a.model !== reference.model;

@@ -2,7 +2,21 @@
 
 **更新日期：2026-11-16（北京时间）。以下为当前运行口径。后续章节为历史记录。**
 
-## 海外社媒购买需求试点
+## 当前执行：耳机成交试点（2026-11-16）
+
+**目标：**保留全球社媒入口与四品类；先让一位有近期需求的买家从耳机对比完成商家购买并独立核验。沿用现有单个每日任务逐帖观察，禁止把 QA 出站当成获客。没有使用其他项目账号、冷邮件、私信群发、评论外联、社区逐人接触或买量。独立 PayPal US$1 成功服务费仍关闭，正式链接、Live 账户级授权及实时流水未核验。
+
+- [生产耳机入口](https://yl124915300-dot.github.io/match-os/?entry=pinterest_pin&topic=wired-anc-headphones) 继续接收[已发布的耳机 Pin](https://www.pinterest.com/pin/1121396376006773237/)及白名单社媒。首屏在建会话前直接显示 XM4、Q45 的厂商对照；选市场、填预算、一次点击进入原 30 分钟会话。旧版先开聊，再逐次询问预算、城市和时间，厂商资料是比较区里的文字链接。
+- 会话中的三款候选、规格矩阵和同款商家并排卡接用原比较引擎。可即时调整预算、币种、市场、期限、排序或有线 ANC、3.5 mm、有线麦克风、关机有线音频条件；不刷新页面。改市场隔离买家手填报价，不自动跨币种换算。原外部来源授权、其他品类、FrameFind、取消与到期清理保留。耳机价格超过快照核验窗口后退出排序并标为过期，仍可直接询问商家；无耳机商家 API 调用。对比图标为原创通用符号。
+- 功能证据：[Sony XM4](https://helpguide.sony.net/mdr/wh1000xm4/v1/en/contents/TP0002752734.html)、[Sony XM5](https://helpguide.sony.net/mdr/wh1000xm5/v1/en/contents/TP1000534744.html) 和 [soundcore Q45](https://service.soundcore.com/article-description/soundcore-Space-Q45-Headphones-FAQ)。Sony 两款有线 ANC 要开机、关机可听音，附线通话走手机麦克风；Q45 插 AUX 后按 NC，关机音频及有线麦克风未核实。XM4C、其他颜色、套装、翻新不能当作同 SKU。
+- 美国商家页观察：黑色全新 XM5（`WH1000XM5/B`）[B&H USD 298](https://www.bhphotovideo.com/c/product/1706293-REG/sony_6505727_sony_wh_1000xm5_wireless_noise_canceling.html) 与 [BuyDig USD 398](https://www.buydig.com/shop/product/SNWH1000XM5B/Sony-WH-1000XM5-Wireless-Industry-Leading-Noise-Canceling-Headphones-Black)，两页均标有货。Q45（`A3040011`）[Uniqcli USD 149.99](https://getuniqcli.com/catalog/anker/a3040011) 显示缺货待订，3–8 周为到店估计，成色和买家资格未证实；[CDW](https://www.cdw.com/product/anker-soundcore-space-q45-binaural-wireless-headphones-w-mic-3.5mm-jack/8474254) 显示已停止销售。均非买家专属报价。税费、收货地库存、配送资格、结账总价和适用退货条款仍需核对。买家可自行加入公开商家链接和报价，资料留在本标签页。
+- 可核验真人购买请求 **0**、商家成交 **0**、MATCH OS 已核验 PayPal 净到账 **US$0**。复核 Gmail、[仓库买家工单](https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues?q=is%3Aissue+%22MATCH+OS+BUYER%22) 和 [FrameFind #41](https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/41)，排除历史 QA；全量独立到站、开聊、出站和未报告购买 **UNKNOWN**。最近完整逐帖官方统计为下文 12:23–12:24 基线，合计曝光 13、两次已知验收出站。不从商家点击推断成交。
+- 自动验证：规则覆盖型号错配、缺费、过期、市场与用户报价证据。Chrome 桌面和手机尺寸触控用例复用实际 Pin 的目标入口，检查预算/排序/硬约束/市场、离线、商家交接、用户报价重算、撤销与 30 分钟清理。合成商家跳转被拦截；设备为 Chrome 仿真。线上结果见[原有 Actions](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions)。
+- 当前最早的真实成交阻碍：还没有可核验、主动进入会话且有明确耳机购买期限的真人请求。用现有入口和每日观察核对第一位，不用曝光数替代买家。
+
+## 此前的海外社媒运营记录
+
+### 海外社媒购买需求试点（历史基线）
 
 北极星按真实链路核算。海外社媒内容解决一个具体购买判断 → 买家自愿进入原 MATCH OS 临时交易对话 → 四类模块按授权和事件重匹配 → 核对候选、费用和商家路径 → 买家在商家结账 → 独立核验商家成交 → 按约由买家通过 PayPal 单独确认 US$1 成功服务费 → 清理临时会话。高频以可重复处理真实请求和独立核验的订单衡量。PayPal 专用正式链接仍待验收，收费入口关闭。禁止冷邮件、私信群发、评论外联、社区一对一接触、买量和商家佣金。
 

@@ -205,8 +205,13 @@ def goods(page, site):
 
 
 def electronics(page, site):
-    open_demand(page, site, "wired-anc-headphones", "Over-ear headphones",
-                ["USD 150", "Austin, United States", "just comparing"])
+    page.goto(urljoin(site, "demand/wired-anc-headphones/"))
+    page.locator("#open-chat").click()
+    expect(page).to_have_url(site + "#entry=demand_page&topic=wired-anc-headphones")
+    expect(page.locator("#hp-preview article")).to_have_count(2)
+    page.locator("#hp-start-market").select_option("US")
+    page.locator("#hp-start-budget").fill("150")
+    page.locator("#start-chat").click()
     expect(page.locator("#live-search")).to_be_hidden()
     expect(page.locator("#summary")).to_contain_text("3.5 mm wired ANC")
     page.locator("#quote-entry summary").click()
@@ -215,7 +220,7 @@ def electronics(page, site):
                        "title": "Synthetic wired ANC headphones", "productKind": "headphones", "condition": "new"}.items():
         form.locator(f"[name={key}]").fill(value)
     form.get_by_role("button", name="Add to comparison").click()
-    expect(page.locator(".offer-card[data-evidence=link]").first).to_contain_text("Wired ANC reported")
+    expect(page.locator(".hp-store-card").filter(has_text="Synthetic wired ANC headphones")).to_contain_text("Needs verification")
     data = feedback(page)
     assert "candidates" in data["steps"] and "authorized" not in data["steps"]
     cancel(page)
