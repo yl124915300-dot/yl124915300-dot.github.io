@@ -143,6 +143,15 @@ def local_services(page):
     expect(cards.first.locator(".offer-price")).to_contain_text("From USD")
     expect(cards.first).to_contain_text("Unknown — Appointment deadline")
     print("LOCAL_CARDS", cards.count(), cards.first.locator(".offer-price").inner_text())
+    direct_links = cards.locator('a[data-purchase-path]')
+    for i in range(direct_links.count()):
+        link_url = urlparse(direct_links.nth(i).get_attribute("href"))
+        assert link_url.scheme == "https" and (
+            link_url.hostname == "groupon.com" or link_url.hostname.endswith(".groupon.com")
+            or link_url.hostname == "livingsocial.com" or link_url.hostname.endswith(".livingsocial.com")
+        ), "Untrusted direct purchase link"
+    print("LIVE_LIVINGSOCIAL_DIRECT_PURCHASE_CANDIDATES", direct_links.count(),
+          "No payment attempted; exact selected option and final total remain unverified")
     page.locator("#handoff").click()
     expect(page.locator("#sharing")).to_be_visible()
     expect(page.locator("#request-submit")).to_be_enabled()
