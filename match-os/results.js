@@ -363,6 +363,11 @@ function renderCategoryOffer(row) {
     ' (' + offer.rating.count + ')', 'offer-meta'));
   if (offer.restrictions) evidence.append(element('p', offer.restrictions, 'offer-meta'));
   if (offer.expires) evidence.append(element('p', 'Listing expires ' + shortDate(offer.expires), 'offer-meta'));
+  if (offer.provider === 'livingsocial') {
+    card.append(element('p', offer.purchaseUrl && row.provenance?.tier === 'api'
+      ? 'Check exact duration, party size and option price at Groupon. This cheapest-option link is not a verified match to your requirements. Final tax, fees and availability require checkout.'
+      : 'Official offer details only. No fresh verified checkout link; option fit, tax, fees and availability remain unverified.', 'offer-meta'));
+  }
   card.append(evidence, listingLink(row));
   return card;
 }
