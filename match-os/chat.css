@@ -287,7 +287,13 @@ summary { cursor: pointer; color: var(--accent); }
 }
 
 @media (max-width: 619px) {
-  .hp-welcome h1 { font-size: clamp(1.65rem, 7vw, 2.1rem); }
+  .hp-welcome { gap: 6px; }
+  .hp-welcome h1 { font-size: clamp(1.55rem, 6vw, 1.95rem); line-height: 1.08; }
+  .hp-welcome #welcome-copy { font-size: .82rem; line-height: 1.25; }
+  .hp-welcome #hp-preview .hp-preview-card { padding: 7px; gap: 4px; }
+  .hp-welcome #hp-preview .hp-preview-card .hp-sku,
+  .hp-welcome #hp-preview .hp-preview-card a { display: none; }
+  .hp-welcome #hp-preview .hp-badge { padding: 2px 4px; font-size: .63rem; }
   .hp-preview-card .hp-icon { width: 28px; height: 24px; }
   #hp-setup > label { font-size: .74rem; }
   #hp-start-budget::placeholder { font-size: .8rem; }
