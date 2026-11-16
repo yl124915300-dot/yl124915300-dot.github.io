@@ -33,7 +33,7 @@ function listingLink(row) {
   };
   // A catalog's listing page is not an actionable checkout. Only an
   // upstream-provided, validated Groupon link can be offered as a purchase path.
-  if (offer.provider === 'livingsocial' && row.status !== 'conflict' && offer.purchaseUrl) {
+  if (offer.provider === 'livingsocial' && row.status !== 'conflict' && row.provenance?.tier === 'api' && offer.purchaseUrl) {
     const label = offer.purchaseKind === 'booking'
       ? 'Choose booking option and review Groupon checkout ↗'
       : 'Review cheapest listed Groupon option ↗';
