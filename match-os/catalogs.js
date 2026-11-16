@@ -73,6 +73,9 @@ function entry(fields) {
 }
 
 export function localEntries(read, brief) {
+  // The open Agent API and the Partner API currently expose US offers only.
+  // Never turn a US offer into a cross-border purchase path.
+  if (brief.place.code !== 'US') return [];
   const { data, source, checkedAt } = read;
   if (!Array.isArray(data?.offers)) throw new Error('Unexpected catalog response');
   return data.offers.slice(0, 12).flatMap(raw => {
@@ -80,7 +83,16 @@ export function localEntries(read, brief) {
     const title = label(raw?.title);
     if (!id || !title || raw.status !== 'active') return [];
     const hosts = ['groupon.com', 'livingsocial.com'];
-    const sourceUrl = officialUrl(raw.offerUrl, hosts) || officialUrl(raw.buyUrl, hosts) || officialUrl(raw.bookingUrl, hosts);
+    const listingUrl = officialUrl(raw.offerUrl, hosts);
+    const eligibleToBuy = raw.buyable === true;
+    const buyUrl = eligibleToBuy ? officialUrl(raw.buyUrl, hosts) : null;
+    const bookingUrl = eligibleToBuy ? officialUrl(raw.bookingUrl, hosts) : null;
+    const needsBooking = ['bookable_with_live_times', 'stay', 'shipped'].includes(raw.bookingKind);
+    // The open Agent API's buyUrl is for its cheapest option, not evidence that the
+    // buyer's exact duration/party/slot is available. Never manufacture a URL.
+    const purchaseUrl = needsBooking ? bookingUrl : buyUrl;
+    const purchaseKind = purchaseUrl ? (needsBooking ? 'booking' : 'cheapest-option') : null;
+    const sourceUrl = listingUrl || purchaseUrl;
     if (!sourceUrl) return [];
     const duration = [...title.matchAll(/\b(\d{1,3})(?:\s*(?:or|and)\s*(\d{1,3}))?\s*[- ]?minutes?\b/giu)]
       .flatMap(match => [Number(match[1]), Number(match[2])].filter(Number.isFinite));
@@ -92,12 +104,12 @@ export function localEntries(read, brief) {
     const rating = Number.isFinite(review?.average) && review.average >= 0 && review.average <= 5 &&
       Number.isSafeInteger(review.count) && review.count > 0 ? { value: review.average, count: review.count, scale: 5 } : null;
     return [entry({
-      id, title, provider: 'livingsocial', sourceUrl, checkedAt, priceTimestamp: asOf,
+      id, title, provider: 'livingsocial', sourceUrl, purchaseUrl, purchaseKind, checkedAt, priceTimestamp: asOf,
       provenance: provenance('api', read, { observedAt: asOf, recordId: id,
         identity: { identifier: id, type: 'Catalog listing ID' } }),
       category: 'local_catalog', city: label(raw.city, 80) || null,
       market: brief.place.code, merchant: label(typeof raw.merchant === 'string' ? raw.merchant : raw.merchant?.name, 90),
-      price: sourcePrice(raw.price), availability: raw.buyable ? 'Catalog lists purchase option' : 'Active catalog listing',
+      price: sourcePrice(raw.price), availability: purchaseUrl ? 'Groupon purchase path available; exact option not verified' : 'Active catalog listing; purchase path unverified',
       serviceScope: label(raw.category, 100), serviceOptions: { duration, party }, restrictions: label(raw.restrictions, 220),
       expires: timestamp(raw.endsAt), rating, confidence: asOf ? 0.74 : 0.57,
       raw: { endpoint: source, id, category: raw.category, bookingKind: raw.bookingKind },
