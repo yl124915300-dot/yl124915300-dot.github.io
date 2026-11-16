@@ -8,6 +8,7 @@ on:
       - 'match-os/**/*.js'
       - 'match-os/demand/**/*.html'
       - 'match-os-probe/build-demand.mjs'
+      - '.github/workflows/match-os-indexnow.yml'
       - '.github/workflows/match-os-intake-smoke.yml'
   workflow_dispatch:
 permissions:
