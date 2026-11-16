@@ -1,5 +1,16 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 主线回归：精确购物车、CJ 资格与真实订单的双重校验
+
+**执行结论：本轮完成源代码的交易安全修正和官方协议复核；未接通生产 API、未发现新的真实买家、未成交。** 只继续原 `yl124915300-dot/yl124915300-dot.github.io/match-os/`；不新增机器人、SKU、广告、冷私信或索引页。GitHub Actions 成功是合成测试通过，不代表上线或盈利。
+
+- **官方合同复核（2026-11-15 版本）：** [Partner Cart](https://agent.livingsocial.com/docs/for-builders/managing-the-cart) 的 `clientReference` 在 cart/order 回读中保留，单次创建包含 `expectedPrice`，Cart ACTIVE 才有 `buyLink`；[Order](https://agent.livingsocial.com/docs/for-builders/checkout-and-order-confirmation/reading-the-order) 含 `items` 及每个 voucher 的 `unitItems`。仅当订单及所选单行商品、数量、会话引用和所有单位状态匹配，且未退款，才可记一笔商家成功订单。
+- **修复了原网关的实付风险：** `core.mjs` 现在拒绝附带额外未授权商品的购物车、与买家 `clientReference` 不符的购物车、voucher 个数不符或状态部分未确认的订单。 `gateway-worker.mjs` 只有在 cart 状态 `CHECKED_OUT` 且该 cart 的 `id` 与 `clientReference` 均匹配时才读取并归因订单；未完成支付的 cart 绝不当订单。
+- **分佣资格从“账号可能已开通”改为后台真实准入：** 官方 [CJ 条款](https://agent.livingsocial.com/docs/for-builders/checkout-and-order-confirmation/commission-through-cj) 指明 `GET /partner_storefront/me` 的 `cjPublisherId` 仅在 Groupon 确认网站 PID 后才为非空；没有确认时返回普通 Groupon Checkout 链接、不能保证任何佣金。`/v1/cart` 在写 D1 或生成购物车**之前**调用只读 `me`，CJ 未确认则明确 `CJ_COMMISSION_NOT_CONFIRMED`（HTTP 409），不消耗用户已签署的决策，也不生成零佣金购物车；`preflight.mjs` 同步按照 `cjPublisherId` 判定，不再使用非官方状态字段推断已批准。
+- **无真实资金流的测试结果：** [GitHub Actions Partner contract 43868802021](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43868802021) 的 Node 合约测试 SUCCESS；包含未确认 CJ 时 409/创建购物车 0、正确 CJ 时一份购物车、重复决策无重复创建、匹配订单单位级确认、退款否定、恶意链接和市场规则；生产 Partner secret 读取步骤 SKIPPED（遵守手动运行规则）。所有密钥/UUID 为合成测试值。
+- **真实权限与买家状态：** 本次 Gmail 搜索 `MATCH OS Buyer Request - opted-in reply (unverified)` 无新合格入站，GitHub `MATCH OS BUYER` issue 0；Groupon 技术邮件线程仅有原 11/15 提问与 11/16 Tomas 回复，Kate 尚未在该线程给出 CJ 资格结论；为避免相隔几小时重复催邮件，未新外发。当前 Browser 连接器返回必须从原浏览器扩展发起的访问限制，无法读取账户持有人已登录的 Storefront 后台。前次 [Partner preflight](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43865643430) 已证明 GitHub Secret `MATCH_OS_GROUPON_API_KEY` **未配置**；不意味着真实账户里一定没有密钥。现有网关**未部署**，主站未连接它。可核验真实买家新增 **0**、真实新 cart **0**、真实商家成交 **0**、新净到账 **US$0**；全量账户实时流水 UNKNOWN。
+- **必要的外部解锁（不能靠代码代替）：** 账户持有人在 [LivingSocial Storefronts](https://agent.livingsocial.com/account/storefronts) 安全检查原 IntentLocal / Intent Transaction Router 的存在，按需取得专用 Partner API key，写入私有服务端 Secrets，并在原店铺确认官网的 CJ PID（不是 CID）获 Groupon 接受。此后才能部署和验收真实只读 `me`/US 商品、再等**真人主动下单请求**来测试一笔可追踪购物车、Groupon 确认订单和 CJ 实际净结算。**在这两类准入未成立前，暂停增加无对应需求的代码功能。**
+
 ## 2026-11-16 高频交易主链：Partner 安全网关及账号实测（尚未投入真实运行）
 
 **目标口径：**真实已授权买家 → 单市场实时准确套餐 → Partner 购物车 `buyLink` → 买家自行在 Groupon 支付 → 订单/退款回读 → CJ 独立核验净佣金。此为真实世界消费交易而非证券交易。
