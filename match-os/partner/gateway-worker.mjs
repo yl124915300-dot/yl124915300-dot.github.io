@@ -157,6 +157,7 @@ async function execute(req, env, pathname, origin, data) {
     const order = await partner.order(cart.grouponOrderUuid);
     const verified = verifyOrderAgainstCart(order, {
       productId: record.product_id, optionId: record.option_id, quantity: record.quantity,
+      clientReference: v.decision,
     });
     await mark(env, v.decision, verified.status, record.cart_id, cart.grouponOrderUuid);
     return reply({ ...verified, commissionAmount: 'UNKNOWN', netRevenue: 'UNKNOWN' }, 200, origin);
