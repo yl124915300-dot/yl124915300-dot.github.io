@@ -31,8 +31,18 @@ function listingLink(row) {
     openprices: 'Review dated record ↗',
     user: 'Open the listing you added ↗',
   };
+  // A catalog's listing page is not an actionable checkout. Only an
+  // upstream-provided, validated Groupon link can be offered as a purchase path.
+  if (offer.provider === 'livingsocial' && row.status !== 'conflict' && offer.purchaseUrl) {
+    const label = offer.purchaseKind === 'booking'
+      ? 'Choose booking option and review Groupon checkout ↗'
+      : 'Review cheapest listed Groupon option ↗';
+    const link = sourceLink(label, offer.purchaseUrl, 'secondary offer-link');
+    link.setAttribute('data-purchase-path', '');
+    return link;
+  }
   const link = sourceLink(labels[offer.provider] || 'Review source ↗', offer.sourceUrl, 'secondary offer-link');
-  if (row.status !== 'conflict' && !['gamerpower', 'openprices'].includes(offer.provider)) {
+  if (row.status !== 'conflict' && !['gamerpower', 'openprices', 'livingsocial'].includes(offer.provider)) {
     link.setAttribute('data-purchase-path', '');
   }
   return link;
@@ -110,6 +120,11 @@ function renderOffer(row, title) {
   if (offer.rating) fulfillment.push('Merchant reviews ' + offer.rating.value + '/' + offer.rating.scale +
     ' (' + offer.rating.count + ')');
   card.append(element('p', fulfillment.join(' · '), 'offer-meta'));
+  if (offer.provider === 'livingsocial') {
+    card.append(element('p', offer.purchaseUrl
+      ? 'Check exact duration, party size and option price at Groupon. A cheapest-option link is not proof that the requested package fits. Taxes, fees, availability and final total are unknown until checkout.'
+      : 'No verified direct purchase link for this listing. Check available options, slots, restrictions and complete price on the official offer page.', 'offer-meta'));
+  }
   const extra = element('details', '', 'offer-details');
   extra.append(element('summary', 'Terms and evidence'));
   explainEvidence(extra, row);
