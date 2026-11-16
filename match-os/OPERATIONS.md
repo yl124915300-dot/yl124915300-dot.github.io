@@ -1,5 +1,27 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 战略升级：高频匹配 × 高频真实交易（现行最高目标）
+
+**北极星不是“发现线索数/自动发送数/店铺点击数”，而是可归因的真实订单频次与最终净收入。** 本阶段只指现实商品、生活服务的高频消费撮合，不是证券高频交易。本文为运营目标与系统设计，**不代表已取得新流量、接通私有交易 API 或已成交**。
+
+### 不能再沿用的错误假设
+- 每小时扫描邮箱不等于“实时匹配”：`FormSubmit→Gmail→定时 AI 回复` 只能是兜底入站，不能作为高频交易主环节。现有 15 分钟预填链接也不适合延迟发邮件。真正的即时入口须在获授权、买家主动发起的会话中实时执行。
+- 自动匹配一次商品 ≠ 可购买 ≠ 已支付 ≠ 已赚到钱。只有用户授权真实需求、实际同市场可购买选项、完整交易交接、商家订单状态和归因净收入分别有证据，才能上报对应漏斗阶段。
+- 第三方买家结账后再单独向用户追收 US$1，将二次支付、人工验证、收款成本和流失叠加；不适合作为高频订单默认商业模式，**保留关闭**。更优先验证由已批准的商家/平台佣金结算或明确订阅制覆盖单位成本；未获平台批准前佣金收入为 0。
+
+### 优先交易链路：即时买家请求→Partner 供给→托管支付→订单回读
+1. **真实需求入口优先于新增流量页面。** 只接入能证明已有真实购买提问、允许第三方代理自动处理且买家主动请求的既有入口；没有这三个条件即停止“铺机器人/铺 SKU”。允许的站内主动咨询保留，不能把公开社媒评论作者直接变成可外发名单。
+2. **先以美国同市场本地服务/体验作为一次完整订单验证切口，而非永久限制全球品类。** Groupon/LivingSocial for Agents 的公开 Builder 文档（2026-10-29）确认 Partner API 可由已注册 storefront 在服务端持密钥查询 `/partner_storefront/products/search`、创建购物车、返回原样 `buyLink` 让买家去 Groupon 支付；US 库存，非全球库存。官方文档另支持 `GET /partner_storefront/carts/{cartId}` 和 `GET /partner_storefront/bookings/{bookingId}` / 订单列表做订单状态回读；`CONFIRMED` / `REDEEMED` 经商品项匹配后才可记交易，`REFUNDED` 必须撤销成功交易计数。用户未完成付款不得计购买。证据：https://agent.livingsocial.com/docs/for-builders/how-it-works 、https://agent.livingsocial.com/docs/for-builders/checkout-and-order-confirmation 、https://agent.livingsocial.com/docs/for-builders/checkout-and-order-confirmation/the-order-list 。
+3. **能力不等于权限。** Partner API 需要在官方后台本人完成 storefront/key 获取并只存于服务端密钥管理系统；本项目暂无可核验现成 Partner 密钥/购物车/订单。CJ 网站 PID 须获得 Groupon/CJ 的独立批准并在 storefront 确认，才可能按计划追踪佣金；无书面/后台证据时不得宣传已能赚钱。公开无注册 agent API 不付佣金，不可混淆为 Partner API。
+4. **实时交易服务需要后端而不是 GitHub Pages 静态 HTML。** 后端承担最小权限 API 代理、实时可用性和购物车校验、`buyLink` 原样转交、订单 UUID 与 optionId 配对、幂等、防重复下单、状态轮询/回调、撤销退款和不暴露密钥。未获后台访问及 API 资格之前，不对外部署假购物车，不创建假订单；现有 Pages 比较站和获准邮件回访照常保留。
+5. **高频来自需求密度，不来自发信速度。** 默认只做买家已经准备下单的需求，优先能立即完成的买卖和用户回流；不处理纯看评测和长期规划。同一客群真实流量密度不足时，先解决分发入口而非扩目录。
+
+### 可执行漏斗与验收门槛（目标非现状）
+- `opt_in_buyer_inbound` → `actionable_intent` → `live_offer_checked` → `cart_buy_link_created` → `buyer_handoff` → `merchant_order_confirmed` → `non_refunded_order` → `attributable_net_revenue_verified`。`PENDING`、`REJECTED`、`EXPIRED`、`UNKNOWN` 单列，不冒充成交。需保存每阶段无敏感资料的事件 ID、时间、平台回执和统计口径。
+- 首个门槛：**1 个真实、自愿、已授权的当下购买需求 + 1 个同市场可实际支付的购物车链接 + 1 个用户在商家完成的订单 + 1 个独立状态回读**，不以模拟测试代替。若无佣金核准，本阶段可以确认订单但收入依然是 US$0。
+- 从 1 单提升到 **10 单/日，再到 100 单/日** 属于明确的下一阶段经营目标（不是当前业绩）。同时记录每日有效入站、可执行匹配率、响应延迟、有效买家点击率、下单率、退款率和单笔扣除佣金/支付/算力/支持成本后的净利。没有真实买家和渠道权限时，不以每分钟调用量或 50k SKU 覆盖量宣称“高频”。
+- 本轮实查：新自愿 MATCH OS 买家邮件 0、合格仓库 `MATCH OS BUYER` issue 0；第一轮 8 条公开信号仍不具备外发许可。真实自动送达 0、独立商家订单 0、已核验收入 US$0。现存高频化最大瓶颈：**真实获准买家流量 + Private Partner API 资格/佣金资格**。
+
 ## 2026-11-16 第二阶段实际执行：免费自愿咨询入口 + 授权邮件回访
 
 **业务结果判定：接入准备已部署、自动核对已启用；真实自动触达闭环仍未验收。** 本轮项目没有新获得可证实的非 QA 买家。上一轮公开购买信号 **8**、按商品证据生成的草稿链接 **1**；新获准真实买家 **0**、本轮真实买家邮件自动发送 **0**、第三方送达/阅读回执 **0**、独立核验商家订单 **0**、已核验 MATCH OS PayPal 净到账 **US$0**。全站独立访客、真实点击、实时 PayPal 全量流水继续 **UNKNOWN**。不得将 GitHub Actions 通过、已发测试表单或 SMTP/Gmail 已发送状态计为真人获客。
