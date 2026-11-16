@@ -43,7 +43,7 @@ test('a selected exact US option must be actively sold and explicitly priced to 
 
 test('only authentic, active, fully matched carts may expose the upstream link unchanged', () => {
   const buyLink = 'https://www.groupon.com/checkout/synthetic?utm_source=cj&utm_medium=afl';
-  const cart = { id: CART, status: 'ACTIVE', buyLink, items: [
+  const cart = { id: CART, status: 'ACTIVE', clientReference: DECISION, buyLink, items: [
     { productId: P, optionId: O, quantity: 1, available: true }] };
   const result = validateReadyCart(cart, decision);
   assert.equal(result.buyLink, buyLink);
@@ -55,16 +55,26 @@ test('only authentic, active, fully matched carts may expose the upstream link u
   fails(() => validateReadyCart({ ...cart, items: [{ ...cart.items[0], available: false }] }, decision), 'CART_ITEM_UNVERIFIED');
   fails(() => validateReadyCart({ ...cart, items: [{ ...cart.items[0], optionId: BOOKING }] }, decision), 'CART_ITEM_UNVERIFIED');
   fails(() => validateReadyCart({ ...cart, messages: ['price_unavailable'] }, decision), 'CART_ITEMS_DECLINED');
+  fails(() => validateReadyCart({ ...cart, items: [...cart.items, { ...cart.items[0], optionId: BOOKING }] },
+    decision), 'CART_LINES_UNVERIFIED');
+  fails(() => validateReadyCart({ ...cart, clientReference: CART },
+    { ...decision, clientReference: DECISION }), 'CART_REFERENCE_MISMATCH');
+  assert.equal(validateReadyCart(cart, { ...decision, clientReference: DECISION }).status, 'READY');
 });
 
 test('order UUID alone is not purchase; exact product, option, quantity and status are necessary', () => {
   const ok = { id: BOOKING, status: 'CONFIRMED', items: [
-    { productId: P, optionId: O, quantity: 1, status: 'CONFIRMED' }] };
+    { productId: P, optionId: O, quantity: 1, status: 'CONFIRMED',
+      unitItems: [{ id: '79a4ff35-0c55-4908-b5f1-20f50e8397ee', status: 'CONFIRMED' }] }] };
   assert.deepEqual(verifyOrderAgainstCart(ok, decision), {
     status: 'CONFIRMED', merchantOrderVerified: true, commissionVerified: false });
   assert.equal(verifyOrderAgainstCart({ ...ok, status: 'REDEEMED', items: [{ ...ok.items[0], status: 'REDEEMED' }] }, decision).merchantOrderVerified, true);
   assert.equal(verifyOrderAgainstCart({ ...ok, id: null }, decision).merchantOrderVerified, false);
   assert.equal(verifyOrderAgainstCart({ ...ok, items: [{ ...ok.items[0], optionId: CART }] }, decision).status, 'ITEM_MISMATCH');
+  assert.equal(verifyOrderAgainstCart({ ...ok, items: [...ok.items, ok.items[0]] }, decision).status, 'ITEM_MISMATCH');
+  assert.equal(verifyOrderAgainstCart({ ...ok, items: [{ ...ok.items[0], unitItems: [] }] }, decision).status, 'ITEM_MISMATCH');
+  assert.equal(verifyOrderAgainstCart({ ...ok, items: [{ ...ok.items[0], unitItems: [{ status: 'ON_HOLD' }] }] }, decision).status, 'ITEM_MISMATCH');
+  assert.equal(verifyOrderAgainstCart({ ...ok, items: [{ ...ok.items[0], unitItems: [{ status: 'REFUNDED' }] }] }, decision).status, 'REFUNDED');
   assert.equal(verifyOrderAgainstCart({ ...ok, items: [{ ...ok.items[0], status: 'ON_HOLD' }] }, decision).status, 'ITEM_MISMATCH');
   for (const status of ['REFUNDED', 'PENDING', 'ON_HOLD', 'REJECTED', 'CANCELLED', 'EXPIRED']) {
     const result = verifyOrderAgainstCart({ ...ok, status }, decision);
@@ -185,6 +195,7 @@ test('synthetic gateway: one buyer decision yields one cart and only a matched c
     id: CART, status: checkedOut ? 'CHECKED_OUT' : 'ACTIVE',
     buyLink: checkedOut ? null : 'https://www.groupon.com/checkout/synthetic',
     items: [{ productId: P, optionId: O, quantity: 1, available: true }],
+    clientReference: decisions.keys().next().value,
     grouponOrderUuid: checkedOut ? BOOKING : null,
   });
   globalThis.fetch = async (url, options = {}) => {
@@ -204,7 +215,8 @@ test('synthetic gateway: one buyer decision yields one cart and only a matched c
       const reference = decisions.keys().next().value;
       return response(200, {
         id: BOOKING, status: 'CONFIRMED', clientReference: reference,
-        items: [{ productId: P, optionId: O, quantity: 1, status: 'CONFIRMED' }],
+        items: [{ productId: P, optionId: O, quantity: 1, status: 'CONFIRMED',
+          unitItems: [{ id: '79a4ff35-0c55-4908-b5f1-20f50e8397ee', status: 'CONFIRMED' }] }],
       });
     }
     throw Error('Unexpected synthetic request');
