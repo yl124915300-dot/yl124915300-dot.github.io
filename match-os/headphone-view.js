@@ -36,9 +36,7 @@ export function renderHeadphonePreview(container) {
       node('p', model.anc), link('Manufacturer evidence', model.sources[0][1]));
     list.append(card);
   }
-  container.replaceChildren(list, node('p',
-    'Both support wired ANC. Sony documents audio with the power off, but calls use the phone mic. Q45’s wired mic is unverified. Current store prices and stock are checked separately.',
-    'hp-preview-copy'));
+  container.replaceChildren(list);
 }
 
 const price = (amount, currency) => Number.isFinite(amount) && currency ?

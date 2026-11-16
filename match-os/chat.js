@@ -8,7 +8,7 @@ import { createMatchingSession } from './matching.js?v=7';
 import { createFunnel, steps as funnelSteps } from './funnel.js?v=8';
 import { compareHeadphones, headphoneIntent, headphoneMarkets, headphoneModels, headphoneNeeds, headphoneTopic } from './modules/headphones.js?v=10';
 import { HEADPHONE_LISTINGS } from './modules/headphone-listings.js?v=10';
-import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=10';
+import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=11';
 import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
 
 (() => {
@@ -183,6 +183,8 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     hpSetup.hidden = true;
     byId('hp-preview').replaceChildren();
     byId('hp-preview').hidden = true;
+    byId('hp-preview-note').hidden = true;
+    byId('example').textContent = 'Try an example';
     byId('welcome').classList.remove('hp-welcome');
     byId('welcome-title').innerHTML = initialWelcome;
     byId('welcome-copy').textContent = initialWelcomeCopy;
@@ -983,7 +985,7 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     session.headphoneSelected = button.dataset.headphoneSelect;
     showComparison('Store comparison changed.');
     byId('hp-store-title').focus({ preventScroll: true });
-    byId('hp-store-title').scrollIntoView({ block: 'nearest' });
+    byId('hp-store-title').scrollIntoView({ block: 'start' });
   });
 
   byId('start-chat').addEventListener('click', () => {
@@ -1008,6 +1010,11 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     input.focus();
   });
   byId('example').addEventListener('click', () => {
+    if (headphoneEntry && draft) {
+      clearDraft();
+      input.focus();
+      return;
+    }
     input.value = 'Find iPhone 15 128 GB + USB-C charger in Seattle, United States under USD 800, just comparing.';
     input.focus();
   });
@@ -1170,11 +1177,13 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
     byId('start-chat').textContent = 'Use this item and start chat';
     if (headphoneEntry) {
       byId('welcome').classList.add('hp-welcome');
-      byId('welcome-title').textContent = 'Noise cancelling, even on a cable';
-      byId('welcome-copy').textContent = 'For a plane seat or a device without Bluetooth. See what actually works before you choose a store.';
+      byId('welcome-title').textContent = 'Wired ANC headphones';
+      byId('welcome-copy').textContent = 'Two verified options for a plane seat or a device without Bluetooth.';
       byId('entry-preview').classList.add('sr-only');
       renderHeadphonePreview(byId('hp-preview'));
       byId('hp-preview').hidden = false;
+      byId('hp-preview-note').hidden = false;
+      byId('example').textContent = 'Compare something else';
       hpSetup.hidden = false;
       byId('start-chat').textContent = 'Start my comparison';
     }

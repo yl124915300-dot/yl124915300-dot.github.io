@@ -21,6 +21,10 @@ def headphone_session(page, site, touch=False):
     expect(page.locator("#hp-preview")).to_contain_text("soundcore Space Q45")
     expect(page.locator("#reference")).to_be_hidden()
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    if touch:
+        cta = page.locator("#start-chat").bounding_box()
+        view = page.locator("#scroll").bounding_box()
+        assert cta["y"] + cta["height"] <= view["y"] + view["height"], (cta, view)
 
     page.locator("#hp-start-market").select_option("US")
     page.locator("#hp-start-budget").fill("420")
