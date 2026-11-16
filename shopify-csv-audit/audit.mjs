@@ -6,9 +6,11 @@ const names = {
   image: ["Product image URL", "Image Src"],
   sku: ["SKU", "Variant SKU"],
   price: ["Price", "Variant Price"],
-  compare: ["Compare At Price", "Variant Compare At Price"],
+  compare: ["Compare-at price", "Compare At Price", "Variant Compare-at Price", "Variant Compare At Price"],
   option1Name: ["Option1 name", "Option1 Name"],
-  option1Value: ["Option1 value", "Option1 Value"]
+  option1Value: ["Option1 value", "Option1 Value"],
+  option2Value: ["Option2 value", "Option2 Value"],
+  option3Value: ["Option3 value", "Option3 Value"]
 };
 
 export function parseCSV(input) {
@@ -74,7 +76,20 @@ export function inspectShopifyCSV(parsed) {
   if (!cols.title) add("critical", 1, "", "Title", "(column missing)", "Shopify product CSV requires a Title column for new products and updates.");
   if (!cols.handle) add("critical", 1, "", "URL handle / Handle", "(column missing)", "A handle is required when updating products and when using variants. Export the official Shopify CSV.");
   if (rows.length > 5000) throw new Error("Maximum 5,000 CSV records per local scan.");
-  const products = new Map(), skus = new Map();
+  // Shopify warns that importing SKU and other variant-dependent fields without
+  // Option1 name/value may replace or delete existing variants on overwrite.
+  // This is a review warning, not a claim that an import has actually happened.
+  const dependentVariantHeaders = ["SKU", "Variant SKU", "Barcode", "Variant Barcode",
+    "Variant Inventory Tracker", "Variant Inventory Policy", "Variant Grams",
+    "Weight value (grams)", "Inventory tracker", "Inventory policy"];
+  if (dependentVariantHeaders.some(h => headers.includes(h)) &&
+      (!cols.option1Name || !cols.option1Value)) {
+    const missing = [!cols.option1Name ? "Option1 name" : null,
+      !cols.option1Value ? "Option1 value" : null].filter(Boolean).join(", ");
+    add("critical", 1, "", missing, "(missing dependent columns)",
+      "Do not reimport this file as-is to overwrite existing products: missing option columns with SKU/inventory fields may delete or replace variants. Re-export and preserve original options and IDs.");
+  }
+  const products = new Map(), skus = new Map(), variantOptions = new Map();
   let variantRows = 0;
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i], line = i + 2;
@@ -102,6 +117,18 @@ export function inspectShopifyCSV(parsed) {
       add("medium", line, handle, cols.compare, compareRaw, "Compare-at price should be a non-negative number or empty.");
     if (priceRaw && compareRaw && nval(priceRaw) !== null && nval(compareRaw) !== null && nval(compareRaw) < nval(priceRaw))
       add("medium", line, handle, cols.compare, compareRaw, "Compare-at price is below selling price; confirm whether this is intended.");
+    // Shopify rejects duplicate variant option combinations for the same handle.
+    const op1 = cols.option1Value ? clip(row[cols.option1Value], 200) : "";
+    if (handle && hasVariant && op1) {
+      const key = handle + "\u0000" + [op1,
+        cols.option2Value ? clip(row[cols.option2Value], 200) : "",
+        cols.option3Value ? clip(row[cols.option3Value], 200) : ""
+      ].map(x => x.toLowerCase()).join("\u0000");
+      const firstLine = variantOptions.get(key);
+      if (firstLine) add("high", line, handle, "Option values", op1,
+        "Duplicate variant combination: same product handle and option values as CSV record " + firstLine + ". Verify the source export before importing.");
+      else variantOptions.set(key, line);
+    }
     if (sku) {
       const prev = skus.get(sku);
       if (prev && prev.handle !== handle)
@@ -126,7 +153,12 @@ export function inspectShopifyCSV(parsed) {
     columns:cols, issues
   };
 }
-function cell(text) { const s = String(text ?? ""); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; }
+function cell(text) {
+  let s = String(text ?? "");
+  // Prevent spreadsheet formula execution when merchant opens findings in Excel.
+  if (/^[\s\u0000-\u001f]*[=+@-]/.test(s)) s = "'" + s;
+  return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
 export function exportFindings(issues) {
   const cols = ["severity","line","product","field","observed","advice"];
   return "\uFEFF" + [cols.join(","), ...issues.map(i => cols.map(c=>cell(i[c])).join(","))].join("\r\n") + "\r\n";

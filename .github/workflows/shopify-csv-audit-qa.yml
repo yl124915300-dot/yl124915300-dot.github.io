@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - business-hub-selfserve-mvp-20261116
+      - catalog-check-conversion-20261116
       - main
     paths:
       - 'shopify-csv-audit/**'
@@ -10,7 +11,7 @@ on:
   workflow_dispatch:
 jobs:
   product-csv-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
     steps:
@@ -27,3 +28,16 @@ jobs:
           test -s shopify-csv-audit/sample.csv
           grep -q 'audit.mjs' shopify-csv-audit/index.html
           grep -q 'Paid orders are' shopify-csv-audit/index.html
+      - name: Install isolated Chromium browser
+        run: |
+          npm install --prefix /tmp/catalog-check-qa --no-package-lock --no-save playwright@1.55.1
+          /tmp/catalog-check-qa/node_modules/.bin/playwright install --with-deps chromium
+      - name: Serve owned static site locally
+        run: |
+          nohup python3 -m http.server 8765 --bind 127.0.0.1 --directory . > /tmp/catalog-check-http.log 2>&1 &
+          sleep 2
+      - name: Actual browser scan and mobile checkout-disclosure smoke
+        env:
+          NODE_PATH: /tmp/catalog-check-qa/node_modules
+        run: node shopify-csv-audit/browser-smoke.cjs
+
