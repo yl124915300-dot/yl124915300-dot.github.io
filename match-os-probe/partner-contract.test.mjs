@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createPartnerClient, PartnerFailure, selectOfferOption, validateReadyCart, verifyOrderAgainstCart } from '../match-os/partner/core.mjs';
+import { createPartnerClient, PartnerFailure, selectOfferOption, validateReadyCart, verifyOrderAgainstCart, hasConfirmedCJ } from '../match-os/partner/core.mjs';
 
 // All examples here are synthetic and never touch the live Partner API.
 const P = '0b6f7a52-3c1d-4e8a-9f20-5d7c1a2b3c4d';
@@ -17,6 +17,13 @@ const decision = selectOfferOption(product, quote);
 const response = (status, data) => ({ ok: status >= 200 && status < 300, status, json: async () => data });
 const fails = (call, code) => assert.throws(call, e => e instanceof PartnerFailure && e.code === code);
 
+test('CJ publisher is only confirmed by Groupon on storefront /me', () => {
+  assert.equal(hasConfirmedCJ({ cjPublisherId: '1234567' }), true);
+  assert.equal(hasConfirmedCJ({ data: { cjPublisherId: '1234567' } }), true);
+  assert.equal(hasConfirmedCJ({ cjPublisherId: null, cjStatus: 'APPROVED' }), false);
+  assert.equal(hasConfirmedCJ({ status: 'ACTIVE', cjPublisherId: null }), false);
+  assert.equal(hasConfirmedCJ({ cjPublisherId: 'not-a-pid' }), false);
+});
 test('server credential is mandatory; no fake or browser token accepted', () => {
   fails(() => createPartnerClient({ apiKey: '' }), 'KEY_REQUIRED');
   fails(() => createPartnerClient({ apiKey: 'groupon' }), 'KEY_REQUIRED');
@@ -204,6 +211,7 @@ test('synthetic gateway: one buyer decision yields one cart and only a matched c
       success: true, hostname: 'yl124915300-dot.github.io' });
     assert.equal(u.hostname, 'api-core.livingsocial.com');
     assert.equal(options.headers.Authorization, 'Bearer ' + API_KEY);
+    if (u.pathname === '/partner_storefront/me') return response(200, { cjPublisherId: '1234567' });
     if (u.pathname === '/partner_storefront/products/' + P) return response(200, product);
     if (u.pathname === '/partner_storefront/carts') {
       assert.equal(options.method, 'POST');
