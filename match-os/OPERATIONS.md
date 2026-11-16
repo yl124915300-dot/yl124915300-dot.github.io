@@ -1,5 +1,19 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 第二阶段实际执行：免费自愿咨询入口 + 授权邮件回访
+
+**业务结果判定：接入准备已部署、自动核对已启用；真实自动触达闭环仍未验收。** 本轮项目没有新获得可证实的非 QA 买家。上一轮公开购买信号 **8**、按商品证据生成的草稿链接 **1**；新获准真实买家 **0**、本轮真实买家邮件自动发送 **0**、第三方送达/阅读回执 **0**、独立核验商家订单 **0**、已核验 MATCH OS PayPal 净到账 **US$0**。全站独立访客、真实点击、实时 PayPal 全量流水继续 **UNKNOWN**。不得将 GitHub Actions 通过、已发测试表单或 SMTP/Gmail 已发送状态计为真人获客。
+
+### 实际已完成
+- **复用既有 FormSubmit→Gmail 线路，未新增零流量机器人。** 改动 `match-os/index.html`：咨询首先免费，删除过去“必须预先勾选将来 US$1 服务费”阻碍；真实买家只有在主动填写邮箱并勾选 `research_consent=yes` 后才能提交。明确只允许针对当前需求发送一次自动或人工准备的回复，无营销订阅。表单设置 `reply_scope=ONE_REQUEST_SPECIFIC_REPLY_NO_MARKETING_V1`、主题 `MATCH OS Buyer Request - opted-in reply (unverified)`，记录请求交易状态仍为未核验；独立订单核验和买家另行批准前不得收成功服务费。`match-os/received.html` 同步准确告知：提交到 FormSubmit 不保证已到达 MATCH OS 或被收件人阅读。
+- **创建单独的获准入站自动任务** `MATCH OS 授权买家自动回复`（任务 ID `6afac988add88191912607b35249ce87`，每小时）。仅读 Gmail 已许可的 FormSubmit 真实购买请求及仓库本人主动提交的买家 issue；筛除 QA、重复回复、主动联系许可不明及无有效商品/市场信息的事件；先查原有已发回复。具备明确单次回复许可时，匹配有时间戳的同市场证据并发送一封非营销回复；平台发信 ID 不等于到达收件人，最终送达、打开及点击未知须留空/UNKNOWN。缺真实咨询不发送。没有可观测实时平台交付回执，仍不能验收“真实买家收到并点击”。
+- **现有商家证据可用而未完成交易。** 已有本轮 Chrome 云端调用公开 `api-core.livingsocial.com` 服务检索并取得候选、CheapShark 等开放目录也曾返回结果；但返回商品列表/起价不等于买家地址的实时到手总价、可预约时段、可退条件或有效结账。11/16 Groupon 工程回信确认 Partner storefront 可自助注册与授权 API 商品/购物车/托管结账流程（需账户完成注册并有密钥），CJ/Groupon 联盟归因需另行批准。当前没有记录可用 Partner API key、私人 cart 或带核验订单的 buyLink；不伪称已接通或获得分佣。
+- **原站已部署，完整回归通过。** [收费勾选移除](https://github.com/yl124915300-dot/yl124915300-dot.github.io/commit/a115e331f6a878ee4cff9be5379675a50aa4bed1)；[提交回执页面](https://github.com/yl124915300-dot/yl124915300-dot.github.io/commit/e77487d95caa1a5c2a4518ef7cc6706bd9ab91ea)；[QA 自动化更新](https://github.com/yl124915300-dot/yl124915300-dot.github.io/commit/ac5caaff30323f945cbe4e377d914df5b1ea34e6)。[最终 Pages](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43838330570)成功；[Node 与完整云端 Chrome](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43838331991)成功。中间一次失败因旧验收脚本引用已删除的收费复选框，已同步更新；QA 禁止向真实表单收件箱发送虚构买家，手机为浏览器尺寸模拟。
+- **权限/获客限制未解除。** viDIQ 本次未列出可运营的社媒连接；从当前 ChatGPT 连接方式读取 Chrome 标签页时被平台拒绝（需扩展发起的浏览器上下文）。Gmail 实查只找到先前自测 FormSubmit 邮件和其他项目/商家支持往来，尚未找到真实自愿 MATCH OS 买家。第一轮 8 条公开需求不具备私信许可；无需创建 Telegram Bot、Discord App，也不向陌生人私信。
+
+### 下一验收门槛
+首位非 QA 买家 **主动提交并授权本次回复** → Gmail 原始入站确证 → MATCH OS 依据匹配规则和真实商家证据发出 **仅一封** 专属比较/缺失问题回复 → 保留 Gmail Message ID 或真实平台返回；实际收件、点击、交易分别验收。无邮件平台级送达回执时，保留 `delivery=UNKNOWN`，绝不以“邮件已发送”替代“用户已收到”。订单成功和服务费净到账独立另验。不增加 SKU、抓取或无授权分发以掩盖 0 真实转化。
+
 ## 2026-11-16 第二阶段决策：先验证有流量的获准入站，暂缓 Telegram Bot
 
 **决策性质：策略与验收标准调整；不是新渠道已接通、不是自动送达或真实成交。** 依据 2026-11-16 第一轮生产记录，已发现 8 条公开选购信号、1 条比较链接草稿；8 条均无联系许可。已授权入站买家 0、自动发送尝试 0、平台送达回执 0、独立确认订单 0、MATCH OS 已核验 PayPal 净到账 US$0；全部访问及实时账户流水仍 UNKNOWN。
