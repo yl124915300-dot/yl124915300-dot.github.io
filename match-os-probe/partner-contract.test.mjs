@@ -171,6 +171,7 @@ test('synthetic gateway: one buyer decision yields one cart and only a matched c
   const decisions = new Map();
   let creates = 0;
   let checkedOut = false;
+  let cjConfirmed = true;
   const database = { prepare(sql) { return { bind(...args) { return {
     async run() {
       if (sql.startsWith('INSERT OR IGNORE')) {
@@ -211,7 +212,7 @@ test('synthetic gateway: one buyer decision yields one cart and only a matched c
       success: true, hostname: 'yl124915300-dot.github.io' });
     assert.equal(u.hostname, 'api-core.livingsocial.com');
     assert.equal(options.headers.Authorization, 'Bearer ' + API_KEY);
-    if (u.pathname === '/partner_storefront/me') return response(200, { cjPublisherId: '1234567' });
+    if (u.pathname === '/partner_storefront/me') return response(200, { cjPublisherId: cjConfirmed ? '1234567' : null });
     if (u.pathname === '/partner_storefront/products/' + P) return response(200, product);
     if (u.pathname === '/partner_storefront/carts') {
       assert.equal(options.method, 'POST');
@@ -239,6 +240,14 @@ test('synthetic gateway: one buyer decision yields one cart and only a matched c
     assert.equal(quoteRes.status, 200);
     const quoteResponse = await quoteRes.json();
     assert.equal(quoteResponse.selected.expectedPrice, 4500);
+    cjConfirmed = false;
+    const noCommission = await post('/v1/cart', {
+      turnstileToken: 'synthetic-turnstile', decisionToken: quoteResponse.decisionToken });
+    assert.equal(noCommission.status, 409);
+    assert.equal((await noCommission.json()).error, 'CJ_COMMISSION_NOT_CONFIRMED');
+    assert.equal(creates, 0);
+    assert.equal(decisions.size, 0, 'Unconfirmed CJ must not consume the decision or create a cart');
+    cjConfirmed = true;
     const cartResponse = await post('/v1/cart', {
       turnstileToken: 'synthetic-turnstile', decisionToken: quoteResponse.decisionToken });
     assert.equal(cartResponse.status, 200);
