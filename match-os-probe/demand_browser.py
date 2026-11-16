@@ -156,6 +156,7 @@ def services(page, site):
             respond(route, {"asOf": source_time, "offers": [{"id": "browser-qa",
                 "title": "60-minute massage for one", "status": "active", "city": "Austin",
                 "offerUrl": "https://www.groupon.com/deals/synthetic-qa",
+                "buyable": True, "buyUrl": "https://www.groupon.com/checkout/synthetic-qa",
                 "price": {"fromMinor": 4000, "currency": "USD"}}]})
     page.route("https://api-core.livingsocial.com/**", source)
     open_demand(page, site, "austin-60-minute-massage", "massage", ["USD 150", "just comparing"])
@@ -163,9 +164,15 @@ def services(page, site):
     page.locator("#live-search").click()
     card = page.locator(".offer-card").first
     expect(card).to_have_attribute("data-evidence", "api")
+    expect(card.locator('a[data-purchase-path]')).to_have_attribute(
+        "href", "https://www.groupon.com/checkout/synthetic-qa")
+    expect(card).to_contain_text("exact duration, party size and option price")
     page.clock.fast_forward(8 * 60_000 + 1000)
     expect(page.locator("#live-status")).to_contain_text("rate limited")
     expect(card).to_have_attribute("data-evidence", "stale")
+    expect(card.locator('a[data-purchase-path]')).to_have_count(0)
+    expect(card.locator('a.offer-link')).to_have_attribute(
+        "href", "https://www.groupon.com/deals/synthetic-qa")
     expect(card).to_have_attribute("data-status", "candidate")
     assert len(reads) == 2
     page.locator("#live-search").click()
