@@ -2,6 +2,7 @@ name: MATCH OS intake deployment smoke
 on:
   push:
     paths:
+      - 'sitemap.xml'
       - 'match-os/*.html'
       - 'match-os/*.css'
       - 'match-os/**/*.js'
