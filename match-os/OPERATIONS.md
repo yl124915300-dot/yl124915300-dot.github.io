@@ -1,5 +1,20 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 高频交易实作：真实官方购买链接接入（已通过生产浏览器测试）
+
+**状态：供给侧交接增强，真实买家与订单闭环仍未成立。** 当轮目标不是扩大公开社媒抓取，而是缩短已经主动进入会话的买家从比较到真实商家付款页面的距离。对原 `match-os/` 实施更新，未新建独立项目、未新建机器人、未建立未获许可的联系名单，未发商家或买家消息，未发起订单/支付/商家账户 API 密钥创建。
+
+### 完成的变更
+- `match-os/catalogs.js`：读取 LivingSocial 公开 Agent API 的 `offerUrl` / `buyUrl` / `bookingUrl`，仅对明确 `status=active`、`buyable=true` 且 URL 为官方 HTTPS 域名的结果保存 `purchaseUrl`。针对 `bookable_with_live_times`、`stay`、`shipped` 只信任专用 `bookingUrl`，不把普通最低价链接冒充预约；不在加拿大市场复用美国库存。来源商品页与购买路径分别保存，不自行拼接链接。
+- `match-os/results.js`：最新 `api` 证据、且与买家条件不冲突时，才提供“检查最低价选项/选择预订时段并在 Groupon 核价”的直接按钮。其他状态（过期缓存、无购买链接、需求冲突）退回官方详情链接；显式声明套餐、人数、时段、配送/税费和最终总价未知，不把最低价当作精确匹配。更新原主站 JS 版本以刷新缓存。
+- **回归与真源验收通过：** 新增 Node 合成反例（非 US、不可买、恶意 HTTP/域名、需要时段而缺 bookingUrl、过期）及 Chrome 真实源验收，不对实际商家下单。最初 Chrome 失败为另一个卡片渲染分支缺同样风险提示，定位后补齐。最终 [Pages 部署](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43856381597) 与 [完整规则及 Chrome](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/43856381793) 均通过。
+- **现场可信供给检查：** 在生产 HTTPS 页面、美国 Austin 的按摩公开搜索路径，浏览器读到展示的 **6 个**服务候选，**6 个**卡片呈现官方域名购买路径（live 日志 `LIVE_LIVINGSOCIAL_DIRECT_PURCHASE_CANDIDATES 6`）。这**只**说明 6 条候选官方购买链接可被展示，不是 6 位买家、6 笔购物车、6 次点击或 6 笔成交。未打开实际第三方收银台、未核验选定套餐/日期价格、最终费用、退款条款和真实订单。
+- **权限检查：** 官方 [Builder 指引](https://agent.livingsocial.com/docs/for-builders/get-your-api-key) 说明 Partner API 必须登录、注册 storefront、本人一次性获取密钥并保存服务端，CJ PID 需要独立确认。当前浏览器连接器实际拒绝跨浏览器上下文读取已登录标签页，尚未取得可核验 Partner key、cartId、buyLink 或订单读取权限。因此未部署并未声称存在正式 Partner 后端或佣金归因。当前只是匿名公开 Agent API 链接交接，无佣金能力证明。
+- **消费者实查：** 本轮 Gmail 检索无 11/16 后符合主题/授权的 MATCH OS 新买家表单邮件，GitHub 原仓库无 `MATCH OS BUYER` 主动咨询 issue。真实获准入站 **0**、真实自动发信 **0**、可独立确认订单 **0**、已核验 MATCH OS 佣金与 PayPal 净到账 **US$0**；全量到站与实时付款账户流水仍 **UNKNOWN**。
+
+### 下一条真正的商业通路
+官方已登录账户中核对当前有没有真实 Partner storefront 和 API key（密钥不得放公共仓库/聊天）；若不存在，通过官方后台创建并绑定服务端后验证 `GET /partner_storefront/me`、同市场搜索、买家选择后创建购物车、原样交给用户的 `buyLink`、`GET /partner_storefront/carts/{cartId}` 与 `GET /partner_storefront/bookings/{bookingId}` 的订单回读。订单与退款必须按实际 status 单独记账。即使成功回读真实订单，如 CJ PID 尚未获 Groupon 确认，收入仍是 US$0。需求侧必须找到有现成买家、可证明权限和主动授权咨询的入口，否则高频交易尚不可持续。
+
 ## 2026-11-16 20:06 JST｜授权买家入站轮检（只读核验）
 
 - **查询范围：** Gmail 严格筛选 `in:anywhere from:submissions@formsubmit.co subject:"MATCH OS Buyer Request - opted-in reply (unverified)" after:2026/11/16` 返回 **0**；`in:anywhere after:2026/11/16 {"MATCH OS" "match-os"} -category:promotions` 返回 **20**，其中 **19 封 GitHub CI 通知和 1 封合作方技术往来**，均不属于买家自愿咨询；`in:sent after:2026/11/16 {"MATCH OS" "match-os"}` 返回 **0**。以 Gmail 搜索本次实际可见结果为准，不能外推所有渠道全量收件。
