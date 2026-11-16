@@ -1,6 +1,6 @@
 import { profiles, readPreference } from './decision.js?v=7';
 import { catalogNames, catalogScope, searchCatalogs } from './catalogs.js?v=8';
-import { renderIntent } from './results.js?v=9';
+import { renderIntent } from './results.js?v=10';
 import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=13';
 
 import { entryContext, topics } from './demand/topics.js?v=10';
