@@ -11,7 +11,7 @@ export const modules = Object.freeze({ electronics, consumables, services, games
 export const providers = Object.freeze({
   cheapshark: { label: 'CheapShark', module: 'games', markets: ['US'], capability: 'Catalog purchase listings from multiple merchants' },
   gamerpower: { label: 'GamerPower', module: 'games', markets: ['US'], capability: 'Free claims' },
-  livingsocial: { label: 'LivingSocial / Groupon', module: 'services', markets: ['US', 'CA'], capability: 'Public catalog starting prices' },
+  livingsocial: { label: 'LivingSocial / Groupon', module: 'services', markets: ['US'], capability: 'US public catalog starting prices and verified checkout or booking links where present' },
   bestbuy: { label: 'Best Buy', module: 'electronics', mode: 'blocked', capability: 'Project API key and private connection needed' },
   ebay: { label: 'eBay Browse', module: 'electronics', mode: 'blocked', capability: 'OAuth and production approval needed' },
   kroger: { label: 'Kroger', module: 'consumables', mode: 'blocked', capability: 'OAuth and location-specific product access needed' },
