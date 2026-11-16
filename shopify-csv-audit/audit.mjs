@@ -81,7 +81,8 @@ export function inspectShopifyCSV(parsed) {
   // This is a review warning, not a claim that an import has actually happened.
   const dependentVariantHeaders = ["SKU", "Variant SKU", "Barcode", "Variant Barcode",
     "Variant Inventory Tracker", "Variant Inventory Policy", "Variant Grams",
-    "Weight value (grams)", "Inventory tracker", "Inventory policy"];
+    "Weight value (grams)", "Inventory tracker", "Inventory policy",
+    "Inventory quantity", "Variant Inventory Qty", "Variant Inventory Quantity"];
   if (dependentVariantHeaders.some(h => headers.includes(h)) &&
       (!cols.option1Name || !cols.option1Value)) {
     const missing = [!cols.option1Name ? "Option1 name" : null,
