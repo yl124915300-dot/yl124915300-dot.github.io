@@ -5,8 +5,9 @@ from urllib.parse import urljoin, urlparse
 from playwright.sync_api import expect
 
 ENTRY = "?entry=pinterest_pin&topic=wired-anc-headphones&qa=1"
-TEST_TIME = datetime(2026, 11, 17, 5, 15, tzinfo=timezone.utc)
+TEST_TIME = datetime(2026, 11, 17, 5, 43, tzinfo=timezone.utc)
 XM5_URL = "https://www.bhphotovideo.com/c/product/1706293-REG/sony_6505727_sony_wh_1000xm5_wireless_noise_canceling.html"
+CH730N_URL = "https://www.bhphotovideo.com/c/product/1998821-REG/sony_whch730n_b_whch730n_wireless_noise_canceling_over_ear.html"
 
 
 def headphone_session(page, site, touch=False):
@@ -27,20 +28,27 @@ def headphone_session(page, site, touch=False):
         assert cta["y"] + cta["height"] <= view["y"] + view["height"], (cta, view)
 
     page.locator("#hp-start-market").select_option("US")
-    page.locator("#hp-start-budget").fill("420")
+    page.locator("#hp-start-budget").fill("150")
     action = lambda locator: locator.tap() if touch else locator.click()
     action(page.locator("#start-chat"))
-    expect(page.locator(".hp-model-card")).to_have_count(3)
+    expect(page.locator(".hp-model-card")).to_have_count(4)
+    expect(page.locator(".hp-model-card[data-selected=true]")).to_have_attribute("data-model", "ch730n")
+    stores = page.locator(".hp-stores")
+    expect(stores).to_contain_text("WHCH730N/B")
+    expect(stores).to_contain_text("USD 98")
+    expect(stores.locator("dl")).to_contain_text("Delivered total")
+    expect(stores.locator("dl")).to_contain_text("Unknown")
+    expect(stores.locator("a[data-purchase-path]")).to_have_attribute("href", CH730N_URL)
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     expect(page.locator(".hp-table")).to_contain_text("Built-in mic with cable")
     expect(page.locator(".hp-table")).to_contain_text("Audio with power off")
     expect(page.locator("#live-search")).to_be_hidden()
     ref = page.locator("#ref").text_content()
 
+    page.locator("#hp-budget").fill("420")
     action(page.locator("[data-headphone-select=xm5]"))
-    stores = page.locator(".hp-stores")
     expect(stores.locator(".hp-store-card")).to_have_count(2)
-    expect(stores.locator("[data-merchant='B&H Photo']")).to_contain_text("USD 298")
+    expect(stores.locator("[data-merchant='B&H Photo']")).to_contain_text("USD 398")
     expect(stores.locator("[data-merchant='BuyDig']")).to_contain_text("USD 398")
     expect(stores.locator("[data-merchant='BuyDig']")).to_contain_text("Unknown")
 
@@ -52,6 +60,9 @@ def headphone_session(page, site, touch=False):
     expect(page.locator("#hp-changes")).to_contain_text("Ranking updated: Lower known cost")
     page.locator("#hp-deadline").fill("2026-11-18")
     expect(page.locator("#hp-changes")).to_contain_text("Deadline changed")
+    action(stores.locator("button[data-headphone-handoff]"))
+    expect(page.locator("#sharing")).to_be_visible()
+    expect(page.locator('#payload input[name="when"]')).to_have_value("2026-11-18")
 
     action(page.locator("#hp-controls label").filter(has_text="Built-in mic over cable"))
     expect(page.locator(".hp-model-card[data-model=xm5]")).to_contain_text("Excluded: Built-in microphone over cable")
@@ -99,7 +110,8 @@ def headphone_ttl(page, site):
     page.locator("#hp-start-market").select_option("US")
     page.locator("#hp-start-budget").fill("420")
     page.locator("#start-chat").click()
-    expect(page.locator(".hp-model-card")).to_have_count(3)
+    expect(page.locator(".hp-model-card")).to_have_count(4)
+    page.locator("[data-headphone-select=xm5]").click()
     page.locator("#quote-entry summary").click()
     form = page.locator("#quote-form")
     for key, value in {

@@ -1,6 +1,36 @@
 # MATCH OS — 交易优先运营状态
 
-**更新日期：2026-11-16（北京时间）。以下为当前运行口径。后续章节为历史记录。**
+**更新日期：2026-11-16（北京时间）。以下为当前运行口径，后续均为历史记录。**
+
+## 美国有线降噪耳机成交试点
+
+| 观察时间（北京时间） | 全新黑色商品页 | 标价 | 页面供给信号 |
+| --- | --- | ---: | --- |
+| 11/16 13:44 | [B&H · WH1000XM5/B](https://www.bhphotovideo.com/c/product/1706293-REG/sony_6505727_sony_wh_1000xm5_wireless_noise_canceling.html) | US$398 | 商家页显示有货，页面示例地点 Centreville, VA 显示 11/18 免费送达。商品页显示延长退货至 2027-02-01。 |
+| 11/16 13:44；13:47 本机 Chrome 复核 | [BuyDig · WH1000XM5/B](https://www.buydig.com/shop/product/SNWH1000XM5B/Sony-WH-1000XM5-Wireless-Industry-Leading-Noise-Canceling-Headphones-Black) | US$398 | 页面显示全新、美国保修、有货，通常当天或下一工作日发货，页面宣传免费配送和 30 天退货。 |
+| 11/16 13:56 | [B&H · WHCH730N/B](https://www.bhphotovideo.com/c/product/1998821-REG/sony_whch730n_b_whch730n_wireless_noise_canceling_over_ear.html) | US$98 | 商家页显示有货，Centreville 示例显示 11/18 免费送达。退货延长标示同上。 |
+| 11/16 13:46 | [Uniqcli · Space Q45 A3040011](https://getuniqcli.com/catalog/anker/a3040011) | US$149.99 | 待订。3–8 周为商家预估到店时间，成色、买家资格和送达待核查。 |
+
+- B&H 两个商品来自按美国市场新读取的公开页面。本机 Chrome 打开 XM5 时遇到商家验证页。此前的 B&H US$298 已被新的 US$398 替代；两店同一 XM5 SKU 当前公开标价持平。B&H 的免费快递为美国本土符合条件的订单，退货涉及物品状态、包装和例外；BuyDig 的免费配送排除邮政信箱、AK、HI、美属领地和 APO/FPO 等，退货条件和可能费用须核对。买家的库存、运费、税费、费用、到手总价、预计送达、适用退货条款均为 **UNKNOWN**。未代入买家 ZIP 或付款资料。[B&H 配送](https://www.bhphotovideo.com/find/HelpCenter/Shipping.jsp) · [B&H 退货](https://www.bhphotovideo.com/find/HelpCenter/ReturnExchange.jsp) · [BuyDig 配送及退货](https://www.buydig.com/shop/content/Policies.htm)
+- [Sony XM5 手册](https://helpguide.sony.net/mdr/wh1000xm5/v1/en/contents/TP1000534744.html)和 [Sony CH730N 手册](https://helpguide.sony.net/mdr/3006/v1/en/contents/H032_Using_the_supplied_headphone_cable.html)确认随附线材接入并开机可用 ANC，关机可听音，线接手机通话使用手机麦克风。[Q45 支持页](https://service.soundcore.com/article-description/soundcore-Space-Q45-Headphones-FAQ)记录插 AUX 后用 NC 控制。CH730N 是明确不同的型号，作为 US$150 内的标价候选；精确 XM5 要求仍会排除它。公开价格观察最长参与排序 24 小时，到期自动降级；待订不参与可买排序，旧 XM4/CDW 证据保留原时点。
+- [原 Pinterest 承接会话](https://yl124915300-dot.github.io/match-os/?entry=pinterest_pin&topic=wired-anc-headphones)内，买家可以直接去店铺核对送达和到手价，或者在商家卡下打开同一会话的现有自愿人工核价入口。已有四类、FrameFind、授权及 30 分钟清理继续使用。首单操作从买家主动提供地区、预算和期限开始，在同一请求下核实商家款项及交付条件，买家自选商家结账，再私下核对订单、金额、状态及退款。人工提交仍走现有 FormSubmit，可能需要 CAPTCHA，本轮未发送合成请求。PayPal 独立 US$1 成功服务费保持关闭。
+- 规则及 Chrome 验证入口见[部署及测试记录](https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions)。验收访问和合成购买路径计为 QA。
+
+## 社媒与真人请求
+
+Pinterest 自有公开图板 **MATCH OS | Buying Comparisons** 在本机已登录 Chrome 的编辑器中可选。已制作一张不同于原有 XM4/Q45 图的 XM5 同 SKU 商家条件比较图，标注 11/16 观察日、不写固定美元价，链接仍到原会话。Pinterest 社区规则要求使用获明确许可的自动操作，本次未确认此发布方式获准，**新增 Pin 0**，图卡供账户所有者通过官方编辑器发布。本机本轮复核 X 的切换菜单只有 BLACK SAIL；未确认其他全球平台存在可用的独立 MATCH OS 账号。继续使用原有单一 24/72 小时监控。[Pinterest 规则](https://policy.pinterest.com/en/community-guidelines)
+
+本机登录 Chrome 读取 Pin Stats（2026/10/17–11/16，近 30 天，全部设备与来源，11/16 约 13:44–13:46 北京时间）。原始读数顺序为曝光 / Pin 点击 / 出站 / 收藏。
+
+| Pin | 原始读数 | 已知的历史 QA 出站 |
+| --- | --- | ---: |
+| [有线耳机](https://www.pinterest.com/pin/1121396376006773237/) | 5 / 2 / 2 / 0 | 2 |
+| [PC 游戏](https://www.pinterest.com/pin/1121396376006773484/) | 4 / 1 / 1 / 0 | 1 |
+| [燕麦奶](https://www.pinterest.com/pin/1121396376006729430/) | 9 / 0 / 0 / 0 | 0 |
+
+三条合计 18 次曝光、3 次出站，共三次已知 QA 出站；无法从聚合数字识别独立买家。本轮未增加社媒验收出站。可核验真人购买请求 **0**（Gmail 全邮件范围排除两封 QA，仓库 Issues 无买家工单，[FrameFind #41](https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/41) 无评论）；可独立核验商家成交 **0**；项目已核验 PayPal 净到账 **US$0**，账户实时流水 **UNKNOWN**。独立到站、开聊量、商家出站全量及未报告购买 **UNKNOWN**。首单最早缺口为独立买家进入并带期限提交需求，另需该买家所在地的成交条件。可用入口已缩短至商家卡下的主动核价按钮。
+
+## 历史记录
 
 ## 当前执行：耳机成交试点（2026-11-16）
 

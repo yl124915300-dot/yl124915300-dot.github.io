@@ -32,6 +32,30 @@ test('headphone feature checks keep wired mic, power-off playback and model revi
     intent('Sony WH-1000XM4 headphones').requirements.hard.model);
   assert.equal(selectedManufacturerModel({ model: 'WH-1000XM5', modelCode: 'WH1000XM5/S' }), undefined);
   assert.equal(selectedManufacturerModel({ model: 'WH-1000XM4C', modelCode: 'WH1000XM4/B' }), undefined);
+  assert.ok(headphoneIntent(intent('Sony WH-CH730N')));
+  assert.equal(selectedManufacturerModel({ model: 'WH-CH735N', modelCode: 'WHCH730N/B' }), undefined);
+});
+
+test('the separate US budget alternative wins on listed price without claiming checkout eligibility', () => {
+  const request = intent(undefined, '3.5 mm wired ANC required', 150);
+  const listings = [
+    merchant('qa-xm5', 'xm5', 'WH1000XM5/B', 398, { stock: 'listed' }),
+    merchant('qa-q45', 'q45', 'A3040011', 149.99, { stock: 'backorder' }),
+    merchant('qa-ch730n', 'ch730n', 'WHCH730N/B', 98, { stock: 'listed' }),
+  ];
+  const result = compareHeadphones(request, [], 'balanced', testNow, listings);
+  const lead = result.models[0];
+  assert.equal(lead.model.id, 'ch730n');
+  assert.equal(lead.best.provenance.identity.identifier, 'WHCH730N/B');
+  assert.equal(lead.best.provenance.availability.state, 'unknown');
+  assert.equal(lead.best.total, null);
+  assert.equal(lead.best.status, 'candidate');
+  assert.equal(result.models.find(entry => entry.model.id === 'q45').best, undefined);
+
+  const exactXm5 = compareHeadphones(intent('Sony WH-1000XM5'), [], 'balanced', testNow, listings);
+  assert.ok(exactXm5.models.find(entry => entry.model.id === 'ch730n').conflicts.includes('Exact model'));
+  const silverXm5 = compareHeadphones(intent('Sony WH-1000XM5/S'), [], 'balanced', testNow, listings);
+  assert.ok(silverXm5.models.find(entry => entry.model.id === 'xm5').conflicts.includes('Exact model number'));
 });
 
 test('snapshots drop out by market and after expiry; missing checkout totals never pass', () => {

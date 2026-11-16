@@ -1,4 +1,4 @@
-import { headphoneModels } from './modules/headphones.js?v=10';
+import { headphoneModels } from './modules/headphones.js?v=12';
 
 const node = (tag, text, className) => {
   const element = document.createElement(tag);
@@ -17,7 +17,7 @@ function link(label, href, merchant = false, purchasePath = merchant) {
 }
 
 function icon(model) {
-  // Generic original pictogram; same geometry for both models.
+  // Generic original pictogram shared by the models.
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 64 54');
   svg.setAttribute('aria-hidden', 'true');
@@ -84,7 +84,7 @@ function matrix(entries) {
   feature.scope = 'col';
   tr.append(feature);
   for (const { model } of entries) {
-    const th = node('th', ({ xm4: 'Sony XM4', xm5: 'Sony XM5', q45: 'Space Q45' }[model.id]));
+    const th = node('th', ({ xm4: 'Sony XM4', xm5: 'Sony XM5', q45: 'Space Q45', ch730n: 'Sony CH730N' }[model.id]));
     th.scope = 'col';
     tr.append(th);
   }
@@ -130,7 +130,7 @@ function merchantCard(row) {
     ['Shipping / tax / fees', [offer.shipping, offer.tax, offer.fees].map(x => price(x, offer.price?.currency)).join(' / ')],
     ['Availability', expired ? 'Unknown now; recheck the source' : offer.stockNote || 'Unknown'],
     ['Delivery / pickup', offer.delivery?.label || 'Unknown'],
-    ['Returns', offer.returns?.label || 'Unknown'],
+    ['Returns', offer.returns?.url ? link(offer.returns.label, offer.returns.url) : offer.returns?.label || 'Unknown'],
     ['Observed', observation(provenance.observedAt || provenance.retrievedAt)],
     ['Evidence', offer.merchantEvidence || (offer.provider === 'user' ? 'Entered by you, unverified' : 'Public seller page')],
     ['Recheck after', provenance.priceValidUntil ? observation(provenance.priceValidUntil) : 'Unknown'],
@@ -154,7 +154,8 @@ function merchantCard(row) {
     why.append(list);
     card.append(why);
   }
-  card.append(link(expired || row.problems.length ? 'Recheck at source' : 'View merchant listing', offer.sourceUrl, true, !expired && !row.problems.length));
+  const actionable = !expired && !row.problems.length && offer.snapshotAvailable !== false;
+  card.append(link(actionable ? 'Check price & delivery at store' : 'Recheck at source', offer.sourceUrl, true, actionable));
   return card;
 }
 
@@ -170,10 +171,10 @@ export function renderHeadphones(container, comparison, selected, market, curren
   heading.tabIndex = -1;
   const matching = entry.rows.filter(row => row.provenance.identity?.verified && row.offer.attrs?.modelCode === entry.model.sku && row.offer.attrs.condition === 'new');
   const other = entry.rows.filter(row => !matching.includes(row));
-  const freshCount = matching.filter(row => !row.stale && !row.problems.length &&
+  const freshCount = matching.filter(row => !row.stale && !row.problems.length && row.offer.snapshotAvailable !== false &&
     row.offer.price?.currency === currency && row.offer.attrs.condition === 'new').length;
   const notes = node('p', freshCount ?
-    'Same SKU and condition. Check stock, final price and eligibility with the store.' :
+    'Same SKU and condition. At the store, check that it ships to your ZIP in time and fits your budget after tax and shipping.' :
     'No current eligible price evidence for this SKU and market. Open a source below or add a local listing.', 'muted');
   const marketLine = node('p', entry.model.sku + ' · ' + market + ' · ' + currency, 'hp-sku');
   const stores = node('section', '', 'hp-stores');
@@ -190,6 +191,10 @@ export function renderHeadphones(container, comparison, selected, market, curren
     for (const row of [...other, ...comparison.other]) grid.append(merchantCard(row));
     stores.append(grid);
   }
-  section.append(cards, matrix(comparison.models), stores);
+  const help = node('button', 'Ask for a manual price and delivery check', 'secondary');
+  help.type = 'button';
+  help.setAttribute('data-headphone-handoff', '');
+  stores.append(help);
+  section.append(cards, stores, matrix(comparison.models));
   container.append(section);
 }

@@ -1,6 +1,6 @@
-import { electronics } from './electronics.js?v=10';
-import { evaluateIntent } from '../transaction.js?v=10';
-import { HEADPHONE_LISTINGS } from './headphone-listings.js?v=10';
+import { electronics } from './electronics.js?v=12';
+import { evaluateIntent } from '../transaction.js?v=12';
+import { HEADPHONE_LISTINGS } from './headphone-listings.js?v=12';
 
 export const headphoneTopic = 'wired-anc-headphones';
 export const headphoneMarkets = {
@@ -40,6 +40,16 @@ export const headphoneModels = [
       ['Sony specifications: analogue input', 'https://www.sony.com/electronics/support/wireless-headphones-bluetooth-headphones/wh-1000xm5/specifications'],
     ],
   },
+  {
+    id: 'ch730n', name: 'Sony WH-CH730N', sku: 'WHCH730N/B', hardware: 'WH-CH730N', accent: 'mint',
+    brand: 'Sony', anc: 'Yes · plug in and turn on', power: 'Power on for ANC',
+    passive: 'Yes · audio only, ANC off', mic: 'No · use the phone or computer mic',
+    facts: { wiredAnc: true, analogAudio: true, passiveAudio: true, wiredMic: false },
+    sources: [
+      ['Sony Help Guide: cable, power and calls', 'https://helpguide.sony.net/mdr/3006/v1/en/contents/H032_Using_the_supplied_headphone_cable.html'],
+      ['Sony specifications', 'https://helpguide.sony.net/mdr/3006/v1/en/contents/H062_Specifications.html'],
+    ],
+  },
 ];
 
 export const headphoneNeeds = [
@@ -52,7 +62,7 @@ export const headphoneNeeds = [
 export function headphoneIntent(intent) {
   if (intent?.category !== 'electronics' || intent.sharedBudget || intent.requirements.accessory) return false;
   const item = intent.item;
-  if (/\b(?:space q45|wh[- ]?1000xm[45])(?![a-z0-9])/iu.test(item)) return true;
+  if (/\b(?:space q45|wh[- ]?(?:1000xm[45]|ch730n))(?![a-z0-9])/iu.test(item)) return true;
   return /^(?:over[- ]ear |wired |anc )*headphones?(?:\s+with\s+active noise cancellation in wired mode)?$|^(?:头戴式|有线|降噪)*耳机$/iu.test(item);
 }
 
@@ -95,10 +105,10 @@ export function headphoneSnapshotOffers(intent, listings = HEADPHONE_LISTINGS) {
         fulfillment: { verified: false },
       },
       delivery: listing.fulfillment ? { label: listing.fulfillment } : null,
-      returns: listing.returns ? { label: listing.returns, verified: false } : null,
+      returns: listing.returns ? { ...listing.returns, verified: false } : null,
       stockNote: listing.stockNote,
       merchantEvidence: listing.evidenceNote,
-      snapshotAvailable: listing.stock !== 'unavailable',
+      snapshotAvailable: !['unavailable', 'backorder'].includes(listing.stock),
     }];
   });
 }

@@ -1,14 +1,14 @@
 import { profiles, readPreference } from './decision.js?v=7';
 import { catalogNames, catalogScope, searchCatalogs } from './catalogs.js?v=7';
 import { renderIntent } from './results.js?v=8';
-import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=10';
+import { combinedCost, evaluateIntent, liveOffer, localQuote, providers, quoteFields, routeRequest } from './transaction.js?v=12';
 
 import { entryContext, topics } from './demand/topics.js?v=9';
 import { createMatchingSession } from './matching.js?v=7';
 import { createFunnel, steps as funnelSteps } from './funnel.js?v=8';
-import { compareHeadphones, headphoneIntent, headphoneMarkets, headphoneModels, headphoneNeeds, headphoneTopic } from './modules/headphones.js?v=10';
-import { HEADPHONE_LISTINGS } from './modules/headphone-listings.js?v=10';
-import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=11';
+import { compareHeadphones, headphoneIntent, headphoneMarkets, headphoneModels, headphoneNeeds, headphoneTopic } from './modules/headphones.js?v=12';
+import { HEADPHONE_LISTINGS } from './modules/headphone-listings.js?v=12';
+import { renderHeadphonePreview, renderHeadphones } from './headphone-view.js?v=12';
 import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
 
 (() => {
@@ -700,14 +700,14 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
         const leading = comparison.models[0];
         const selected = session.headphoneSelected || leading.model.id;
         renderHeadphones(output, comparison, selected, intent.brief.place.region, intent.brief.budget.currency);
-        const eligible = comparison.rows.filter(row => !row.problems.length && !row.stale);
+        const eligible = comparison.rows.filter(row => !row.problems.length && !row.stale && row.offer.snapshotAvailable !== false);
         candidates += eligible.length;
         merchantCandidates += eligible.length;
         const fits = comparison.models.filter(model => !model.conflicts.length && !model.unknown.length).length;
         const priced = eligible.filter(row => row.offer.price && row.offer.price.currency === intent.brief.budget.currency &&
           row.provenance.identity?.verified).length;
-        const summary = (change ? change + ' ' : '') + fits + ' models meet the checked feature and price constraints so far. ' +
-          priced + ' matching-SKU price observations in ' + intent.brief.budget.currency + '. ' +
+        const summary = (change ? change + ' ' : '') + fits + ' models clear the checked requirements so far. ' +
+          priced + ' matching-SKU price observations within the listed-price budget in ' + intent.brief.budget.currency + '. ' +
           (!leading.conflicts.length && !leading.unknown.length
             ? (leading.best ? leading.model.name + ' leads on the available evidence. ' : 'No priced lead can be ranked in this market. ')
             : 'No model clears all checked requirements. ') +
@@ -980,6 +980,10 @@ import { validBarcode, withoutBarcodes } from './evidence.js?v=7';
   });
 
   byId('live-results').addEventListener('click', event => {
+    if (event.target.closest('button[data-headphone-handoff]')) {
+      showSharing();
+      return;
+    }
     const button = event.target.closest('button[data-headphone-select]');
     if (!button || !remaining() || closing || session.submitting) return;
     session.headphoneSelected = button.dataset.headphoneSelect;

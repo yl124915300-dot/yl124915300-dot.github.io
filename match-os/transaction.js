@@ -1,5 +1,5 @@
 import { profiles } from './decision.js?v=7';
-import { electronics, modelReference } from './modules/electronics.js?v=10';
+import { electronics, modelReference } from './modules/electronics.js?v=12';
 import { consumables, productType } from './modules/consumables.js?v=7';
 import { services, serviceDefinition } from './modules/services.js?v=7';
 import { games } from './modules/games.js?v=7';
