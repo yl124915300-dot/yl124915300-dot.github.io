@@ -1,5 +1,13 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-16 20:06 JST｜授权买家入站轮检（只读核验）
+
+- **查询范围：** Gmail 严格筛选 `in:anywhere from:submissions@formsubmit.co subject:"MATCH OS Buyer Request - opted-in reply (unverified)" after:2026/11/16` 返回 **0**；`in:anywhere after:2026/11/16 {"MATCH OS" "match-os"} -category:promotions` 返回 **20**，其中 **19 封 GitHub CI 通知和 1 封合作方技术往来**，均不属于买家自愿咨询；`in:sent after:2026/11/16 {"MATCH OS" "match-os"}` 返回 **0**。以 Gmail 搜索本次实际可见结果为准，不能外推所有渠道全量收件。
+- **排除证据：** 额外搜查 FormSubmit 于 11/15 起的记录共 **4 封**：**2 封历史 QA/合成表单**和 **2 封激活通知**，均非买家。逐封完整读取的 2 封 QA（11/15）含 QA 标记、**均无** `research_consent=yes`、`reply_scope=ONE_REQUEST_SPECIFIC_REPLY_NO_MARKETING_V1`、`session reference`，判定 `BLOCKED_QA_NO_CONSENT`，未对外回复；历史激活通知不是购买请求，判定 `EXCLUDED_SYSTEM`。脱敏证据：邮件 id 前缀 `1a1dd7a4`、`1a1dd6ac`（QA）；未公开邮箱和正文。
+- **GitHub 入站：** 仓库匹配 `[MATCH OS BUYER]` 以及更宽松 `"MATCH OS" is:issue` 查询均返回 **0 个 issue**。无真实非操作员自愿创建的购买请求或允许回复渠道。未创建问题/评论，也未接触社媒陌生人。
+- **本轮结果：** 非 QA 合格买家 **0**，买家回复发送 **0**，Gmail message ID / GitHub comment ID **无**，平台受理与实际送达 **UNKNOWN/无发送**，点击 **UNKNOWN**，订单独立核验新增 **0**，PayPal 实时全量流水 **未查、UNKNOWN**，已核验项目净到账基线 **US$0（沿用前次，不代表本轮实时账户证明）**。US$1 服务费仍关闭。**无符合授权门槛的事项可自动回复，本轮不发通知给主人。**
+- **限制与后续：** 没有触发商品现价抓取和交易执行，因为无合格买家条件；避免过期商品报价和不必要操作。原站外部 HTTP 工具本轮未能直接读取，不能据此认定线上故障；GitHub 运营记录可正常读取。后续继续检查授权新入站、核对已发去重，达到明确许可与本次目的的门槛才处理。无新真实事件时避免重复写入同类日志。
+
 ## 2026-11-16 战略升级：高频匹配 × 高频真实交易（现行最高目标）
 
 **北极星不是“发现线索数/自动发送数/店铺点击数”，而是可归因的真实订单频次与最终净收入。** 本阶段只指现实商品、生活服务的高频消费撮合，不是证券高频交易。本文为运营目标与系统设计，**不代表已取得新流量、接通私有交易 API 或已成交**。
