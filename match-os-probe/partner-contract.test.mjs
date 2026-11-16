@@ -127,3 +127,119 @@ test('errors never echo request fields, secrets or buyers', async () => {
     return true;
   });
 });
+
+
+test('gateway remains disabled without private key, D1 and Turnstile; foreign origin rejected', async () => {
+  const { default: gateway } = await import('../match-os/partner/gateway-worker.mjs');
+  const base = 'https://partner-test.example';
+  const health = await gateway.fetch(new Request(base + '/health'), {});
+  assert.equal((await health.json()).connected, false);
+  const request = new Request(base + '/v1/cart', {
+    method: 'POST', headers: { Origin: 'https://yl124915300-dot.github.io',
+      'Content-Type': 'application/json' }, body: JSON.stringify({ decisionToken: 'fake' }) });
+  const blocked = await gateway.fetch(request, {});
+  assert.equal(blocked.status, 503);
+  assert.equal((await blocked.json()).error, 'PARTNER_NOT_CONNECTED');
+  const foreign = await gateway.fetch(new Request(base + '/v1/cart', {
+    method: 'POST', headers: { Origin: 'https://untrusted.example',
+      'Content-Type': 'application/json' }, body: '{}' }), {});
+  assert.equal(foreign.status, 403);
+  assert.equal((await foreign.json()).error, 'ORIGIN_REFUSED');
+});
+
+test('synthetic gateway: one buyer decision yields one cart and only a matched confirmed order', async () => {
+  const { default: gateway } = await import('../match-os/partner/gateway-worker.mjs');
+  const origin = 'https://yl124915300-dot.github.io';
+  const base = 'https://partner-test.example';
+  const decisions = new Map();
+  let creates = 0;
+  let checkedOut = false;
+  const database = { prepare(sql) { return { bind(...args) { return {
+    async run() {
+      if (sql.startsWith('INSERT OR IGNORE')) {
+        if (decisions.has(args[0])) return { meta: { changes: 0 } };
+        decisions.set(args[0], { id: args[0], status: args[1], product_id: args[2],
+          option_id: args[3], quantity: args[4], agreed_price: args[5], cart_id: null });
+        return { meta: { changes: 1 } };
+      }
+      if (sql.startsWith('UPDATE partner_decisions')) {
+        const row = decisions.get(args[3]);
+        assert.ok(row);
+        row.status = args[0];
+        row.cart_id = args[1] || row.cart_id;
+        row.order_id = args[2] || row.order_id;
+        return { meta: { changes: 1 } };
+      }
+      throw Error('Unexpected SQL');
+    },
+    async first() {
+      assert.ok(sql.startsWith('SELECT * FROM partner_decisions'));
+      return decisions.get(args[0]) || null;
+    },
+  }; } }; } };
+  const env = { MATCH_OS_PARTNER_LIVE_ENABLED: 'true', MATCH_OS_GROUPON_API_KEY: API_KEY,
+    MATCH_OS_TOKEN_KEY: 'synthetic-private-HMAC-key-with-64-random-characters-not-production',
+    MATCH_OS_TURNSTILE_SECRET: 'synthetic-secret', MATCH_OS_DB: database };
+  const savedFetch = globalThis.fetch;
+  const partnerCart = () => ({
+    id: CART, status: checkedOut ? 'CHECKED_OUT' : 'ACTIVE',
+    buyLink: checkedOut ? null : 'https://www.groupon.com/checkout/synthetic',
+    items: [{ productId: P, optionId: O, quantity: 1, available: true }],
+    grouponOrderUuid: checkedOut ? BOOKING : null,
+  });
+  globalThis.fetch = async (url, options = {}) => {
+    const u = new URL(url);
+    if (u.hostname === 'challenges.cloudflare.com') return response(200, {
+      success: true, hostname: 'yl124915300-dot.github.io' });
+    assert.equal(u.hostname, 'api-core.livingsocial.com');
+    assert.equal(options.headers.Authorization, 'Bearer ' + API_KEY);
+    if (u.pathname === '/partner_storefront/products/' + P) return response(200, product);
+    if (u.pathname === '/partner_storefront/carts') {
+      assert.equal(options.method, 'POST');
+      creates++;
+      return response(200, partnerCart());
+    }
+    if (u.pathname === '/partner_storefront/carts/' + CART) return response(200, partnerCart());
+    if (u.pathname === '/partner_storefront/bookings/' + BOOKING) {
+      const reference = decisions.keys().next().value;
+      return response(200, {
+        id: BOOKING, status: 'CONFIRMED', clientReference: reference,
+        items: [{ productId: P, optionId: O, quantity: 1, status: 'CONFIRMED' }],
+      });
+    }
+    throw Error('Unexpected synthetic request');
+  };
+  const post = (route, input) => gateway.fetch(new Request(base + route, {
+    method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json' },
+    body: JSON.stringify(input),
+  }), env);
+  try {
+    const quoteRes = await post('/v1/quote', { turnstileToken: 'synthetic-turnstile',
+      productId: P, optionId: O, quantity: 1, agreedPrice: 4500 });
+    assert.equal(quoteRes.status, 200);
+    const quoteResponse = await quoteRes.json();
+    assert.equal(quoteResponse.selected.expectedPrice, 4500);
+    const cartResponse = await post('/v1/cart', {
+      turnstileToken: 'synthetic-turnstile', decisionToken: quoteResponse.decisionToken });
+    assert.equal(cartResponse.status, 200);
+    const cartResult = await cartResponse.json();
+    assert.equal(cartResult.status, 'READY');
+    assert.match(cartResult.buyLink, /^https:\/\/www\.groupon\.com\//);
+    assert.equal(creates, 1);
+    const dupResponse = await post('/v1/cart', {
+      turnstileToken: 'synthetic-turnstile', decisionToken: quoteResponse.decisionToken });
+    assert.equal(dupResponse.status, 200);
+    assert.equal(creates, 1, 'Double-click may not create a duplicate live cart');
+    checkedOut = true;
+    const statusResponse = await post('/v1/status', { statusToken: cartResult.statusToken });
+    assert.equal(statusResponse.status, 200);
+    const outcome = await statusResponse.json();
+    assert.equal(outcome.status, 'CONFIRMED');
+    assert.equal(outcome.merchantOrderVerified, true);
+    assert.equal(outcome.commissionVerified, false);
+    assert.equal(outcome.netRevenue, 'UNKNOWN');
+    assert.equal(creates, 1);
+  } finally {
+    globalThis.fetch = savedFetch;
+  }
+});
