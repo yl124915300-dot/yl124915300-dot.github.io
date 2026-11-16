@@ -1,0 +1,86 @@
+name: MATCH OS owned-entry IndexNow submission
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sitemap.xml'
+      - 'match-os/index.html'
+      - 'match-os/demand/**'
+      - '.github/workflows/match-os-indexnow.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: match-os-indexnow-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  submit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Wait for this commit to publish on Pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 30); do
+            matched="$(curl -fsSL --max-time 15 -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json'               "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs?per_page=100"               | jq --arg sha "$GITHUB_SHA" '[.workflow_runs[] | select(.name == "pages build and deployment" and .head_sha == $sha and .status == "completed" and .conclusion == "success")] | length')"
+            if [ "$matched" -gt 0 ]; then echo "PAGES_COMMIT_CONFIRMED $GITHUB_SHA"; exit 0; fi
+            sleep 10
+          done
+          echo "No successful Pages deployment confirmed; no submission performed."
+          exit 1
+      - name: Check ownership and published canonical URLs, then notify IndexNow
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import urllib.error
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          from urllib.parse import urlparse
+          host = "yl124915300-dot.github.io"
+          root = "https://" + host
+          key = "5b6be22d1f9d4641a83ab30909f4cb52"
+          key_url = root + "/" + key + ".txt"
+          urls = [
+              root + "/match-os/",
+              root + "/match-os/demand/",
+              root + "/match-os/demand/wired-anc-headphones/",
+              root + "/match-os/demand/oat-milk-pack-price/",
+              root + "/match-os/demand/austin-60-minute-massage/",
+              root + "/match-os/demand/lego-batman-pc-editions/",
+          ]
+          def read(url):
+              req = urllib.request.Request(url, headers={"User-Agent": "MATCH-OS-IndexNow/1.0"})
+              with urllib.request.urlopen(req, timeout=15) as resp:
+                  assert resp.status == 200
+                  return resp.read()
+          assert read(key_url).decode("utf-8").strip() == key, "IndexNow ownership proof invalid"
+          xml = ET.fromstring(read(root + "/sitemap.xml"))
+          published = {node.text for node in xml.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")}
+          assert set(urls).issubset(published), "Requested URL missing from published sitemap"
+          for url in urls:
+              assert urlparse(url).hostname == host, "Unexpected external URL"
+              page = read(url).decode("utf-8")
+              assert 'rel="canonical" href="' + url + '"' in page, "Invalid canonical for " + url
+              assert 'name="robots" content="noindex' not in page, "Nonindexable page: " + url
+          payload = json.dumps({"host": host, "key": key, "keyLocation": key_url, "urlList": urls}).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", data=payload, method="POST",
+                  headers={"Content-Type": "application/json; charset=utf-8", "User-Agent": "MATCH-OS-IndexNow/1.0"})
+          try:
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  status = resp.status
+                  response = resp.read(256).decode("utf-8", errors="replace")
+          except urllib.error.HTTPError as exc:
+              status = exc.code
+              response = exc.read(256).decode("utf-8", errors="replace")
+          print("INDEXNOW_HTTP_STATUS", status)
+          print("INDEXNOW_SUBMITTED_URLS", len(urls))
+          if response:
+              print("INDEXNOW_RESPONSE", response)
+          assert status in (200, 202), "IndexNow request not accepted"
+          print("IndexNow accepted the URLs; this is NOT proof of indexing, visitors, inquiries or purchases.")
+          PY
