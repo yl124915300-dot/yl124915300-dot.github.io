@@ -114,7 +114,7 @@ function safeUrl(uri){return /^https:\/\/(?:www\.)?(gov\.uk|ofgem\.gov\.uk)\//.t
 function matchingEvents(){
  if(!Array.isArray(publicEvents))return[];
  const p=currentProfile();
- return publicEvents.filter(e=>e.approved===true&&Array.isArray(e.nations)&&e.nations.includes(p.nation)&&p.topics.includes(e.topic)&&/^\d{4}-\d{2}-\d{2}$/.test(e.date||"")&&safeUrl(e.source));
+ return publicEvents.filter(e=>e.approved===true&&e.include_in_calendar!==false&&Array.isArray(e.nations)&&e.nations.includes(p.nation)&&p.topics.includes(e.topic)&&/^\d{4}-\d{2}-\d{2}$/.test(e.date||"")&&safeUrl(e.source));
 }
 function pretty(iso){const [y,m,d]=iso.split("-").map(Number);return new Date(Date.UTC(y,m-1,d)).toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})}
 function render(){
