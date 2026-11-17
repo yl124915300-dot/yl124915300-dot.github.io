@@ -26,6 +26,25 @@ QUERIES=[
 MAX_PER_QUERY=15
 MAX_QUEUE=120
 
+# Search API uses broad token matching; never treat a search hit as relevant
+# unless its title or description contains one of these explicit phrases.
+TOPIC_PHRASES={
+    "warm-home-discount":("warm home discount",),
+    "cold-weather-payment":("cold weather payment","cold weather payments"),
+    "childcare":("free childcare","working parents","childcare entitlement","childcare support","funded childcare","childcare funding","childcare costs"),
+    "energy":("energy price cap","energy-price cap","default tariff price cap"),
+    "local-support":("crisis and resilience fund","crisis resilience fund"),
+}
+
+def likely_relevant(entry, topic):
+    path=str(entry.get("link") or entry.get("official_url") or "")
+    if "/employment-tribunal-decisions/" in path or "/government/people/" in path:
+        return False
+    title=str(entry.get("title") or "").lower()
+    description=str(entry.get("description") or "").lower()
+    text=title+" "+description
+    return any(phrase in text for phrase in TOPIC_PHRASES[topic])
+
 def now_iso():
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00","Z")
 
@@ -77,6 +96,8 @@ def main():
             published=entry.get("public_timestamp")
             if not isinstance(title,str) or not isinstance(published,str):
                 continue
+            if not likely_relevant(entry,topic):
+                continue
             url="https://www.gov.uk"+path
             old=previous.get(url,{})
             current=candidates.get(url)
@@ -97,7 +118,8 @@ def main():
         time.sleep(0.4)
     for url,old in previous.items():
         if url not in candidates and old.get("review_status")=="needs_human_review":
-            candidates[url]=old
+            if any(likely_relevant(old,t) for t in old.get("matched_topics",[]) if t in TOPIC_PHRASES):
+                candidates[url]=old
     ranked=sorted(candidates.values(),key=lambda x:x.get("published_at",""),reverse=True)[:MAX_QUEUE]
     result={
         "schema_version":1,
