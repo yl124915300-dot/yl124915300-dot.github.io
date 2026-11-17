@@ -39,7 +39,9 @@
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
       "last_seen_utc": "2026-11-17T10:40:59Z",
-      "review_status": "needs_human_review"
+      "review_status": "approved_rss",
+      "reviewed_at_utc": "2026-11-17T10:40:00Z",
+      "disposition": "Verified as active official guidance reminder; news entry approved for RSS, not calendar."
     },
     {
       "official_url": "https://www.gov.uk/guidance/universal-credit-if-you-have-children",
