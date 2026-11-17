@@ -1,5 +1,15 @@
 # Policy Radar UK — Operations (source of truth)
 
+## 17 November 2026 — segment subscriptions and monitor review alerts
+
+- Extended `policy-radar/build_feeds.py` to generate **12 RSS feeds** (four UK nations × energy, support, childcare) strictly from editor-approved `data/approved_events.json`. A new `feeds/manifest.json` records which feeds contain approved items. Empty feeds are valid but do not prove that an area has no benefits.
+- Added `my-radar.html` on-device nation/topic feed selector. The default England browser view displayed Energy **3 reviewed notices** and Support **0**. Public feed URLs and manifest have returned HTTP 200. A longer cross-nation interaction attempt timed out / hit a browser session limit; the Scotland feed's XML and manifest both show **1** approved notice, but that full UI switching path is not yet signed off by the browser test.
+- The scheduled GitHub Actions workflow stages `policy-radar/feeds/`, regenerates public snapshots from the latest main branch and now produces a GitHub Actions review summary for failures or source fingerprint changes. This action deliberately fails when any source cannot be fetched or an unreviewed change persists, so a maintainer must inspect official evidence before public publishing.
+- **Run #18** (https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/44073413057) succeeded, including the health/review audit. Last status `2026-11-17T11:22:28Z`: **11 of 11** official source fetches succeeded, 0 failures, 0 pending fingerprint changes.
+- No Cloudflare Web Analytics, Umami or accountless email subscriber provider has been connected or authorised for this existing static GitHub Pages site. The Lovable workspace lookup failed internally; the connected browser context is unavailable. Do not claim a tracking beacon, email subscription, unique visitor counts or conversion reporting has been installed. Do not embed third-party beacons without a verified property and suitable privacy disclosure.
+- Existing RSS is reader-based and has no in-house subscriber counter or push notifications; visits and verified subscribers remain unknown. Revenue and verified paid orders remain **£0**.
+
+
 ## 17 November 2026 — latest follow-up execution
 
 - Added **Warm Home Discount 2026/27 action checker**, public address: https://yl124915300-dot.github.io/policy-radar/warm-home-discount-checker.html. It is purely client-side and gathers no identity or benefits data; it shows action guidance, not approval.
