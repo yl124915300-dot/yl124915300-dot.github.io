@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-16T21:55:55+00:00",
+  "checkedAt": "2026-11-17T07:44:14+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -30,16 +30,6 @@
   ],
   "workers": [
     {
-      "name": "Abhinav Sharma",
-      "headline": "QA Engineer | Test Automation | AI & n8n Automation | Python | DevOps",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 10,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/2aGVv24rzH7TVle7r0Wt"
-    },
-    {
       "name": "Kelly",
       "headline": "Petroleum Engineering Student | Excel, Technical Reports & Document Formatting",
       "city": "New York",
@@ -58,6 +48,36 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+    },
+    {
+      "name": "MIMI",
+      "headline": "Retail Merchandiser | Product Displays, Shelf Arrangement & Tailoring",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/xMqO1TqDYZEmWFQ7VTuz"
+    },
+    {
+      "name": "Alexander Ortiz (Mr. Crafty)",
+      "headline": "Mixologist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 25.5,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
+    },
+    {
+      "name": "johnny",
+      "headline": "Operations & Facilities Professional | Property Maintenance, Repairs & Site Support",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 17,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/AfcYfUjQ83uxQ63ulyzQ"
     },
     {
       "name": "K Julian",
@@ -110,16 +130,6 @@
       "profileUrl": "https://rentahuman.ai/humans/4gTyRWcGjg9l3pAHCcqs"
     },
     {
-      "name": "Alexander Ortiz (Mr. Crafty)",
-      "headline": "Mixologist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 25.5,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
-    },
-    {
       "name": "Jessie Roeder",
       "headline": "Technology Educator & Engineer | Robotics, VR & Software Development Specialist",
       "city": "New York",
@@ -168,16 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/UjFrKaZxFsBM8dXf1JcU"
-    },
-    {
-      "name": "Alex Taylor",
-      "headline": "On-demand IRL tasks, pickups and site inspections",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 19,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/vLiEvuTbRaSf5SqnH51a"
     },
     {
       "name": "Pat Santiago",
@@ -260,16 +260,6 @@
       "profileUrl": "https://rentahuman.ai/humans/Mzb2C5QzJY39zJ136dqP"
     },
     {
-      "name": "Martin Davis",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
-    },
-    {
       "name": "Matthew Farley",
       "headline": "People skills. Solve problems 24/7.",
       "city": "San Francisco",
@@ -278,6 +268,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
+    },
+    {
+      "name": "Martin Davis",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
       "name": "Edward James",
@@ -328,6 +328,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
+    },
+    {
+      "name": "Li",
+      "headline": "",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 5.1,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/GWlbgmmtRBgLpCXPtHAi"
     },
     {
       "name": "Seth Jacobs",
@@ -468,16 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/tQHHcMzD12Vc4Ahq5x3t"
-    },
-    {
-      "name": "Sophia Johnson",
-      "headline": "Personal courier, errands & physical task solver",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 16,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/s60kpZes5Lo0REyZFArL"
     },
     {
       "name": "Marvin Risco",
@@ -780,6 +780,16 @@
       "profileUrl": "https://rentahuman.ai/humans/gkoHNqOo9OwQwJz7IRAM"
     },
     {
+      "name": "Akai",
+      "headline": "Quality Assurance Professional | Product Inspection, Quality Documentation & Customer Service",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/OrcDA75ACjkpQMizaboh"
+    },
+    {
       "name": "Dave@work",
       "headline": "Sales & Marketing Manager | B2B/B2C Business Development, GeBIZ & Sourcing",
       "city": "Singapore",
@@ -918,16 +928,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/6SAtwPriJlLJKfPzFe8q"
-    },
-    {
-      "name": "Mr. Zeng",
-      "headline": "Embedded Software Engineer | C, STM32, ESP32, OTA Updates & Automotive CAN/UDS",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/cd7iVSAV2X7lboDj6I3a"
     }
   ],
   "errors": []
