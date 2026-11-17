@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from html import unescape
 import sys
 import time
 import urllib.error
@@ -104,6 +105,36 @@ def normalize(source):
         raise ValueError("Could not extract sufficient main-page text")
     return main_text.encode("utf-8"), None
 
+def extract_review_signals(data):
+    """Record non-authoritative dates and money tokens for human reviewers.
+
+    These small tokens are diagnostic hints, not assertions of a payment,
+    deadline, eligibility or effective legal status.
+    """
+    body = data.decode("utf-8", errors="replace")
+    body = unescape(re.sub(r"<[^>]*>", " ", body))
+    body = re.sub(r"\s+", " ", body)
+    amounts = re.findall(r"£\s*\d+(?:,\d{3})*(?:\.\d+)?(?:\s*(?:million|billion))?", body, re.I)
+    named_dates = re.findall(
+        r"\b(?:[0-3]?\d)\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2}\b",
+        body, re.I,
+    )
+    iso_dates = re.findall(r"\b20\d{2}-[01]\d-[0-3]\d\b", body)
+    def unique_limited(values, cap=30):
+        return sorted(set(v.strip() for v in values if v.strip()))[:cap]
+    return {
+        "amount_tokens": unique_limited(amounts),
+        "date_tokens": unique_limited(named_dates + iso_dates),
+    }
+
+def signal_diff(previous, current):
+    return {
+        "added_amount_tokens": sorted(set(current["amount_tokens"]) - set(previous.get("amount_tokens", []))),
+        "removed_amount_tokens": sorted(set(previous.get("amount_tokens", [])) - set(current["amount_tokens"])),
+        "added_date_tokens": sorted(set(current["date_tokens"]) - set(previous.get("date_tokens", []))),
+        "removed_date_tokens": sorted(set(previous.get("date_tokens", [])) - set(current["date_tokens"])),
+    }
+
 def main():
     previous = {}
     if DEST.exists():
@@ -126,20 +157,25 @@ def main():
             "content_sha256": old.get("content_sha256"),
             "last_change_detected_utc": old.get("last_change_detected_utc"),
             "pending_human_review": bool(old.get("pending_human_review", False)),
+            "review_signals": old.get("review_signals", {"amount_tokens": [], "date_tokens": []}),
+            "signal_diff": old.get("signal_diff", {}),
             "fetch_status": "error",
         }
         try:
             data, updated_at = normalize(source)
             digest = hashlib.sha256(data).hexdigest()
+            signals = extract_review_signals(data)
             has_baseline = bool(old.get("content_sha256"))
             is_new_change = has_baseline and old["content_sha256"] != digest
             record.update({
                 "content_sha256": digest,
+                "review_signals": signals,
                 "source_public_updated_at": updated_at,
                 "last_success_utc": now,
                 "fetch_status": "ok",
             })
             if is_new_change:
+                record["signal_diff"] = signal_diff(old.get("review_signals", {}), signals)
                 record["pending_human_review"] = True
                 record["last_change_detected_utc"] = now
             print(f'{source["id"]}: {"CHANGE / REVIEW NEEDED" if is_new_change else "ok or first baseline"}')
