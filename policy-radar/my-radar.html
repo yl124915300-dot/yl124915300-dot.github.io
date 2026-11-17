@@ -65,6 +65,12 @@ footer{border-top:1px solid #d9e3da;color:#5e7565;font-size:12px;padding:25px 0 
 <div class="actionbar"><button class="btn" id="save-settings">Save on this device</button><button class="btn secondary" id="clear-settings">Clear this browser profile</button></div>
 <p class="helper" role="status" id="save-response">No profile sent to any server.</p>
 </section>
+<section class="panel" aria-labelledby="topic-feed-title">
+<h2 id="topic-feed-title">Follow only the updates you choose</h2>
+<p class="muted">Free RSS feeds are generated from verified policy notices, filtered by your UK nation and selected topics. Add each link to your own RSS reader. No email address, login, account or server-side profile is required. RSS readers control their own delivery frequency and privacy settings.</p>
+<div id="topic-feeds" class="actionbar" aria-live="polite"><p class="small">Checking approved feeds…</p></div>
+<p class="helper" id="topic-feed-help">Some feeds may have zero approved notices today. That is not evidence that no government support applies to you.</p>
+</section>
 <section class="panel" aria-labelledby="calendar-title">
 <h2 id="calendar-title">2. Add an optional personal reminder</h2>
 <p class="muted">If you already know your next childcare eligibility reconfirmation deadline, you can include it in a private calendar file. We do not calculate or confirm that deadline. Find the exact date in your official childcare account.</p>
@@ -110,6 +116,8 @@ const nation=document.getElementById("nation"), due=document.getElementById("chi
 const eventsBox=document.getElementById("events"), eventCount=document.getElementById("event-count"), dateStatus=document.getElementById("date-status"), health=document.getElementById("health");
 const saveMessage=document.getElementById("save-response"), calendarMessage=document.getElementById("calendar-response");
 let publicEvents=null;
+let feedManifest=null;
+const feedPanel=document.getElementById("topic-feeds");
 const changeStatus=document.getElementById("change-status"),changeList=document.getElementById("change-list"),reviewButton=document.getElementById("review-changes");
 function selectedTopics(){return checkboxes.filter(c=>c.checked).map(c=>c.value)}
 function currentProfile(){return {nation:nation.value,topics:selectedTopics(),childcareDue:due.value}}
@@ -191,6 +199,31 @@ function renderDiff(){
   changeList.appendChild(card);
  }
 }
+function renderTopicFeeds(){
+ feedPanel.textContent="";
+ if(!feedManifest || !Array.isArray(feedManifest.feeds)){
+  const p=document.createElement("p");p.textContent="Region-specific feeds have not been verified yet. You can still follow the general approved policy RSS.";
+  feedPanel.appendChild(p);
+  const a=document.createElement("a");a.href="./updates.xml";a.className="btn secondary";a.textContent="All reviewed policy updates ↗";feedPanel.appendChild(a);
+  return;
+ }
+ const region=nation.value;
+ const picked=selectedTopics();
+ if(!picked.length){
+  const p=document.createElement("p");p.textContent="Select at least one policy topic above to see a matching RSS subscription.";feedPanel.appendChild(p);return;
+ }
+ for(const topic of picked){
+  const item=feedManifest.feeds.find(x=>x.nation===region&&x.topic===topic&&/^feeds\/[a-z-]+\.xml$/.test(x.path));
+  if(!item)continue;
+  const a=document.createElement("a");a.className="btn secondary";a.href="./"+item.path;
+  a.type="application/rss+xml";
+  a.textContent=region[0].toUpperCase()+region.slice(1)+" / "+topic+" · "+item.approved_items+" reviewed notice(s) ↗";
+  feedPanel.appendChild(a);
+ }
+ if(!feedPanel.childElementCount){
+  const p=document.createElement("p");p.textContent="The selected combination is unavailable. Use the general RSS feed.";feedPanel.appendChild(p);
+ }
+}
 function matchingEvents(){
  if(!Array.isArray(publicEvents))return[];
  const p=currentProfile();
@@ -256,7 +289,7 @@ document.getElementById("calendar-download").addEventListener("click",()=>{
  downloadFile(output.bytes,"my-policy-radar.ics","text/calendar;charset=utf-8");
  text(calendarMessage,output.count+" calendar event(s) generated on this device. Import into your calendar app; notifications depend on that app.");
 });
-[nation,due,...checkboxes].forEach(el=>el.addEventListener("change",()=>{render();renderDiff()}));
+[nation,due,...checkboxes].forEach(el=>el.addEventListener("change",()=>{render();renderDiff();renderTopicFeeds()}));
 reviewButton.addEventListener("click",()=>{
  const rows=approvedEventSnapshot();
  if(!rows){text(changeStatus,"Approved source data unavailable. No review was recorded.");changeStatus.className="status warning";return}
@@ -268,6 +301,10 @@ document.getElementById("clear-changes").addEventListener("click",()=>{
  renderDiff();
 });
 restore();
+fetch("./feeds/manifest.json",{cache:"no-store"})
+ .then(r=>{if(!r.ok)throw new Error("No approved feed manifest");return r.json()})
+ .then(data=>{if(data.schema_version!==1)throw new Error("Unknown feed manifest");feedManifest=data;renderTopicFeeds()})
+ .catch(()=>{feedManifest=null;renderTopicFeeds()});
 fetch("./data/approved_events.json",{cache:"no-store"})
  .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})
  .then(data=>{if(data.schema_version!==1||!Array.isArray(data.events))throw new Error("Invalid event feed");publicEvents=data.events;render();renderDiff()})
