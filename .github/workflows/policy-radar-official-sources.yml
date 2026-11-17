@@ -67,3 +67,49 @@ jobs:
           done
           echo "Could not safely save the source snapshot after three attempts"
           exit 1
+      - name: Audit source health and flag human-review tasks
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, sys
+          path=pathlib.Path("policy-radar/data/source_status.json")
+          summary=os.environ.get("GITHUB_STEP_SUMMARY")
+          def say(line):
+              print(line)
+              if summary:
+                  with open(summary, "a", encoding="utf-8") as output:
+                      output.write(line + "\n")
+          say("## Policy Radar UK — official-source audit")
+          if not path.exists():
+              say("**FAIL:** No official-source snapshot was produced or retained.")
+              raise SystemExit(1)
+          try:
+              d=json.loads(path.read_text(encoding="utf-8"))
+          except (ValueError,OSError):
+              say("**FAIL:** The snapshot is unreadable.")
+              raise SystemExit(1)
+          sources=d.get("sources",[])
+          if not isinstance(sources,list) or not sources:
+              say("**FAIL:** The source list is empty.")
+              raise SystemExit(1)
+          errors=[x for x in sources if x.get("fetch_status")!="ok"]
+          pending=[x for x in sources if x.get("pending_human_review")]
+          say(f"Snapshot: {d.get('last_checked_utc','unknown')} · {len(sources)-len(errors)}/{len(sources)} fetched · {len(pending)} awaiting editorial review")
+          if errors:
+              say("**Fetch failures — manual check required:**")
+              for x in errors:
+                  say(f"- {str(x.get('id','unknown'))[:90]}: {str(x.get('error','no reason'))[:180]}")
+          if pending:
+              say("**Possible government-page changes — NOT verified policy decisions:**")
+              for x in pending:
+                  diff=x.get("signal_diff",{})
+                  say(f"- {str(x.get('id','unknown'))[:90]} · official source: {str(x.get('official_url',''))[:200]}")
+                  if diff:
+                      say(f"  - Amount/date token differences: {str(diff)[:280]}")
+              say("Human editorial verification is required before updating public policy guidance.")
+          if errors or pending:
+              say("**Action needed:** Investigate the failing or changed sources. No unverified changes have been published.")
+              raise SystemExit(1)
+          say("Source fetches succeeded, and no fingerprint changes are awaiting review. This does NOT certify legal accuracy or completeness.")
+          PY
