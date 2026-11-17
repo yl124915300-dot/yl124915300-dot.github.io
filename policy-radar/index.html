@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#10251e">
 <meta name="description" content="Independent, source-linked UK policy and household benefits radar. Check what is relevant in your nation, save topics locally and go straight to official guidance.">
 <title>Policy Radar UK — policy changes, real actions</title>
+<link rel="alternate" type="application/rss+xml" title="Policy Radar UK reviewed updates" href="./updates.xml">
 <style>
 :root {font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;color:#152920;background:#f4f7f3}
 *{box-sizing:border-box}body{margin:0}a{color:#176547;text-underline-offset:3px}button,select,input{font:inherit}
@@ -40,6 +41,9 @@ h2{font-size:25px;letter-spacing:-.03em;margin:26px 0 8px}
 .btn.saved{background:#edf7ef;border-color:#5a9e6f}
 .official{font-size:13px;font-weight:750}
 .empty{padding:30px;text-align:center;color:#607666}
+.subscribe{margin:14px 0 8px;padding:23px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.subscribe-copy{max-width:570px}.subscribe h2{font-size:22px;margin:0 0 7px}.subscribe p{margin:0;color:#607363;font-size:13px;line-height:1.6}.subscribe-links{display:flex;gap:9px;flex-wrap:wrap}
+.subscribe-links a{display:inline-flex;align-items:center;padding:11px 13px;background:#e8f4e9;color:#205439;border:1px solid #b9d7bf;border-radius:10px;font-size:13px;font-weight:800;text-decoration:none}
 .upcoming{padding:18px 23px;margin-top:20px;display:flex;gap:15px;align-items:flex-start;background:#e9f4e9;border:1px solid #cbded0;border-radius:15px}
 .upcoming strong{color:#183c28}.upcoming p{margin:4px 0 0;color:#48644f;font-size:13px;line-height:1.5}
 .timeline{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
@@ -64,12 +68,13 @@ footer{border-top:1px solid #d5e1d8;padding:26px 0 50px;color:#536b5b;font-size:
 <div class="control"><label for="search">Search monitored policies</label><input id="search" type="search" placeholder="Example: cold weather, £150, childcare"></div>
 </section>
 <div class="metrics"><span><strong id="visible-count">0</strong> matching programmes</span><span><strong id="saved-count">0</strong> saved on this device</span><label><input id="only-saved" type="checkbox" style="display:inline;width:auto;min-height:auto;margin-right:5px">Only my saved topics</label></div>
+<section class="subscribe panel" id="subscribe" aria-label="Subscribe to government policy changes"><div class="subscribe-copy"><h2>Follow updates without handing over your email</h2><p><strong>RSS</strong> contains manually reviewed source-linked updates. <strong>Calendar</strong> lists verified upcoming public milestones. Both are free, require no account, and can be added to a compatible reader/calendar app. They are not personalized, and do not guarantee eligibility.</p></div><div class="subscribe-links"><a href="./updates.xml" type="application/rss+xml">Subscribe with RSS ↗</a><a href="./calendar.ics" type="text/calendar">Add policy calendar ↓</a></div></section>
 <section class="upcoming" aria-label="Upcoming event"><div style="font-size:25px" aria-hidden="true">◷</div><div><strong>Next national event: Ofgem energy price cap announcement — 25 November 2026</strong><p>Ofgem plans to publish price caps for 1 January–31 March 2027. Actual bill changes depend on region, payment type and energy use. <a href="https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026" target="_blank" rel="noopener noreferrer">Read the official schedule</a>.</p></div></section>
 <h2>Monitor library</h2>
 <p class="sub">Every card shows a public rule and one next action. Inclusion is not confirmation of personal eligibility.</p>
 <div class="cards" id="cards" aria-live="polite"></div>
 <section class="timeline">
-<div class="notice"><h3>What “save” means</h3><p>Saved topics stay in this browser only. This preview does not send emails or push alerts, does not register you for benefits, and does not collect identities, postcodes or payment details.</p></div>
+<div class="notice"><h3>What “save” means</h3><p>Saved topics stay in this browser only. This preview does not send emails or browser push alerts, does not register you for benefits, and does not collect identities, postcodes or payment details. RSS/calendar subscriptions are managed by your own app.</p></div>
 <div class="notice"><h3>Getting official help</h3><p>Use each government's own page to check eligibility, apply or correct an issue. For local assistance in England, <a href="https://www.gov.uk/find-local-council" target="_blank" rel="noopener noreferrer">find your council by postcode</a>.</p></div>
 </section>
 <section id="sources"><h2>Evidence &amp; transparency</h2><div class="notice" style="margin-bottom:14px" id="source-health"><h3>Official-source monitoring status</h3><p id="monitor-status">Public source-status feed is not yet available. Official documents linked below remain authoritative.</p></div>
