@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-17T07:44:14+00:00",
+  "checkedAt": "2026-11-17T20:46:24+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -40,14 +40,34 @@
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
     },
     {
-      "name": "ARUBI UGBEM",
-      "headline": "Project Manager | Agile & Waterfall | Planning, Delivery & Cross-Functional Team Leadership",
+      "name": "Alexander Ortiz (Mr. Crafty)",
+      "headline": "Mixologist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 25.5,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
+    },
+    {
+      "name": "Nityanand Mahajan",
+      "headline": "Focused on delivering quality results with honesty and efficiency.",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/OSmYtbNCVBe4zR1m1P0r"
+    },
+    {
+      "name": "Charlie Jose",
+      "headline": "Senior Full-Stack Engineer | AI Evaluation Specialist | Python, TypeScript & FastAPI",
       "city": "New York",
       "country": "US",
       "hourlyRate": 7.25,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/kxAb52Z4wCLDFjVDZ7p1"
+      "profileUrl": "https://rentahuman.ai/humans/4EH4HgzjocWAv4O3n5JT"
     },
     {
       "name": "MIMI",
@@ -58,16 +78,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/xMqO1TqDYZEmWFQ7VTuz"
-    },
-    {
-      "name": "Alexander Ortiz (Mr. Crafty)",
-      "headline": "Mixologist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 25.5,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
     },
     {
       "name": "johnny",
@@ -170,16 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/fgyjsKK3k4TuX4kjEwjf"
     },
     {
-      "name": "Valentine",
-      "headline": "Administrative & Office Manager | Operations, Team Coordination and Customer Support",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/UjFrKaZxFsBM8dXf1JcU"
-    },
-    {
       "name": "Pat Santiago",
       "headline": "Founder of ACCELR8",
       "city": "San Francisco",
@@ -260,16 +260,6 @@
       "profileUrl": "https://rentahuman.ai/humans/Mzb2C5QzJY39zJ136dqP"
     },
     {
-      "name": "Matthew Farley",
-      "headline": "People skills. Solve problems 24/7.",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
-    },
-    {
       "name": "Martin Davis",
       "headline": "",
       "city": "San Francisco",
@@ -278,6 +268,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
+    },
+    {
+      "name": "Matthew Farley",
+      "headline": "People skills. Solve problems 24/7.",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
     },
     {
       "name": "Edward James",
@@ -300,16 +300,6 @@
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
     },
     {
-      "name": "Jessica  Potter",
-      "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
-    },
-    {
       "name": "Michael Patterson",
       "headline": "Administrative & Office Support Professional | 20+ Years in Hospitality and Events",
       "city": "San Francisco",
@@ -318,6 +308,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
+    },
+    {
+      "name": "Jessica  Potter",
+      "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
     },
     {
       "name": "Yoanna Flores",
@@ -630,6 +630,46 @@
       "profileUrl": "https://rentahuman.ai/humans/2klmttBqAt5wW1YjKK0U"
     },
     {
+      "name": "Yaqi Chu",
+      "headline": "Programme & Startup Portfolio Specialist | 7 Years at UNDP | Social Innovation, Partnerships & Impact",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/LgUc9fPtA1qRsAtN5Ytf"
+    },
+    {
+      "name": "Nmuaz",
+      "headline": "Field Operations & Local Task Support | Physics Educator | Structured Reporting",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/jy6woOepVIuIZIPayOPD"
+    },
+    {
+      "name": "Ferova",
+      "headline": "Administrative & Recruitment Support Professional | Data Review, Documentation & AI Evaluation",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/7V3J5ezMKhmQNhOEvPWw"
+    },
+    {
+      "name": "Paul Agbo",
+      "headline": "Customer Service & Field Sales Professional | Data Entry & Accounting Support",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/yj3Vt8RJ3jAFxQOLhCoQ"
+    },
+    {
       "name": "Oluwadamilare David Fasuyi",
       "headline": "Telecommunications Engineer | AI Data Validation, Network Analysis & Technical Research",
       "city": "London",
@@ -738,46 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/zh6M2Q9sX2kgUTuC5eCQ"
-    },
-    {
-      "name": "Daniel Harris",
-      "headline": "Detail-oriented field verification & photography specialist",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/46Q4OXhtV0Xl34boYJFN"
-    },
-    {
-      "name": "Michael Smith",
-      "headline": "On-demand IRL tasks, pickups and site inspections",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/UgMJCURIaksCEg0ylyJO"
-    },
-    {
-      "name": "Michael Miller",
-      "headline": "Personal courier, errands & physical task solver",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 21,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/EHQSXKIWH9vVc5OIKpx1"
-    },
-    {
-      "name": "Olivia Taylor",
-      "headline": "Reliable local assistant & on-site researcher",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 36,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/gkoHNqOo9OwQwJz7IRAM"
     },
     {
       "name": "Akai",
