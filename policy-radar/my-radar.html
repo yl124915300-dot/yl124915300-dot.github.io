@@ -78,8 +78,16 @@ footer{border-top:1px solid #d9e3da;color:#5e7565;font-size:12px;padding:25px 0 
 <div class="timeline" id="events"></div>
 <p class="helper">Only manually reviewed public dates appear here. These are not individual award decisions, and subscribing to a calendar never files a benefit claim.</p>
 </section>
+<section class="panel" aria-labelledby="changes-title">
+<h2 id="changes-title">4. What changed since your last review?</h2>
+<p class="muted">Start an on-device snapshot of editor-approved policy notices. On later visits, compare official-source-linked updates with that snapshot. Only your browser stores the baseline; there is no background push or eligibility assessment.</p>
+<div id="change-status" class="status" role="status">Loading reviewed notices before comparison…</div>
+<div id="change-list" class="timeline" style="margin:14px 0" aria-live="polite"></div>
+<div class="actionbar"><button class="btn" id="review-changes" disabled>Start tracking reviewed changes</button><button class="btn secondary" id="clear-changes">Clear review history</button></div>
+<p class="helper">Change detection is limited to manually approved public entries, not all government announcements. Missing data must never be treated as confirmation of no changes.</p>
+</section>
 <section class="panel">
-<h2>4. How current is this source watch?</h2>
+<h2>5. How current is this source watch?</h2>
 <div id="health" class="status">Checking the latest public source snapshot…</div>
 <p class="muted">The official-source detector compares versions and records possible changes. Any detected change needs editorial review before a revised policy statement appears in public updates.</p>
 <div class="actionbar"><a class="btn secondary" href="./updates.xml">Reviewed updates RSS</a><a class="btn secondary" href="./local-support.html">Find your local council</a></div>
@@ -92,10 +100,12 @@ footer{border-top:1px solid #d9e3da;color:#5e7565;font-size:12px;padding:25px 0 
 (function(){
 "use strict";
 const storageKey="policy-radar-uk-private-profile-v1";
+const reviewKey="policy-radar-uk-reviewed-events-v1";
 const nation=document.getElementById("nation"), due=document.getElementById("childcare-date"), checkboxes=Array.from(document.querySelectorAll(".checkcard input"));
 const eventsBox=document.getElementById("events"), eventCount=document.getElementById("event-count"), dateStatus=document.getElementById("date-status"), health=document.getElementById("health");
 const saveMessage=document.getElementById("save-response"), calendarMessage=document.getElementById("calendar-response");
 let publicEvents=null;
+const changeStatus=document.getElementById("change-status"),changeList=document.getElementById("change-list"),reviewButton=document.getElementById("review-changes");
 function selectedTopics(){return checkboxes.filter(c=>c.checked).map(c=>c.value)}
 function currentProfile(){return {nation:nation.value,topics:selectedTopics(),childcareDue:due.value}}
 function restore(){
@@ -111,6 +121,71 @@ function restore(){
 }
 function text(el,message){el.textContent=message}
 function safeUrl(uri){return /^https:\/\/(?:www\.)?(gov\.uk|ofgem\.gov\.uk)\//.test(uri||"")?uri:null}
+function approvedEventSnapshot(){
+ if(!Array.isArray(publicEvents))return null;
+ const rows={};
+ for(const e of publicEvents){
+  if(e.approved!==true||typeof e.id!=="string"||!Array.isArray(e.nations)||!safeUrl(e.source))continue;
+  rows[e.id]={
+   id:e.id,title:String(e.title||""),description:String(e.description||""),
+   status:String(e.status||""),date:String(e.date||""),
+   source:e.source,topic:String(e.topic||""),nations:e.nations.slice().sort(),
+   include_in_calendar:e.include_in_calendar!==false
+  };
+ }
+ return rows;
+}
+function readReviewHistory(){
+ try{
+  const x=JSON.parse(localStorage.getItem(reviewKey)||"null");
+  return x&&x.schema===1&&x.items&&typeof x.items==="object"?x:null
+ }catch(e){return null}
+}
+function relevant(e){
+ const p=currentProfile();
+ return e&&Array.isArray(e.nations)&&e.nations.includes(p.nation)&&p.topics.includes(e.topic);
+}
+function describeDiff(){
+ const now=approvedEventSnapshot(),old=readReviewHistory();
+ if(!now)return null;
+ if(!old)return {state:"not_started",items:[],date:null,now};
+ const previous=old.items,items=[];
+ for(const [id,e] of Object.entries(now)){
+  if(!previous[id]){if(relevant(e))items.push({type:"New reviewed notice",event:e});continue}
+  if(JSON.stringify(e)!==JSON.stringify(previous[id])&&relevant(e))items.push({type:"Reviewed notice updated",event:e})
+ }
+ for(const [id,e] of Object.entries(previous)){
+  if(!now[id]&&relevant(e))items.push({type:"No longer in the approved feed — verify original source",event:e})
+ }
+ return {state:"compared",items,date:old.viewedAtUTC,now}
+}
+function renderDiff(){
+ changeList.textContent="";
+ const result=describeDiff();
+ if(!result){
+  text(changeStatus,"Cannot compare: the approved policy feed is unavailable. Check GOV.UK directly.");
+  changeStatus.className="status warning";reviewButton.disabled=true;return;
+ }
+ if(result.state==="not_started"){
+  text(changeStatus,"No previous comparison on this device. Start tracking now; future visits can show approved changes since this baseline.");
+  changeStatus.className="status";reviewButton.textContent="Start tracking reviewed changes";reviewButton.disabled=false;return
+ }
+ reviewButton.textContent="Mark these reviewed & update baseline";reviewButton.disabled=false;
+ if(!result.items.length){
+  text(changeStatus,"No differences within your selected topics since your saved review ("+(result.date||"date unknown")+"). This does not prove government policy is unchanged.");
+  changeStatus.className="status";return
+ }
+ text(changeStatus,result.items.length+" reviewed public notice change(s) match your topics since the saved review ("+(result.date||"date unknown")+"). Please check official sources.");
+ changeStatus.className="status warning";
+ for(const item of result.items){
+  const card=document.createElement("article");card.className="event";
+  const label=document.createElement("div");label.className="label";label.textContent=item.type;card.appendChild(label);
+  const h=document.createElement("h3");h.textContent=item.event.title;card.appendChild(h);
+  const p=document.createElement("p");p.textContent=item.event.description;card.appendChild(p);
+  if(safeUrl(item.event.source)){const a=document.createElement("a");a.href=item.event.source;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Check official source ↗";card.appendChild(a)}
+  changeList.appendChild(card);
+ }
+}
 function matchingEvents(){
  if(!Array.isArray(publicEvents))return[];
  const p=currentProfile();
@@ -176,18 +251,31 @@ document.getElementById("calendar-download").addEventListener("click",()=>{
  downloadFile(output.bytes,"my-policy-radar.ics","text/calendar;charset=utf-8");
  text(calendarMessage,output.count+" calendar event(s) generated on this device. Import into your calendar app; notifications depend on that app.");
 });
-[nation,due,...checkboxes].forEach(el=>el.addEventListener("change",render));
+[nation,due,...checkboxes].forEach(el=>el.addEventListener("change",()=>{render();renderDiff()}));
+reviewButton.addEventListener("click",()=>{
+ const rows=approvedEventSnapshot();
+ if(!rows){text(changeStatus,"Approved source data unavailable. No review was recorded.");changeStatus.className="status warning";return}
+ try{localStorage.setItem(reviewKey,JSON.stringify({schema:1,viewedAtUTC:new Date().toISOString(),items:rows}));renderDiff()}
+ catch(e){text(changeStatus,"This browser blocked local storage. No review baseline was saved.");changeStatus.className="status warning"}
+});
+document.getElementById("clear-changes").addEventListener("click",()=>{
+ try{localStorage.removeItem(reviewKey)}catch(e){}
+ renderDiff();
+});
 restore();
 fetch("./data/approved_events.json",{cache:"no-store"})
  .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})
- .then(data=>{if(data.schema_version!==1||!Array.isArray(data.events))throw new Error("Invalid event feed");publicEvents=data.events;render()})
- .catch(()=>{publicEvents=null;render()});
+ .then(data=>{if(data.schema_version!==1||!Array.isArray(data.events))throw new Error("Invalid event feed");publicEvents=data.events;render();renderDiff()})
+ .catch(()=>{publicEvents=null;render();renderDiff()});
 fetch("./data/source_status.json",{cache:"no-store"})
  .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})
  .then(data=>{
   const s=data.summary||{},count=data.sources?.length||0;
   text(health,"Last completed source check: "+(data.last_checked_utc||"unknown")+" · "+(s.successful_fetches||0)+"/"+count+" source checks succeeded · "+(s.failed_fetches||0)+" failed · "+(s.pending_human_review||0)+" differences awaiting review. This is an operational check, not proof of eligibility.");
-  health.className=(s.failed_fetches>0||s.pending_human_review>0)?"status warning":"status";
+  const checkedAt=Date.parse(data.last_checked_utc||"");
+  const stale=!Number.isFinite(checkedAt)||(Date.now()-checkedAt)>48*3600*1000;
+  if(stale)health.textContent+=" Warning: the latest official-source check is older than 48 hours. Verify the government sources directly.";
+  health.className=(stale||s.failed_fetches>0||s.pending_human_review>0)?"status warning":"status";
  })
  .catch(()=>{text(health,"Current automated source status could not be loaded. Check the original official websites.");health.className="status warning"});
 })();
