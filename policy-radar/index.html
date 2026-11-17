@@ -72,12 +72,20 @@ footer{border-top:1px solid #d5e1d8;padding:26px 0 50px;color:#536b5b;font-size:
 <div class="notice"><h3>What “save” means</h3><p>Saved topics stay in this browser only. This preview does not send emails or push alerts, does not register you for benefits, and does not collect identities, postcodes or payment details.</p></div>
 <div class="notice"><h3>Getting official help</h3><p>Use each government's own page to check eligibility, apply or correct an issue. For local assistance in England, <a href="https://www.gov.uk/find-local-council" target="_blank" rel="noopener noreferrer">find your council by postcode</a>.</p></div>
 </section>
-<section id="sources"><h2>Evidence &amp; transparency</h2>
+<section id="sources"><h2>Evidence &amp; transparency</h2><div class="notice" style="margin-bottom:14px" id="source-health"><h3>Official-source monitoring status</h3><p id="monitor-status">First automated source check not yet confirmed. Official documents linked below remain authoritative.</p></div>
 <p class="sub">We separate published guidance from future plans and never infer that a household automatically qualifies. This page is a fixed, source-checked snapshot; official sites remain authoritative. A daily research watch exists separately and is not yet connected to this public page. Last editorial verification: 17 November 2026.</p>
 <div class="notice"><h3>Early preview — no paid service</h3><p>Policy Radar UK is independent and unaffiliated with GOV.UK, DWP, HMRC, Ofgem or local councils. No subscription, payment or personal advice is offered. Guidance can change after the date shown. For legal, tax or benefits decisions, refer to the responsible authority or a qualified adviser.</p></div></section>
 </main>
 <footer><div class="container">© 2026 Policy Radar UK · Independent public-interest information · Source-linked, not official advice · No cookies or analytics in this preview.</div></footer>
 <script>
+fetch('./data/source_status.json?refresh=' + Date.now(), {cache:'no-store'})
+  .then(r=>{if(!r.ok)throw new Error('Not yet available');return r.json()})
+  .then(s=>{
+    const m=s.summary||{}, when=s.last_checked_utc||'unknown';
+    const note=document.getElementById('monitor-status');
+    if(note) note.textContent='Last automated source check: '+when+' · '+(m.successful_fetches||0)+' successful · '+(m.failed_fetches||0)+' failed · '+(m.pending_human_review||0)+' source updates awaiting human review. A detected webpage change is not a verified policy change.';
+  })
+  .catch(()=>{});
 (function(){
 'use strict';
 const policies=[
