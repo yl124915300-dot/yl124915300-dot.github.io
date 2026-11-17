@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_searched_utc": "2026-11-17T10:02:30Z",
+  "last_searched_utc": "2026-11-17T10:03:44Z",
   "purpose": "Discovery queue, not verified policy or eligibility advice",
   "from_date": "2026-10-03",
   "queries": [
@@ -26,6 +26,280 @@
     }
   ],
   "failed_queries": [],
-  "candidate_count": 0,
-  "candidates": []
+  "candidate_count": 21,
+  "candidates": [
+    {
+      "official_url": "https://www.gov.uk/government/publications/easy-read-cold-weather-payments",
+      "title": "Easy read: Cold Weather Payments",
+      "description": "This easy read guide explains what Cold Weather Payments are and how you can apply for them.",
+      "published_at": "2026-11-09T10:34:45Z",
+      "format": "guidance",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-31-march-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 31 March 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates.",
+      "published_at": "2026-11-04T13:59:20Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-26-march-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 26 March 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates.",
+      "published_at": "2026-11-04T13:56:55Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-19-march-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 19 March 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates.",
+      "published_at": "2026-11-04T13:41:16Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-12-march-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 12 March 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:39:07Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-5-march-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 5 March 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates.",
+      "published_at": "2026-11-04T13:34:34Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-26-february-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 26 February 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:32:08Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-19-february-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 19 February 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:28:17Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-12-february-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 12 February 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:25:45Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-5-february-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 5 February 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:22:54Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-29-january-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 29 January 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:21:05Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-22-january-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 22 January 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:13:20Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-15-january-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 15 January 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:10:03Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-11-december-2026-estimated",
+      "title": "Cold Weather Payments: 1 November to 11 December 2026 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:05:31Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-4-december-2026-estimated",
+      "title": "Cold Weather Payments: 1 November to 4 December 2026 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates.",
+      "published_at": "2026-11-04T13:05:12Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-8-january-2027-estimated",
+      "title": "Cold Weather Payments: 1 November to 8 January 2027 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-11-04T13:04:30Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-november-to-18-december-2026-estimated",
+      "title": "Cold Weather Payments: 1 November to 18 December 2026 (estimated)",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates.",
+      "published_at": "2026-11-04T13:03:57Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/announcements/cold-weather-payments-1-to-27-november-2026-estimated",
+      "title": "Cold Weather Payments: 1 to 27 November 2026 (estimated) ",
+      "description": "The weekly and monthly estimated payments include breakdowns for England and Wales, in addition to the total estimates. ",
+      "published_at": "2026-10-28T14:07:30Z",
+      "format": "statistics_announcement",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/news/households-to-receive-150-warm-home-discount-confirmation-letter",
+      "title": "Households to receive £150 Warm Home Discount confirmation letter",
+      "description": "Millions of households in England and Wales are set to receive letters confirming £150 off their energy bills this winter.",
+      "published_at": "2026-10-22T09:46:00Z",
+      "format": "press_release",
+      "matched_topics": [
+        "warm-home-discount"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/guidance/universal-credit-if-you-have-children",
+      "title": "Universal Credit if you have children",
+      "description": "If you’re responsible for a child, you may be entitled to an extra amount of Universal Credit and support with childcare costs.",
+      "published_at": "2026-10-20T16:31:29Z",
+      "format": "detailed_guide",
+      "matched_topics": [
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/news/more-than-600000-families-conjure-up-halloween-savings-with-tax-free-childcare",
+      "title": "More than 600,000 families conjure up Hallowe’en savings with Tax-Free Childcare",
+      "description": "Working families urged to sign up to Tax-Free Childcare to save on their childcare costs.",
+      "published_at": "2026-10-13T09:08:06Z",
+      "format": "press_release",
+      "matched_topics": [
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:03:44Z",
+      "last_seen_utc": "2026-11-17T10:03:44Z",
+      "review_status": "needs_human_review"
+    }
+  ]
 }
