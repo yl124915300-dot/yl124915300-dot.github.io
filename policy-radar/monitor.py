@@ -38,8 +38,6 @@ SOURCES = [
      "url": "https://www.ofgem.gov.uk/energy-regulation/domestic-and-non-domestic/energy-pricing-rules/energy-price-cap"},
     {"id": "crf-birmingham", "title": "Birmingham Crisis and Resilience Fund",
      "url": "https://www.birmingham.gov.uk/info/50274/cost_of_living_support/2497/crisis_and_resilience_fund_2026_to_2027/2"},
-    {"id": "crf-manchester", "title": "Manchester Crisis and Resilience Fund",
-     "url": "https://www.manchester.gov.uk/benefits-and-support/help-with-emergency-living-costs-and-crisis-support-in-manchester-crisis-and-resilience-fund"},
     {"id": "crf-leeds", "title": "Leeds Crisis and Resilience Fund",
      "url": "https://www.leeds.gov.uk/benefits/crisis-and-resilience-fund"},
     {"id": "crf-bristol", "title": "Bristol Crisis and Resilience Fund",
