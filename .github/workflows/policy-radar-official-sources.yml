@@ -7,6 +7,7 @@ on:
       - ".github/workflows/policy-radar-official-sources.yml"
       - "policy-radar/monitor.py"
       - "policy-radar/build_feeds.py"
+      - "policy-radar/discover.py"
       - "policy-radar/data/approved_events.json"
   schedule:
     - cron: "17 6 * * *"
@@ -33,11 +34,13 @@ jobs:
           python-version: "3.12"
       - name: Read source snapshots without interpreting entitlement
         run: python3 policy-radar/monitor.py
+      - name: Discover possible new GOV.UK policy notices
+        run: python3 policy-radar/discover.py
       - name: Generate public reviewed RSS and iCalendar feeds
         run: python3 policy-radar/build_feeds.py
       - name: Commit traceable source-check status if changed
         run: |
-          git add policy-radar/data/source_status.json policy-radar/updates.xml policy-radar/calendar.ics
+          git add policy-radar/data/source_status.json policy-radar/data/discovery_queue.json policy-radar/updates.xml policy-radar/calendar.ics
           if git diff --cached --quiet; then
             echo "No status change"
             exit 0
