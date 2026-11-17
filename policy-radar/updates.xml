@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Policy Radar UK — verified policy milestones</title>
+    <link>https://yl124915300-dot.github.io/policy-radar/</link>
+    <description>Independent, source-linked UK policy dates. Entries are reviewed before publication. Personal eligibility is never guaranteed.</description>
+    <language>en-gb</language>
+    <ttl>720</ttl>
+    <atom:link href="https://yl124915300-dot.github.io/policy-radar/updates.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 17 Nov 2026 09:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Ofgem scheduled energy price cap announcement (Jan–Mar 2027)</title>
+      <link>https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026</link>
+      <description>Ofgem says it will announce the cap for 1 January–31 March 2027 by 25 November 2026. It may publish sooner. This is an announcement date, not a payment or personal entitlement. Source: https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026 · Status: official-scheduled · Reviewed: 2026-11-17</description>
+      <guid isPermaLink="false">ofgem-energy-price-cap-2027-q1-announcement@policy-radar.uk</guid>
+      <pubDate>Tue, 17 Nov 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Warm Home Discount: deadline to contact helpline if more information is required</title>
+      <link>https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales</link>
+      <description>In England and Wales, households asked to provide additional information for the 2026–27 Warm Home Discount must contact the scheme by 26 February 2027. Most eligible people receive the bill credit automatically. This date is not a universal application deadline. Source: https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales · Status: official-deadline-conditional · Reviewed: 2026-11-17</description>
+      <guid isPermaLink="false">warm-home-discount-information-deadline-england-wales-2027@policy-radar.uk</guid>
+      <pubDate>Tue, 17 Nov 2026 09:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
