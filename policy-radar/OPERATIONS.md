@@ -1,5 +1,15 @@
 # Policy Radar UK — Operations (source of truth)
 
+## 2026-11-17 — existing account discovery, search metrics gate
+
+- **Correction to earlier claim**: The owner already possesses a Cloudflare account. Gmail includes official Cloudflare Workers AI / D1 / Observability service notices from 2026. This is evidence of an account, NOT that Web Analytics is provisioned for the Policy Radar public Pages URL.
+- **Verified Google Search Console property already exists**: the owner received Google Search Console verification/get-started for `https://yl124915300-dot.github.io/` on 2026-09-26, and Google's 2026-09-29 message says it began collecting search impressions for this *root property* on **2026-09-27**. This does NOT prove that any `/policy-radar/` URL has been indexed or has any impressions.
+- Read-only attempt to open the verified site's Search Console performance report in an isolated cloud browser stopped at Google sign-in. Similarly the existing Cloudflare account dashboard stopped at Cloudflare login. No credentials or private analytics were read and no settings changed.
+- Public search for exact Policy Radar URL/name returned no matching results in this search session; search index discovery is not exhaustive. **Do not claim indexed/unindexed definitively** without a verified Search Console report.
+- **Priority over further features**: log in through an authorised secure browser (not chat), open Search Console for the already-verified root property and filter Performance by Page contains `/policy-radar/` over current available dates, then read total impressions, clicks, page-level and query reports; use the same existing Cloudflare account to verify whether its Web Analytics has a real configured site/token. Create no duplicate accounts.
+- Current externally measured unique visitors / subscriptions / qualified leads and revenue remain unavailable. No verified paid orders; receipts GBP 0. Do NOT infer user demand from Github Pages HTTP 200 or IndexNow acknowledgements.
+
+
 ## 2026-11-17 correction / execution gate (must read before building more pages)
 
 **Strategic correction:** The earlier sequence over-weighted page count, number of sources/feeds, CI passes, and IndexNow receipts. These prove limited technical operation, not acquisition, utility, retention or purchase intent. Do NOT keep presenting technical item counts as market traction.
