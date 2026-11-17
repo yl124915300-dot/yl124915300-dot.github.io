@@ -1,0 +1,575 @@
+{
+  "schema_version": 1,
+  "last_searched_utc": "2026-11-17T10:01:08Z",
+  "purpose": "Discovery queue, not verified policy or eligibility advice",
+  "from_date": "2026-10-03",
+  "queries": [
+    {
+      "topic": "warm-home-discount",
+      "search_terms": "warm home discount"
+    },
+    {
+      "topic": "cold-weather-payment",
+      "search_terms": "cold weather payment"
+    },
+    {
+      "topic": "childcare",
+      "search_terms": "free childcare working parents"
+    },
+    {
+      "topic": "energy",
+      "search_terms": "energy price cap"
+    },
+    {
+      "topic": "local-support",
+      "search_terms": "crisis resilience fund"
+    }
+  ],
+  "failed_queries": [],
+  "candidate_count": 39,
+  "candidates": [
+    {
+      "official_url": "https://www.gov.uk/guidance/climate-change-levy-rates",
+      "title": "Climate Change Levy rates",
+      "description": "Find the latest Climate Change Levy and Carbon Price Support rates for energy providers.",
+      "published_at": "2026-11-17T09:57:38Z",
+      "format": "detailed_guide",
+      "matched_topics": [
+        "warm-home-discount",
+        "energy"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/news/have-your-say-on-the-future-of-part-k-of-the-building-regulations",
+      "title": "Have your say on the future of Part K of the building regulations",
+      "description": "Help inform the Building Safety Regulator's review of Part K and Approved Document K by sharing evidence, research and experience.",
+      "published_at": "2026-11-17T09:53:07Z",
+      "format": "news_story",
+      "matched_topics": [
+        "warm-home-discount",
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/news/have-your-say-on-exmouth-blue-brook-incident",
+      "title": "Have your say on Exmouth blue brook incident",
+      "description": "A new survey has been launched to gauge community impact when the Littleham Brook turned blue.",
+      "published_at": "2026-11-17T09:52:05Z",
+      "format": "news_story",
+      "matched_topics": [
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/guidance/civil-processing-dates",
+      "title": "Civil processing dates",
+      "description": "Check timescales for LAA to process your work (for example, civil applications and bills).",
+      "published_at": "2026-11-17T09:50:55Z",
+      "format": "detailed_guide",
+      "matched_topics": [
+        "cold-weather-payment",
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/employment-tribunal-decisions/miss-e-mberengwa-v-maison-care-ltd-6008470-slash-2025",
+      "title": "Miss E Mberengwa v Maison Care Ltd: 6008470/2025",
+      "description": "Employment Tribunal decision.",
+      "published_at": "2026-11-17T09:43:04Z",
+      "format": "employment_tribunal_decision",
+      "matched_topics": [
+        "warm-home-discount",
+        "childcare",
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/employment-tribunal-decisions/ms-evemy-v-tops-day-nurseries-6015062-slash-2025",
+      "title": "Ms Evemy v Tops Day Nurseries: 6015062/2025",
+      "description": "Employment Tribunal decision.",
+      "published_at": "2026-11-17T09:40:26Z",
+      "format": "employment_tribunal_decision",
+      "matched_topics": [
+        "warm-home-discount",
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/people/neil-taylor--2",
+      "title": "Neil Taylor",
+      "description": "Neil Taylor was Director of the Office of the Advocate General & Solicitor to the Advocate General from August 2017 to September 2026.   The Director of OAG is responsible for overseeing all legal services provided by OAG to the UK government, and for overseeing delivery of OAG’s objectives. In that time Neil led the work of the Office oversaw some of the most important constitutional and devolution litigation of recent times in the Inner House and the Supreme Court: Miller 1 (article 50 trigger",
+      "published_at": "2026-11-17T09:38:02Z",
+      "format": "person",
+      "matched_topics": [
+        "warm-home-discount",
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/contingency-plan-for-exotic-notifiable-diseases-of-animals-in-england",
+      "title": "Contingency plan for exotic notifiable diseases of animals in England",
+      "description": "This contingency plan describes how the government will manage an outbreak or incident of exotic notifiable disease of animals in England.",
+      "published_at": "2026-11-17T09:36:56Z",
+      "format": "policy_paper",
+      "matched_topics": [
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/people/neil-taylor",
+      "title": "Neil Taylor",
+      "description": "Education Neil has an MA(Hons) in English and Philosophy from the University of Glasgow and an LLB(Dist) from the University of Edinburgh. He was admitted as a solicitor and notary public in 1996. Career Neil joined the civil service in 1995 and prior to devolution advised a number of Scottish Office departments as well as undertaking Home Office judicial review work in Scotland. Post-devolution highlights: Legal adviser to a variety of departments and agencies within the Scottish Administration",
+      "published_at": "2026-11-17T09:36:36Z",
+      "format": "person",
+      "matched_topics": [
+        "warm-home-discount",
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/guidance/landspreading-benefits-and-risks-of-the-waste-types-you-can-use/19-waste-codes",
+      "title": "19 Waste codes",
+      "description": "19 waste codes are from waste management facilities, off-site waste water treatment plants and the preparation of water intended for human consumption and water for industrial use. Your permit lists the 19 waste codes you can use. You must follow the guidance given in the Before you start section.  ",
+      "published_at": "2026-11-17T09:34:22Z",
+      "format": "manual_section",
+      "matched_topics": [
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/employment-tribunal-decisions/mr-a-granger-v-gxo-logistics-uk-ltd-6003454-slash-2025",
+      "title": "Mr A Granger v GXO Logistics UK Ltd: 6003454/2025",
+      "description": "Employment Tribunal decision.",
+      "published_at": "2026-11-17T09:32:56Z",
+      "format": "employment_tribunal_decision",
+      "matched_topics": [
+        "warm-home-discount",
+        "cold-weather-payment",
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/guidance/check-if-and-when-you-need-to-register-as-a-tax-adviser-with-hmrc",
+      "title": "Check if and when you need to register as a tax adviser with HMRC",
+      "description": "Check if and when you need to register for an agent services account to interact with HMRC on behalf of your clients as a tax adviser.",
+      "published_at": "2026-11-17T09:32:39Z",
+      "format": "detailed_guide",
+      "matched_topics": [
+        "cold-weather-payment",
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/residential-property-tribunal-decisions/322-markhouse-road-london-e17-8ef-lon-slash-00bh-slash-f77-slash-2026-slash-0195",
+      "title": "322 Markhouse Road, London E17 8EF: LON/00BH/F77/2026/0195",
+      "description": "Residential Property Tribunal Decision of Judge R Waterhouse FRICS on 10 November 2026",
+      "published_at": "2026-11-17T09:32:08Z",
+      "format": "residential_property_tribunal_decision",
+      "matched_topics": [
+        "energy"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/residential-property-tribunal-decisions/ground-floor-flat-14-harborough-road-london-sw16-2xw-lon-slash-00ay-slash-f77-slash-2026-slash-0190",
+      "title": "Ground Floor Flat, 14 Harborough Road, London SW16 2XW: LON/00AY/F77/2026/0190",
+      "description": "Residential Property Tribunal Decision of Judge R Waterhouse FRICS on 10 November 2026",
+      "published_at": "2026-11-17T09:30:32Z",
+      "format": "residential_property_tribunal_decision",
+      "matched_topics": [
+        "energy"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/collections/migration-statistics",
+      "title": "Migration statistics",
+      "description": "This series brings together documents relating to Home Office statistics on migration.",
+      "published_at": "2026-11-17T09:30:03Z",
+      "format": "document_collection",
+      "matched_topics": [
+        "warm-home-discount",
+        "childcare",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/collections/crime-statistics",
+      "title": "Crime statistics",
+      "description": "This series brings together all documents relating to crime statistics.",
+      "published_at": "2026-11-17T09:30:03Z",
+      "format": "document_collection",
+      "matched_topics": [
+        "warm-home-discount"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/local-area-send-inspections-information-for-families",
+      "title": "Area SEND inspections: information about ongoing inspections",
+      "description": "Guides for parents, carers, children and young people about inspections of local services for children and young people with SEND.",
+      "published_at": "2026-11-17T09:30:03Z",
+      "format": "guidance",
+      "matched_topics": [
+        "warm-home-discount",
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/weekly-road-fuel-prices",
+      "title": "Weekly road fuel prices",
+      "description": "Road fuel price statistics providing average UK retail 'pump' prices on a weekly basis.",
+      "published_at": "2026-11-17T09:30:03Z",
+      "format": "national_statistics",
+      "matched_topics": [
+        "energy"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/individual-insolvencies-october-2026",
+      "title": "Individual insolvencies, October 2026",
+      "description": "Monthly tables and commentary on the numbers and rates of individual insolvencies, including bankruptcies, debt relief orders and individual voluntary arrangements in England and Wales and Northern Ireland, and quarterly information for Scotland. For England and Wales, Breathing Space scheme statistics are also included.",
+      "published_at": "2026-11-17T09:30:02Z",
+      "format": "national_statistics",
+      "matched_topics": [
+        "warm-home-discount",
+        "cold-weather-payment",
+        "childcare",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/universal-credit-sanctions-statistics-background-information-and-methodology",
+      "title": "Universal Credit sanctions statistics: background information and methodology",
+      "description": "Information about sanctions statistics and methodology including the purpose, source, definitions and limitations of the statistics covered.",
+      "published_at": "2026-11-17T09:30:02Z",
+      "format": "guidance",
+      "matched_topics": [
+        "warm-home-discount",
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/community-and-engagement-survey-202526-summary-report",
+      "title": "Community and Engagement Survey 2025/26: summary report",
+      "description": "Report covering the headline findings of the Community and Engagement Survey in 2025/26.",
+      "published_at": "2026-11-17T09:30:02Z",
+      "format": "official_statistics",
+      "matched_topics": [
+        "warm-home-discount"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/list-of-upcoming-research-publications",
+      "title": "Upcoming DWP research publications",
+      "description": "This document provides details of upcoming Department for Work and Pensions (DWP) research publications.",
+      "published_at": "2026-11-17T09:30:02Z",
+      "format": "research",
+      "matched_topics": [
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/guidance/severe-fever-with-thrombocytopaenia-syndrome-sfts-category-5-contact-information",
+      "title": "Severe fever with thrombocytopaenia syndrome (SFTS): category 5 contact information",
+      "description": "Advice for people who may have come into contact with SFTS.",
+      "published_at": "2026-11-17T09:30:01Z",
+      "format": "detailed_guide",
+      "matched_topics": [
+        "warm-home-discount"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/collections/child-poverty-strategy",
+      "title": "Child Poverty Strategy",
+      "description": "This collection brings together publications related to the Child Poverty Strategy 2025.",
+      "published_at": "2026-11-17T09:30:01Z",
+      "format": "document_collection",
+      "matched_topics": [
+        "warm-home-discount"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/universal-credit-statistics-background-information",
+      "title": "Universal Credit statistics: release strategy",
+      "description": "Information about the Universal Credit statistics release strategy.",
+      "published_at": "2026-11-17T09:30:01Z",
+      "format": "guidance",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/pre-release-access-to-statistics-order-2008",
+      "title": "Pre-release access to DWP statistics",
+      "description": "Job titles of people with pre-release access to Department for Work and Pensions (DWP) statistics and the organisations they belong to.",
+      "published_at": "2026-11-17T09:30:01Z",
+      "format": "official_statistics",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/universal-credit-statistics-background-information-and-methodology",
+      "title": "Universal Credit statistics: background information and methodology",
+      "description": "Information about Universal Credit statistics methodology including the purpose, source, definitions and limitations of the statistics covered.",
+      "published_at": "2026-11-17T09:30:01Z",
+      "format": "guidance",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/hm-land-registry-local-land-charges-programme",
+      "title": "HM Land Registry: Local Land Charges Programme",
+      "description": "We are working with local authorities to create a national local land charges service that will speed up searches and reduce their cost.",
+      "published_at": "2026-11-17T09:30:01Z",
+      "format": "guidance",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/england-biodiversity-indicators",
+      "title": "England biodiversity indicators",
+      "description": "A snapshot of the current status of biodiversity in England and how it’s changing.\r\n\r\n",
+      "published_at": "2026-11-17T09:30:00Z",
+      "format": "national_statistics",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/statistics-on-the-impact-of-removing-the-2-child-limit-from-universal-credit-may-2026",
+      "title": "Statistics on the impact of removing the 2-child limit from Universal Credit, May 2026",
+      "description": "Number of adults and children in Universal Credit families benefitting and number leaving poverty in May 2026.",
+      "published_at": "2026-11-17T09:30:00Z",
+      "format": "official_statistics",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/work-aspirations-and-support-needs-of-young-health-and-disability-benefit-customers",
+      "title": "Work aspirations and support needs of young health and disability benefit customers",
+      "description": "Exploring work aspirations and support needs of 18 to 24-year-old health and disability benefit customers, and barriers to education, training and employment.",
+      "published_at": "2026-11-17T09:30:00Z",
+      "format": "research",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/benefit-sanctions-statistics-to-august-2026",
+      "title": "Benefit Sanctions statistics to August 2026",
+      "description": "Statistics about sanctions on Universal Credit (UC). The data will be available as normal for analysis via Stat-Xplore.",
+      "published_at": "2026-11-17T09:30:00Z",
+      "format": "official_statistics",
+      "matched_topics": [
+        "cold-weather-payment"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/guidance/ukhsa-chromosome-dosimetry-services",
+      "title": "UKHSA Chromosome Dosimetry Services",
+      "description": "UK Health Security Agency’s (UKHSA) Chromosome Dosimetry Service (CDS) offer services to support your organisation to estimate radiation exposure to your DNA.",
+      "published_at": "2026-11-17T09:30:00Z",
+      "format": "detailed_guide",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/universal-credit-statistics-29-april-2013-to-13-august-2026",
+      "title": "Universal Credit Statistics, 29 April 2013 to 13 August 2026",
+      "description": "Statistics for the number of claims, starts, people and households on Universal Credit.",
+      "published_at": "2026-11-17T09:30:00Z",
+      "format": "official_statistics",
+      "matched_topics": [
+        "cold-weather-payment",
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/statistics/universal-credit-low-income-ucli-statistics-may-2026",
+      "title": "Universal Credit Low Income (UCLI) statistics, May 2026",
+      "description": "Quarterly statistics on the number and percentage of individuals living in low income in families receiving Universal Credit.",
+      "published_at": "2026-11-17T09:30:00Z",
+      "format": "official_statistics",
+      "matched_topics": [
+        "energy",
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/guidance/local-land-charges-news-archives",
+      "title": "Local Land Charges news archives",
+      "description": "A collection of news, announcements and milestones concerning HM Land Registry's Local Land Charges register. ",
+      "published_at": "2026-11-17T09:30:00Z",
+      "format": "detailed_guide",
+      "matched_topics": [
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/guidance/crime-processing-dates",
+      "title": "Crime processing dates",
+      "description": "Check timescales for the Legal Aid Agency (LAA) to process your work (eg prior authority application, graduated fee claims).",
+      "published_at": "2026-11-17T09:28:33Z",
+      "format": "detailed_guide",
+      "matched_topics": [
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/weaver-and-dane-abstraction-licensing-strategy",
+      "title": "Weaver and Dane abstraction licensing strategy",
+      "description": "The Environment Agency's approach to managing new and existing abstraction and impoundment within the Weaver and Dane catchment.",
+      "published_at": "2026-11-17T09:17:35Z",
+      "format": "policy_paper",
+      "matched_topics": [
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    },
+    {
+      "official_url": "https://www.gov.uk/government/publications/longer-duration-energy-storage-demonstration-programme-successful-projects",
+      "title": "Longer Duration Energy Storage (LoDES) Demonstration Programme: successful projects",
+      "description": "Projects which received funding through the concluded Longer Duration Energy Storage Demonstration Programme Stream 1 (Phases 1 and 2) and Stream 2 (Phases 1 and 2).",
+      "published_at": "2026-11-17T09:13:58Z",
+      "format": "notice",
+      "matched_topics": [
+        "local-support"
+      ],
+      "first_seen_utc": "2026-11-17T10:01:08Z",
+      "last_seen_utc": "2026-11-17T10:01:08Z",
+      "review_status": "needs_human_review"
+    }
+  ]
+}
