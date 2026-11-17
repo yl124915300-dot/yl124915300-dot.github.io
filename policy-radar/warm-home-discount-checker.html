@@ -84,6 +84,7 @@ footer{border-top:1px solid #d6e3d9;color:#5d7664;font-size:12px;line-height:1.6
 </section>
 </main>
 <footer><div class="wrap">Independent Policy Radar UK · Editorial rules check: 17 November 2026 · No government affiliation, no paid applications, no personal details collected, and no eligibility guarantee. This page loads no third-party tracking scripts. Official GOV.UK and Ofgem sources remain authoritative.</div></footer>
+<script src="./eligibility-source-guard.js"></script>
 <script>
 (function(){
 "use strict";
@@ -99,25 +100,16 @@ function setGuardReady(ready,message){
  action.disabled=!ready;
  action.textContent=ready?"Show my next action":"Official check temporarily unavailable";
 }
-const required=["warm-home-discount","warm-home-discount-suppliers","warm-home-discount-eligibility-statement-2026"];
 fetch("./data/source_status.json",{cache:"no-store"})
  .then(r=>{if(!r.ok)throw new Error("source monitoring unavailable");return r.json()})
  .then(d=>{
-   const checked=Date.parse(d.last_checked_utc||"");
-   if(!Number.isFinite(checked)||checked>Date.now()+300000||Date.now()-checked>48*60*60*1000){
-      throw new Error("the official-source verification is older than 48 hours or has an invalid timestamp");
-   }
-   const rows=Array.isArray(d.sources)?d.sources:[];
-   const tracked=required.map(id=>rows.find(row=>row.id===id));
-   if(tracked.some(row=>!row||row.fetch_status!=="ok"||!row.content_sha256||!row.last_success_utc)){
-      throw new Error("a required official-source check failed or is missing");
-   }
-   if(tracked.some(row=>row.pending_human_review===true)){
-      throw new Error("at least one official guidance page has changed and needs editorial review");
-   }
-   setGuardReady(true,"Official-source checks completed at "+d.last_checked_utc+" (UTC). The 2026/27 eligibility sources have been fetched without pending page-change flags. This is not proof of personal eligibility; confirm with GOV.UK.");
+   const evaluator=window.PolicyRadarSourceGuard;
+   if(!evaluator||typeof evaluator.check!=="function")throw new Error("source checking protection script did not load");
+   const result=evaluator.check(d,Date.now());
+   if(!result.ok)throw new Error(result.reason);
+   setGuardReady(true,"Official-source checks completed at "+result.last_checked_utc+" (UTC). The current 2026/27 eligibility sources passed their monitoring checks; this is not a guarantee of eligibility.");
  })
- .catch(err=>setGuardReady(false,"This checklist is temporarily paused: "+String(err.message||"source check unavailable")+". Please use the GOV.UK official guidance and helpline links below. No eligibility decision was made."));
+ .catch(err=>setGuardReady(false,"This checklist is temporarily paused: "+String(err.message||"source check unavailable")+". Use the original GOV.UK guidance and helpline below. No eligibility decision was made."));
 nation.addEventListener("change",()=>{fields.hidden=!(nation.value==="england"||nation.value==="wales");panel.hidden=true;out.style.display="none"});
 el("reset").addEventListener("click",()=>{form.reset();fields.hidden=true;panel.hidden=true;out.style.display="none"});
 function show(title,summary,steps,warning){
