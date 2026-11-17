@@ -51,7 +51,8 @@ jobs:
             git add policy-radar/data/source_status.json \
                     policy-radar/data/discovery_queue.json \
                     policy-radar/updates.xml \
-                    policy-radar/calendar.ics
+                    policy-radar/calendar.ics \
+                    policy-radar/feeds/
             if git diff --cached --quiet; then
               echo "No changes to the source snapshots or reviewed feeds"
               exit 0
