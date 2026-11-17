@@ -1,5 +1,16 @@
 # Policy Radar UK — Operations (source of truth)
 
+## 17 November 2026 — safety interlock and distribution transparency
+
+- Re-read current GOV.UK 2026/27 Warm Home Discount conditions and missing-letter helpline guidance, both official and source-linked (https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales ; https://www.gov.uk/the-warm-home-discount-scheme/get-help). These sources distinguish qualifying-date evidence, automatic awards, letters requiring information and the 2027-02-26 contact deadline.
+- The public action checker `warm-home-discount-checker.html` now has a **fail-closed official-source gate**. It disables next-action decisions unless all three required GOV.UK content snapshots (scheme conditions, supplier list and statutory 2026/27 eligibility statement) are recent (<=48 hours), intact, successful and not marked pending human review. If not, it displays a pause warning and gives direct official links. The browser neither transmits nor stores benefit answers.
+- `eligibility-source-guard.js` and `tests/eligibility-source-guard.test.cjs` implement deterministic checks. GitHub Actions `policy-radar-safety-checks.yml` ran successfully at https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/44075742531 with **10 passed, 0 failed**; another run after the checker sharing button also succeeded: https://github.com/yl124915300-dot/yl124915300-dot.github.io/actions/runs/44076111836.
+- On the live site a synthetic anonymous browser run confirmed a recently checked status (2026-11-17T11:22:28Z), enabled action button and correct Northern Ireland guidance, with no JS errors. An isolated browser negative test with HTTP 503 interception was attempted but the browser tool did not support network interception; therefore that exact browser scenario remains untested. The Node regression covers error/stale/review states.
+- Published `data-handling.html` and linked it from site sections. It explains local profile storage, direct postcode lookup to Postcodes.io, GitHub hosting and public GitHub Issues, lack of analytics/mail/payment backends, and privacy limitations. The checker also offers a one-tap OS share/copy of the public URL ONLY, never user's form answers.
+- HubSpot account read returned `onboarded:false` and denied USER_INFORMATION permission. Lovable workspace lookup also failed. No verified external analytics/email-list provider has been connected, and no user profile or portal ID has been embedded in public code. UK ICO says cookies and similar non-essential storage technologies can require valid user consent; assess before deploying analytics.
+- **Business metric**: public site works, no credible unique resident visitor or subscriber count, paid orders 0 verified, receipts GBP 0. Search-engine inclusion and actual external referrals not established. The privacy-safe share affordance is not itself evidence of acquisition.
+
+
 ## 17 November 2026 — segment subscriptions and monitor review alerts
 
 - Extended `policy-radar/build_feeds.py` to generate **12 RSS feeds** (four UK nations × energy, support, childcare) strictly from editor-approved `data/approved_events.json`. A new `feeds/manifest.json` records which feeds contain approved items. Empty feeds are valid but do not prove that an area has no benefits.
