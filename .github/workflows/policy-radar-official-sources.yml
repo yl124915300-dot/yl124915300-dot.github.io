@@ -32,37 +32,37 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Read source snapshots without interpreting entitlement
-        run: python3 policy-radar/monitor.py
-      - name: Discover possible new GOV.UK policy notices
-        run: python3 policy-radar/discover.py
-      - name: Generate public reviewed RSS and iCalendar feeds
-        run: python3 policy-radar/build_feeds.py
-      - name: Commit traceable source-check status if changed
+      - name: Refresh against latest upstream before every save attempt
+        shell: bash
         run: |
-          git add policy-radar/data/source_status.json policy-radar/data/discovery_queue.json policy-radar/updates.xml policy-radar/calendar.ics
-          if git diff --cached --quiet; then
-            echo "No status change"
-            exit 0
-          fi
+          set -euo pipefail
           git config user.name "policy-radar-bot"
           git config user.email "policy-radar-bot@users.noreply.github.com"
-          git commit -m "Policy Radar: update official source check status"
-          # The shared Pages repository receives unrelated site commits.
-          # Rebase the bot-only data commit against the newest main branch.
-          # Never force-push; if the same data changed concurrently, fail safely.
+          # This job only generates files inside policy-radar. The runner is
+          # disposable. Never force push or overwrite concurrent human edits.
           for attempt in 1 2 3; do
             git fetch origin main
-            if ! git rebase origin/main; then
-              git rebase --abort || true
-              echo "Conflict while merging monitoring data; manual resolution required"
-              exit 1
-            fi
-            if git push origin HEAD:main; then
-              echo "Source-monitor snapshot saved"
+            git checkout -B main origin/main
+            # Always regenerate from the newest approved items and latest
+            # editorial queue. A stale snapshot is discarded, not rebased.
+            python3 policy-radar/monitor.py
+            python3 policy-radar/discover.py
+            python3 policy-radar/build_feeds.py
+            git add policy-radar/data/source_status.json \
+                    policy-radar/data/discovery_queue.json \
+                    policy-radar/updates.xml \
+                    policy-radar/calendar.ics
+            if git diff --cached --quiet; then
+              echo "No changes to the source snapshots or reviewed feeds"
               exit 0
             fi
+            git commit -m "Policy Radar: refresh verified public source snapshots"
+            if git push origin HEAD:main; then
+              echo "Official source snapshot saved from latest main"
+              exit 0
+            fi
+            echo "Concurrent repo update detected. Rebuilding from newest main."
             sleep $((attempt * 5))
           done
-          echo "Could not save updated snapshot after 3 attempts"
+          echo "Could not safely save the source snapshot after three attempts"
           exit 1
