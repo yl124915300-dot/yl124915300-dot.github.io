@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10251e">
+<meta name="description" content="Create a private, browser-only UK policy checklist and calendar. Follow official dates by nation and topic, without sharing your household details.">
+<title>My Policy Radar — Private policy checklist | Policy Radar UK</title>
+<link rel="canonical" href="https://yl124915300-dot.github.io/policy-radar/my-radar.html">
+<link rel="alternate" type="application/rss+xml" href="./updates.xml" title="Policy Radar UK verified updates">
+<style>
+:root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#183429;background:#f4f7f3}
+*{box-sizing:border-box}body{margin:0}a{color:#176347;text-underline-offset:3px}button,input,select{font:inherit}
+.wrap{max-width:1060px;padding:0 22px;margin:auto}
+header{background:#10251e;color:#fff}header .bar{padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:800;letter-spacing:.055em}header a{color:#d7f0e2;font-size:13px}
+.hero{background:#10251e;color:white;padding:48px 0 64px;background-image:radial-gradient(ellipse at 75% 30%,#316e5277 0,transparent 60%)}
+.hero .overline{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#a3d9b3}
+h1{font-size:clamp(36px,5.5vw,58px);letter-spacing:-.055em;line-height:1.07;margin:14px 0}
+.hero p{max-width:760px;font-size:17px;color:#d3e6d8;line-height:1.6}
+main{padding-top:24px;padding-bottom:65px}
+.panel{border:1px solid #d7e3d9;border-radius:17px;background:#fff;padding:24px;box-shadow:0 5px 24px #1236220a}
+.stack{display:grid;gap:17px}
+.panel h2{font-size:23px;letter-spacing:-.025em;margin:0 0 9px}
+p{line-height:1.58}.muted{color:#58715e;font-size:13px}.helper{font-size:12px;color:#657d6b;margin:6px 0 0}
+.field{margin:16px 0}
+label.heading{font-size:13px;font-weight:800;color:#2c4c37;display:block;margin-bottom:8px}
+select,input[type=date]{width:100%;max-width:350px;padding:12px;border:1px solid #b8cbbb;border-radius:9px;color:#223b2b;background:#fff}
+.checkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.checkcard{border:1px solid #cadcce;border-radius:11px;padding:13px 15px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px;line-height:1.35}
+.checkcard input{margin-top:3px;accent-color:#1a6a45}
+.badge{display:inline-block;border-radius:90px;padding:5px 9px;background:#e7f3e8;color:#22683d;font-size:11px;font-weight:750}
+.actionbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.btn{border:1px solid #19593c;border-radius:9px;padding:12px 15px;background:#1b5c3e;color:#fff;font-weight:750;font-size:13px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.secondary{background:#fff;color:#19593c}.btn:disabled{opacity:.5;cursor:default}
+.status{border-radius:11px;background:#edf6ee;border-left:4px solid #4a9770;padding:13px 15px;color:#2a593b;font-size:13px;line-height:1.55}
+.status.warning{border-color:#b48e4e;background:#faf5eb;color:#5d5135}
+.timeline{display:grid;gap:12px}
+.event{background:#f5f9f4;border:1px solid #d9e6dc;border-radius:11px;padding:16px}
+.event .label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#5f8066;font-weight:750}
+.event h3{margin:6px 0;font-size:17px}.event p{margin:8px 0;color:#5a715f;font-size:13px}
+.event a{font-size:13px;font-weight:750}
+.privacy{background:#e7f1e8;border-radius:13px;padding:17px 19px;font-size:13px;line-height:1.6;color:#416449}
+footer{border-top:1px solid #d9e3da;color:#5e7565;font-size:12px;padding:25px 0 50px;line-height:1.65}
+@media(max-width:680px){.wrap{padding:0 16px}.checkgrid{grid-template-columns:1fr}.panel{padding:20px}.hero{padding:39px 0 52px}}
+</style></head>
+<body>
+<header><div class="wrap bar"><div class="brand">◉ POLICY RADAR UK</div><a href="./">← Public monitor library</a></div></header>
+<section class="hero"><div class="wrap">
+<div class="overline">Free · Private on this device · Official links</div>
+<h1>Make the policy radar yours.</h1>
+<p>Choose where you live, follow the areas that matter to your household, and generate a calendar for important dates. Your settings stay in this browser; no account, postcode, email or payment required.</p>
+</div></section>
+<main class="wrap">
+<div class="stack">
+<section class="panel" aria-labelledby="preferences">
+<h2 id="preferences">1. Select what matters to you</h2>
+<p class="muted">This is a topic filter, not a benefit entitlement check. Save a general profile on this device to restore it on your next visit.</p>
+<div class="field"><label class="heading" for="nation">My UK nation</label><select id="nation"><option value="england">England</option><option value="wales">Wales</option><option value="scotland">Scotland</option><option value="ni">Northern Ireland</option></select></div>
+<div class="field"><label class="heading">Topics to follow</label><div class="checkgrid">
+<label class="checkcard"><input type="checkbox" value="energy" checked> <span><strong>Energy costs</strong><br><span class="helper">Ofgem price caps, electricity discounts</span></span></label>
+<label class="checkcard"><input type="checkbox" value="support" checked> <span><strong>Financial support</strong><br><span class="helper">Cold weather and emergency assistance</span></span></label>
+<label class="checkcard"><input type="checkbox" value="childcare"> <span><strong>Childcare</strong><br><span class="helper">Official childcare rules and renewal dates</span></span></label>
+</div></div>
+<div class="actionbar"><button class="btn" id="save-settings">Save on this device</button><button class="btn secondary" id="clear-settings">Clear this browser profile</button></div>
+<p class="helper" role="status" id="save-response">No profile sent to any server.</p>
+</section>
+<section class="panel" aria-labelledby="calendar-title">
+<h2 id="calendar-title">2. Add an optional personal reminder</h2>
+<p class="muted">If you already know your next childcare eligibility reconfirmation deadline, you can include it in a private calendar file. We do not calculate or confirm that deadline. Find the exact date in your official childcare account.</p>
+<div class="field"><label class="heading" for="childcare-date">My next childcare reconfirmation date (optional)</label><input type="date" id="childcare-date"><p class="helper">Only use this date if relevant to you. We add an optional 14-day calendar reminder. Your calendar app controls notifications.</p></div>
+<div class="actionbar"><button class="btn" id="calendar-download">Create my calendar file</button><a class="btn secondary" href="./calendar.ics">Follow the public policy calendar</a></div>
+<p class="helper" role="status" id="calendar-response">No personal event is uploaded or emailed.</p>
+</section>
+<section class="panel" aria-labelledby="matched-title">
+<div class="actionbar" style="justify-content:space-between"><h2 id="matched-title">3. Official dates that match your topics</h2><span class="badge" id="event-count">Checking…</span></div>
+<div id="date-status" class="status" style="margin:13px 0">Loading editor-reviewed public dates…</div>
+<div class="timeline" id="events"></div>
+<p class="helper">Only manually reviewed public dates appear here. These are not individual award decisions, and subscribing to a calendar never files a benefit claim.</p>
+</section>
+<section class="panel">
+<h2>4. How current is this source watch?</h2>
+<div id="health" class="status">Checking the latest public source snapshot…</div>
+<p class="muted">The official-source detector compares versions and records possible changes. Any detected change needs editorial review before a revised policy statement appears in public updates.</p>
+<div class="actionbar"><a class="btn secondary" href="./updates.xml">Reviewed updates RSS</a><a class="btn secondary" href="./local-support.html">Find your local council</a></div>
+</section>
+<div class="privacy"><strong>Your data stays with you.</strong> Only nation, selected topics and an optional reminder date are saved in your browser's local storage. No tracking scripts, advertising identifiers or server-side accounts are used in this preview. Other people using the same browser profile might see your settings; use “Clear” if this is a shared device. If you use the local-support postcode lookup, that separate service sends the postcode directly to Postcodes.io on request.</div>
+</div>
+</main>
+<footer><div class="wrap">Independent public information, not affiliated with GOV.UK, DWP, Ofgem or local authorities. Always use official sources before making an application or legal decision. No fees are charged for public support claims. Last site content review: 17 November 2026.</div></footer>
+<script>
+(function(){
+"use strict";
+const storageKey="policy-radar-uk-private-profile-v1";
+const nation=document.getElementById("nation"), due=document.getElementById("childcare-date"), checkboxes=Array.from(document.querySelectorAll(".checkcard input"));
+const eventsBox=document.getElementById("events"), eventCount=document.getElementById("event-count"), dateStatus=document.getElementById("date-status"), health=document.getElementById("health");
+const saveMessage=document.getElementById("save-response"), calendarMessage=document.getElementById("calendar-response");
+let publicEvents=null;
+function selectedTopics(){return checkboxes.filter(c=>c.checked).map(c=>c.value)}
+function currentProfile(){return {nation:nation.value,topics:selectedTopics(),childcareDue:due.value}}
+function restore(){
+ try {
+ const x=JSON.parse(localStorage.getItem(storageKey)||"null");
+ if(x&&["england","wales","scotland","ni"].includes(x.nation)){
+  nation.value=x.nation;
+  if(Array.isArray(x.topics))checkboxes.forEach(c=>c.checked=x.topics.includes(c.value));
+  if(typeof x.childcareDue==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(x.childcareDue))due.value=x.childcareDue;
+  saveMessage.textContent="Saved profile loaded from this browser. No server data was accessed.";
+ }
+ }catch(e){saveMessage.textContent="Local browser settings unavailable. You can still use this page without saving."}
+}
+function text(el,message){el.textContent=message}
+function safeUrl(uri){return /^https:\/\/(?:www\.)?(gov\.uk|ofgem\.gov\.uk)\//.test(uri||"")?uri:null}
+function matchingEvents(){
+ if(!Array.isArray(publicEvents))return[];
+ const p=currentProfile();
+ return publicEvents.filter(e=>e.approved===true&&Array.isArray(e.nations)&&e.nations.includes(p.nation)&&p.topics.includes(e.topic)&&/^\d{4}-\d{2}-\d{2}$/.test(e.date||"")&&safeUrl(e.source));
+}
+function pretty(iso){const [y,m,d]=iso.split("-").map(Number);return new Date(Date.UTC(y,m-1,d)).toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})}
+function render(){
+ const matched=matchingEvents();
+ eventCount.textContent=matched.length+" matching public dates";
+ eventsBox.textContent="";
+ if(publicEvents===null){text(dateStatus,"The approved events feed could not be loaded. Use the official RSS/calendar links.");dateStatus.className="status warning";return}
+ if(matched.length===0){text(dateStatus,"No editor-approved public dates match these choices yet. This does not mean you have no eligible benefits.");dateStatus.className="status";return}
+ text(dateStatus,"Showing "+matched.length+" date(s) from the editor-reviewed official-policy feed.");// not a user-level eligibility decision
+ dateStatus.className="status";
+ matched.sort((a,b)=>a.date.localeCompare(b.date)).forEach(e=>{
+  const article=document.createElement("article");article.className="event";
+  const label=document.createElement("div");label.className="label";label.textContent=pretty(e.date)+" · "+e.status;article.appendChild(label);
+  const title=document.createElement("h3");title.textContent=e.title;article.appendChild(title);
+  const description=document.createElement("p");description.textContent=e.description;article.appendChild(description);
+  const a=document.createElement("a");a.href=e.source;a.target="_blank";a.rel="noopener noreferrer";a.textContent="View original official source ↗";article.appendChild(a);
+  eventsBox.appendChild(article);
+ });
+}
+function iCalEscape(s){return String(s).replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/,/g,"\\,").replace(/;/g,"\\;")}
+function foldLine(value){let current="",parts=[];for(const ch of value){if(new TextEncoder().encode(current+ch).length>72){parts.push(current);current=" "+ch}else{current+=ch}}parts.push(current);return parts.join("\r\n")}
+function nextDay(iso){const t=new Date(iso+"T12:00:00Z");t.setUTCDate(t.getUTCDate()+1);return t.toISOString().slice(0,10)}
+function icsStamp(d){return d.replace(/-/g,"")}
+function personalCalendar(){
+ const p=currentProfile(), items=matchingEvents().map(e=>({id:e.id,date:e.date,title:e.title,description:e.description+" Official source: "+e.source,source:e.source,remind:false}));
+ if(p.childcareDue&&p.topics.includes("childcare")&&p.nation==="england"){
+  const d=new Date(p.childcareDue+"T12:00:00Z");
+  if(!isNaN(d.getTime())&&d.toISOString().slice(0,10)===p.childcareDue){
+   items.push({id:"personal-childcare-reconfirmation",date:p.childcareDue,title:"Your saved childcare reconfirmation date (user-entered)",description:"You entered this date. Check the official childcare account to confirm your actual deadline. This event is private and not an official eligibility finding.",source:"https://www.gov.uk/free-childcare-if-working",remind:true});
+  }
+ }
+ const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Policy Radar UK//Private local event export//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:My Policy Radar (device-generated)"];
+ items.forEach((e,i)=>{
+  const created=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  lines.push("BEGIN:VEVENT","UID:"+e.id+"-"+i+"@policy-radar-local","DTSTAMP:"+created,"DTSTART;VALUE=DATE:"+icsStamp(e.date),"DTEND;VALUE=DATE:"+icsStamp(nextDay(e.date)),"SUMMARY:"+iCalEscape(e.title),"DESCRIPTION:"+iCalEscape(e.description),"URL:"+e.source,"TRANSP:TRANSPARENT");
+  if(e.remind)lines.push("BEGIN:VALARM","ACTION:DISPLAY","TRIGGER:-P14D","DESCRIPTION:Check your recorded childcare reconfirmation deadline in your official account","END:VALARM");
+  lines.push("END:VEVENT");
+ });
+ lines.push("END:VCALENDAR");
+ return {bytes:lines.map(foldLine).join("\r\n")+"\r\n",count:items.length};
+}
+function downloadFile(str,filename,mime){
+ const blob=new Blob([str],{type:mime});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+document.getElementById("save-settings").addEventListener("click",()=>{
+ try{localStorage.setItem(storageKey,JSON.stringify(currentProfile()));text(saveMessage,"Saved in this browser only. Nothing was sent to Policy Radar.");}
+ catch(e){text(saveMessage,"Could not store settings in this browser. You can still download a calendar.")}
+});
+document.getElementById("clear-settings").addEventListener("click",()=>{
+ try{localStorage.removeItem(storageKey)}catch(e){}
+ nation.value="england";checkboxes.forEach(c=>c.checked=c.value!=="childcare");due.value="";text(saveMessage,"Browser profile cleared.");render();
+});
+document.getElementById("calendar-download").addEventListener("click",()=>{
+ if(publicEvents===null){text(calendarMessage,"Official events are unavailable. Use the public calendar feed for verified dates.");return}
+ const output=personalCalendar();if(output.count===0){text(calendarMessage,"No selected dates yet. Select a relevant topic or enter your confirmed childcare deadline.");return}
+ downloadFile(output.bytes,"my-policy-radar.ics","text/calendar;charset=utf-8");
+ text(calendarMessage,output.count+" calendar event(s) generated on this device. Import into your calendar app; notifications depend on that app.");
+});
+[nation,due,...checkboxes].forEach(el=>el.addEventListener("change",render));
+restore();
+fetch("./data/approved_events.json",{cache:"no-store"})
+ .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})
+ .then(data=>{if(data.schema_version!==1||!Array.isArray(data.events))throw new Error("Invalid event feed");publicEvents=data.events;render()})
+ .catch(()=>{publicEvents=null;render()});
+fetch("./data/source_status.json",{cache:"no-store"})
+ .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json()})
+ .then(data=>{
+  const s=data.summary||{},count=data.sources?.length||0;
+  text(health,"Last completed source check: "+(data.last_checked_utc||"unknown")+" · "+(s.successful_fetches||0)+"/"+count+" source checks succeeded · "+(s.failed_fetches||0)+" failed · "+(s.pending_human_review||0)+" differences awaiting review. This is an operational check, not proof of eligibility.");
+  health.className=(s.failed_fetches>0||s.pending_human_review>0)?"status warning":"status";
+ })
+ .catch(()=>{text(health,"Current automated source status could not be loaded. Check the original official websites.");health.className="status warning"});
+})();
+</script>
+</body></html>
