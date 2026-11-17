@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Policy Radar UK — Wales / Energy</title>
+    <link>https://yl124915300-dot.github.io/policy-radar/</link>
+    <description>Editor-reviewed, official-source-linked UK policy notices, not personal eligibility decisions.</description>
+    <language>en-gb</language>
+    <ttl>720</ttl>
+    <atom:link href="https://yl124915300-dot.github.io/policy-radar/feeds/wales-energy.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GOV.UK: £150 Warm Home Discount confirmation letters sent through January 2027</title>
+      <link>https://www.gov.uk/government/news/households-to-receive-150-warm-home-discount-confirmation-letter</link>
+      <description>The UK government's 22 October 2026 announcement says letters are being sent from late October through January 2027. Some households receive the discount automatically; those told to supply extra information must contact the helpline by 26 February 2027. Beware messages requesting bank details. This is a verified public notice, not a personal eligibility decision. Source: https://www.gov.uk/government/news/households-to-receive-150-warm-home-discount-confirmation-letter · Reviewed: 2026-11-17</description>
+      <guid isPermaLink="false">warm-home-discount-letters-start-2026@policy-radar.uk</guid>
+      <pubDate>Tue, 17 Nov 2026 10:40:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Ofgem scheduled energy price cap announcement (Jan–Mar 2027)</title>
+      <link>https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026</link>
+      <description>Ofgem says it will announce the cap for 1 January–31 March 2027 by 25 November 2026. It may publish sooner. This is an announcement date, not a payment or personal entitlement. Source: https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-december-2026 · Reviewed: 2026-11-17</description>
+      <guid isPermaLink="false">ofgem-energy-price-cap-2027-q1-announcement@policy-radar.uk</guid>
+      <pubDate>Tue, 17 Nov 2026 09:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Warm Home Discount: deadline to contact helpline if more information is required</title>
+      <link>https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales</link>
+      <description>In England and Wales, households asked to provide additional information for the 2026–27 Warm Home Discount must contact the scheme by 26 February 2027. Most eligible people receive the bill credit automatically. This date is not a universal application deadline. Source: https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales · Reviewed: 2026-11-17</description>
+      <guid isPermaLink="false">warm-home-discount-information-deadline-england-wales-2027@policy-radar.uk</guid>
+      <pubDate>Tue, 17 Nov 2026 09:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

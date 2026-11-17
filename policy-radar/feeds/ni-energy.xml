@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Policy Radar UK — Ni / Energy</title>
+    <link>https://yl124915300-dot.github.io/policy-radar/</link>
+    <description>Editor-reviewed, official-source-linked UK policy notices, not personal eligibility decisions.</description>
+    <language>en-gb</language>
+    <ttl>720</ttl>
+    <atom:link href="https://yl124915300-dot.github.io/policy-radar/feeds/ni-energy.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

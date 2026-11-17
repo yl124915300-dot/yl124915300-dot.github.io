@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "notice": "Counts are editor-approved notices, not eligible residents or subscribers. Empty feeds are expected.",
+  "generated_from": "policy-radar/data/approved_events.json",
+  "feeds": [
+    {
+      "nation": "england",
+      "topic": "energy",
+      "approved_items": 3,
+      "path": "feeds/england-energy.xml"
+    },
+    {
+      "nation": "england",
+      "topic": "support",
+      "approved_items": 0,
+      "path": "feeds/england-support.xml"
+    },
+    {
+      "nation": "england",
+      "topic": "childcare",
+      "approved_items": 0,
+      "path": "feeds/england-childcare.xml"
+    },
+    {
+      "nation": "wales",
+      "topic": "energy",
+      "approved_items": 3,
+      "path": "feeds/wales-energy.xml"
+    },
+    {
+      "nation": "wales",
+      "topic": "support",
+      "approved_items": 0,
+      "path": "feeds/wales-support.xml"
+    },
+    {
+      "nation": "wales",
+      "topic": "childcare",
+      "approved_items": 0,
+      "path": "feeds/wales-childcare.xml"
+    },
+    {
+      "nation": "scotland",
+      "topic": "energy",
+      "approved_items": 1,
+      "path": "feeds/scotland-energy.xml"
+    },
+    {
+      "nation": "scotland",
+      "topic": "support",
+      "approved_items": 0,
+      "path": "feeds/scotland-support.xml"
+    },
+    {
+      "nation": "scotland",
+      "topic": "childcare",
+      "approved_items": 0,
+      "path": "feeds/scotland-childcare.xml"
+    },
+    {
+      "nation": "ni",
+      "topic": "energy",
+      "approved_items": 0,
+      "path": "feeds/ni-energy.xml"
+    },
+    {
+      "nation": "ni",
+      "topic": "support",
+      "approved_items": 0,
+      "path": "feeds/ni-support.xml"
+    },
+    {
+      "nation": "ni",
+      "topic": "childcare",
+      "approved_items": 0,
+      "path": "feeds/ni-childcare.xml"
+    }
+  ]
+}
