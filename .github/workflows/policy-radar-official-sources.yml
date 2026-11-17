@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: policy-radar-source-watch
@@ -22,7 +23,7 @@ concurrency:
 jobs:
   official-sources:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - name: Check out site repository
         uses: actions/checkout@v4
@@ -33,6 +34,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Refresh against latest upstream before every save attempt
+        id: refresh
         shell: bash
         run: |
           set -euo pipefail
@@ -60,12 +62,38 @@ jobs:
             git commit -m "Policy Radar: refresh verified public source snapshots"
             if git push origin HEAD:main; then
               echo "Official source snapshot saved from latest main"
+              echo "snapshot_commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             echo "Concurrent repo update detected. Rebuilding from newest main."
             sleep $((attempt * 5))
           done
           echo "Could not safely save the source snapshot after three attempts"
+          exit 1
+      - name: Publish the saved snapshot on GitHub Pages
+        if: steps.refresh.outputs.snapshot_commit != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SNAPSHOT_COMMIT: ${{ steps.refresh.outputs.snapshot_commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # A push made with GITHUB_TOKEN does not trigger branch-based Pages.
+          gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" \
+            --jq '"Pages build request: " + .status + " " + .url'
+
+          snapshot_url="https://yl124915300-dot.github.io/policy-radar/data/source_status.json"
+          expected_timestamp=$(jq -er '.last_checked_utc' policy-radar/data/source_status.json)
+          for attempt in {1..24}; do
+            if live_timestamp=$(curl --fail --silent --show-error --max-time 8 \
+              "$snapshot_url?revision=$SNAPSHOT_COMMIT&attempt=$attempt" | jq -er '.last_checked_utc') &&
+              [[ "$live_timestamp" == "$expected_timestamp" ]]; then
+              echo "Public snapshot confirmed for $SNAPSHOT_COMMIT ($live_timestamp)"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::Pages did not serve the saved Policy Radar snapshot after 24 checks"
           exit 1
       - name: Audit source health and flag human-review tasks
         if: always()
