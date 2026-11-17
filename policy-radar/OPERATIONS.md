@@ -1,5 +1,14 @@
 # Policy Radar UK — Operations (source of truth)
 
+## 2026-11-17 — critical interpretation correction: GSC window predates launch
+
+- The **first Policy Radar homepage commit** was `ee252202fa9f3984abd81013f4a771596e8dd6a5`, created at **2026-11-17T09:34:35Z** (verified from GitHub commit metadata; it added `policy-radar/index.html`). The site cannot generate Google search impressions for this new path before it existed.
+- The verified Google Search Console daily report for page path `/policy-radar/` only covers **2026-09-25 through 2026-11-15**. Therefore its **0 clicks / 0 impressions are pre-launch baseline**, not a meaningful test of market demand, SEO effectiveness, or user acquisition after launch.
+- The provisional 24-hour data for Nov 16–17 also showed zero, but the site was launched partway through Nov 17 and indexing/metrics can be delayed. This is an *early preliminary observation* and must not be treated as an adequate post-launch acquisition sample.
+- Recheck using a window **starting no earlier than 2026-11-17** once Search Console has processed post-launch dates. Log the exact fully covered date range, query/page filters, impressions, clicks and any indexing evidence. Separate index discovery from ranking and visitors. A subsequent stable comparison (e.g., after at least 7 fully processed post-launch days) is the earliest fair directional signal; it is not proof of viability or failure on its own.
+- **No claims of verified users:** external unique visitors, retained subscribers, and paid demand remain unknown. Paid orders 0 verified and receipts GBP 0 on the current project ledger.
+- Do not create more policy pages just to respond to the pre-launch zero report. Obtain real post-launch acquisition evidence before allocating additional product work.
+
 ## 2026-11-17 — first verified Policy Radar search report
 
 - Opened the existing `https://yl124915300-dot.github.io/` property in the ChatGPT desktop in-app browser with its existing Google session. In Performance → Search results, the search type was Web (text) and the page filter was URLs containing `/policy-radar/`. The 3-month view showed daily chart coverage from **2026-09-25 through 2026-11-15**, with **0 clicks and 0 impressions**. Google displayed CTR **0%** and average position **0**. With zero recorded impressions, CTR and ranking are not meaningful. Both the Pages and Queries tables showed **No data**. [Filtered Search Console report](https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fyl124915300-dot.github.io%2F&page=*%2Fpolicy-radar%2F&breakdown=query&time_granularity=DAY&num_of_months=3)
