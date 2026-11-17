@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_searched_utc": "2026-11-17T10:40:59Z",
+  "last_searched_utc": "2026-11-17T10:44:52Z",
   "purpose": "Discovery queue, not verified policy or eligibility advice",
   "from_date": "2026-10-03",
   "queries": [
@@ -38,10 +38,8 @@
         "warm-home-discount"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-17T10:40:59Z",
-      "review_status": "approved_rss",
-      "reviewed_at_utc": "2026-11-17T10:40:00Z",
-      "disposition": "Verified as active official guidance reminder; news entry approved for RSS, not calendar."
+      "last_seen_utc": "2026-11-17T10:44:52Z",
+      "review_status": "approved_rss"
     },
     {
       "official_url": "https://www.gov.uk/guidance/universal-credit-if-you-have-children",
@@ -53,7 +51,7 @@
         "childcare"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-17T10:40:59Z",
+      "last_seen_utc": "2026-11-17T10:44:52Z",
       "review_status": "needs_human_review"
     },
     {
@@ -66,7 +64,7 @@
         "childcare"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-17T10:40:59Z",
+      "last_seen_utc": "2026-11-17T10:44:52Z",
       "review_status": "needs_human_review"
     }
   ]
