@@ -1,35 +1,42 @@
-
-
-
-
-
-
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Policy Radar UK//Verified public policy dates//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Policy Radar UK — official milestones
 X-WR-CALDESC:Source-checked public dates only; not individual legal or be
-
-
-
-
-
-
+ nefits advice.
+BEGIN:VEVENT
+UID:ofgem-energy-price-cap-2027-q1-announcement@policy-radar.uk
+DTSTAMP:20261117T090000Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:Ofgem scheduled energy price cap announcement (Jan–Mar 2027)
 DESCRIPTION:Ofgem says it will announce the cap for 1 January–31 March 
  2027 by 25 November 2026. It may publish sooner. This is an announcement
   date\, not a payment or personal entitlement. Official source: https://
  www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-october-and-31-
+ december-2026
 URL:https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-octo
-
-
-
+ ber-and-31-december-2026
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:warm-home-discount-information-deadline-england-wales-2027@policy-rad
-
-
-
+ ar.uk
+DTSTAMP:20261117T090000Z
+DTSTART;VALUE=DATE:20270226
+DTEND;VALUE=DATE:20270227
 SUMMARY:Warm Home Discount: deadline to contact helpline if more informat
+ ion is required
 DESCRIPTION:In England and Wales\, households asked to provide additional
   information for the 2026–27 Warm Home Discount must contact the schem
  e by 26 February 2027. Most eligible people receive the bill credit auto
  matically. This date is not a universal application deadline. Official s
  ource: https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-e
+ ngland-and-wales
 URL:https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-engla
-
-
-
+ nd-and-wales
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
