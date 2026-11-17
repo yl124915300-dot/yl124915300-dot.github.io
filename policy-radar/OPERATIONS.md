@@ -1,5 +1,17 @@
 # Policy Radar UK — Operations (source of truth)
 
+## 17 November 2026 — latest follow-up execution
+
+- Added **Warm Home Discount 2026/27 action checker**, public address: https://yl124915300-dot.github.io/policy-radar/warm-home-discount-checker.html. It is purely client-side and gathers no identity or benefits data; it shows action guidance, not approval.
+- Rechecked the statutory 2026/27 eligibility statement and official GOV.UK summary: England/Wales core-group qualifying date 23 August 2026; the GOV.UK 2026/27 list contains Universal Credit, Housing Benefit, income-related ESA and Pension Credit, subject to participating electricity supplier/account-name requirements. Where a letter requests more information or an expected letter is missing, the official contact deadline is 26 February 2027. A separate park homes route exists. Scotland has separate rules; NI does not have the WHD scheme.
+- Added the official supplier list and 2026/27 statutory statement as monitored source fingerprints. Confirmed automated snapshot at **2026-11-17T11:04:46Z**: **11/11 source fetches succeeded, zero failures**. First snapshots of new sources are baselines, not evidence of zero legal changes.
+- Real browser tests verified the public checker page HTTP 200; tested NI inapplicability, Scotland separate route, England potential main eligibility/letter-not-received, a request for more information, Wales park home, and England nonqualifying benefit. No test results were counted as genuine users.
+- IndexNow: submitted the new policy checker URL after the verification file was accessible; endpoint returned **HTTP 200**. This is only submission processing, not evidence of crawl, search indexing or user acquisition.
+- User adoption and revenue **still unverified**: externally attributable unique visitors unknown, consented email subscribers unknown/no backend, genuine paid users 0 verified, net receipts **£0**.
+- Client-side checker and policy summaries require manual re-verification whenever the relevant official version fingerprints change. Never automatically change legal eligibility advice based solely on a hash.
+- The static site does not yet have a securely authenticated backend, and no provider integration for privacy-preserving audience measurement or opt-in email list has been verified. Do not claim otherwise. An external analytics provider would require a provisioned account, documented privacy purposes, and tests separating owner's QA from public usage.
+
+
 Last updated: 2026-11-17 (UTC). This file documents what actually ran, not forecasts.
 
 ## Existing project (DO NOT REBUILD)
