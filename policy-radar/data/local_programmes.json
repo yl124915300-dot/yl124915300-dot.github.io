@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "catalogue": "Policy Radar UK — manually checked local Crisis and Resilience Fund pointers",
+  "jurisdiction": "England",
+  "checked_at": "2026-11-17",
+  "usage": "Public reference links, not a benefits eligibility service. Use official sources and check whether a programme is taking new applications. No commercial service charge.",
+  "records": [
+    {
+      "id": "birmingham",
+      "admin_district": "Birmingham",
+      "council": "Birmingham City Council",
+      "official_guidance": "https://www.birmingham.gov.uk/info/50274/cost_of_living_support/2497/crisis_and_resilience_fund_2026_to_2027/2",
+      "operator_updates": "https://www.bvsc.org/crf",
+      "focus": [
+        "food",
+        "energy",
+        "hardship"
+      ],
+      "availability": "unverified_conflicting_public_notices",
+      "availability_note": "The council's June guide said open; the administrator published a September pause. Re-check the live administrator and application route. No automated approval implied.",
+      "automated_official_source_monitor": true
+    },
+    {
+      "id": "manchester",
+      "admin_district": "Manchester",
+      "council": "Manchester City Council",
+      "official_guidance": "https://www.manchester.gov.uk/benefits-and-support/help-with-emergency-living-costs-and-crisis-support-in-manchester-crisis-and-resilience-fund",
+      "focus": [
+        "food",
+        "emergency costs",
+        "energy",
+        "essential items"
+      ],
+      "availability": "check_official_site",
+      "availability_note": "The council publishes separate support categories. It blocks direct automated access in this monitor; verify changes manually.",
+      "automated_official_source_monitor": false
+    },
+    {
+      "id": "leeds",
+      "admin_district": "Leeds",
+      "council": "Leeds City Council",
+      "official_guidance": "https://www.leeds.gov.uk/benefits/crisis-and-resilience-fund",
+      "focus": [
+        "essential expenses",
+        "housing payments",
+        "crisis support"
+      ],
+      "availability": "check_official_site",
+      "availability_note": "The council describes online routes for crisis and housing payments, subject to individual eligibility.",
+      "automated_official_source_monitor": true
+    },
+    {
+      "id": "bristol",
+      "admin_district": "Bristol, City of",
+      "council": "Bristol City Council",
+      "official_guidance": "https://www.bristol.gov.uk/residents/benefits-and-financial-help/crisis-resilience-fund",
+      "focus": [
+        "crisis payments",
+        "housing payments",
+        "food",
+        "heating"
+      ],
+      "availability": "check_official_site",
+      "availability_note": "The council lists different routes for different household circumstances.",
+      "automated_official_source_monitor": true
+    }
+  ]
+}
