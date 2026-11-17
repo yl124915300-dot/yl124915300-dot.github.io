@@ -1,0 +1,29 @@
+name: Policy Radar public benefit safety checks
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/policy-radar-safety-checks.yml"
+      - "policy-radar/eligibility-source-guard.js"
+      - "policy-radar/warm-home-discount-checker.html"
+      - "policy-radar/tests/**"
+  pull_request:
+    paths:
+      - "policy-radar/eligibility-source-guard.js"
+      - "policy-radar/warm-home-discount-checker.html"
+      - "policy-radar/tests/**"
+permissions:
+  contents: read
+jobs:
+  safety-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Test official-source fail-closed and normal behaviour
+        run: node --test policy-radar/tests/eligibility-source-guard.test.cjs
