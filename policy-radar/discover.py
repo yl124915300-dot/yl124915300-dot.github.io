@@ -23,7 +23,7 @@ QUERIES=[
     ("energy","energy price cap"),
     ("local-support","crisis resilience fund"),
 ]
-MAX_PER_QUERY=15
+MAX_PER_QUERY=75
 MAX_QUEUE=120
 
 # Search API uses broad token matching; never treat a search hit as relevant
@@ -76,7 +76,6 @@ def main():
         params=urlencode({
             "q":q,
             "count":MAX_PER_QUERY,
-            "order":"-public_timestamp",
             "filter_public_timestamp":f"from:{from_date}",
             "fields":"title,description,link,public_timestamp,format",
         })
