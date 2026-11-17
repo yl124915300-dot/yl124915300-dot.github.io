@@ -82,6 +82,12 @@ footer{border-top:1px solid #d6e3d9;color:#5d7664;font-size:12px;line-height:1.6
 <p class="small">Never pay someone to secure an automatic government energy discount. The actual scheme decides whether a household qualifies. Scheme dates or rules can change; check the official source.</p>
 <div class="source-links"><a href="./my-radar.html">Keep official policy dates in your private calendar ↗</a><a href="./updates.xml">Follow verified policy updates via RSS ↗</a></div>
 </section>
+<section class="panel"><h2>Share the free official-source checker</h2>
+<p class="small">If someone you know may need to check their electricity discount, send them this public guide. Sharing never includes your answers, benefit status or any other information you entered above. We do not track recipients or send messages on your behalf.</p>
+<div class="buttons"><button class="btn secondary" id="share-checker" type="button">Share this free tool</button>
+<a class="btn secondary" href="https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales" target="_blank" rel="noopener noreferrer">Open GOV.UK guidance ↗</a></div>
+<p class="small" id="share-checker-result" role="status" aria-live="polite"></p>
+</section>
 </main>
 <footer><div class="wrap">Independent Policy Radar UK · Editorial rules check: 17 November 2026 · No government affiliation, no paid applications, no personal details collected, and no eligibility guarantee. This page loads no third-party tracking scripts. Official GOV.UK and Ofgem sources remain authoritative. · <a href="./data-handling.html">How this preview handles data</a></div></footer>
 <script src="./eligibility-source-guard.js"></script>
@@ -110,6 +116,23 @@ fetch("./data/source_status.json",{cache:"no-store"})
    setGuardReady(true,"Official-source checks completed at "+result.last_checked_utc+" (UTC). The current 2026/27 eligibility sources passed their monitoring checks; this is not a guarantee of eligibility.");
  })
  .catch(err=>setGuardReady(false,"This checklist is temporarily paused: "+String(err.message||"source check unavailable")+". Use the original GOV.UK guidance and helpline below. No eligibility decision was made."));
+const shareBtn=el("share-checker"),shareResult=el("share-checker-result");
+shareBtn.addEventListener("click",async()=>{
+ const canonical="https://yl124915300-dot.github.io/policy-radar/warm-home-discount-checker.html";
+ try{
+  if(navigator.share){
+    await navigator.share({title:"Free £150 Warm Home Discount action checker",text:"Independent, source-linked 2026/27 UK discount information. Confirm decisions with GOV.UK.",url:canonical});
+    shareResult.textContent="Your device finished the share action. Policy Radar does not know whether anyone received it.";
+  } else if(navigator.clipboard&&navigator.clipboard.writeText){
+    await navigator.clipboard.writeText(canonical);
+    shareResult.textContent="Public checker link copied. No answers or private details were included.";
+  } else {
+    shareResult.textContent="Copy this public link manually: "+canonical;
+  }
+ }catch(err){
+  shareResult.textContent="No share was confirmed. You can copy the public page link from your address bar.";
+ }
+});
 nation.addEventListener("change",()=>{fields.hidden=!(nation.value==="england"||nation.value==="wales");panel.hidden=true;out.style.display="none"});
 el("reset").addEventListener("click",()=>{form.reset();fields.hidden=true;panel.hidden=true;out.style.display="none"});
 function show(title,summary,steps,warning){
