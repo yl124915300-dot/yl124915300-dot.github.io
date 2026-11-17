@@ -1,0 +1,60 @@
+name: "Policy Radar UK: request a policy monitor"
+description: "Suggest a public, official UK policy or local council programme to monitor. Public GitHub account required."
+title: "[Policy Radar request] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is an **independent public information project**, not a government application portal.
+        GitHub issues are **public**. Never include full postcodes, names, addresses, email addresses,
+        benefit account details, medical information, immigration status, or other personal data.
+        Requests do not subscribe you to messages. Always use the official scheme for urgent help.
+  - type: dropdown
+    id: jurisdiction
+    attributes:
+      label: "UK nation or council area (general only)"
+      options:
+        - "England"
+        - "Scotland"
+        - "Wales"
+        - "Northern Ireland"
+        - "England — specific council (provide council name below)"
+        - "UK-wide"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Which public policy topic?"
+      options:
+        - "Energy and household bills"
+        - "Benefits and crisis support"
+        - "Housing and rental rules"
+        - "Childcare and education"
+        - "Tax and employment"
+        - "Transport and consumer rights"
+        - "Other public rights"
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: "What public change or deadline should be monitored?"
+      description: "Keep this general. Do not describe your family's individual circumstances."
+      placeholder: "Example: official council dates for opening applications to a public hardship fund"
+    validations:
+      required: true
+  - type: input
+    id: official
+    attributes:
+      label: "Official government source URL (if known)"
+      placeholder: "https://www.gov.uk/... or https://your-council.gov.uk/..."
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: "Public issue checklist"
+      options:
+        - label: "This contains no personal, financial account, or other sensitive information."
+          required: true
