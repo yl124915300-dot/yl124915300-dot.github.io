@@ -29,7 +29,7 @@ def fold(line: str) -> str:
             current = " " + char
         else:
             current += char
-    return "\r\n".join(chunks)
+    return "\r\n".join(chunks + [current])
 
 def main() -> None:
     src = json.loads(DATA.read_text(encoding="utf-8"))
@@ -111,7 +111,12 @@ def main() -> None:
             "END:VEVENT",
         ])
     lines.append("END:VCALENDAR")
-    (ROOT/"calendar.ics").write_bytes(("\r\n".join(fold(x) for x in lines)+"\r\n").encode("utf-8"))
+    calendar = ("\r\n".join(fold(x) for x in lines)+"\r\n").encode("utf-8")
+    if not calendar.startswith(b"BEGIN:VCALENDAR\r\n") or not calendar.endswith(b"END:VCALENDAR\r\n"):
+        raise ValueError("Calendar structure invalid")
+    if calendar.count(b"BEGIN:VEVENT") != len(curated) or calendar.count(b"END:VEVENT") != len(curated):
+        raise ValueError("Calendar event count incorrect")
+    (ROOT/"calendar.ics").write_bytes(calendar)
     print(f"Generated {len(curated)} reviewed milestones. Machine-detected text differences were not published.")
 
 if __name__ == "__main__":
