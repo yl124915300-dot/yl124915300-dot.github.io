@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Editor-approved, source-linked future UK policy milestones. This feed is not an automatic eligibility determination. Machine-detected changes remain unpublished until human review.",
+  "description": "Editor-approved, source-linked UK public policy milestones and announcements. RSS may include verified notices; calendar includes only future-date events approved for calendar inclusion. Machine candidates require human review.",
   "reviewed_snapshot_date": "2026-11-17",
   "events": [
     {
@@ -33,6 +33,22 @@
       "source": "https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales",
       "reviewed_at": "2026-11-17T09:00:00Z",
       "approved": true
+    },
+    {
+      "id": "warm-home-discount-letters-start-2026",
+      "status": "official-announcement",
+      "topic": "energy",
+      "nations": [
+        "england",
+        "wales"
+      ],
+      "title": "GOV.UK: £150 Warm Home Discount confirmation letters sent through January 2027",
+      "description": "The UK government's 22 October 2026 announcement says letters are being sent from late October through January 2027. Some households receive the discount automatically; those told to supply extra information must contact the helpline by 26 February 2027. Beware messages requesting bank details. This is a verified public notice, not a personal eligibility decision.",
+      "date": "2026-10-22",
+      "source": "https://www.gov.uk/government/news/households-to-receive-150-warm-home-discount-confirmation-letter",
+      "reviewed_at": "2026-11-17T10:40:00Z",
+      "approved": true,
+      "include_in_calendar": false
     }
   ]
 }
