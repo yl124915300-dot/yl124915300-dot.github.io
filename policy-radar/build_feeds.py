@@ -88,6 +88,74 @@ def main() -> None:
     xml=b'<?xml version="1.0" encoding="UTF-8"?>\n'+ET.tostring(rss, encoding="utf-8") + b"\n"
     (ROOT/"updates.xml").write_bytes(xml)
 
+    # Per-nation, per-topic RSS subscriptions. Generate only from the
+    # manually approved public entries, never from unreviewed search results.
+    # An empty feed is valid and means "no approved notices yet", not
+    # "no eligible policies exist".
+    regions = ("england", "wales", "scotland", "ni")
+    topics = ("energy", "support", "childcare")
+    feed_dir = ROOT / "feeds"
+    feed_dir.mkdir(parents=True, exist_ok=True)
+    manifest = {
+        "schema_version": 1,
+        "notice": "Counts are editor-approved notices, not eligible residents or subscribers. Empty feeds are expected.",
+        "generated_from": "policy-radar/data/approved_events.json",
+        "feeds": [],
+    }
+    for region in regions:
+        for topic in topics:
+            name = f"{region}-{topic}.xml"
+            selected = [
+                item for item in curated
+                if item[0].get("topic") == topic
+                and region in item[0].get("nations", [])
+            ]
+            feed = ET.Element("rss", {"version": "2.0"})
+            ch = ET.SubElement(feed, "channel")
+            for tag, value in [
+                ("title", f"Policy Radar UK — {region.title()} / {topic.title()}"),
+                ("link", BASE),
+                ("description", "Editor-reviewed, official-source-linked UK policy notices, not personal eligibility decisions."),
+                ("language", "en-gb"),
+                ("ttl", "720"),
+            ]:
+                ET.SubElement(ch, tag).text = value
+            ET.SubElement(ch, f"{{{ATOM_NS}}}link", {
+                "href": BASE + "feeds/" + name,
+                "rel": "self",
+                "type": "application/rss+xml",
+            })
+            for entry, dt, approved_at in sorted(selected, key=lambda x: x[2], reverse=True):
+                item = ET.SubElement(ch, "item")
+                fields = [
+                    ("title", entry["title"]),
+                    ("link", entry["source"]),
+                    ("description", entry["description"] + " Source: " + entry["source"]
+                     + " · Reviewed: " + approved_at.date().isoformat()),
+                    ("guid", entry["id"] + "@policy-radar.uk"),
+                    ("pubDate", format_datetime(approved_at.astimezone(timezone.utc), usegmt=True)),
+                ]
+                for tag, value in fields:
+                    el = ET.SubElement(item, tag)
+                    el.text = value
+                    if tag == "guid":
+                        el.set("isPermaLink", "false")
+            ET.indent(feed)
+            output = b'<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(feed, encoding="utf-8") + b"\n"
+            root = ET.fromstring(output)
+            if len(root.findall("./channel/item")) != len(selected):
+                raise ValueError(f"Filtered RSS count mismatch: {name}")
+            (feed_dir / name).write_bytes(output)
+            manifest["feeds"].append({
+                "nation": region,
+                "topic": topic,
+                "approved_items": len(selected),
+                "path": "feeds/" + name,
+            })
+    (feed_dir / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
     lines=[
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
@@ -118,7 +186,7 @@ def main() -> None:
     if calendar.count(b"BEGIN:VEVENT") != len(calendar_events) or calendar.count(b"END:VEVENT") != len(calendar_events):
         raise ValueError("Calendar event count incorrect")
     (ROOT/"calendar.ics").write_bytes(calendar)
-    print(f"Generated {len(curated)} reviewed RSS entries; {len(calendar_events)} public calendar milestones. Machine-detected text differences were not published.")
+    print(f"Generated {len(curated)} reviewed RSS entries, {len(regions)*len(topics)} filtered feeds; {len(calendar_events)} public calendar milestones. Machine-detected text differences were not published.")
 
 if __name__ == "__main__":
     main()
