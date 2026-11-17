@@ -25,6 +25,7 @@ h2{letter-spacing:-.025em;font-size:23px;margin:0 0 12px}h3{font-size:17px;margi
 select{padding:12px;border-radius:9px;border:1px solid #b9ccb9;background:#fff;color:#1b3524;width:100%}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .hint{color:#627a68;font-size:12px;line-height:1.5;margin:5px 0 0}
+button.btn:disabled{opacity:.5;cursor:not-allowed}
 button.btn,a.btn{display:inline-block;background:#1e603f;color:#fff;border:0;border-radius:10px;padding:13px 18px;font-size:14px;font-weight:800;cursor:pointer;text-decoration:none}
 .btn.secondary{background:white;color:#1e603f;border:1px solid #9dc4a5}.buttons{display:flex;flex-wrap:wrap;gap:9px}
 .result{background:#eaf4eb;border:1px solid #add2b9;border-radius:14px;padding:21px;line-height:1.6;display:none}
@@ -43,6 +44,7 @@ footer{border-top:1px solid #d6e3d9;color:#5d7664;font-size:12px;line-height:1.6
 <section class="panel">
 <div class="topline"><h2>What to check</h2><span class="tag">No sign-up · No payment · No data collection</span></div>
 <div class="no-data">The Warm Home Discount is a one-off <strong>£150 bill discount</strong>, not a bank transfer. For England and Wales, the 2026/27 qualifying date was <strong>23 August 2026</strong>. The majority of eligible households receive their discount automatically. <a href="https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales" target="_blank" rel="noopener noreferrer">Official GOV.UK conditions ↗</a></div>
+<div id="source-guard" class="no-data" role="status" aria-live="polite" style="margin:16px 0"><strong>Checking official-source monitoring status…</strong> The action checker is unavailable until the 2026/27 government guidance sources have been verified as current.</div>
 <form id="checker" autocomplete="off">
 <div class="field"><label for="nation">1. Which part of the UK do you live in?</label>
 <select id="nation" required><option value="">Select your nation…</option><option value="england">England</option><option value="wales">Wales</option><option value="scotland">Scotland</option><option value="ni">Northern Ireland</option></select></div>
@@ -63,7 +65,7 @@ footer{border-top:1px solid #d6e3d9;color:#5d7664;font-size:12px;line-height:1.6
 <div class="field"><label for="letter">6. Have you received a Warm Home Discount letter for 2026/27?</label>
 <select id="letter"><option value="">Select…</option><option value="automatic">Yes — it says my discount is automatic</option><option value="details">Yes — I need to supply more information</option><option value="none">No letter received</option><option value="other">Not sure / another situation</option></select></div>
 </div>
-<div class="buttons"><button type="submit" class="btn">Show my next action</button><button type="button" id="reset" class="btn secondary">Clear answers</button></div>
+<div class="buttons"><button type="submit" class="btn" id="check-action" disabled>Checking guidance…</button><button type="button" id="reset" class="btn secondary">Clear answers</button></div>
 </form>
 </section>
 <section class="panel" aria-label="Action checker result" id="out-panel" hidden>
@@ -87,6 +89,35 @@ footer{border-top:1px solid #d6e3d9;color:#5d7664;font-size:12px;line-height:1.6
 "use strict";
 const nation=document.getElementById("nation"),fields=document.getElementById("engwales"),form=document.getElementById("checker"),out=document.getElementById("result"),panel=document.getElementById("out-panel");
 const el=id=>document.getElementById(id);
+const guard=el("source-guard"),action=el("check-action");
+let guidanceReady=false;
+function setGuardReady(ready,message){
+ guidanceReady=ready;
+ guard.textContent=message;
+ guard.style.borderLeftColor=ready?"#619875":"#b48e4e";
+ guard.style.background=ready?"#edf6ef":"#fbf4e8";
+ action.disabled=!ready;
+ action.textContent=ready?"Show my next action":"Official check temporarily unavailable";
+}
+const required=["warm-home-discount","warm-home-discount-suppliers","warm-home-discount-eligibility-statement-2026"];
+fetch("./data/source_status.json",{cache:"no-store"})
+ .then(r=>{if(!r.ok)throw new Error("source monitoring unavailable");return r.json()})
+ .then(d=>{
+   const checked=Date.parse(d.last_checked_utc||"");
+   if(!Number.isFinite(checked)||checked>Date.now()+300000||Date.now()-checked>48*60*60*1000){
+      throw new Error("the official-source verification is older than 48 hours or has an invalid timestamp");
+   }
+   const rows=Array.isArray(d.sources)?d.sources:[];
+   const tracked=required.map(id=>rows.find(row=>row.id===id));
+   if(tracked.some(row=>!row||row.fetch_status!=="ok"||!row.content_sha256||!row.last_success_utc)){
+      throw new Error("a required official-source check failed or is missing");
+   }
+   if(tracked.some(row=>row.pending_human_review===true)){
+      throw new Error("at least one official guidance page has changed and needs editorial review");
+   }
+   setGuardReady(true,"Official-source checks completed at "+d.last_checked_utc+" (UTC). The 2026/27 eligibility sources have been fetched without pending page-change flags. This is not proof of personal eligibility; confirm with GOV.UK.");
+ })
+ .catch(err=>setGuardReady(false,"This checklist is temporarily paused: "+String(err.message||"source check unavailable")+". Please use the GOV.UK official guidance and helpline links below. No eligibility decision was made."));
 nation.addEventListener("change",()=>{fields.hidden=!(nation.value==="england"||nation.value==="wales");panel.hidden=true;out.style.display="none"});
 el("reset").addEventListener("click",()=>{form.reset();fields.hidden=true;panel.hidden=true;out.style.display="none"});
 function show(title,summary,steps,warning){
@@ -98,6 +129,7 @@ function show(title,summary,steps,warning){
 }
 form.addEventListener("submit",e=>{
  e.preventDefault();
+ if(!guidanceReady){show("Use the current GOV.UK guidance","The policy checker cannot confirm its official-source monitoring status. No automated qualification result is available. Read the government rules and contact the official scheme.",[],true);return;}
  const n=nation.value;
  if(!n){show("Please select your nation","England, Wales, Scotland and Northern Ireland have different scheme rules.",[],true);return}
  if(n==="ni"){show("Warm Home Discount does not run in Northern Ireland","The £150 Warm Home Discount Scheme is a Great Britain programme. Check Northern Ireland's separate Affordable Warmth and energy support services.",["Use the government's official Warm Home Discount overview for links to Northern Ireland support.","Do not pay third parties for a supposed Warm Home Discount application."],true);return}
