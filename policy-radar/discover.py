@@ -40,6 +40,12 @@ def likely_relevant(entry, topic):
     path=str(entry.get("link") or entry.get("official_url") or "")
     if "/employment-tribunal-decisions/" in path or "/government/people/" in path:
         return False
+    if "/government/statistics/announcements/" in path:
+        return False
+    if str(entry.get("title") or "").lower().startswith("easy read:"):
+        return False
+    if "(estimated)" in str(entry.get("title") or "").lower():
+        return False
     title=str(entry.get("title") or "").lower()
     description=str(entry.get("description") or "").lower()
     text=title+" "+description
