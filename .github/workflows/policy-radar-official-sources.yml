@@ -2,6 +2,10 @@ name: Policy Radar UK official-source watch
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/policy-radar-official-sources.yml"
+      - "policy-radar/monitor.py"
   schedule:
     - cron: "17 6 * * *"
 
