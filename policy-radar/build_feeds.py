@@ -97,7 +97,8 @@ def main() -> None:
         "X-WR-CALNAME:Policy Radar UK — official milestones",
         "X-WR-CALDESC:Source-checked public dates only; not individual legal or benefits advice.",
     ]
-    for entry,d,published in sorted(curated,key=lambda x:x[1]):
+    calendar_events = [x for x in curated if x[0].get("include_in_calendar", True) is not False]
+    for entry,d,published in sorted(calendar_events,key=lambda x:x[1]):
         lines.extend([
             "BEGIN:VEVENT",
             "UID:"+entry["id"]+"@policy-radar.uk",
@@ -114,10 +115,10 @@ def main() -> None:
     calendar = ("\r\n".join(fold(x) for x in lines)+"\r\n").encode("utf-8")
     if not calendar.startswith(b"BEGIN:VCALENDAR\r\n") or not calendar.endswith(b"END:VCALENDAR\r\n"):
         raise ValueError("Calendar structure invalid")
-    if calendar.count(b"BEGIN:VEVENT") != len(curated) or calendar.count(b"END:VEVENT") != len(curated):
+    if calendar.count(b"BEGIN:VEVENT") != len(calendar_events) or calendar.count(b"END:VEVENT") != len(calendar_events):
         raise ValueError("Calendar event count incorrect")
     (ROOT/"calendar.ics").write_bytes(calendar)
-    print(f"Generated {len(curated)} reviewed milestones. Machine-detected text differences were not published.")
+    print(f"Generated {len(curated)} reviewed RSS entries; {len(calendar_events)} public calendar milestones. Machine-detected text differences were not published.")
 
 if __name__ == "__main__":
     main()
