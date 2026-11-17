@@ -1,5 +1,28 @@
 # Policy Radar UK — Operations (source of truth)
 
+## 2026-11-17 correction / execution gate (must read before building more pages)
+
+**Strategic correction:** The earlier sequence over-weighted page count, number of sources/feeds, CI passes, and IndexNow receipts. These prove limited technical operation, not acquisition, utility, retention or purchase intent. Do NOT keep presenting technical item counts as market traction.
+
+**Official recheck:** The England/Wales 2026/27 Warm Home Discount government guide and the 7 August 2026 statutory eligibility statement both confirm: £150, qualifying snapshot 23 August 2026, qualifying benefits Universal Credit/Housing Benefit/income-related ESA/Pension Credit, electricity supplier/account-holder conditions, most discounts automatic, a letter requiring additional information must be actioned by 26 February 2027. Verify the source version before changing the decision aid:
+- https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales
+- https://www.gov.uk/government/publications/warm-home-discount-eligibility-statement-england-and-wales-2026-to-2027-scheme-year/warm-home-discount-eligibility-statement-england-and-wales-2026-to-2027
+
+**Shipped correction:** Existing public homepage at https://yl124915300-dot.github.io/policy-radar/ now leads with two FREE resident actions (check £150 energy discount / find local emergency support), retains broad UK policy library secondarily, and removes three repetitive new-feature banners. External site fetched HTTP 200 with new primary CTA. Homepage change submitted once to IndexNow, returned HTTP 200. This does NOT establish Google/Bing indexing or visits.
+
+**Privacy correction:** Data handling page now cites the 2026 UK ICO limited statistical-purpose PECR exception for appropriately aggregated, service-improvement-only analytics; individual tracking, profiling or ad measurement do not qualify. UK GDPR still applies. No visitor analytics is installed: https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-on-the-use-of-storage-and-access-technologies/what-are-the-exceptions/ . Public page HTTP 200 verified.
+
+**Hard evidence:** Latest repository official source-status snapshot 2026-11-17T11:22:28Z had 11/11 successful fetches, 0 failures, 0 pending fingerprint differences. The 12 RSS endpoints consist of only three unique approved public policy entries distributed across nation/topic filters, not twelve independently useful programmes. Search result queries did not supply verifiable search impressions; GitHub policy feedback issues search returned zero matches. Actual external unique residents, repeat sessions and RSS subscribers remain UNKNOWN; verified paid transactions and net receipts remain zero.
+
+**Immediate business gate, not feature roadmap:**
+1. STOP creating new user-facing policy modules until there is a securely authorised measurement route. Cloudflare Web Analytics can be used for GitHub Pages only after the account owner creates a site and supplies the actual per-site snippet/token; provider privacy/legal review required. Google Search Console requires the owner to verify the URL-prefix property; sitemap/IndexNow submission alone cannot establish impressions.
+2. Prefer aggregated, privacy-preserving metrics and exclude creator/QA traffic. Track public entry page, government-guide click, voluntary ongoing subscription/follow request, and repeat actual usage where lawful; don't pretend the static site already measures these.
+3. Keep government eligibility and applications entirely free. Retain revenue £0 until a real non-test receipt. Test a premium proposition only after verified repeated value or an external organisation requests a paid API/license.
+4. Record real user evidence only from trustworthy external sources; do not create synthetic traffic, fake feedback or pretend that GitHub Actions proves acquisition.
+
+**Current externally blocked items:** Site analytics account/access, Google Search Console ownership and an ordinary-user consent-based email subscription backend have not been confirmed. Prior HubSpot account had onboarding false and missing read permission. Do not invent or publicly post account credentials. The existing site can continue running daily monitoring while these dependencies are unresolved.
+
+
 ## 17 November 2026 — safety interlock and distribution transparency
 
 - Re-read current GOV.UK 2026/27 Warm Home Discount conditions and missing-letter helpline guidance, both official and source-linked (https://www.gov.uk/the-warm-home-discount-scheme/if-you-live-in-england-and-wales ; https://www.gov.uk/the-warm-home-discount-scheme/get-help). These sources distinguish qualifying-date evidence, automatic awards, letters requiring information and the 2027-02-26 contact deadline.
