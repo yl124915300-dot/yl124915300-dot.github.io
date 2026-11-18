@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-18T07:10:04+00:00",
+  "checkedAt": "2026-11-18T20:23:26+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -38,6 +38,36 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
+    },
+    {
+      "name": "Sutton Peter",
+      "headline": "Egocentric Video Data Contributor | AI Field Data Collection & Video Quality Review",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
+    },
+    {
+      "name": "K Julian",
+      "headline": "Creative Consultant, Writing and in-Person Event Professional",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/ElZxZy6kYyLyu4X7xwzk"
+    },
+    {
+      "name": "Abdul Haseeb",
+      "headline": "Shopify & E-Commerce Specialist | 5+ Years Experience",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 30,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/to1XeayjYpKH8uEsGlGn"
     },
     {
       "name": "Alexander Ortiz (Mr. Crafty)",
@@ -88,16 +118,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/AfcYfUjQ83uxQ63ulyzQ"
-    },
-    {
-      "name": "K Julian",
-      "headline": "Creative Consultant, Writing and in-Person Event Professional",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/ElZxZy6kYyLyu4X7xwzk"
     },
     {
       "name": "Jason battiest",
@@ -160,26 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/iR4U9a8xC9WjdWACCkpj"
     },
     {
-      "name": "Raul Taveras",
-      "headline": "",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/zQaUAdNvTid71da05ENT"
-    },
-    {
-      "name": "Oluwaseyi Ogunbiyi",
-      "headline": "Entry-Level Communications & Administrative Support | Content Writing & Social Media",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/fgyjsKK3k4TuX4kjEwjf"
-    },
-    {
       "name": "Pat Santiago",
       "headline": "Founder of ACCELR8",
       "city": "San Francisco",
@@ -230,16 +230,6 @@
       "profileUrl": "https://rentahuman.ai/humans/NfyhSxukikHJbP6sKcdi"
     },
     {
-      "name": "Brandon sims",
-      "headline": "Store Consultant | Customer Service, Print Production & Shipping",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/OUrdNrSqYAiwOqVeBz4Z"
-    },
-    {
       "name": "Kaliegh Thompson",
       "headline": "",
       "city": "San Francisco",
@@ -260,16 +250,6 @@
       "profileUrl": "https://rentahuman.ai/humans/Mzb2C5QzJY39zJ136dqP"
     },
     {
-      "name": "Matthew Farley",
-      "headline": "People skills. Solve problems 24/7.",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
-    },
-    {
       "name": "Martin Davis",
       "headline": "",
       "city": "San Francisco",
@@ -278,6 +258,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
+    },
+    {
+      "name": "Matthew Farley",
+      "headline": "People skills. Solve problems 24/7.",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
     },
     {
       "name": "Iris Pierre",
@@ -310,6 +300,16 @@
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
     },
     {
+      "name": "Michael Patterson",
+      "headline": "Administrative & Office Support Professional | 20+ Years in Hospitality and Events",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
+    },
+    {
       "name": "Jessica  Potter",
       "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
       "city": "San Francisco",
@@ -320,14 +320,14 @@
       "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
     },
     {
-      "name": "Michael Patterson",
-      "headline": "Administrative & Office Support Professional | 20+ Years in Hospitality and Events",
+      "name": "Yoanna Flores",
+      "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
       "city": "San Francisco",
       "country": "US",
       "hourlyRate": 7.25,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
+      "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
       "name": "Wu xiansheng",
@@ -630,6 +630,16 @@
       "profileUrl": "https://rentahuman.ai/humans/2klmttBqAt5wW1YjKK0U"
     },
     {
+      "name": "Radeendesigns",
+      "headline": "Graphic Designer & Digital Content Creator | 3+ Years of Freelance Experience | Fluent Hausa Speaker",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/IkMv4KHHSRifB2uicRub"
+    },
+    {
       "name": "Precious",
       "headline": "Freelance Content Writer | AI Response Evaluation, Research & Proofreading",
       "city": "London",
@@ -688,16 +698,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/0zTTaPfPvJVjPO6dWT1r"
-    },
-    {
-      "name": "Radeendesigns",
-      "headline": "Graphic Designer & Digital Content Creator | 3+ Years of Freelance Experience | Fluent Hausa Speaker",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/IkMv4KHHSRifB2uicRub"
     },
     {
       "name": "Olivia Johnson",
