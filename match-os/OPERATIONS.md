@@ -1,5 +1,20 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-18 13:46 JST｜公开需求/主动买家/流量只读轮检
+
+- **生产入口**：Firecrawl 以 `maxAge=0` 重新抓取 [公开 MATCH OS 首页](https://yl124915300-dot.github.io/match-os/)，返回正常可读的「Purchase chat」页面。首屏仍显示耳机用途、购物国家/币种/预算、原会话动态比较与免费邮件请求/单次回信许可；页面明确写明“PayPal checkout is closed”。这是页面内容核对，不是实际买家端对话或支付验收；全量访客、开聊、点击 UNKNOWN。
+- **11/17 新的公开购买意图 5 条（截至 11/18 午间检索；均是公开信号，不是 MATCH OS 用户）**：
+  1. [意大利：混合地面吸尘器](https://www.reddit.com/r/VacuumCleaners/comments/1xynl2m/need_vacuum_cleaner_suggestions_300_budget_mixed/)（11/17）：EUR300、木地板+厚地毯、长发、轻便，已关注 Dreame G10；可生成结构/刷头/清洁场景比较主题，缺意大利当日商家总价、适配证据，不把型号当推荐。
+  2. [英国：两款无线吸尘器](https://www.reddit.com/r/VacuumCleaners/comments/1xyby2q/shark_powerdetect_speed_vs_levoit_lvac200/)（11/17）：Shark PowerDetect Speed GBP180 与 Levoit LVAC200 GBP115 的发帖者自述报价，小户型硬地板+长发，无宠物；属于明确二选一，但价格是用户自述，未获独立核价。
+  3. [俄罗斯：头戴耳机升级](https://www.reddit.com/r/HeadphoneAdvice/comments/1xypwx0/looking_to_upgrade_from_soundcore_space_one/)（11/17）：RUB15,000、户外步行与 DJ 混音、要求 ANC 和有线接口，在 Sennheiser Momentum 4 和 Soundcore 新品之间比较；发帖者称中国卖家约 USD160，但不代表俄区可实际购买含税价。
+  4. [澳大利亚：显卡更换](https://www.reddit.com/r/PcBuild/comments/1xy80b6/aus_my_6900xt_is_dying_please_help_pick_a_budget/)（11/17）：损坏旧 6900XT，预算 AUD500，1440p 游戏，提到 Intel B580 AUD419、新卡与二手候选；仅为用户自报可见价，二手成色、兼容性和本地库存未核查。
+  5. [美国：黑五电脑](https://www.reddit.com/r/PcAdvice/comments/1xyle06/best_black_friday_computer_deals_for_500800/)（11/17）：USD500–800、笔记本/迷你机/台式机皆可，用于游戏、AI、多任务，要求可升级 >=16GB RAM、>=512GB SSD、可选独显；无可核验现价与明确可买 SKU。
+  **优先可服务主题**：英国两款吸尘器的价格/滚刷结构/毛发缠绕/售后证据卡；公开讨论只证明这些比较问题真实存在，现有原站四类匹配模块并无上述区域足够商家证据，不能替作者生成已核验个人购买方案。未联系作者、未留存用户名、未发送评论或私信。
+- **今日入站独立检查**：Gmail `in:anywhere` 11/16 起精确 FormSubmit 买家许可主题 = **0**；宽泛 MATCH OS Buyer 搜索 = **0**；11/15 起 FormSubmit 仍为 **4 封历史消息**（2 QA + 2 激活通知），无新请求。原仓库 `MATCH OS BUYER` 与宽泛 `MATCH OS` issue = **0**；FrameFind #41 评论 = **0**。vidIQ 已连接可发布社媒账号 **0**（不代表 Pinterest 不存在）。本轮真人合格入站 **0**、新自动发出 **0**、独立证明订单 **0**、新增已核验项目净到账 **US$0**；PayPal 实时账户流水 UNKNOWN，独立 Live US$1 链接未验收、付款入口保持关闭。
+- **Pinterest 所有者逐 Pin 统计缺失**：Browser 仍返回 `Browser access requires the originating browser context`，无法读取 11/18 官方耳机/游戏/燕麦奶的曝光、Pin 点击与出站；三条均分别记为 **UNKNOWN**。不能从公开 Pin 页或历史 11/16 数值猜测当日业绩。既往三次出站为已知 QA，未主动点击 Pin，未增加合成流量。
+- **单一优先动作**：待原持有人已登录 Pinterest 后台可从正确浏览器上下文读取时，核验三条 Pin 在同一统计窗口内的官方累计曝光/点击/出站，标注 QA 及非 QA 无法辨认部分；若没有真正的买家主动入站或可核验新出站，不发新内容、不扩商品代码、不开放服务费。
+
+
 ## 2026-11-17 13:35 JST｜全球需求与买家/分发实查（无外发）
 
 - **生产站实查**：公开 `https://yl124915300-dot.github.io/match-os/` 直接读取返回 HTTP 200；网页可见用户自主选择有线 ANC、线缆麦克风、关机有线音频/泛比较及地区、预算、期限，提供原会话比较、来源授权、匿名反馈和独立提交买家免费询价。正式 PayPal US$1 收费入口继续明确关闭；公开页没有实际订单或 Live 资金证据。独立全量访客/开聊仍 UNKNOWN。
