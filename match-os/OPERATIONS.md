@@ -1,5 +1,20 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-19｜公开购买信号及 72 小时分发节点只读核验（JST 午间）
+
+- **只读生产复核**：Firecrawl 对 https://yl124915300-dot.github.io/match-os/ 使用 `maxAge=0` 获取线上页面，响应元数据 `HTTP 200`，标题仍为 `MATCH OS — Purchase chat`；能看到本人自主选择耳机用途、地区/币种/预算、临时比较、来源授权、商家直达与 FormSubmit 明确回复同意。生产明确写 `PayPal checkout is closed`，收费仍关闭；本次仅获取静态页面文字，并非真实 Chrome 用户成交体验。另一路公开网页读取被工具禁用、独立终端 DNS 不可用，故只以 Firecrawl 这次 HTTP 响应作为实时页面证据。全站到站、开聊、商家出站全量 UNKNOWN。
+- **11/19 本轮新发现的公开消费问题（最多五条；与 11/18 已记五条去重，全部未联系、无用户授权）**：
+  1. [加拿大安大略：黑五无线吸尘器选择](https://www.reddit.com/r/VacuumCleaners/comments/1xz2uen/black_friday_vacuum/)（原帖 11/18）：预算约 $250（帖子未写币种，不能擅自定为 CAD）、公寓、多表面及车座/窗框/缝隙清理，要求无线并比较黑五或 Boxing Day；原帖明确 Ontario。缺可核验本地品牌、总价、促销截止日。
+  2. [加拿大：黑五无线吸尘器与 Costco](https://www.reddit.com/r/VacuumCleaners/comments/1xz4gzp/vacuum_black_friday/)（原帖 11/18）：低于 CAD 500、续航/吸力、倾向 Shark Stratos 与 Miele，也在询问 Costco 购买优势；地面类型未知，帖子本人说法不代表商家库存和售后。
+  3. [澳大利亚：长毛宠物家庭无线吸尘器](https://www.reddit.com/r/VacuumCleaners/comments/1xz8duu/wanna_buy_my_parents_a_cordless_vacuum/)（原帖 11/18）：替父母采购，家有掉毛严重的黑色拉布拉多犬、主要瓷砖地面、需要短时清理的无线款；未声明预算/型号，不自动补。
+  4. [美国：黑五羊毛地毯与木地板吸尘器](https://www.reddit.com/r/VacuumCleaners/comments/1xzr6ez/need_advice_for_what_to_try_and_grab_this_black/)（原帖 11/18；社区帖子标注 US）：理想 USD 800、最高 USD 1000，羊毛地毯、木地板、猫和长发、希望少换刷头；对线缆/袋装不排斥。评论中的 Sebo 价格和促销非独立商家核验，不作为在售报价。
+  5. [地区未确定：宿舍隔音有线耳机](https://www.reddit.com/r/HeadphoneAdvice/comments/1xxbsqm/wired_headphones_that_can_block_out_a_noisy/)（原帖 11/16）：预算约 US$200、学习/游戏时隔离室友说话声，有线耳塞或头戴均可；币种美元但发帖者未明确国家。此需求属于「言语隔音 + 有线」不应误认为所有 ANC 头戴型号都能屏蔽突然的人声，需对比被动隔音及实际 ANC 有线条件。
+  这五项均为公开匿名需求**主题信号**，不是 MATCH OS 买家、可自动私信对象或成交。前三项及美国吸尘器虽同属家用消费，但具体选择标准、市场/预算不同；目前日用品模块缺足够当地准确型号与实时可结账报价，不生成虚构商家推荐。公开来源使用普通可读检索结果，无复制视频或收集作者身份。
+- **主动买家/第三方回执**：Gmail `in:anywhere` 范围分别查 11/16 后精确的 `MATCH OS Buyer Request - opted-in reply (unverified)`、广义 Buyer Interest/Request、来自 `submissions@formsubmit.co` 的来信，结果三组均 0；11/17 后全文 `MATCH OS` 两封均为旧自动化任务通知，非买家。GitHub 原仓库最新 issue 列表中无 MATCH OS 买家提问（最新列表至 #44；旧 Issue #41 为 FrameFind，评论 0）。本轮实际外发、评论、私信与付款操作均 0；合格的新增自愿真人需求 0、独立证明商家订单 0、**新增已核验项目净到账 US$0**；PayPal 当前实时账户余额/全量流水 UNKNOWN，不等同于账户余额为 0。
+- **Pinterest 72h 节点**：耳机 Pin 11/16 11:45 北京时间发布、游戏 Pin 11:50，至 11/19 11:45/11:50 均已满 72h；燕麦奶 11/15 发布。Browser 连接器本次仍报 `Browser access requires the originating browser context`，不能读取当前已登录所有者后台，故三条 11/19 同窗口**官方曝光/Pin 点击/出站均 UNKNOWN**。11/16 所见耳机 5/2/2、游戏 4/1/1、燕麦奶 9/0/0 属于历史快照，合计 3 次已知 QA 出站，不复述为今日读数；没有点击 Pin 或提交测试流量，无法确定独立买家的出站是否存在。
+- **首要瓶颈和唯一下一动作**：必须恢复在原 Pinterest 已登录浏览器上下文的只读 Owner Stats 访问，读取耳机、游戏、燕麦奶同一近 30 天窗口的 72h 后逐 Pin 曝光/点击/出站并核对已知 QA，先判断已有内容分发是否出现非 QA 可疑出站。无此证据不扩大内容数量、不改成交算法、不触碰其他品牌账号、不开放 PayPal US$1 Live 入口；若恢复统计仍无非 QA 出站，再对低质量内容分发策略做止损，而不是把公开需求数量当真实用户。
+
+
 ## 2026-11-18 13:46 JST｜公开需求/主动买家/流量只读轮检
 
 - **生产入口**：Firecrawl 以 `maxAge=0` 重新抓取 [公开 MATCH OS 首页](https://yl124915300-dot.github.io/match-os/)，返回正常可读的「Purchase chat」页面。首屏仍显示耳机用途、购物国家/币种/预算、原会话动态比较与免费邮件请求/单次回信许可；页面明确写明“PayPal checkout is closed”。这是页面内容核对，不是实际买家端对话或支付验收；全量访客、开聊、点击 UNKNOWN。
