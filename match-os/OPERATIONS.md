@@ -1,5 +1,27 @@
 # MATCH OS — 交易优先运营状态
 
+## 2026-11-19 15:03（北京时间）｜Pinterest 所有者统计恢复可读，72h 后零值与历史快照冲突
+
+- **新增可核验证据**：本轮通过本人已登录的 Chrome 进入 Pinterest 企业中心及个人资料中的“前往 Pin 图数据详细信息页面”，三条原 Pin 的所有者统计均可读取；此前“无法访问所有者后台”的阻碍本轮已解除。只打开后台 analytics 页面，未点公开 Pin、缩略图、目标网址或商家链接，未发布内容或制造验收出站。
+- **同口径官方读数**：2026/10/20–2026/11/19、全部设备、全部来源、无分类；后台注明每日数据按 UTC 记录、数值为估算、非受众指标实时更新。耳机及游戏显示同一近 30 天窗口；燕麦奶初始默认截止 11/18，已用日期控件明确改为同一 10/20–11/19，并选择“所有来源”。读取时刻约 14:59–15:02 北京时间，已经超过耳机/游戏 11/16 11:45/11:50 发布后的 72h。此为 72h 后累计快照，不是严格截取最初 72h 的逐小时数据。
+
+| 原 Pin 所有者统计 | 当前显示曝光/浏览 | Pin 点击 | 出站 | 收藏 |
+| --- | ---: | ---: | ---: | ---: |
+| [有线耳机](https://www.pinterest.com/pin/1121396376006773237/analytics/?device_type=all&source_type=all&aggregation=last30d&selected_metric=IMPRESSION&selected_split=NO_SPLIT) | 0 | 0 | 0 | 0 |
+| [LEGO Batman](https://www.pinterest.com/pin/1121396376006773484/analytics/?device_type=all&source_type=all&aggregation=last30d&selected_metric=IMPRESSION&selected_split=NO_SPLIT) | 0 | 0 | 0 | 0 |
+| [燕麦奶](https://www.pinterest.com/pin/1121396376006729430/analytics/?device_type=all&source_type=all&start_date=2026-10-20&end_date=2026-11-19&aggregation=custom&selected_metric=IMPRESSION&selected_split=NO_SPLIT) | 0 | 0 | 0 | 0 |
+
+- **零值的证据边界**：以上是当前所有者后台实际显示，不能解释为已独立证明三条从未被浏览。11/16 旧快照为耳机 5/2/2/0、游戏 4/1/1/0、燕麦奶 9/0/0/0（曝光/点击/出站/收藏），历史三次出站均为已知 QA。新旧窗口均覆盖 11/15–11/16 发布日，不能简单用滚动窗口排除日期解释归零；平台过滤、回填或其他原因**未知**。不抹除历史 QA、不做负数减法、不声称自然流量为 0；当前可证明非 QA 出站 **0**，实际独立出站 **UNKNOWN**。未读取官方导出或取得平台解释，冲突未解决。
+- **买家入口只读复核**：Gmail `in:anywhere subject:"MATCH OS Buyer Interest"` 全范围 0；11/15–11/19 的 Buyer Interest / Buyer Request 主题 0。同期 FormSubmit 共 4 封，仍为 2 封明确 QA + 2 封激活通知，排除后新增授权买家 0。宽泛 MATCH OS + Buyer/Interest/Request 仅命中已记录的 Groupon 商务线程，非买家，不触发回复。原仓库不限开闭的 `is:issue "MATCH OS"` 无匹配；最新 issue/PR 列表仍至 #44（11/16，非买家），[FrameFind #41](https://github.com/yl124915300-dot/yl124915300-dot.github.io/issues/41) 评论列表为空、评论总数 0。未发信、评论、私信或联系作者。
+- **生产站本次证据**：本机 Chrome 直接打开 [生产首页](https://yl124915300-dot.github.io/match-os/)，可见 “What are you looking to buy?”、“Start purchase chat” 及 “PayPal checkout is closed”。只观察首屏，未启动聊天、提交表单、下单或付款，不把运营访问计作买家。PayPal US$1 收费保持关闭；未启用 Stripe、未改支付或功能代码。全站实际独立到站、开聊、候选展示及商家出站全量仍 UNKNOWN。
+- **新增公开购买需求 3 条**（与本文件既有原帖 URL 去重；检索范围近一周，2026/11/12–11/19；全部来自公开 Reddit 原帖，无联系或授权，不计为 MATCH OS 买家）：
+  1. [美国：黑五约 US$100 无线头戴耳机](https://www.reddit.com/r/HeadphoneAdvice/comments/1xzcnip/what_wireless_overear_headphones_are_worth/)（原帖 2026/11/18）：地铁/公交及长时间桌面使用，眼镜佩戴舒适、ANC、希望非纯黑外观，手机/笔记本多点连接为加分项。地区及预算由原帖明确；不采信评论中的商家售价。读取到带日期的搜索原帖正文，直接 URL 本轮再次抓取失败，因此不声称已验证页面实时状态。
+  2. [英国：£200 以下蓝牙耳机三选一](https://www.reddit.com/r/HeadphoneAdvice/comments/1xyl7nk/limited_budget_advice/)（原帖 2026/11/17）：比较 Momentum 4、Bose QuietComfort、Nothing Headphones 1，以音质优先，ANC 可选。原帖称促销价低于预算，未获商家独立核价；本轮能直接读取原帖正文，日期来自带绝对日期的检索结果。
+  3. [美国：搬家后 US$400 以下混合地面吸尘器](https://www.reddit.com/r/VacuumCleaners/comments/1xymllu/moving_looking_for_recommendation/)（原帖 2026/11/17）：约 2000 平方英尺住宅、木地板与地毯各半，原本想要带动力刷的 Sebo/Miele，因预算考虑 Kenmore Intuition 或其他候选。本轮能直接读取原帖正文，日期来自带绝对日期的检索结果；不把讨论中的型号或价格变成已核验推荐。
+- **实际经营漏斗**：本轮新公开需求信号 3；真实独立曝光/到站/开聊/商家出站 UNKNOWN；可证明非 QA Pinterest 出站 0；新增合格自愿买家 0、发给买家的回复 0、独立核验商家订单 0、新增已核验项目净到账 US$0。PayPal 实时账户余额及全量流水未读取，仍 UNKNOWN；“项目新增核验 0”不等于账户余额 0。
+- **首个阻碍与唯一下一动作**：首个可核验经营断点仍在独立买家触达/主动入站；后台权限已恢复，但零值与历史 QA 快照冲突，未能证明真实分发。唯一下一动作是用 Pinterest 官方同窗口数据导出核对这三条 Pin 与 11/16 旧快照的差异；在差异查清前暂停同类内容新增，既不扩商品模块，也不开放 US$1 收费。
+
+
 ## 2026-11-19｜公开购买信号及 72 小时分发节点只读核验（JST 午间）
 
 - **只读生产复核**：Firecrawl 对 https://yl124915300-dot.github.io/match-os/ 使用 `maxAge=0` 获取线上页面，响应元数据 `HTTP 200`，标题仍为 `MATCH OS — Purchase chat`；能看到本人自主选择耳机用途、地区/币种/预算、临时比较、来源授权、商家直达与 FormSubmit 明确回复同意。生产明确写 `PayPal checkout is closed`，收费仍关闭；本次仅获取静态页面文字，并非真实 Chrome 用户成交体验。另一路公开网页读取被工具禁用、独立终端 DNS 不可用，故只以 Firecrawl 这次 HTTP 响应作为实时页面证据。全站到站、开聊、商家出站全量 UNKNOWN。
