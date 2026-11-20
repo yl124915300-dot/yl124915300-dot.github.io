@@ -21,11 +21,13 @@ jobs:
         with:
           node-version: '22'
       - name: Run local parser and audit tests
-        run: node --test shopify-csv-audit/audit.test.mjs
+        run: node --test shopify-csv-audit/audit.test.mjs shopify-csv-audit/openai-feed.test.mjs
       - name: Verify public static assets
         run: |
           test -s shopify-csv-audit/index.html
           test -s shopify-csv-audit/audit.mjs
+          test -s shopify-csv-audit/openai-feed.mjs
+          test -s shopify-csv-audit/openai-feed.test.mjs
           test -s shopify-csv-audit/sample.csv
           grep -q 'audit.mjs' shopify-csv-audit/index.html
           grep -q 'Paid orders are' shopify-csv-audit/index.html
