@@ -1,0 +1,21 @@
+import assert from "node:assert/strict";
+import {parseCSV,exportFindings} from "./audit.mjs";
+import {inspectOpenAIProductFeed as check} from "./openai-feed.mjs";
+const cols=["item_id","title","description","url","brand","seller_name","image_url","availability","price","target_countries","store_country"];
+const vals=["0001","Blue mug","Ceramic mug","https://example.com/mug","Maker","Shop","https://example.com/mug.jpg","in_stock","18.00 USD",'["US"]',"US"];
+const esc=a=>a.map(x=>/[,"]/.test(x)?'"'+x.replaceAll('"','""')+'"':x).join(",");
+function run(override={},extra=[]){const h=cols.concat(extra.map(x=>x[0])),v=vals.concat(extra.map(x=>x[1]));Object.entries(override).forEach(([k,x])=>v[h.indexOf(k)]=x);return check(parseCSV(esc(h)+"\n"+esc(v)+"\n"));}
+assert.equal(run().summary.findings,0);
+assert.ok(run({availability:"available"}).issues.some(x=>x.field==="availability"));
+assert.ok(run({price:"$18"}).issues.some(x=>x.field==="price"));
+assert.ok(run({price:"18.000 USD"}).issues.some(x=>x.field==="price"));
+assert.ok(run({url:"javascript:evil"}).issues.some(x=>x.field==="url"));
+assert.ok(run({target_countries:"US"}).issues.some(x=>x.field==="target_countries"));
+assert.ok(run({item_id:""}).issues.some(x=>x.field==="item_id"));
+assert.equal(run({},[["listing_has_variations","true"],["group_id","grp"],["variant_dict",'{"Size":"M"}']]).summary.findings,0);
+assert.ok(run({},[["listing_has_variations","true"],["group_id","0001"],["variant_dict",'{"Size":"M"}']]).issues.some(x=>x.field==="group_id"));
+assert.ok(run({},[["listing_has_variations","true"],["group_id","grp"],["variant_dict",'{"Size":null}']]).issues.some(x=>x.field==="variant_dict"));
+assert.ok(check(parseCSV(esc(cols)+"\n"+esc(vals)+"\n"+esc(vals)+"\n")).issues.some(x=>x.field==="item_id"));
+assert.equal(check(parseCSV(esc(cols.slice(0,9))+"\n"+esc(vals.slice(0,9))+"\n")).issues.filter(x=>x.line===1).length,2);
+assert.ok(exportFindings(run({title:"=SUM(1,1)"}).issues).startsWith("\uFEFF"));
+console.log("13 checks passed");
