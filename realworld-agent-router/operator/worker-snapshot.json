@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-20T06:59:14+00:00",
+  "checkedAt": "2026-11-20T19:59:11+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -50,6 +50,16 @@
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
     },
     {
+      "name": "K Julian",
+      "headline": "Creative Consultant, Writing and in-Person Event Professional",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/ElZxZy6kYyLyu4X7xwzk"
+    },
+    {
       "name": "Sutton Peter",
       "headline": "Egocentric Video Data Contributor | AI Field Data Collection & Video Quality Review",
       "city": "New York",
@@ -78,16 +88,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/sjLKXGmnIlV0bWp4Vlx1"
-    },
-    {
-      "name": "K Julian",
-      "headline": "Creative Consultant, Writing and in-Person Event Professional",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/ElZxZy6kYyLyu4X7xwzk"
     },
     {
       "name": "Abdul Haseeb",
@@ -250,16 +250,6 @@
       "profileUrl": "https://rentahuman.ai/humans/Mzb2C5QzJY39zJ136dqP"
     },
     {
-      "name": "Martin Davis",
-      "headline": "",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
-    },
-    {
       "name": "Matthew Farley",
       "headline": "People skills. Solve problems 24/7.",
       "city": "San Francisco",
@@ -268,6 +258,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
+    },
+    {
+      "name": "Martin Davis",
+      "headline": "",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
     },
     {
       "name": "Iris Pierre",
@@ -640,6 +640,26 @@
       "profileUrl": "https://rentahuman.ai/humans/duXALcKQ1RohGK3EuSiO"
     },
     {
+      "name": "Kurt",
+      "headline": "10 years in media production, remote video and podcast specialist",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 75,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0Kff6HPvZUiPru6zxQFX"
+    },
+    {
+      "name": "Oluwadamilare David Fasuyi",
+      "headline": "Telecommunications Engineer | AI Data Validation, Network Analysis & Technical Research",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 15,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0zTTaPfPvJVjPO6dWT1r"
+    },
+    {
       "name": "Radeendesigns",
       "headline": "Graphic Designer & Digital Content Creator | 3+ Years of Freelance Experience | Fluent Hausa Speaker",
       "city": "London",
@@ -698,16 +718,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/yj3Vt8RJ3jAFxQOLhCoQ"
-    },
-    {
-      "name": "Oluwadamilare David Fasuyi",
-      "headline": "Telecommunications Engineer | AI Data Validation, Network Analysis & Technical Research",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 15,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0zTTaPfPvJVjPO6dWT1r"
     },
     {
       "name": "Olivia Johnson",
@@ -770,14 +780,14 @@
       "profileUrl": "https://rentahuman.ai/humans/hFaYogB4WiVSuRlTsejh"
     },
     {
-      "name": "Daniel Wilson",
-      "headline": "Detail-oriented field verification & photography specialist",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 38,
+      "name": "Ruth C",
+      "headline": "QA & Performance Test Engineer | 7+ Years | LoadRunner, Mobile & Telecom Testing",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/kgAgArNWfeJIXrHtfHkW"
+      "profileUrl": "https://rentahuman.ai/humans/wiJeiUlf8Ggdh9Frbc6N"
     },
     {
       "name": "chen zeji",
@@ -788,16 +798,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/BSSdxapJ4oqlw2oUEeR8"
-    },
-    {
-      "name": "Ruth C",
-      "headline": "QA & Performance Test Engineer | 7+ Years | LoadRunner, Mobile & Telecom Testing",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/wiJeiUlf8Ggdh9Frbc6N"
     },
     {
       "name": "Akai",
