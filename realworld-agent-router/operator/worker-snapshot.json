@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-19T20:27:03+00:00",
+  "checkedAt": "2026-11-20T06:59:14+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -30,6 +30,16 @@
   ],
   "workers": [
     {
+      "name": "Fakunmoju Qudus",
+      "headline": "Entry-Level Remote Virtual Assistant | Administrative Support & AI Productivity",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/sh3bOBj5orktEp7re9M0"
+    },
+    {
       "name": "Kelly",
       "headline": "Petroleum Engineering Student | Excel, Technical Reports & Document Formatting",
       "city": "New York",
@@ -48,6 +58,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
+    },
+    {
+      "name": "Bevo Raoul",
+      "headline": "Bilingual AI Evaluator & Data Annotator | English–French Translator | 3D Jewelry CAD Designer",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/ko0bgUGGC7taa5xoSfYq"
+    },
+    {
+      "name": "Yusuf",
+      "headline": "Recruiter & Operations Manager | Talent Sourcing, Team Leadership & Process Improvement",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/sjLKXGmnIlV0bWp4Vlx1"
     },
     {
       "name": "K Julian",
@@ -150,36 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/c8MULNfFAH8oQR2ZTjcT"
     },
     {
-      "name": "Jamie Garcia",
-      "headline": "Licensed Residential Leasing Specialist | Luxury Multifamily & Resident Experience",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/4gTyRWcGjg9l3pAHCcqs"
-    },
-    {
-      "name": "Jessie Roeder",
-      "headline": "Technology Educator & Engineer | Robotics, VR & Software Development Specialist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 15,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/IeHmBKfKZpRmo2HNgHoK"
-    },
-    {
-      "name": "Stan N.",
-      "headline": "",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/iR4U9a8xC9WjdWACCkpj"
-    },
-    {
       "name": "Pat Santiago",
       "headline": "Founder of ACCELR8",
       "city": "San Francisco",
@@ -250,16 +250,6 @@
       "profileUrl": "https://rentahuman.ai/humans/Mzb2C5QzJY39zJ136dqP"
     },
     {
-      "name": "Matthew Farley",
-      "headline": "People skills. Solve problems 24/7.",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
-    },
-    {
       "name": "Martin Davis",
       "headline": "",
       "city": "San Francisco",
@@ -268,6 +258,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/fLADbibQ928xReMH9RlL"
+    },
+    {
+      "name": "Matthew Farley",
+      "headline": "People skills. Solve problems 24/7.",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/25IrGHaBMCWqhL6eLljw"
     },
     {
       "name": "Iris Pierre",
@@ -328,6 +328,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
+    },
+    {
+      "name": "Abdulbasit Bashir",
+      "headline": "",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/qIaGZjjeDLVPWPzAOW2d"
     },
     {
       "name": "Wu xiansheng",
@@ -468,16 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/6oW8Y4Ug8MXcItgjBlg7"
-    },
-    {
-      "name": "Alex Wilson",
-      "headline": "Fast, punctual & communicative personal assistant",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/GI7zX3wSfgcguSai6lwl"
     },
     {
       "name": "Marvin Risco",
