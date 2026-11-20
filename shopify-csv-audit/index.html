@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Free private Shopify product CSV audit. Find missing product descriptions, invalid prices, duplicate SKUs, and image gaps directly in your browser. No upload required.">
-<title>Catalog Check — Free Shopify CSV Product Audit</title>
+<title>Catalog Check — Shopify and OpenAI Product Feed Audits</title>
 <link rel="canonical" href="https://yl124915300-dot.github.io/shopify-csv-audit/">
 <style>
 :root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172d31;background:#f5f6f1;font-synthesis:none}
@@ -79,7 +79,9 @@ a{color:#00745e}
 </aside></section>
 <section id="audit" class="panel">
 <h2>Scan a product CSV</h2>
-<p class="muted">Compatible with common recent and legacy Shopify product export column names. Limited to 2 MB and 5,000 records. Only the report is exported; your catalog stays local.</p>
+<label for="format" style="display:block;font-weight:700;margin:12px 0">Choose input format</label>
+<select id="format" aria-label="Input format" style="padding:10px;border:1px solid #aac9bb;border-radius:9px;background:#fff;font:inherit"><option value="shopify">Shopify Product CSV</option><option value="openai">OpenAI Stable Product Feed CSV</option></select>
+<p class="muted"><span id="format-note">Compatible with common recent and legacy Shopify product exports.</span> Limited to 2 MB and 5,000 records. Only the report is exported; your catalog stays local.</p>
 <div class="upload" id="drop" tabindex="0">
   <div><strong>Choose a Shopify product CSV</strong>
   <p class="muted">or drop a file here • no upload to a server</p>
@@ -115,16 +117,18 @@ a{color:#00745e}
 <section class="panel" aria-labelledby="guides-title"><h2 id="guides-title">Fix the errors that matter</h2><p class="muted">A missed variant dependency can be more serious than a missing product description. Use Shopify’s official documentation alongside this free check.</p><ul><li><a href="./variant-deletion-risk/">Shopify CSV variant deletion risk: Option1 name / value dependencies</a></li><li><a href="./import-errors/">Common Shopify CSV import errors: quotes, options, prices and image links</a></li></ul></section>
 <section class="dark">
   <h2>Want a complete repair review?</h2>
-  <p>A US$129, 20-product assisted remediation pilot is being evaluated. Paid orders are <strong>not open</strong> until verified checkout, order tracking, and delivery are available. You can request a pilot review directly, with no obligation and no payment requested.</p>
-  <a class="btn" id="contact" href="mailto:yl124915300@gmail.com?subject=Catalog%20Check%20-%20merchant%20pilot%20enquiry" style="background:#ecf7ef;color:#165d4b;text-decoration:none">Ask about the $129 pilot</a>
+  <p>Two pilots are being evaluated: Shopify CSV repair (US$129 / 20 products) and OpenAI product-feed error review (US$49 / 100 rows). Paid orders are <strong>not open</strong> until verified checkout, order tracking, and delivery are available. You can request a pilot review directly, with no obligation and no payment requested.</p>
+  <a class="btn" id="contact" href="mailto:yl124915300@gmail.com?subject=Catalog%20Check%20-%20merchant%20pilot%20enquiry" style="background:#ecf7ef;color:#165d4b;text-decoration:none">Ask about a repair pilot</a>
   <p class="note" style="color:#d6e5df">An email enquiry does not create a paid order. Do not send private customer data, admin credentials, full product CSVs or payment details by email.</p>
 </section>
 </main>
 <footer><div class="wrap">Catalog Check is an independent prototype, not affiliated with Shopify, OpenAI, or ChatGPT. No network requests are made by the CSV scanner; do not paste private customer information into public issues. For CSV format requirements, see <a href="https://help.shopify.com/en/manual/products/import-export/using-csv" rel="noopener noreferrer">Shopify's official guidance</a>. <span id="stamp">Updated Nov 2026.</span></div></footer>
 <script type="module">
 import {parseCSV,inspectShopifyCSV,exportFindings} from "./audit.mjs";
+import {inspectOpenAIProductFeed} from "./openai-feed.mjs";
 const $=id=>document.getElementById(id);
 const demoCSV='Handle,Title,Body (HTML),Variant SKU,Variant Price,Variant Compare At Price,Image Src\ntrail-bag,Trail Bag,Verified 25L pack,TB-1,29,39,https://example.com/trail.jpg\ntrail-bag,,,TB-2,30,,\ntravel-mug,Travel Mug,,TB-1,not-a-price,20,\n';
+const openAIDemoCSV="item_id,title,description,url,brand,seller_name,image_url,availability,price,target_countries,store_country\ndemo-mug,Demo Mug,Ceramic mug,https://example.com/mug,Demo Brand,Demo Store,https://example.com/mug.jpg,in_stock,18.00 USD,\"[\"\"US\"\"]\",US";
 let last=null;
 function err(message){$("error").hidden=false;$("error").style.display="block";$("error").textContent=message;$("results").hidden=true;}
 function clearErr(){ $("error").hidden=true;$("error").style.display="none";$("error").textContent="";}
@@ -133,7 +137,7 @@ function run(text){
  clearErr();
  try{
    const data=parseCSV(text);
-   last=inspectShopifyCSV(data);
+   last=$("format").value==="openai"?inspectOpenAIProductFeed(data):inspectShopifyCSV(data);
    const s=last.summary;
    $("products").textContent=s.products;$("records").textContent=s.records;$("findings").textContent=s.findings;
    $("priority").textContent=s.critical+s.high;
@@ -145,17 +149,19 @@ function run(text){
      tbody.append(tr);
    }
    $("result-title").textContent="Prioritized findings"+(last.issues.length>350?" (first 350 shown; download all)":"");
-   $("results").hidden=false;$("status").textContent="Scan finished locally. Original CSV not changed."; $("contact").href=emailFor(s.products+" product handles; "+s.findings+" potential findings; "+(s.critical+s.high)+" higher-priority"); $("results-enquiry").href=$("contact").href;
+   $("results").hidden=false;$("status").textContent="Scan finished locally. Original CSV not changed."; $("contact").href=emailFor(s.products+" products or IDs; "+s.findings+" potential findings; "+(s.critical+s.high)+" higher-priority",$("format").value==="openai"); $("results-enquiry").href=$("contact").href;
  }catch(e){last=null;err(e.message||"Could not read this CSV.");}
 }
-const emailFor = summary => {
+const emailFor = (summary, openAI=false) => {
  const subject = "Catalog Check - merchant pilot enquiry";
- const body = "I am interested in a possible US$129 pilot for up to 20 Shopify products.\nStore website (public URL only): \nI am the store owner or authorized representative: \nOptional local scan summary: " + summary + "\nPlease confirm scope, timing and checkout eligibility before any payment.\nNo private CSV, login details or customer data are included.";
+ const offer = openAI ? "US$49 OpenAI Stable product-feed error review (up to 100 rows)" : "US$129 Shopify CSV repair pilot (up to 20 products)";
+ const body = "I am interested in the proposed " + offer + ".\nStore website (public URL only): \nI am the store owner or authorized representative: \nOptional local scan summary: " + summary + "\nPlease confirm scope and payment eligibility before any payment. No private CSV, passwords, or customer data included.";
  return "mailto:yl124915300@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
 };
-$("contact").href = emailFor("(not provided)");
-$("results-enquiry").href = emailFor("(not provided)");
-$("demo").addEventListener("click",()=>run(demoCSV));
+$("contact").href = emailFor("(not provided)",false);
+$("results-enquiry").href = emailFor("(not provided)",false);
+$("format").addEventListener("change",()=>{const isOpenAI=$("format").value==="openai";$("format-note").textContent=isOpenAI?"Checks OpenAI Stable 11 required fields, ID uniqueness, prices, availability, URLs, and variant fields. Upload a native OpenAI feed CSV, not a Shopify export.":"Compatible with common recent and legacy Shopify product exports.";$("contact").href=emailFor("(not provided)",isOpenAI);$("results-enquiry").href=$("contact").href;$("results").hidden=true;last=null;});
+$("demo").addEventListener("click",()=>run($("format").value==="openai"?openAIDemoCSV:demoCSV));
 $("input").addEventListener("change",async ev=>{
   const f=ev.target.files?.[0]; if(!f)return;
   if(f.size>2*1024*1024){err("File too large. Use a product CSV under 2 MB.");return;}
