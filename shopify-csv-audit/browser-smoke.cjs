@@ -21,7 +21,7 @@ const {chromium} = require("playwright");
       let href=await page.locator("#results-enquiry").getAttribute("href");
       assert.ok(href.startsWith("mailto:yl124915300@gmail.com?subject="));
       assert.ok(href.includes("Catalog%20Check%20-%20merchant%20pilot%20enquiry"));
-      assert.ok(href.includes("product%20handles"));
+      assert.ok(href.includes("products%20or%20IDs"));
       // Client-side input; no upload or merchant-admin request.
       const content = "URL handle,Title,Option1 name,Option1 value,SKU,Price,Compare-at price,Product image URL\nshirt,Shirt,Size,M,A,20,30,https://example.com/a.png\nshirt,,,L,B,25,35,\n";
       await page.locator("#input").setInputFiles({name:"test.csv",mimeType:"text/csv",buffer:Buffer.from(content)});
@@ -37,6 +37,17 @@ const {chromium} = require("playwright");
       const download=await downloadPromise;
       const path=await download.path();
       assert.ok(fs.readFileSync(path,"utf8").includes("Option1 name"));
+      // Native OpenAI product-feed mode must parse locally and flag specific errors.
+      await page.locator("#format").selectOption("openai");
+      await page.click("#demo");
+      assert.equal(await page.locator("#findings").innerText(),"0","OpenAI sample must be valid");
+      const openAIHeaders="item_id,title,description,url,brand,seller_name,image_url,availability,price,target_countries,store_country";
+      const openAIBad='test-mug,Test Mug,Plain mug,https://example.com/mug,Maker,Shop,https://example.com/a.jpg,in stock,$18,"[""US""]",US';
+      await page.locator("#input").setInputFiles({name:"openai-errors.csv",mimeType:"text/csv",buffer:Buffer.from(openAIHeaders+"\\n"+openAIBad+"\\n")});
+      assert.ok(Number(await page.locator("#findings").innerText())>=2);
+      assert.ok((await page.locator("#issue-list").innerText()).includes("availability"));
+      assert.ok((await page.locator("#issue-list").innerText()).includes("price"));
+      assert.ok((await page.locator("#results-enquiry").getAttribute("href")).includes("US%2449"));
       const tooWide=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
       assert.equal(tooWide,false,"Page should not overflow viewport width");
       assert.deepEqual(errors,[],"No runtime JS errors");
