@@ -44,6 +44,7 @@ const {chromium} = require("playwright");
       const openAIHeaders="item_id,title,description,url,brand,seller_name,image_url,availability,price,target_countries,store_country";
       const openAIBad='test-mug,Test Mug,Plain mug,https://example.com/mug,Maker,Shop,https://example.com/a.jpg,in stock,$18,"[""US""]",US';
       await page.locator("#input").setInputFiles({name:"openai-errors.csv",mimeType:"text/csv",buffer:Buffer.from([openAIHeaders,openAIBad].join(String.fromCharCode(10))+String.fromCharCode(10))});
+      await page.waitForFunction(()=>Number(document.querySelector("#findings")?.textContent || 0)>=2,{timeout:10000});
       assert.ok(Number(await page.locator("#findings").innerText())>=2);
       assert.ok((await page.locator("#issue-list").innerText()).includes("availability"));
       assert.ok((await page.locator("#issue-list").innerText()).includes("price"));
