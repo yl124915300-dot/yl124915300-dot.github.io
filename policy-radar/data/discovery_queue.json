@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "last_searched_utc": "2026-11-20T15:25:15Z",
+  "last_searched_utc": "2026-11-21T14:37:09Z",
   "purpose": "Discovery queue, not verified policy or eligibility advice",
-  "from_date": "2026-10-06",
+  "from_date": "2026-10-07",
   "queries": [
     {
       "topic": "warm-home-discount",
@@ -38,7 +38,7 @@
         "warm-home-discount"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-20T15:25:15Z",
+      "last_seen_utc": "2026-11-21T14:37:09Z",
       "review_status": "approved_rss"
     },
     {
@@ -51,7 +51,7 @@
         "childcare"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-20T15:25:15Z",
+      "last_seen_utc": "2026-11-21T14:37:09Z",
       "review_status": "needs_human_review"
     },
     {
@@ -64,7 +64,7 @@
         "childcare"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-20T15:25:15Z",
+      "last_seen_utc": "2026-11-21T14:37:09Z",
       "review_status": "needs_human_review"
     }
   ]
