@@ -33,3 +33,16 @@ test("navigation and discovery include the directory", () => {
   }
   assert.match(site, /\/flightclaim\/refunds\.html/);
 });
+
+test("denial guidance stays free and has a voluntary enquiry rather than checkout", () => {
+  const denied = read("denied.html");
+  assert.match(denied, /<h1>Airline rejected your EU261 claim\?<\/h1>/);
+  assert.match(denied, /Currently not for sale/);
+  assert.match(denied, /europa\.eu\/youreurope\/citizens\/travel\/passenger-rights\/air/);
+  assert.match(denied, /transport\.ec\.europa\.eu\/transport-themes\/passenger-rights\/national-enforcement-bodies-neb/);
+  assert.doesNotMatch(denied, /<form\b|fetch\s*\(|XMLHttpRequest|sendBeacon/i);
+  assert.match(read("refunds.html"), /href="\.\/denied\.html"/);
+  assert.match(read("service.html"), /href="\.\/denied\.html"/);
+  assert.match(read("radar.html"), /href="\.\/denied\.html"/);
+  assert.match(read("sitemap.xml"), /\/flightclaim\/denied\.html/);
+});
