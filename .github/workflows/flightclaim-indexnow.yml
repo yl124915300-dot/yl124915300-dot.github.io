@@ -65,6 +65,7 @@ jobs:
           urls=(
             "$base"
             "${base}radar.html"
+            "${base}refunds.html"
             "${base}events/ba563-2026-11-20.html"
             "${base}events/lh1385-2026-11-19.html"
             "${base}events/ib420-2026-11-16.html"
