@@ -1,0 +1,11 @@
+{
+  "started_at": "2026-11-21T00:00:00+08:00",
+  "cutoff": "2026-12-05T23:59:00+08:00",
+  "minimum_paid_customers": 1,
+  "target_paid_customers": 3,
+  "count_test_or_owner_payments": false,
+  "cash_spend_authorized_usd": 0,
+  "payment_gate": "CLOSED_UNVERIFIED",
+  "on_zero_payments": "Stop paid acquisition and further development. Do not reset clock automatically. Continue existing obligations; preserve free official claim links.",
+  "unknown_metrics_are_not_zero": true
+}

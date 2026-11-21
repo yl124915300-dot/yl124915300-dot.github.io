@@ -1,6 +1,6 @@
 // FlightClaim Agent V0 — auditable, deterministic and deliberately conservative EU261 self-help screening.
 // This is not an airline claim, legal opinion, outcome guarantee, or verification of flight facts.
-export const RULESET_VERSION = "EU261 / 2004 Regulation and related case law; assessed 2026-10-19. EU 2026/2202 applies from 2027-10-23.";
+export const RULESET_VERSION = "EU261 / 2004 Regulation and related case law; assessed 2026-11-21. EU 2026/2202 applies from 2027-10-23.";
 export const SOURCES = Object.freeze({
   eu: "https://europa.eu/youreurope/citizens/travel/passenger-rights/air/",
   regulation: "https://eur-lex.europa.eu/eli/reg/2004/261/oj/eng",
@@ -9,7 +9,7 @@ export const SOURCES = Object.freeze({
   easyjet: "https://www.easyjet.com/en/claim/EU261",
   ryanair: "https://help.ryanair.com/hc/en-us/sections/12488602662545-EU-261-Passenger-Rights"
 });
-const nonneg = (v) => v === "" || v === null || v === undefined || !Number.isFinite(Number(v)) ? null : Math.max(0, Number(v));
+const nonneg = (v) => v === "" || v === null || v === undefined || !Number.isFinite(Number(v)) || Number(v) < 0 ? null : Number(v);
 const known = (v) => v !== "" && v !== null && v !== undefined;
 const eligibleCause = new Set(["airline_technical", "airline_operations"]);
 
@@ -32,6 +32,14 @@ export function assess(raw = {}) {
     disclaimer: "Indicative self-help assessment only. Flight facts, carrier evidence, local deadlines, connection details and court decisions may change the result. You can claim directly from the airline for free."
   });
 
+  if (x.flightDate && (!/^\d{4}-\d{2}-\d{2}$/.test(x.flightDate) || !Number.isFinite(Date.parse(x.flightDate)) || x.flightDate >= "2027-10-23")) {
+    add("DATE_REVIEW", "The date is invalid or reaches the new regulation's application period. This version cannot assess it.");
+    return done();
+  }
+  if (scope === "swiss_review") {
+    add("JURISDICTION_REVIEW", "Swiss or mixed-jurisdiction application and case law require individual review.");
+    return done();
+  }
   if (scope === "uk_only") {
     category = "NOT_SUPPORTED"; compensation = "NOT_SUPPORTED";
     add("UK_ONLY", "UK-only journeys are not assessed by this EU checker; use the UK CAA guidance.");
@@ -78,6 +86,10 @@ export function assess(raw = {}) {
       questions.push("Did the airline offer a replacement flight? If so, provide its departure and final-arrival timing.");
     } else {
       const early = nonneg(x.rerouteEarlyDeparture), late = nonneg(x.rerouteArrivalLate);
+      if (early === null || late === null) {
+        add("REROUTING_INVALID", "Replacement-flight timings must be valid non-negative numbers; individual review is required.");
+        return done();
+      }
       const timely = cancelDays >= 7 ? (early <= 2 && late < 4) : (early <= 1 && late < 2);
       if (timely) {
         category = "GENERALLY_UNLIKELY"; compensation = category;
@@ -124,12 +136,13 @@ export function assess(raw = {}) {
   if (category === "REVIEW_REQUIRED" && (cause === "atc" || cause === "weather")) {
     add("EXTRAORDINARY_FACTS", "Extraordinary-circumstance defenses must be assessed case by case, not assumed.");
   }
-  if (category === "POSSIBLY_ELIGIBLE" && disruption !== "cancellation") {
+  if (category === "POSSIBLY_ELIGIBLE" && disruption === "delay") {
     if (x.distance === "short") amount = 250;
     else if (x.distance === "medium" || (x.distance === "long" && x.intraEU === "yes")) amount = 400;
     else if (x.distance === "long" && x.intraEU === "no") amount = disruption === "delay" && arrival !== null && arrival < 4 ? 300 : 600;
   }
   if (category === "POSSIBLY_ELIGIBLE" && x.distance === "long" && x.intraEU !== "yes" && x.intraEU !== "no") questions.push("Confirm whether this long flight was entirely within the EU before estimating €400 versus €600.");
+  if (disruption === "denied") cautions.push("The amount may be reduced for timely rerouting; no amount is calculated by this checker.");
   if (disruption === "cancellation") cautions.push("Amount reductions, rerouting and relevant court rulings require case-specific review.");
   cautions.push("Service providers may charge fees; you can first claim directly from the airline for free.");
   return done();

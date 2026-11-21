@@ -14,7 +14,7 @@ const copy = {
     navFees: "Fees & privacy", banner: "Free passenger-rights self-help pilot.",
     heroTitle: "Your flight changed. Your rights shouldn't be a mystery.",
     heroLead: "Check whether EU flight disruption rules may apply, understand compensation versus refunds, and prepare a claim you can submit yourself.",
-    start: "Start free check →", officialLinks: "Official airline links",
+    start: "Start free check", officialLinks: "Official airline links",
     step1: "Where did your flight operate?", step2: "What happened?", step3: "How long and when?",
     step4: "What is known about the cause?", step5: "Your preliminary result", draftsTitle: "My case drafts"
   },
@@ -23,7 +23,7 @@ const copy = {
     navFees: "费用与隐私", banner: "免费航空旅客权益初筛测试版。",
     heroTitle: "航班发生变化，旅客权益不该成为谜题。",
     heroLead: "初步核对欧盟航空旅客权益，区分赔偿、退票和费用报销，生成可由旅客本人提交的资料。",
-    start: "免费开始初筛 →", officialLinks: "航空公司官方入口",
+    start: "免费开始初筛", officialLinks: "航空公司官方入口",
     step1: "这次航班的路线属于哪里？", step2: "发生了哪种航班问题？", step3: "延误多久？何时收到通知？",
     step4: "目前知道的原因是什么？", step5: "初步筛选结果", draftsTitle: "我的本机案件草稿"
   }
