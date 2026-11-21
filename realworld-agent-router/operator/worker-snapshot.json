@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-21T06:54:46+00:00",
+  "checkedAt": "2026-11-21T19:05:23+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -50,6 +50,16 @@
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
     },
     {
+      "name": "Omar Boug",
+      "headline": "Computer Vision & Machine Learning | Object Detection with YOLOv11 and PyTorch",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/pEJl5Eu0b8peHMjC7aLU"
+    },
+    {
       "name": "K Julian",
       "headline": "Creative Consultant, Writing and in-Person Event Professional",
       "city": "New York",
@@ -60,6 +70,16 @@
       "profileUrl": "https://rentahuman.ai/humans/ElZxZy6kYyLyu4X7xwzk"
     },
     {
+      "name": "Alexander Ortiz (Mr. Crafty)",
+      "headline": "Mixologist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 25.5,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
+    },
+    {
       "name": "Sutton Peter",
       "headline": "Egocentric Video Data Contributor | AI Field Data Collection & Video Quality Review",
       "city": "New York",
@@ -68,6 +88,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
+    },
+    {
+      "name": "Wahab Ahmad Waris",
+      "headline": "Computer Science Graduate | Microsoft Office, Database Management & Customer Communication",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/dwsleJGl0Qv0nwEnhWpt"
+    },
+    {
+      "name": "Emmanuel Samson",
+      "headline": "AI Generalist | Response Evaluation, Data Quality & Human-in-the-Loop Review",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/uXabNwquLA2XJv8C0UxU"
     },
     {
       "name": "Bevo Raoul",
@@ -98,16 +138,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/to1XeayjYpKH8uEsGlGn"
-    },
-    {
-      "name": "Alexander Ortiz (Mr. Crafty)",
-      "headline": "Mixologist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 25.5,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
     },
     {
       "name": "Nityanand Mahajan",
@@ -148,36 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/AfcYfUjQ83uxQ63ulyzQ"
-    },
-    {
-      "name": "Jason battiest",
-      "headline": "Data Annotator & AI Evaluation Specialist | Prompt Writing, Fact-Checking & Content Review",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 35,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/7dSUp7iwyLs6Gzawvcj6"
-    },
-    {
-      "name": "Fathur Romadlan",
-      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 13,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
-    },
-    {
-      "name": "Lucas Thomas",
-      "headline": "Detail-oriented field verification & photography specialist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 37,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/c8MULNfFAH8oQR2ZTjcT"
     },
     {
       "name": "Pat Santiago",
@@ -330,6 +330,26 @@
       "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
+      "name": "Amanda Zhang",
+      "headline": "Data Analyst | SQL, Python, R, Power BI & Tableau",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/cCMY9qEymqXFXbXX7RB5"
+    },
+    {
+      "name": "Cormier Shuhei",
+      "headline": "Warehouse & Logistics Specialist | International Shipping | English & Japanese",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/lKof79jkrzbn3Itt6Vrk"
+    },
+    {
       "name": "Abdulbasit Bashir",
       "headline": "",
       "city": "Los Angeles",
@@ -458,26 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/Ya0xk1bf7eU1Gm1R5K0y"
-    },
-    {
-      "name": "David Wilson",
-      "headline": "On-demand IRL tasks, pickups and site inspections",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 31,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/QaRgf1sAumK7rS7NMFy0"
-    },
-    {
-      "name": "Alex Taylor",
-      "headline": "Reliable local assistant & on-site researcher",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 31,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/6oW8Y4Ug8MXcItgjBlg7"
     },
     {
       "name": "Marvin Risco",
