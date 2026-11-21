@@ -60,17 +60,28 @@ jobs:
           fi
           echo "IndexNow host proof verified."
 
-          code="$(curl -sS --max-time 25 -G \
-              --data-urlencode "url=$base" \
-              --data-urlencode "key=$key" \
-              --data-urlencode "keyLocation=$location" \
-              -o /tmp/indexnow-response.txt \
-              -w '%{http_code}' \
-              'https://api.indexnow.org/indexnow')"
-          echo "IndexNow HTTP response code: $code"
-          if [ -s /tmp/indexnow-response.txt ]; then head -c 400 /tmp/indexnow-response.txt; echo; fi
-          case "$code" in
-            200) echo "Accepted by IndexNow. Indexing NOT guaranteed." ;;
-            202) echo "Received; engine may be verifying key. Indexing NOT guaranteed." ;;
-            *) echo "Rejected or unavailable, not submitted successfully."; exit 1 ;;
-          esac
+          # Submit only public, independently reviewed FlightClaim URLs.
+          # IndexNow acceptance is not a search ranking, impression, or visitor.
+          urls=(
+            "$base"
+            "${base}radar.html"
+            "${base}events/ba563-2026-11-20.html"
+            "${base}events/lh1385-2026-11-19.html"
+            "${base}events/ib420-2026-11-16.html"
+          )
+          for target in "${urls[@]}"; do
+            code="$(curl -sS --max-time 25 -G \
+                --data-urlencode "url=$target" \
+                --data-urlencode "key=$key" \
+                --data-urlencode "keyLocation=$location" \
+                -o /tmp/indexnow-response.txt \
+                -w '%{http_code}' \
+                'https://api.indexnow.org/indexnow')"
+            echo "IndexNow response for $target : $code"
+            if [ -s /tmp/indexnow-response.txt ]; then head -c 400 /tmp/indexnow-response.txt; echo; fi
+            case "$code" in
+              200) echo "Accepted by IndexNow; indexing NOT guaranteed." ;;
+              202) echo "Received; engine may be verifying key. Indexing NOT guaranteed." ;;
+              *) echo "Rejected or unavailable; NOT counting as indexed."; exit 1 ;;
+            esac
+          done
