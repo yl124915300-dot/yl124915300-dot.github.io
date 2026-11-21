@@ -1,0 +1,155 @@
+{
+  "checked_on": "2026-11-22",
+  "data_type": "public_rules_not_individual_eligibility",
+  "public_entries": [
+    {
+      "id": "eu-flight",
+      "category": "travel",
+      "region": "欧盟/相关航线",
+      "title": "欧盟航班延误、取消或拒载",
+      "official_source": "https://europa.eu/youreurope/citizens/travel/passenger-rights/air/",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "material",
+      "caution": "重大延误不自动等于有权赔偿；罢工、天气等原因必须核实。"
+    },
+    {
+      "id": "ca-flight",
+      "category": "travel",
+      "region": "加拿大",
+      "title": "加拿大航班延误或取消",
+      "official_source": "https://otc-cta.gc.ca/eng/publication/flight-delays-and-cancellations-a-guide",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "material",
+      "caution": "通常须在事件发生后一年内申请；30 天答复要求；并非每次晚点都获赔。"
+    },
+    {
+      "id": "us-flight",
+      "category": "travel",
+      "region": "美国",
+      "title": "美国航班取消或重大变更票款退款",
+      "official_source": "https://www.transportation.gov/individuals/aviation-consumer-protection/refunds",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "free",
+      "caution": "很多退款应自动处理，不能收取所谓‘领取资格费’。"
+    },
+    {
+      "id": "eu-rail",
+      "category": "travel",
+      "region": "欧盟",
+      "title": "欧盟列车延误赔付",
+      "official_source": "https://europa.eu/youreurope/citizens/travel/passenger-rights/rail/",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "material",
+      "caution": "不可同时简单累加特定退票和延误赔付；例外情形及运营商政策适用。"
+    },
+    {
+      "id": "eu-ship",
+      "category": "travel",
+      "region": "欧盟",
+      "title": "欧盟轮渡到达延误",
+      "official_source": "https://europa.eu/youreurope/citizens/travel/passenger-rights/ship/",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "material",
+      "caution": "游轮和恶劣天气等有特殊排除条件。"
+    },
+    {
+      "id": "eu-bus",
+      "category": "travel",
+      "region": "欧盟",
+      "title": "欧盟长途巴士取消或延误",
+      "official_source": "https://europa.eu/youreurope/citizens/travel/passenger-rights/bus-and-coach/index_en.htm",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "free",
+      "caution": "必须检查运营线路全程及出发延误，不是任何乘车路段都有资格。"
+    },
+    {
+      "id": "eu-withdrawal",
+      "category": "shopping",
+      "region": "欧盟",
+      "title": "欧盟网络购物 14 天撤销",
+      "official_source": "https://europa.eu/youreurope/citizens/consumers/shopping/shopping-consumer-rights/index_en.htm",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "free",
+      "caution": "机票、特定日期酒店、定制商品、已开始且适当确认的数字内容等可能不适用。"
+    },
+    {
+      "id": "eu-defective",
+      "category": "shopping",
+      "region": "欧盟",
+      "title": "欧盟商品质量缺陷和不符描述",
+      "official_source": "https://europa.eu/youreurope/citizens/consumers/shopping/guarantees/index_en.htm",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "material",
+      "caution": "通常不能跳过法定救济顺序直接要求退款；具体国家规则可能更优。"
+    },
+    {
+      "id": "us-card",
+      "category": "billing",
+      "region": "美国",
+      "title": "美国信用卡账单错误争议",
+      "official_source": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-a-charge-on-my-credit-card-bill-en-61/",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "material",
+      "caution": "某些账单错误要求在账单寄出后 60 天内书面通知发卡行；不应鼓励虚假拒付。"
+    },
+    {
+      "id": "uk-broadband",
+      "category": "utilities",
+      "region": "英国",
+      "title": "英国宽带/座机故障自动赔偿",
+      "official_source": "https://www.ofcom.org.uk/phones-and-broadband/service-quality/automatic-compensation-need-know",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "free",
+      "caution": "仅参加计划的服务商及符合条件的家庭固定线路适用，运营商通常自动赔。"
+    },
+    {
+      "id": "google-play",
+      "category": "digital",
+      "region": "支持 Google Play 的地区",
+      "title": "Google Play 数字购买退款",
+      "official_source": "https://support.google.com/googleplay/answer/15574908?hl=en",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "free",
+      "caution": "不是所有购买都符合退款条件；48 小时也非无条件退款。"
+    },
+    {
+      "id": "fedex",
+      "category": "delivery",
+      "region": "美国付款方/适用国际服务",
+      "title": "FedEx 限时快递超时运费退还",
+      "official_source": "https://www.fedex.com/en-us/service-guide/money-back-guarantee.html",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "free",
+      "caution": "不是所有 FedEx 服务适用；费用权利属于合法付款方；期限和排除条款须逐票核实。"
+    },
+    {
+      "id": "ftc",
+      "category": "official",
+      "region": "美国",
+      "title": "FTC 政府官方退款公告",
+      "official_source": "https://www.ftc.gov/enforcement/refunds",
+      "paid_service_available": false,
+      "fee_for_official_claim": 0,
+      "status": "free",
+      "caution": "不要因接到主动‘退款’通知而支付任何款项、提供密码或验证码。"
+    }
+  ],
+  "payments": {
+    "state": "CLOSED_UNVERIFIED",
+    "verified_sales": 0,
+    "verified_receipts": 0
+  },
+  "no_private_case_upload": true
+}
