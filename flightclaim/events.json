@@ -147,5 +147,83 @@
     "deadline": "Payments expire 60 days after issue.",
     "status": "Official distribution notice; individual eligibility unverified",
     "fee_usd": 0
+  },
+  {
+    "id": "EU-202611-BA563",
+    "title": "BA563 Rome → London",
+    "category": "EU_FLIGHT_THIRD_PARTY_REVIEW",
+    "source": "https://www.flightradar24.com/data/flights/ba563/schedules/5891935708",
+    "corroboration": "https://us.trip.com/flights/status-ba563/",
+    "source_publisher": "Independent flight-tracking services",
+    "public_record": "https://yl124915300-dot.github.io/flightclaim/events/ba563-2026-11-20.html",
+    "event_date": "2026-11-20",
+    "checked_on": "2026-11-21",
+    "scheduled_arrival_utc": "2026-11-20T10:30:00Z",
+    "reported_arrival_utc": "2026-11-20T14:34:00Z",
+    "reported_delay": "about 4h 4m",
+    "status": "Third-party reported historical disruption; not independently certified by airline",
+    "assessment": "REVIEW_REQUIRED",
+    "unknowns": [
+      "Passenger itinerary",
+      "Operating carrier explanation",
+      "Extraordinary circumstances",
+      "Individual booking and final destination",
+      "Actual compensation eligibility",
+      "Payment outcome"
+    ],
+    "rights_source": "https://europa.eu/youreurope/citizens/travel/passenger-rights/air/",
+    "fee_usd": null
+  },
+  {
+    "id": "EU-202611-LH1385",
+    "title": "LH1385 Gdańsk → Frankfurt",
+    "category": "EU_FLIGHT_THIRD_PARTY_REVIEW",
+    "source": "https://www.flightradar24.com/data/playback/42a3f0cb",
+    "corroboration": "https://www.flightera.net/en/flight/Lufthansa/LH1385",
+    "source_publisher": "Independent flight-tracking services",
+    "public_record": "https://yl124915300-dot.github.io/flightclaim/events/lh1385-2026-11-19.html",
+    "event_date": "2026-11-19",
+    "checked_on": "2026-11-21",
+    "scheduled_arrival_utc": "2026-11-19T06:45:00Z",
+    "reported_arrival_utc": "2026-11-19T15:02:00Z",
+    "reported_delay": "about 8h 17m",
+    "status": "Third-party reported historical disruption; not independently certified by airline",
+    "assessment": "REVIEW_REQUIRED",
+    "unknowns": [
+      "Passenger itinerary",
+      "Operating carrier explanation",
+      "Extraordinary circumstances",
+      "Individual booking and final destination",
+      "Actual compensation eligibility",
+      "Payment outcome"
+    ],
+    "rights_source": "https://europa.eu/youreurope/citizens/travel/passenger-rights/air/",
+    "fee_usd": null
+  },
+  {
+    "id": "EU-202611-IB420",
+    "title": "IB420 Barcelona → Madrid",
+    "category": "EU_FLIGHT_THIRD_PARTY_REVIEW",
+    "source": "https://data-live.flightradar24.com/data/flights/ib420",
+    "corroboration": "https://www.flightera.net/en/flight_details/Iberia-Barcelona-Madrid/IB420/LEBL/2026-11-18",
+    "source_publisher": "Independent flight-tracking services",
+    "public_record": "https://yl124915300-dot.github.io/flightclaim/events/ib420-2026-11-16.html",
+    "event_date": "2026-11-16",
+    "checked_on": "2026-11-21",
+    "scheduled_arrival_utc": "2026-11-16T19:20:00Z",
+    "reported_arrival_utc": "2026-11-16T23:16:00Z",
+    "reported_delay": "about 3h 56m",
+    "status": "Third-party reported historical disruption; not independently certified by airline",
+    "assessment": "REVIEW_REQUIRED",
+    "unknowns": [
+      "Passenger itinerary",
+      "Operating carrier explanation",
+      "Extraordinary circumstances",
+      "Individual booking and final destination",
+      "Actual compensation eligibility",
+      "Payment outcome"
+    ],
+    "rights_source": "https://europa.eu/youreurope/citizens/travel/passenger-rights/air/",
+    "fee_usd": null
   }
 ]
