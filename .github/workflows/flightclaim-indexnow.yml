@@ -10,80 +10,60 @@ on:
 
 permissions:
   contents: read
-  actions: read
+
+concurrency:
+  group: flightclaim-indexnow-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   notify:
-    name: Notify participating search engines (not proof of indexing)
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Wait for GitHub Pages deployment of this exact main commit
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          echo "Need Pages build and deployment success for exact SHA: $GITHUB_SHA"
-          ready=0
-          for attempt in $(seq 1 24); do
-            runs="$(curl -fsSL --retry 2 --max-time 15 \
-              -H "Authorization: Bearer $GH_TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs?per_page=60")"
-            match="$(printf '%s' "$runs" | jq -r --arg sha "$GITHUB_SHA" \
-              '[.workflow_runs[] | select(.head_sha == $sha and .name == "pages build and deployment" and .status == "completed" and .conclusion == "success")] | length')"
-            if [ "$match" -ge 1 ]; then ready=1; break; fi
-            echo "Matching Pages deployment not confirmed yet (attempt $attempt)."
-            sleep 10
-          done
-          if [ "$ready" -ne 1 ]; then echo "No verified Pages deployment for this commit. Do not ping stale URL."; exit 1; fi
-          echo "Matching Pages deployment completed successfully."
-      - name: Verify scoped proof and submit ONE public URL
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: flightclaim
+          persist-credentials: false
+      - name: Verify published content and notify IndexNow
         shell: bash
         run: |
           set -euo pipefail
-          base="https://yl124915300-dot.github.io/flightclaim/"
+          host="yl124915300-dot.github.io"
+          base="https://$host/flightclaim/"
           key="fcagent20261019e061a9b4c75f28d03a641bfe"
-          location="${base}${key}.txt"
-
-          # Allow GitHub Pages publication to catch up with the main commit.
-          verified=0
-          for attempt in $(seq 1 12); do
-            body="$(curl -fsSL --max-time 12 "$location" || true)"
-            if [ "$body" = "$key" ]; then verified=1; break; fi
-            echo "Key file not deployed yet; attempt $attempt"
-            sleep 5
-          done
-          if [ "$verified" -ne 1 ]; then
-            echo "ERROR: host proof unavailable; NOT submitting IndexNow."
-            exit 1
-          fi
-          echo "IndexNow host proof verified."
-
-          # Submit only public, independently reviewed FlightClaim URLs.
-          # IndexNow acceptance is not a search ranking, impression, or visitor.
-          urls=(
-            "$base"
-            "${base}radar.html"
-            "${base}refunds.html"
-            "${base}denied.html"
-            "${base}events/ba563-2026-11-20.html"
-            "${base}events/lh1385-2026-11-19.html"
-            "${base}events/ib420-2026-11-16.html"
+          pages=(
+            index.html help.html service.html denied.html radar.html refunds.html
+            events/ba563-2026-11-20.html
+            events/lh1385-2026-11-19.html
+            events/ib420-2026-11-16.html
           )
-          for target in "${urls[@]}"; do
-            code="$(curl -sS --max-time 25 -G \
-                --data-urlencode "url=$target" \
-                --data-urlencode "key=$key" \
-                --data-urlencode "keyLocation=$location" \
-                -o /tmp/indexnow-response.txt \
-                -w '%{http_code}' \
-                'https://api.indexnow.org/indexnow')"
-            echo "IndexNow response for $target : $code"
-            if [ -s /tmp/indexnow-response.txt ]; then head -c 400 /tmp/indexnow-response.txt; echo; fi
-            case "$code" in
-              200) echo "Accepted by IndexNow; indexing NOT guaranteed." ;;
-              202) echo "Received; engine may be verifying key. Indexing NOT guaranteed." ;;
-              *) echo "Rejected or unavailable; NOT counting as indexed."; exit 1 ;;
-            esac
+          [[ "$(<"flightclaim/$key.txt")" == "$key" ]]
+          urls=()
+          # Pages may combine several pushes into one deployment. Verify what it serves.
+          for file in "$key.txt" "${pages[@]}"; do
+            url="$base${file#index.html}"
+            for attempt in {1..24}; do
+              if curl -fsS --max-time 12 "$url?rev=$GITHUB_SHA" -o "$RUNNER_TEMP/live" &&
+                 cmp -s "flightclaim/$file" "$RUNNER_TEMP/live"; then
+                echo "Verified $url"
+                break
+              fi
+              if [[ $attempt == 24 ]]; then echo "::error::Live content mismatch at $url"; exit 1; fi
+              sleep 10
+            done
+            if [[ "$file" != "$key.txt" ]]; then urls+=("$url"); fi
           done
+
+          jq -n --arg host "$host" --arg key "$key" --arg location "$base$key.txt" \
+            '{host:$host, key:$key, keyLocation:$location, urlList:$ARGS.positional}' \
+            --args "${urls[@]}" > "$RUNNER_TEMP/request.json"
+          code=$(curl -sS --max-time 30 -H 'Content-Type: application/json' \
+            --data-binary "@$RUNNER_TEMP/request.json" -o "$RUNNER_TEMP/response" \
+            -w '%{http_code}' https://api.indexnow.org/indexnow)
+          echo "IndexNow HTTP $code for ${#urls[@]} verified pages"
+          case "$code" in
+            200) echo "Notification accepted." ;;
+            202) echo "Notification received pending key validation." ;;
+            *) cat "$RUNNER_TEMP/response"; exit 1 ;;
+          esac

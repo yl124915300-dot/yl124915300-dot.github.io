@@ -20,8 +20,14 @@ test('invalid cancellation reroute times cannot manufacture an exception',()=>{
 test('historical real cancellation with missing notice and cause stays unconfirmed',()=>{
  const r=assess({scope:'eu_departure',flightNumber:'FR6802',flightDate:'2026-10-20',disruption:'cancellation',cause:'unknown'});assert.equal(r.category,'REVIEW_REQUIRED');assert.equal(r.indicativeAmountEUR,null);assert.equal(r.refundPossible,true);
 });
-test('public radar separates nine free government programs from one historical flight',()=>{
- const records=JSON.parse(readFileSync(new URL('./events.json',import.meta.url)));assert.equal(records.length,10);assert.equal(records.filter(x=>x.category==='FTC_FREE_ONLY'&&x.fee_usd===0).length,9);assert.equal(records[0].assessment,'REVIEW_REQUIRED');
+test('refund programs are free and unverified flight events require review', () => {
+  const records = JSON.parse(readFileSync(new URL('./events.json', import.meta.url)));
+  const programs = records.filter(record => record.category === 'FTC_FREE_ONLY');
+  const flights = records.filter(record => record.category.startsWith('EU_FLIGHT_'));
+  assert.equal(programs.length + flights.length, records.length);
+  assert.ok(programs.length >= 9 && flights.length >= 1);
+  for (const record of programs) assert.equal(record.fee_usd, 0);
+  for (const record of flights) assert.equal(record.assessment, 'REVIEW_REQUIRED');
 });
 test('proposed service has no functional checkout or confidential input',()=>{
  const s=readFileSync(new URL('./service.html',import.meta.url),'utf8');assert.match(s,/<button[^>]*disabled/);assert.match(s,/Not yet for sale/);assert.doesNotMatch(s,/<form|type="file"|paypal\.com\/.*checkout|buy\.stripe\.com/);assert.match(s,/5 December 2026/);
