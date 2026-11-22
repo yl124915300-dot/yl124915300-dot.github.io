@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-22T06:31:35+00:00",
+  "checkedAt": "2026-11-22T19:27:38+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -50,6 +50,36 @@
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
     },
     {
+      "name": "Sutton Peter",
+      "headline": "Egocentric Video Data Contributor | AI Field Data Collection & Video Quality Review",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
+    },
+    {
+      "name": "子騰",
+      "headline": "Traditional Chinese Medicine doctor",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/mum9YNgmTnAv8KbEa881"
+    },
+    {
+      "name": "vivian wu",
+      "headline": "Mandarin-English Interpreter | Business Research & Art Market Support",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/86eLOtgoWK8HlA1WFA0H"
+    },
+    {
       "name": "Omar Boug",
       "headline": "Computer Vision & Machine Learning | Object Detection with YOLOv11 and PyTorch",
       "city": "New York",
@@ -78,16 +108,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
-    },
-    {
-      "name": "Sutton Peter",
-      "headline": "Egocentric Video Data Contributor | AI Field Data Collection & Video Quality Review",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
     },
     {
       "name": "Wahab Ahmad Waris",
@@ -158,26 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/4EH4HgzjocWAv4O3n5JT"
-    },
-    {
-      "name": "MIMI",
-      "headline": "Retail Merchandiser | Product Displays, Shelf Arrangement & Tailoring",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/xMqO1TqDYZEmWFQ7VTuz"
-    },
-    {
-      "name": "johnny",
-      "headline": "Operations & Facilities Professional | Property Maintenance, Repairs & Site Support",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 17,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/AfcYfUjQ83uxQ63ulyzQ"
     },
     {
       "name": "Pat Santiago",
@@ -330,6 +330,26 @@
       "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
+      "name": "Wulong Yi",
+      "headline": "跨境电商采购开发专员｜选品、供应商开发与采购降本",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/pbcbp4WlbYRz1GbdK9Ni"
+    },
+    {
+      "name": "Onwe Abraham Chukwudi",
+      "headline": "Video Annotation & Visual Data Evaluation | Videographer and Editor",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0a1lB1Gc7NaIKZ3VkO6R"
+    },
+    {
       "name": "Amanda Zhang",
       "headline": "Data Analyst | SQL, Python, R, Power BI & Tableau",
       "city": "Los Angeles",
@@ -458,26 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/PhJMKf2RWCZ7WCQAXiue"
-    },
-    {
-      "name": "Ethan Smith",
-      "headline": "Reliable local assistant & on-site researcher",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 21,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/7bgzN5Lv68LGvov1KlG6"
-    },
-    {
-      "name": "Olivia Harris",
-      "headline": "Detail-oriented field verification & photography specialist",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 33,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/Ya0xk1bf7eU1Gm1R5K0y"
     },
     {
       "name": "Marvin Risco",
@@ -780,6 +780,16 @@
       "profileUrl": "https://rentahuman.ai/humans/hFaYogB4WiVSuRlTsejh"
     },
     {
+      "name": "zanhi",
+      "headline": "Communications Engineering Graduate Student | Robotics, Multimodal Data & Signal Processing",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/B5GWDD4S9zhqwqSiWx1J"
+    },
+    {
       "name": "Ruth C",
       "headline": "QA & Performance Test Engineer | 7+ Years | LoadRunner, Mobile & Telecom Testing",
       "city": "Singapore",
@@ -918,16 +928,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/9GlyS3aRQY7y203bB0et"
-    },
-    {
-      "name": "Shangwei",
-      "headline": "PMP-Certified Project Manager | Software Implementation, AI Project Delivery & Digital Transformation",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/5TeXV8UmxX7CH4mO5FNY"
     }
   ],
   "errors": []
