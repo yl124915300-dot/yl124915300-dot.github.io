@@ -1,6 +1,7 @@
 {
   "ucp": {
     "version": "2026-08-25",
+    "payment_handlers": {},
     "services": {
       "dev.ucp.shopping": [{
         "version": "2026-08-25",
