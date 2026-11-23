@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-22T19:27:38+00:00",
+  "checkedAt": "2026-11-23T07:21:52+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -300,16 +300,6 @@
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
     },
     {
-      "name": "Jessica  Potter",
-      "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 20,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
-    },
-    {
       "name": "Michael Patterson",
       "headline": "Administrative & Office Support Professional | 20+ Years in Hospitality and Events",
       "city": "San Francisco",
@@ -328,6 +318,26 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
+    },
+    {
+      "name": "Jessica  Potter",
+      "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 20,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
+    },
+    {
+      "name": "Elikute Saypden",
+      "headline": "Computer Science Student | Python Computer Vision & C# Game Development",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Und6de1BBLqjliKYY1Eh"
     },
     {
       "name": "Wulong Yi",
@@ -468,16 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/4WB0pVfNYxwpmTYjOO1x"
-    },
-    {
-      "name": "Michael Thomas",
-      "headline": "Reliable local assistant & on-site researcher",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 30,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/PhJMKf2RWCZ7WCQAXiue"
     },
     {
       "name": "Marvin Risco",
@@ -640,6 +640,26 @@
       "profileUrl": "https://rentahuman.ai/humans/duXALcKQ1RohGK3EuSiO"
     },
     {
+      "name": "April Ding",
+      "headline": "Biomedical Engineering Student | Arduino Prototyping, MATLAB & Finite Element Analysis",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/HkZBrFqKGb4BNsVec3BM"
+    },
+    {
+      "name": "dan epan",
+      "headline": "",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 4.96,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/yoK7MkjlhKVDAhNdNrAG"
+    },
+    {
       "name": "Kurt",
       "headline": "10 years in media production, remote video and podcast specialist",
       "city": "London",
@@ -758,26 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/lQkJB6WbYcsFQc4Wt2Ne"
-    },
-    {
-      "name": "Olivia Harris",
-      "headline": "Detail-oriented field verification & photography specialist",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 35,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/lzEHwlQ8Oth9O4wmi9bJ"
-    },
-    {
-      "name": "Lucas Johnson",
-      "headline": "Detail-oriented field verification & photography specialist",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 17,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/hFaYogB4WiVSuRlTsejh"
     },
     {
       "name": "zanhi",
