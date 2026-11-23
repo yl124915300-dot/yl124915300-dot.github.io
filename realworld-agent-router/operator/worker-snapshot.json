@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-23T07:21:52+00:00",
+  "checkedAt": "2026-11-23T23:46:51+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -48,6 +48,36 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
+    },
+    {
+      "name": "Fathur Romadlan",
+      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 13,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
+    },
+    {
+      "name": "jiantao liu",
+      "headline": "AI Researcher | Computer Vision, Image Super-Resolution & Denoising",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Vdcl0HIVRbkA5SsdXo7M"
+    },
+    {
+      "name": "umar kabir marafa",
+      "headline": "Statistics Student | Computer Science HND | Research & Software Development",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/AWvgbftQd0WftyzOrTEK"
     },
     {
       "name": "Sutton Peter",
@@ -148,36 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/sjLKXGmnIlV0bWp4Vlx1"
-    },
-    {
-      "name": "Abdul Haseeb",
-      "headline": "Shopify & E-Commerce Specialist | 5+ Years Experience",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 30,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/to1XeayjYpKH8uEsGlGn"
-    },
-    {
-      "name": "Nityanand Mahajan",
-      "headline": "Focused on delivering quality results with honesty and efficiency.",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/OSmYtbNCVBe4zR1m1P0r"
-    },
-    {
-      "name": "Charlie Jose",
-      "headline": "Senior Full-Stack Engineer | AI Evaluation Specialist | Python, TypeScript & FastAPI",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/4EH4HgzjocWAv4O3n5JT"
     },
     {
       "name": "Pat Santiago",
@@ -300,16 +300,6 @@
       "profileUrl": "https://rentahuman.ai/humans/WgcuzKuwob4KvoNinfFW"
     },
     {
-      "name": "Michael Patterson",
-      "headline": "Administrative & Office Support Professional | 20+ Years in Hospitality and Events",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
-    },
-    {
       "name": "Yoanna Flores",
       "headline": "Customer Service & Event Support | Food Distribution, Delivery & Administrative Assistance",
       "city": "San Francisco",
@@ -320,14 +310,34 @@
       "profileUrl": "https://rentahuman.ai/humans/p8rXK7OIBEhOJyDl1Uv1"
     },
     {
-      "name": "Jessica  Potter",
-      "headline": "SIGN HOLDER AND BRAND AMBASSADOR, Administrative & Personal Assistant | Scheduling, Bookkeeping & Business Support",
+      "name": "Joshua Greiner",
+      "headline": "Sign Holder | Experience with RentAHuman Gigs",
       "city": "San Francisco",
       "country": "US",
-      "hourlyRate": 20,
+      "hourlyRate": 7.25,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/TMIm62Zb4OpP8Jffib6f"
+      "profileUrl": "https://rentahuman.ai/humans/I26j5ZS1L5FBkYHMcUtI"
+    },
+    {
+      "name": "Michael Patterson",
+      "headline": "Administrative & Office Support Professional | 20+ Years in Hospitality and Events",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/D9QcNplCMFI9joTojWYD"
+    },
+    {
+      "name": "Ryan Haskins",
+      "headline": "Graphic Designer",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/TO1GfpkLJMmtDeWjL2Ji"
     },
     {
       "name": "Elikute Saypden",
@@ -468,16 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/ugjicBBRBdn5uFwDFElX"
-    },
-    {
-      "name": "David Anderson",
-      "headline": "Fast, punctual & communicative personal assistant",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 30,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/4WB0pVfNYxwpmTYjOO1x"
     },
     {
       "name": "Marvin Risco",
@@ -640,6 +640,16 @@
       "profileUrl": "https://rentahuman.ai/humans/duXALcKQ1RohGK3EuSiO"
     },
     {
+      "name": "Momchil Tsenov",
+      "headline": "AI Evaluation & QA | SaaS Developer and Product Designer",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/kOcOijZNFM0idmjLde3x"
+    },
+    {
       "name": "April Ding",
       "headline": "Biomedical Engineering Student | Arduino Prototyping, MATLAB & Finite Element Analysis",
       "city": "London",
@@ -768,16 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/oNazmolnEx92j7hHPhPS"
-    },
-    {
-      "name": "David Thomas",
-      "headline": "Fast, punctual & communicative personal assistant",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 35,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/lQkJB6WbYcsFQc4Wt2Ne"
     },
     {
       "name": "zanhi",
