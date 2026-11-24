@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-23T23:46:51+00:00",
+  "checkedAt": "2026-11-24T09:42:00+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -48,6 +48,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
+    },
+    {
+      "name": "Mathieu Lloyd",
+      "headline": "Photographer & Marketing Executive | Project Photography, Graphic Design & Brand Presentation",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/XCjf8HetMFlphHd7D1jc"
     },
     {
       "name": "Fathur Romadlan",
@@ -168,16 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/ko0bgUGGC7taa5xoSfYq"
-    },
-    {
-      "name": "Yusuf",
-      "headline": "Recruiter & Operations Manager | Talent Sourcing, Team Leadership & Process Improvement",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/sjLKXGmnIlV0bWp4Vlx1"
     },
     {
       "name": "Pat Santiago",
@@ -490,6 +490,16 @@
       "profileUrl": "https://rentahuman.ai/humans/qUdKhOA4FefvvUgmV2tw"
     },
     {
+      "name": "Emelise Figueroa",
+      "headline": "Flexible human assistant for web, travel & errands",
+      "city": "Austin",
+      "country": "US",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/sFUun1c8bMz7PLxNsleD"
+    },
+    {
       "name": "Brandon Little",
       "headline": "",
       "city": "Austin",
@@ -620,16 +630,6 @@
       "profileUrl": "https://rentahuman.ai/humans/mg0XFndbZbOxRb5A9Fzt"
     },
     {
-      "name": "Kitty Darling",
-      "headline": "Loan Processing & Office Administration Professional | Banking, Mortgage & Business Operations",
-      "city": "Austin",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/2klmttBqAt5wW1YjKK0U"
-    },
-    {
       "name": "Mirha Fatima",
       "headline": "Hi I’m Human",
       "city": "London",
@@ -638,6 +638,26 @@
       "verified": true,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/duXALcKQ1RohGK3EuSiO"
+    },
+    {
+      "name": "William Sanchez",
+      "headline": "Bilingual Care and Support | English–Spanish | Personal Care and Administration",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/AFO6dqxPqdmwaf2GW1ue"
+    },
+    {
+      "name": "Nick N",
+      "headline": "Commercial Account & Retail Operations Manager | Brand Partnerships & Sales Growth",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/qjKocYQN9DF7LAYhEhkN"
     },
     {
       "name": "Momchil Tsenov",
@@ -758,26 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/0kRca5jWwOQHuwHG4wJn"
-    },
-    {
-      "name": "Naveed Ullah",
-      "headline": "Accounting & Finance Graduate | Bookkeeping, Financial Reporting & Excel",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/BomcjZe6FT10XvxLX2YO"
-    },
-    {
-      "name": "James Harris",
-      "headline": "On-demand IRL tasks, pickups and site inspections",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 36,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/oNazmolnEx92j7hHPhPS"
     },
     {
       "name": "zanhi",
