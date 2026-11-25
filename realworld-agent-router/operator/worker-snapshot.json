@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-25T08:15:12+00:00",
+  "checkedAt": "2026-11-25T21:35:16+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -50,6 +50,26 @@
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
     },
     {
+      "name": "King Nkosi",
+      "headline": "Office Administrator / I.T Specialist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 5,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/TKI9N7HRDGyhhFFmMiyh"
+    },
+    {
+      "name": "Stan N.",
+      "headline": "",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/iR4U9a8xC9WjdWACCkpj"
+    },
+    {
       "name": "Fathur Romadlan",
       "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
       "city": "New York",
@@ -88,16 +108,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/94UA8AtuAOWHscadiprb"
-    },
-    {
-      "name": "Stan N.",
-      "headline": "",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/iR4U9a8xC9WjdWACCkpj"
     },
     {
       "name": "Raul Taveras",
@@ -168,16 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/AWvgbftQd0WftyzOrTEK"
-    },
-    {
-      "name": "Sutton Peter",
-      "headline": "Egocentric Video Data Contributor | AI Field Data Collection & Video Quality Review",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
     },
     {
       "name": "Pat Santiago",
@@ -330,6 +330,16 @@
       "profileUrl": "https://rentahuman.ai/humans/I26j5ZS1L5FBkYHMcUtI"
     },
     {
+      "name": "Stevens Ozenta",
+      "headline": "Freelancer | Client Collaboration & Project Delivery",
+      "city": "Los Angeles",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/XlXYvVtmB3YfS85vB0Jm"
+    },
+    {
       "name": "Ryan Haskins",
       "headline": "Graphic Designer",
       "city": "Los Angeles",
@@ -468,16 +478,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/lDl5k8Gbcloy08lo3010"
-    },
-    {
-      "name": "Michael Anderson",
-      "headline": "Detail-oriented field verification & photography specialist",
-      "city": "Los Angeles",
-      "country": "US",
-      "hourlyRate": 29,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/ugjicBBRBdn5uFwDFElX"
     },
     {
       "name": "Marvin Risco",
@@ -640,6 +640,26 @@
       "profileUrl": "https://rentahuman.ai/humans/duXALcKQ1RohGK3EuSiO"
     },
     {
+      "name": "Cecile Baninla",
+      "headline": "AI Training & Data Annotation Specialist | AI Response Evaluation, Search Relevance & Quality Assurance",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/cCZ73jgy6ipwL13TQN0m"
+    },
+    {
+      "name": "David U",
+      "headline": "Software Developer | React Native, Expo & WordPress",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/faZtlFbzBoRJ1uyHUoRA"
+    },
+    {
       "name": "The King",
       "headline": "I annotate, label and help shape the future of AI",
       "city": "London",
@@ -758,26 +778,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/7V3J5ezMKhmQNhOEvPWw"
-    },
-    {
-      "name": "Paul Agbo",
-      "headline": "Customer Service & Field Sales Professional | Data Entry & Accounting Support",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/yj3Vt8RJ3jAFxQOLhCoQ"
-    },
-    {
-      "name": "Olivia Johnson",
-      "headline": "Detail-oriented field verification & photography specialist",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 36,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0kRca5jWwOQHuwHG4wJn"
     },
     {
       "name": "jixuan yuan",
