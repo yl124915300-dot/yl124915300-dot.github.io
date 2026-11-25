@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "last_searched_utc": "2026-11-24T17:39:20Z",
+  "last_searched_utc": "2026-11-25T17:10:37Z",
   "purpose": "Discovery queue, not verified policy or eligibility advice",
-  "from_date": "2026-10-10",
+  "from_date": "2026-10-11",
   "queries": [
     {
       "topic": "warm-home-discount",
@@ -26,8 +26,21 @@
     }
   ],
   "failed_queries": [],
-  "candidate_count": 4,
+  "candidate_count": 5,
   "candidates": [
+    {
+      "official_url": "https://www.gov.uk/government/statistics/tax-free-childcare-statistics-september-2026",
+      "title": "Tax-Free Childcare Statistics September 2026",
+      "description": "These statistics provide information about families using Tax-Free Childcare",
+      "published_at": "2026-11-25T09:30:08Z",
+      "format": "official_statistics",
+      "matched_topics": [
+        "childcare"
+      ],
+      "first_seen_utc": "2026-11-25T17:10:37Z",
+      "last_seen_utc": "2026-11-25T17:10:37Z",
+      "review_status": "needs_human_review"
+    },
     {
       "official_url": "https://www.gov.uk/government/consultations/warm-home-discount-insulation-and-microgeneration-measures",
       "title": "Warm Home Discount: insulation and microgeneration measures",
@@ -38,7 +51,7 @@
         "warm-home-discount"
       ],
       "first_seen_utc": "2026-11-23T18:02:08Z",
-      "last_seen_utc": "2026-11-24T17:39:20Z",
+      "last_seen_utc": "2026-11-25T17:10:37Z",
       "review_status": "needs_human_review"
     },
     {
@@ -51,7 +64,7 @@
         "warm-home-discount"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-24T17:39:20Z",
+      "last_seen_utc": "2026-11-25T17:10:37Z",
       "review_status": "approved_rss"
     },
     {
@@ -64,7 +77,7 @@
         "childcare"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-24T17:39:20Z",
+      "last_seen_utc": "2026-11-25T17:10:37Z",
       "review_status": "needs_human_review"
     },
     {
@@ -77,7 +90,7 @@
         "childcare"
       ],
       "first_seen_utc": "2026-11-17T10:03:44Z",
-      "last_seen_utc": "2026-11-24T17:39:20Z",
+      "last_seen_utc": "2026-11-25T17:10:37Z",
       "review_status": "needs_human_review"
     }
   ]
