@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-24T22:17:45+00:00",
+  "checkedAt": "2026-11-25T08:15:12+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -50,6 +50,56 @@
       "profileUrl": "https://rentahuman.ai/humans/ZIYe2sG33D8via51e1NJ"
     },
     {
+      "name": "Fathur Romadlan",
+      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 13,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
+    },
+    {
+      "name": "Omar Boug",
+      "headline": "Computer Vision & Machine Learning | Object Detection with YOLOv11 and PyTorch",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/pEJl5Eu0b8peHMjC7aLU"
+    },
+    {
+      "name": "victor",
+      "headline": "Data Annotation & Evaluation Specialist | Text, Image, Video and AI Dataset QA",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/Bjf83nI6eGo6o4YDNMbr"
+    },
+    {
+      "name": "Jonathan Shaird",
+      "headline": "Forklift Operator | Warehouse Distribution & Materials Handling",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 15,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/94UA8AtuAOWHscadiprb"
+    },
+    {
+      "name": "Stan N.",
+      "headline": "",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/iR4U9a8xC9WjdWACCkpj"
+    },
+    {
       "name": "Raul Taveras",
       "headline": "",
       "city": "New York",
@@ -78,16 +128,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/86eLOtgoWK8HlA1WFA0H"
-    },
-    {
-      "name": "Omar Boug",
-      "headline": "Computer Vision & Machine Learning | Object Detection with YOLOv11 and PyTorch",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/pEJl5Eu0b8peHMjC7aLU"
     },
     {
       "name": "Mathieu Lloyd",
@@ -120,16 +160,6 @@
       "profileUrl": "https://rentahuman.ai/humans/Vdcl0HIVRbkA5SsdXo7M"
     },
     {
-      "name": "Fathur Romadlan",
-      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 13,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
-    },
-    {
       "name": "umar kabir marafa",
       "headline": "Statistics Student | Computer Science HND | Research & Software Development",
       "city": "New York",
@@ -148,36 +178,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/cPH6DyeWznEcy6B7haEX"
-    },
-    {
-      "name": "子騰",
-      "headline": "Traditional Chinese Medicine doctor",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 7.25,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/mum9YNgmTnAv8KbEa881"
-    },
-    {
-      "name": "K Julian",
-      "headline": "Creative Consultant, Writing and in-Person Event Professional",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/ElZxZy6kYyLyu4X7xwzk"
-    },
-    {
-      "name": "Alexander Ortiz (Mr. Crafty)",
-      "headline": "Mixologist",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 25.5,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/BHPTRcBkURUsSbIOkyLW"
     },
     {
       "name": "Pat Santiago",
@@ -640,6 +640,16 @@
       "profileUrl": "https://rentahuman.ai/humans/duXALcKQ1RohGK3EuSiO"
     },
     {
+      "name": "The King",
+      "headline": "I annotate, label and help shape the future of AI",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 30,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/gQ4qvI5UW1r3DqlCjoTQ"
+    },
+    {
       "name": "William Sanchez",
       "headline": "Bilingual Care and Support | English–Spanish | Personal Care and Administration",
       "city": "London",
@@ -770,14 +780,14 @@
       "profileUrl": "https://rentahuman.ai/humans/0kRca5jWwOQHuwHG4wJn"
     },
     {
-      "name": "Naveed Ullah",
-      "headline": "Accounting & Finance Graduate | Bookkeeping, Financial Reporting & Excel",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
+      "name": "jixuan yuan",
+      "headline": "AI Product Builder | Agent Workflows & Business Automation",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
       "verified": false,
       "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/BomcjZe6FT10XvxLX2YO"
+      "profileUrl": "https://rentahuman.ai/humans/AdkEYpWJAyke5JbgXp8i"
     },
     {
       "name": "zanhi",
@@ -918,16 +928,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/0rWCat8GZYWNykZqrtAI"
-    },
-    {
-      "name": "식신胖妹-Sophia",
-      "headline": "L2-Certified Mandarin Educator | Early Childhood Curriculum & Primary 1 Readiness",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/9GlyS3aRQY7y203bB0et"
     }
   ],
   "errors": []
