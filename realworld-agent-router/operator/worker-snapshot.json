@@ -1,6 +1,6 @@
 {
   "source": "https://rentahuman.ai/api/humans",
-  "checkedAt": "2026-11-28T07:33:12+00:00",
+  "checkedAt": "2026-11-28T19:54:31+00:00",
   "disclaimer": "Self-reported public marketplace profiles. Not verified worker availability, identity, eligibility or bookings.",
   "cities": [
     {
@@ -68,6 +68,36 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/sh3bOBj5orktEp7re9M0"
+    },
+    {
+      "name": "Mipo",
+      "headline": "AI Data Annotator | GIS & Geospatial Data Quality Specialist",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/vOpoQHwOySvjzcw1J0J9"
+    },
+    {
+      "name": "Abdulbatazar Precious",
+      "headline": "Digital Creative Strategist | Web Development, Copywriting & AI-Assisted Research",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/x1HrJcN5JDgTEWZ1RKJ3"
+    },
+    {
+      "name": "Jenny",
+      "headline": "Financial Research & Analysis | Market Research | Construction Management Background",
+      "city": "New York",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/qk6mMeUtrnNiV6tny9sB"
     },
     {
       "name": "Charlotte Yang",
@@ -150,36 +180,6 @@
       "profileUrl": "https://rentahuman.ai/humans/NhtcxcrbQHXOVwrPqt9p"
     },
     {
-      "name": "Joseph Alexander",
-      "headline": "Manual QA Tester & Software Analyst | Web, iOS & Android | TestRail",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 5,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/EgSaZ5KrzTmPnRrenebG"
-    },
-    {
-      "name": "Fathur Romadlan",
-      "headline": "Virtual Assistant | Excel Data Entry, Customer Support & Social Media Admin",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 13,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/0KU0HlRd64dAbgASl9oS"
-    },
-    {
-      "name": "Stephen Michael",
-      "headline": "Connect founders and investors",
-      "city": "New York",
-      "country": "US",
-      "hourlyRate": 200,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/QwhjDYWe5ylhW8SfxAVj"
-    },
-    {
       "name": "Pat Santiago",
       "headline": "Founder of ACCELR8",
       "city": "San Francisco",
@@ -210,16 +210,6 @@
       "profileUrl": "https://rentahuman.ai/humans/maS1XMGyvZy63zMxl2XB"
     },
     {
-      "name": "KC",
-      "headline": "Assistant Producer & QA Tester | Interactive Experiences and AI Software",
-      "city": "San Francisco",
-      "country": "US",
-      "hourlyRate": 12.78,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/c2afoahADbVhZjsUTMSp"
-    },
-    {
       "name": "Tarvon Robinson",
       "headline": "Security/laborer",
       "city": "San Francisco",
@@ -248,6 +238,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/Mzb2C5QzJY39zJ136dqP"
+    },
+    {
+      "name": "cristina j",
+      "headline": "Student Support & Front Desk Assistant | Library and Retail Customer Service",
+      "city": "San Francisco",
+      "country": "US",
+      "hourlyRate": 7.25,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/e7YprcH7OaAqT9J2jw3z"
     },
     {
       "name": "Matthew Farley",
@@ -640,6 +640,16 @@
       "profileUrl": "https://rentahuman.ai/humans/duXALcKQ1RohGK3EuSiO"
     },
     {
+      "name": "Cecile Baninla",
+      "headline": "AI Training & Data Annotation Specialist | AI Response Evaluation, Search Relevance & Quality Assurance",
+      "city": "London",
+      "country": "GB",
+      "hourlyRate": 16.26,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/cCZ73jgy6ipwL13TQN0m"
+    },
+    {
       "name": "Adetutu",
       "headline": "AI Data Annotator | Image & Video Annotation | Computer Vision & Data Quality",
       "city": "London",
@@ -750,16 +760,6 @@
       "profileUrl": "https://rentahuman.ai/humans/CSygcRMZ2rAuj1k0cJHC"
     },
     {
-      "name": "Cecile Baninla",
-      "headline": "AI Training & Data Annotation Specialist | AI Response Evaluation, Search Relevance & Quality Assurance",
-      "city": "London",
-      "country": "GB",
-      "hourlyRate": 16.26,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/cCZ73jgy6ipwL13TQN0m"
-    },
-    {
       "name": "David U",
       "headline": "Software Developer | React Native, Expo & WordPress",
       "city": "London",
@@ -778,6 +778,16 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/gQ4qvI5UW1r3DqlCjoTQ"
+    },
+    {
+      "name": "Phan Phoansatya",
+      "headline": "Legal Research Assistant | Commercial Arbitration, Policy Writing & Project Coordination",
+      "city": "Singapore",
+      "country": "SG",
+      "hourlyRate": 50,
+      "verified": false,
+      "availableListed": true,
+      "profileUrl": "https://rentahuman.ai/humans/gvuw5gOfHTfOuSoZPFCo"
     },
     {
       "name": "linhao wu",
@@ -918,16 +928,6 @@
       "verified": false,
       "availableListed": true,
       "profileUrl": "https://rentahuman.ai/humans/mzh0c4E4Bj5O9sOIzHKH"
-    },
-    {
-      "name": "ei e",
-      "headline": "",
-      "city": "Singapore",
-      "country": "SG",
-      "hourlyRate": 50,
-      "verified": false,
-      "availableListed": true,
-      "profileUrl": "https://rentahuman.ai/humans/1SplP6ftEYXWnMDobf8P"
     }
   ],
   "errors": []
